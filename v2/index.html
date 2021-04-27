@@ -24,7 +24,7 @@
       -moz-user-select: none;
       user-select: none;
     }
-    
+
     @import "transition-style";
 
     @media (min-width: 768px) {
@@ -53,7 +53,10 @@
         popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive
         prebuilt components, and powerful JavaScript plugins.</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
+
+        <div transition-style="in:wipe:up">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
+        </div>
         <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
       </div>
     </div>
