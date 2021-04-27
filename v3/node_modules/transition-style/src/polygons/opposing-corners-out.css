@@ -1,0 +1,13 @@
+@keyframes polygon-out-opposing-corners {
+  from {
+    clip-path: var(--opposing-corners-in);
+  }
+  to {
+    clip-path: var(--opposing-corners-out);
+  }
+}
+
+[transition-style="out:polygon:opposing-corners"] {
+  --transition__duration: 1.5s;
+  animation-name: polygon-out-opposing-corners;
+}

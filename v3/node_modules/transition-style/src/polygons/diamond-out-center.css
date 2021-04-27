@@ -1,0 +1,13 @@
+@keyframes diamond-out-center {
+  from {
+    clip-path: var(--diamond-center-in);
+  }
+  to {
+    clip-path: var(--diamond-center-out);
+  }
+}
+
+[transition-style="out:diamond:center"] {
+  --transition__duration: 1.5s;
+  animation-name: diamond-out-center;
+}

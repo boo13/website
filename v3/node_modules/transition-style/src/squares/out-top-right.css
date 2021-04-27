@@ -1,0 +1,13 @@
+@keyframes square-out-top-right {
+  from {
+    clip-path: var(--square-in);
+  }
+  to {
+    clip-path: var(--square-top-right-out);
+  }
+}
+
+[transition-style="out:square:top-right"] {
+  --transition__duration: 1.5s;
+  animation-name: square-out-top-right;
+}

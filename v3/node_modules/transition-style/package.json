@@ -1,0 +1,43 @@
+{
+  "name": "transition-style",
+  "version": "0.1.1",
+  "author": "Adam Argyle",
+  "description": "just add water clip-path mask transitions",
+  "license": "ISC",
+  "homepage": "https://transition.style",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/argyleink/transition.css"
+  },
+  "keywords": [
+    "css",
+    "transitions",
+    "animations",
+    "masking",
+    "clip-path"
+  ],
+  "main": "transition.min.css",
+  "style": "transition.min.css",
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "lib:all": "postcss src/index.css -c src -o transition.min.css",
+    "lib:wipes": "postcss src/wipes/index.css -c src -o transition.wipes.min.css",
+    "lib:circles": "postcss src/circles/index.css -c src -o transition.circles.min.css",
+    "lib:squares": "postcss src/squares/index.css -c src -o transition.squares.min.css",
+    "lib:polygons": "postcss src/polygons/index.css -c src -o transition.polygons.min.css",
+    "lib:hackpack": "postcss src/hackpack.css -c src -o transition.hackpack.min.css",
+    "bundle": "concurrently --kill-others npm:lib:*"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "concurrently": "5.2.0",
+    "cssnano": "^4.1.10",
+    "postcss": "7.0.31",
+    "postcss-cli": "7.1.1",
+    "postcss-easings": "^2.0.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0"
+  }
+}

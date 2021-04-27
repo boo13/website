@@ -1,0 +1,13 @@
+@keyframes circle-out-bottom-left {
+  from {
+    clip-path: var(--circle-center-center-in);
+  }
+  to {
+    clip-path: var(--circle-bottom-left-out);
+  }
+}
+
+[transition-style="out:circle:bottom-left"] {
+  --transition__duration: 1.5s;
+  animation-name: circle-out-bottom-left;
+}

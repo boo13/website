@@ -1,0 +1,13 @@
+@keyframes wipe-out-bottom {
+  from {
+    clip-path: var(--wipe-in);
+  }
+  to {
+    clip-path: var(--wipe-bottom);
+  }
+}
+
+[transition-style="out:wipe:bottom"],
+[transition-style="out:wipe:down"] {
+  animation-name: wipe-out-bottom;
+}
