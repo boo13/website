@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/boo13/website/issues"
   },
-  "homepage": "https://github.com/boo13/website#readme"
+  "homepage": "https://github.com/boo13/website#readme",
+  "dependencies": {
+    "@barba/core": "^2.9.7"
+  }
 }
