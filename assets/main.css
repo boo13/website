@@ -6,6 +6,14 @@ body {
     color: white;
 }
 
+/* 
+=====================================================
+=====================================================
+Loading / Page Transition
+=====================================================
+=====================================================
+*/
+
 .loading-screen {
     position: relative;
     padding-left: 0;
@@ -27,9 +35,17 @@ body {
     pointer-events: none;
 }
 
+/* 
+=====================================================
+=====================================================
+Text Styling
+=====================================================
+=====================================================
+*/
+
 h1 {
     position: absolute;
-    top: 38%;
+    top: 32%;
     left: 50%;
     transform: translate(-50%, -50%);
     /* Font */
@@ -38,18 +54,39 @@ h1 {
     font-style: normal;
 }
 
-/* Nav Buttons */
+.big {
+    font-size: 400%;
+}
+
+/* 
+=====================================================
+=====================================================
+Nav Buttons 
+=====================================================
+=====================================================
+*/
 
 .btn {
 
     /* Font */
-    color: white;
     font-family: mrs-eaves-xl-serif, serif;
     font-weight: 700;
     font-style: normal;
-    text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 4px;
+    /* Position */
+    position: absolute;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    /* Animation? */
+    transition: 0.3s;
+}
+
+.btn a {
+    /* Font */
+    color: white;
+    /* Remove underline */
+    text-decoration: none;
     /* Position */
     position: absolute;
     top: 60%;
@@ -57,24 +94,31 @@ h1 {
     /* Draw Box */
     border: 1px solid white;
     padding: 24px 40px;
-    /* Animation? */
-    transition: 0.3s;
 }
 
-.btn:hover {
+/* Mouse Over Links and Selected links */
+.btn a:hover,
+a:active {
     background: white;
     color: #161616;
-    transition: 0.3s;
 }
 
-.btn-about {
+#btn-home {
+    left: 20%;
+}
+
+#btn-latest {
+    left: 20%;
+}
+
+#btn-about {
     left: 40%;
 }
 
-.btn-credits {
+#btn-credits {
     left: 60%;
 }
 
-.btn-contact {
+#btn-contact {
     left: 80%;
 }
