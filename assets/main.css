@@ -32,7 +32,8 @@ h1 {
     top: 38%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: mrs-eaves-xl-serif,serif;
+    /* Font */
+    font-family: mrs-eaves-xl-serif, serif;
     font-weight: 700;
     font-style: normal;
 }
@@ -40,101 +41,40 @@ h1 {
 /* Nav Buttons */
 
 .btn {
+
+    /* Font */
+    color: white;
+    font-family: mrs-eaves-xl-serif, serif;
+    font-weight: 700;
+    font-style: normal;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    /* Position */
     position: absolute;
     top: 60%;
     transform: translate(-50%, -50%);
+    /* Draw Box */
+    border: 1px solid white;
+    padding: 24px 40px;
+    /* Animation? */
+    transition: 0.3s;
 }
 
-#aboutButton {
-    left: 40%;   
+.btn:hover {
+    background: white;
+    color: #161616;
+    transition: 0.3s;
 }
 
-#creditsButton {
-    left: 60%;   
-}
-
-#contactButton {
-    left: 80%;   
-}
-
-/* About Button */
-
-.about_button {
+.btn-about {
     left: 40%;
 }
 
-
-.about_button a {
-    font-family: mrs-eaves-xl-serif,serif;
-    font-weight: 700;
-    font-style: normal;
-    text-decoration: none;
-    color: white;
-    border: 1px solid white;
-    padding: 24px 40px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    transition: 0.3s;
-}
-
-.about_button:hover a {
-    background: white;
-    color: #161616;
-    transition: 0.3s;
-}
-
-/* Credits Button */
-
-.credits_button {
-    position: absolute;
-    top: 60%;
+.btn-credits {
     left: 60%;
-    transform: translate(-50%, -50%);
 }
 
-.credits_button a {
-    font-family: mrs-eaves-xl-serif,serif;
-    font-weight: 700;
-    font-style: normal;
-    text-decoration: none;
-    color: white;
-    border: 1px solid white;
-    padding: 24px 40px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    transition: 0.3s;
-}
-
-.credits_button:hover a {
-    background: white;
-    color: #161616;
-    transition: 0.3s;
-}
-
-/* Contact Button */
-
-.contact_button {
-    position: absolute;
-    top: 60%;
+.btn-contact {
     left: 80%;
-    transform: translate(-50%, -50%);
-}
-
-.contact_button a {
-    font-family: mrs-eaves-xl-serif,serif;
-    font-weight: 700;
-    font-style: normal;
-    text-decoration: none;
-    color: white;
-    border: 1px solid white;
-    padding: 24px 40px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    transition: 0.3s;
-}
-
-.contact_button:hover a {
-    background: white;
-    color: #161616;
-    transition: 0.3s;
 }
