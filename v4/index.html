@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+    <!--            HEAD             -->
     <head>
         <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Page Transition Using BarbaJS & GSAP</title>
         <link rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="https://use.typekit.net/aro7jbx.css">
     </head>
 
+    <!--            BODY             -->
     <body data-barba="wrapper">
         <div class="load-container">
             <div class="loading-screen"></div>
@@ -13,16 +19,26 @@
 
         <main data-barba="container" data-barba-namespace="home-section">
             <div class="header">
-                <h1 class="title animate-this">
-                    home page
+                <h1 class="title animate-about">
+                    Randy Counsman
                 </h1>
-                <div class="animate-this button">
-                    <a href="about.html">go to about</a>
+
+                <!--            MENU             -->
+                <div class="animate-about btn", id="aboutButton">
+                    <a href="about.html">About</a>
                 </div>
+                <div class="animate-credits credits_button", id="creditsButton">
+                    <a href="credits.html">Credits</a>
+                </div>
+                <div class="animate-credits btn", id="contactButton">
+                    <a href="contact.html">Credits</a>
+                </div>
+
             </div>
         </main>
     </body>
 
+    <!--            SCRIPTS             -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://unpkg.com/@barba/core"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
