@@ -29,8 +29,8 @@ function pageTransition() {
 function contentAnimation() {
     var tl = gsap.timeline();
     tl.from(".animate-about", { duration: 1, y: 30, opacity: 0, stagger: 0.5, delay: 0.2 });
-    var t2 = gsap.timeline();
-    t2.from(".animate-credits", { duration: 1, y: 30, opacity: 0, stagger: 1, delay: 0.2 });
+    // var t2 = gsap.timeline();
+    // t2.from(".animate-credits", { duration: 1, y: 30, opacity: 0, stagger: 1, delay: 0.2 });
 }
 
 $(function () {
