@@ -7,11 +7,13 @@ Table of Contents
 
     2. Components?
     
-    Typography
+    3. Typography
 
-    3. Loading / Page Transition
+    4. Loading / Page Transition
 
-    4. Nav Buttons 
+    5. Nav Buttons
+    
+    6. Video
 =====================================================
 =====================================================
 */
@@ -55,7 +57,6 @@ body {
     font-size: 1.3125rem;
     line-height: 1.6;
     font-style: normal;
-    text-transform: uppercase;
     letter-spacing: 4px;
     /* Page */
     margin: 0;
@@ -108,15 +109,10 @@ nav {}
 /* 
 =====================================================
 =====================================================
-    2. Typography
+    3. Typography
 =====================================================
 =====================================================
 */
-
-/* @font-face {
-    font-family: 'MrsEaves';
-    src: url();
-} */
 
 h1 {
     font-family: var(--ff-display-serif);
@@ -125,12 +121,26 @@ h1 {
 h2 h3 h4 h5 h6 {
     font-family: var(--ff-display-sans);
     line-height: 1;
+    font-weight: 300;
+}
+
+
+
+ul {
+    font-family: var(--ff-body-sans);
+    font-weight: 300;
+    font-size: .8rem;
+    line-height: 2;
 }
 
 /* p {
     font-size: medium;
 
 } */
+
+.accent-color {
+    color: var(--clr-accent);
+}
 
 .big {
     font-size: 400%;
@@ -147,32 +157,10 @@ h2 h3 h4 h5 h6 {
     background: var(--clr-black);
 }
 
-
-/* @font-face {
-    font-family: 'Roboto';
-    src: url('Roboto-Light-webfont.woff') format('woff');
-    font-style: normal;
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: 'Roboto';
-    src: url('Roboto-LightItalic-webfont.woff') format('woff');
-    font-style: italic;
-    font-weight: 300;
-}
-
-@font-face {
-    font-family: 'Roboto';
-    src: url('Roboto-Bold-webfont.woff') format('woff');
-    font-style: normal;
-    font-weight: 700;
-} */
-
 /* 
 =====================================================
 =====================================================
-    3. Loading / Page Transition
+    4. Loading / Page Transition
 =====================================================
 =====================================================
 */
@@ -203,12 +191,17 @@ h2 h3 h4 h5 h6 {
 /* 
 =====================================================
 =====================================================
-    4. Nav Buttons 
+    5. Nav Buttons 
 =====================================================
 =====================================================
 */
 
 .btn {
+    /* Font */
+    text-transform: uppercase;
+    letter-spacing: .7rem;
+    font-size: .9rem;
+    text-align: center;
     /* Position */
     position: absolute;
     top: 80%;
@@ -218,16 +211,20 @@ h2 h3 h4 h5 h6 {
     margin: 50px;
 
     /* Animation? */
-    transition: 0.3s;
+    transition: 0.5s;
 
     /* Draw Box */
+    background-color: var(--clr-black);
     border: 1px solid var(--clr-white);
     padding: 24px 40px;
+    opacity: 0.6;
 }
 
 /* Mouse Over Links and Selected links */
 .btn:hover,
-.btn:active {
+.btn:active,
+.btn:focus {
+    opacity: 1;
     background: var(--clr-accent);
     /* color: var(--clr-accent); */
 }
@@ -237,21 +234,21 @@ h2 h3 h4 h5 h6 {
 }
 
 #btn-about {
-    left: 40%;
+    left: 20%;
 }
 
 #btn-work {
-    left: 60%;
+    left: 40%;
 }
 
 #btn-contact {
-    left: 80%;
+    left: 60%;
 }
 
 /* 
 =====================================================
 =====================================================
-    5. Videos 
+    6. Videos 
 =====================================================
 =====================================================
 */
