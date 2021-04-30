@@ -3,9 +3,11 @@
 =====================================================
 Table of Contents
 
-    1. Components?
+    1. Variables
 
-    2. Typography
+    2. Components?
+    
+    Typography
 
     3. Loading / Page Transition
 
@@ -14,30 +16,44 @@ Table of Contents
 =====================================================
 */
 
+/* 
+=====================================================
+=====================================================
+    1. Variables
+=====================================================
+=====================================================
+*/
 
 :root {
+    /* Setup Color Pallete */
     --clr-black: #0d0000;
     --clr-white: #fbfbc9;
     --clr-accent: #de8f06;
     --clr-secondary: #0425cb;
+
+    /* Setup Font Family */
+    --ff-display-serif: mrs-eaves-serif, serif;
+    --ff-display-sans: mr-eaves-modern, sans-serif;
+    --ff-body-serif: mrs-eaves-xl-serif, serif;
+    --ff-body-sans: mr-eaves-xl-modern, sans-serif;
 
 }
 
 /* 
 =====================================================
 =====================================================
-    1. Components?
+    2. Main Components?
 =====================================================
 =====================================================
 */
 
-
-html,
 body {
     /* Font */
     color: var(--clr-white);
-    font-family: mrs-eaves-xl-serif, serif;
+    font-family: var(--ff-body-serif);
     font-weight: 700;
+    font-size: 1.3125rem;
+    line-height: 1.6;
     font-style: normal;
     text-transform: uppercase;
     letter-spacing: 4px;
@@ -102,11 +118,13 @@ nav {}
     src: url();
 } */
 
-h1 h2 h3 h4 h5 h6 {
-    /* Font */
-    font-family: mrs-eaves-serif, serif;
-    font-weight: 700;
-    font-style: normal;
+h1 {
+    font-family: var(--ff-display-serif);
+}
+
+h2 h3 h4 h5 h6 {
+    font-family: var(--ff-display-sans);
+    line-height: 1;
 }
 
 /* p {
@@ -214,8 +232,7 @@ h1 h2 h3 h4 h5 h6 {
     /* color: var(--clr-accent); */
 }
 
-#btn-home,
-#btn-latest {
+#btn-home {
     left: 20%;
 }
 
@@ -223,7 +240,7 @@ h1 h2 h3 h4 h5 h6 {
     left: 40%;
 }
 
-#btn-credits {
+#btn-work {
     left: 60%;
 }
 
