@@ -1,17 +1,22 @@
 <!DOCTYPE html>
+
+<!-- HTML -->
 <html lang="en">
 
-    <!--            HEAD             -->
+    <!-- --------------------------------------------           HEAD             -->
     <head>
+        <title>Randy Counsman Makes Video</title>
+
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Randy Counsman Makes Video</title>
+        
         <link rel="stylesheet" href="assets/main.css" />
         <link rel="stylesheet" href="https://use.typekit.net/aro7jbx.css">
     </head>
 
-    <!--            BODY             -->
+
+    <!-- --------------------------------------------           BODY             -->
     <body data-barba="wrapper">
         <div class="load-container">
             <div class="loading-screen"></div>
@@ -19,40 +24,53 @@
 
         <main data-barba="container" data-barba-namespace="home-section">
             <div class="header">
-                <h1 class="title animate-this big">
-                    Randy Counsman
-                </h1>
-                <h1 class="title animate-this">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
+                <h1 class="title animate-this big">Randy Counsman</h1>
+                <h2 class="title animate-this">
                     (Website Coming Soon...)            
-                </h1>
-
-                <!--            MENU             -->
-                <div class="animate-this btn" id="btn-latest">
-                    <a href="latest.html">Latest</a>
-                </div>
-                <div class="animate-this btn" id="btn-about">
-                    <a href="about.html">About</a>
-                </div>
-                <div class="animate-this btn" id="btn-credits">
-                    <a href="credits.html">Credits</a>
-                </div>
-                <div class="animate-this btn" id="btn-contact">
-                    <a href="contact.html">Contact</a>
-                </div>
-
+                </h2>
             </div>
-        </main>
-    </body>
+            
+            <p>JavaScript</p>
+            <div class="container">
+              <div class="skills js">65%</div>
+            </div>
 
-    <!--            SCRIPTS             -->
+            <section>
+                <!-- The video -->
+                <video autoplay muted loop id="myVideo">
+                    <source src="assets/videos/shortvid.mp4">
+                </video>
+                
+            </section>
+
+        </main>
+
+    <!-- --------------------------------------------           NAV Menu           -->
+    <nav>
+        <ul>
+            <div class="animate-this btn" id="btn-latest">
+                <a href="latest.html">Latest</a>
+            </div>
+            <div class="animate-this btn" id="btn-about">
+                <a href="about.html">About</a>
+            </div>
+            <div class="animate-this btn" id="btn-credits">
+                <a href="credits.html">Credits</a>
+            </div>
+            <div class="animate-this btn" id="btn-contact">
+                <a href="contact.html">Contact</a>
+            </div>
+        </ul>
+    </nav>
+    <!-- ---------------------------------------------------------------------------------------- -->
+    <!-- --------------------------------------------           Close Body          -->
+    </body>
+    <!-- ---------------------------------------------------------------------------------------- -->
+
+    <!-- --------------------------------------------            SCRIPTS             -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://unpkg.com/@barba/core"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
     <script src="assets/main.js"></script>
+
 </html>

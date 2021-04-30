@@ -1,15 +1,160 @@
-html,
-body {
-    margin: 0;
-    padding: 0;
-    background: #161616;
-    color: white;
+/* 
+=====================================================
+=====================================================
+Table of Contents
+
+    1. Components?
+
+    2. Typography
+
+    3. Loading / Page Transition
+
+    4. Nav Buttons 
+=====================================================
+=====================================================
+*/
+
+
+:root {
+    --clr-black: #0d0000;
+    --clr-white: #fbfbc9;
+    --clr-accent: #de8f06;
+    --clr-secondary: #0425cb;
+
 }
 
 /* 
 =====================================================
 =====================================================
-Loading / Page Transition
+    1. Components?
+=====================================================
+=====================================================
+*/
+
+
+html,
+body {
+    /* Font */
+    color: var(--clr-white);
+    font-family: mrs-eaves-xl-serif, serif;
+    font-weight: 700;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    /* Page */
+    margin: 0;
+    padding: 0;
+    background: var(--clr-black);
+
+}
+
+a {
+    color: var(--clr-white);
+    /* Remove underline */
+    text-decoration: none;
+
+}
+
+nav {}
+
+.header {
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Make sure that padding behaves as expected */
+* {
+    box-sizing: border-box
+}
+
+/* Container for skill bars */
+.container {
+    width: 100%;
+    /* Full width */
+    background-color: #ddd;
+    /* Grey background */
+}
+
+.skills {
+    text-align: right;
+    /* Right-align text */
+    padding-top: 10px;
+    /* Add top padding */
+    padding-bottom: 10px;
+    /* Add bottom padding */
+    color: white;
+    /* White text color */
+}
+
+
+/* 
+=====================================================
+=====================================================
+    2. Typography
+=====================================================
+=====================================================
+*/
+
+/* @font-face {
+    font-family: 'MrsEaves';
+    src: url();
+} */
+
+h1 h2 h3 h4 h5 h6 {
+    /* Font */
+    font-family: mrs-eaves-serif, serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* p {
+    font-size: medium;
+
+} */
+
+.big {
+    font-size: 400%;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: var(--clr-accent);
+    background: var(--clr-black);
+}
+
+::selection {
+    color: var(--clr-accent);
+    background: var(--clr-black);
+}
+
+
+/* @font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Light-webfont.woff') format('woff');
+    font-style: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-LightItalic-webfont.woff') format('woff');
+    font-style: italic;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Bold-webfont.woff') format('woff');
+    font-style: normal;
+    font-weight: 700;
+} */
+
+/* 
+=====================================================
+=====================================================
+    3. Loading / Page Transition
 =====================================================
 =====================================================
 */
@@ -19,7 +164,7 @@ Loading / Page Transition
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    background-color: #ce943e;
+    background-color: var(--clr-accent);
     width: 0%;
     height: 100%;
 }
@@ -35,78 +180,41 @@ Loading / Page Transition
     pointer-events: none;
 }
 
-/* 
-=====================================================
-=====================================================
-Text Styling
-=====================================================
-=====================================================
-*/
 
-h1 {
-    position: absolute;
-    top: 32%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* Font */
-    font-family: mrs-eaves-xl-serif, serif;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.big {
-    font-size: 400%;
-}
 
 /* 
 =====================================================
 =====================================================
-Nav Buttons 
+    4. Nav Buttons 
 =====================================================
 =====================================================
 */
 
 .btn {
-
-    /* Font */
-    font-family: mrs-eaves-xl-serif, serif;
-    font-weight: 700;
-    font-style: normal;
-    text-transform: uppercase;
-    letter-spacing: 4px;
     /* Position */
     position: absolute;
-    top: 60%;
+    top: 80%;
     transform: translate(-50%, -50%);
+
+    /* Spacing */
+    margin: 50px;
+
     /* Animation? */
     transition: 0.3s;
-}
 
-.btn a {
-    /* Font */
-    color: white;
-    /* Remove underline */
-    text-decoration: none;
-    /* Position */
-    position: absolute;
-    top: 60%;
-    transform: translate(-50%, -50%);
     /* Draw Box */
-    border: 1px solid white;
+    border: 1px solid var(--clr-white);
     padding: 24px 40px;
 }
 
 /* Mouse Over Links and Selected links */
-.btn a:hover,
-a:active {
-    background: white;
-    color: #161616;
+.btn:hover,
+.btn:active {
+    background: var(--clr-accent);
+    /* color: var(--clr-accent); */
 }
 
-#btn-home {
-    left: 20%;
-}
-
+#btn-home,
 #btn-latest {
     left: 20%;
 }
@@ -121,4 +229,21 @@ a:active {
 
 #btn-contact {
     left: 80%;
+}
+
+/* 
+=====================================================
+=====================================================
+    5. Videos 
+=====================================================
+=====================================================
+*/
+
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
