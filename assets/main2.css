@@ -1,0 +1,120 @@
+:root {
+    /* Setup Color Pallete */
+    --clr-black: #0d0000;
+    --clr-white: #fbfbc9;
+    --clr-accent: #de8f06;
+    --clr-secondary: #5260a9;
+
+    /* Setup Font Family */
+    --ff-display-serif: mrs-eaves-serif, serif;
+    --ff-display-sans: mr-eaves-modern, sans-serif;
+    --ff-body-serif: mrs-eaves-xl-serif, serif;
+    --ff-body-sans: mr-eaves-xl-modern, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--ff-display-serif);
+    font-weight: 300;
+    font-size: 1.3125rem;
+    line-height: 1.6;
+}
+
+body,
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+    margin-bottom: 1em;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1;
+    font-family: var(--ff-display-serif);
+    font-weight: 900;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+header,
+section {
+    padding: 3rem 0;
+}
+
+@media (min-width: 40em) {
+
+    /* Add more padding for big screens... I think? */
+    header,
+    section {
+        padding: 4rem 0;
+    }
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.container {
+    margin-inline: auto;
+    width: min(90%, 70.5rem);
+
+}
+
+.split {
+    display: flex;
+    flex-direction: column;
+
+}
+
+@media (min-width: 40em) {
+    .split {
+        flex-direction: row;
+    }
+
+    .split>* {
+        flex-basis: 100%;
+    }
+
+    /* Any element that has an element before it, add a margin to the left */
+    .split>*+* {
+        margin-left: 2em;
+    }
+}
+
+.container--narrow {
+    max-width: 30rem;
+}
+
+.bg-light {
+    background-color: var(--clr-white);
+}
+
+.bg-dark {
+    color: var(--clr-white);
+    background-color: var(--clr-black);
+}
+
+.bg-dark h2,
+.bg-accent h2 {
+    color: var(--clr-secondary)
+}
+
+.bg-accent {
+    background-color: var(--clr-accent);
+}
+
+.bg-secondary {
+    background-color: var(--clr-secondary);
+}
