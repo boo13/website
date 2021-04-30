@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/boo13/website#readme",
   "dependencies": {
-    "@barba/core": "^2.9.7"
+    "@barba/core": "^2.9.7",
+    "foundation-sites": "^6.6.3",
+    "graceful-fs": "^4.2.6"
   }
 }

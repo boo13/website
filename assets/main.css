@@ -116,6 +116,7 @@ nav {}
 
 h1 {
     font-family: var(--ff-display-serif);
+    font-size: 1.5rem;
 }
 
 h2 h3 h4 h5 h6 {
@@ -129,7 +130,7 @@ h2 h3 h4 h5 h6 {
 ul {
     font-family: var(--ff-body-sans);
     font-weight: 300;
-    font-size: .8rem;
+    font-size: 1rem;
     line-height: 2;
 }
 

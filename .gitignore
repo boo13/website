@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/osx,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=osx,windows
 
+# Source files for designing website
+source/
+
 ### OSX ###
 # General
 .DS_Store
