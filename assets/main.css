@@ -206,7 +206,7 @@ ul {
     /* Position */
     position: absolute;
     top: 80%;
-    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%); */
 
     /* Spacing */
     margin: 50px;
@@ -217,7 +217,7 @@ ul {
     /* Draw Box */
     background-color: var(--clr-black);
     border: 1px solid var(--clr-white);
-    padding: 24px 40px;
+    padding: 40px 100%;
     opacity: 0.6;
 }
 
@@ -231,19 +231,19 @@ ul {
 }
 
 #btn-home {
-    left: 20%;
+    top: 20%;
 }
 
 #btn-about {
-    left: 20%;
+    top: 20%;
 }
 
 #btn-work {
-    left: 40%;
+    top: 40%;
 }
 
 #btn-contact {
-    left: 60%;
+    top: 60%;
 }
 
 /* 
