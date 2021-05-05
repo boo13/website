@@ -1,3 +1,6 @@
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fwww.randycounsman.com)
+![GitHub](https://img.shields.io/github/license/boo13/website)
+
 # Randy Counsman's Website
 
 This is the source for Randy Counsman's personal website: [HERE](https://www.randycounsman.com)
