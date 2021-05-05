@@ -1,0 +1,39 @@
+// ================================================
+// 
+//      WORK PAGE / PORTFOLIO LAYOUT
+// 
+// ================================================
+// Just somewhere to put all of the Grid layout
+// stuff for displaying the project example cards
+// on the 'work.html' page. 
+//  
+
+.portfolio {
+
+    // ============= Positiong =============
+    // Position within page Grid
+    display: grid;
+    grid-column: content-left / content-right;
+    grid-row: info-start / page-bottom;
+
+    &:hover {
+        color: $primary;
+    }
+
+}
+
+
+.work-container {
+    // Internal positioning
+    display: flex;
+    flex-wrap: wrap;
+    // display: grid;
+    // grid-auto-columns: [work-1] 25% [work-2] 25% [work-3] 25%;
+
+
+}
+
+.project-display-card {
+
+    text-align: center;
+}

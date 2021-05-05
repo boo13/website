@@ -1,0 +1,35 @@
+// ================================================
+// 
+//      FONTS
+// 
+// ================================================
+// Import @font-face CSS names from Adobe
+@import url(https://use.typekit.net/aro7jbx.css);
+
+$ff-display-sans: bebas-neue-pro-expanded;
+$ff-subhead-sans: mr-eaves-modern;
+$ff-display-serif: mrs-eaves;
+$ff-body-serif: mrs-eaves-xl-serif;
+
+// ================================================
+// 
+//      COLORS
+// 
+// ================================================
+
+$bg: #000;
+$offwhite: #e8e8e8;
+$primary: #16a085;
+$secondary: #606060;
+$accent-primary: hsla(20, 20%, 85%, 0.7);
+$text-background-faint: hsla(0, 0, 0, 0.4);
+
+@debug Color-Accent-Primary $accent-primary;
+
+// ================================================
+// 
+//      FORMAT
+// 
+// ================================================
+
+$spacer: 1rem;
