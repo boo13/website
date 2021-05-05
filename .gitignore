@@ -9,6 +9,8 @@ design/
 # VS code settings
 .vscode/
 
+# npm (Node) modules
+node_modules
 
 # =================================================================================
 # Created by https://www.toptal.com/developers/gitignore/api/osx,windows
