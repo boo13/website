@@ -91,7 +91,26 @@ npm run deploy
 
 ## Built With
 
-* [`gh-pages`](https://www.npmjs.com/package/gh-pages) - Website deployment
+
+SCSS / CSS
+
+- [`node-sass`](https://www.npmjs.com/package/node-sass) - Sass convertor
+  - Supposed to switch to Dart `sass` now... #ToDo
+- [`autoprefixer`](https://www.npmjs.com/package/autoprefixer) - Used with `postcss` to build `dist/*CSS`
+- [`postcss`](https://www.npmjs.com/package/postcss) - "PostCSS takes a CSS file and provides an API to analyze and modify its rules"
+- [`stylelint`](https://www.npmjs.com/package/stylelint) - CSS linting
+
+Watch
+
+- [`browser-sync`](https://www.npmjs.com/package/browser-sync) - Live server
+- [`onchange`](https://www.npmjs.com/package/onchange) - Updates live server
+
+Deploy
+
+- [`imagemin`](https://www.npmjs.com/package/imagemin) - Image management
+- [`webpack`](https://www.npmjs.com/package/webpack) - 
+- [`gh-pages`](https://www.npmjs.com/package/gh-pages) - Website deployment
+
 
 ## Authors
 
@@ -106,5 +125,6 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 
 ## Acknowledgments
 
-* Site Template - (WWeb.dev)[https://wweb.dev/blog/how-to-create-static-website-npm-scripts/#simplifybuild]
-* CSS Inspiration - (Kevin Powell)[https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw]
+- Site Template - (WWeb.dev)[https://wweb.dev/blog/how-to-create-static-website-npm-scripts/#simplifybuild]
+- CSS Inspiration - (Kevin Powell)[https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw]
+- FavIcon Generator - (FavIcon.io)[https://favicon.io/]
