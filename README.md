@@ -9,30 +9,102 @@ This is the source for Randy Counsman's personal website: [HERE](https://www.ran
 
 N/A
 
-## Usage
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+
+```shell
+Give examples
+```
+
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
 
 ***
 ### Watch (Development)
+
 ```shell
 npm run watch 
 ```
+
 - Uses [`onchange`](https://www.npmjs.com/package/onchange) to watch for changes
 - [`posthtml`](https://www.npmjs.com/package/posthtml) to...
 - [`webpack`](https://www.npmjs.com/package/webpack) to...
 ***
 
 ***
-### Deploy (Publish)
+
+
+### Installing
+
+A step by step series of examples that tell you how to get a development env running
+
+Say what the step will be
+
+```shell
+Give the example
+```
+
+And repeat
+
+```shell
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```shell
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```shell
+Give an example
+```
+
+## Deploy (Publish)
 
 Deploy command uses [`gh-pages`](https://www.npmjs.com/package/gh-pages) to publish to the `gh-pages` branch, which is where the [RandyCounsman.com](https://www.randycounsman.com) URL is pointed. 
 
 ```shell
 npm run deploy
 ```
+
 ***
 
-## Contributing
-Just me, doing my thing. 
+
+## Built With
+
+* [`gh-pages`](https://www.npmjs.com/package/gh-pages) - Website deployment
+
+## Authors
+
+Just me, doing my thing...
+
+- **Randy Counsman** - [RandyCounsman.com](https://www.RandyCounsman.com)
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+
+This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/) - see the [LICENSE.md](LICENSE.md) file for details
+
+
+## Acknowledgments
+
+* Site Template - (WWeb.dev)[https://wweb.dev/blog/how-to-create-static-website-npm-scripts/#simplifybuild]
+* CSS Inspiration - (Kevin Powell)[https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw]
