@@ -3,7 +3,7 @@
 
 # Randy Counsman's Website
 
-This is the source for Randy Counsman's personal website: [RandyCounsman.com](https://www.randycounsman.com)
+This is the source for my personal website: [RandyCounsman.com](https://www.randycounsman.com)
 
 ## Installation
 
