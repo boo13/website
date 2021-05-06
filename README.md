@@ -121,6 +121,6 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 
 ## Acknowledgments
 
-- Site Template - (WWeb.dev)[https://wweb.dev/blog/how-to-create-static-website-npm-scripts/#simplifybuild]
-- CSS Inspiration - (Kevin Powell)[https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw]
-- FavIcon Generator - (FavIcon.io)[https://favicon.io/]
+- Site Template - [WWeb.dev](https://wweb.dev/blog/how-to-create-static-website-npm-scripts/#simplifybuild)
+- CSS Inspiration - [Kevin Powell](https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw)
+- FavIcon Generator - [FavIcon.io](https://favicon.io/)
