@@ -33,6 +33,12 @@ nav {
 
 }
 
+.triangle {
+    position: relative;
+    background: $accent-primary;
+    height: 50vh;
+  }
+
 .content {
     grid-column: content-left / content-right;
 }
@@ -55,7 +61,7 @@ nav {
 
 
 .page-header {
-    background: url(//unsplash.it/1000/800);
+    background: url(images/nyc.jpg);
     background-size: cover;
     grid-column: page-left / page-right;
     grid-row: page-top / info-start;
@@ -63,12 +69,11 @@ nav {
 
 .page-desc {
 
-    // ============= Background box =============
-    background-color: $text-background-faint;
-    background-blend-mode: multiply;
+    text-align: justify;
 
-    text-align: center;
-    justify-content: center;
+    // ============= Background box =============
+    // background-color: $text-background-faint;
+    // background-blend-mode: multiply;
 
     // ============= Positiong =============
 
@@ -78,7 +83,7 @@ nav {
     align-items: center; // Vertical Align
 
     // Position within page Grid
-    grid-column: marg-left / marg-right;
+    grid-column: content-left / content-right;
     grid-row: page-top / info-start;
 
     z-index: 20;
