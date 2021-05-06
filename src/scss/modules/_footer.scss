@@ -1,0 +1,16 @@
+footer {
+    grid-row-start: contact-end;
+    grid-row-end: page-bottom; 
+    grid-column-start: content-left;
+    grid-column-end: content-right;
+}
+
+.social-icons {
+    width: 20px;
+    filter: invert(1);
+}
+
+.copyright {
+    width: 20px;
+    filter: invert(1);
+}

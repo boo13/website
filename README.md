@@ -125,3 +125,4 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 - CSS Inspiration - [Kevin Powell](https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw)
 - FavIcon Generator - [FavIcon.io](https://favicon.io/)
 - Temporary Cover Image - [Florian Wehde](https://unsplash.com/photos/J6mySj3wntg?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink)
+- Footer Icons - [Iconmonstr](https://iconmonstr.com)

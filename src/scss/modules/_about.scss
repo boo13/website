@@ -1,0 +1,20 @@
+// ================================================
+// 
+//      ABOUT PAGE
+// 
+// ================================================
+// A page for me to talk about how great I am - 
+// standard "I'm great" kind of stuff goes here. 
+
+.about {
+        // ============= Positiong =============
+    // Position within page Grid
+    grid-column-start: content-left;
+    grid-column-end: content-right;
+    grid-row-start: nav-end;
+    grid-row-end: about-end;
+}
+
+.about-img {
+    max-width: 100px;
+}

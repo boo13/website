@@ -10,16 +10,28 @@
 
 
 .portfolio {
-
     // ============= Positiong =============
     // Position within page Grid
-    display: grid;
-    grid-column: content-left / content-right;
-    grid-row: info-start / page-bottom;
+    // display: grid;
+    grid-column-start: content-left;
+    grid-column-end: content-right;
+    grid-row-start: about-end;
+    grid-row-end: portfolio-end;
+}
 
+.portfolio-item {
+
+    display:flex;
+    flex-wrap: wrap;
+
+    img { 
+        height: 200px;
+        max-width: 300px;
+    }
 }
 
 
+// Not used currently
 .work-container {
     // Internal positioning
     display: flex;

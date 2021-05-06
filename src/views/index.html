@@ -14,7 +14,7 @@
         <!-- Cover Image -->
         <section class="welcome">
             <div class="welcome-left"></div>
-            <div class="welcome-middle"></div>
+            <div class="welcome-middle"><h1>Randy<br>Makes TV</h1></div>
             <div class="welcome-right"></div>
         </section>
 
@@ -31,7 +31,7 @@
         </section>
         
         <!-- Work -->
-        <section class="portfolio">
+        <section class="portfolio animate-this">
                 <h1>Work</h1>
 
                 <div class="portfolio-items">
@@ -79,6 +79,15 @@
                             <p class="portfolio-desc">A short description could appear here.</p>
                         </figcaption>
                     </figure>
+
+                    <!-- Portfolio Item 6 -->
+                    <figure class="portfolio-item">
+                        <img src="../images/portfolio-06.jpg" alt="Portfolio image 6" class="">
+                        <figcaption>
+                            <h2 class="portfolio-title">Project Name</h2>
+                            <p class="portfolio-desc">A short description could appear here.</p>
+                        </figcaption>
+                    </figure>
                 </div>
         </section>
 
@@ -103,23 +112,31 @@
 
         <!-- Footer -->
         <footer>
-
-            <p>Links and stuff...</p>
             <div class="social-icons">
-                <img class="social-icon" src="img/twitter.svg" alt="twitter">
-                <img class="social-icon" src="img/github.svg" alt="github">
+                <!-- <img class="social-icon" src="images/icons/favorite.svg" alt="favorite icon">
+                <img class="social-icon" src="images/icons/twitter.svg" alt="twitter icon"> -->
+                
+                <a href="https://github.com/boo13">
+                    <img class="social-icon" src="images/icons/github.svg" alt="github icon">
+                </a>    
+                <a href="https://www.linkedin.com/in/randycounsman/">
+                    <img class="social-icon" src="images/icons/linkedin.svg" alt="linkedin icon">
+                </a>
+                <a href="http://vimeo.com" >
+                    <img class="social-icon" src="images/icons/vimeo.svg" alt="vimeo icon">
+                </a>        
+                <!-- <img class="social-icon" src="images/icons/save.svg" alt="save icon"> -->
             </div>
-            <p class="copyright">Copyright</p>
+            <p class="copyright"><img class="social-icon" src="images/icons/creative-commons.svg" alt="creative commons icon"></p>
             
         </footer>
 
 
         <!-- Old -->
-        <h1 class="title content">Randy <span>Makes TV</span></h1>
+        <h1 class="title content animate-this"></h1>
         
 
         <nav class="content">
-            <h2>Nav</h2>
             <a href="/about.html">About</a>
             <a href="/work.html">Work</a>
             <a href="/contact.html">Contact</a>
@@ -130,7 +147,7 @@
         </section>
 
         <!-- <section class="content"> -->
-        <section class="content">
+        <!-- <section class="content">
             <div class="portfolio work-container">
                 <div class="project-display-card">
                     <img src="https://picsum.photos/320/180?random=1" alt="Example Image">
@@ -153,10 +170,13 @@
             </div>
 
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus molestias id delectus error quod debitis adipisci perferendis consequatur at odit ad expedita totam excepturi quam autem nisi, nemo laboriosam nihil. Sint, molestiae cumque recusandae nisi nobis vel, sunt ratione suscipit, dicta eum voluptatibus omnis obcaecati. Asperiores maxime veniam ex repudiandae?</p>
-        </section>
+        </section> -->
 
         <!-- Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+        <script src="https://unpkg.com/@barba/core"></script>
         <script src="./bundle.js"></script>
+        <script src="assets/main.js"></script>
         
     </body>
 </html>

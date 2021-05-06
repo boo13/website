@@ -3,6 +3,9 @@ body {
     margin: 0;
     background: $bg;
 
+
+    transition: 0.5s;
+
     // Main font color
     color: $offwhite;
     font-family: $ff-s;
@@ -13,9 +16,8 @@ body {
     grid-template-columns:
         [page-left] 10vw [marg-left] 1fr [content-left] 60vw [content-right] 1fr [marg-right] 10vw [page-right];
     grid-template-rows:
-        [page-top] 95vh [info-start] 5em [info-end] 5em [content-top] auto [page-bottom];
+        [page-top] 95vh [nav-start] 5vh [nav-end] auto [about-end] auto [portfolio-end] auto [contact-end] 20vh [page-bottom];
 }
-
 
 
 h1 {
@@ -29,7 +31,6 @@ h1 {
         display: block;
         font-size: 5.5rem;
         letter-spacing: $letter-spacing;
-
     }
 }
 
@@ -51,4 +52,93 @@ nav {
     &:hover {
         color: $accent-primary;
     }
+}
+
+.contact {
+    grid-row-start: portfolio-end;
+    grid-row-end: contact-end;
+    grid-column-start: content-left;
+    grid-column-end: content-right;
+}
+
+
+
+
+.content {
+    grid-column: content-left / content-right;
+}
+
+.title {
+    font-family: $ff-display-sans, Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $accent-primary;
+    font-size: 3.5rem;
+    // Grid positiong
+    grid-row: page-top / nav-start;
+    z-index: 30;
+}
+
+.small-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+
+.welcome {
+    background: url(images/nyc.jpg);
+    background-size: cover;
+    grid-column: page-left / page-right;
+    grid-row: page-top / nav-start;
+}
+
+.page-desc {
+
+    text-align: justify;
+
+    // ============= Background box =============
+    // background-color: $text-background-faint;
+    // background-blend-mode: multiply;
+
+    // ============= Positiong =============
+
+    // Internal positioning
+    display: flex;
+    justify-content: space-around;
+    align-items: center; // Vertical Align
+
+    // Position within page Grid
+    grid-column: content-left / content-right;
+    grid-row: page-top / nav-start;
+
+    z-index: 20;
+}
+
+/* 
+=====================================================
+=====================================================
+    4. Loading / Page Transition
+=====================================================
+=====================================================
+*/
+
+.loading-screen {
+    position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    background-color: var(--clr-accent);
+    width: 0%;
+    height: 100%;
+}
+
+.load-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 10;
+    pointer-events: none;
 }
