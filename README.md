@@ -107,8 +107,8 @@ Watch
 
 Deploy
 
-- [`imagemin`](https://www.npmjs.com/package/imagemin) - Image management
-- [`webpack`](https://www.npmjs.com/package/webpack) - 
+- [`imagemin`](https://www.npmjs.com/package/imagemin) - Minify images
+- [`webpack`](https://www.npmjs.com/package/webpack) - Javascript bundler
 - [`gh-pages`](https://www.npmjs.com/package/gh-pages) - Website deployment
 
 
