@@ -5,10 +5,6 @@
 
 This is the source for my personal website: [RandyCounsman.com](https://www.randycounsman.com)
 
-## Installation
-
-N/A
-
 
 ## Getting Started
 
