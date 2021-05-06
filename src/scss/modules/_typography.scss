@@ -1,0 +1,29 @@
+// ================================================
+// 
+//      FONTS
+// 
+// ================================================
+// Import @font-face CSS names from Adobe
+@import url(https://use.typekit.net/aro7jbx.css);
+
+$ff-display-sans: bebas-neue-pro-expanded;
+$ff-subhead-sans: mr-eaves-modern;
+$ff-display-serif: mrs-eaves;
+$ff-body-serif: mrs-eaves-xl-serif;
+
+// Font family - S(ans), S(ans) S(erif)
+// Main
+$ff-s: 'mrs-eaves', serif;
+$ff-ss: 'mr-eaves-modern', sans-serif;
+
+// Heading (Display)
+$ff-heading-s: 'bebas-neue-pro-expanded', Arial;
+
+// Font weights - Light, normal, bold
+$fw-l: 200; 
+$fw-n: 400;
+$fw-b: 900;
+
+
+// Spacing
+$letter-spacing: 10px;

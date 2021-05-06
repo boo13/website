@@ -8,6 +8,7 @@
 // on the 'work.html' page. 
 //  
 
+
 .portfolio {
 
     // ============= Positiong =============
@@ -15,10 +16,6 @@
     display: grid;
     grid-column: content-left / content-right;
     grid-row: info-start / page-bottom;
-
-    &:hover {
-        color: $primary;
-    }
 
 }
 
@@ -29,7 +26,6 @@
     flex-wrap: wrap;
     // display: grid;
     // grid-auto-columns: [work-1] 25% [work-2] 25% [work-3] 25%;
-
 
 }
 

@@ -1,0 +1,54 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: $bg;
+
+    // Main font color
+    color: $offwhite;
+    font-family: $ff-s;
+    line-height: 1.6;
+
+    // Named CSS Grids
+    display: grid;
+    grid-template-columns:
+        [page-left] 10vw [marg-left] 1fr [content-left] 60vw [content-right] 1fr [marg-right] 10vw [page-right];
+    grid-template-rows:
+        [page-top] 95vh [info-start] 5em [info-end] 5em [content-top] auto [page-bottom];
+}
+
+
+
+h1 {
+    color: $accent-primary;
+    line-height: 1;
+    font-size: 3.125rem;
+
+    span {
+        color: $accent-primary;
+        font-family: $ff-ss;
+        display: block;
+        font-size: 5.5rem;
+        letter-spacing: $letter-spacing;
+
+    }
+}
+
+h2 {
+    font-size: 2rem;
+    font-family: $ff-ss;
+    letter-spacing: $letter-spacing;
+    color: $dark-gray;
+    line-height: 1;
+}
+
+a {
+    color: $accent-secondary;
+}
+
+nav {
+    color: $accent-primary;
+
+    &:hover {
+        color: $accent-primary;
+    }
+}
