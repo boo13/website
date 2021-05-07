@@ -14,7 +14,7 @@ body {
     // Named CSS Grids
     display: grid;
     grid-template-columns:
-        [page-left] 10vw [marg-left] 1fr [content-left] 60vw [content-right] 1fr [marg-right] 10vw [page-right];
+        [page-left] 10vw [marg-left] 10vw [content-left] 60vw [content-right] 10vw [marg-right] 10vw [page-right];
     grid-template-rows:
         [page-top] 95vh [nav-start] 5vh [nav-end] auto [about-end] auto [portfolio-end] auto [contact-end] 20vh [page-bottom];
 }
@@ -42,17 +42,6 @@ h2 {
     line-height: 1;
 }
 
-a {
-    color: $accent-secondary;
-}
-
-nav {
-    color: $accent-primary;
-
-    &:hover {
-        color: $accent-primary;
-    }
-}
 
 .contact {
     grid-row-start: portfolio-end;
@@ -62,21 +51,16 @@ nav {
 }
 
 
-
-
 .content {
     grid-column: content-left / content-right;
 }
 
-.title {
+.page-title {
     font-family: $ff-display-sans, Arial, sans-serif;
     font-weight: 700;
     text-transform: uppercase;
     color: $accent-primary;
     font-size: 3.5rem;
-    // Grid positiong
-    grid-row: page-top / nav-start;
-    z-index: 30;
 }
 
 .small-title {
@@ -88,8 +72,23 @@ nav {
 .welcome {
     background: url(images/nyc.jpg);
     background-size: cover;
+    background-position: center ;
     grid-column: page-left / page-right;
     grid-row: page-top / nav-start;
+
+    h1 {
+        font-size: 2rem;
+
+
+        &::before {
+            content: '';
+            display: block;
+            margin: 0 auto;
+            width: 80%;
+            height: 1 px;
+            background: $dark-gray;
+        }
+    }
 }
 
 .page-desc {
@@ -114,31 +113,3 @@ nav {
     z-index: 20;
 }
 
-/* 
-=====================================================
-=====================================================
-    4. Loading / Page Transition
-=====================================================
-=====================================================
-*/
-
-.loading-screen {
-    position: relative;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    background-color: var(--clr-accent);
-    width: 0%;
-    height: 100%;
-}
-
-.load-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    z-index: 10;
-    pointer-events: none;
-}

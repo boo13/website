@@ -1,0 +1,67 @@
+.container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+.logo {
+float: left;
+padding: 10px 0;
+}
+  
+
+nav {
+    float: right;
+    color: $accent-primary;
+    font-family: $ff-heading-s;
+    font-size: 2rem;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        display: inline-block;
+        margin-left: 70px;
+        padding-top: 23px;
+      
+        position: relative;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover, a:active {
+        color: $accent-primary;
+    }
+
+    a:visited {
+        color: $accent-secondary;
+    }
+
+    a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background-color: #444;
+      
+        position: absolute;
+        top: 0;
+        width: 0%;
+      
+        transition: all ease-in-out 250ms;
+      }
+
+    a:hover::before {
+    width: 100%;
+    }
+      
+}

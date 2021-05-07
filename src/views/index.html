@@ -9,12 +9,21 @@
     <!-- ================================= Body ================================= -->
     <body>
         <!-- Rework of the structure -->
+        <!-- Header based on https://codepen.io/kevinpowell/pen/GrLKNo -->
+
+        <header>
+            <module href="/components/nav.html"></module>
+        </header>
+
+        <!-- <nav class="content">
+            <module href="/components/nav.html"></module>
+        </nav> -->
 
         <!-- Welcome -->
         <!-- Cover Image -->
         <section class="welcome">
             <div class="welcome-left"></div>
-            <div class="welcome-middle"><h1>Randy<br>Makes TV</h1></div>
+            <h1 class="welcome-mid">Randy<br>Makes TV</h1>
             <div class="welcome-right"></div>
         </section>
 
@@ -31,7 +40,7 @@
         </section>
         
         <!-- Work -->
-        <section class="portfolio animate-this">
+        <section class="work animate-this">
                 <h1>Work</h1>
 
                 <div class="portfolio-items">
@@ -93,7 +102,7 @@
 
         <!-- Contact -->
 
-        <section class="contact">
+        <section class="contact" id="contact">
             <h1>Contact</h1>
             <form action="">
                 <label class="name">Name:
@@ -112,23 +121,7 @@
 
         <!-- Footer -->
         <footer>
-            <div class="social-icons">
-                <!-- <img class="social-icon" src="images/icons/favorite.svg" alt="favorite icon">
-                <img class="social-icon" src="images/icons/twitter.svg" alt="twitter icon"> -->
-                
-                <a href="https://github.com/boo13">
-                    <img class="social-icon" src="images/icons/github.svg" alt="github icon">
-                </a>    
-                <a href="https://www.linkedin.com/in/randycounsman/">
-                    <img class="social-icon" src="images/icons/linkedin.svg" alt="linkedin icon">
-                </a>
-                <a href="http://vimeo.com" >
-                    <img class="social-icon" src="images/icons/vimeo.svg" alt="vimeo icon">
-                </a>        
-                <!-- <img class="social-icon" src="images/icons/save.svg" alt="save icon"> -->
-            </div>
-            <p class="copyright"><img class="social-icon" src="images/icons/creative-commons.svg" alt="creative commons icon"></p>
-            
+            <module href="/components/footer.html"></module>
         </footer>
 
 
@@ -136,11 +129,7 @@
         <h1 class="title content animate-this"></h1>
         
 
-        <nav class="content">
-            <a href="/about.html">About</a>
-            <a href="/work.html">Work</a>
-            <a href="/contact.html">Contact</a>
-        </nav>
+
 
         <section class="page-desc content">
             <p>Paragraph text Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, dignissimos sint vel non perferendis assumenda autem! Rerum laboriosam, optio nihil exercitationem reiciendis mollitia hic odit. Saepe, voluptate perspiciatis officia amet alias, rerum numquam necessitatibus labore optio, minima molestias laboriosam explicabo esse atque veniam. Maxime, nam corporis laborum aperiam unde incidunt!</p> 
@@ -174,9 +163,9 @@
 
         <!-- Scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
-        <script src="https://unpkg.com/@barba/core"></script>
+        <!-- <script src="https://unpkg.com/@barba/core"></script> -->
         <script src="./bundle.js"></script>
-        <script src="assets/main.js"></script>
+        <!-- <script src="assets/main.js"></script> -->
         
     </body>
 </html>
