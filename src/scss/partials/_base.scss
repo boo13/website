@@ -1,13 +1,16 @@
+* { box-sizing: border-box; }
+
 body {
     padding: 0;
     margin: 0;
-    background: $bg;
+    min-height: 100vh;
 
+    // Background (Color-shifting Animation)
+    background-image: $gradient-bg;
+    background-size: 300%;
+    animation: bg-animation 8s infinite alternate;
 
-    transition: 0.5s;
-
-    // Main font color
-    color: $offwhite;
+    // Main font
     font-family: $ff-s;
     line-height: 1.6;
 
@@ -16,100 +19,6 @@ body {
     grid-template-columns:
         [page-left] 10vw [marg-left] 10vw [content-left] 60vw [content-right] 10vw [marg-right] 10vw [page-right];
     grid-template-rows:
-        [page-top] 95vh [nav-start] 5vh [nav-end] auto [about-end] auto [portfolio-end] auto [contact-end] 20vh [page-bottom];
+        [page-top] $content-height [nav-start] $footer-height [page-bottom];
+    // grid-area: ;
 }
-
-
-h1 {
-    color: $accent-primary;
-    line-height: 1;
-    font-size: 3.125rem;
-
-    span {
-        color: $accent-primary;
-        font-family: $ff-ss;
-        display: block;
-        font-size: 5.5rem;
-        letter-spacing: $letter-spacing;
-    }
-}
-
-h2 {
-    font-size: 2rem;
-    font-family: $ff-ss;
-    letter-spacing: $letter-spacing;
-    color: $dark-gray;
-    line-height: 1;
-}
-
-
-.contact {
-    grid-row-start: portfolio-end;
-    grid-row-end: contact-end;
-    grid-column-start: content-left;
-    grid-column-end: content-right;
-}
-
-
-.content {
-    grid-column: content-left / content-right;
-}
-
-.page-title {
-    font-family: $ff-display-sans, Arial, sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: $accent-primary;
-    font-size: 3.5rem;
-}
-
-.small-title {
-    font-size: 1rem;
-    text-transform: uppercase;
-}
-
-
-.welcome {
-    background: url(images/nyc.jpg);
-    background-size: cover;
-    background-position: center ;
-    grid-column: page-left / page-right;
-    grid-row: page-top / nav-start;
-
-    h1 {
-        font-size: 2rem;
-
-
-        &::before {
-            content: '';
-            display: block;
-            margin: 0 auto;
-            width: 80%;
-            height: 1 px;
-            background: $dark-gray;
-        }
-    }
-}
-
-.page-desc {
-
-    text-align: justify;
-
-    // ============= Background box =============
-    // background-color: $text-background-faint;
-    // background-blend-mode: multiply;
-
-    // ============= Positiong =============
-
-    // Internal positioning
-    display: flex;
-    justify-content: space-around;
-    align-items: center; // Vertical Align
-
-    // Position within page Grid
-    grid-column: content-left / content-right;
-    grid-row: page-top / nav-start;
-
-    z-index: 20;
-}
-

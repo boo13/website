@@ -1,11 +1,12 @@
 // Order matters
 // Start with variable loading...
-@import 'colors';
-@import 'typography';
+// @import 'colors';
+
 
 // These modules use those variables...
 @import 'nav';
-@import 'about';
-@import 'contact';
+@import 'welcome';
+// @import 'portfolio';
+// @import 'about';
+// @import 'contact';
 @import 'footer';
-@import 'portfolio';

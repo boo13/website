@@ -19,11 +19,12 @@ $ff-ss: 'mr-eaves-modern', sans-serif;
 // Heading (Display)
 $ff-heading-s: 'bebas-neue-pro-expanded', Arial;
 
-// Font weights - Light, normal, bold
+// Font weights - ExtraLight, Light, normal, bold
+$fw-el: 100; 
 $fw-l: 200; 
 $fw-n: 400;
 $fw-b: 900;
 
-
 // Spacing
-$letter-spacing: 10px;
+$letter-spacing-tight: .05em;
+$letter-spacing-loose: .2em;

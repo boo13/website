@@ -1,30 +1,8 @@
 footer {
-    grid-row-start: contact-end;
-    grid-row-end: page-bottom; 
-    grid-column-start: content-left;
-    grid-column-end: content-right;
-
-    ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-
-    li {
-        display: inline-block;
-        // margin-left: 70px;
-        // padding-top: 23px;
-      
-        position: relative;
-    }
-}
-
-.social-icons {
-    width: 20px;
-    filter: invert(1);
-}
-
-.copyright {
-    width: 20px;
-    filter: invert(1);
+    background-image: $gradient-accent;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: $footer-height;
 }

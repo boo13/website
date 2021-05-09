@@ -1,0 +1,29 @@
+
+// ================================================
+// 
+//      COLORS
+// 
+// ================================================
+
+// Greyscale
+$black: hsla(200, 50%, 5%, 1);
+$light-gray: #A7A7A7;
+$gray: #E8E9EB;
+$dark-gray: #393939;
+
+$accent-secondary: orange;
+
+// Gradient Colors
+$purple: hsla(302, 81%, 40%, 1);
+$yellow: hsla(55, 100%, 50%, 1);
+$orange: hsla(29, 100%, 50%, 1);
+$blue: hsla(219, 100%, 45%, 1);
+$light-blue: hsla(199, 20%, 96%, 1);
+
+// Gradients
+$gradient-bg: linear-gradient(45deg, #faf0ea, #c3e5f5);
+$gradient-accent: linear-gradient(85deg, $yellow 5%,$purple 35%, $orange 66%, $blue 95%);
+
+// Helper names
+$accent-primary: $purple;
+$accent-secondary: $orange;

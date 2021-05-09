@@ -1,0 +1,15 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 80%;
+    margin: 2em auto;
+  }
+  
+  .square {
+    aspect-ratio: 1 / 1;
+    border: 1px solid black;
+    display: grid;
+    place-items: center;
+    font-size: 5vw;
+  }
+  
