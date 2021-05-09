@@ -4,6 +4,10 @@
 // 
 // ================================================
 // Import @font-face CSS names from Adobe
+// 
+// Fonts I actually use:
+//     - 
+
 @import url(https://use.typekit.net/aro7jbx.css);
 
 $ff-display-sans: bebas-neue-pro-expanded;
@@ -13,8 +17,8 @@ $ff-body-serif: mrs-eaves-xl-serif;
 
 // Font family - S(ans), S(ans) S(erif)
 // Main
-$ff-s: 'mrs-eaves', serif;
-$ff-ss: 'mr-eaves-modern', sans-serif;
+$ff-s: $ff-body-serif, serif;
+$ff-ss: $ff-subhead-sans, sans-serif;
 
 // Heading (Display)
 $ff-heading-s: 'bebas-neue-pro-expanded', Arial;

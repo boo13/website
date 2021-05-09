@@ -5,10 +5,6 @@
 }
 
 .welcome-page {
-    // Position within page Grid
-    grid-column: content-left / content-right;
-    grid-row: page-top / nav-start;
-
     margin: auto;
     // width: 80%;
     max-width: 600px;
@@ -20,7 +16,7 @@
         font-family: $ff-display-serif;
         letter-spacing: $letter-spacing-tight;
         font-size: 6rem;
-        font-weight: $fw-l;
+        font-weight: $fw-n;
         line-height: 1;
         color: $light-gray;
         text-align: center;

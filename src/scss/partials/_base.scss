@@ -1,4 +1,6 @@
-* { box-sizing: border-box; }
+* { 
+    box-sizing: border-box; 
+}
 
 body {
     padding: 0;
@@ -21,4 +23,10 @@ body {
     grid-template-rows:
         [page-top] $content-height [nav-start] $footer-height [page-bottom];
     // grid-area: ;
+}
+
+main {
+    // Position within page Grid
+    grid-column: content-left / content-right;
+    grid-row: page-top / nav-start;
 }
