@@ -1,5 +1,5 @@
 {
-  "name": "randycounsmanweb",
+  "name": "Randy Counsman",
   "version": "1.0.0",
   "description": "Personal website for Randy Counsman",
   "main": "index.js",
@@ -45,5 +45,8 @@
     "stylelint": "^13.13.0",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.6.0"
+  },
+  "dependencies": {
+    "@barba/core": "^2.9.7"
   }
 }
