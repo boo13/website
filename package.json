@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    // "css:scss": "node-sass --output-style compressed -o dist src/scss",
+    "css:scss": "sass --output-style compressed -o dist src/scss",
     "css:autoprefixer": "postcss -u autoprefixer -r dist/*.css",
-    "css:lint": "stylelint src/scss/*.scss --syntax scss || true",
+    "css:lint": "style rlint src/scss/*.scss --syntax scss || true",
     "build:css": "npm run css:lint && npm run css:scss && npm run css:autoprefixer",
     "watch:css": "onchange -d 2000 \"src/scss\" -- npm run build:css",
     "serve": "browser-sync start --server \"dist\" --files \"dist\"",
@@ -42,6 +42,7 @@
     "posthtml": "^0.15.2",
     "posthtml-cli": "^0.9.1",
     "posthtml-modules": "^0.7.4",
+    "sass": "^1.34.0",
     "stylelint": "^13.13.0",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.6.0"
