@@ -1,4 +1,4 @@
-# Personal Portfolio Website for Randy Counsman
+# RandyCounsman.com
 
 
 ---
