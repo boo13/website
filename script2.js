@@ -196,14 +196,27 @@ document.addEventListener('DOMContentLoaded', function () {
     const source = video.querySelector('source');
 
     function updateVideoSource() {
+        const currentTime = video.currentTime;
+        const wasPaused = video.paused;
+
+        let newSrc;
         if (window.matchMedia('(max-aspect-ratio: 9/16)').matches) {
-            // Switch to vertical video for portrait-like aspect ratios
-            source.src = './video/LandingPageMontagev05_9x16.webm';
+            newSrc = './video/LandingPageMontagev05_9x16.webm';
         } else {
-            // Switch back to default video for landscape-like aspect ratios
-            source.src = './video/LandingPageMontagev04.2.webm';
+            newSrc = './video/LandingPageMontagev04.2.webm';
         }
-        video.load(); // Reload the video with the new source
+
+        // Only change source if it's different
+        if (source.src.endsWith(newSrc)) return;
+
+        source.src = newSrc;
+        video.load();
+
+        video.addEventListener('loadedmetadata', function restorePlayback() {
+            video.currentTime = currentTime;
+            if (!wasPaused) video.play();
+            video.removeEventListener('loadedmetadata', restorePlayback);
+        });
     }
 
     // Initial check
