@@ -306,8 +306,9 @@ section video {
 .landing-container {
   grid-row: 1 / -1;
   grid-column: 1 / -1;
-  display: grid;
-  place-items: center;
+  display: flex;              
+  flex-direction: column;
+  align-items: flex-start;
   z-index: 10;
   position: relative;
   /* For debugging */
@@ -333,6 +334,7 @@ footer {
   color: #fff;
   opacity: 0;
   animation: fadeUp 2s ease-out forwards;
+  margin-bottom: 0.72rem;
 }
 
 .landing-subtitle {
@@ -345,6 +347,35 @@ footer {
   animation: fadeUp 2s ease-out forwards;
   text-align: left;
   width: 100%;
+}
+
+.landing-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-start;   /* left align icons */
+  width: 100%;
+}
+
+.landing-icons a {
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.landing-icons a:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.landing-icons svg {
+  width: 28px;
+  height: 28px;
+  display: block;
 }
 
 @keyframes fadeUp {
