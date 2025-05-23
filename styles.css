@@ -8,6 +8,7 @@
   --ff-inter: "Inter", sans-serif;
   --ff-bebas: "Bebas Neue", sans-serif;
   --ff-ivy: "ivypresto-display", serif;
+  --ff-offwhite: #f7f8f4f4;
 }
 
 * {
@@ -45,7 +46,7 @@ img {
 a,
 p {
   text-decoration: none;
-  color: #fff;
+  color: var(--ff-offwhite);
   font-size: 14px;
 }
 
@@ -68,6 +69,21 @@ nav a {
 nav a#active {
   opacity: 1;
 }
+
+h1 {
+  margin: 0;
+  font-family: var(--ff-ivy);
+  font-weight: 300;
+  font-style: normal;
+  font-size: 4rem;
+  line-height: 1.05;
+  text-align: left;
+  color: var(--ff-offwhite);
+  opacity: 0;
+  animation: fadeUp 2s ease-out forwards;
+  margin-bottom: 0.72rem;
+}
+
 
 .slider {
   position: relative;
@@ -230,7 +246,7 @@ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -241,7 +257,7 @@ nav {
   width: 50px;
   height: 50px;
   border: 5px solid rgba(0, 0, 0, 0.1);
-  border-top: 5px solid #3498db;
+  border-top: 5px solid var(--ff-offwhite);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -324,7 +340,7 @@ footer {
   position: relative;
 }
 
-.landing-title {
+/* .landing-title {
   margin: 0;
   font-family: var(--ff-ivy);
   font-weight: 300;
@@ -332,18 +348,18 @@ footer {
   font-size: 4rem;
   line-height: 1.05;
   text-align: left;
-  color: #fff;
+  color: var(--ff-offwhite);
   opacity: 0;
   animation: fadeUp 2s ease-out forwards;
   margin-bottom: 0.72rem;
-}
+} */
 
 .landing-subtitle {
   margin: 0;
   font-family: var(--ff-inter);
   font-style: italic;
   font-size: 1.5rem;
-  color: #fff;
+  color: var(--ff-offwhite);
   opacity: 0;
   animation: fadeUp 2s ease-out forwards;
   text-align: left;
@@ -356,7 +372,7 @@ footer {
   margin-top: 1.5rem;
   justify-content: flex-start;
   width: 100%;
-  opacity: 1;
+  opacity: 0.6;
 }
 
 .landing-icons a {
@@ -401,9 +417,36 @@ footer {
   }
 }
 
+.snap-sections {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s;
+  position: relative;
+  z-index: 1;
+}
+
+.snap-section.active {
+  opacity: 1;
+}
 
 @media (max-width: 600px) {
   .landing-container {
     padding-left: 3rem; /* Keeps title from hitting left edge of screen on mobile */
   }
 }
+
+#about { background: #333; }
+#work { background: #444; }
+#contact { background: #555; }
