@@ -340,7 +340,7 @@ footer {
   position: relative;
 }
 
-/* .landing-title {
+.landing-title {
   margin: 0;
   font-family: var(--ff-ivy);
   font-weight: 300;
@@ -352,7 +352,11 @@ footer {
   opacity: 0;
   animation: fadeUp 2s ease-out forwards;
   margin-bottom: 0.72rem;
-} */
+  text-shadow:
+    0 6px 32px rgba(0,0,0,0.65),
+    0 2px 8px rgba(0,0,0,0.35),
+    0 1px 0 rgba(0,0,0,0.18);
+}
 
 .landing-subtitle {
   margin: 0;
@@ -364,6 +368,10 @@ footer {
   animation: fadeUp 2s ease-out forwards;
   text-align: left;
   width: 100%;
+  text-shadow:
+    0 4px 18px rgba(0,0,0,0.55),
+    0 1.5px 6px rgba(0,0,0,0.22),
+    0 1px 0 rgba(0,0,0,0.12);
 }
 
 .landing-icons {
@@ -373,6 +381,10 @@ footer {
   justify-content: flex-start;
   width: 100%;
   opacity: 0.6;
+  filter:
+    drop-shadow(0 4px 18px rgba(0,0,0,0.55))
+    drop-shadow(0 1.5px 6px rgba(0,0,0,0.22))
+    drop-shadow(0 1px 0 rgba(0,0,0,0.12));
 }
 
 .landing-icons a {
