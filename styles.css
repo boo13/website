@@ -311,6 +311,7 @@ section video {
   align-items: flex-start;
   z-index: 10;
   position: relative;
+  padding-left: 0; /* Changes for mobile */
   /* For debugging */
   /* border: 2px solid red;  */
 }
@@ -401,3 +402,8 @@ footer {
 }
 
 
+@media (max-width: 600px) {
+  .landing-container {
+    padding-left: 3rem; /* Keeps title from hitting left edge of screen on mobile */
+  }
+}
