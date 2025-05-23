@@ -353,8 +353,11 @@ footer {
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
-  justify-content: flex-start;   /* left align icons */
+  justify-content: flex-start;
   width: 100%;
+  opacity: 0;
+  animation: fadeUp 2s ease-out forwards;
+  animation-delay: 1s; /* Start fade up 1s after landing-container */
 }
 
 .landing-icons a {
