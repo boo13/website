@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="styles_contact.css" />
+</head>
+<body>
+    <form id="fs-frm" name="simple-contact-form" accept-charset="utf-8" action="https://formspree.io/f/xyzyzvyn" method="post">
+    <fieldset id="fs-frm-inputs">
+        <label for="full-name">Full Name</label>
+        <input type="text" name="name" id="full-name" placeholder="Name" required="">
+        <label for="email-address">Email Address</label>
+        <input type="email" name="_replyto" id="email-address" placeholder="email@domain.com" required="">
+        <label for="message">Message</label>
+        <textarea rows="5" name="message" id="message" placeholder="Go ahead, say 'Hi!'" required=""></textarea>
+        <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
+    </fieldset>
+    <input id="fs-frm-submit" type="submit" value="Submit">
+    <p id="fs-frm-status"></p>
+    </form>
+    <script>
+        var form = document.getElementById("fs-frm");
+        var submit = document.getElementById("fs-frm-submit");
+
+        async function handleSubmit(event) {
+        submit.setAttribute('disabled', true);
+        }
+
+        form.addEventListener("submit", handleSubmit)
+    </script>
+</body>
+</html>
