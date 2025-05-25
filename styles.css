@@ -462,3 +462,21 @@ footer {
 #about { background: #333; }
 #work { background: black; }
 #contact { background: #555; }
+
+
+/* Responsive */
+
+/* Mobile (default styles, or use max-width: 600px) */
+@media (max-width: 600px) {
+  /* Mobile styles */
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  /* Tablet styles */
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  /* Desktop styles */
+}
