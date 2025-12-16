@@ -193,7 +193,7 @@ nav {
     padding: 1.5em 2em;
     /* color: #cdc6be; */
     mix-blend-mode: difference;
-    z-index: 6;
+    z-index: 15;
   }
   
 nav > div {
@@ -279,6 +279,7 @@ nav > div {
 
 .menu-item {
     display: flex;
+    justify-content: center;
     cursor: pointer;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
@@ -289,6 +290,7 @@ nav > div {
     /* font-family: "Canopee"; */
     font-size: 10vw;
     line-height: 80%;
+    display: inline-block;
     will-change: transform;
     transition: letter-spacing 0.3s;
 }
