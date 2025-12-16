@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 - Primary pages live at the repo root (`index.html`, `work.html`, `contact.html`, plus archived `index_old.html`/`index2.html`).
-- Shared styling is in `styles.css`, with page-specific variants such as `styles_contact.css` and `fadein.css`; global scripts sit in `script.js`, `Slider.js`, and `Video.js`.
+- Shared styling is in `styles.css`, with page-specific variants such as `styles_contact.css` and `fadein.css`; global scripts sit in `js/script.js`, `js/Slider.js`, and `js/Video.js`.
 - Assets are in `images/`, `video/`, and `favicon/`; keep new media there and prefer existing naming patterns.
 - `codepen_examples/` holds standalone experiments and should not be bundled into the main site; `SDE_Web/website/` is an older prototype—touch only when explicitly needed.
 
