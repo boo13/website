@@ -1,10 +1,7 @@
-import gsap from 'https://cdn.skypack.dev/gsap@3.12.5';
-import CustomEase from 'https://cdn.skypack.dev/gsap@3.12.5/CustomEase';
-
 /**
  * Slider class to encapsulate slider functionality.
  */
-export class Slider {
+class Slider {
     constructor() {
         this.sliderImages = document.querySelector('.slider-images');
         this.counter = document.querySelector('.counter');
@@ -154,3 +151,5 @@ export class Slider {
         });
     }
 }
+
+window.Slider = Slider;
