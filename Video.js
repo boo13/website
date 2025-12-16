@@ -1,7 +1,7 @@
 /**
  * Handles video loading, responsive source switching, and loading overlay.
  */
-export class ResponsiveVideo {
+class ResponsiveVideo {
     constructor() {
         this.loadingOverlay = document.querySelector('.loading-overlay');
         this.video = document.querySelector('section video');
@@ -59,3 +59,5 @@ export class ResponsiveVideo {
         );
     }
 }
+
+window.ResponsiveVideo = ResponsiveVideo;
