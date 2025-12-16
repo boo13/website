@@ -17,11 +17,11 @@ This is a static portfolio website for Randy Counsman (Documentary Producer) dep
 ### JavaScript Architecture
 The site uses a modular class-based approach with deferred script loading:
 
-1. **ResponsiveVideo** (`Video.js`): Handles video loading overlays and responsive source switching based on aspect ratio. Automatically switches between standard (16:9) and vertical (9:16) video sources. Manages the loading spinner that displays while video loads (5s timeout).
+1. **ResponsiveVideo** (`js/Video.js`): Handles video loading overlays and responsive source switching based on aspect ratio. Automatically switches between standard (16:9) and vertical (9:16) video sources. Manages the loading spinner that displays while video loads (5s timeout).
 
-2. **Slider** (`Slider.js`): Portfolio image carousel with GSAP-powered transitions. Uses custom "hop" easing curve for smooth animations. Handles click-based navigation (left/right half clicks), preview thumbnails, and slide counter/title synchronization.
+2. **Slider** (`js/Slider.js`): Portfolio image carousel with GSAP-powered transitions. Uses custom "hop" easing curve for smooth animations. Handles click-based navigation (left/right half clicks), preview thumbnails, and slide counter/title synchronization.
 
-3. **Main initialization** (`script.js`): DOMContentLoaded orchestrator that instantiates ResponsiveVideo and Slider if their respective DOM elements exist.
+3. **Main initialization** (`js/script.js`): DOMContentLoaded orchestrator that instantiates ResponsiveVideo and Slider if their respective DOM elements exist.
 
 All classes are exposed on `window` object and initialized conditionally based on DOM presence, allowing shared scripts across pages with different features.
 
@@ -83,7 +83,7 @@ python -m http.server 4000
 ### Adding a New Page
 1. Create HTML file in root (e.g., `newpage.html`)
 2. Link to `styles.css` and relevant page-specific CSS
-3. Include deferred scripts: GSAP, CustomEase, then `Slider.js`, `Video.js`, `script.js`
+3. Include deferred scripts: GSAP, CustomEase, then `js/Slider.js`, `js/Video.js`, `js/script.js`
 4. Use `.snap-sections` container for scroll-snap layout if needed
 5. Test responsive video/slider components if used
 
