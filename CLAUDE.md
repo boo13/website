@@ -26,8 +26,8 @@ The site uses a modular class-based approach with deferred script loading:
 All classes are exposed on `window` object and initialized conditionally based on DOM presence, allowing shared scripts across pages with different features.
 
 ### Styling System
-- **Global**: `styles.css` (typography, layout grid, slider, video sections)
-- **Page-specific**: `styles_contact.css` (contact form), `fadein.css` (animation utilities)
+- **Global**: `css/styles.css` (typography, layout grid, slider, video sections)
+- **Page-specific**: `css/styles_contact.css` (contact form), `css/fadein.css` (animation utilities)
 - **CSS Variables**: Root-level design tokens for fonts (`--ff-ivy`, `--ff-bebas`) and colors (`--clr-offwhite`, `--clr-nearblack`)
 - **Layout**: CSS Grid with snap-scrolling sections; 2-space indentation standard
 
@@ -82,7 +82,7 @@ python -m http.server 4000
 
 ### Adding a New Page
 1. Create HTML file in root (e.g., `newpage.html`)
-2. Link to `styles.css` and relevant page-specific CSS
+2. Link to `css/styles.css` and relevant page-specific CSS
 3. Include deferred scripts: GSAP, CustomEase, then `js/Slider.js`, `js/Video.js`, `js/script.js`
 4. Use `.snap-sections` container for scroll-snap layout if needed
 5. Test responsive video/slider components if used

@@ -1,6 +1,6 @@
 # RandyCounsman.com
 
-Static portfolio site for Randy Counsman. Pages live at the repo root (`index.html`, `work.html`, `contact.html`, plus archival `index_old.html`/`index2.html`). Scripts (`js/Slider.js`, `js/Video.js`, `js/script.js`) and styles (`styles.css`, `styles_contact.css`, `fadein.css`) are plain browser files.
+Static portfolio site for Randy Counsman. Pages live at the repo root (`index.html`, `work.html`, `contact.html`, plus archival `index_old.html`/`index2.html`). Scripts (`js/Slider.js`, `js/Video.js`, `js/script.js`) and styles (`css/styles.css`, `css/styles_contact.css`, `css/fadein.css`) are plain browser files.
 
 ## Running locally
 - No build step is required. Open `index.html` directly or serve the root to avoid CORS issues for media.
