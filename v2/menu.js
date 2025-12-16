@@ -1,11 +1,41 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-    let activeItemIndicator = CSSRulePlugin.getRule(".menu-item p#active::after");
+    const activeItemIndicator = CSSRulePlugin.getRule(".menu-item p#active::after");
     const toggleButton = document.querySelector(".burger");
     const menuItems = document.querySelectorAll(".menu-item p");
     let isOpen = false;
 
-    gsap.set(".menu-item p", {y: 225})
+    gsap.set(".menu-item p", { y: 225 });
+
+    const measureItemWidth = (item) => {
+        const link = item.querySelector("a");
+        return link ? link.offsetWidth : item.offsetWidth;
+    };
+
+    const resetActiveIndicator = () => {
+        if (!activeItemIndicator) return;
+        gsap.set(activeItemIndicator, { width: "0px" });
+    };
+
+    const animateActiveIndicator = (targetWidth) => {
+        if (!activeItemIndicator) return;
+        gsap.fromTo(
+            activeItemIndicator,
+            { width: "0px" },
+            { width: `${targetWidth}px`, duration: 0.6, ease: "power4.out" }
+        );
+    };
+
+    const setActiveItem = (item) => {
+        const currentActive = document.querySelector(".menu-item p#active");
+        if (currentActive && currentActive !== item) {
+            currentActive.removeAttribute("id");
+        }
+        if (item.id !== "active") {
+            item.id = "active";
+        }
+        animateActiveIndicator(measureItemWidth(item));
+    };
 
     const timeline = gsap.timeline({ paused: true });
 
@@ -22,13 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ease: "power4.out"
     }, "-=1");
 
-    timeline.to(activeItemIndicator, {
-        width: "100%",
-        duration: 1,
-        ease: "power4.out",
-        delay: 0.5
-    }, "<");
-
     timeline.to(".sub-nav", {
         bottom: "5%",
         opacity: 1,
@@ -39,13 +62,19 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleButton.addEventListener("click", function () {
         if (isOpen) {
             timeline.reverse();
+            resetActiveIndicator();
         } else {
             timeline.play();
+            const activeItem = document.querySelector(".menu-item p#active") || menuItems[0];
+            resetActiveIndicator();
+            animateActiveIndicator(measureItemWidth(activeItem));
         }
         isOpen = !isOpen;
     });
+
     menuItems.forEach(item => {
         item.addEventListener("click", function () {
+            setActiveItem(item);
             if (isOpen) {
                 timeline.reverse();
                 isOpen = false;
@@ -54,4 +83,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
