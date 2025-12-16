@@ -17,10 +17,22 @@
   content: none;
 }
 
+#latest.latest-randy .latest-perspective-container {
+  position: absolute;
+  inset: 0;
+  perspective: 1000px;
+  perspective-origin: center center;
+  overflow: hidden;
+}
+
 #latest.latest-randy .latest-video-wrapper {
   position: absolute;
   inset: 0;
   z-index: 1;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform, filter, opacity;
+  transform: translateZ(0);
 }
 
 #latest.latest-randy video {
@@ -94,6 +106,12 @@
 
 #latest.latest-randy .latest-icons a:hover {
   transform: translateY(-2px);
+}
+
+#about {
+  position: relative;
+  z-index: 3;
+  background: #000;
 }
 
 @media (max-width: 768px) {
