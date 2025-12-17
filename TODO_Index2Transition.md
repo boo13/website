@@ -7,7 +7,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
 
 - [x] Added ScrollTrigger CDN after GSAP core and before CSSRulePlugin in `index2.html`; wired new `v2/zoom-transition.js`.
 - [x] Wrapped Latest video in `.latest-perspective-container` with 3D/perspective styling and GPU hints; set About section background/z-index for coverage.
-- [x] Implemented ScrollTrigger timeline using window/body as scroller, with mobile-tuned scale/blur, reduced-motion fade fallback, start at `bottom bottom`, and snap temporarily disabled while pinned; global snap currently off to unblock scrolling (to re-tune later). Body/HTML now min-height (not fixed height) to allow pin spacing and normal scrolling.
+- [x] Implemented ScrollTrigger timeline using window/body as scroller, with mobile-tuned scale/blur, reduced-motion fade fallback, start at `top top`, and snap temporarily disabled while pinned; global snap currently off to unblock scrolling (to re-tune later). Body/HTML now min-height (not fixed height) to allow pin spacing and normal scrolling. About is a fixed overlay with a child `.about-content` that blur/scale transitions in/out (pointer-events off) during the pin; in-flow About markup is wrapped for isolated scaling.
 - [ ] Additional refinements (snap handling beyond basic disable/restore, Safari/mobile trims, video readiness guard) remain to do; see “Additional Refinements.”
 
 ## Current State Analysis

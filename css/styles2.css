@@ -109,9 +109,36 @@
 }
 
 #about {
-  position: relative;
-  z-index: 3;
-  background: #000;
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 2em;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: center center;
+  will-change: transform, filter, opacity;
+}
+
+.about-content {
+  max-width: 820px;
+  width: min(85vw, 820px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+  transform-origin: center center;
+  will-change: transform, filter, opacity;
+}
+
+.about-content p {
+  max-width: 100%;
+  text-align: left;
 }
 
 @media (max-width: 768px) {
