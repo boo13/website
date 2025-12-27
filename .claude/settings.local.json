@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(frontend-design)",
+      "Bash(cp:*)",
+      "Bash(cat:*)",
+      "Bash(open:*)"
+    ]
+  }
+}
