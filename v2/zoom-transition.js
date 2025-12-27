@@ -13,9 +13,13 @@
     const latestContent = document.querySelector('.latest-content');
     const aboutSection = document.querySelector('#about');
     const aboutContent = document.querySelector('#about .about-content');
+    const latestName = document.querySelector('.latest-name');
+    const aboutNameSlot = document.querySelector('.about-name-slot');
+    const aboutNameTarget = document.querySelector('.about-name-target');
     const scroller = window;
     const scrollerEl = document.body;
     const originalSnap = scrollerEl ? getComputedStyle(scrollerEl).scrollSnapType : '';
+    let namePos = null;
 
     const disableSnap = () => {
       if (scrollerEl) scrollerEl.style.scrollSnapType = 'none';
@@ -26,6 +30,44 @@
     };
 
     if (!videoWrapper || !aboutSection || !aboutContent) return;
+
+    const computeNamePos = () => {
+      if (!latestName || !aboutNameTarget) return null;
+      const start = latestName.getBoundingClientRect();
+      const end = aboutNameTarget.getBoundingClientRect();
+      const scaleX = end.width / start.width || 1;
+      const scaleY = end.height / start.height || 1;
+      const scale = Math.min(scaleX, scaleY) || 1;
+      const startCenterX = start.left + start.width / 2;
+      const startCenterY = start.top + start.height / 2;
+      const endCenterX = end.left + end.width / 2;
+      const endCenterY = end.top + end.height / 2;
+      return {
+        start,
+        x: endCenterX - startCenterX,
+        y: endCenterY - startCenterY,
+        scale
+      };
+    };
+
+    const refreshNamePos = () => {
+      namePos = computeNamePos();
+      if (!namePos || !latestName) return;
+      gsap.set(latestName, {
+        position: 'fixed',
+        left: namePos.start.left,
+        top: namePos.start.top,
+        width: namePos.start.width,
+        height: namePos.start.height,
+        x: 0,
+        y: 0,
+        scale: 1,
+        zIndex: 7,
+        pointerEvents: 'none'
+      });
+    };
+
+    refreshNamePos();
 
     if (prefersReducedMotion) {
       gsap.to(videoWrapper, { opacity: 0, duration: 0.3 });
@@ -43,12 +85,58 @@
         anticipatePin: 1,
         invalidateOnRefresh: true,
         scroller,
-        onEnter: () => disableSnap(),
-        onLeave: () => restoreSnap(),
-        onEnterBack: () => disableSnap(),
-        onLeaveBack: () => restoreSnap()
+        onEnter: () => {
+          disableSnap();
+          refreshNamePos();
+          gsap.set(latestName, { opacity: 1 });
+          gsap.set(aboutNameTarget, { opacity: 0 });
+        },
+        onLeave: () => {
+          restoreSnap();
+          gsap.set(latestName, { clearProps: 'all' });
+        },
+        onEnterBack: () => {
+          disableSnap();
+          refreshNamePos();
+        },
+        onLeaveBack: () => {
+          restoreSnap();
+          gsap.set(latestName, { clearProps: 'all', opacity: 1 });
+          gsap.set(aboutNameTarget, { opacity: 0 });
+        }
       }
     });
+
+    ScrollTrigger.addEventListener('refreshInit', refreshNamePos);
+    ScrollTrigger.addEventListener('refresh', refreshNamePos);
+
+    tl.add(() => {
+      refreshNameClone();
+    }, 0);
+
+    if (latestName && aboutNameSlot && aboutNameTarget) {
+      tl.to(latestName, {
+        opacity: 1,
+        duration: 0.25,
+        ease: 'power1.out'
+      }, 0);
+
+      tl.to(latestName, {
+        x: () => (namePos?.x ?? 0),
+        y: () => (namePos?.y ?? 0),
+        scale: () => (namePos?.scale ?? 1),
+        ease: 'power2.inOut',
+        duration: 0.9
+      }, 0);
+
+      tl.to(latestName, {
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power1.out'
+      }, '>-0.1');
+
+      tl.set(aboutNameTarget, { opacity: 1 }, '>-0.15');
+    }
 
     tl.to(videoWrapper, {
       scale: scaleTarget,

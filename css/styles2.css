@@ -56,6 +56,10 @@
   gap: 1.2rem;
 }
 
+#latest.latest-randy .latest-name {
+  width: fit-content;
+}
+
 #latest.latest-randy .eyebrow {
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -69,6 +73,7 @@
   font-weight: 300;
   font-size: clamp(2.8rem, 4vw, 3.8rem);
   text-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  color: #f7f8f4;
 }
 
 #latest.latest-randy .subtitle {
@@ -139,6 +144,27 @@
 .about-content p {
   max-width: 100%;
   text-align: left;
+}
+
+.about-name-slot {
+  width: fit-content;
+  min-height: 1em;
+  align-self: flex-start;
+  position: relative;
+}
+
+.about-name-target {
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.name-transition {
+  position: fixed;
+  z-index: 6;
+  pointer-events: none;
+  will-change: transform, opacity;
+  color: #f7f8f4;
 }
 
 @media (max-width: 768px) {

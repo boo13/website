@@ -7,7 +7,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
 
 - [x] Added ScrollTrigger CDN after GSAP core and before CSSRulePlugin in `index2.html`; wired new `v2/zoom-transition.js`.
 - [x] Wrapped Latest video in `.latest-perspective-container` with 3D/perspective styling and GPU hints; set About section background/z-index for coverage.
-- [x] Implemented ScrollTrigger timeline using window/body as scroller, with mobile-tuned scale/blur, reduced-motion fade fallback, start at `top top`, and snap temporarily disabled while pinned; global snap currently off to unblock scrolling (to re-tune later). Body/HTML now min-height (not fixed height) to allow pin spacing and normal scrolling. About is a fixed overlay with a child `.about-content` that blur/scale transitions in/out (pointer-events off) during the pin; in-flow About markup is wrapped for isolated scaling.
+- [x] Implemented ScrollTrigger timeline using window/body as scroller, with mobile-tuned scale/blur, reduced-motion fade fallback, start at `top top`, and snap temporarily disabled while pinned; global snap currently off to unblock scrolling (to re-tune later). Body/HTML now min-height (not fixed height) to allow pin spacing and normal scrolling. About is a fixed overlay with a child `.about-content` that blur/scale transitions in/out (pointer-events off) during the pin; in-flow About markup is wrapped for isolated scaling. Name transition now reuses the single Latest heading (positioned fixed during pin and animated into the About slot) rather than cloning.
 - [ ] Additional refinements (snap handling beyond basic disable/restore, Safari/mobile trims, video readiness guard) remain to do; see “Additional Refinements.”
 
 ## Current State Analysis
@@ -416,6 +416,13 @@ If issues arise:
 - GSAP ScrollTrigger Docs: https://greensock.com/docs/v3/Plugins/ScrollTrigger
 - CSS `filter: blur()` performance: https://web.dev/blur-performance
 - 3D transforms best practices: https://3dtransforms.desandro.com/perspective
+
+## Shared Element: "Randy Counsman" Transition (planned)
+
+- Goal: animate the “Randy Counsman” text in Latest into the About heading position as a single shared element instead of crossfading.
+- Approach (Flip): wrap the Latest heading in `.latest-name`, add an empty placeholder in About overlay `.about-name-slot`. On pin start, capture state with Flip and move `.latest-name` into `.about-name-slot`; animate with `Flip.from(state, { duration: 0.8, ease: 'power2.inOut', absolute: true })`.
+- Alternate (manual): measure both positions with `getBoundingClientRect`, then tween `x/y/scale` on `.latest-name` to the About slot while fading other Latest text.
+- Considerations: match font/weight; set `transform-origin` consistently; temporarily disable letter-spacing/hover effects during the move; trigger early in the pin so the name lands before About fully fades in.
 
 ## Additional Refinements (after basic version works)
 
