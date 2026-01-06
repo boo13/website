@@ -68,32 +68,6 @@ body {
 }
 
 /* ============================================
-   FILM GRAIN TEXTURE
-   ============================================ */
-.grain {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  animation: grain-anim 8s steps(10) infinite;
-}
-
-@keyframes grain-anim {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  20% { transform: translate(-15%, 5%); }
-  30% { transform: translate(7%, -25%); }
-  40% { transform: translate(-5%, 25%); }
-  50% { transform: translate(-15%, 10%); }
-  60% { transform: translate(15%, 0%); }
-  70% { transform: translate(0%, 15%); }
-  80% { transform: translate(3%, 25%); }
-  90% { transform: translate(-10%, 10%); }
-}
-
-/* ============================================
    GLOBAL PROGRESS BAR
    ============================================ */
 .global-progress {
@@ -133,9 +107,10 @@ body {
 }
 
 /* ============================================
-   HERO SECTION
+   Z-ZOOM CONTAINER SYSTEM
+   Single perspective context for continuous zoom
    ============================================ */
-.hero {
+.z-zoom-container {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -143,31 +118,51 @@ body {
   background: var(--clr-pure-black);
 }
 
-.hero-perspective-container {
+.z-zoom-perspective {
   position: absolute;
   inset: 0;
-  perspective: 1200px;
-  perspective-origin: center center;
-  overflow: hidden;
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  overflow: visible;
 }
 
-.hero-video-wrapper {
+.z-zoom-layers {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
-  transform-origin: center center;
-  will-change: transform, filter, opacity;
-  transform: translateZ(0);
+  will-change: transform;
 }
 
-.hero-video-wrapper video {
+/* Individual z-layers */
+.z-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+}
+
+.z-layer-media {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.z-layer-media img,
+.z-layer-media video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.z-layer-media video {
   opacity: 0.5;
 }
 
-.hero-gradient {
+.z-layer-gradient {
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -176,19 +171,25 @@ body {
     rgba(0, 0, 0, 0.3) 50%,
     rgba(0, 0, 0, 0.8) 100%
   );
-  transition: background 0.8s var(--ease-smooth);
+  transition: background 0.5s var(--ease-smooth);
 }
 
-.hero-content {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
+/* Z-layer overlays (inside perspective context) */
+.z-layer-overlay {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--gutter);
+  z-index: 10;
+  opacity: 0;
   will-change: opacity, transform;
+}
+
+/* Hero overlay specifics */
+.z-layer-overlay.hero-overlay {
+  text-align: center;
+  padding: var(--gutter);
 }
 
 .hero-inner {
@@ -213,20 +214,13 @@ body {
   color: var(--clr-cream);
 }
 
-/* ============================================
-   ABOUT SECTION (Fixed Overlay)
-   ============================================ */
-.about {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* About overlay specifics */
+.z-layer-overlay.about-overlay {
   background: rgba(0, 0, 0, 0.85);
-  opacity: 0;
-  pointer-events: none;
-  will-change: opacity;
+}
+
+.about-backdrop {
+  background: var(--clr-pure-black);
 }
 
 .about-content {
@@ -281,74 +275,19 @@ body {
   color: var(--clr-cream);
 }
 
-/* ============================================
-   FEATURED WORK SECTIONS
-   ============================================ */
-.featured-work {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background: var(--clr-pure-black);
-}
-
-.featured-perspective-container {
-  position: absolute;
-  inset: 0;
-  perspective: 1500px; /* Increased for more dramatic z-space effect */
-  perspective-origin: center center;
-  overflow: hidden;
-  transform-style: preserve-3d;
-}
-
-.featured-image-wrapper {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  transform-origin: center center;
-  will-change: transform, filter, opacity;
-  transform: translateZ(0);
-}
-
-.featured-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.featured-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.3) 50%,
-    rgba(0, 0, 0, 0.85) 100%
-  );
-  transition: background 0.8s var(--ease-smooth);
-}
-
-/* Featured Overlay */
-.featured-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
+/* Featured overlay specifics */
+.z-layer-overlay.featured-overlay {
   display: grid;
   grid-template-rows: auto 1fr auto;
   padding: var(--gutter);
   pointer-events: none;
-  opacity: 0;
-  will-change: opacity;
 }
 
 .network-logo {
   justify-self: start;
   max-width: 180px;
   height: auto;
-  opacity: 0;
-  transform: translateY(-10px);
-  will-change: opacity, transform;
+  /* Visibility controlled by parent .z-layer-overlay */
 }
 
 .project-info {
@@ -365,9 +304,7 @@ body {
   letter-spacing: -0.02em;
   color: var(--clr-warm-white);
   margin-bottom: 3rem;
-  opacity: 0;
-  transform: translateY(20px);
-  will-change: opacity, transform;
+  /* Visibility controlled by parent .z-layer-overlay */
 }
 
 .quotes {
@@ -383,9 +320,7 @@ body {
   font-weight: 300;
   line-height: 1.5;
   color: var(--clr-cream);
-  opacity: 0;
-  transform: translateY(15px);
-  will-change: opacity, transform;
+  /* Visibility controlled by parent .z-layer-overlay */
 }
 
 .quote cite {
@@ -421,6 +356,23 @@ body {
   padding: var(--section-padding) 0;
   background: var(--clr-near-black);
   position: relative;
+  z-index: 1;
+}
+
+/* Smooth gradient transition from z-zoom */
+.gallery::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(
+    to bottom,
+    var(--clr-pure-black) 0%,
+    var(--clr-near-black) 100%
+  );
+  pointer-events: none;
 }
 
 .container {
@@ -850,10 +802,6 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-
-  .grain {
-    animation: none;
   }
 }
 
