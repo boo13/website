@@ -1,33 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="css/styles_contact.css" />
-</head>
-<body>
-    <form id="fs-frm" name="simple-contact-form" accept-charset="utf-8" action="https://formspree.io/f/xyzyzvyn" method="post">
-    <fieldset id="fs-frm-inputs">
-        <input type="text" name="name" id="full-name" placeholder="Your Name" required="">
+  </head>
+  <body>
+    <form
+      id="fs-frm"
+      name="simple-contact-form"
+      accept-charset="utf-8"
+      action="https://formspree.io/f/xyzyzvyn"
+      method="post"
+    >
+      <fieldset id="fs-frm-inputs">
+        <input
+          type="text"
+          name="name"
+          id="full-name"
+          placeholder="Your Name"
+          required=""
+        />
         <!-- <label for="email-address">Email Address</label> -->
-        <input type="email" name="_replyto" id="email-address" placeholder="Your Email" required="">
+        <input
+          type="email"
+          name="_replyto"
+          id="email-address"
+          placeholder="Your Email"
+          required=""
+        />
         <!-- <label for="message">Message</label> -->
-        <textarea rows="5" name="message" id="message" placeholder="Anything you want to say..." required=""></textarea>
-        <input type="hidden" name="_subject" id="email-subject" value="Contact Form Submission">
-    </fieldset>
-    <input id="fs-frm-submit" type="submit" value="Submit">
-    <p id="fs-frm-status"></p>
+        <textarea
+          rows="5"
+          name="message"
+          id="message"
+          placeholder="Anything you want to say..."
+          required=""
+        ></textarea>
+        <input
+          type="hidden"
+          name="_subject"
+          id="email-subject"
+          value="Contact Form Submission"
+        />
+      </fieldset>
+      <input id="fs-frm-submit" type="submit" value="Submit" />
+      <p id="fs-frm-status"></p>
     </form>
     <script>
-        var form = document.getElementById("fs-frm");
-        var submit = document.getElementById("fs-frm-submit");
+      var form = document.getElementById("fs-frm");
+      var submit = document.getElementById("fs-frm-submit");
 
-        async function handleSubmit(event) {
-        submit.setAttribute('disabled', true);
-        }
+      async function handleSubmit(event) {
+        submit.setAttribute("disabled", true);
+      }
 
-        form.addEventListener("submit", handleSubmit)
+      form.addEventListener("submit", handleSubmit);
     </script>
-</body>
+  </body>
 </html>

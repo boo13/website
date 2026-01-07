@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>Credits - Randy Counsman</title>
@@ -28,7 +28,7 @@
       body {
         background-color: var(--clr-nearblack);
         color: var(--clr-offwhite);
-        font-family: 'Lato', sans-serif;
+        font-family: "Lato", sans-serif;
         padding: 2rem;
         margin: 0;
         min-height: 100vh;
@@ -78,19 +78,19 @@
       }
 
       th.sortable::after {
-        content: '⇅';
+        content: "⇅";
         margin-left: 0.5rem;
         opacity: 0.3;
         font-size: 0.9rem;
       }
 
       th.sort-asc::after {
-        content: '↑';
+        content: "↑";
         opacity: 1;
       }
 
       th.sort-desc::after {
-        content: '↓';
+        content: "↓";
         opacity: 1;
       }
 
@@ -119,7 +119,7 @@
       }
 
       td.year {
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
         font-weight: 300;
         opacity: 0.7;
       }
@@ -166,7 +166,8 @@
       }
 
       @media (max-width: 768px) {
-        th, td {
+        th,
+        td {
           padding: 1rem;
           font-size: 0.85rem;
         }
@@ -204,12 +205,12 @@
       class CreditsTable {
         constructor() {
           this.projects = [];
-          this.sortColumn = 'year';
-          this.sortDirection = 'desc';
+          this.sortColumn = "year";
+          this.sortDirection = "desc";
 
-          this.tbody = document.getElementById('creditsBody');
-          this.imagePopup = document.getElementById('imagePopup');
-          this.popupImg = this.imagePopup.querySelector('img');
+          this.tbody = document.getElementById("creditsBody");
+          this.imagePopup = document.getElementById("imagePopup");
+          this.popupImg = this.imagePopup.querySelector("img");
 
           this.init();
         }
@@ -223,11 +224,11 @@
 
         async loadProjects() {
           try {
-            const response = await fetch('./data/projects.json');
+            const response = await fetch("./data/projects.json");
             const data = await response.json();
             this.projects = data.projects;
           } catch (error) {
-            console.error('Error loading projects:', error);
+            console.error("Error loading projects:", error);
             this.tbody.innerHTML = `
               <tr>
                 <td colspan="4" class="no-results">
@@ -240,8 +241,8 @@
 
         initEventListeners() {
           // Column header sorting
-          document.querySelectorAll('th.sortable').forEach(th => {
-            th.addEventListener('click', () => {
+          document.querySelectorAll("th.sortable").forEach((th) => {
+            th.addEventListener("click", () => {
               const column = th.dataset.column;
               this.handleSort(column);
             });
@@ -250,45 +251,53 @@
 
         initImagePopup() {
           // Mouse move to follow cursor with offset
-          document.addEventListener('mousemove', (e) => {
-            if (this.imagePopup.classList.contains('visible')) {
+          document.addEventListener("mousemove", (e) => {
+            if (this.imagePopup.classList.contains("visible")) {
               // Offset to the right and down from cursor
-              this.imagePopup.style.left = (e.clientX + 20) + 'px';
-              this.imagePopup.style.top = (e.clientY + 20) + 'px';
+              this.imagePopup.style.left = e.clientX + 20 + "px";
+              this.imagePopup.style.top = e.clientY + 20 + "px";
             }
           });
 
           // Delegate event listeners to tbody for row hover
-          this.tbody.addEventListener('mouseenter', (e) => {
-            const row = e.target.closest('tr');
-            if (row && row.dataset.poster) {
-              this.showPopup(row.dataset.poster);
-            }
-          }, true);
+          this.tbody.addEventListener(
+            "mouseenter",
+            (e) => {
+              const row = e.target.closest("tr");
+              if (row && row.dataset.poster) {
+                this.showPopup(row.dataset.poster);
+              }
+            },
+            true,
+          );
 
-          this.tbody.addEventListener('mouseleave', (e) => {
-            const row = e.target.closest('tr');
-            if (row && row.dataset.poster) {
-              this.hidePopup();
-            }
-          }, true);
+          this.tbody.addEventListener(
+            "mouseleave",
+            (e) => {
+              const row = e.target.closest("tr");
+              if (row && row.dataset.poster) {
+                this.hidePopup();
+              }
+            },
+            true,
+          );
         }
 
         showPopup(posterUrl) {
           this.popupImg.src = posterUrl;
-          this.imagePopup.classList.add('visible');
+          this.imagePopup.classList.add("visible");
         }
 
         hidePopup() {
-          this.imagePopup.classList.remove('visible');
+          this.imagePopup.classList.remove("visible");
         }
 
         handleSort(column) {
           if (this.sortColumn === column) {
-            this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+            this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc";
           } else {
             this.sortColumn = column;
-            this.sortDirection = column === 'year' ? 'desc' : 'asc';
+            this.sortDirection = column === "year" ? "desc" : "asc";
           }
 
           this.updateSortIndicators();
@@ -297,8 +306,8 @@
         }
 
         updateSortIndicators() {
-          document.querySelectorAll('th.sortable').forEach(th => {
-            th.classList.remove('sort-asc', 'sort-desc');
+          document.querySelectorAll("th.sortable").forEach((th) => {
+            th.classList.remove("sort-asc", "sort-desc");
             if (th.dataset.column === this.sortColumn) {
               th.classList.add(`sort-${this.sortDirection}`);
             }
@@ -315,7 +324,7 @@
             if (valB === null || valB === undefined) return -1;
 
             // String comparison (case-insensitive)
-            if (typeof valA === 'string') {
+            if (typeof valA === "string") {
               valA = valA.toLowerCase();
               valB = valB.toLowerCase();
             }
@@ -324,7 +333,7 @@
             if (valA > valB) comparison = 1;
             if (valA < valB) comparison = -1;
 
-            return this.sortDirection === 'asc' ? comparison : -comparison;
+            return this.sortDirection === "asc" ? comparison : -comparison;
           });
         }
 
@@ -338,25 +347,29 @@
             return;
           }
 
-          this.tbody.innerHTML = this.projects.map(project => `
-            <tr data-poster="${project.poster || ''}">
+          this.tbody.innerHTML = this.projects
+            .map(
+              (project) => `
+            <tr data-poster="${project.poster || ""}">
               <td class="title">${this.escapeHtml(project.title)}</td>
               <td class="platform">${this.escapeHtml(project.platform)}</td>
               <td class="year">${project.year}</td>
               <td class="role">${this.escapeHtml(project.role)}</td>
             </tr>
-          `).join('');
+          `,
+            )
+            .join("");
         }
 
         escapeHtml(text) {
-          const div = document.createElement('div');
+          const div = document.createElement("div");
           div.textContent = text;
           return div.innerHTML;
         }
       }
 
       // Initialize table when DOM is ready
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         new CreditsTable();
       });
     </script>

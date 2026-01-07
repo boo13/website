@@ -8,16 +8,18 @@
  */
 
 // Initialize on DOM load
-document.addEventListener('DOMContentLoaded', () => {
-  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    console.error('GSAP or ScrollTrigger not loaded');
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    console.error("GSAP or ScrollTrigger not loaded");
     return;
   }
 
   gsap.registerPlugin(ScrollTrigger);
 
   // Check for reduced motion preference
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
   if (!prefersReducedMotion) {
     // NEW: Single unified cinematic zoom controller
@@ -48,18 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
    Unified z-axis zoom experience for Hero → About → Featured Work
    ============================================ */
 function initCinematicZoom() {
-  if (typeof CinematicZoom === 'undefined') {
-    console.warn('CinematicZoom class not loaded');
+  if (typeof CinematicZoom === "undefined") {
+    console.warn("CinematicZoom class not loaded");
     return;
   }
 
   // Initialize with smooth cinematic config
   // High scrub = buttery smooth like film dolly zoom
   const cinematicZoom = new CinematicZoom({
-    zDepthPerLayer: 1000,    // Subtler z-movement
-    scrollDistance: '800%',  // Lots of scroll room for gentle pacing
+    zDepthPerLayer: 1000, // Subtler z-movement
+    scrollDistance: "800%", // Lots of scroll room for gentle pacing
     blurMax: 18,
-    scrubAmount: 4           // Ultra smooth scrolling
+    scrubAmount: 4, // Ultra smooth scrolling
   });
 
   // Store reference globally for debugging
@@ -71,52 +73,53 @@ function initCinematicZoom() {
    Scroll-triggered reveals for credits table
    ============================================ */
 function initCreditsListAnimations() {
-  const gallerySection = document.querySelector('#gallery');
+  const gallerySection = document.querySelector("#gallery");
   if (!gallerySection) return;
 
   // Gallery header reveal
-  const header = gallerySection.querySelector('.gallery-header');
+  const header = gallerySection.querySelector(".gallery-header");
   if (header) {
     gsap.from(header, {
       opacity: 0,
       y: 40,
       duration: 1.2,
-      ease: 'power3.out',
+      ease: "power3.out",
       scrollTrigger: {
         trigger: header,
-        start: 'top 80%',
-        once: true
-      }
+        start: "top 80%",
+        once: true,
+      },
     });
   }
 
   // Credits table rows subtle entrance - don't hide, just animate subtly
-  const rows = gallerySection.querySelectorAll('.credit-row');
+  const rows = gallerySection.querySelectorAll(".credit-row");
   if (rows.length) {
-    console.log('Found credit rows:', rows.length); // Debug log
+    console.log("Found credit rows:", rows.length); // Debug log
 
     rows.forEach((row, index) => {
-      gsap.fromTo(row,
+      gsap.fromTo(
+        row,
         {
           opacity: 0.5,
-          x: -15
+          x: -15,
         },
         {
           opacity: 1,
           x: 0,
           duration: 0.6,
           delay: index * 0.1,
-          ease: 'power2.out',
+          ease: "power2.out",
           scrollTrigger: {
-            trigger: '.credits-table',
-            start: 'top 90%',
-            once: true
-          }
-        }
+            trigger: ".credits-table",
+            start: "top 90%",
+            once: true,
+          },
+        },
       );
     });
   } else {
-    console.warn('No credit rows found!'); // Debug warning
+    console.warn("No credit rows found!"); // Debug warning
   }
 }
 
@@ -125,23 +128,23 @@ function initCreditsListAnimations() {
    Image preview that tracks mouse cursor
    ============================================ */
 function initCursorPreview() {
-  console.log('=== CURSOR PREVIEW INIT ===');
+  console.log("=== CURSOR PREVIEW INIT ===");
 
-  const cursorPreview = document.querySelector('.cursor-preview');
-  const previewImg = cursorPreview?.querySelector('img');
-  const creditRows = document.querySelectorAll('.credit-row');
+  const cursorPreview = document.querySelector(".cursor-preview");
+  const previewImg = cursorPreview?.querySelector("img");
+  const creditRows = document.querySelectorAll(".credit-row");
 
-  console.log('Preview container:', cursorPreview);
-  console.log('Preview img:', previewImg);
-  console.log('Rows found:', creditRows.length);
+  console.log("Preview container:", cursorPreview);
+  console.log("Preview img:", previewImg);
+  console.log("Rows found:", creditRows.length);
 
   if (!cursorPreview || !previewImg) {
-    console.error('❌ Missing cursor preview elements');
+    console.error("❌ Missing cursor preview elements");
     return;
   }
 
   if (!creditRows.length) {
-    console.error('❌ No credit rows found');
+    console.error("❌ No credit rows found");
     return;
   }
 
@@ -149,51 +152,54 @@ function initCursorPreview() {
     const previewSrc = row.dataset.preview;
     console.log(`Row ${index}: ${previewSrc}`);
 
-    row.addEventListener('mouseenter', function(e) {
-      console.log('✅ MOUSEENTER on row', index);
+    row.addEventListener("mouseenter", function (e) {
+      console.log("✅ MOUSEENTER on row", index);
 
       if (!previewSrc) {
-        console.warn('No preview image for this row');
+        console.warn("No preview image for this row");
         return;
       }
 
       // Load image
       previewImg.src = previewSrc;
-      previewImg.alt = row.querySelector('.credit-title')?.textContent || '';
+      previewImg.alt = row.querySelector(".credit-title")?.textContent || "";
 
       // Position at cursor
       const x = e.clientX + 30;
       const y = e.clientY + 30;
 
-      cursorPreview.style.left = x + 'px';
-      cursorPreview.style.top = y + 'px';
+      cursorPreview.style.left = x + "px";
+      cursorPreview.style.top = y + "px";
 
       // Show it
-      cursorPreview.classList.add('active');
-      cursorPreview.style.display = 'block';
+      cursorPreview.classList.add("active");
+      cursorPreview.style.display = "block";
 
       console.log(`Positioned at ${x}, ${y}`);
-      console.log('Classes:', cursorPreview.classList);
-      console.log('Computed opacity:', window.getComputedStyle(cursorPreview).opacity);
+      console.log("Classes:", cursorPreview.classList);
+      console.log(
+        "Computed opacity:",
+        window.getComputedStyle(cursorPreview).opacity,
+      );
     });
 
-    row.addEventListener('mousemove', function(e) {
-      if (cursorPreview.classList.contains('active')) {
+    row.addEventListener("mousemove", function (e) {
+      if (cursorPreview.classList.contains("active")) {
         const x = e.clientX + 30;
         const y = e.clientY + 30;
-        cursorPreview.style.left = x + 'px';
-        cursorPreview.style.top = y + 'px';
+        cursorPreview.style.left = x + "px";
+        cursorPreview.style.top = y + "px";
       }
     });
 
-    row.addEventListener('mouseleave', function() {
-      console.log('❌ MOUSELEAVE on row', index);
-      cursorPreview.classList.remove('active');
-      cursorPreview.style.display = 'none';
+    row.addEventListener("mouseleave", function () {
+      console.log("❌ MOUSELEAVE on row", index);
+      cursorPreview.classList.remove("active");
+      cursorPreview.style.display = "none";
     });
   });
 
-  console.log('✅ Cursor preview setup complete');
+  console.log("✅ Cursor preview setup complete");
 }
 
 /* ============================================
@@ -201,15 +207,15 @@ function initCursorPreview() {
    Updates progress bar and label based on scroll
    ============================================ */
 function initGlobalProgress() {
-  const progressBar = document.querySelector('.progress-fill');
-  const progressSection = document.querySelector('.progress-section');
-  const progressFraction = document.querySelector('.progress-fraction');
-  const globalProgress = document.querySelector('.global-progress');
+  const progressBar = document.querySelector(".progress-fill");
+  const progressSection = document.querySelector(".progress-section");
+  const progressFraction = document.querySelector(".progress-fraction");
+  const globalProgress = document.querySelector(".global-progress");
 
   if (!progressBar) return;
 
   // Listen to cinematic zoom progress events
-  document.addEventListener('cinematicZoomProgress', (e) => {
+  document.addEventListener("cinematicZoomProgress", (e) => {
     const { sectionName, featuredIndex, featuredTotal, layerType } = e.detail;
 
     // Update section label
@@ -219,58 +225,58 @@ function initGlobalProgress() {
 
     // Update fraction for featured work
     if (progressFraction) {
-      if (layerType.startsWith('featured-') && featuredTotal > 0) {
+      if (layerType.startsWith("featured-") && featuredTotal > 0) {
         progressFraction.textContent = `${featuredIndex} / ${featuredTotal}`;
       } else {
-        progressFraction.textContent = '';
+        progressFraction.textContent = "";
       }
     }
 
     // Show progress bar
     if (globalProgress) {
-      globalProgress.classList.add('visible');
+      globalProgress.classList.add("visible");
     }
   });
 
   // Update progress bar on scroll
   ScrollTrigger.create({
-    trigger: 'body',
-    start: 'top top',
-    end: 'bottom bottom',
+    trigger: "body",
+    start: "top top",
+    end: "bottom bottom",
     onUpdate: (self) => {
       // Update progress bar width
       const progress = self.progress * 100;
       gsap.to(progressBar, {
         width: `${progress}%`,
         duration: 0.3,
-        ease: 'power2.out'
+        ease: "power2.out",
       });
-    }
+    },
   });
 
   // Handle sections after z-zoom (gallery, newsletter, contact)
   const postZoomSections = [
-    { id: 'gallery', name: 'More Work' },
-    { id: 'newsletter', name: 'Newsletter' },
-    { id: 'contact', name: 'Contact' }
+    { id: "gallery", name: "More Work" },
+    { id: "newsletter", name: "Newsletter" },
+    { id: "contact", name: "Contact" },
   ];
 
-  postZoomSections.forEach(section => {
+  postZoomSections.forEach((section) => {
     const el = document.getElementById(section.id);
     if (!el) return;
 
     ScrollTrigger.create({
       trigger: el,
-      start: 'top 50%',
-      end: 'bottom 50%',
+      start: "top 50%",
+      end: "bottom 50%",
       onEnter: () => {
         if (progressSection) progressSection.textContent = section.name;
-        if (progressFraction) progressFraction.textContent = '';
+        if (progressFraction) progressFraction.textContent = "";
       },
       onEnterBack: () => {
         if (progressSection) progressSection.textContent = section.name;
-        if (progressFraction) progressFraction.textContent = '';
-      }
+        if (progressFraction) progressFraction.textContent = "";
+      },
     });
   });
 }
@@ -281,8 +287,9 @@ function initGlobalProgress() {
    ============================================ */
 function initVideoHandling() {
   // Updated selector for new z-layer structure
-  const video = document.querySelector('.z-layer[data-layer="hero"] video') ||
-                document.querySelector('.z-layer-media video');
+  const video =
+    document.querySelector('.z-layer[data-layer="hero"] video') ||
+    document.querySelector(".z-layer-media video");
 
   if (!video) return;
 
@@ -290,8 +297,8 @@ function initVideoHandling() {
     const playPromise = video.play();
 
     if (playPromise !== undefined) {
-      playPromise.catch(error => {
-        console.warn('Video autoplay prevented:', error);
+      playPromise.catch((error) => {
+        console.warn("Video autoplay prevented:", error);
       });
     }
   };
@@ -300,21 +307,24 @@ function initVideoHandling() {
   playVideo();
 
   // Ensure smooth looping
-  video.addEventListener('ended', () => {
+  video.addEventListener("ended", () => {
     video.currentTime = 0;
     playVideo();
   });
 
   // Pause video when out of view to save resources
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        playVideo();
-      } else {
-        video.pause();
-      }
-    });
-  }, { threshold: 0.25 });
+  const videoObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          playVideo();
+        } else {
+          video.pause();
+        }
+      });
+    },
+    { threshold: 0.25 },
+  );
 
   videoObserver.observe(video);
 }
@@ -324,10 +334,10 @@ function initVideoHandling() {
    For anchor links
    ============================================ */
 function initSmoothScrolling() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (href === '#') return;
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (href === "#") return;
 
       e.preventDefault();
       const target = document.querySelector(href);
@@ -335,7 +345,7 @@ function initSmoothScrolling() {
       if (target) {
         window.scrollTo({
           top: target.offsetTop,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
       }
     });
@@ -349,14 +359,14 @@ function initSmoothScrolling() {
 function initResponsiveRefresh() {
   let resizeTimer;
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       ScrollTrigger.refresh();
     }, 250);
   });
 
-  window.addEventListener('load', () => {
+  window.addEventListener("load", () => {
     ScrollTrigger.refresh();
   });
 }
@@ -367,31 +377,31 @@ function initResponsiveRefresh() {
    ============================================ */
 function initReducedMotionMode() {
   // Simple fade transitions instead of zoom/blur
-  const sections = document.querySelectorAll('section');
+  const sections = document.querySelectorAll("section");
 
-  sections.forEach(section => {
+  sections.forEach((section) => {
     gsap.from(section, {
       opacity: 0,
       duration: 0.5,
-      ease: 'power2.out',
+      ease: "power2.out",
       scrollTrigger: {
         trigger: section,
-        start: 'top 80%',
-        once: true
-      }
+        start: "top 80%",
+        once: true,
+      },
     });
   });
 
   // Simple progress tracking without animations
-  const progressBar = document.querySelector('.progress-fill');
+  const progressBar = document.querySelector(".progress-fill");
   if (progressBar) {
     ScrollTrigger.create({
-      trigger: 'body',
-      start: 'top top',
-      end: 'bottom bottom',
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
       onUpdate: (self) => {
         progressBar.style.width = `${self.progress * 100}%`;
-      }
+      },
     });
   }
 }
@@ -402,11 +412,13 @@ function initReducedMotionMode() {
    ============================================ */
 function initLazyLoading() {
   // Target images in z-layers and gallery sections
-  const lazyImages = document.querySelectorAll('.z-layer img, .gallery-item img');
+  const lazyImages = document.querySelectorAll(
+    ".z-layer img, .gallery-item img",
+  );
 
-  if (!lazyImages.length || !('IntersectionObserver' in window)) {
+  if (!lazyImages.length || !("IntersectionObserver" in window)) {
     // Fallback: load all images immediately
-    lazyImages.forEach(img => {
+    lazyImages.forEach((img) => {
       if (img.dataset.src) {
         img.src = img.dataset.src;
       }
@@ -414,31 +426,34 @@ function initLazyLoading() {
     return;
   }
 
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
+  const imageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
 
-        // If data-src exists, use it; otherwise image is already loaded
-        if (img.dataset.src) {
-          img.src = img.dataset.src;
-          img.removeAttribute('data-src');
+          // If data-src exists, use it; otherwise image is already loaded
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute("data-src");
+          }
+
+          // Add loaded class for any CSS transitions
+          img.classList.add("lazy-loaded");
+
+          // Stop observing this image
+          observer.unobserve(img);
         }
+      });
+    },
+    {
+      // Load images slightly before they enter viewport
+      rootMargin: "50px 0px",
+      threshold: 0.01,
+    },
+  );
 
-        // Add loaded class for any CSS transitions
-        img.classList.add('lazy-loaded');
-
-        // Stop observing this image
-        observer.unobserve(img);
-      }
-    });
-  }, {
-    // Load images slightly before they enter viewport
-    rootMargin: '50px 0px',
-    threshold: 0.01
-  });
-
-  lazyImages.forEach(img => imageObserver.observe(img));
+  lazyImages.forEach((img) => imageObserver.observe(img));
 }
 
 /* ============================================
@@ -447,11 +462,13 @@ function initLazyLoading() {
    ============================================ */
 function initPerformanceOptimizations() {
   // Clean up will-change after animations complete
-  ScrollTrigger.addEventListener('scrollEnd', () => {
+  ScrollTrigger.addEventListener("scrollEnd", () => {
     // Remove will-change from elements not currently animating
-    const animatingElements = document.querySelectorAll('[style*="will-change"]');
+    const animatingElements = document.querySelectorAll(
+      '[style*="will-change"]',
+    );
 
-    animatingElements.forEach(el => {
+    animatingElements.forEach((el) => {
       // Check if element has active GSAP animation
       const hasTween = gsap.getTweensOf(el).length > 0;
 
@@ -459,7 +476,7 @@ function initPerformanceOptimizations() {
         // Remove will-change after a short delay to ensure animation is done
         setTimeout(() => {
           if (gsap.getTweensOf(el).length === 0) {
-            el.style.willChange = 'auto';
+            el.style.willChange = "auto";
           }
         }, 100);
       }
@@ -467,57 +484,67 @@ function initPerformanceOptimizations() {
   });
 
   // Preload critical assets for first featured work layer
-  const firstFeaturedImage = document.querySelector('.z-layer[data-layer="featured-1"] img');
+  const firstFeaturedImage = document.querySelector(
+    '.z-layer[data-layer="featured-1"] img',
+  );
   if (firstFeaturedImage && firstFeaturedImage.dataset.src) {
-    const preloadLink = document.createElement('link');
-    preloadLink.rel = 'preload';
-    preloadLink.as = 'image';
+    const preloadLink = document.createElement("link");
+    preloadLink.rel = "preload";
+    preloadLink.as = "image";
     preloadLink.href = firstFeaturedImage.dataset.src;
     document.head.appendChild(preloadLink);
   }
 
   // Optimize network logos (small, should load early)
-  const networkLogos = document.querySelectorAll('.network-logo');
-  networkLogos.forEach(logo => {
+  const networkLogos = document.querySelectorAll(".network-logo");
+  networkLogos.forEach((logo) => {
     if (logo.dataset.src && logo.closest('.z-layer[data-layer="featured-1"]')) {
-      const preloadLink = document.createElement('link');
-      preloadLink.rel = 'preload';
-      preloadLink.as = 'image';
+      const preloadLink = document.createElement("link");
+      preloadLink.rel = "preload";
+      preloadLink.as = "image";
       preloadLink.href = logo.dataset.src;
       document.head.appendChild(preloadLink);
     }
   });
 
   // Connection-aware loading (reduce quality on slow connections)
-  if ('connection' in navigator) {
+  if ("connection" in navigator) {
     const connection = navigator.connection;
 
-    if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+    if (
+      connection.effectiveType === "slow-2g" ||
+      connection.effectiveType === "2g"
+    ) {
       // Disable some animations on very slow connections
-      document.documentElement.classList.add('slow-connection');
+      document.documentElement.classList.add("slow-connection");
 
       // Reduce blur values in cinematic zoom
       if (window.cinematicZoom) {
-        window.cinematicZoom.config.blurMax = Math.min(window.cinematicZoom.config.blurMax, 8);
+        window.cinematicZoom.config.blurMax = Math.min(
+          window.cinematicZoom.config.blurMax,
+          8,
+        );
       }
     }
   }
 
   // Memory cleanup on page visibility change
-  document.addEventListener('visibilitychange', () => {
+  document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       // Pause all GSAP animations when page is hidden
       gsap.globalTimeline.pause();
 
       // Pause videos
-      const videos = document.querySelectorAll('video');
-      videos.forEach(v => v.pause());
+      const videos = document.querySelectorAll("video");
+      videos.forEach((v) => v.pause());
     } else {
       // Resume when page becomes visible
       gsap.globalTimeline.resume();
 
       // Resume hero video if in viewport
-      const heroVideo = document.querySelector('.z-layer[data-layer="hero"] video');
+      const heroVideo = document.querySelector(
+        '.z-layer[data-layer="hero"] video',
+      );
       if (heroVideo) {
         const rect = heroVideo.getBoundingClientRect();
         if (rect.top < window.innerHeight && rect.bottom > 0) {

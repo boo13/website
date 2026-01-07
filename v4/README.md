@@ -7,6 +7,7 @@ V4 creates an immersive, cinematic portfolio experience where users "fly through
 ## Design Philosophy
 
 **Cinematic Noir Editorial** - Inspired by high-end film publications and museum exhibitions:
+
 - Pure black backgrounds (#000000)
 - Warm white/cream accents (#f7f4f0, #e8e3dc)
 - Fullscreen images dominate the canvas
@@ -127,7 +128,7 @@ Each featured work section follows this 4-phase sequence:
 - Safari 14+ ✓
 - Edge 90+ ✓
 
-*Note: 3D transforms and blur effects require modern browsers. Graceful degradation provided.*
+_Note: 3D transforms and blur effects require modern browsers. Graceful degradation provided._
 
 ## Project Data Structure
 
@@ -137,12 +138,12 @@ Featured work sections expect this data model:
 <section class="featured-work" data-project="1">
   <div class="featured-perspective-container">
     <div class="featured-image-wrapper">
-      <img src="project-image.jpg" alt="Project Title">
+      <img src="project-image.jpg" alt="Project Title" />
       <div class="featured-gradient"></div>
     </div>
   </div>
   <div class="featured-overlay">
-    <img class="network-logo" src="network-logo.png" alt="Network">
+    <img class="network-logo" src="network-logo.png" alt="Network" />
     <div class="project-info">
       <h2 class="project-title">Project Title</h2>
       <div class="quotes">
@@ -180,9 +181,9 @@ The FeaturedWorkZoom instance is exposed globally for debugging:
 
 ```javascript
 // In browser console:
-window.featuredZoom.currentIndex  // Current project index
-window.featuredZoom.timelines     // Array of GSAP timelines
-window.featuredZoom.destroy()     // Kill all animations
+window.featuredZoom.currentIndex; // Current project index
+window.featuredZoom.timelines; // Array of GSAP timelines
+window.featuredZoom.destroy(); // Kill all animations
 ```
 
 ### Modifying Projects

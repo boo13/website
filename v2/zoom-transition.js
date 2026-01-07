@@ -5,28 +5,32 @@
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const scaleTarget = window.innerWidth < 768 ? 2.0 : 2.5;
     const blurTarget = window.innerWidth < 768 ? 12 : 20;
 
-    const videoWrapper = document.querySelector('.latest-video-wrapper');
-    const latestContent = document.querySelector('.latest-content');
-    const aboutSection = document.querySelector('#about');
-    const aboutContent = document.querySelector('#about .about-content');
-    const latestName = document.querySelector('.latest-name');
-    const aboutNameSlot = document.querySelector('.about-name-slot');
-    const aboutNameTarget = document.querySelector('.about-name-target');
+    const videoWrapper = document.querySelector(".latest-video-wrapper");
+    const latestContent = document.querySelector(".latest-content");
+    const aboutSection = document.querySelector("#about");
+    const aboutContent = document.querySelector("#about .about-content");
+    const latestName = document.querySelector(".latest-name");
+    const aboutNameSlot = document.querySelector(".about-name-slot");
+    const aboutNameTarget = document.querySelector(".about-name-target");
     const scroller = window;
     const scrollerEl = document.body;
-    const originalSnap = scrollerEl ? getComputedStyle(scrollerEl).scrollSnapType : '';
+    const originalSnap = scrollerEl
+      ? getComputedStyle(scrollerEl).scrollSnapType
+      : "";
     let namePos = null;
 
     const disableSnap = () => {
-      if (scrollerEl) scrollerEl.style.scrollSnapType = 'none';
+      if (scrollerEl) scrollerEl.style.scrollSnapType = "none";
     };
 
     const restoreSnap = () => {
-      if (scrollerEl) scrollerEl.style.scrollSnapType = originalSnap || '';
+      if (scrollerEl) scrollerEl.style.scrollSnapType = originalSnap || "";
     };
 
     if (!videoWrapper || !aboutSection || !aboutContent) return;
@@ -46,7 +50,7 @@
         start,
         x: endCenterX - startCenterX,
         y: endCenterY - startCenterY,
-        scale
+        scale,
       };
     };
 
@@ -54,7 +58,7 @@
       namePos = computeNamePos();
       if (!namePos || !latestName) return;
       gsap.set(latestName, {
-        position: 'fixed',
+        position: "fixed",
         left: namePos.start.left,
         top: namePos.start.top,
         width: namePos.start.width,
@@ -63,7 +67,7 @@
         y: 0,
         scale: 1,
         zIndex: 7,
-        pointerEvents: 'none'
+        pointerEvents: "none",
       });
     };
 
@@ -71,15 +75,19 @@
 
     if (prefersReducedMotion) {
       gsap.to(videoWrapper, { opacity: 0, duration: 0.3 });
-      gsap.fromTo('#about', { opacity: 0 }, { opacity: 1, duration: 0.3, delay: 0.2 });
+      gsap.fromTo(
+        "#about",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, delay: 0.2 },
+      );
       return;
     }
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: '#latest',
-        start: 'top top',
-        end: '+=150%',
+        trigger: "#latest",
+        start: "top top",
+        end: "+=150%",
         scrub: 1.2,
         pin: true,
         anticipatePin: 1,
@@ -93,7 +101,7 @@
         },
         onLeave: () => {
           restoreSnap();
-          gsap.set(latestName, { clearProps: 'all' });
+          gsap.set(latestName, { clearProps: "all" });
         },
         onEnterBack: () => {
           disableSnap();
@@ -101,124 +109,166 @@
         },
         onLeaveBack: () => {
           restoreSnap();
-          gsap.set(latestName, { clearProps: 'all', opacity: 1 });
+          gsap.set(latestName, { clearProps: "all", opacity: 1 });
           gsap.set(aboutNameTarget, { opacity: 0 });
-        }
-      }
+        },
+      },
     });
 
-    ScrollTrigger.addEventListener('refreshInit', refreshNamePos);
-    ScrollTrigger.addEventListener('refresh', refreshNamePos);
+    ScrollTrigger.addEventListener("refreshInit", refreshNamePos);
+    ScrollTrigger.addEventListener("refresh", refreshNamePos);
 
     tl.add(() => {
       refreshNameClone();
     }, 0);
 
     if (latestName && aboutNameSlot && aboutNameTarget) {
-      tl.to(latestName, {
-        opacity: 1,
-        duration: 0.25,
-        ease: 'power1.out'
-      }, 0);
+      tl.to(
+        latestName,
+        {
+          opacity: 1,
+          duration: 0.25,
+          ease: "power1.out",
+        },
+        0,
+      );
 
-      tl.to(latestName, {
-        x: () => (namePos?.x ?? 0),
-        y: () => (namePos?.y ?? 0),
-        scale: () => (namePos?.scale ?? 1),
-        ease: 'power2.inOut',
-        duration: 0.9
-      }, 0);
+      tl.to(
+        latestName,
+        {
+          x: () => namePos?.x ?? 0,
+          y: () => namePos?.y ?? 0,
+          scale: () => namePos?.scale ?? 1,
+          ease: "power2.inOut",
+          duration: 0.9,
+        },
+        0,
+      );
 
-      tl.to(latestName, {
-        opacity: 0,
-        duration: 0.25,
-        ease: 'power1.out'
-      }, '>-0.1');
+      tl.to(
+        latestName,
+        {
+          opacity: 0,
+          duration: 0.25,
+          ease: "power1.out",
+        },
+        ">-0.1",
+      );
 
-      tl.set(aboutNameTarget, { opacity: 1 }, '>-0.15');
+      tl.set(aboutNameTarget, { opacity: 1 }, ">-0.15");
     }
 
-    tl.to(videoWrapper, {
-      scale: scaleTarget,
-      filter: `blur(${blurTarget}px)`,
-      ease: 'power2.inOut',
-      duration: 1
-    }, 0);
-
-    tl.to('.latest-gradient', {
-      backgroundColor: 'rgba(0, 0, 0, 0.45)',
-      ease: 'power2.in',
-      duration: 0.7
-    }, 0.3);
-
-    tl.to(latestContent, {
-      opacity: 0,
-      y: -30,
-      ease: 'power2.in',
-      duration: 0.5
-    }, 0);
-
-    tl.set('#about', { opacity: 0 }, 0);
-
-    tl.fromTo('#about',
+    tl.to(
+      videoWrapper,
       {
-        opacity: 0,
+        scale: scaleTarget,
+        filter: `blur(${blurTarget}px)`,
+        ease: "power2.inOut",
+        duration: 1,
       },
-      {
-        opacity: 1,
-        ease: 'power2.out',
-        duration: 0.9
-      },
-      0.05
+      0,
     );
 
-    tl.fromTo(aboutContent,
+    tl.to(
+      ".latest-gradient",
+      {
+        backgroundColor: "rgba(0, 0, 0, 0.45)",
+        ease: "power2.in",
+        duration: 0.7,
+      },
+      0.3,
+    );
+
+    tl.to(
+      latestContent,
       {
         opacity: 0,
-        filter: 'blur(18px)',
-        scale: 0.9
+        y: -30,
+        ease: "power2.in",
+        duration: 0.5,
+      },
+      0,
+    );
+
+    tl.set("#about", { opacity: 0 }, 0);
+
+    tl.fromTo(
+      "#about",
+      {
+        opacity: 0,
       },
       {
         opacity: 1,
-        filter: 'blur(0px)',
-        scale: 1,
-        ease: 'power2.out',
-        duration: 0.9
+        ease: "power2.out",
+        duration: 0.9,
       },
-      0.1
+      0.05,
+    );
+
+    tl.fromTo(
+      aboutContent,
+      {
+        opacity: 0,
+        filter: "blur(18px)",
+        scale: 0.9,
+      },
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        scale: 1,
+        ease: "power2.out",
+        duration: 0.9,
+      },
+      0.1,
     );
 
     tl.to({}, { duration: 0.6 }); // hold
 
-    tl.to(aboutContent, {
-      opacity: 0,
-      filter: 'blur(18px)',
-      scale: 1.15,
-      ease: 'power1.out',
-      duration: 0.5
-    }, '>-0.2');
+    tl.to(
+      aboutContent,
+      {
+        opacity: 0,
+        filter: "blur(18px)",
+        scale: 1.15,
+        ease: "power1.out",
+        duration: 0.5,
+      },
+      ">-0.2",
+    );
 
-    tl.to('#about', {
-      opacity: 0,
-      ease: 'power1.out',
-      duration: 0.4
-    }, '>-0.25');
+    tl.to(
+      "#about",
+      {
+        opacity: 0,
+        ease: "power1.out",
+        duration: 0.4,
+      },
+      ">-0.25",
+    );
 
-    tl.to('.latest-gradient', {
-      backgroundColor: 'rgba(0, 0, 0, 1)',
-      duration: 0.5,
-      ease: 'power2.out'
-    }, '>-0.2');
+    tl.to(
+      ".latest-gradient",
+      {
+        backgroundColor: "rgba(0, 0, 0, 1)",
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      ">-0.2",
+    );
 
-    tl.to(videoWrapper, {
-      opacity: 0,
-      duration: 0.6,
-      ease: 'power2.out'
-    }, '>-0.2');
+    tl.to(
+      videoWrapper,
+      {
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      ">-0.2",
+    );
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initZoomTransition);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initZoomTransition);
   } else {
     initZoomTransition();
   }

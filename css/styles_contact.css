@@ -15,7 +15,7 @@ body {
 #fs-frm optgroup,
 #fs-frm label,
 #fs-frm #card-element:disabled {
-  box-sizing: border-box; 
+  box-sizing: border-box;
   font-family: inherit;
   font-size: 100%;
   color: inherit;
@@ -31,9 +31,9 @@ body {
 #fs-frm label,
 #fs-frm legend,
 #fs-frm ::placeholder {
-  font-size: .825rem;
-  margin-bottom: .5rem;
-  padding-top: .2rem;
+  font-size: 0.825rem;
+  margin-bottom: 0.5rem;
+  padding-top: 0.2rem;
   display: flex;
   align-items: baseline;
 }
@@ -42,9 +42,9 @@ body {
 #fs-frm input,
 #fs-frm select,
 #fs-frm textarea {
-  border: 1px solid rgba(0,0,0,0.2);
-  background-color: rgba(255,255,255,0.9);
-  padding: .75em 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 0.75em 1rem;
   margin-bottom: 1.5rem;
 }
 #fs-frm input:focus,
@@ -68,8 +68,7 @@ body {
 }
 
 #fs-frm [type="button"][disabled],
-#fs-frm [type="submit"][disabled]
-{
+#fs-frm [type="submit"][disabled] {
   cursor: progress;
   color: #888;
 }

@@ -1,170 +1,225 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Randy Counsman - Documentary Producer</title>
-    <meta name="description" content="Documentary producer crafting narratives at the intersection of history, business, and innovation.">
+    <meta
+      name="description"
+      content="Documentary producer crafting narratives at the intersection of history, business, and innovation."
+    />
 
     <!-- Typekit Fonts -->
-    <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css">
+    <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css" />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <!-- Global Progress Bar -->
     <div class="global-progress">
-        <div class="progress-fill"></div>
-        <div class="progress-label">
-            <span class="progress-section"></span>
-            <span class="progress-fraction"></span>
-        </div>
+      <div class="progress-fill"></div>
+      <div class="progress-label">
+        <span class="progress-section"></span>
+        <span class="progress-fraction"></span>
+      </div>
     </div>
 
     <!-- Z-ZOOM CONTAINER: Single pinned element for continuous zoom experience -->
     <div id="z-zoom-container" class="z-zoom-container">
-        <div class="z-zoom-perspective">
-            <div class="z-zoom-layers">
+      <div class="z-zoom-perspective">
+        <div class="z-zoom-layers">
+          <!-- Layer 0: Hero -->
+          <div class="z-layer" data-layer="hero">
+            <div class="z-layer-media">
+              <video
+                autoplay
+                loop
+                muted
+                playsinline
+                poster="../images/1x1black.jpg"
+              >
+                <source
+                  src="../video/LandingPageMontagev04.2.webm"
+                  type="video/webm"
+                />
+              </video>
+              <div class="z-layer-gradient"></div>
+            </div>
+            <div class="z-layer-overlay hero-overlay">
+              <div class="hero-inner">
+                <h1 class="hero-name">Randy Counsman</h1>
+                <p class="hero-subtitle">
+                  Original series development and production
+                </p>
+              </div>
+            </div>
+          </div>
 
-                <!-- Layer 0: Hero -->
-                <div class="z-layer" data-layer="hero">
-                    <div class="z-layer-media">
-                        <video autoplay loop muted playsinline poster="../images/1x1black.jpg">
-                            <source src="../video/LandingPageMontagev04.2.webm" type="video/webm">
-                        </video>
-                        <div class="z-layer-gradient"></div>
-                    </div>
-                    <div class="z-layer-overlay hero-overlay">
-                        <div class="hero-inner">
-                            <h1 class="hero-name">Randy Counsman</h1>
-                            <p class="hero-subtitle">Original series development and production</p>
-                        </div>
-                    </div>
+          <!-- Layer 1: About -->
+          <div class="z-layer" data-layer="about">
+            <div class="z-layer-media about-backdrop"></div>
+            <div class="z-layer-overlay about-overlay">
+              <div class="about-content">
+                <p class="about-lead">
+                  Crafting narratives where history, commerce, and human
+                  ambition intersect.
+                </p>
+                <p>
+                  Over fifteen years bringing complex stories to life for a
+                  variety of major streamers, networks, news organizations, and
+                  social.
+                </p>
+                <div class="about-networks">
+                  <span class="networks-label">Trusted by</span>
+                  <div class="networks-list">
+                    <span>Netflix</span>
+                    <span>History</span>
+                    <span>PBS</span>
+                    <span>AMC</span>
+                    <span>Amazon</span>
+                    <span>Nat Geo</span>
+                    <span>Discovery</span>
+                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                <!-- Layer 1: About -->
-                <div class="z-layer" data-layer="about">
-                    <div class="z-layer-media about-backdrop"></div>
-                    <div class="z-layer-overlay about-overlay">
-                        <div class="about-content">
-                            <p class="about-lead">Crafting narratives where history, commerce, and human ambition intersect.</p>
-                            <p>Over fifteen years bringing complex stories to life for a variety of major streamers, networks, news organizations, and social.</p>
-                            <div class="about-networks">
-                                <span class="networks-label">Trusted by</span>
-                                <div class="networks-list">
-                                    <span>Netflix</span>
-                                    <span>History</span>
-                                    <span>PBS</span>
-                                    <span>AMC</span>
-                                    <span>Amazon</span>
-                                    <span>Nat Geo</span>
-                                    <span>Discovery</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <!-- Layer 2: Featured Work 1 - Wyatt Earp -->
+          <div class="z-layer" data-layer="featured-1" data-project="1">
+            <div class="z-layer-media">
+              <img
+                src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/WyattEarpCowboyWar.jpg"
+                alt="Wyatt Earp and The Cowboy War"
+                loading="lazy"
+              />
+              <div class="z-layer-gradient"></div>
+            </div>
+            <div class="z-layer-overlay featured-overlay">
+              <img
+                class="network-logo"
+                src="https://stephendavidentertainment.github.io/website/assets/logos/Netflix_white.png"
+                alt="Netflix"
+              />
+              <div class="project-info">
+                <h2 class="project-title">Wyatt Earp and The Cowboy War</h2>
+                <div class="quotes">
+                  <blockquote class="quote">
+                    "Guns, grits, and global politics"
+                    <cite>— Wall Street Journal</cite>
+                  </blockquote>
+                  <blockquote class="quote">
+                    "A cracking good yarn"
+                    <cite>— The Spectator</cite>
+                  </blockquote>
+                  <blockquote class="quote">
+                    "Well-written and well-acted... Stream it!"
+                    <cite>— Decider</cite>
+                  </blockquote>
                 </div>
+              </div>
+              <div class="project-progress">
+                <span class="progress-current">1</span>
+                <span class="progress-divider">/</span>
+                <span class="progress-total">6</span>
+              </div>
+            </div>
+          </div>
 
-                <!-- Layer 2: Featured Work 1 - Wyatt Earp -->
-                <div class="z-layer" data-layer="featured-1" data-project="1">
-                    <div class="z-layer-media">
-                        <img src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/WyattEarpCowboyWar.jpg" alt="Wyatt Earp and The Cowboy War" loading="lazy">
-                        <div class="z-layer-gradient"></div>
-                    </div>
-                    <div class="z-layer-overlay featured-overlay">
-                        <img class="network-logo" src="https://stephendavidentertainment.github.io/website/assets/logos/Netflix_white.png" alt="Netflix">
-                        <div class="project-info">
-                            <h2 class="project-title">Wyatt Earp and The Cowboy War</h2>
-                            <div class="quotes">
-                                <blockquote class="quote">
-                                    "Guns, grits, and global politics"
-                                    <cite>— Wall Street Journal</cite>
-                                </blockquote>
-                                <blockquote class="quote">
-                                    "A cracking good yarn"
-                                    <cite>— The Spectator</cite>
-                                </blockquote>
-                                <blockquote class="quote">
-                                    "Well-written and well-acted... Stream it!"
-                                    <cite>— Decider</cite>
-                                </blockquote>
-                            </div>
-                        </div>
-                        <div class="project-progress">
-                            <span class="progress-current">1</span>
-                            <span class="progress-divider">/</span>
-                            <span class="progress-total">6</span>
-                        </div>
-                    </div>
+          <!-- Layer 3: Featured Work 2 - Men Who Built America -->
+          <div class="z-layer" data-layer="featured-2" data-project="2">
+            <div class="z-layer-media">
+              <img
+                src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/MWBA.jpg"
+                alt="The Men Who Built America"
+                loading="lazy"
+              />
+              <div class="z-layer-gradient"></div>
+            </div>
+            <div class="z-layer-overlay featured-overlay">
+              <img
+                class="network-logo"
+                src="https://stephendavidentertainment.github.io/website/assets/logos/History.png"
+                alt="History"
+              />
+              <div class="project-info">
+                <h2 class="project-title">The Men Who Built America</h2>
+                <div class="quotes">
+                  <blockquote class="quote">
+                    "The titans who transformed America into an economic
+                    superpower"
+                    <cite>— Series Description</cite>
+                  </blockquote>
                 </div>
+              </div>
+              <div class="project-progress">
+                <span class="progress-current">2</span>
+                <span class="progress-divider">/</span>
+                <span class="progress-total">6</span>
+              </div>
+            </div>
+          </div>
 
-                <!-- Layer 3: Featured Work 2 - Men Who Built America -->
-                <div class="z-layer" data-layer="featured-2" data-project="2">
-                    <div class="z-layer-media">
-                        <img src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/MWBA.jpg" alt="The Men Who Built America" loading="lazy">
-                        <div class="z-layer-gradient"></div>
-                    </div>
-                    <div class="z-layer-overlay featured-overlay">
-                        <img class="network-logo" src="https://stephendavidentertainment.github.io/website/assets/logos/History.png" alt="History">
-                        <div class="project-info">
-                            <h2 class="project-title">The Men Who Built America</h2>
-                            <div class="quotes">
-                                <blockquote class="quote">
-                                    "The titans who transformed America into an economic superpower"
-                                    <cite>— Series Description</cite>
-                                </blockquote>
-                            </div>
-                        </div>
-                        <div class="project-progress">
-                            <span class="progress-current">2</span>
-                            <span class="progress-divider">/</span>
-                            <span class="progress-total">6</span>
-                        </div>
-                    </div>
+          <!-- Layer 4: Featured Work 3 - Sons of Liberty -->
+          <div class="z-layer" data-layer="featured-3" data-project="3">
+            <div class="z-layer-media">
+              <img
+                src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/SonsOfLiberty.jpg"
+                alt="Sons of Liberty"
+                loading="lazy"
+              />
+              <div class="z-layer-gradient"></div>
+            </div>
+            <div class="z-layer-overlay featured-overlay">
+              <img
+                class="network-logo"
+                src="https://stephendavidentertainment.github.io/website/assets/logos/History.png"
+                alt="History"
+              />
+              <div class="project-info">
+                <h2 class="project-title">Sons of Liberty</h2>
+                <div class="quotes">
+                  <blockquote class="quote">
+                    "Rips the powdered wigs off America's founding fathers. In a
+                    good way."
+                    <cite>— NY Daily News</cite>
+                  </blockquote>
+                  <blockquote class="quote">
+                    "A ripping good saga"
+                    <cite>— San Francisco Chronicle</cite>
+                  </blockquote>
                 </div>
+              </div>
+              <div class="project-progress">
+                <span class="progress-current">3</span>
+                <span class="progress-divider">/</span>
+                <span class="progress-total">6</span>
+              </div>
+            </div>
+          </div>
 
-                <!-- Layer 4: Featured Work 3 - Sons of Liberty -->
-                <div class="z-layer" data-layer="featured-3" data-project="3">
-                    <div class="z-layer-media">
-                        <img src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/SonsOfLiberty.jpg" alt="Sons of Liberty" loading="lazy">
-                        <div class="z-layer-gradient"></div>
-                    </div>
-                    <div class="z-layer-overlay featured-overlay">
-                        <img class="network-logo" src="https://stephendavidentertainment.github.io/website/assets/logos/History.png" alt="History">
-                        <div class="project-info">
-                            <h2 class="project-title">Sons of Liberty</h2>
-                            <div class="quotes">
-                                <blockquote class="quote">
-                                    "Rips the powdered wigs off America's founding fathers. In a good way."
-                                    <cite>— NY Daily News</cite>
-                                </blockquote>
-                                <blockquote class="quote">
-                                    "A ripping good saga"
-                                    <cite>— San Francisco Chronicle</cite>
-                                </blockquote>
-                            </div>
-                        </div>
-                        <div class="project-progress">
-                            <span class="progress-current">3</span>
-                            <span class="progress-divider">/</span>
-                            <span class="progress-total">6</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Layer 5: Featured Work 4 - Jonestown -->
-                <div class="z-layer" data-layer="featured-4" data-project="4">
-                    <div class="z-layer-media">
-                        <img src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/Jonestown.jpg" alt="Jonestown: Terror in the Jungle" loading="lazy">
-                        <div class="z-layer-gradient"></div>
-                    </div>
-                    <div class="z-layer-overlay featured-overlay">
-                        <img class="network-logo" src="/images/logos/CNN_logo_red.svg" alt="CNN logo">
-                        <div class="project-info">
-                            <h2 class="project-title">Pope: The Most Powerful Man in History</h2>
-                            <!-- <div class="quotes">
+          <!-- Layer 5: Featured Work 4 - Jonestown -->
+          <div class="z-layer" data-layer="featured-4" data-project="4">
+            <div class="z-layer-media">
+              <img
+                src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/Jonestown.jpg"
+                alt="Jonestown: Terror in the Jungle"
+                loading="lazy"
+              />
+              <div class="z-layer-gradient"></div>
+            </div>
+            <div class="z-layer-overlay featured-overlay">
+              <img
+                class="network-logo"
+                src="/images/logos/CNN_logo_red.svg"
+                alt="CNN logo"
+              />
+              <div class="project-info">
+                <h2 class="project-title">
+                  Pope: The Most Powerful Man in History
+                </h2>
+                <!-- <div class="quotes">
                                 <blockquote class="quote">
                                     "Skilled, deeply harrowing..."
                                     <cite>— Entertainment Weekly</cite>
@@ -174,179 +229,233 @@
                                     <cite>— New York Times</cite>
                                 </blockquote>
                             </div> -->
-                        </div>
-                        <div class="project-progress">
-                            <span class="progress-current">4</span>
-                            <span class="progress-divider">/</span>
-                            <span class="progress-total">6</span>
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <div class="project-progress">
+                <span class="progress-current">4</span>
+                <span class="progress-divider">/</span>
+                <span class="progress-total">6</span>
+              </div>
+            </div>
+          </div>
 
-                <!-- Layer 6: Featured Work 5 - upNEXT News -->
-                <div class="z-layer" data-layer="featured-5" data-project="5">
-                    <div class="z-layer-media">
-                        <img src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/Titans.jpg" alt="The Titans That Built America" loading="lazy">
-                        <div class="z-layer-gradient"></div>
-                    </div>
-                    <div class="z-layer-overlay featured-overlay">
-                        <!-- <img class="network-logo" src="https://stephendavidentertainment.github.io/website/assets/logos/History.png" alt="History"> -->
-                        <div class="project-info">
-                            <h2 class="project-title">upNEXT News</h2>
-                            <!-- <div class="quotes">
+          <!-- Layer 6: Featured Work 5 - upNEXT News -->
+          <div class="z-layer" data-layer="featured-5" data-project="5">
+            <div class="z-layer-media">
+              <img
+                src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/Titans.jpg"
+                alt="The Titans That Built America"
+                loading="lazy"
+              />
+              <div class="z-layer-gradient"></div>
+            </div>
+            <div class="z-layer-overlay featured-overlay">
+              <!-- <img class="network-logo" src="https://stephendavidentertainment.github.io/website/assets/logos/History.png" alt="History"> -->
+              <div class="project-info">
+                <h2 class="project-title">upNEXT News</h2>
+                <!-- <div class="quotes">
                                 <blockquote class="quote">
                                     "Innovators who revolutionized technology and business"
                                     <cite>— Series Description</cite>
                                 </blockquote>
                             </div> -->
-                        </div>
-                        <div class="project-progress">
-                            <span class="progress-current">5</span>
-                            <span class="progress-divider">/</span>
-                            <span class="progress-total">6</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Layer 7: Featured Work 6 - World Wars -->
-                <div class="z-layer" data-layer="featured-6" data-project="6">
-                    <div class="z-layer-media">
-                        <img src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/WorldWars.jpg" alt="The World Wars" loading="lazy">
-                        <div class="z-layer-gradient"></div>
-                    </div>
-                    <div class="z-layer-overlay featured-overlay">
-                        <img class="network-logo" src="https://stephendavidentertainment.github.io/website/assets/logos/History.png" alt="History">
-                        <div class="project-info">
-                            <h2 class="project-title">The World Wars</h2>
-                            <div class="quotes">
-                                <blockquote class="quote">
-                                    "The global conflicts that shaped the modern world"
-                                    <cite>— Series Description</cite>
-                                </blockquote>
-                            </div>
-                        </div>
-                        <div class="project-progress">
-                            <span class="progress-current">6</span>
-                            <span class="progress-divider">/</span>
-                            <span class="progress-total">6</span>
-                        </div>
-                    </div>
-                </div>
-
+              </div>
+              <div class="project-progress">
+                <span class="progress-current">5</span>
+                <span class="progress-divider">/</span>
+                <span class="progress-total">6</span>
+              </div>
             </div>
+          </div>
+
+          <!-- Layer 7: Featured Work 6 - World Wars -->
+          <div class="z-layer" data-layer="featured-6" data-project="6">
+            <div class="z-layer-media">
+              <img
+                src="https://raw.githubusercontent.com/stephendavidentertainment/website3/main/images/slideshow/WorldWars.jpg"
+                alt="The World Wars"
+                loading="lazy"
+              />
+              <div class="z-layer-gradient"></div>
+            </div>
+            <div class="z-layer-overlay featured-overlay">
+              <img
+                class="network-logo"
+                src="https://stephendavidentertainment.github.io/website/assets/logos/History.png"
+                alt="History"
+              />
+              <div class="project-info">
+                <h2 class="project-title">The World Wars</h2>
+                <div class="quotes">
+                  <blockquote class="quote">
+                    "The global conflicts that shaped the modern world"
+                    <cite>— Series Description</cite>
+                  </blockquote>
+                </div>
+              </div>
+              <div class="project-progress">
+                <span class="progress-current">6</span>
+                <span class="progress-divider">/</span>
+                <span class="progress-total">6</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Gallery Section -->
     <section id="gallery" class="gallery">
-        <div class="container">
-            <header class="gallery-header">
-                <h2 class="section-title">Other work includes</h2>
-            </header>
+      <div class="container">
+        <header class="gallery-header">
+          <h2 class="section-title">Other work includes</h2>
+        </header>
 
-            <table class="credits-table">
-                <tbody>
-                    <tr class="credit-row" data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/RomanEmpire.jpg">
-                        <td class="credit-title">Roman Empire</td>
-                        <td class="credit-network">Netflix</td>
-                    </tr>
-                    <tr class="credit-row" data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/MakingOfTheMob2.jpg">
-                        <td class="credit-title">Making of the Mob</td>
-                        <td class="credit-network">AMC</td>
-                    </tr>
-                    <tr class="credit-row" data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/TheWest.jpg">
-                        <td class="credit-title">The American West</td>
-                        <td class="credit-network">AMC</td>
-                    </tr>
-                    <tr class="credit-row" data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/Capsized.png">
-                        <td class="credit-title">Capsized: Blood in the Water</td>
-                        <td class="credit-network">Discovery</td>
-                    </tr>
-                    <tr class="credit-row" data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/AmericanGenius3.jpg">
-                        <td class="credit-title">American Genius</td>
-                        <td class="credit-network">Nat Geo</td>
-                    </tr>
-                    <tr class="credit-row" data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/AmericanPlayboy.jpg">
-                        <td class="credit-title">American Playboy</td>
-                        <td class="credit-network">Amazon</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="credits-table">
+          <tbody>
+            <tr
+              class="credit-row"
+              data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/RomanEmpire.jpg"
+            >
+              <td class="credit-title">Roman Empire</td>
+              <td class="credit-network">Netflix</td>
+            </tr>
+            <tr
+              class="credit-row"
+              data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/MakingOfTheMob2.jpg"
+            >
+              <td class="credit-title">Making of the Mob</td>
+              <td class="credit-network">AMC</td>
+            </tr>
+            <tr
+              class="credit-row"
+              data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/TheWest.jpg"
+            >
+              <td class="credit-title">The American West</td>
+              <td class="credit-network">AMC</td>
+            </tr>
+            <tr
+              class="credit-row"
+              data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/Capsized.png"
+            >
+              <td class="credit-title">Capsized: Blood in the Water</td>
+              <td class="credit-network">Discovery</td>
+            </tr>
+            <tr
+              class="credit-row"
+              data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/AmericanGenius3.jpg"
+            >
+              <td class="credit-title">American Genius</td>
+              <td class="credit-network">Nat Geo</td>
+            </tr>
+            <tr
+              class="credit-row"
+              data-preview="https://stephendavidentertainment.github.io/website/assets/images/shows/AmericanPlayboy.jpg"
+            >
+              <td class="credit-title">American Playboy</td>
+              <td class="credit-network">Amazon</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- Cursor-tracking preview image -->
-        <div class="cursor-preview">
-            <img src="" alt="" />
-        </div>
+      <!-- Cursor-tracking preview image -->
+      <div class="cursor-preview">
+        <img src="" alt="" />
+      </div>
     </section>
 
     <!-- Newsletter Section -->
     <section id="newsletter" class="newsletter">
-        <div class="container">
-            <div class="newsletter-content">
-                <h2 class="section-title">Stay Connected</h2>
-                <p class="newsletter-intro">Updates on new projects, behind-the-scenes insights, and stories from the world of documentary production.</p>
+      <div class="container">
+        <div class="newsletter-content">
+          <h2 class="section-title">Stay Connected</h2>
+          <p class="newsletter-intro">
+            Updates on new projects, behind-the-scenes insights, and stories
+            from the world of documentary production.
+          </p>
 
-                <form class="newsletter-form" action="#" method="post">
-                    <div class="form-group">
-                        <label for="email" class="visually-hidden">Email address</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Your email address"
-                            required
-                            aria-label="Email address"
-                        >
-                        <button type="submit" class="btn-submit">Subscribe</button>
-                    </div>
-                    <p class="form-note">No spam. Unsubscribe anytime.</p>
-                </form>
+          <form class="newsletter-form" action="#" method="post">
+            <div class="form-group">
+              <label for="email" class="visually-hidden">Email address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Your email address"
+                required
+                aria-label="Email address"
+              />
+              <button type="submit" class="btn-submit">Subscribe</button>
             </div>
+            <p class="form-note">No spam. Unsubscribe anytime.</p>
+          </form>
         </div>
+      </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <h2 class="section-title">Go ahead, say "Hi!"</h2>
-                <p class="contact-intro">Let's chat about work, art, life, whatever.</p>
+      <div class="container">
+        <div class="contact-content">
+          <h2 class="section-title">Go ahead, say "Hi!"</h2>
+          <p class="contact-intro">
+            Let's chat about work, art, life, whatever.
+          </p>
 
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <span class="contact-label">Location</span>
-                        <span class="contact-value">New York, NY</span>
-                    </div>
-                    <!-- <div class="contact-item">
+          <div class="contact-details">
+            <div class="contact-item">
+              <span class="contact-label">Location</span>
+              <span class="contact-value">New York, NY</span>
+            </div>
+            <!-- <div class="contact-item">
                         <span class="contact-label">Email</span>
                         <a href="mailto:randycouns" class="contact-value contact-link">randy@stephendavidentertainment.com</a>
                     </div> -->
-                </div>
+          </div>
 
-                <div class="contact-social">
-                    <a href="https://www.linkedin.com/in/randycounsman/" target="_blank" rel="noopener" class="social-link">
-                        <span>LinkedIn</span>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                    <a href="https://vimeo.com/randycounsman" target="_blank" rel="noopener" class="social-link">
-                        <span>Vimeo</span>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+          <div class="contact-social">
+            <a
+              href="https://www.linkedin.com/in/randycounsman/"
+              target="_blank"
+              rel="noopener"
+              class="social-link"
+            >
+              <span>LinkedIn</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M3 13L13 3M13 3H5M13 3V11"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://vimeo.com/randycounsman"
+              target="_blank"
+              rel="noopener"
+              class="social-link"
+            >
+              <span>Vimeo</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M3 13L13 3M13 3H5M13 3V11"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Randy Counsman</p>
-        </div>
+      <div class="container">
+        <p>&copy; 2026 Randy Counsman</p>
+      </div>
     </footer>
 
     <!-- Scripts -->
@@ -354,5 +463,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
     <script src="CinematicZoom.js"></script>
     <script src="animations.js"></script>
-</body>
+  </body>
 </html>

@@ -1,6 +1,7 @@
 # Zoom-In Transition Effect: Latest → About Section
 
 ## Overview
+
 Transform the transition between the "Latest" and "About" sections from a simple scroll-snap to a cinematic zoom-through-video effect. The user scrolls down, triggering a zoom into the video with blur and fade-to-black, then emerging through to reveal the About text with a de-blur effect.
 
 ## Progress
@@ -13,6 +14,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
 ## Current State Analysis
 
 ### Architecture
+
 - **Scrolling**: Pure CSS snap-scroll (`scroll-snap-type: y mandatory`)
 - **Libraries**: GSAP 3.12.4 + CSSRulePlugin loaded
 - **No ScrollTrigger**: Not currently loaded, will need to add
@@ -21,6 +23,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
 - **Scroller**: Both `body` and `#website-container` set to `overflow-y: scroll`; need to target the real scroller for ScrollTrigger
 
 ### Key Files
+
 - `index2.html` - HTML structure
 - `css/styles2.css` - Latest section styles
 - `v2/styles.css` - Global styles including snap-scroll
@@ -34,9 +37,13 @@ Transform the transition between the "Latest" and "About" sections from a simple
 **Goal**: Enable scroll-driven animations with precise control
 
 **Tasks**:
+
 1. Add ScrollTrigger CDN to index2.html before CSSRulePlugin and custom scripts (after GSAP core):
    ```html
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
+   <script
+     src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"
+     defer
+   ></script>
    ```
 2. Verify load order: GSAP core → ScrollTrigger → CSSRulePlugin → custom scripts
 
@@ -47,7 +54,9 @@ Transform the transition between the "Latest" and "About" sections from a simple
 **Goal**: Prepare the video and content layers for z-axis animation
 
 **Tasks**:
+
 1. Wrap video container in a 3D transform context:
+
    ```html
    <section id="latest" class="latest-randy">
      <div class="latest-perspective-container">
@@ -62,6 +71,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
    ```
 
 2. Add CSS for 3D perspective (in `css/styles2.css`):
+
    ```css
    .latest-perspective-container {
      position: absolute;
@@ -79,6 +89,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
    ```
 
 **Rationale**:
+
 - `perspective` creates realistic depth for z-axis movement
 - `will-change` optimizes GPU acceleration
 - `transform-style: preserve-3d` maintains 3D space through nested elements
@@ -88,9 +99,11 @@ Transform the transition between the "Latest" and "About" sections from a simple
 **Goal**: Implement the core zoom-in effect with blur and fade
 
 **Tasks**:
+
 1. Create new file: `v2/zoom-transition.js`
 
 2. Implement ScrollTrigger animation:
+
    ```javascript
    // Register ScrollTrigger
    gsap.registerPlugin(ScrollTrigger);
@@ -99,85 +112,104 @@ Transform the transition between the "Latest" and "About" sections from a simple
    const ZOOM_CONFIG = {
      scaleFrom: 1,
      scaleTo: window.innerWidth < 768 ? 2.0 : 2.5, // softer on mobile
-     blurMax: window.innerWidth < 768 ? 12 : 20,   // pixels; lower on mobile
-     duration: 1.5,       // seconds of scroll "scrubbing"
-     easing: 'power2.inOut'
+     blurMax: window.innerWidth < 768 ? 12 : 20, // pixels; lower on mobile
+     duration: 1.5, // seconds of scroll "scrubbing"
+     easing: "power2.inOut",
    };
 
-   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   const prefersReducedMotion = window.matchMedia(
+     "(prefers-reduced-motion: reduce)",
+   ).matches;
 
    function initZoomTransition() {
-     const videoWrapper = document.querySelector('.latest-video-wrapper');
-     const latestContent = document.querySelector('.latest-content');
-     const aboutSection = document.querySelector('#about');
-     const scroller = document.querySelector('#website-container') || window;
+     const videoWrapper = document.querySelector(".latest-video-wrapper");
+     const latestContent = document.querySelector(".latest-content");
+     const aboutSection = document.querySelector("#about");
+     const scroller = document.querySelector("#website-container") || window;
 
      if (!videoWrapper || !aboutSection) return;
 
      if (prefersReducedMotion) {
        gsap.to(videoWrapper, { opacity: 0, duration: 0.3 });
-       gsap.fromTo('#about', { opacity: 0 }, { opacity: 1, duration: 0.3, delay: 0.2 });
+       gsap.fromTo(
+         "#about",
+         { opacity: 0 },
+         { opacity: 1, duration: 0.3, delay: 0.2 },
+       );
        return;
      }
 
      // Create timeline for synchronized animations
      const tl = gsap.timeline({
        scrollTrigger: {
-         trigger: '#latest',
-         start: 'bottom bottom',      // Start when bottom of Latest hits bottom of viewport
-         end: 'bottom top',            // End when bottom of Latest hits top of viewport
-         scrub: 1.2,                   // Smooth scrubbing with slight lag
-         pin: true,                    // Pin Latest section during animation
-         anticipatePin: 1,             // Prevent flashing
-         invalidateOnRefresh: true,    // Recalculate on resize
-         scroller                      // ensure we pin the correct scroll container
-       }
+         trigger: "#latest",
+         start: "bottom bottom", // Start when bottom of Latest hits bottom of viewport
+         end: "bottom top", // End when bottom of Latest hits top of viewport
+         scrub: 1.2, // Smooth scrubbing with slight lag
+         pin: true, // Pin Latest section during animation
+         anticipatePin: 1, // Prevent flashing
+         invalidateOnRefresh: true, // Recalculate on resize
+         scroller, // ensure we pin the correct scroll container
+       },
      });
 
      // 1. Zoom and blur the video
-     tl.to(videoWrapper, {
-       scale: ZOOM_CONFIG.scaleTo,
-       filter: `blur(${ZOOM_CONFIG.blurMax}px)`,
-       ease: ZOOM_CONFIG.easing,
-       duration: 1
-     }, 0);
+     tl.to(
+       videoWrapper,
+       {
+         scale: ZOOM_CONFIG.scaleTo,
+         filter: `blur(${ZOOM_CONFIG.blurMax}px)`,
+         ease: ZOOM_CONFIG.easing,
+         duration: 1,
+       },
+       0,
+     );
 
      // 2. Fade video to black (via gradient overlay)
-     tl.to('.latest-gradient', {
-       background: 'rgba(0, 0, 0, 1)',
-       ease: 'power2.in',
-       duration: 0.7
-     }, 0.3);  // Start slightly after zoom begins
+     tl.to(
+       ".latest-gradient",
+       {
+         background: "rgba(0, 0, 0, 1)",
+         ease: "power2.in",
+         duration: 0.7,
+       },
+       0.3,
+     ); // Start slightly after zoom begins
 
      // 3. Fade out Latest content
-     tl.to(latestContent, {
-       opacity: 0,
-       y: -30,  // Subtle upward movement
-       ease: 'power2.in',
-       duration: 0.5
-     }, 0);
-
-     // 4. Fade in About section with de-blur effect
-     tl.fromTo('#about',
+     tl.to(
+       latestContent,
        {
          opacity: 0,
-         filter: 'blur(15px)',
-         y: 100
+         y: -30, // Subtle upward movement
+         ease: "power2.in",
+         duration: 0.5,
+       },
+       0,
+     );
+
+     // 4. Fade in About section with de-blur effect
+     tl.fromTo(
+       "#about",
+       {
+         opacity: 0,
+         filter: "blur(15px)",
+         y: 100,
        },
        {
          opacity: 1,
-         filter: 'blur(0px)',
+         filter: "blur(0px)",
          y: 0,
-         ease: 'power2.out',
-         duration: 0.8
+         ease: "power2.out",
+         duration: 0.8,
        },
-       0.6  // Start as fade-to-black completes
+       0.6, // Start as fade-to-black completes
      );
    }
 
    // Initialize on DOM ready
-   if (document.readyState === 'loading') {
-     document.addEventListener('DOMContentLoaded', initZoomTransition);
+   if (document.readyState === "loading") {
+     document.addEventListener("DOMContentLoaded", initZoomTransition);
    } else {
      initZoomTransition();
    }
@@ -189,6 +221,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
    ```
 
 **Rationale**:
+
 - **scrub: 1.2** creates buttery-smooth scroll-linked animation with slight elasticity
 - **pin: true** holds Latest section in place while animation plays
 - **Staggered timing** (0, 0.3, 0.6) creates layered reveal effect
@@ -201,7 +234,9 @@ Transform the transition between the "Latest" and "About" sections from a simple
 **Goal**: Ensure sections work correctly with ScrollTrigger pinning
 
 **Tasks**:
+
 1. In `v2/styles.css`, ensure smooth scroll but plan to relax snap during pin if needed:
+
    ```css
    body {
      /* Keep existing styles but add: */
@@ -210,6 +245,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
    ```
 
 2. Add spacer styles for ScrollTrigger pin-spacer in `css/styles2.css`:
+
    ```css
    .pin-spacer {
      /* ScrollTrigger adds this automatically, but we ensure it fits our layout */
@@ -233,7 +269,9 @@ Transform the transition between the "Latest" and "About" sections from a simple
 **Goal**: Polish the effect to perfection
 
 **Tasks**:
+
 1. Add custom easing curve for zoom (optional enhancement):
+
    ```javascript
    // In zoom-transition.js
    gsap.registerPlugin(ScrollTrigger, CustomEase);
@@ -242,10 +280,11 @@ Transform the transition between the "Latest" and "About" sections from a simple
    CustomEase.create("zoomTunnel", "0.76, 0, 0.24, 1");
 
    // Use in timeline:
-   ease: 'zoomTunnel'
+   ease: "zoomTunnel";
    ```
 
 2. Add viewport-based scale adjustments:
+
    ```javascript
    const scaleTo = window.innerWidth < 768 ? 2.0 : 2.5; // Less zoom on mobile
    ```
@@ -255,11 +294,12 @@ Transform the transition between the "Latest" and "About" sections from a simple
    if (prefersReducedMotion) {
      // Fallback to simple fade transition
      tl.to(videoWrapper, { opacity: 0, duration: 0.3 });
-     tl.to('#about', { opacity: 1, duration: 0.3 }, 0.3);
+     tl.to("#about", { opacity: 1, duration: 0.3 }, 0.3);
    }
    ```
 
 **Rationale**:
+
 - Custom easing creates signature feel
 - Mobile optimization prevents performance issues
 - Accessibility compliance for motion sensitivity
@@ -269,7 +309,9 @@ Transform the transition between the "Latest" and "About" sections from a simple
 **Goal**: Ensure 60fps animation on all devices
 
 **Tasks**:
+
 1. Add GPU acceleration hints:
+
    ```css
    .latest-video-wrapper {
      transform: translateZ(0); /* Force GPU layer */
@@ -278,22 +320,24 @@ Transform the transition between the "Latest" and "About" sections from a simple
    ```
 
 2. Optimize blur rendering with backdrop-filter fallback:
+
    ```javascript
    // In zoom-transition.js, detect if filter: blur is expensive
-   const supportsBackdropFilter = CSS.supports('backdrop-filter', 'blur(1px)');
-   const blurProperty = supportsBackdropFilter ? 'backdrop-filter' : 'filter';
+   const supportsBackdropFilter = CSS.supports("backdrop-filter", "blur(1px)");
+   const blurProperty = supportsBackdropFilter ? "backdrop-filter" : "filter";
    ```
 
 3. Debounce resize handlers:
    ```javascript
    let resizeTimeout;
-   ScrollTrigger.addEventListener('refresh', () => {
+   ScrollTrigger.addEventListener("refresh", () => {
      clearTimeout(resizeTimeout);
      resizeTimeout = setTimeout(() => ScrollTrigger.refresh(), 250);
    });
    ```
 
 **Rationale**:
+
 - GPU acceleration is critical for smooth transforms
 - Blur is computationally expensive; optimizations prevent jank
 - Debouncing prevents layout thrashing on window resize
@@ -303,7 +347,9 @@ Transform the transition between the "Latest" and "About" sections from a simple
 **Goal**: Ensure Work and Contact sections retain normal scroll-snap behavior
 
 **Tasks**:
+
 1. Verify no interference by adding ScrollTrigger only to Latest→About:
+
    ```javascript
    // In zoom-transition.js
    // Only target #latest specifically, not other sections
@@ -330,6 +376,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
 ## Testing Checklist
 
 ### Functional Tests
+
 - [ ] Zoom effect triggers when scrolling from Latest to About
 - [ ] Video scales smoothly from 1x to 2.5x
 - [ ] Blur increases from 0 to 20px during zoom
@@ -341,6 +388,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
 - [ ] Other sections (Work, Contact) use normal scroll-snap
 
 ### Performance Tests
+
 - [ ] 60fps on desktop (Chrome DevTools Performance tab)
 - [ ] 30fps minimum on mobile devices
 - [ ] No layout shifts (CLS = 0)
@@ -348,6 +396,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
 - [ ] Memory usage stable (<50MB increase during transition)
 
 ### Browser Compatibility
+
 - [ ] Chrome 90+ (primary target)
 - [ ] Safari 14+ (WebKit blur rendering)
 - [ ] Firefox 88+ (Gecko transform handling)
@@ -355,12 +404,14 @@ Transform the transition between the "Latest" and "About" sections from a simple
 - [ ] Chrome Mobile (Android)
 
 ### Accessibility
+
 - [ ] Reduced motion fallback works (simple fade)
 - [ ] Keyboard navigation unaffected (Tab, Arrow keys)
 - [ ] Screen reader announces section changes
 - [ ] No epilepsy triggers (blur/flashing checked)
 
 ### Edge Cases
+
 - [ ] Viewport resize during transition
 - [ ] Fast scrolling (snap vs. scrub balance)
 - [ ] Page refresh mid-transition
@@ -379,6 +430,7 @@ Transform the transition between the "Latest" and "About" sections from a simple
 ## Rollback Plan
 
 If issues arise:
+
 1. Remove `<script>` tag for `v2/zoom-transition.js` from index2.html
 2. Revert CSS changes to `.latest-video-wrapper` (remove 3D transforms)
 3. Site returns to original scroll-snap behavior
@@ -429,13 +481,14 @@ If issues arise:
 - Safari/mobile safety rails: cap scale/blur further on Safari (e.g., 1.6–1.8 scale, 8–10px blur) and shorten duration if jank appears.
 - Snap interplay: if both `body` and `#website-container` have snap, disable snap on the inactive scroller and temporarily relax snap on the active scroller during pin:
   ```js
-  const scrollerEl = document.querySelector('#website-container');
+  const scrollerEl = document.querySelector("#website-container");
   const originalSnap = scrollerEl?.style.scrollSnapType;
-  ScrollTrigger.addEventListener('refreshInit', () => {
-    if (scrollerEl) scrollerEl.style.scrollSnapType = 'none';
+  ScrollTrigger.addEventListener("refreshInit", () => {
+    if (scrollerEl) scrollerEl.style.scrollSnapType = "none";
   });
-  ScrollTrigger.addEventListener('refresh', () => {
-    if (scrollerEl) scrollerEl.style.scrollSnapType = originalSnap || 'y mandatory';
+  ScrollTrigger.addEventListener("refresh", () => {
+    if (scrollerEl)
+      scrollerEl.style.scrollSnapType = originalSnap || "y mandatory";
   });
   ```
 - Video readiness: guard the transition if the video isn’t ready—fallback to a simple fade or a poster frame until `canplaythrough` fires.
