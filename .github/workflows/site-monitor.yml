@@ -3,7 +3,7 @@ name: Weekly Site Monitoring
 on:
   schedule:
     # Every Sunday at 9:00 AM UTC
-    - cron: '5 1 * * 6'
+    - cron: '5 6 * * 6'
   workflow_dispatch:
 
 jobs:
