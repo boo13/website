@@ -1,0 +1,96 @@
+name: Weekly Site Monitoring
+
+on:
+  schedule:
+    # Every Sunday at 9:00 AM UTC
+    - cron: '5 1 * * 6'
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check website availability and timing
+        id: site_check
+        run: |
+          URL="${{ secrets.SITE_URL }}"
+
+          echo "Checking $URL"
+
+          START=$(date +%s%3N)
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+          END=$(date +%s%3N)
+          DURATION=$((END - START))
+
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "duration=$DURATION" >> $GITHUB_OUTPUT
+
+          if [ "$STATUS" -ge 400 ]; then
+            echo "Site returned error status $STATUS"
+            exit 1
+          fi
+
+          if [ "$DURATION" -gt 3000 ]; then
+            echo "Site is slow: ${DURATION}ms"
+            exit 1
+          fi
+
+      - name: Check SSL certificate expiration
+        id: ssl_check
+        run: |
+          DOMAIN=$(echo "${{ secrets.SITE_URL }}" | sed -e 's|https://||' -e 's|/.*||')
+
+          EXPIRY_DATE=$(echo | \
+            openssl s_client -servername "$DOMAIN" -connect "$DOMAIN:443" 2>/dev/null | \
+            openssl x509 -noout -enddate | cut -d= -f2)
+
+          EXPIRY_TS=$(date -d "$EXPIRY_DATE" +%s)
+          NOW_TS=$(date +%s)
+          DAYS_LEFT=$(( (EXPIRY_TS - NOW_TS) / 86400 ))
+
+          echo "days_left=$DAYS_LEFT" >> $GITHUB_OUTPUT
+
+          if [ "$DAYS_LEFT" -lt 14 ]; then
+            echo "SSL certificate expires in $DAYS_LEFT days"
+            exit 1
+          fi
+
+      - name: Send success email
+        if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: '✅ Weekly site check OK'
+          body: |
+            Your site is healthy.
+
+            URL: ${{ secrets.SITE_URL }}
+            Status code: ${{ steps.site_check.outputs.status }}
+            Response time: ${{ steps.site_check.outputs.duration }} ms
+            SSL expires in: ${{ steps.ssl_check.outputs.days_left }} days
+          to: ${{ secrets.EMAIL_TO }}
+          from: 'Site Monitor'
+
+      - name: Send failure email
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: '🚨 Site monitoring alert'
+          body: |
+            There is a problem with your site.
+
+            URL: ${{ secrets.SITE_URL }}
+
+            Check the GitHub Actions logs for details:
+            https://github.com/${{ github.repository }}/actions
+          to: ${{ secrets.EMAIL_TO }}
+          from: 'Site Monitor'
