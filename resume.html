@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Randy Counsman · Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Reddit+Sans:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/geist" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #050505;
+        --text: #f6f6f6;
+        --muted: #9b9b9b;
+        --line: #1b1b1b;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          'Schibsted Grotesk',
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        font-size: 15px;
+        line-height: 1.45;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      main {
+        max-width: 1220px;
+        margin: 0 auto;
+        padding: 48px 32px 96px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .hero {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .hero-names {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .hero-name,
+      .hero-title {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin: 0;
+      }
+
+      .hero-title {
+        color: #ababab;
+      }
+
+      .hero-link {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: inherit;
+        text-decoration: none;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .divider {
+        border: none;
+        border-top: 1px solid var(--line);
+        margin: 0;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 368px minmax(0, 1fr);
+        gap: 48px;
+        margin-top: 16px;
+      }
+
+      .sidebar,
+      .main-column {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .panel {
+        border-top: 1px solid var(--line);
+        padding-top: 28px;
+      }
+
+      .bio {
+        margin: 0 0 16px;
+        font-size: 15px;
+        line-height: 1.55;
+      }
+
+      .bio-list {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .bio-list li {
+        margin-bottom: 8px;
+      }
+
+      .contact-list {
+        font-size: 12px;
+        margin-top: 16px;
+      }
+
+      .contact-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+        text-decoration: none;
+        color: inherit;
+        letter-spacing: -0.01em;
+      }
+
+      .contact-item:first-child {
+        border-top: 1px solid var(--line);
+      }
+
+      .contact-item .arrow {
+        font-family: 'Reddit Sans', 'Schibsted Grotesk', sans-serif;
+        font-size: 10px;
+        letter-spacing: -0.08em;
+      }
+
+      .section-title {
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 20px;
+      }
+
+      .experience-item {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 48px;
+        padding: 28px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .experience-item:first-of-type {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .experience-meta h3 {
+        margin: 0 0 4px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .experience-meta p {
+        margin: 2px 0;
+        font-size: 15px;
+        color: #cfcfcf;
+      }
+
+      .experience-details {
+        margin: 0;
+        font-family: 'Geist', 'Schibsted Grotesk', sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+        padding-left: 18px;
+      }
+
+      .experience-details li {
+        margin-bottom: 12px;
+      }
+
+      .skills-layout {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px;
+      }
+
+      .skill-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .skill-group p {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .skill-group ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .skill-group li {
+        margin-bottom: 8px;
+      }
+
+      .education-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px;
+      }
+
+      .education-grid p {
+        margin: 0;
+      }
+
+      .credits-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px;
+      }
+
+      .credits-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .credits-list li {
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .credits-list strong {
+        display: block;
+        font-size: 15px;
+        color: #fff;
+      }
+
+      .credits-list span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .footer-link {
+        display: inline-block;
+        margin-top: 8px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      @media (max-width: 980px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .experience-item {
+          grid-template-columns: 1fr;
+        }
+
+        .skills-layout,
+        .education-grid,
+        .credits-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        main {
+          padding: 32px 20px 64px;
+        }
+
+        .hero {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .hero-link {
+          align-self: flex-start;
+        }
+
+        .experience-details {
+          padding-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero" id="about">
+        <div class="hero-names">
+          <p class="hero-name">Randy Counsman</p>
+          <p class="hero-title">Creative Director &amp; Executive Producer</p>
+        </div>
+        <a class="hero-link" href="#about">About</a>
+      </header>
+
+      <hr class="divider" />
+
+      <section class="grid">
+        <div class="sidebar">
+          <article class="panel">
+            <p class="bio">
+              Hands-on senior content producer translating strategic direction
+              into measurable growth by delivering premium television, news, and
+              social content.
+            </p>
+            <ul class="bio-list">
+              <li>
+                Trusted by talent—from A-list celebrities to reluctant
+                participants.
+              </li>
+              <li>Leads high-profile projects from pitch through delivery.</li>
+              <li>Creator of award-winning series and lasting franchises.</li>
+              <li>Fluent in every stage of the production pipeline.</li>
+            </ul>
+          </article>
+          <article class="panel">
+            <div class="contact-list">
+              <a class="contact-item" href="mailto:RandyCounsman@gmail.com">
+                <span>RandyCounsman@gmail.com</span>
+                <span aria-hidden="true" class="arrow">↗</span>
+              </a>
+              <a class="contact-item" href="tel:+16464292271">
+                <span>(646) 429-2271</span>
+                <span aria-hidden="true" class="arrow">↗</span>
+              </a>
+              <a
+                class="contact-item"
+                href="https://maps.app.goo.gl/gs17N1d7bZ1FKCjGA"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <span>New York, NY</span>
+                <span aria-hidden="true" class="arrow">↗</span>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="main-column">
+          <article class="panel">
+            <p class="section-title">Experience</p>
+
+            <div class="experience-item">
+              <div class="experience-meta">
+                <h3>Creative Director</h3>
+                <p>upNEXT News</p>
+                <p>2025</p>
+              </div>
+              <ul class="experience-details">
+                <li>
+                  Built the social-first newsroom's end-to-end production
+                  workflow, including original formats, branding, and graphics.
+                </li>
+                <li>
+                  Designed systems and automated templates that dramatically
+                  reduced content creation time.
+                </li>
+              </ul>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-meta">
+                <h3>Head of Development</h3>
+                <p>Stephen David Entertainment</p>
+                <p>2018 – 2025</p>
+              </div>
+              <ul class="experience-details">
+                <li>
+                  Led a development team and delivered sales at Netflix,
+                  History, Discovery, PBS, and more.
+                </li>
+                <li>
+                  Created a low-cost interview series that featured MrBeast and
+                  drove 20M+ views.
+                </li>
+                <li>
+                  Developed sellable originals, including Discovery's first
+                  Shark Week film and Netflix's global Top 3 hit
+                  <em>Wyatt Earp &amp; the Cowboy War</em>.
+                </li>
+              </ul>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-meta">
+                <h3>Executive Producer</h3>
+                <p>NBC News / Peacock Productions</p>
+                <p>2016 – 2018</p>
+              </div>
+              <ul class="experience-details">
+                <li>
+                  Pitched and executed a slate revitalization plan aligned with
+                  the modern media landscape.
+                </li>
+                <li>
+                  Secured a development deal and three major sales by retooling
+                  the company's approach.
+                </li>
+              </ul>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-meta">
+                <h3>Executive Producer / Founder</h3>
+                <p>Rearrange Media</p>
+                <p>2014 – 2016</p>
+              </div>
+              <ul class="experience-details">
+                <li>
+                  Launched a production shingle with Glass Entertainment Group
+                  and built a 40+ person team.
+                </li>
+                <li>
+                  Managed budgets, operations, and business affairs while
+                  securing a first-look with CNN.
+                </li>
+                <li>
+                  Produced the critically acclaimed series
+                  <em>Pope: The Most Powerful Man in History</em> on a $4.5M
+                  budget.
+                </li>
+              </ul>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-meta">
+                <h3>VP of Development</h3>
+                <p>Stephen David Entertainment</p>
+                <p>2009 – 2014</p>
+              </div>
+              <ul class="experience-details">
+                <li>
+                  Joined as the first employee and helped define company
+                  strategy alongside the founder.
+                </li>
+                <li>
+                  Closed sales that turned the startup into a Realscreen Global
+                  Top 100 producer and eventual Banijay acquisition.
+                </li>
+                <li>
+                  Developed Emmy-winning franchise
+                  <em>The Men Who Built America</em> and more than a dozen
+                  follow-up series with partners such as Playboy, NASCAR, and
+                  Xbox.
+                </li>
+              </ul>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-meta">
+                <h3>Director of Development</h3>
+                <p>The Idea Factory</p>
+                <p>2008 – 2009</p>
+              </div>
+              <ul class="experience-details">
+                <li>
+                  Developed and sold the series that became the foundation for
+                  Stephen David Entertainment.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="panel">
+            <p class="section-title">Skills</p>
+            <div class="skills-layout">
+              <div class="skill-group">
+                <p>Tools &amp; Technical</p>
+                <ul>
+                  <li>Adobe Creative Suite</li>
+                  <li>Video Production</li>
+                  <li>Interviewing &amp; Story Craft</li>
+                  <li>AI Automation Systems</li>
+                  <li>Python, HTML &amp; CSS</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <p>Leadership &amp; Impact</p>
+                <ul>
+                  <li>Series development and franchise building</li>
+                  <li>Stakeholder alignment across talent and partners</li>
+                  <li>Full life-cycle production management</li>
+                  <li>Data-informed creative experimentation</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <p class="section-title">Education</p>
+            <div class="education-grid">
+              <p>
+                <strong>New York University</strong><br />
+                Dramatic Writing
+              </p>
+              <p>
+                <strong>Syracuse University</strong><br />
+                Communications Design
+              </p>
+            </div>
+          </article>
+
+          <article class="panel">
+            <p class="section-title">Selected Credits</p>
+            <div class="credits-grid">
+              <div>
+                <ul class="credits-list">
+                  <li>
+                    <strong>Wyatt Earp &amp; The Cowboy War</strong>
+                    <span>Co-Executive Producer · Netflix</span>
+                  </li>
+                  <li>
+                    <strong>Human: The World Within</strong>
+                    <span>Supervising Producer · Netflix / PBS</span>
+                  </li>
+                  <li>
+                    <strong>Holiday Home Makeover with Mr. Christmas</strong>
+                    <span>Supervising Producer · Netflix</span>
+                  </li>
+                  <li>
+                    <strong>Pope: The Most Powerful Man in History</strong>
+                    <span>Executive Producer / Writer / Director · CNN</span>
+                  </li>
+                  <li>
+                    <strong>Hamilton: Building America</strong>
+                    <span
+                      >Executive Producer / Writer / Director · History</span
+                    >
+                  </li>
+                  <li>
+                    <strong>The Men Who Built America</strong>
+                    <span
+                      >Writer / Producer · History (2× Emmy nominations)</span
+                    >
+                  </li>
+                  <li>
+                    <strong>The Titans That Built America</strong>
+                    <span>Co-Executive Producer · History</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <ul class="credits-list">
+                  <li>
+                    <strong>Sitting Bull</strong>
+                    <span>Co-Executive Producer · History</span>
+                  </li>
+                  <li>
+                    <strong>Capsized: Blood in the Water</strong>
+                    <span>Supervising Producer · Discovery</span>
+                  </li>
+                  <li>
+                    <strong>The Interrogator</strong>
+                    <span>Supervising Producer · Investigation Discovery</span>
+                  </li>
+                  <li>
+                    <strong>American Dynasty</strong>
+                    <span>Supervising Producer · Fox Nation</span>
+                  </li>
+                  <li>
+                    <strong>Washington</strong>
+                    <span>Writer · History Channel</span>
+                  </li>
+                  <li>
+                    <strong>The World Wars</strong>
+                    <span
+                      >Writer / Producer · History (Primetime Emmy
+                      nomination)</span
+                    >
+                  </li>
+                  <li>
+                    <strong>Secrets to Success with Daymond John</strong>
+                    <span>Co-Executive Producer · CNBC</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <footer class="panel">
+            <a class="footer-link" href="mailto:RandyCounsman@gmail.com">
+              Contact me
+            </a>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
