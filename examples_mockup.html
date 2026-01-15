@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scroll Controlled Mockup</title>
+    <style>
+      :root {
+        --bg: #030304;
+        --panel: #0c0c10;
+        --text: #f5f6f8;
+        --muted: #9ca3b2;
+        --accent: #ff7a45;
+        --accent-2: #7558ff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: radial-gradient(circle at 20% 20%, #10101a 0%, #050507 55%);
+        color: var(--text);
+        min-height: 100vh;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .progress-bar {
+        position: fixed;
+        inset: 0 auto auto 0;
+        width: 100%;
+        height: 3px;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+      }
+
+      .progress-bar span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        transform-origin: left;
+        transform: scaleX(0);
+        background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+      }
+
+      header.hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 1.5rem 6rem;
+        text-align: center;
+      }
+
+      .hero__inner {
+        max-width: 760px;
+        background: rgba(255, 255, 255, 0.015);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 32px;
+        padding: 3rem 3.5rem;
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+      }
+
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: clamp(2.4rem, 4vw, 3.75rem);
+        margin: 0 0 1rem;
+      }
+
+      .subtitle {
+        color: rgba(245, 246, 248, 0.82);
+        font-size: 1.08rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .hero__stats {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .hero__stats span {
+        padding: 0.75rem 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.01);
+      }
+
+      .hero__hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-top: 2.25rem;
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+      }
+
+      .hero__hint::after {
+        content: "↓";
+        font-size: 1.1rem;
+        position: relative;
+        top: 1px;
+      }
+
+      .sequence-track {
+        position: relative;
+        height: 360vh;
+        background: linear-gradient(180deg, rgba(5, 5, 7, 0) 0%, #050507 35%);
+      }
+
+      .sequence-canvas {
+        position: sticky;
+        top: 0;
+        width: min(1200px, 90vw);
+        height: 100vh;
+        display: block;
+        margin: 0 auto;
+        border-radius: 32px;
+        background: radial-gradient(circle at 30% 30%, #0f0f19, #030304 75%);
+        box-shadow: 0 50px 120px rgba(0, 0, 0, 0.55);
+      }
+
+      .sequence-copy {
+        position: absolute;
+        bottom: 4rem;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.95rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .details {
+        background: var(--panel);
+        padding: 5rem 1.5rem 6rem;
+      }
+
+      .details__inner {
+        max-width: 840px;
+        margin: 0 auto;
+      }
+
+      .details__inner h2 {
+        font-size: clamp(2rem, 3vw, 2.75rem);
+        margin-bottom: 0.75rem;
+      }
+
+      .details__inner p {
+        color: rgba(245, 246, 248, 0.8);
+        margin-bottom: 1.5rem;
+      }
+
+      .details__grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .details__card {
+        padding: 1.5rem;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
+        color: rgba(245, 246, 248, 0.92);
+      }
+
+      .details__card strong {
+        display: block;
+        font-size: 1.05rem;
+        margin-bottom: 0.5rem;
+        color: var(--text);
+      }
+
+      @media (max-width: 640px) {
+        .hero__inner {
+          padding: 2.25rem 2rem;
+        }
+
+        .sequence-canvas {
+          border-radius: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress-bar" aria-hidden="true">
+      <span id="progressIndicator"></span>
+    </div>
+
+    <header class="hero">
+      <div class="hero__inner">
+        <p class="eyebrow">Examples mockup</p>
+        <h1>Scroll through the entire mockup without hitting play.</h1>
+        <p class="subtitle">
+          The frames below are taken from the 8K export. The canvas stays pinned
+          while you scroll, translating scroll distance into playback for a
+          smooth, tactile feel.
+        </p>
+        <div class="hero__stats">
+          <span>900 native frames available</span>
+          <span>Web-friendly proxy set: 225 frames @ 1600px wide</span>
+          <span>Lazy loaded + idle-queue warmed</span>
+        </div>
+        <div class="hero__hint">Start scrolling</div>
+      </div>
+    </header>
+
+    <section class="sequence-track" id="sequenceTrack">
+      <canvas
+        id="sequenceCanvas"
+        class="sequence-canvas"
+        role="img"
+        aria-label="Phone mockup animation tied to scroll"
+      ></canvas>
+      <div class="sequence-copy">Scroll = timeline</div>
+    </section>
+
+    <section class="details">
+      <div class="details__inner">
+        <h2>Implementation notes</h2>
+        <p>
+          The demo keeps the canvas sticky and updates the frame only when the
+          scroll position changes enough. Frames are preloaded lazily in small
+          batches so the first interaction is instant and the rest streams in as
+          the user explores.
+        </p>
+        <div class="details__grid">
+          <div class="details__card">
+            <strong>Sampling</strong>
+            Using every 4th frame from the 30fps export keeps motion smooth
+            while holding payload down to ~225 images.
+          </div>
+          <div class="details__card">
+            <strong>Canvas scaling</strong>
+            The canvas redraws on resize and letterboxes the artwork so the
+            original aspect is preserved without stretching.
+          </div>
+          <div class="details__card">
+            <strong>Graceful loading</strong>
+            A queue driven by <code>requestIdleCallback</code> (with fallback)
+            batches downloads so the browser never chokes on hundreds of
+            simultaneous requests.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        const canvas = document.getElementById('sequenceCanvas');
+        const ctx = canvas.getContext('2d');
+        const progressFill = document.getElementById('progressIndicator');
+        const track = document.getElementById('sequenceTrack');
+
+        const totalFrames = 225;
+        const prefix =
+          'images/upNEXT_Examples_Mockup_01_web/upNEXT_Examples_Mockup_01_web_';
+        const digits = 5;
+
+        const frameNumbers = Array.from({ length: totalFrames }, (_, i) => i);
+
+        const cache = new Map();
+        const loaders = new Map();
+        let pendingFrame = frameNumbers[0];
+        let displayWidth = 0;
+        let displayHeight = 0;
+        let scrollableDistance = 1;
+
+        const frameToPath = (frameNumber) =>
+          `${prefix}${frameNumber.toString().padStart(digits, '0')}.jpg`;
+
+        const ensureFrame = (frameNumber) => {
+          if (cache.has(frameNumber)) {
+            return Promise.resolve(cache.get(frameNumber));
+          }
+          if (loaders.has(frameNumber)) {
+            return loaders.get(frameNumber);
+          }
+          const promise = new Promise((resolve) => {
+            const img = new Image();
+            img.src = frameToPath(frameNumber);
+            img.loading = frameNumber === frameNumbers[0] ? 'eager' : 'lazy';
+            img.decode?.().catch(() => {});
+            img.onload = () => {
+              cache.set(frameNumber, img);
+              loaders.delete(frameNumber);
+              resolve(img);
+            };
+            img.onerror = () => {
+              loaders.delete(frameNumber);
+              resolve(null);
+            };
+          });
+          loaders.set(frameNumber, promise);
+          return promise;
+        };
+
+        const drawFrame = (img) => {
+          if (!img) return;
+          ctx.clearRect(0, 0, displayWidth, displayHeight);
+          const hRatio = displayWidth / img.width;
+          const vRatio = displayHeight / img.height;
+          const ratio = Math.min(hRatio, vRatio);
+          const renderWidth = img.width * ratio;
+          const renderHeight = img.height * ratio;
+          const offsetX = (displayWidth - renderWidth) / 2;
+          const offsetY = (displayHeight - renderHeight) / 2;
+          ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight);
+        };
+
+        const render = (frameNumber) => {
+          pendingFrame = frameNumber;
+          if (cache.has(frameNumber)) {
+            drawFrame(cache.get(frameNumber));
+            return;
+          }
+          ensureFrame(frameNumber).then((img) => {
+            if (img && pendingFrame === frameNumber) {
+              drawFrame(img);
+            }
+          });
+        };
+
+        const resizeCanvas = () => {
+          setTrackHeight();
+          const rect = canvas.getBoundingClientRect();
+          const ratio = window.devicePixelRatio || 1;
+          displayWidth = rect.width;
+          displayHeight = rect.height;
+          canvas.width = rect.width * ratio;
+          canvas.height = rect.height * ratio;
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.scale(ratio, ratio);
+          if (cache.has(pendingFrame)) {
+            drawFrame(cache.get(pendingFrame));
+          }
+        };
+
+        const debounce = (fn, wait = 150) => {
+          let timeout;
+          return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => fn.apply(null, args), wait);
+          };
+        };
+
+        const setTrackHeight = () => {
+          const pixelsPerFrame = 8;
+          const computed = frameNumbers.length * pixelsPerFrame;
+          const min = window.innerHeight * 3;
+          const total = Math.max(min, computed) + window.innerHeight;
+          track.style.height = `${Math.round(total)}px`;
+          scrollableDistance = Math.max(1, track.offsetHeight - window.innerHeight);
+        };
+
+        const warmFrames = () => {
+          let preloadIndex = 1;
+          const chunkSize = 6;
+          const queueNext = () => {
+            if (preloadIndex >= frameNumbers.length) return;
+            for (
+              let i = 0;
+              i < chunkSize && preloadIndex < frameNumbers.length;
+              i += 1, preloadIndex += 1
+            ) {
+              ensureFrame(frameNumbers[preloadIndex]);
+            }
+            const callback = () => queueNext();
+            if ('requestIdleCallback' in window) {
+              requestIdleCallback(callback, { timeout: 200 });
+            } else {
+              setTimeout(callback, 120);
+            }
+          };
+          queueNext();
+        };
+
+        const updateFromScroll = () => {
+          const scrollY = window.scrollY || window.pageYOffset;
+          const trackStart = track.offsetTop;
+          const distance = scrollableDistance;
+          const progress = Math.min(
+            1,
+            Math.max(0, (scrollY - trackStart) / distance)
+          );
+          const frameIndex = Math.round(progress * (frameNumbers.length - 1));
+          render(frameNumbers[frameIndex]);
+          progressFill.style.transform = `scaleX(${progress.toFixed(4)})`;
+        };
+
+        const handleScroll = (() => {
+          let ticking = false;
+          return () => {
+            if (!ticking) {
+              window.requestAnimationFrame(() => {
+                updateFromScroll();
+                ticking = false;
+              });
+            }
+            ticking = true;
+          };
+        })();
+
+        ensureFrame(frameNumbers[0]).then((img) => {
+          setTrackHeight();
+          resizeCanvas();
+          drawFrame(img);
+          warmFrames();
+          updateFromScroll();
+        });
+
+        window.addEventListener(
+          'resize',
+          debounce(() => {
+            setTrackHeight();
+            resizeCanvas();
+            updateFromScroll();
+          }, 100)
+        );
+        window.addEventListener('scroll', handleScroll, { passive: true });
+      })();
+    </script>
+  </body>
+</html>
