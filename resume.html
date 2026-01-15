@@ -185,16 +185,23 @@
         color: #cfcfcf;
       }
 
+      .experience-meta p:first-of-type {
+        font-size: 19px;
+      }
+
       .experience-details {
         margin: 0;
         font-family: 'Geist', 'Schibsted Grotesk', sans-serif;
         font-size: 16px;
         line-height: 1.55;
-        padding-left: 18px;
+        padding-left: 0;
+        list-style: none;
       }
 
       .experience-details li {
         margin-bottom: 12px;
+        padding-left: 16px;
+        border-left: 1px solid var(--line);
       }
 
       .skills-layout {
@@ -252,6 +259,48 @@
       .credits-list li {
         font-size: 14px;
         line-height: 1.45;
+        cursor: pointer;
+      }
+
+      .credits-list li strong {
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: 3px;
+        transition: text-decoration-color 0.2s ease;
+      }
+
+      .credits-list li:hover strong {
+        text-decoration-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .hover-preview {
+        position: fixed;
+        pointer-events: none;
+        z-index: 1000;
+        width: 360px;
+        height: 200px;
+        border-radius: 10px;
+        overflow: hidden;
+        opacity: 0;
+        left: max(32px, calc(50% - 610px + 32px));
+        transform: translateY(-50%) scale(0.92) perspective(800px) rotateY(8deg);
+        transition:
+          opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow:
+          0 25px 50px -12px rgba(0, 0, 0, 0.6),
+          0 0 0 1px rgba(255, 255, 255, 0.08);
+      }
+
+      .hover-preview.active {
+        opacity: 1;
+        transform: translateY(-50%) scale(1) perspective(800px) rotateY(0deg);
+      }
+
+      .hover-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
       .credits-list strong {
@@ -263,6 +312,7 @@
       .credits-list span {
         color: var(--muted);
         font-size: 13px;
+        line-height: 1.5;
       }
 
       .footer-link {
@@ -534,35 +584,35 @@
             <div class="credits-grid">
               <div>
                 <ul class="credits-list">
-                  <li>
+                  <li data-preview="images/portfolio/WyattEarp.jpg">
                     <strong>Wyatt Earp &amp; The Cowboy War</strong>
                     <span>Co-Executive Producer · Netflix</span>
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/SonsOfLiberty.jpg">
                     <strong>Human: The World Within</strong>
                     <span>Supervising Producer · Netflix / PBS</span>
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/MakingOfTheMob.jpg">
                     <strong>Holiday Home Makeover with Mr. Christmas</strong>
                     <span>Supervising Producer · Netflix</span>
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/Pope.jpg">
                     <strong>Pope: The Most Powerful Man in History</strong>
                     <span>Executive Producer / Writer / Director · CNN</span>
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/MWBA.jpg">
                     <strong>Hamilton: Building America</strong>
                     <span
                       >Executive Producer / Writer / Director · History</span
                     >
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/MWBA.jpg">
                     <strong>The Men Who Built America</strong>
                     <span
                       >Writer / Producer · History (2× Emmy nominations)</span
                     >
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/MWBA.jpg">
                     <strong>The Titans That Built America</strong>
                     <span>Co-Executive Producer · History</span>
                   </li>
@@ -570,34 +620,34 @@
               </div>
               <div>
                 <ul class="credits-list">
-                  <li>
+                  <li data-preview="images/portfolio/SonsOfLiberty.jpg">
                     <strong>Sitting Bull</strong>
                     <span>Co-Executive Producer · History</span>
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/MakingOfTheMob.jpg">
                     <strong>Capsized: Blood in the Water</strong>
                     <span>Supervising Producer · Discovery</span>
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/Pope.jpg">
                     <strong>The Interrogator</strong>
                     <span>Supervising Producer · Investigation Discovery</span>
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/MWBA.jpg">
                     <strong>American Dynasty</strong>
                     <span>Supervising Producer · Fox Nation</span>
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/SonsOfLiberty.jpg">
                     <strong>Washington</strong>
                     <span>Writer · History Channel</span>
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/MWBA.jpg">
                     <strong>The World Wars</strong>
                     <span
                       >Writer / Producer · History (Primetime Emmy
                       nomination)</span
                     >
                   </li>
-                  <li>
+                  <li data-preview="images/portfolio/MakingOfTheMob.jpg">
                     <strong>Secrets to Success with Daymond John</strong>
                     <span>Co-Executive Producer · CNBC</span>
                   </li>
@@ -614,5 +664,38 @@
         </div>
       </section>
     </main>
+
+    <div class="hover-preview" id="hoverPreview">
+      <img src="" alt="Preview" id="hoverPreviewImg" />
+    </div>
+
+    <script>
+      (function () {
+        const preview = document.getElementById('hoverPreview');
+        const previewImg = document.getElementById('hoverPreviewImg');
+        const items = document.querySelectorAll('.credits-list li[data-preview]');
+
+        let currentSrc = '';
+
+        items.forEach((item) => {
+          item.addEventListener('mouseenter', () => {
+            const src = item.dataset.preview;
+            if (src && src !== currentSrc) {
+              currentSrc = src;
+              previewImg.src = src;
+            }
+            preview.classList.add('active');
+          });
+
+          item.addEventListener('mouseleave', () => {
+            preview.classList.remove('active');
+          });
+
+          item.addEventListener('mousemove', (e) => {
+            preview.style.top = e.clientY + 'px';
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
