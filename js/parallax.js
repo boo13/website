@@ -48,6 +48,8 @@
         timeline: null,
         scrollTrigger: null,
         prefersReducedMotion: false,
+        isMobile: false,
+        mobileBreakpoint: 768,
 
         init() {
             this.section = document.querySelector('.parallax-section');
@@ -64,8 +66,10 @@
             }
 
             this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            this.isMobile = window.innerWidth <= this.mobileBreakpoint;
 
-            if (this.prefersReducedMotion) {
+            // Simplified effect on mobile
+            if (this.prefersReducedMotion || this.isMobile) {
                 this.initReducedMotion();
                 return;
             }

@@ -25,6 +25,8 @@
         scrollTrigger: null,
         currentIndex: 0,
         prefersReducedMotion: false,
+        isMobile: false,
+        mobileBreakpoint: 768,
 
         init() {
             this.section = document.querySelector('.gallery-section');
@@ -40,9 +42,12 @@
             }
 
             this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            this.isMobile = window.innerWidth <= this.mobileBreakpoint;
 
-            if (this.prefersReducedMotion) {
+            // On mobile/tablet, use vertical layout (CSS handles this)
+            if (this.prefersReducedMotion || this.isMobile) {
                 this.initReducedMotion();
+                this.setupVideoHover();
                 return;
             }
 
@@ -145,10 +150,21 @@
         },
 
         handleResize() {
-            // Recalculate on resize
-            this.calculateDimensions();
-            if (this.scrollTrigger) {
-                this.scrollTrigger.refresh();
+            const wasMobile = this.isMobile;
+            this.isMobile = window.innerWidth <= this.mobileBreakpoint;
+
+            // If crossing breakpoint, reload page for clean state
+            if (wasMobile !== this.isMobile) {
+                window.location.reload();
+                return;
+            }
+
+            // Only recalculate if not mobile
+            if (!this.isMobile) {
+                this.calculateDimensions();
+                if (this.scrollTrigger) {
+                    this.scrollTrigger.refresh();
+                }
             }
         },
 

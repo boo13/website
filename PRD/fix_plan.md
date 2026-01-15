@@ -43,9 +43,11 @@
 ## Current Focus
 - [x] Initial implementation complete
 - [x] Fixed gallery horizontal scroll (GSAP pin-based)
+- [x] Added mobile responsive styles (tablet/mobile breakpoints)
+- [x] Gallery converts to vertical scroll on mobile
+- [x] Parallax simplified on mobile devices
 - [ ] Browser testing and bug fixes
 - [ ] Performance optimization
-- [ ] Responsive testing (mobile/tablet)
 
 ## Performance Targets
 - FCP: <1.5s
