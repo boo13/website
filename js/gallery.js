@@ -69,34 +69,43 @@
         },
 
         createAnimation() {
-            // Pin the container and move track horizontally
-            this.scrollTrigger = ScrollTrigger.create({
-                trigger: this.section,
-                start: 'top top',
-                end: () => `+=${this.section.offsetHeight - window.innerHeight}`,
-                pin: this.container,
-                scrub: this.config.scrubAmount,
-                anticipatePin: 1,
-                onUpdate: (self) => {
-                    // Move track based on scroll progress
-                    const xMove = -this.scrollDistance * self.progress;
-                    gsap.set(this.track, { x: xMove });
+            // Use GSAP's horizontal scroll pattern
+            // Pin the section and animate the track horizontally
+            const xDistance = this.scrollDistance;
 
-                    // Update progress indicator
-                    this.updateProgress(self.progress);
+            gsap.to(this.track, {
+                x: () => -xDistance,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: this.section,
+                    start: 'top top',
+                    end: () => `+=${xDistance}`,
+                    pin: true,
+                    scrub: this.config.scrubAmount,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                    onUpdate: (self) => {
+                        // Update progress indicator
+                        this.updateProgress(self.progress);
 
-                    // Toggle section active state
-                    if (self.progress > 0 && self.progress < 1) {
-                        this.section.classList.add('active');
-                    } else {
-                        this.section.classList.remove('active');
-                    }
-                },
-                onEnter: () => this.section.classList.add('active'),
-                onLeave: () => this.section.classList.remove('active'),
-                onEnterBack: () => this.section.classList.add('active'),
-                onLeaveBack: () => this.section.classList.remove('active')
+                        // Toggle section active state
+                        if (self.progress > 0 && self.progress < 1) {
+                            this.section.classList.add('active');
+                        } else {
+                            this.section.classList.remove('active');
+                        }
+                    },
+                    onEnter: () => this.section.classList.add('active'),
+                    onLeave: () => this.section.classList.remove('active'),
+                    onEnterBack: () => this.section.classList.add('active'),
+                    onLeaveBack: () => this.section.classList.remove('active')
+                }
             });
+
+            // Store reference for cleanup
+            this.scrollTrigger = ScrollTrigger.getAll().find(
+                st => st.trigger === this.section
+            );
         },
 
         updateProgress(progress) {

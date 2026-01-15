@@ -42,6 +42,7 @@
 
 ## Current Focus
 - [x] Initial implementation complete
+- [x] Fixed gallery horizontal scroll (GSAP pin-based)
 - [ ] Browser testing and bug fixes
 - [ ] Performance optimization
 - [ ] Responsive testing (mobile/tablet)
