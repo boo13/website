@@ -22,8 +22,8 @@
 
         // Config
         config: {
-            offsetX: 20,  // Offset from cursor
-            offsetY: 20
+            fixedX: 40,   // Fixed left position (px from left edge)
+            offsetY: 0    // Offset from cursor Y (centers on cursor)
         },
 
         init() {
@@ -90,25 +90,21 @@
 
             if (!this.isVisible) return;
 
-            // Calculate position with boundary checking
-            const viewportWidth = window.innerWidth;
+            // Calculate position - fixed X, follows cursor Y
             const viewportHeight = window.innerHeight;
             const previewRect = this.preview.getBoundingClientRect();
 
-            let x = this.mouseX + this.config.offsetX;
-            let y = this.mouseY + this.config.offsetY;
+            // Fixed left position, Y follows cursor (centered)
+            let x = this.config.fixedX;
+            let y = this.mouseY - (previewRect.height / 2);
 
-            // Keep preview within viewport
-            if (x + previewRect.width > viewportWidth) {
-                x = this.mouseX - previewRect.width - this.config.offsetX;
-            }
+            // Keep preview within viewport vertically
             if (y + previewRect.height > viewportHeight) {
-                y = this.mouseY - previewRect.height - this.config.offsetY;
+                y = viewportHeight - previewRect.height - 20;
             }
-
-            // Ensure not off-screen left/top
-            x = Math.max(10, x);
-            y = Math.max(10, y);
+            if (y < 20) {
+                y = 20;
+            }
 
             this.preview.style.left = `${x}px`;
             this.preview.style.top = `${y}px`;

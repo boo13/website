@@ -485,11 +485,11 @@ a {
     position: fixed;
     top: 0;
     left: 0;
-    width: 300px;
+    width: 350px;
     height: 200px;
     pointer-events: none;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.9);
+    transform: scale(0.95);
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 1000;
     border-radius: 4px;
@@ -499,7 +499,7 @@ a {
 
 .cursor-preview.visible {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: scale(1);
 }
 
 .cursor-preview img {
