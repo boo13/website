@@ -47,6 +47,7 @@
 - [x] Gallery converts to vertical scroll on mobile
 - [x] Parallax simplified on mobile devices
 - [x] Code review complete (JS, CSS, asset URLs verified)
+- [x] Fixed credits preview (fixed-left, cursor-Y per PRD)
 - [ ] Browser testing (manual)
 - [ ] Performance profiling (manual)
 
