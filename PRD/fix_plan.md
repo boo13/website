@@ -77,7 +77,16 @@
 - js/gallery.js (horizontal scroll)
 - js/credits.js (hover preview + stats reveal)
 
+## Testing Instructions
+To test locally:
+```bash
+cd /Users/randycounsman/Git/website
+python3 -m http.server 8000
+```
+Then open: http://localhost:8000/index2.html
+
 ## Notes
 - Using GSAP 3.12+ with ScrollTrigger
 - Leveraging patterns from v4/CinematicZoom.js
 - Mobile: simplified transitions, static thumbnails
+- CSS file named `index2.css` (not `styles.css`) to avoid conflicts with existing site
