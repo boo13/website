@@ -48,8 +48,19 @@
 - [x] Parallax simplified on mobile devices
 - [x] Code review complete (JS, CSS, asset URLs verified)
 - [x] Fixed credits preview (fixed-left, cursor-Y per PRD)
+- [x] Fixed placeholder email to real email
 - [ ] Browser testing (manual)
 - [ ] Performance profiling (manual)
+
+## Success Criteria (from PRD)
+- [ ] Hero z-zoom feels smooth, not jarring
+- [ ] Wyatt Earp parallax focus effect is cinematic
+- [ ] Horizontal gallery responds correctly to scroll
+- [ ] Hover previews appear without lag
+- [ ] About stats animate in on scroll
+- [ ] All links functional (resume, Vimeo, LinkedIn, email) ✅ Verified
+- [ ] Mobile layout is usable (no broken interactions)
+- [ ] Meets performance targets
 
 ## Performance Targets
 - FCP: <1.5s
