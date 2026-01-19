@@ -2,13 +2,16 @@ name: Weekly Site Monitoring
 
 on:
   schedule:
-    - cron: '15 6 * * 6'
+    - cron: '15 6 * * *'
   workflow_dispatch:
 
 jobs:
   monitor:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
 
     steps:
       - name: Check website availability and timing
@@ -19,7 +22,7 @@ jobs:
           echo "Checking $URL"
 
           START=$(date +%s%3N)
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --retry 3 --retry-delay 5 "$URL")
           END=$(date +%s%3N)
           DURATION=$((END - START))
 
@@ -56,25 +59,6 @@ jobs:
             exit 1
           fi
 
-      - name: Send success email
-        if: success()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: '✅ Weekly site check OK'
-          body: |
-            Your site is healthy.
-
-            URL: ${{ secrets.SITE_URL }}
-            Status code: ${{ steps.site_check.outputs.status }}
-            Response time: ${{ steps.site_check.outputs.duration }} ms
-            SSL expires in: ${{ steps.ssl_check.outputs.days_left }} days
-          to: ${{ secrets.EMAIL_TO }}
-          from: 'Site Monitor'
-
       - name: Send failure email
         if: failure()
         uses: dawidd6/action-send-mail@v3
@@ -93,3 +77,13 @@ jobs:
             https://github.com/${{ github.repository }}/actions
           to: ${{ secrets.EMAIL_TO }}
           from: 'Site Monitor'
+
+      - name: Create failure issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "🚨 Site Monitoring Alert: ${{ secrets.SITE_URL }}" \
+            --body "The site monitoring workflow failed. Check the logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --label "incident"
