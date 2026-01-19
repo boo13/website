@@ -6,7 +6,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            ${{ secrets.SITE_URL }}
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          configPath: .github/lighthouserc.json
+
   monitor:
+
+
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
