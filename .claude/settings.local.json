@@ -6,7 +6,6 @@
       "Bash(cat:*)",
       "Bash(open:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: implement portfolio homepage v2 with cinematic scroll experience\n\n- Add index2.html with all 6 sections \\(hero, Wyatt Earp parallax, gallery, credits, about, contact\\)\n- Create css/index2.css with complete styling and responsive design\n- Implement js/hero-zoom.js for z-depth zoom transition over video\n- Implement js/parallax.js for Wyatt Earp rack-focus effect\n- Implement js/gallery.js for horizontal scroll gallery\n- Implement js/credits.js for hover preview and stats reveal\n- All animations use GSAP ScrollTrigger for 60fps performance\n- Supports prefers-reduced-motion accessibility\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git commit:*)",
       "Bash(ls:*)",
       "Bash(node --check:*)"
