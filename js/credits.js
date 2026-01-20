@@ -169,17 +169,61 @@
         }
     };
 
+    // Credits Table Row Reveal Animation
+    const CreditsRowReveal = {
+        rows: null,
+        observer: null,
+
+        init() {
+            this.rows = document.querySelectorAll('.credit-row');
+
+            if (!this.rows.length) return;
+
+            this.observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const row = entry.target;
+                            const index = Array.from(this.rows).indexOf(row);
+                            
+                            setTimeout(() => {
+                                row.classList.add('revealed');
+                            }, index * 80);
+
+                            this.observer.unobserve(row);
+                        }
+                    });
+                },
+                {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -30px 0px'
+                }
+            );
+
+            this.rows.forEach(row => this.observer.observe(row));
+        },
+
+        destroy() {
+            if (this.observer) {
+                this.observer.disconnect();
+            }
+        }
+    };
+
     // Initialize on DOM ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             CreditsPreview.init();
             StatsReveal.init();
+            CreditsRowReveal.init();
         });
     } else {
         CreditsPreview.init();
         StatsReveal.init();
+        CreditsRowReveal.init();
     }
 
     window.CreditsPreview = CreditsPreview;
     window.StatsReveal = StatsReveal;
+    window.CreditsRowReveal = CreditsRowReveal;
 })();

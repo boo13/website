@@ -455,12 +455,26 @@ a {
 
 .credit-row {
     border-bottom: 1px solid rgba(247, 244, 240, 0.1);
-    transition: background 0.3s ease;
     cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s var(--ease-out-expo), 
+                transform 0.6s var(--ease-out-expo),
+                background 0.4s ease;
+}
+
+.credit-row.revealed {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .credit-row:hover {
-    background: rgba(247, 244, 240, 0.05);
+    background: rgba(212, 175, 55, 0.08);
+}
+
+.credit-row:hover .credit-title {
+    color: #d4af37;
+    transition: color 0.3s ease;
 }
 
 .credit-row td {
@@ -879,6 +893,11 @@ a {
     }
 
     .stat {
+        opacity: 1;
+        transform: none;
+    }
+
+    .credit-row {
         opacity: 1;
         transform: none;
     }
