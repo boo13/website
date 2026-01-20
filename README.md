@@ -18,7 +18,6 @@ Static portfolio site for Randy Counsman. Pages live at the repo root (`index.ht
 
 - Scripts are loaded as deferred globals (no bundler). Keep new JS in the same pattern unless you add a build step.
 - Assets live in `images/`, `video/`, and `favicon/`; optimize media before committing.
-- `codepen_examples/` contains standalone experiments; `SDE_Web/website/` is legacy. Avoid mixing those with production page changes.
 
 ## Contributing
 
