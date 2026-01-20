@@ -11,11 +11,13 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt18382254/"
+      "imdbLink": "https://www.imdb.com/title/tt18382254/",
+      "preview": "images/portfolio/sitting-bull.jpg"
     },
     {
       "id": "wyatt-earp-and-the-cowboy-war",
       "title": "Wyatt Earp and the Cowboy War",
+      "preview": "images/portfolio/WyattEarp.jpg",
       "platform": "History Channel",
       "year": "2024",
       "role": "Co-Executive Producer",
@@ -37,7 +39,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt32987087/"
+      "imdbLink": "https://www.imdb.com/title/tt32987087/",
+      "preview": "images/portfolio/george-rise-of-a-revolutionary.jpg"
     },
     {
       "id": "american-dynasty",
@@ -50,7 +53,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt21066272/"
+      "imdbLink": "https://www.imdb.com/title/tt21066272/",
+      "preview": "images/portfolio/american-dynasty.jpg"
     },
     {
       "id": "liberty-or-death-boston-tea-party",
@@ -63,7 +67,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt29920137/"
+      "imdbLink": "https://www.imdb.com/title/tt29920137/",
+      "preview": "images/portfolio/liberty-or-death-boston-tea-party.jpg"
     },
     {
       "id": "titans-the-rise-of-hollywood",
@@ -76,7 +81,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt22245664/"
+      "imdbLink": "https://www.imdb.com/title/tt22245664/",
+      "preview": "images/portfolio/titans-the-rise-of-hollywood.jpg"
     },
     {
       "id": "titans-the-rise-of-wall-street",
@@ -89,7 +95,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt18278410/"
+      "imdbLink": "https://www.imdb.com/title/tt18278410/",
+      "preview": "images/portfolio/titans-the-rise-of-wall-street.jpg"
     },
     {
       "id": "beyond-the-spotlight",
@@ -102,11 +109,13 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt14417270/"
+      "imdbLink": "https://www.imdb.com/title/tt14417270/",
+      "preview": "images/portfolio/beyond-the-spotlight.jpg"
     },
     {
       "id": "raging-bulls",
       "title": "Raging Bulls",
+      "preview": "images/portfolio/shark-week.jpg",
       "platform": "Discovery Channel",
       "year": "2021",
       "role": "Supervising Producer",
@@ -128,11 +137,13 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt14574154/"
+      "imdbLink": "https://www.imdb.com/title/tt14574154/",
+      "preview": "images/portfolio/human-the-world-within.jpg"
     },
     {
       "id": "the-titans-that-built-america",
       "title": "The Titans That Built America",
+      "preview": "https://stephendavidentertainment.github.io/website/assets/images/shows/Titans.jpg",
       "platform": "History Channel",
       "year": "2021",
       "role": "Co-Executive Producer",
@@ -154,7 +165,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt13255112/"
+      "imdbLink": "https://www.imdb.com/title/tt13255112/",
+      "preview": "images/portfolio/holiday-home-makeover-with-mr-christmas.jpg"
     },
     {
       "id": "washington",
@@ -167,7 +179,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt10098580/"
+      "imdbLink": "https://www.imdb.com/title/tt10098580/",
+      "preview": "images/portfolio/washington.jpg"
     },
     {
       "id": "shark-week",
@@ -180,7 +193,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt1146333/"
+      "imdbLink": "https://www.imdb.com/title/tt1146333/",
+      "preview": "images/portfolio/shark-week.jpg"
     },
     {
       "id": "the-interrogator",
@@ -193,11 +207,13 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt11018358/"
+      "imdbLink": "https://www.imdb.com/title/tt11018358/",
+      "preview": "images/portfolio/the-interrogator.jpg"
     },
     {
       "id": "capsized-blood-in-the-water",
       "title": "Capsized: Blood in the Water",
+      "preview": "https://stephendavidentertainment.github.io/website/assets/images/shows/Capsized.png",
       "platform": "Discovery Channel",
       "year": "2019",
       "role": "Co-Producer",
@@ -211,6 +227,7 @@
     {
       "id": "pope-the-most-powerful-man-in-history",
       "title": "Pope: The Most Powerful Man in History",
+      "preview": "images/portfolio/Pope.jpg",
       "platform": "CNN",
       "year": "2018",
       "role": "Writer",
@@ -232,11 +249,13 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt7069502/"
+      "imdbLink": "https://www.imdb.com/title/tt7069502/",
+      "preview": "images/portfolio/hamilton-building-america.jpg"
     },
     {
       "id": "the-world-wars",
       "title": "The World Wars",
+      "preview": "https://stephendavidentertainment.github.io/website/assets/images/shows/WorldWars.jpg",
       "platform": "History Channel",
       "year": "2014",
       "role": "Writer",
@@ -250,6 +269,7 @@
     {
       "id": "the-men-who-built-america",
       "title": "The Men Who Built America",
+      "preview": "images/portfolio/MWBA.jpg",
       "platform": "History Channel",
       "year": "2012",
       "role": "Writer",
@@ -271,7 +291,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt2179099/"
+      "imdbLink": "https://www.imdb.com/title/tt2179099/",
+      "preview": "images/portfolio/inside-the-nsa.jpg"
     },
     {
       "id": "redrum",
@@ -284,7 +305,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt2568868/"
+      "imdbLink": "https://www.imdb.com/title/tt2568868/",
+      "preview": "images/portfolio/redrum.jpg"
     },
     {
       "id": "modern-love",
@@ -297,7 +319,8 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt1429075/"
+      "imdbLink": "https://www.imdb.com/title/tt1429075/",
+      "preview": "images/portfolio/modern-love.png"
     }
   ]
 }

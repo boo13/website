@@ -6,6 +6,58 @@
 (function() {
     'use strict';
 
+    const CreditsTable = {
+        init() {
+            const tableBody = document.querySelector('.credits-table tbody');
+            if (!tableBody) return;
+
+            fetch('data/Projects.json')
+                .then(response => response.json())
+                .then(data => {
+                    this.render(data.projects, tableBody);
+                    // Initialize preview logic after rendering
+                    CreditsPreview.init();
+                })
+                .catch(err => {
+                    console.error('Error loading projects:', err);
+                    // Fallback to existing static content if fetch fails? 
+                    // Or just init what's there.
+                    CreditsPreview.init();
+                });
+        },
+
+        render(projects, tableBody) {
+            // Clear existing rows (if any, though we might want to keep a loading state)
+            tableBody.innerHTML = '';
+
+            projects.forEach(project => {
+                const tr = document.createElement('tr');
+                tr.className = 'credit-row';
+                
+                // Add data-preview attribute if preview image exists
+                if (project.preview) {
+                    tr.setAttribute('data-preview', project.preview);
+                } else if (project.poster) {
+                     tr.setAttribute('data-preview', project.poster);
+                }
+
+                // Title Cell
+                const tdTitle = document.createElement('td');
+                tdTitle.className = 'credit-title';
+                tdTitle.textContent = project.title;
+                tr.appendChild(tdTitle);
+
+                // Network/Platform Cell
+                const tdNetwork = document.createElement('td');
+                tdNetwork.className = 'credit-network';
+                tdNetwork.textContent = project.platform || '';
+                tr.appendChild(tdNetwork);
+
+                tableBody.appendChild(tr);
+            });
+        }
+    };
+
     const CreditsPreview = {
         // Elements
         table: null,
@@ -28,12 +80,15 @@
 
         init() {
             this.table = document.querySelector('.credits-table');
+            // Re-select rows as they might have been injected dynamically
             this.rows = document.querySelectorAll('.credit-row');
             this.preview = document.querySelector('.cursor-preview');
             this.previewImg = this.preview?.querySelector('img');
 
             if (!this.table || !this.rows.length || !this.preview) {
-                console.warn('CreditsPreview: Required elements not found');
+                // It's okay if no rows if we are waiting for fetch, 
+                // but init() is called AFTER fetch in CreditsTable.
+                // console.warn('CreditsPreview: Required elements not found'); 
                 return;
             }
 
@@ -48,12 +103,18 @@
         setupEventListeners() {
             // Row events
             this.rows.forEach(row => {
+                // Remove old listeners to prevent duplicates if init called multiple times?
+                // Actually, cloning node is a cheap way to wipe listeners, but let's just assume init called once per set of rows.
+                // Since we clear innerHTML, old rows are gone. New rows are fresh.
                 row.addEventListener('mouseenter', (e) => this.handleRowEnter(e));
                 row.addEventListener('mouseleave', () => this.handleRowLeave());
             });
 
-            // Global mouse move for smooth cursor following
-            document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+            // Global mouse move for smooth cursor following (only add once)
+            if (!this.hasGlobalListeners) {
+                document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+                this.hasGlobalListeners = true;
+            }
         },
 
         handleRowEnter(e) {
@@ -213,16 +274,17 @@
     // Initialize on DOM ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-            CreditsPreview.init();
+            CreditsTable.init();
             StatsReveal.init();
             CreditsRowReveal.init();
         });
     } else {
-        CreditsPreview.init();
+        CreditsTable.init();
         StatsReveal.init();
         CreditsRowReveal.init();
     }
 
+    window.CreditsTable = CreditsTable;
     window.CreditsPreview = CreditsPreview;
     window.StatsReveal = StatsReveal;
     window.CreditsRowReveal = CreditsRowReveal;
