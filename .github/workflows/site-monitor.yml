@@ -18,6 +18,12 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
           configPath: .github/lighthouserc.json
+      - name: Send Slack alert on Lighthouse failure
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"🚨 Lighthouse alert\n\nLighthouse check failed for your site.\n\nURL: ${{ secrets.SITE_URL }}\n\nCheck the GitHub Actions logs for details:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
 
   monitor:
     runs-on: ubuntu-latest
