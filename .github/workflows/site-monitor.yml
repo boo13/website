@@ -20,8 +20,6 @@ jobs:
           configPath: .github/lighthouserc.json
 
   monitor:
-
-
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -102,3 +100,10 @@ jobs:
             --title "🚨 Site Monitoring Alert: ${{ secrets.SITE_URL }}" \
             --body "The site monitoring workflow failed. Check the logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
             --label "incident"
+
+      - name: Send Slack alert
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"🚨 Site monitoring alert\n\nThere is a problem with your site.\n\nURL: ${{ secrets.SITE_URL }}\n\nCheck the GitHub Actions logs for details:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
