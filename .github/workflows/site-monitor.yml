@@ -16,7 +16,7 @@ jobs:
         with:
           urls: |
             ${{ secrets.SITE_URL }}
-          uploadArtifacts: false
+          uploadArtifacts: true
           temporaryPublicStorage: true
           configPath: .github/lighthouserc.json
       - name: Upload Lighthouse results
