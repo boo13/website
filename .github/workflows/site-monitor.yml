@@ -11,13 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run Lighthouse
+        id: lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
             ${{ secrets.SITE_URL }}
-          uploadArtifacts: true
+          uploadArtifacts: false
           temporaryPublicStorage: true
           configPath: .github/lighthouserc.json
+      - name: Upload Lighthouse results
+        if: always() && steps.lighthouse.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse_results_${{ github.run_id }}
+          path: .lighthouseci
       - name: Send Slack alert on Lighthouse failure
         if: failure()
         run: |
