@@ -19,12 +19,6 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
           configPath: .github/lighthouserc.json
-      - name: Upload Lighthouse results
-        if: always() && steps.lighthouse.outcome != 'skipped'
-        uses: actions/upload-artifact@v4
-        with:
-          name: lighthouse_results_${{ github.run_id }}
-          path: .lighthouseci
       - name: Send Slack alert on Lighthouse failure
         if: failure()
         run: |
