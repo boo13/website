@@ -9,11 +9,16 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
+      issues: write
+    env:
+      LIGHTHOUSE_FAILURE_THRESHOLD: ${{ vars.LIGHTHOUSE_FAILURE_THRESHOLD || 2 }}
     steps:
       - uses: actions/checkout@v3
       - name: Run Lighthouse
         id: lighthouse
+        continue-on-error: true
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
@@ -21,12 +26,173 @@ jobs:
           uploadArtifacts: true
           temporaryPublicStorage: true
           configPath: .github/lighthouserc.json
-      - name: Send Slack alert on Lighthouse failure
-        if: failure()
+      - name: Collect Lighthouse summary
+        if: always() && steps.lighthouse.outcome != 'skipped'
+        id: lighthouse_summary
         run: |
-          curl -X POST -H 'Content-type: application/json' \
-            --data '{"text":"🚨 Lighthouse alert\n\nLighthouse check failed for your site.\n\nURL: ${{ secrets.SITE_URL }}\n\nCheck the GitHub Actions logs for details:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' \
-            ${{ secrets.SLACK_WEBHOOK_URL }}
+          if [ ! -d ".lighthouseci" ]; then
+            echo "No Lighthouse artifacts produced"
+            exit 0
+          fi
+
+          REPORT_FILE=$(find .lighthouseci -name '*.report.json' | sort | head -n1)
+          SUMMARY_FILE=$(find .lighthouseci -name '*.summary.json' | sort | head -n1)
+
+          if [ -z "$REPORT_FILE" ]; then
+            echo "No Lighthouse report found"
+            exit 0
+          fi
+
+          export REPORT_FILE
+          export SUMMARY_FILE
+
+          cat <<'NODE' > build-lighthouse-details.mjs
+import fs from 'fs';
+
+const reportPath = process.env.REPORT_FILE;
+const summaryPath = process.env.SUMMARY_FILE;
+const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+const summary = summaryPath && fs.existsSync(summaryPath)
+  ? JSON.parse(fs.readFileSync(summaryPath, 'utf8'))
+  : null;
+
+const categories = (summary && summary.categories) || report.categories || {};
+const pct = (value) => (typeof value === 'number' ? Math.round(value * 100) + '%' : 'n/a');
+
+const catLines = [
+  `Performance: ${pct(categories.performance && categories.performance.score)}`,
+  `Accessibility: ${pct(categories.accessibility && categories.accessibility.score)}`,
+  `Best Practices: ${pct(categories['best-practices'] && categories['best-practices'].score)}`,
+  `SEO: ${pct(categories.seo && categories.seo.score)}`
+];
+
+const audits = Object.values(report.audits || {});
+const failingAudits = audits
+  .filter((audit) => typeof audit.score === 'number' && audit.score < 1)
+  .sort((a, b) => (a.score ?? 0) - (b.score ?? 0))
+  .slice(0, 5)
+  .map((audit) => {
+    const score = typeof audit.score === 'number' ? Math.round(audit.score * 100) + '%' : 'n/a';
+    const extra = audit.displayValue || audit.explanation || '';
+    return `- ${audit.id}: ${audit.title} (${score})${extra ? ` - ${extra}` : ''}`;
+  });
+
+const details = [
+  'Latest Lighthouse scores:',
+  ...catLines,
+  '',
+  'Top failing audits:',
+  failingAudits.length ? failingAudits.join('\n') : 'All monitored audits passed in the parsed report.'
+].join('\n');
+
+fs.writeFileSync('lighthouse-details.md', details);
+NODE
+
+          node build-lighthouse-details.mjs
+          echo "details_file=lighthouse-details.md" >> $GITHUB_OUTPUT
+          {
+            echo "issue_body<<'EOF'"
+            cat lighthouse-details.md
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+      - name: Track Lighthouse failure streak
+        if: steps.lighthouse.outcome == 'failure'
+        id: lighthouse_failure_tracker
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_FILE: site-monitor.yml
+        run: |
+          THRESHOLD=${LIGHTHOUSE_FAILURE_THRESHOLD:-2}
+          API_URL="https://api.github.com/repos/${{ github.repository }}/actions/workflows/$WORKFLOW_FILE/runs?status=completed&per_page=10"
+          curl -sS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$API_URL" -o workflow-runs.json
+
+          STREAK=$(python3 <<'PY'
+import json
+with open('workflow-runs.json', encoding='utf-8') as fh:
+    data = json.load(fh)
+count = 0
+for run in data.get('workflow_runs', []):
+    conclusion = run.get('conclusion')
+    if conclusion == 'success':
+        break
+    if conclusion is None:
+        continue
+    count += 1
+print(count)
+PY
+          )
+
+          TOTAL=$((STREAK + 1))
+          echo "count=$TOTAL" >> $GITHUB_OUTPUT
+          echo "threshold=$THRESHOLD" >> $GITHUB_OUTPUT
+          if [ "$TOTAL" -ge "$THRESHOLD" ]; then
+            echo "should_alert=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_alert=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Suppress noisy Lighthouse alert
+        if: steps.lighthouse.outcome == 'failure' && steps.lighthouse_failure_tracker.outputs.should_alert != 'true'
+        run: |
+          echo "Lighthouse failed but streak (${{ steps.lighthouse_failure_tracker.outputs.count }}) is below threshold (${{ steps.lighthouse_failure_tracker.outputs.threshold }}). Alerts suppressed."
+      - name: Create Lighthouse failure issue with audit detail
+        if: steps.lighthouse.outcome == 'failure' && steps.lighthouse_failure_tracker.outputs.should_alert == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+          STREAK: ${{ steps.lighthouse_failure_tracker.outputs.count }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          DETAILS_FILE=${{ steps.lighthouse_summary.outputs.details_file || 'lighthouse-details.md' }}
+          if [ -z "$DETAILS_FILE" ] || [ ! -f "$DETAILS_FILE" ]; then
+            DETAILS_FILE=lighthouse-details.md
+            echo "Lighthouse artifacts missing." > "$DETAILS_FILE"
+          fi
+
+          MESSAGE_FILE=lighthouse-issue.md
+          {
+            echo "Lighthouse has failed $STREAK consecutive time(s) for $SITE_URL."
+            echo
+            echo "Workflow run: $RUN_URL"
+            echo
+            cat "$DETAILS_FILE"
+          } > "$MESSAGE_FILE"
+
+          ISSUE_NUMBER=$(gh issue list --label lighthouse --state open --json number --jq '.[0].number' 2>/dev/null || true)
+          if [ "$ISSUE_NUMBER" = "null" ]; then
+            ISSUE_NUMBER=""
+          fi
+          if [ -n "$ISSUE_NUMBER" ]; then
+            gh issue comment "$ISSUE_NUMBER" --body-file "$MESSAGE_FILE"
+          else
+            gh issue create \
+              --title "🚨 Lighthouse regression detected" \
+              --body-file "$MESSAGE_FILE" \
+              --label incident \
+              --label lighthouse
+          fi
+      - name: Send Slack alert on Lighthouse failure
+        if: steps.lighthouse.outcome == 'failure' && steps.lighthouse_failure_tracker.outputs.should_alert == 'true'
+        run: |
+          SUMMARY=$(cat <<EOF
+🚨 Lighthouse alert
+
+Lighthouse check failed for your site.
+
+URL: ${{ secrets.SITE_URL }}
+Consecutive failures: ${{ steps.lighthouse_failure_tracker.outputs.count }} (threshold ${{ steps.lighthouse_failure_tracker.outputs.threshold }})
+
+Check the GitHub Actions logs for details:
+https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+EOF
+          )
+
+          PAYLOAD=$(jq -n --arg text "$SUMMARY" '{text:$text}')
+          curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Fail workflow on sustained Lighthouse regressions
+        if: steps.lighthouse.outcome == 'failure' && steps.lighthouse_failure_tracker.outputs.should_alert == 'true'
+        run: |
+          echo "Lighthouse has failed ${{ steps.lighthouse_failure_tracker.outputs.count }} consecutive time(s), exceeding the threshold ${{ steps.lighthouse_failure_tracker.outputs.threshold }}."
+          exit 1
 
   monitor:
     runs-on: ubuntu-latest
@@ -116,3 +282,115 @@ jobs:
           curl -X POST -H 'Content-type: application/json' \
             --data '{"text":"🚨 Site monitoring alert\n\nThere is a problem with your site.\n\nURL: ${{ secrets.SITE_URL }}\n\nCheck the GitHub Actions logs for details:\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' \
             ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  regional_monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        region:
+          - name: us-east-1
+            country: US
+            city: Ashburn
+          - name: eu-west-1
+            country: IE
+            city: Dublin
+
+    steps:
+      - name: Check site via Globalping (${{ matrix.region.name }})
+        id: globalping_check
+        env:
+          TARGET_URL: ${{ secrets.SITE_URL }}
+          COUNTRY: ${{ matrix.region.country }}
+          CITY: ${{ matrix.region.city }}
+          REGION_NAME: ${{ matrix.region.name }}
+        run: |
+          REQUEST_BODY=$(jq -n --arg target "$TARGET_URL" --arg country "$COUNTRY" --arg city "$CITY" '{
+            type: "http",
+            target: $target,
+            limit: 1,
+            locations: [
+              ({ country: $country } + ( ($city | length) > 0 ? {city: $city} : {} ))
+            ]
+          }')
+
+          CREATE_RESPONSE=$(curl -sS -H 'Content-Type: application/json' -d "$REQUEST_BODY" https://api.globalping.io/v1/measurements)
+          MEASUREMENT_ID=$(echo "$CREATE_RESPONSE" | jq -r '.id // .measurementId // empty')
+          if [ -z "$MEASUREMENT_ID" ]; then
+            echo "Failed to start Globalping measurement for $REGION_NAME: $CREATE_RESPONSE"
+            exit 1
+          fi
+
+          ATTEMPTS=0
+          while [ $ATTEMPTS -lt 12 ]; do
+            RESULT=$(curl -sS "https://api.globalping.io/v1/measurements/$MEASUREMENT_ID")
+            STATUS=$(echo "$RESULT" | jq -r '.status')
+            if [ "$STATUS" = "finished" ]; then
+              echo "$RESULT" > globalping-result.json
+              break
+            fi
+            if [ "$STATUS" = "failed" ]; then
+              echo "Globalping measurement failed: $RESULT"
+              exit 1
+            fi
+            ATTEMPTS=$((ATTEMPTS + 1))
+            if [ $ATTEMPTS -lt 12 ]; then
+              sleep 5
+            fi
+          done
+
+          if [ ! -f globalping-result.json ]; then
+            echo "Globalping measurement did not complete in time for $REGION_NAME"
+            exit 1
+          fi
+
+          STATUS_CODE=$(jq -r '.results[0].result.statusCode // .results[0].result.response.statusCode // empty' globalping-result.json)
+          if [ -z "$STATUS_CODE" ] || [ "$STATUS_CODE" = "null" ]; then
+            echo "Unable to read HTTP status code for $REGION_NAME"
+            cat globalping-result.json
+            exit 1
+          fi
+
+          echo "Remote probe returned HTTP $STATUS_CODE from $REGION_NAME"
+
+          if [ "$STATUS_CODE" -ge 400 ]; then
+            echo "Regional probe saw failing status code $STATUS_CODE"
+            exit 1
+          fi
+
+          DURATION=$(jq -r '.results[0].result.timings.total // .results[0].result.timings.duration // .results[0].result.averageResponseTime // empty' globalping-result.json)
+          if [ -n "$DURATION" ] && [ "$DURATION" != "null" ]; then
+            export DURATION
+            python3 <<'PY'
+import os, sys
+value = os.environ.get('DURATION')
+try:
+    latency = float(value)
+except (TypeError, ValueError):
+    sys.exit(0)
+if latency > 5:
+    print(f"Regional probe latency {latency:.3f}s exceeded the 5s budget")
+    sys.exit(1)
+print(f"Regional latency {latency:.3f}s")
+PY
+          fi
+
+      - name: Send Slack alert for regional outage
+        if: failure()
+        env:
+          REGION_NAME: ${{ matrix.region.name }}
+        run: |
+          SUMMARY=$(cat <<EOF
+🚨 Regional uptime alert
+
+The $REGION_NAME Globalping probe reported a problem for ${{ secrets.SITE_URL }}.
+
+Check the GitHub Actions logs for details:
+https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+EOF
+          )
+
+          PAYLOAD=$(jq -n --arg text "$SUMMARY" '{text:$text}')
+          curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" ${{ secrets.SLACK_WEBHOOK_URL }}
