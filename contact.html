@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="css/styles_contact.css" />
+    <!-- Styles injected by Vite from src/main-contact.js -->
   </head>
   <body>
     <form
@@ -48,15 +48,6 @@
       <input id="fs-frm-submit" type="submit" value="Submit" />
       <p id="fs-frm-status"></p>
     </form>
-    <script>
-      var form = document.getElementById("fs-frm");
-      var submit = document.getElementById("fs-frm-submit");
-
-      async function handleSubmit(event) {
-        submit.setAttribute("disabled", true);
-      }
-
-      form.addEventListener("submit", handleSubmit);
-    </script>
+    <script type="module" src="/src/main-contact.js"></script>
   </body>
 </html>

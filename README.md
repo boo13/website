@@ -1,25 +1,61 @@
 # RandyCounsman.com
 
-Static portfolio site for Randy Counsman. Pages live at the repo root (`index.html`, `work.html`, `contact.html`, plus archival `index_old.html`/`index2.html`). Scripts (`js/Slider.js`, `js/Video.js`, `js/script.js`) and styles (`css/styles.css`, `css/styles_contact.css`, `css/fadein.css`) are plain browser files.
+Portfolio site for Randy Counsman, a nonfiction video producer. The site is heavy on scroll-driven animations — they're a core part of the experience, not just decoration.
+
+## Pages
+
+The site is a multi-page static site. Each HTML file lives at the repo root:
+
+- **index2.html** — The primary portfolio page. Hero zoom, parallax rack-focus, horizontal scroll gallery, credits table, and stats section.
+- **index.html** — An alternate landing with a full-screen video and image slider.
+- **work.html** — A simple credits list page (no JavaScript).
+- **contact.html** — Contact form powered by Formspree.
+- **credits.html** — A sortable credits table that loads project data from JSON.
+
+## How it's built
+
+The site uses [Vite](https://vite.dev/) for bundling and [GSAP](https://gsap.com/) (installed via npm) for animations. Each page has its own JavaScript entry point in `src/` that imports its CSS and wires up any interactive behavior.
+
+```
+src/
+  main.js            # index2.html entry — imports all scroll sections
+  main-index.js      # index.html entry — Slider + ResponsiveVideo
+  main-work.js       # work.html entry — CSS import only
+  main-contact.js    # contact.html entry — form handler
+  main-credits.js    # credits.html entry — sortable table
+  sections/          # one file per scroll section (landing, featured-work, gallery, credits, about)
+  animations/        # shared GSAP setup (plugin registration)
+  components/        # reusable classes (Slider, ResponsiveVideo)
+  styles/            # one CSS file per page
+  config.js          # shared breakpoints and timing values
+```
+
+Static assets (images, video, data, favicon) live in `public/` and get copied as-is to the build output.
 
 ## Running locally
 
-- No build step is required. Open `index.html` directly or serve the root to avoid CORS issues for media.
-- Example local server:
-  ```sh
-  # from repo root
-  python -m http.server 4000
-  # or
-  npx serve .
-  ```
-- Ensure network access for CDN-loaded GSAP if testing offline.
+```sh
+npm install
+npm run dev
+```
 
-## Development notes
+This starts the Vite dev server with hot module replacement. Open the URL it prints (usually `http://localhost:5173`).
 
-- Scripts are loaded as deferred globals (no bundler). Keep new JS in the same pattern unless you add a build step.
-- Assets live in `images/`, `video/`, and `favicon/`; optimize media before committing.
+Other commands:
+
+- `npm run build` — production build to `dist/`
+- `npm run preview` — serve the production build locally
+- `npm run lint` — run ESLint on `src/`
+- `npm run format` — run Prettier on `src/`
+
+## How the animations work
+
+Each section on the main page (index2.html) exports an `init` function that sets up its GSAP animations inside a `gsap.context()` scoped to that section's DOM element. The entry point (`src/main.js`) calls each init function on page load.
+
+GSAP's ScrollTrigger plugin drives most of the effects — pinning sections, scrubbing timelines based on scroll position, and triggering horizontal movement in the gallery. All sections respect `prefers-reduced-motion` and fall back to static layouts on mobile.
 
 ## Contributing
 
 - Use small, focused commits with imperative messages (e.g., `update hero video`, `tweak contact form spacing`).
 - For visual changes, include a brief note on tested browsers/devices and, if possible, before/after screenshots.
+- Optimize media before committing — video and image files are large.

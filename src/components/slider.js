@@ -1,24 +1,28 @@
 /**
  * Slider class to encapsulate slider functionality.
  */
-class Slider {
+import { gsap } from 'gsap';
+import { CustomEase } from 'gsap/CustomEase';
+
+gsap.registerPlugin(CustomEase);
+
+export class Slider {
   constructor() {
-    this.sliderImages = document.querySelector(".slider-images");
-    this.counter = document.querySelector(".counter");
-    this.titles = document.querySelector(".slider-title-wrapper");
-    this.indicators = document.querySelectorAll(".slider-indicators p");
-    this.prevSlides = document.querySelectorAll(".slider-preview .preview");
-    this.slidePreview = document.querySelector(".slider-preview");
+    this.sliderImages = document.querySelector('.slider-images');
+    this.counter = document.querySelector('.counter');
+    this.titles = document.querySelector('.slider-title-wrapper');
+    this.indicators = document.querySelectorAll('.slider-indicators p');
+    this.prevSlides = document.querySelectorAll('.slider-preview .preview');
+    this.slidePreview = document.querySelector('.slider-preview');
     this.currentImg = 1;
     this.totalSlides = 5;
     this.indicatorRotation = 0;
 
-    if (!this.sliderImages) return; // Only run if slider exists
+    if (!this.sliderImages) return;
 
-    gsap.registerPlugin(CustomEase);
     CustomEase.create(
-      "hop",
-      "M0,0 C0.071,0.505 0.192,0.726 0.318,0.852 0.45,0.984 0.504,1 1,1",
+      'hop',
+      'M0,0 C0.071,0.505 0.192,0.726 0.318,0.852 0.45,0.984 0.504,1 1,1',
     );
 
     this.initEvents();
@@ -33,88 +37,88 @@ class Slider {
     gsap.to(this.counter, {
       y: counterY,
       duration: 1,
-      ease: "hop",
+      ease: 'hop',
     });
 
     gsap.to(this.titles, {
       y: titleY,
       duration: 1,
-      ease: "hop",
+      ease: 'hop',
     });
   }
 
   updateActiveSlidePreview() {
-    this.prevSlides.forEach((prev) => prev.classList.remove("active"));
-    this.prevSlides[this.currentImg - 1].classList.add("active");
+    this.prevSlides.forEach((prev) => prev.classList.remove('active'));
+    this.prevSlides[this.currentImg - 1].classList.add('active');
   }
 
   animateSlide(direction) {
     const currentSlide =
-      document.querySelectorAll(".img")[
-        document.querySelectorAll(".img").length - 1
+      document.querySelectorAll('.img')[
+        document.querySelectorAll('.img').length - 1
       ];
 
-    const slideImg = document.createElement("div");
-    slideImg.classList.add("img");
+    const slideImg = document.createElement('div');
+    slideImg.classList.add('img');
 
-    const slideImgElem = document.createElement("img");
+    const slideImgElem = document.createElement('img');
     slideImgElem.src = `./images/portfolio-${this.currentImg}.jpg`;
-    gsap.set(slideImgElem, { x: direction === "left" ? -500 : 500 });
+    gsap.set(slideImgElem, { x: direction === 'left' ? -500 : 500 });
 
     slideImg.appendChild(slideImgElem);
     this.sliderImages.appendChild(slideImg);
 
-    gsap.to(currentSlide.querySelector("img"), {
-      x: direction === "left" ? 500 : -500,
+    gsap.to(currentSlide.querySelector('img'), {
+      x: direction === 'left' ? 500 : -500,
       duration: 1.5,
-      ease: "hop",
+      ease: 'hop',
     });
 
     gsap.fromTo(
       slideImg,
       {
         clipPath:
-          direction === "left"
-            ? "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"
-            : "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
+          direction === 'left'
+            ? 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)'
+            : 'polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)',
       },
       {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
         duration: 1.5,
-        ease: "hop",
+        ease: 'hop',
       },
     );
     gsap.to(slideImgElem, {
       x: 0,
       duration: 1.5,
-      ease: "hop",
+      ease: 'hop',
     });
 
     this.cleanupSlides();
 
-    this.indicatorRotation += direction === "left" ? -90 : 90;
+    this.indicatorRotation += direction === 'left' ? -90 : 90;
     gsap.to(this.indicators, {
       rotate: this.indicatorRotation,
       duration: 1,
-      ease: "hop",
+      ease: 'hop',
     });
   }
 
   cleanupSlides() {
-    const imgElements = document.querySelectorAll(".slider-images .img");
+    const imgElements = document.querySelectorAll('.slider-images .img');
     if (imgElements.length > this.totalSlides) {
       imgElements[0].remove();
     }
   }
 
   initEvents() {
-    document.addEventListener("click", (event) => {
+    document.addEventListener('click', (event) => {
       if (!this.sliderImages) return;
-      const sliderWidth = document.querySelector(".slider").clientWidth;
+      const sliderWidth = document.querySelector('.slider').clientWidth;
       const clickPosition = event.clientX;
 
       if (this.slidePreview && this.slidePreview.contains(event.target)) {
-        const clickedPrev = event.target.closest(".preview");
+        const clickedPrev = event.target.closest('.preview');
 
         if (clickedPrev) {
           const clickedIndex =
@@ -123,10 +127,10 @@ class Slider {
           if (clickedIndex !== this.currentImg) {
             if (clickedIndex < this.currentImg) {
               this.currentImg = clickedIndex;
-              this.animateSlide("left");
+              this.animateSlide('left');
             } else {
               this.currentImg = clickedIndex;
-              this.animateSlide("right");
+              this.animateSlide('right');
             }
             this.updateActiveSlidePreview();
             this.updateCounterAndTitlePosition();
@@ -137,13 +141,13 @@ class Slider {
 
       if (clickPosition < sliderWidth / 2 && this.currentImg !== 1) {
         this.currentImg--;
-        this.animateSlide("left");
+        this.animateSlide('left');
       } else if (
         clickPosition > sliderWidth / 2 &&
         this.currentImg !== this.totalSlides
       ) {
         this.currentImg++;
-        this.animateSlide("right");
+        this.animateSlide('right');
       }
 
       this.updateActiveSlidePreview();
@@ -151,5 +155,3 @@ class Slider {
     });
   }
 }
-
-window.Slider = Slider;

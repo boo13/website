@@ -2,11 +2,12 @@
   "name": "website",
   "version": "1.0.0",
   "description": "Static portfolio site for Randy Counsman. Pages live at the repo root (`index.html`, `work.html`, `contact.html`, plus archival `index_old.html`/`index2.html`). Scripts (`js/Slider.js`, `js/Video.js`, `js/script.js`) and styles (`css/styles.css`, `css/styles_contact.css`, `css/fadein.css`) are plain browser files.",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint .",
-    "format": "prettier --write ."
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src/",
+    "format": "prettier --write src/"
   },
   "repository": {
     "type": "git",
@@ -15,7 +16,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/boo13/website/issues"
   },
@@ -24,6 +25,10 @@
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.0.0",
-    "prettier": "^3.7.4"
+    "prettier": "^3.7.4",
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "gsap": "^3.14.2"
   }
 }

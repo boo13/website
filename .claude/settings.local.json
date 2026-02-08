@@ -11,7 +11,10 @@
       "Bash(node --check:*)",
       "Bash(find:*)",
       "Bash(gh run list:*)",
-      "Bash(gh run view:*)"
+      "Bash(gh run view:*)",
+      "Bash(grep:*)",
+      "Bash(npx vite build:*)",
+      "Bash(npx eslint:*)"
     ]
   }
 }

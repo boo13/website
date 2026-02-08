@@ -6,20 +6,27 @@ GSAP-focused portfolio site for Randy Counsman (nonfiction video producer). Anim
 ## Stack
 - **Vite** for bundling, dev server, hot reload
 - **JavaScript**
-- **GSAP** with ScrollTrigger, CustomEase, Observer (local vendor builds in `js/vendor/gsap-3.12.4/`)
+- **GSAP 3.14.2** via npm with ScrollTrigger, CustomEase, Observer
 - **Deployed** to gh-pages as static files
 
 ## Project Structure
 Organized by **section**, not file type:
 ```
 src/
-  sections/       # one file per scroll section (landing, featured-work, trusted-by, contact)
-  animations/     # shared animation utilities (scroll defaults, text effects)
+  sections/       # one file per scroll section (landing, featured-work, gallery, credits, about)
+  animations/     # shared animation utilities (scroll-defaults.js registers GSAP plugins)
   components/     # reusable DOM components (slider, responsive-video)
-  config.js       # shared easings, breakpoints, reusable timing values
-  main.js         # entry point — wires sections together
+  styles/         # CSS per page, imported from JS entry points
+  config.js       # shared breakpoints, timing values
+  main.js         # entry for index2.html — imports sections + calls init()
+  main-index.js   # entry for index.html (Slider + ResponsiveVideo)
+  main-work.js    # entry for work.html (CSS only)
+  main-contact.js # entry for contact.html (form handler)
+  main-credits.js # entry for credits.html (standalone CreditsTable)
 ```
-Each section exports an `init()` function called from `main.js`.
+Each section exports an `initSectionName()` function called from `main.js`.
+
+Static assets live in `public/` (data, video, images, favicon, CNAME) — Vite copies them as-is to the build output. HTML files stay at the repo root.
 
 ## GSAP Conventions
 - Use `gsap.context()` per section for clean setup/teardown — no custom lifecycle wrappers
@@ -28,7 +35,15 @@ Each section exports an `init()` function called from `main.js`.
 - Keep animation code direct — don't abstract into config-driven timeline factories
 - Magic numbers in animation code are fine when tuned visually
 
+## Dev Commands
+- `npm run dev` — Vite dev server with HMR
+- `npm run build` — production build to `dist/`
+- `npm run preview` — preview production build locally
+- `npm run lint` — ESLint on `src/`
+- `npm run format` — Prettier on `src/`
+
 ## Code Style
-- `npm run lint` (eslint), `npm run format` (prettier)
+- ES modules throughout (`"type": "module"` in package.json)
+- CSS imported from JS entry points — Vite handles bundling/injection
 - Keep it simple — no state management, no framework, no premature abstractions
 - See DECISIONS.md for full design rationale and content plans
