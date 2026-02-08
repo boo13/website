@@ -15,10 +15,7 @@ export default defineConfig({
         credits: resolve(import.meta.dirname, 'credits.html'),
         resume: resolve(import.meta.dirname, 'resume.html'),
         examplesMockup: resolve(import.meta.dirname, 'examples_mockup.html'),
-        sandbox: resolve(import.meta.dirname, 'sandbox.html'),
-        v3: resolve(import.meta.dirname, 'v3/index.html'),
-        v4: resolve(import.meta.dirname, 'v4/index.html'),
-        v5: resolve(import.meta.dirname, 'v5/index.html'),
+        sandbox: resolve(import.meta.dirname, 'sandbox.html')
       },
     },
   },
