@@ -1,94 +1,66 @@
 # Testing Patterns
 
-**Analysis Date:** 2026-01-12
+**Analysis Date:** 2026-02-08
 
 ## Test Framework
 
 **Runner:**
 - None currently configured
-- `package.json` line 7: `"test": "echo \"Error: no test specified\" && exit 1"`
-
-**Assertion Library:**
-- Not applicable
-
-**Run Commands:**
-```bash
-npm test                     # Currently: exits with error
-```
-
-## Test File Organization
-
-**Location:**
-- No test files exist in codebase
-- No `__tests__/` directory
-- No `*.test.js` or `*.spec.js` files
-
-**Naming:**
-- Not applicable (no tests)
+- No test files exist in codebase (`__tests__/`, `*.test.js`, `*.spec.js`)
+- `package.json`: `"test": "echo \"Error: no test specified\" && exit 1"`
 
 ## Current Testing Approach
 
-**From CLAUDE.md (Manual Testing):**
-```markdown
-### Testing
-- No automated test framework
-- Manual cross-browser validation required: Chrome, Firefox, Safari
-- Check responsive behavior at mobile/tablet/desktop breakpoints
-- Verify video autoplay/loading, slider navigation, form interactions
-- Ensure console is error-free
-```
+**Manual testing is the primary QA approach.**
+
+Cross-browser validation: Chrome, Firefox, Safari. Check responsive behavior at mobile/tablet/desktop breakpoints. Verify animations, video autoplay/loading, slider navigation, form interactions. Ensure console is error-free.
 
 **Manual Test Areas:**
 
-1. **Video Component** (`js/Video.js`):
-   - Video loading and overlay display timeout (5s)
-   - Responsive source switching on resize
-   - Playback state preservation during source changes
-   - Autoplay behavior across browsers
-
-2. **Slider Component** (`js/Slider.js`):
-   - Click-based navigation (left/right half clicks)
-   - Preview thumbnail selection
-   - Animation smoothness and direction
-   - Counter and title synchronization
-   - Boundary conditions (first/last slide)
-
-3. **Responsive Behavior**:
-   - Mobile vs desktop layouts
-   - Aspect ratio detection and video source switching
-   - Touch vs mouse interactions
-
-4. **Browser Compatibility**:
-   - Chrome, Firefox, Safari
-   - Video format support (WebM)
-   - GSAP animation consistency
-
-5. **Accessibility**:
-   - Reduced motion preference respected (v4)
-   - Keyboard navigation (not implemented)
+1. **Section Initialization** — each `initSectionName()` function in `src/sections/`
+2. **GSAP Animation Setup** — ScrollTrigger configs, pin behavior, timeline sequencing
+3. **CreditsTable** — data loading from JSON, column sorting, responsive layout
+4. **Responsive Video** — source switching based on viewport/aspect ratio
+5. **Slider Navigation** — click-based nav, preview thumbnails, boundary conditions
+6. **Loading Screen Sequence** — font-ready → fade → dispatch event → init landing
+7. **Browser Compatibility** — video format support (WebM), GSAP animation consistency
+8. **Accessibility** — reduced motion preference (planned)
 
 ## Development Tooling
 
-**Linting:**
-- ESLint 9.39.2 installed (`package.json` line 22)
-- Not configured (no `.eslintrc*` or `eslint.config.js`)
-- No scripts defined for running linter
+**Linting (ESLint):**
+- ESLint 9 with flat config (`eslint.config.js`)
+- Uses `@eslint/js` recommended + `eslint-config-prettier` + browser globals
+- Rules: `no-unused-vars` warn, `no-undef` warn, `no-console` off
+- Run: `npm run lint`
 
-**Formatting:**
-- Prettier 3.7.4 installed (`package.json` line 24)
-- Not configured (no `.prettierrc`)
-- No scripts defined for formatting
+**Formatting (Prettier):**
+- Configured via `.prettierrc`
+- Settings: semi, singleQuote, tabWidth 2, trailingComma es5, printWidth 80
+- Run: `npm run format`
 
 **Type Checking:**
 - Not applicable (vanilla JavaScript, no TypeScript)
 
+## Dev Commands
+
+```bash
+npm run dev       # Vite dev server with HMR
+npm run build     # Production build to dist/
+npm run preview   # Preview production build locally
+npm run lint      # ESLint on src/
+npm run format    # Prettier on src/
+```
+
+## CI/CD
+
+- **GitHub Actions** runs `npm ci && npm run build` on deploy — build errors block deploy
+- **Lighthouse** — `.github/lighthouserc.json` exists for performance monitoring
+- No pre-commit hooks (no husky/lint-staged)
+
 ## Coverage
 
-**Requirements:**
-- No coverage targets
-- No coverage tooling
-
-**Current State:**
+- No coverage targets or tooling
 - 0% automated test coverage
 - Relies entirely on manual testing
 
@@ -97,64 +69,37 @@ npm test                     # Currently: exits with error
 If implementing automated testing:
 
 **Unit Tests (Vitest recommended):**
-- Slider navigation logic (boundary conditions)
-- Video source selection based on aspect ratio
-- Counter/title position calculations
+- Section `init*()` function setup (DOM queries, event listeners)
+- CreditsTable data parsing and sort logic
+- Slider navigation logic (boundary conditions, direction)
+- Video source selection based on viewport
 
 **Integration Tests:**
-- Component initialization with real DOM
-- GSAP animation timing verification
-- Event listener behavior
+- Section initialization with real DOM
+- GSAP ScrollTrigger creation and pin behavior
+- Loading screen → landing section handoff
+- Event listener behavior across components
 
 **E2E Tests (Playwright recommended):**
-- Full slider navigation flow
-- Video playback and source switching
-- Form submission (Formspree integration)
+- Full scroll-through of all sections on index2.html
+- Slider navigation flow on index.html
+- Video playback and responsive source switching
+- Contact form submission (Formspree integration)
 - Cross-browser visual testing
-
-**Example Test Structure:**
-```javascript
-// js/Slider.test.js (hypothetical)
-describe('Slider', () => {
-  describe('navigation', () => {
-    it('should advance to next slide on right click', () => {
-      // ...
-    });
-
-    it('should wrap from last to first slide', () => {
-      // ...
-    });
-  });
-});
-```
-
-## Pre-Commit Validation
-
-**Current:**
-- No pre-commit hooks configured
-- Manual review before commit
-
-**Recommended:**
-- Add husky for pre-commit hooks
-- Run ESLint on staged files
-- Format with Prettier
 
 ## Quality Assurance Process
 
 **Current Workflow:**
 1. Make changes locally
-2. Test manually in browser
-3. Check console for errors
-4. Verify responsive behavior
-5. Commit to `gh-pages` branch
-6. Verify on production site
-
-**Git Workflow:**
-- Commit style: Imperative mood, concise
-- Examples: `fix slider autoplay pause`, `update hero typography`
-- No PR review process (solo developer)
+2. Run `npm run lint` and `npm run format`
+3. Test manually in browser (`npm run dev`)
+4. Check console for errors
+5. Verify responsive behavior
+6. Run `npm run build` to catch build errors
+7. Commit and push — GitHub Actions deploys to gh-pages
+8. Verify on production site
 
 ---
 
-*Testing analysis: 2026-01-12*
+*Testing analysis: 2026-02-08*
 *Update when test patterns change*

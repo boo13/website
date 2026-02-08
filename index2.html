@@ -9,12 +9,58 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="video/LandingPageMontagev04.2.webm" as="video" type="video/webm">
 
+    <!-- Critical inline styles to prevent white flash -->
+    <style>
+      html, body {
+        background: #0a0a0a;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Loading screen - ensures dark background immediately */
+      .loading-screen {
+        position: fixed;
+        inset: 0;
+        background: #0a0a0a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.6s ease;
+      }
+
+      .loading-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Loading spinner animation */
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 2px solid rgba(247, 244, 240, 0.1);
+        border-top-color: #f7f4f0;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+
     <!-- Typekit Fonts -->
     <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css">
 
     <!-- Styles injected by Vite from src/main.js -->
 </head>
 <body>
+    <!-- Loading screen -->
+    <div class="loading-screen">
+        <div class="loading-spinner"></div>
+    </div>
+
     <!-- =====================================================
          SECTION 1: HERO
          Z-depth zoom transition over looping montage video

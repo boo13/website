@@ -40,12 +40,16 @@ export function initLanding() {
     });
 
     // Force GPU compositing to prevent flicker
-    [hero, video, content].forEach((el) => {
+    [hero, video].forEach((el) => {
       if (el) {
         el.style.transform = 'translate3d(0, 0, 0)';
         el.style.webkitTransform = 'translate3d(0, 0, 0)';
       }
     });
+    if (content) {
+      content.style.transform = 'translate3d(0, -50%, 0)';
+      content.style.webkitTransform = 'translate3d(0, -50%, 0)';
+    }
 
     const tl = gsap.timeline({ paused: true });
 

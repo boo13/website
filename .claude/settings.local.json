@@ -16,7 +16,8 @@
       "Bash(npx vite build:*)",
       "Bash(npx eslint:*)",
       "Bash(npm run build:*)",
-      "Bash(sips:*)"
+      "Bash(sips:*)",
+      "Bash(npm run dev:*)"
     ]
   }
 }

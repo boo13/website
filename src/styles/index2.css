@@ -112,8 +112,9 @@ a {
 
 .hero-content {
     position: absolute;
-    bottom: clamp(4rem, 12vh, 8rem);
+    top: 50%;
     left: var(--container-padding);
+    transform: translateY(-50%);
     z-index: 10;
     max-width: 800px;
 }
@@ -126,6 +127,20 @@ a {
     color: var(--color-offwhite);
     margin-bottom: 0.5rem;
     text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+}
+
+/* SplitText word animation support */
+.hero-name .word {
+    display: inline-block;
+    will-change: transform, opacity;
+}
+
+/* Mask wrapper for rise effect */
+.hero-name div {
+    display: inline-block;
+    overflow: hidden;
+    padding-bottom: 0.15em;
 }
 
 .hero-subtitle {
@@ -138,7 +153,7 @@ a {
     text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
     opacity: 0;
     transform: translateY(20px);
-    animation: heroFadeIn 1.2s var(--ease-out-expo) 0.5s forwards;
+    animation: heroFadeIn 1.2s var(--ease-out-expo) 1.2s forwards;
 }
 
 .hero-social {
@@ -146,7 +161,7 @@ a {
     gap: 1rem;
     opacity: 0;
     transform: translateY(20px);
-    animation: heroFadeIn 1.2s var(--ease-out-expo) 0.7s forwards;
+    animation: heroFadeIn 1.2s var(--ease-out-expo) 1.7s forwards;
 }
 
 .social-icon {
@@ -448,6 +463,9 @@ a {
 .credits-table {
     width: 100%;
     border-collapse: collapse;
+    --credits-title-safe-zone: 120px;
+    --credits-title-blend-width: 80px;
+    --credits-cursor-right-offset: 16px;
 }
 
 .credit-row {
@@ -730,6 +748,21 @@ a {
    RESPONSIVE ADJUSTMENTS
 ====================================================== */
 
+/* Desktop: shift credits table into right 2/3 of viewport */
+@media (min-width: 1025px) {
+    .credits-section .container {
+        max-width: none;
+        padding-left: var(--container-padding);
+        padding-right: var(--container-padding);
+    }
+
+    .credits-table {
+        width: calc(66.666% - (2 * var(--container-padding, 1.5rem)));
+        margin-left: calc(33.333% + var(--container-padding, 1.5rem));
+        margin-right: var(--container-padding, 1.5rem);
+    }
+}
+
 /* Tablet */
 @media (max-width: 1024px) {
     .gallery-card {
@@ -744,7 +777,6 @@ a {
 /* Mobile landscape and smaller tablets */
 @media (max-width: 768px) {
     .hero-content {
-        bottom: 6rem;
         left: 1.5rem;
         right: 1.5rem;
     }
@@ -828,7 +860,6 @@ a {
     }
 
     .hero-content {
-        bottom: 4rem;
     }
 
     .hero-social {

@@ -1,218 +1,231 @@
 # Codebase Structure
 
-**Analysis Date:** 2026-01-12
+**Analysis Date:** 2026-02-08
 
 ## Directory Layout
 
 ```
 website/
-├── index.html              # Production landing page
-├── work.html               # Portfolio grid
+├── index.html              # Legacy landing page (Slider + ResponsiveVideo)
+├── index2.html             # New primary GSAP-animated single-page portfolio
 ├── contact.html            # Contact form (Formspree)
-├── credits.html            # Full filmography
-├── 404.html                # GitHub Pages 404 fallback
-├── index_old.html          # Archived version
-├── index3.html             # Experimental prototype
+├── resume.html             # Resume page
+├── examples_mockup.html    # Image sequence demo
+├── sandbox.html            # Development sandbox
 │
-├── css/                    # Stylesheets
-│   ├── styles.css          # Primary global styles
-│   ├── styles_contact.css  # Contact page specific
-│   ├── fadein.css          # Animation utilities
-│   ├── styles2.css         # Legacy (work.html)
-│   ├── styles3.css         # index3 variant
-│   └── styles3-v2.css      # index3 variant v2
+├── src/                    # All source code (Vite-bundled)
+│   ├── sections/           # One file per scroll section
+│   │   ├── landing.js
+│   │   ├── featured-work.js
+│   │   ├── gallery.js
+│   │   ├── credits.js
+│   │   └── about.js
+│   ├── animations/         # Shared animation utilities
+│   │   ├── scroll-defaults.js   # Registers GSAP + ScrollTrigger
+│   │   └── text-mask-rise.js    # Text reveal animation
+│   ├── components/         # Reusable DOM components
+│   │   ├── slider.js
+│   │   └── responsive-video.js
+│   ├── styles/             # CSS per page (imported from JS entry points)
+│   │   ├── index.css
+│   │   ├── index2.css
+│   │   ├── contact.css
+│   │   ├── credits.css
+│   │   ├── resume.css
+│   │   ├── work.css
+│   │   └── examples-mockup.css
+│   ├── config.js           # Shared breakpoints, timing values
+│   ├── main.js             # Entry for index2.html
+│   ├── main-index.js       # Entry for index.html (legacy)
+│   ├── main-contact.js     # Entry for contact.html
+│   ├── main-credits.js     # Entry for credits.html (standalone CreditsTable)
+│   ├── main-resume.js      # Entry for resume.html
+│   ├── main-work.js        # Entry for work.html
+│   └── main-examples-mockup.js  # Entry for examples_mockup.html
 │
-├── js/                     # Production JavaScript
-│   ├── script.js           # DOMContentLoaded orchestrator
-│   ├── Slider.js           # Slider carousel class
-│   └── Video.js            # Responsive video class
+├── public/                 # Static assets (copied as-is by Vite)
+│   ├── data/               # JSON data files (projects.json)
+│   ├── favicon/            # Favicon suite
+│   ├── images/             # Image assets
+│   ├── video/              # Video assets (WebM)
+│   └── CNAME               # Custom domain config
 │
-├── v2/                     # Previous iteration (archived)
-│   ├── index3-animations.js
-│   ├── menu.js
-│   ├── scripts.js
-│   ├── styles.css
-│   ├── video.js
-│   └── zoom-transition.js
-│
-├── v4/                     # Next generation (active development)
-│   ├── index.html          # Cinematic zoom landing
-│   ├── CinematicZoom.js    # Main animation controller
-│   ├── animations.js       # Scroll orchestration
-│   ├── styles.css          # v4-specific styles
-│   ├── newsletter.js       # Email signup
-│   ├── parallax-test.html  # Experimental variant
-│   └── README.md           # v4 documentation
-│
-├── images/                 # Image assets
-│   ├── portfolio-{1-5}.jpg # Slider images
-│   ├── portfolio/          # Portfolio subfolder
-│   ├── icons/              # SVG social icons
-│   ├── logos/              # Brand assets
-│   └── unused/             # Archived images
-│
-├── video/                  # Video assets
-│   ├── LandingPageMontagev04.2.webm    # 16:9 standard
-│   ├── LandingPageMontagev05_9x16.webm # 9:16 vertical
-│   └── [project reels]                  # Individual project clips
-│
-├── data/                   # Structured data
-│   └── Projects.json       # Filmography metadata
-│
-├── favicon/                # Favicon suite
-│   ├── apple-touch-icon.png
-│   ├── favicon-*.png
-│   ├── favicon.ico
-│   └── site.webmanifest
-│
-├── screenshots/            # Prototype screenshots
-├── scripts/                # Utility scripts
-├── tasks/                  # Planning documents
-│
-├── .planning/              # GSD workflow
+├── dist/                   # Vite build output (gitignored)
+├── .github/                # CI/CD
+│   ├── workflows/
+│   │   ├── deploy.yml      # Build + deploy to GitHub Pages
+│   │   └── site-monitor.yml
+│   ├── scripts/
+│   └── lighthouserc.json
+├── .planning/              # Documentation
 │   └── codebase/           # This documentation
+├── tasks/                  # Planning documents
+├── screenshots/            # Development screenshots
+├── logs/                   # Log files
 │
-├── package.json            # npm configuration
+├── vite.config.js          # Multi-page Vite config
+├── eslint.config.js        # ESLint flat config
+├── .prettierrc             # Prettier config
+├── package.json            # npm config
 ├── package-lock.json       # npm lockfile
 ├── CLAUDE.md               # Project instructions
-├── README.md               # Quick start guide
-├── CNAME                   # Custom domain config
-└── .gitignore              # VCS ignore rules
+├── DECISIONS.md            # Design rationale
+├── ROADMAP.md              # Project roadmap
+├── README.md               # Quick start
+└── CNAME                   # Custom domain
 ```
 
 ## Directory Purposes
 
-**css/**
-- Purpose: All stylesheets
-- Contains: Global styles, page-specific styles, animation utilities
-- Key files: `styles.css` (primary, 745 lines)
-- Subdirectories: None
+**src/**
+- Purpose: All application source code, bundled by Vite
+- Contains: JS entry points, sections, animations, components, styles
+- Organization: By concern (sections, animations, components, styles)
 
-**js/**
-- Purpose: Production JavaScript classes
-- Contains: ES6 class definitions, initialization script
-- Key files: `Slider.js` (155 lines), `Video.js` (63 lines), `script.js` (4 lines)
-- Subdirectories: None
+**src/sections/**
+- Purpose: One file per scroll section of the single-page portfolio (index2.html)
+- Contains: Each file exports an `initSectionName()` function called from `main.js`
+- Key files: `landing.js`, `featured-work.js`, `gallery.js`, `credits.js`, `about.js`
 
-**v4/**
-- Purpose: Next-generation cinematic zoom prototype
-- Contains: Complete v4 implementation (not yet deployed to main)
-- Key files: `CinematicZoom.js` (622 lines), `animations.js` (519 lines)
-- Note: Active development, not production
+**src/animations/**
+- Purpose: Shared GSAP animation utilities
+- Contains: Plugin registration, reusable animation patterns
+- Key files: `scroll-defaults.js` (registers GSAP + ScrollTrigger), `text-mask-rise.js`
 
-**images/**
-- Purpose: All image assets
-- Contains: Portfolio images, icons, logos, profile photos
-- Key files: `portfolio-{1-5}.jpg` (slider images)
-- Subdirectories: `icons/`, `logos/`, `portfolio/`, `unused/`
+**src/components/**
+- Purpose: Reusable DOM components
+- Contains: ES module classes for interactive elements
+- Key files: `slider.js`, `responsive-video.js`
 
-**video/**
-- Purpose: Video assets
-- Contains: WebM video files in multiple aspect ratios
-- Key files: `LandingPageMontagev04.2.webm` (16:9), `LandingPageMontagev05_9x16.webm` (9:16)
-- Subdirectories: None
+**src/styles/**
+- Purpose: CSS per page, imported from JS entry points (Vite handles bundling)
+- Contains: Page-specific stylesheets
+- Key files: `index2.css` (primary portfolio), `index.css` (legacy)
 
-**data/**
-- Purpose: Structured content data
-- Contains: JSON metadata for filmography
-- Key files: `Projects.json` (25+ projects)
-- Note: Not yet used in production (prepared for dynamic rendering)
+**public/**
+- Purpose: Static assets copied as-is by Vite to build output
+- Contains: Images, video, favicon suite, JSON data, CNAME
+- Subdirectories: `data/`, `favicon/`, `images/`, `video/`
 
-**favicon/**
-- Purpose: Browser and device icons
-- Contains: Full favicon suite for all platforms
-- Key files: `site.webmanifest`, `apple-touch-icon.png`
+**dist/**
+- Purpose: Vite production build output
+- Source: `npm run build`
+- Committed: No (in `.gitignore`)
+
+**.github/**
+- Purpose: CI/CD workflows and tooling
+- Contains: GitHub Actions deploy workflow, Lighthouse config
+- Key files: `workflows/deploy.yml`
 
 ## Key File Locations
 
 **Entry Points:**
-- `index.html` - Main landing page
-- `v4/index.html` - Cinematic zoom prototype
-- `js/script.js` - JavaScript initialization
+- `index2.html` → `src/main.js` — Primary GSAP-animated portfolio
+- `index.html` → `src/main-index.js` — Legacy landing page
+- `contact.html` → `src/main-contact.js` — Contact form
+- `resume.html` → `src/main-resume.js` — Resume page
+- `examples_mockup.html` → `src/main-examples-mockup.js` — Image sequence demo
 
 **Configuration:**
-- `package.json` - npm dependencies
-- `CNAME` - Custom domain
-- `.gitignore` - Git ignore rules
+- `vite.config.js` — Multi-page Vite build config
+- `eslint.config.js` — ESLint flat config
+- `.prettierrc` — Prettier config
+- `package.json` — npm dependencies and scripts
+- `CNAME` — Custom domain (randycounsman.com)
 
 **Core Logic:**
-- `js/Slider.js` - Portfolio carousel
-- `js/Video.js` - Responsive video handling
-- `v4/CinematicZoom.js` - Cinematic zoom controller
+- `src/config.js` — Shared breakpoints, timing values
+- `src/animations/scroll-defaults.js` — GSAP plugin registration + ScrollTrigger defaults
+- `src/sections/*.js` — Section init functions for index2.html
+- `src/components/slider.js` — Portfolio carousel (legacy)
+- `src/components/responsive-video.js` — Responsive video handling (legacy)
 
 **Testing:**
 - None (no test files)
 
 **Documentation:**
-- `CLAUDE.md` - Project architecture and conventions
-- `README.md` - Quick start guide
-- `v4/README.md` - v4 implementation notes
+- `CLAUDE.md` — Project architecture and conventions
+- `DECISIONS.md` — Design rationale
+- `ROADMAP.md` — Project roadmap
+- `README.md` — Quick start guide
 
 ## Naming Conventions
 
 **Files:**
-- kebab-case: `styles_contact.css`, `portfolio-1.jpg`
-- PascalCase: `Slider.js`, `Video.js`, `CinematicZoom.js` (class files)
-- UPPERCASE: `README.md`, `CLAUDE.md`, `CNAME`
+- kebab-case: `featured-work.js`, `scroll-defaults.js`, `responsive-video.js`
+- UPPERCASE: `README.md`, `CLAUDE.md`, `DECISIONS.md`, `ROADMAP.md`, `CNAME`
+- `main-*.js` prefix: Page-specific entry points
 
 **Directories:**
-- lowercase: `css/`, `js/`, `images/`, `video/`
-- Version prefixes: `v2/`, `v4/`
-- Plural for collections: `images/`, `scripts/`
+- lowercase: `src/`, `sections/`, `animations/`, `components/`, `styles/`, `public/`
+- Plural for collections: `images/`, `styles/`, `sections/`
 
 **Special Patterns:**
-- Version suffixes: `styles3-v2.css`, `LandingPageMontagev04.2.webm`
-- Aspect ratio indicators: `_9x16` suffix for vertical videos
+- Section files map 1:1 to scroll sections in `index2.html`
+- Entry point naming: `main-{page}.js` corresponds to `{page}.html`
+- CSS naming: matches the HTML page it styles (e.g., `contact.css` for `contact.html`)
 
 ## Where to Add New Code
 
-**New JavaScript Component:**
-- Implementation: `js/{ComponentName}.js`
-- Registration: Add conditional instantiation to `js/script.js`
-- Pattern: Follow `Slider.js` or `Video.js` structure
+**New Scroll Section:**
+- Implementation: `src/sections/{section-name}.js`
+- Export: `initSectionName()` function
+- Registration: Import and call from `src/main.js`
+- Styles: Add to `src/styles/index2.css` or create section-specific partial
+
+**New Animation Utility:**
+- Implementation: `src/animations/{utility-name}.js`
+- Pattern: Export a reusable function, import where needed
+
+**New Reusable Component:**
+- Implementation: `src/components/{component-name}.js`
+- Pattern: Follow `slider.js` or `responsive-video.js` structure
 
 **New CSS Styles:**
-- Global: Extend `css/styles.css`
-- Page-specific: Create `css/styles_{page}.css`
-- Variables: Add to `:root` in `css/styles.css`
+- Page-specific: `src/styles/{page}.css`, imported from the page's entry point
+- Shared variables: Add to existing CSS or `src/config.js` for JS-accessible values
 
 **New HTML Page:**
-- Implementation: Root directory `{page}.html`
-- Styles: Link to `css/styles.css` + page-specific
-- Scripts: Include deferred GSAP + component scripts
+- HTML file: Root directory `{page}.html`
+- Entry point: `src/main-{page}.js` (imports styles + initializes components)
+- Vite config: Add to `input` in `vite.config.js`
+- Styles: `src/styles/{page}.css`
 
-**New Assets:**
-- Images: `images/` (optimize before commit)
-- Video: `video/` (WebM format preferred)
-- Icons: `images/icons/`
-
-**v4 Development:**
-- All v4 code: `v4/` directory
-- Isolated from production until ready
+**New Static Assets:**
+- Images: `public/images/` (optimize before commit)
+- Video: `public/video/` (WebM format preferred)
+- Data: `public/data/`
 
 ## Special Directories
 
 **.planning/**
-- Purpose: GSD workflow documentation
-- Source: Generated by codebase mapping
+- Purpose: Codebase documentation and analysis
+- Source: Maintained manually
 - Committed: Yes
 
-**v2/**
-- Purpose: Archived previous iteration
-- Source: Historical code
-- Status: Not in active use
-
-**v4/**
-- Purpose: Next-generation prototype
-- Source: Active development
-- Status: Not yet deployed to production
+**dist/**
+- Purpose: Vite production build output
+- Source: `npm run build`
+- Committed: No (in `.gitignore`)
 
 **node_modules/**
-- Purpose: npm dependencies (dev tools only)
+- Purpose: npm dependencies (GSAP, Vite, ESLint, Prettier)
 - Source: `npm install`
 - Committed: No (in `.gitignore`)
 
+**tasks/**
+- Purpose: Planning and task tracking documents
+- Committed: Yes
+
+**logs/**
+- Purpose: Development log files
+- Committed: Varies
+
+**screenshots/**
+- Purpose: Development screenshots for reference
+- Committed: Yes
+
 ---
 
-*Structure analysis: 2026-01-12*
+*Structure analysis: 2026-02-08*
 *Update when directory structure changes*

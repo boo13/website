@@ -1,6 +1,6 @@
 # External Integrations
 
-**Analysis Date:** 2026-01-12
+**Analysis Date:** 2026-02-08
 
 ## APIs & External Services
 
@@ -11,93 +11,78 @@
   - Auth: None required (public form endpoint)
   - Form fields: name, email (`_replyto`), message, subject
 
-**Newsletter (v4 only):**
-- Buttondown - Newsletter subscription API
-  - Endpoint: `https://api.buttondown.email/v1/subscribers`
-  - Location: `v4/newsletter.js`
-  - Auth: API key in client-side code (security concern)
-  - Note: API key exposed in source - should be moved to backend
+**Newsletter:**
+- None — Buttondown integration removed (was in `v4/` which no longer exists)
 
 ## Data Storage
 
 **Databases:**
-- Not detected - Static site with no backend database
+- None — Static site with no backend database
 
 **File Storage:**
 - Local assets only
-  - Videos: `video/` directory (WebM format)
-  - Images: `images/` directory (JPG, PNG)
+  - Videos: `public/video/` directory
+  - Images: `public/images/` directory
   - No external CDN for media
 
 **Caching:**
-- Browser caching only (no service worker or Redis)
+- Browser caching only (no service worker)
 
 ## Authentication & Identity
 
-**Auth Provider:**
-- Not detected - Public portfolio site with no authentication
-
-**OAuth Integrations:**
-- None
+- None — Public portfolio site with no authentication or OAuth
 
 ## Monitoring & Observability
 
+**Site Monitoring:**
+- GitHub Actions workflow: `.github/workflows/site-monitor.yml`
+- Lighthouse CI config: `lighthouserc.json`
+
 **Error Tracking:**
-- Not detected - No Sentry, Bugsnag, or similar
+- None — No Sentry, Bugsnag, or similar
 
 **Analytics:**
-- Not detected - No Google Analytics, Mixpanel, or similar tracking
-
-**Logs:**
-- Browser console only (development)
+- None — No Google Analytics, Mixpanel, or similar tracking
 
 ## CI/CD & Deployment
 
 **Hosting:**
-- GitHub Pages
-  - Branch: `gh-pages` (main deployment branch)
-  - Deployment: Automatic on push
-  - Custom domain: Configured via `CNAME` file
-
-**CI Pipeline:**
-- Not detected - No GitHub Actions workflows
+- GitHub Pages via GitHub Actions
+  - Workflow: `.github/workflows/deploy.yml`
+  - Trigger: push to `gh-pages` branch or manual dispatch
+  - Process: checkout → setup Node 20 → `npm ci` → `npm run build` → upload `dist/` → deploy
+  - Custom domain: configured via `CNAME` file (also in `public/CNAME`)
 
 ## Environment Configuration
 
 **Development:**
 - No environment variables required
-- Local server for CORS: `npx serve .` or `python -m http.server 4000`
-- CDN dependencies (GSAP, Typekit) require network access
+- `npm run dev` — Vite dev server with HMR
+- Typekit font CDN requires network access
 
 **Staging:**
-- Not detected - Direct to production workflow
+- None — Direct to production workflow
 
 **Production:**
 - Static files served from GitHub Pages
 - No secrets management needed (all third-party services are public-facing)
 
-## External Resources (CDN)
+## External Resources
 
-**Animation Libraries:**
-- GSAP Core: `cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js`
-- CustomEase: `cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js`
-- ScrollTrigger: `cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js`
+**GSAP (Animation):**
+- Installed via npm (`gsap` package) — no CDN dependency
+- Plugins: ScrollTrigger, CustomEase, Observer
 
 **Fonts:**
-- Adobe Typekit: `use.typekit.net/gya6int.css` (main pages)
-- Adobe Typekit: `use.typekit.net/bnp0hyp.css` (v4 pages)
-- Google Fonts: `fonts.googleapis.com` (Lato, Poppins)
+- Adobe Typekit: `use.typekit.net` (web fonts loaded via CSS link in HTML)
+- No Google Fonts in current pages
 
-**jQuery (legacy):**
-- Google CDN: `ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js` (work.html only)
+**jQuery:**
+- Removed entirely — no jQuery dependency
 
 ## Webhooks & Callbacks
 
-**Incoming:**
-- None
-
-**Outgoing:**
-- None
+- None (incoming or outgoing)
 
 ## Social Media Links (Non-API)
 
@@ -105,8 +90,9 @@ Direct links only, no API integration:
 - LinkedIn: `linkedin.com/in/randycounsman/`
 - Vimeo: `vimeo.com/randycounsman`
 - IMDB: `imdb.com/name/nm3442225/`
+- Email
 
 ---
 
-*Integration audit: 2026-01-12*
+*Integration audit: 2026-02-08*
 *Update when adding/removing external services*

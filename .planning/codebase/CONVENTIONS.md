@@ -1,32 +1,32 @@
 # Coding Conventions
 
-**Analysis Date:** 2026-01-12
+**Analysis Date:** 2026-02-08
+
+## Module System
+
+- **ES modules throughout** — `import`/`export`, `"type": "module"` in package.json
+- **No `window` globals** — everything imported/exported explicitly
+- **Vite** handles bundling, dev server, HMR, and CSS injection
+- **CSS imported from JS entry points** — e.g., `import './styles/index2.css'`
 
 ## Naming Patterns
 
 **Files:**
-- kebab-case for most files: `styles_contact.css`, `portfolio-1.jpg`
-- PascalCase for class files: `Slider.js`, `Video.js`, `CinematicZoom.js`
-- UPPERCASE for docs: `README.md`, `CLAUDE.md`
-- Version suffixes: `styles3-v2.css`, `LandingPageMontagev04.2.webm`
+- kebab-case for most files: `scroll-defaults.js`, `featured-work.js`, `responsive-video.js`
+- UPPERCASE for docs: `README.md`, `CLAUDE.md`, `DECISIONS.md`
 
 **Functions:**
-- camelCase for all functions: `updateVideoSource()`, `animateSlide()`, `handleLoadingOverlay()`
-- No special prefix for async functions
+- camelCase: `initLanding`, `initFeaturedWork`, `textMaskRiseWords`
 - Handler naming: `handleX` pattern (e.g., `handleSubmit`)
 
 **Variables:**
-- camelCase for properties: `currentImg`, `totalSlides`, `isMobile`
+- camelCase: `currentImg`, `totalSlides`, `isMobile`
 - DOM references: descriptive names (`loadingOverlay`, `sliderImages`)
-- No underscore prefix for private members
-
-**Types:**
-- Not applicable (vanilla JavaScript, no TypeScript)
 
 **CSS Classes:**
-- kebab-case: `.loading-overlay`, `.slider-images`, `.z-zoom-container`
+- kebab-case: `.loading-overlay`, `.slider-images`
 - BEM-like for complex components: `.z-layer-media`, `.hero-overlay`
-- Data attributes: `data-layer="hero"`, `data-barba="wrapper"`
+- Data attributes: `data-layer="hero"`
 
 **CSS Variables:**
 - Double dash prefix: `--ff-ivy`, `--ff-bebas`, `--clr-offwhite`
@@ -36,167 +36,107 @@
 
 **JavaScript:**
 - 2-space indentation
-- Single quotes for strings: `'hop'`, `'./video/...'`
-- Semicolons required (always)
-- Arrow functions for callbacks: `() => this.updateVideoSource()`
-- No trailing commas in parameter lists
+- Semicolons required
+- Single quotes for strings
+- Arrow functions for callbacks
+- No comments unless complex — code is self-documenting
 
 **CSS:**
 - 2-space indentation
 - One property per line
 - Hex colors: `#f7f8f4f4`, `#232323`
-- Properties grouped logically (positioning, then visual)
 
 **HTML:**
 - 2-space indentation
-- Double quotes for attributes: `<meta charset="utf-8">`
-- Self-closing tags with space: `<img ... />`
+- Double quotes for attributes
 
-**Linting:**
-- ESLint installed but unconfigured (`package.json`)
-- Prettier installed but unconfigured
-- No active enforcement
+**Linting & Formatting:**
+- **ESLint** — flat config in `eslint.config.js`: `no-unused-vars: warn`, `no-undef: warn`, `no-console: off`
+- **Prettier** — `.prettierrc`: semi, singleQuote, tabWidth 2, trailingComma es5, printWidth 80
+- Commands: `npm run lint`, `npm run format`
 
-## Import Organization
+## Section Pattern
 
-**Script Loading Order (HTML):**
-1. External CDN (GSAP)
-2. GSAP plugins (CustomEase, ScrollTrigger)
-3. Application classes (Slider.js, Video.js)
-4. Initialization script (script.js)
+Each section file exports an `initSectionName()` function, called from `main.js`:
 
-**All scripts use `defer` attribute:**
-```html
-<script src="..." defer></script>
-```
-
-## Error Handling
-
-**Patterns:**
-- Early return when DOM elements missing: `if (!this.sliderImages) return;`
-- Null checks before assignment in constructors
-- Fallback timeouts for loading states (5-second video overlay)
-
-**Error Types:**
-- No explicit try-catch blocks (DOM operations don't require them)
-- Silent failures logged to console (debug mode)
-- Defensive programming over exception handling
-
-## Logging
-
-**Framework:**
-- Browser console only (console.log, console.error)
-- No logging library
-
-**Patterns:**
-- Debug statements in development (v4 has verbose logging)
-- Should be wrapped in DEBUG flag for production
-- Example: `console.log('Cinematic zoom initialized')` in v4
-
-## Comments
-
-**When to Comment:**
-- Class-level JSDoc for class purpose
-- Complex animation configurations (parallax config objects)
-- Non-obvious calculations (magic numbers should be documented)
-
-**JSDoc:**
 ```javascript
-/**
- * Handles video loading, responsive source switching, and loading overlay.
- */
-class ResponsiveVideo { ... }
-```
+export function initFeaturedWork() {
+  const ctx = gsap.context(() => {
+    // section animations
+  });
 
-**Inline Comments:**
-- Minimal (code is self-documenting)
-- Used for non-obvious logic: `// Only run if slider exists`
-
-**TODO Comments:**
-- Not consistently used
-- No standardized format
-
-## Function Design
-
-**Size:**
-- Generally under 30 lines
-- Larger functions in CinematicZoom should be refactored
-
-**Parameters:**
-- Configuration objects for complex initialization
-- Example: `new CinematicZoom({ zDepthPerLayer: 1000, blurMax: 18 })`
-
-**Return Values:**
-- Implicit returns common (void methods)
-- No Result<T, E> pattern (vanilla JS)
-
-## Module Design
-
-**Exports:**
-- Classes attached to `window` object: `window.Slider = Slider;`
-- No ES modules (browser globals pattern)
-
-**Instantiation:**
-- Conditional based on DOM: `if (window.Slider) new Slider();`
-- Single instance per component per page
-
-## GSAP Patterns
-
-**Plugin Registration:**
-```javascript
-gsap.registerPlugin(CustomEase);
-gsap.registerPlugin(ScrollTrigger);
-```
-
-**Custom Easing:**
-```javascript
-CustomEase.create('hop', 'M0,0 C0.071,0.505 ...');
-```
-
-**Animation Objects:**
-```javascript
-gsap.to(element, {
-    x: 0,
-    duration: 1.5,
-    ease: 'hop',
-});
-```
-
-## Event Handling
-
-**Arrow Functions for Context:**
-```javascript
-window.addEventListener('resize', () => this.updateVideoSource());
-```
-
-**Named Functions for Removal:**
-```javascript
-function restorePlayback() { ... }
-video.addEventListener('loadedmetadata', restorePlayback);
-```
-
-**Event Delegation:**
-```javascript
-document.addEventListener('click', (event) => {
-    if (this.slidePreview.contains(event.target)) { ... }
-});
-```
-
-## Responsive Patterns
-
-**Media Queries in JS:**
-```javascript
-if (window.matchMedia('(max-aspect-ratio: 9/16)').matches) {
-    // Load vertical video
+  window.addEventListener('pagehide', () => ctx.revert());
 }
 ```
 
-**Mobile Detection:**
+## GSAP Conventions
+
+**Imports:**
 ```javascript
-this.isMobile = window.matchMedia('(max-width: 768px)').matches;
+import { gsap } from 'gsap';
+// or re-export from scroll-defaults.js
+```
+
+**Plugin Registration:**
+- Centralized in `scroll-defaults.js` — registers ScrollTrigger, CustomEase, Observer
+- `ScrollTrigger.defaults()` set in one place to avoid pin conflicts
+
+**Context:**
+- `gsap.context()` per section for clean setup/teardown
+- Lazy-init heavy timelines when section approaches viewport
+- Magic numbers in animation code are fine when tuned visually
+
+## Import Organization
+
+**JS Entry Points** (e.g., `main.js`, `main-index.js`):
+1. CSS imports
+2. Section/component imports
+3. Initialization calls
+
+**Section Files:**
+1. GSAP imports (from `gsap` or `scroll-defaults.js`)
+2. Config imports (from `src/config.js`)
+3. Local helpers
+4. Exported init function
+
+## Error Handling
+
+- Early returns for missing DOM elements: `if (!el) return;`
+- `try-catch` for async fetches (e.g., credits data)
+- Silent failures — no error modals or user-facing error states
+
+## Loading Pattern
+
+```javascript
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+```
+
+## Cleanup
+
+- `pagehide` event listener calls `gsap.context().revert()` per section
+
+## Configuration
+
+- Shared constants in `src/config.js`: `MOBILE_BREAKPOINT`, `SCRUB`
+- Breakpoints and timing values centralized, not scattered
+
+## Responsive Patterns
+
+**Breakpoint from config:**
+```javascript
+import { MOBILE_BREAKPOINT } from '../config.js';
+```
+
+**Media Queries in JS:**
+```javascript
+window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
 ```
 
 ---
 
-*Convention analysis: 2026-01-12*
+*Convention analysis: 2026-02-08*
 *Update when patterns change*
