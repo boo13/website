@@ -43,52 +43,7 @@ jobs:
             exit 0
           fi
 
-          export REPORT_FILE
-          export SUMMARY_FILE
-
-          cat <<'NODE' > build-lighthouse-details.mjs
-import fs from 'fs';
-
-const reportPath = process.env.REPORT_FILE;
-const summaryPath = process.env.SUMMARY_FILE;
-const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
-const summary = summaryPath && fs.existsSync(summaryPath)
-  ? JSON.parse(fs.readFileSync(summaryPath, 'utf8'))
-  : null;
-
-const categories = (summary && summary.categories) || report.categories || {};
-const pct = (value) => (typeof value === 'number' ? Math.round(value * 100) + '%' : 'n/a');
-
-const catLines = [
-  `Performance: ${pct(categories.performance && categories.performance.score)}`,
-  `Accessibility: ${pct(categories.accessibility && categories.accessibility.score)}`,
-  `Best Practices: ${pct(categories['best-practices'] && categories['best-practices'].score)}`,
-  `SEO: ${pct(categories.seo && categories.seo.score)}`
-];
-
-const audits = Object.values(report.audits || {});
-const failingAudits = audits
-  .filter((audit) => typeof audit.score === 'number' && audit.score < 1)
-  .sort((a, b) => (a.score ?? 0) - (b.score ?? 0))
-  .slice(0, 5)
-  .map((audit) => {
-    const score = typeof audit.score === 'number' ? Math.round(audit.score * 100) + '%' : 'n/a';
-    const extra = audit.displayValue || audit.explanation || '';
-    return `- ${audit.id}: ${audit.title} (${score})${extra ? ` - ${extra}` : ''}`;
-  });
-
-const details = [
-  'Latest Lighthouse scores:',
-  ...catLines,
-  '',
-  'Top failing audits:',
-  failingAudits.length ? failingAudits.join('\n') : 'All monitored audits passed in the parsed report.'
-].join('\n');
-
-fs.writeFileSync('lighthouse-details.md', details);
-NODE
-
-          node build-lighthouse-details.mjs
+          node .github/scripts/build-lighthouse-details.mjs "$REPORT_FILE" "$SUMMARY_FILE"
           echo "details_file=lighthouse-details.md" >> $GITHUB_OUTPUT
           {
             echo "issue_body<<'EOF'"
