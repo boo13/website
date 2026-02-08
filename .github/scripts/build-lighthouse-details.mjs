@@ -53,4 +53,4 @@ const details = [
   failingAudits.length ? failingAudits.join('\n') : 'All monitored audits passed in the parsed report.',
 ].join('\n');
 
-fs.writeFileSync('lighthouse-details.md', details);
+fs.writeFileSync('lighthouse-details.md', details + '\n');
