@@ -61,21 +61,7 @@ jobs:
           API_URL="https://api.github.com/repos/${{ github.repository }}/actions/workflows/$WORKFLOW_FILE/runs?status=completed&per_page=10"
           curl -sS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$API_URL" -o workflow-runs.json
 
-          STREAK=$(python3 <<'PY'
-import json
-with open('workflow-runs.json', encoding='utf-8') as fh:
-    data = json.load(fh)
-count = 0
-for run in data.get('workflow_runs', []):
-    conclusion = run.get('conclusion')
-    if conclusion == 'success':
-        break
-    if conclusion is None:
-        continue
-    count += 1
-print(count)
-PY
-          )
+          STREAK=$(python3 .github/scripts/count-lighthouse-failures.py workflow-runs.json)
 
           TOTAL=$((STREAK + 1))
           echo "count=$TOTAL" >> $GITHUB_OUTPUT
@@ -128,18 +114,14 @@ PY
       - name: Send Slack alert on Lighthouse failure
         if: steps.lighthouse.outcome == 'failure' && steps.lighthouse_failure_tracker.outputs.should_alert == 'true'
         run: |
-          SUMMARY=$(cat <<EOF
-🚨 Lighthouse alert
-
-Lighthouse check failed for your site.
-
-URL: ${{ secrets.SITE_URL }}
-Consecutive failures: ${{ steps.lighthouse_failure_tracker.outputs.count }} (threshold ${{ steps.lighthouse_failure_tracker.outputs.threshold }})
-
-Check the GitHub Actions logs for details:
-https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-EOF
-          )
+          SUMMARY=$(printf '%s\n\n%s\n\nURL: %s\nConsecutive failures: %s (threshold %s)\n\n%s\n%s\n' \
+            '🚨 Lighthouse alert' \
+            'Lighthouse check failed for your site.' \
+            '${{ secrets.SITE_URL }}' \
+            '${{ steps.lighthouse_failure_tracker.outputs.count }}' \
+            '${{ steps.lighthouse_failure_tracker.outputs.threshold }}' \
+            'Check the GitHub Actions logs for details:' \
+            'https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}')
 
           PAYLOAD=$(jq -n --arg text "$SUMMARY" '{text:$text}')
           curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -317,19 +299,7 @@ EOF
 
           DURATION=$(jq -r '.results[0].result.timings.total // .results[0].result.timings.duration // .results[0].result.averageResponseTime // empty' globalping-result.json)
           if [ -n "$DURATION" ] && [ "$DURATION" != "null" ]; then
-            export DURATION
-            python3 <<'PY'
-import os, sys
-value = os.environ.get('DURATION')
-try:
-    latency = float(value)
-except (TypeError, ValueError):
-    sys.exit(0)
-if latency > 5:
-    print(f"Regional probe latency {latency:.3f}s exceeded the 5s budget")
-    sys.exit(1)
-print(f"Regional latency {latency:.3f}s")
-PY
+            python3 .github/scripts/check-regional-latency.py "$DURATION"
           fi
 
       - name: Send Slack alert for regional outage
@@ -337,15 +307,12 @@ PY
         env:
           REGION_NAME: ${{ matrix.region.name }}
         run: |
-          SUMMARY=$(cat <<EOF
-🚨 Regional uptime alert
-
-The $REGION_NAME Globalping probe reported a problem for ${{ secrets.SITE_URL }}.
-
-Check the GitHub Actions logs for details:
-https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-EOF
-          )
+          SUMMARY=$(printf '%s\n\nThe %s Globalping probe reported a problem for %s.\n\n%s\n%s\n' \
+            '🚨 Regional uptime alert' \
+            "$REGION_NAME" \
+            '${{ secrets.SITE_URL }}' \
+            'Check the GitHub Actions logs for details:' \
+            'https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}')
 
           PAYLOAD=$(jq -n --arg text "$SUMMARY" '{text:$text}')
           curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" ${{ secrets.SLACK_WEBHOOK_URL }}
