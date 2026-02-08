@@ -352,7 +352,6 @@ footer {
   text-align: left;
   color: var(--clr-offwhite);
   opacity: 0;
-  animation: fadeUp 2s ease-out forwards;
   margin-bottom: 0.72rem;
   text-shadow:
     0 6px 32px rgba(0, 0, 0, 0.65),
@@ -360,9 +359,20 @@ footer {
     0 1px 0 rgba(0, 0, 0, 0.18);
 }
 
+.landing-title .word,
+.landing-subtitle .word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.landing-title .word-mask,
+.landing-subtitle .word-mask {
+  display: inline-block;
+  overflow: hidden;
+}
+
 .landing-subtitle {
-  animation: secFadeIn 2s forwards;
-  animation-delay: 1s;
+  animation: none;
   font-weight: 400;
   font-family: "Lato";
   /* font-size: 12px; */
@@ -375,7 +385,6 @@ footer {
   font-size: 0.75rem;
   color: var(--clr-offwhite);
   opacity: 0;
-  /* animation: fadeUp 2s ease-out forwards; */
   text-align: left;
   width: 100%;
   text-shadow:
