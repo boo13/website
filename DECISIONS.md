@@ -2,6 +2,7 @@
 
 ## OVERALL
 - I want to reveal the "about" text through a series of featured work examples (using image sequences tied to ScrollTrigger)
+- This is a GSAP-focused portfolio site — animations are the feature, not a side effect
 
 ## Landing
 Randy Counsman
