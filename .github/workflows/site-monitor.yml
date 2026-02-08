@@ -245,7 +245,8 @@ jobs:
           CITY: ${{ matrix.region.city }}
           REGION_NAME: ${{ matrix.region.name }}
         run: |
-          REQUEST_BODY=$(jq -n --arg target "$TARGET_URL" --arg country "$COUNTRY" --arg city "$CITY" '
+          TARGET_HOST=$(echo "$TARGET_URL" | sed -e 's|https\?://||' -e 's|/.*||')
+          REQUEST_BODY=$(jq -n --arg target "$TARGET_HOST" --arg country "$COUNTRY" --arg city "$CITY" '
             {
               type: "http",
               target: $target,
