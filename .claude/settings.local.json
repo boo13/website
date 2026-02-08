@@ -14,7 +14,8 @@
       "Bash(gh run view:*)",
       "Bash(grep:*)",
       "Bash(npx vite build:*)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }
