@@ -1,8 +1,8 @@
-const js = require("@eslint/js");
-const prettierConfig = require("eslint-config-prettier");
-const globals = require("globals");
+import js from "@eslint/js";
+import prettierConfig from "eslint-config-prettier";
+import globals from "globals";
 
-module.exports = [
+export default [
   js.configs.recommended,
   prettierConfig,
   {
@@ -11,19 +11,15 @@ module.exports = [
       sourceType: "module",
       globals: {
         ...globals.browser,
-        ...globals.node,
-        gsap: "readonly",
-        ScrollTrigger: "readonly",
-        CustomEase: "readonly",
-        CSSRulePlugin: "readonly",
-        CinematicZoom: "readonly"
-      }
+      },
     },
     rules: {
       "no-unused-vars": "warn",
       "no-undef": "warn",
-      "no-console": "off"
+      "no-console": "off",
     },
-    ignores: [".git/", "node_modules/"]
-  }
+  },
+  {
+    ignores: ["dist/", "node_modules/", "public/"],
+  },
 ];
