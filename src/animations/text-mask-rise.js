@@ -58,8 +58,6 @@ export function textMaskRiseWords(targets, overrides = {}) {
 
   const tl = gsap.timeline({
     delay: settings.delay,
-    onComplete: revertSplits,
-    onInterrupt: revertSplits,
   });
 
   splits.forEach((split) => {
@@ -78,6 +76,8 @@ export function textMaskRiseWords(targets, overrides = {}) {
     );
   });
 
+  // Keep SplitText wrappers after animation to preserve layout height
+  // and per-word shadows. Revert only via manual cleanup if needed.
   return () => {
     tl.kill();
     revertSplits();
