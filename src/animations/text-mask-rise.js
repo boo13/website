@@ -11,6 +11,7 @@ const preset = {
   stagger: 0.2,
   ease: 'expo.out',
   yOffset: 30,
+  delay: 0,
 };
 
 // Normalize single elements / selector strings / arrays into a clean array.
@@ -36,6 +37,9 @@ export function textMaskRiseWords(targets, overrides = {}) {
     return () => {};
   }
 
+  // Ensure parent elements aren't stuck at opacity: 0 from CSS.
+  gsap.set(elements, { opacity: 1 });
+
   const splits = elements.map((element) =>
     SplitText.create(element, {
       type: 'words',
@@ -45,9 +49,22 @@ export function textMaskRiseWords(targets, overrides = {}) {
     }),
   );
 
+  let reverted = false;
+  const revertSplits = () => {
+    if (reverted) return;
+    reverted = true;
+    splits.forEach((split) => split.revert());
+  };
+
+  const tl = gsap.timeline({
+    delay: settings.delay,
+    onComplete: revertSplits,
+    onInterrupt: revertSplits,
+  });
+
   splits.forEach((split) => {
     // Animate each word from below while the word mask clips overflow.
-    gsap.fromTo(
+    tl.fromTo(
       split.words,
       { opacity: 0, y: settings.yOffset },
       {
@@ -57,11 +74,13 @@ export function textMaskRiseWords(targets, overrides = {}) {
         ease: settings.ease,
         stagger: settings.stagger,
       },
+      0,
     );
   });
 
   return () => {
-    splits.forEach((split) => split.revert());
+    tl.kill();
+    revertSplits();
   };
 }
 

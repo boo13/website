@@ -6,7 +6,7 @@ import { textMaskRiseWords } from './animations/text-mask-rise.js';
 function init() {
   new ResponsiveVideo();
   new Slider();
-  textMaskRiseWords(['.landing-title', '.landing-subtitle']);
+  textMaskRiseWords(['.landing-title', '.landing-subtitle'], { delay: 0.5 });
 }
 
 if (document.readyState === 'loading') {
