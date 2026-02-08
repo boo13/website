@@ -4,6 +4,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=svelte,node,visualstudiocode
 
 ### Node ###
+node_modules
+
 # Logs
 logs
 *.log
