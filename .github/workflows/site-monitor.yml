@@ -44,12 +44,12 @@ jobs:
           fi
 
           node .github/scripts/build-lighthouse-details.mjs "$REPORT_FILE" "$SUMMARY_FILE"
-          echo "details_file=lighthouse-details.md" >> $GITHUB_OUTPUT
           {
-            echo "issue_body<<'EOF'"
+            echo "details_file=lighthouse-details.md"
+            echo "issue_body<<EOF"
             cat lighthouse-details.md
             echo "EOF"
-          } >> $GITHUB_OUTPUT
+          } >> "$GITHUB_OUTPUT"
       - name: Track Lighthouse failure streak
         if: steps.lighthouse.outcome == 'failure'
         id: lighthouse_failure_tracker
@@ -244,14 +244,16 @@ jobs:
           CITY: ${{ matrix.region.city }}
           REGION_NAME: ${{ matrix.region.name }}
         run: |
-          REQUEST_BODY=$(jq -n --arg target "$TARGET_URL" --arg country "$COUNTRY" --arg city "$CITY" '{
-            type: "http",
-            target: $target,
-            limit: 1,
-            locations: [
-              ({ country: $country } + ( ($city | length) > 0 ? {city: $city} : {} ))
-            ]
-          }')
+          REQUEST_BODY=$(jq -n --arg target "$TARGET_URL" --arg country "$COUNTRY" --arg city "$CITY" '
+            {
+              type: "http",
+              target: $target,
+              limit: 1,
+              locations: [
+                ({ country: $country } + (if ($city | length) > 0 then {city: $city} else {} end))
+              ]
+            }
+          ')
 
           CREATE_RESPONSE=$(curl -sS -H 'Content-Type: application/json' -d "$REQUEST_BODY" https://api.globalping.io/v1/measurements)
           MEASUREMENT_ID=$(echo "$CREATE_RESPONSE" | jq -r '.id // .measurementId // empty')
