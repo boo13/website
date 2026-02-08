@@ -6,11 +6,15 @@ import { initCredits } from './sections/credits.js';
 import { initAbout } from './sections/about.js';
 
 function init() {
-  initLanding();
+  const cleanupLanding = initLanding();
   initFeaturedWork();
   initGallery();
   initCredits();
   initAbout();
+
+  if (typeof cleanupLanding === 'function') {
+    window.addEventListener('pagehide', cleanupLanding, { once: true });
+  }
 }
 
 if (document.readyState === 'loading') {

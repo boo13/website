@@ -126,9 +126,6 @@ a {
     color: var(--color-offwhite);
     margin-bottom: 0.5rem;
     text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transform: translateY(30px);
-    animation: heroFadeIn 1.2s var(--ease-out-expo) 0.3s forwards;
 }
 
 .hero-subtitle {

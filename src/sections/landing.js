@@ -3,6 +3,7 @@
  * Creates cinematic zoom transition where hero recedes as user scrolls
  */
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
+import { textMaskRiseWords } from '../animations/text-mask-rise.js';
 
 const config = {
   scrollDistance: '150%',
@@ -17,7 +18,7 @@ export function initLanding() {
   const content = document.querySelector('.hero-content');
   const gradient = document.querySelector('.hero-gradient');
 
-  if (!hero) return;
+  if (!hero) return () => {};
 
   const prefersReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)',
@@ -25,10 +26,19 @@ export function initLanding() {
 
   if (prefersReducedMotion) {
     gsap.set(hero, { opacity: 1 });
-    return;
+    return () => {};
   }
 
+  let cleanupHeroNameMask = () => {};
+
   const ctx = gsap.context(() => {
+    cleanupHeroNameMask = textMaskRiseWords('.hero-name', {
+      delay: 0.3,
+      duration: 1.2,
+      stagger: 0.12,
+      yOffset: 30,
+    });
+
     // Force GPU compositing to prevent flicker
     [hero, video, content].forEach((el) => {
       if (el) {
@@ -103,5 +113,8 @@ export function initLanding() {
     });
   }, hero);
 
-  return ctx;
+  return () => {
+    ctx.revert();
+    cleanupHeroNameMask();
+  };
 }
