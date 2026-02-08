@@ -352,6 +352,7 @@ footer {
   text-align: left;
   color: var(--clr-offwhite);
   opacity: 0;
+  animation: none;
   margin-bottom: 0.72rem;
 }
 
@@ -593,8 +594,6 @@ footer {
       }
 
       p {
-        animation: secFadeIn 2s forwards;
-        animation-delay: 3.2s;
         opacity: 0;
         font-weight: 400;
         font-family: "Lato";
@@ -681,14 +680,6 @@ footer {
   }
 }
 
-@keyframes secFadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.5;
-  }
-}
 
 /* footer {
   width: 350px;
