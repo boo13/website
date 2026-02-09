@@ -1,6 +1,20 @@
 {
   "projects": [
     {
+      "id": "upnext-news",
+      "title": "upNEXT News",
+      "platform": "social",
+      "year": "2026",
+      "role": "Creative Director",
+      "description": null,
+      "videoStandard": null,
+      "videoVertical": null,
+      "poster": null,
+      "vimeoLink": null,
+      "imdbLink": null,
+      "preview": null
+    },
+    {
       "id": "sitting-bull",
       "title": "Sitting Bull",
       "platform": "History Channel",
