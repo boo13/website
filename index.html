@@ -14,38 +14,100 @@
         padding: 0;
       }
 
-      /* Loading overlay - ensures dark background immediately */
+      /* Preloader - ensures dark background immediately */
       .loading-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: black;
+        background-color: rgba(0, 0, 0, 0.8);
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 9999;
+        z-index: 10000;
         opacity: 1;
         transition: opacity 0.6s ease;
       }
 
       .loading-overlay.hidden {
         opacity: 0;
+        visibility: hidden;
         pointer-events: none;
       }
 
-      .spinner {
-        width: 50px;
-        height: 50px;
-        border: 5px solid rgba(255, 255, 255, 0.1);
-        border-top: 5px solid #f7f8f4;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+      .preloader-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      @keyframes spin {
-        to { transform: rotate(360deg); }
+      .preloader-edges {
+        position: relative;
+        width: 96px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        will-change: width, height, transform, opacity;
+      }
+
+      .preloader-time {
+        font-family: Arial, sans-serif;
+        color: #f0f2f1;
+        font-size: 14px;
+        z-index: 2;
+      }
+
+      .preloader-corner {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+      }
+
+      .preloader-corner::before,
+      .preloader-corner::after {
+        content: '';
+        position: absolute;
+        background: #f0f2f1;
+      }
+
+      .preloader-corner::before {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+      }
+
+      .preloader-corner::after {
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 100%;
+      }
+
+      .preloader-corner-lt { top: 0; left: 0; }
+      .preloader-corner-lb { bottom: 0; left: 0; transform: scaleY(-1); }
+      .preloader-corner-rt { top: 0; right: 0; transform: scaleX(-1); }
+      .preloader-corner-rb { bottom: 0; right: 0; transform: scale(-1); }
+
+      @media (max-width: 480px) {
+        .preloader-edges {
+          width: 64px;
+          height: 36px;
+        }
+
+        .preloader-corner {
+          width: 14px;
+          height: 14px;
+        }
+
+        .preloader-time {
+          font-size: 12px;
+        }
       }
     </style>
 
@@ -72,7 +134,15 @@
   </head>
   <body>
     <div class="loading-overlay">
-      <div class="spinner"></div>
+      <div class="preloader-wrapper">
+        <div class="preloader-edges">
+          <div class="preloader-time">00:06:00</div>
+          <div class="preloader-corner preloader-corner-lt"></div>
+          <div class="preloader-corner preloader-corner-lb"></div>
+          <div class="preloader-corner preloader-corner-rt"></div>
+          <div class="preloader-corner preloader-corner-rb"></div>
+        </div>
+      </div>
     </div>
 
     <div class="snap-sections">

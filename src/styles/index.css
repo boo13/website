@@ -247,32 +247,116 @@ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 10000;
+  color: #f0f2f1;
+  opacity: 1;
+  visibility: visible;
 }
 
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  border-top: 5px solid var(--clr-offwhite);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.loading-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+.preloader-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preloader-edges {
+  position: relative;
+  width: 96px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  will-change: width, height, transform, opacity;
+}
+
+.preloader-time {
+  font-family: 'futura-pt', 'Arial', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  z-index: 2;
+}
+
+.preloader-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+}
+
+.preloader-corner::before,
+.preloader-corner::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+
+.preloader-corner::before {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.preloader-corner::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+}
+
+.preloader-corner-lt {
+  top: 0;
+  left: 0;
+}
+
+.preloader-corner-lb {
+  left: 0;
+  bottom: 0;
+  transform: scaleY(-1);
+}
+
+.preloader-corner-rt {
+  top: 0;
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.preloader-corner-rb {
+  right: 0;
+  bottom: 0;
+  transform: scale(-1);
+}
+
+@media (max-width: 480px) {
+  .preloader-edges {
+    width: 64px;
+    height: 36px;
   }
-  100% {
-    transform: rotate(360deg);
+
+  .preloader-time {
+    font-size: 12px;
+  }
+
+  .preloader-corner {
+    width: 14px;
+    height: 14px;
   }
 }
-
-/* End of stuff I'm adding */
 
 @media (max-width: 900px) {
   .slider-indicators {
