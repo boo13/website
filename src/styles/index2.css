@@ -459,6 +459,136 @@ a {
 }
 
 /* =====================================================
+   CTA Section
+====================================================== */
+.cta-section {
+    padding: clamp(4rem, 8vh, 8rem) 0;
+    background: var(--color-nearblack);
+    text-align: center;
+}
+
+.cta-content {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.cta-heading {
+    font-family: var(--ff-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+}
+
+.cta-subtext {
+    font-size: 0.9375rem;
+    color: rgba(247, 244, 240, 0.6);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.newsletter-form {
+    margin-bottom: 2rem;
+}
+
+.newsletter-input-group {
+    display: flex;
+    gap: 0;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.newsletter-input-group input[type="email"] {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-family: var(--ff-body);
+    font-size: 0.9375rem;
+    color: var(--color-offwhite);
+    background: rgba(247, 244, 240, 0.08);
+    border: 1px solid rgba(247, 244, 240, 0.2);
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.newsletter-input-group input[type="email"]::placeholder {
+    color: rgba(247, 244, 240, 0.35);
+}
+
+.newsletter-input-group input[type="email"]:focus {
+    border-color: rgba(247, 244, 240, 0.5);
+    background: rgba(247, 244, 240, 0.12);
+}
+
+.newsletter-submit {
+    padding: 0.75rem 1.5rem;
+    font-family: var(--ff-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-nearblack);
+    background: var(--color-offwhite);
+    border: 1px solid var(--color-offwhite);
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.newsletter-submit:hover {
+    opacity: 0.85;
+}
+
+.cta-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(247, 244, 240, 0.2);
+    margin: 2rem auto;
+}
+
+.cta-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--ff-body);
+    font-size: 0.9375rem;
+    color: var(--color-offwhite);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid rgba(247, 244, 240, 0.3);
+    border-radius: 4px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.cta-contact-btn:hover {
+    border-color: rgba(247, 244, 240, 0.6);
+    background: rgba(247, 244, 240, 0.05);
+}
+
+.cta-contact-btn svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.2s ease;
+}
+
+.cta-contact-btn:hover svg {
+    transform: translate(2px, -2px);
+}
+
+/* Screen reader only utility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* =====================================================
    SECTION 4: ABOUT
    Stats with scroll-reveal + network marquee
 ====================================================== */
@@ -706,6 +836,21 @@ a {
     .hero-subtitle {
         font-size: 0.75rem;
         letter-spacing: 0.1em;
+    }
+
+    /* CTA section mobile adjustments */
+    .newsletter-input-group {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .newsletter-input-group input[type="email"] {
+        border-right: 1px solid rgba(247, 244, 240, 0.2);
+        border-radius: 4px;
+    }
+
+    .newsletter-submit {
+        border-radius: 4px;
     }
 
     /* Gallery converts to vertical swipe on tablet */
