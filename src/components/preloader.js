@@ -1,17 +1,13 @@
 import { gsap } from 'gsap';
 
 const FORCE_COMPLETE_AFTER_MS = 15000;
-const FAKE_PROGRESS_TICK_MS = 240;
-const FAKE_PROGRESS_MIN_STEP = 0.01;
-const FAKE_PROGRESS_MAX_STEP = 0.05;
+const FONT_TASK_WEIGHT = 3;
+const VIDEO_TASK_WEIGHT = 4;
+const IMAGE_TASK_WEIGHT = 1;
 
 const VIDEO_ASPECT_RATIO = 16 / 9;
 const DESKTOP_SIZES = { minWidth: 96, maxWidth: 520 };
 const MOBILE_SIZES = { minWidth: 64, maxWidth: 360 };
-
-function randomStep(min, max) {
-  return Math.random() * (max - min) + min;
-}
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -36,40 +32,44 @@ function waitForVideoFrame(video, onLoaded) {
   return () => video.removeEventListener('loadeddata', onFrameLoaded);
 }
 
-function startCountdown(timerEl) {
-  if (!timerEl) {
+function waitForImageLoad(image, onLoaded) {
+  if (image.complete && image.naturalWidth > 0) {
+    onLoaded();
     return () => {};
   }
 
-  let hundredths = 999;
-  let seconds = 6;
-  let minutes = 0;
-
-  const updateTime = () => {
-    hundredths -= 50;
-    if (hundredths <= 0) {
-      seconds -= 1;
-      hundredths = 999;
-    }
-
-    if (seconds <= 0) {
-      minutes -= 1;
-      seconds = 60;
-    }
-
-    if (hundredths >= 0 && seconds >= 0 && minutes >= 0) {
-      const mm = String(minutes).padStart(2, '0');
-      const ss = String(seconds).padStart(2, '0');
-      const hh = String(Math.floor(hundredths / 10)).padStart(2, '0');
-      timerEl.textContent = `${mm}:${ss}:${hh}`;
-      return;
-    }
-
-    timerEl.textContent = '00:00:00';
+  const onDone = () => {
+    image.removeEventListener('load', onDone);
+    image.removeEventListener('error', onDone);
+    onLoaded();
   };
 
-  const timerId = window.setInterval(updateTime, 50);
-  return () => window.clearInterval(timerId);
+  image.addEventListener('load', onDone);
+  image.addEventListener('error', onDone);
+  return () => {
+    image.removeEventListener('load', onDone);
+    image.removeEventListener('error', onDone);
+  };
+}
+
+function waitForFonts(onLoaded) {
+  if (!document.fonts?.ready) {
+    onLoaded();
+    return () => {};
+  }
+
+  let isCancelled = false;
+  document.fonts.ready
+    .catch(() => {})
+    .finally(() => {
+      if (!isCancelled) {
+        onLoaded();
+      }
+    });
+
+  return () => {
+    isCancelled = true;
+  };
 }
 
 function renderEdges(edgesEl, progress) {
@@ -174,22 +174,49 @@ export function runPreloader() {
     const timeEl = overlayEl.querySelector('.preloader-time');
     const progressSmoother = createProgressSmoother(edgesEl);
 
-    const clearCountdown = startCountdown(timeEl);
     const videos = Array.from(document.querySelectorAll('video'));
+    const images = Array.from(document.querySelectorAll('img'));
 
-    let fakeProgress = 0;
-    let realProgress = videos.length > 0 ? 0 : 1;
-    let loadedVideos = 0;
+    let loadedWeight = 0;
     let isComplete = false;
 
-    const metadataCleanupFns = [];
+    const taskCleanupFns = [];
+
+    const tasks = [
+      { weight: FONT_TASK_WEIGHT, register: waitForFonts },
+      ...videos.map((video) => ({
+        weight: VIDEO_TASK_WEIGHT,
+        register: (onLoaded) => waitForVideoFrame(video, onLoaded),
+      })),
+      ...images.map((image) => ({
+        weight: IMAGE_TASK_WEIGHT,
+        register: (onLoaded) => waitForImageLoad(image, onLoaded),
+      })),
+    ];
+    const totalWeight = tasks.reduce((sum, task) => sum + task.weight, 0);
+
+    const updateProgress = () => {
+      if (isComplete) {
+        return;
+      }
+
+      const progress = totalWeight > 0 ? clamp(loadedWeight / totalWeight, 0, 1) : 1;
+      progressSmoother.to(progress);
+
+      if (progress >= 1) {
+        finish();
+      }
+    };
+
+    const markTaskLoaded = (weight) => {
+      loadedWeight += weight;
+      updateProgress();
+    };
 
     const cleanup = () => {
-      window.clearInterval(fakeProgressIntervalId);
       window.clearTimeout(forceCompleteTimeoutId);
-      clearCountdown();
       progressSmoother.kill();
-      metadataCleanupFns.forEach((cleanupFn) => cleanupFn());
+      taskCleanupFns.forEach((cleanupFn) => cleanupFn());
     };
 
     const finish = () => {
@@ -211,45 +238,17 @@ export function runPreloader() {
       });
     };
 
-    const updateProgress = () => {
-      if (isComplete) {
-        return;
-      }
-
-      const progress = clamp(0.8 * fakeProgress + 0.2 * realProgress, 0, 1);
-      progressSmoother.to(progress);
-
-      if (progress >= 1) {
-        finish();
-      }
-    };
-
     const forceComplete = () => {
-      fakeProgress = 1;
-      realProgress = 1;
+      loadedWeight = totalWeight;
       updateProgress();
     };
-
-    const fakeProgressIntervalId = window.setInterval(() => {
-      fakeProgress = Math.min(
-        fakeProgress + randomStep(FAKE_PROGRESS_MIN_STEP, FAKE_PROGRESS_MAX_STEP),
-        1,
-      );
-      updateProgress();
-    }, FAKE_PROGRESS_TICK_MS);
 
     const forceCompleteTimeoutId = window.setTimeout(forceComplete, FORCE_COMPLETE_AFTER_MS);
 
-    if (videos.length > 0) {
-      videos.forEach((video) => {
-        const cleanupMetadataListener = waitForVideoFrame(video, () => {
-          loadedVideos += 1;
-          realProgress = loadedVideos / videos.length;
-          updateProgress();
-        });
-        metadataCleanupFns.push(cleanupMetadataListener);
-      });
-    }
+    tasks.forEach((task) => {
+      const cleanupTaskListener = task.register(() => markTaskLoaded(task.weight));
+      taskCleanupFns.push(cleanupTaskListener);
+    });
 
     updateProgress();
   });

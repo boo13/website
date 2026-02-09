@@ -10,11 +10,9 @@ function startExperience() {
 }
 
 function init() {
-  const fontsReady = document.fonts?.ready || Promise.resolve();
   new ResponsiveVideo();
 
   runPreloader()
-    .then(() => fontsReady)
     .catch(() => {})
     .finally(() => {
       startExperience();
