@@ -1,11 +1,12 @@
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
+import { textMaskRiseWords } from '../animations/text-mask-rise.js';
 import { SCRUB } from '../config.js';
 
 /**
  * About Slides Section
  * Full-viewport scroll-driven narrative slides
  * Slide 1: Grid zoom-out from 3x to 1x scale (scrub-linked)
- * Text animations added in Plan 04
+ *          + Text reveal animations (handwritten intro fade, headline mask-rise)
  */
 export function initAboutSlides() {
     const section = document.querySelector('.about-slides-section');
@@ -18,8 +19,13 @@ export function initAboutSlides() {
     if (prefersReducedMotion) {
         // Show all content immediately, no animations
         gsap.set(section.querySelectorAll('.slide-content'), { opacity: 1 });
+        gsap.set(section.querySelectorAll('.slide-intro'), { opacity: 1 });
+        gsap.set(section.querySelectorAll('.slide-headline'), { opacity: 1 });
         return () => {};
     }
+
+    // Track cleanup functions
+    let cleanupHeadline = () => {};
 
     const ctx = gsap.context(() => {
         // =====================================================
@@ -56,14 +62,58 @@ export function initAboutSlides() {
                 animation: gridTl,
                 invalidateOnRefresh: true,  // Handle resize/orientation changes
             });
+
+            // =====================================================
+            // SLIDE 1: TEXT REVEAL ANIMATIONS
+            // =====================================================
+
+            // Handwritten intro text — simple fade and rise
+            const intro = slideGoesBig.querySelector('.slide-intro');
+            if (intro) {
+                gsap.fromTo(intro,
+                    { opacity: 0, y: 20 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1.2,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: slideGoesBig,
+                            start: 'top 85%',
+                            toggleActions: 'play none none none',
+                        },
+                    }
+                );
+            }
+
+            // Headline — text-mask-rise word-by-word animation
+            const headline = slideGoesBig.querySelector('.slide-headline');
+            if (headline) {
+                // Trigger text mask rise when slide enters viewport
+                ScrollTrigger.create({
+                    trigger: slideGoesBig,
+                    start: 'top 80%',
+                    onEnter: () => {
+                        cleanupHeadline = textMaskRiseWords(headline, {
+                            duration: 1.5,
+                            stagger: 0.15,
+                            yOffset: 40,
+                            delay: 0.2,
+                        });
+                    },
+                    once: true,  // Only trigger once
+                });
+            }
         }
 
-        // Ensure all slide content is visible
-        gsap.set('.slide-content', { opacity: 1 });
+        // Ensure other slide content is visible
+        gsap.set('.slide-in-your-hand .slide-content', { opacity: 1 });
+        gsap.set('.slide-this-is-me .slide-content', { opacity: 1 });
         ScrollTrigger.refresh();
     }, section);
 
     return () => {
         ctx.revert();
+        cleanupHeadline();
     };
 }
