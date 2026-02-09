@@ -36,6 +36,10 @@ export function initGallery() {
   }
 
   function setupVideoHover() {
+    // Skip hover previews on touch devices
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
     cards.forEach((card) => {
       const video = card.querySelector('.card-video');
       if (!video) return;
@@ -43,10 +47,20 @@ export function initGallery() {
       // Store video reference for lightbox integration
       card._hoverVideo = video;
 
+      let hoverTimeout = null;
+
       card.addEventListener('mouseenter', () => {
-        video.play().catch(() => {});
+        // 200ms hover intent delay prevents accidental triggers during fast scroll
+        hoverTimeout = setTimeout(() => {
+          if (video.readyState === 0) {
+            video.load(); // Lazy load if not yet loaded
+          }
+          video.play().catch(() => {});
+        }, 200);
       });
+
       card.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimeout);
         video.pause();
         video.currentTime = 0;
       });
