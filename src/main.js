@@ -1,5 +1,6 @@
 import './styles/index2.css';
 import './styles/about-slides.css';
+import './styles/video-lightbox.css';
 import { initLanding } from './sections/landing.js';
 import { initGallery } from './sections/gallery.js';
 import { initCredits } from './sections/credits.js';
@@ -7,6 +8,7 @@ import { initAbout } from './sections/about.js';
 import { initAboutSlides } from './sections/about-slides.js';
 import { initCustomCursor } from './components/custom-cursor.js';
 import { runPreloader } from './components/preloader.js';
+import { initVideoLightbox } from './components/video-lightbox.js';
 
 function init() {
   // Initialize sections (without landing animations yet)
@@ -15,6 +17,7 @@ function init() {
   const cleanupAboutSlides = initAboutSlides();
   initGallery();
   initAbout();
+  const cleanupLightbox = initVideoLightbox();
 
   let cleanupLanding;
 
@@ -35,6 +38,7 @@ function init() {
     if (typeof cleanupCredits === 'function') cleanupCredits();
     if (typeof cleanupCursor === 'function') cleanupCursor();
     if (typeof cleanupAboutSlides === 'function') cleanupAboutSlides();
+    if (typeof cleanupLightbox === 'function') cleanupLightbox();
     if (typeof cleanupLanding === 'function') cleanupLanding();
   }, { once: true });
 }

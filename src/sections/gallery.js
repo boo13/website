@@ -39,6 +39,10 @@ export function initGallery() {
     cards.forEach((card) => {
       const video = card.querySelector('.card-video');
       if (!video) return;
+
+      // Store video reference for lightbox integration
+      card._hoverVideo = video;
+
       card.addEventListener('mouseenter', () => {
         video.play().catch(() => {});
       });
@@ -47,6 +51,11 @@ export function initGallery() {
         video.currentTime = 0;
       });
     });
+
+    // GLightbox event integration
+    // Note: GLightbox binds to .glightbox-video elements automatically
+    // We just need to ensure hover videos pause when lightbox opens
+    // The lightbox component handles this via its 'open' event listener
   }
 
   if (prefersReducedMotion || isMobile) {
