@@ -52,6 +52,20 @@ function waitForImageLoad(image, onLoaded) {
   };
 }
 
+function shouldTrackImage(image) {
+  if (image.loading === 'lazy' && !image.complete) {
+    return false;
+  }
+  return true;
+}
+
+function shouldTrackVideo(video) {
+  if (video.preload === 'none' && !video.autoplay) {
+    return false;
+  }
+  return true;
+}
+
 function waitForFonts(onLoaded) {
   if (!document.fonts?.ready) {
     onLoaded();
@@ -211,8 +225,8 @@ export function runPreloader() {
     const progressSmoother = createProgressSmoother(edgesEl);
     const clearCountdown = startCountdown(timeEl);
 
-    const videos = Array.from(document.querySelectorAll('video'));
-    const images = Array.from(document.querySelectorAll('img'));
+    const videos = Array.from(document.querySelectorAll('video')).filter(shouldTrackVideo);
+    const images = Array.from(document.querySelectorAll('img')).filter(shouldTrackImage);
 
     let loadedWeight = 0;
     let isComplete = false;
