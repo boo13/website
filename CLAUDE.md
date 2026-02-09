@@ -13,16 +13,16 @@ GSAP-focused portfolio site for Randy Counsman (nonfiction video producer). Anim
 Organized by **section**, not file type:
 ```
 src/
-  sections/       # one file per scroll section (landing, featured-work, gallery, credits, about)
-  animations/     # shared animation utilities (scroll-defaults.js registers GSAP plugins)
-  components/     # reusable DOM components (slider, responsive-video)
-  styles/         # CSS per page, imported from JS entry points
-  config.js       # shared breakpoints, timing values
-  main.js         # entry for index2.html — imports sections + calls init()
-  main-index.js   # entry for index.html (Slider + ResponsiveVideo)
-  main-work.js    # entry for work.html (CSS only)
-  main-contact.js # entry for contact.html (form handler)
-  main-credits.js # entry for credits.html (standalone CreditsTable)
+  sections/             # one file per scroll section (landing, featured-work, gallery, credits, about)
+  animations/           # shared animation utilities (scroll-defaults.js registers GSAP plugins)
+  components/           # reusable DOM components (slider, responsive-video)
+  styles/               # CSS per page, imported from JS entry points
+  config.js             # shared breakpoints, timing values
+  main.js               # entry for index2.html — imports sections + calls init()
+  main-index.js         # entry for index.html (Slider + ResponsiveVideo)
+  main-contact.js       # entry for contact.html (form handler)
+  main-resume.js        # entry for resume.html (page-specific layout tweaks)
+  main-examples-mockup.js # entry for examples_mockup.html (static mock styling)
 ```
 Each section exports an `initSectionName()` function called from `main.js`.
 

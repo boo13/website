@@ -1,7 +1,7 @@
 {
   "name": "website",
   "version": "1.0.0",
-  "description": "Static portfolio site for Randy Counsman. Pages live at the repo root (`index.html`, `work.html`, `contact.html`, plus archival `index_old.html`/`index2.html`). Scripts (`js/Slider.js`, `js/Video.js`, `js/script.js`) and styles (`css/styles.css`, `css/styles_contact.css`, `css/fadein.css`) are plain browser files.",
+  "description": "Static portfolio site for Randy Counsman with root pages for index2 (primary), index, contact, resume, examples_mockup, and a GSAP sandbox. Built with Vite + GSAP and modular JS/CSS under src/.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

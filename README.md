@@ -8,9 +8,10 @@ The site is a multi-page static site. Each HTML file lives at the repo root:
 
 - **index2.html** — The primary portfolio page. Hero zoom, parallax rack-focus, horizontal scroll gallery, credits table, and stats section.
 - **index.html** — An alternate landing with a full-screen video and image slider.
-- **work.html** — A simple credits list page (no JavaScript).
 - **contact.html** — Contact form powered by Formspree.
-- **credits.html** — A sortable credits table that loads project data from JSON.
+- **resume.html** — Printable resume layout built to match the site's typography.
+- **examples_mockup.html** — Static comps that showcase layout explorations.
+- **sandbox.html** — A GSAP demo playground for text animation timing/easing experiments.
 
 ## How it's built
 
@@ -18,16 +19,16 @@ The site uses [Vite](https://vite.dev/) for bundling and [GSAP](https://gsap.com
 
 ```
 src/
-  main.js            # index2.html entry — imports all scroll sections
-  main-index.js      # index.html entry — Slider + ResponsiveVideo
-  main-work.js       # work.html entry — CSS import only
-  main-contact.js    # contact.html entry — form handler
-  main-credits.js    # credits.html entry — sortable table
-  sections/          # one file per scroll section (landing, featured-work, gallery, credits, about)
-  animations/        # shared GSAP setup (plugin registration)
-  components/        # reusable classes (Slider, ResponsiveVideo)
-  styles/            # one CSS file per page
-  config.js          # shared breakpoints and timing values
+  main.js                 # index2.html entry — imports all scroll sections
+  main-index.js           # index.html entry — Slider + ResponsiveVideo
+  main-contact.js         # contact.html entry — form handler
+  main-resume.js          # resume.html entry — typography + layout tweaks
+  main-examples-mockup.js # examples_mockup.html entry — grabs static styles
+  sections/               # one file per scroll section (landing, featured-work, gallery, credits, about)
+  animations/             # shared GSAP setup (plugin registration)
+  components/             # reusable DOM components (Slider, ResponsiveVideo)
+  styles/                 # CSS per page, imported from each entry point
+  config.js               # shared breakpoints and timing values
 ```
 
 Static assets (images, video, data, favicon) live in `public/` and get copied as-is to the build output.

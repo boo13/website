@@ -42,11 +42,6 @@ The following concerns from the 2026-01-12 audit have been resolved:
 - **Impact:** Unclear which is the canonical homepage; both have Vite entry points
 - **Fix approach:** Complete migration, make index2.html the primary index.html
 
-### Empty 404.html
-
-- **Problem:** 404.html may still be empty or missing meaningful content
-- **Impact:** GitHub Pages serves a blank page for missing routes
-
 ### Performance — Large Media Assets
 
 - **Problem:** Large video and image files in `public/` may affect initial load times
