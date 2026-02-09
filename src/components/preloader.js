@@ -90,6 +90,14 @@ function animateEdges(edgesEl, progress) {
 }
 
 function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
+  const travelDistance = window.matchMedia('(max-width: 480px)').matches ? 28 : 44;
+  const cornerAnimations = [
+    { selector: '.preloader-corner-lt', x: -travelDistance, y: -travelDistance },
+    { selector: '.preloader-corner-lb', x: -travelDistance, y: travelDistance },
+    { selector: '.preloader-corner-rt', x: travelDistance, y: -travelDistance },
+    { selector: '.preloader-corner-rb', x: travelDistance, y: travelDistance },
+  ];
+
   const timeline = gsap.timeline({
     defaults: {
       ease: 'power2.inOut',
@@ -101,18 +109,37 @@ function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
     timeline.to(timeEl, { autoAlpha: 0, duration: 0.35 }, 0);
   }
 
+  cornerAnimations.forEach(({ selector, x, y }) => {
+    const cornerEl = overlayEl.querySelector(selector);
+    if (!cornerEl) {
+      return;
+    }
+
+    timeline.to(
+      cornerEl,
+      {
+        x,
+        y,
+        autoAlpha: 0,
+        duration: 0.55,
+        ease: 'power3.out',
+      },
+      0.06,
+    );
+  });
+
   if (edgesEl) {
-    timeline.to(edgesEl, { scale: 1.08, duration: 0.55 }, 0.1);
+    timeline.to(edgesEl, { scale: 1.04, duration: 0.55, ease: 'power2.out' }, 0.06);
   }
 
   timeline.to(
     overlayEl,
     {
-      delay: 0.5,
+      delay: 0.35,
       autoAlpha: 0,
-      duration: 1.2,
+      duration: 0.9,
     },
-    0.2,
+    0.32,
   );
 }
 
