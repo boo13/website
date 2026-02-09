@@ -6,8 +6,8 @@ const FAKE_PROGRESS_MIN_STEP = 0.05;
 const FAKE_PROGRESS_MAX_STEP = 0.28;
 
 const VIDEO_ASPECT_RATIO = 16 / 9;
-const DESKTOP_SIZES = { minWidth: 67, maxWidth: 371 };
-const MOBILE_SIZES = { minWidth: 41, maxWidth: 229 };
+const DESKTOP_SIZES = { minWidth: 96, maxWidth: 520 };
+const MOBILE_SIZES = { minWidth: 64, maxWidth: 360 };
 
 function randomStep(min, max) {
   return Math.random() * (max - min) + min;
