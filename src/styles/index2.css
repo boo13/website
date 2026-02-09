@@ -75,6 +75,45 @@ a {
    SECTION 1: HERO
    Z-depth zoom over looping video
 ====================================================== */
+/* Custom cursor */
+.hero-section,
+.parallax-section {
+    cursor: none;
+}
+
+.hero-section a,
+.hero-section button,
+.parallax-section a,
+.parallax-section button {
+    cursor: none;
+}
+
+.custom-cursor-dot {
+    position: fixed;
+    top: -5px;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-offwhite);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+}
+
+.custom-cursor-ring {
+    position: fixed;
+    top: -15px;
+    left: -15px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-offwhite);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+}
+
 .hero-section {
     position: relative;
     width: 100%;

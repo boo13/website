@@ -4,10 +4,12 @@ import { initFeaturedWork } from './sections/featured-work.js';
 import { initGallery } from './sections/gallery.js';
 import { initCredits } from './sections/credits.js';
 import { initAbout } from './sections/about.js';
+import { initCustomCursor } from './components/custom-cursor.js';
 
 function init() {
   // Initialize sections (without landing animations yet)
   const cleanupCredits = initCredits();
+  const cleanupCursor = initCustomCursor();
   initFeaturedWork();
   initGallery();
   initAbout();
@@ -52,6 +54,7 @@ function init() {
   // Cleanup on page unload
   window.addEventListener('pagehide', () => {
     if (typeof cleanupCredits === 'function') cleanupCredits();
+    if (typeof cleanupCursor === 'function') cleanupCursor();
     if (typeof cleanupLanding === 'function') cleanupLanding();
   }, { once: true });
 }
