@@ -274,6 +274,10 @@ a {
     inset: 0;
 }
 
+.card-media--placeholder {
+    background: linear-gradient(135deg, rgba(247,244,240,0.06) 0%, rgba(247,244,240,0.02) 100%);
+}
+
 .card-thumbnail,
 .card-video {
     width: 100%;
