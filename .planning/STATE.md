@@ -1,8 +1,8 @@
 # Project State: Randy Counsman Portfolio v2
 
 **Last Updated:** 2026-02-09
-**Current Phase:** Not started
-**Current Plan:** None
+**Current Phase:** 01-housekeeping-about (1 of 7)
+**Current Plan:** 01-01 completed
 
 ---
 
@@ -22,7 +22,7 @@ Roadmap revised with design-first philosophy. Ready to begin Phase 1: Housekeepi
 
 ### Phase Progress
 ```
-Phase 1: Housekeeping & About Section Structure  [░░░░░░░░░░] 0%
+Phase 1: Housekeeping & About Section Structure  [█░░░░░░░░░] 10%
 Phase 2: Hero Section & Core Animations          [░░░░░░░░░░] 0%
 Phase 3: Featured Work & Credits Rough Layout    [░░░░░░░░░░] 0%
 Phase 4: Video Lightbox & Hover Interactivity    [░░░░░░░░░░] 0%
@@ -31,24 +31,25 @@ Phase 6: Mobile Responsive & Performance         [░░░░░░░░░░
 Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░] 0%
 ```
 
-**Overall:** 0/27 requirements complete (0%)
+**Overall:** 1/27 requirements complete (3.7%)
 
 ### Active Work
-- Roadmap revised and approved, awaiting Phase 1 planning
+- Phase 1 in progress: Housekeeping complete, About section structure next
+- Plan 01-01 complete: Wyatt Earp extraction successful
 
 ### Status
-- **Phase:** None started
-- **Plan:** None
+- **Phase:** 01-housekeeping-about (Plan 01 complete)
+- **Plan:** 01-01 completed
 - **Blockers:** None
-- **Next:** Begin Phase 1 planning with `/gsd:plan-phase 1`
+- **Next:** Continue Phase 1 with remaining plans (About section structure)
 
 ---
 
 ## Performance Metrics
 
 ### Velocity
-- **Requirements completed:** 0/27 (0%)
-- **Plans completed:** 0
+- **Requirements completed:** 1/27 (3.7%)
+- **Plans completed:** 1
 - **Phases completed:** 0/7
 
 ### Quality
@@ -61,6 +62,11 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 ## Accumulated Context
 
 ### Key Decisions
+
+| ID | Date | Decision | Phase | Impact |
+|----|------|----------|-------|--------|
+| HOUSE-01-extract-wyatt | 2026-02-09 | Extract Wyatt Earp parallax to standalone case study page | 01 | Establishes case study pattern, cleans index2.html structure |
+| HOUSE-01-reuse-animation | 2026-02-09 | Reuse featured-work.js module across multiple entry points | 01 | Clean code reuse, section-specific entry point pattern |
 
 **2026-02-09: Roadmap Revision - Design-First Philosophy**
 - Restructured from 8 phases to 7 phases based on user feedback
@@ -104,9 +110,9 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 - [ ] Begin Phase 1 planning
 
 **Phase 1 Specific:**
-- [ ] Extract Wyatt Earp section (lines 108-157 in index2.html)
-- [ ] Create case_study_wyatt.html with HTML boilerplate
-- [ ] Remove Wyatt Earp from index2.html cleanly
+- [x] Extract Wyatt Earp section (lines 108-157 in index2.html) ✓ Complete
+- [x] Create case_study_wyatt.html with HTML boilerplate ✓ Complete
+- [x] Remove Wyatt Earp from index2.html cleanly ✓ Complete
 - [ ] Build About section structure after hero
 
 **Research Needed:**
@@ -128,20 +134,23 @@ None currently. Roadmap revised and ready to begin Phase 1.
 ## Session Continuity
 
 ### What Just Happened
-Roadmap revised based on user feedback. Shifted from optimization-first to design-first approach. Added HOUSE-01 requirement for Wyatt Earp extraction. Restructured phases to prioritize housekeeping + About sections (Phase 1), then rough layouts across all sections (Phases 2-3), then interactivity polish (Phases 4-5), and finally optimization (Phases 6-7). Total: 7 phases covering 27 requirements (1 new housekeeping + 26 original).
+Completed Plan 01-01: Extracted Wyatt Earp parallax section from index2.html to standalone case_study_wyatt.html page. Created entry point (main-wyatt.js) and extracted styles (wyatt.css). Systematically cleaned all orphaned references from index2.html (HTML, CSS, JS). Build passes, lint passes, both pages work correctly. Duration: 3 minutes.
 
 ### Context for Next Session
-- Roadmap approved, ready to plan Phase 1
-- Phase 1 combines housekeeping (Wyatt Earp extraction) with About section structure
-- User wants to START with About sections, not video infrastructure
-- Philosophy: Build rough layouts across full page before optimizing any single section
-- Section order critical: Hero → About → Featured Work → Credits → CTA
+- Plan 01-01 complete (HOUSE-01 requirement satisfied)
+- index2.html is now clean and ready for About section insertion
+- Placeholder comment at line 108 marks insertion point for About slides
+- Section numbering updated: Gallery → Section 2, Credits → Section 3, About → Section 4, Contact → Section 5
+- Established pattern: case studies get standalone pages with section-specific entry points
+- Next: Continue Phase 1 with About section structure (remaining plans)
 
 ### Key Files
 - `/Users/randy/Git/website/.planning/ROADMAP.md` — 7-phase structure with design-first philosophy
 - `/Users/randy/Git/website/.planning/REQUIREMENTS.md` — Updated with HOUSE-01 and revised traceability
 - `/Users/randy/Git/website/.planning/STATE.md` — This file (project memory)
-- `/Users/randy/Git/website/index2.html` — Wyatt Earp section at lines 108-157
+- `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-01-SUMMARY.md` — Wyatt extraction summary
+- `/Users/randy/Git/website/case_study_wyatt.html` — Standalone Wyatt Earp case study page
+- `/Users/randy/Git/website/index2.html` — Clean structure, ready for About insertion at line 108
 
 ### Recovery Point
 If context lost, read:
@@ -153,4 +162,4 @@ If context lost, read:
 ---
 
 *State initialized: 2026-02-09*
-*Last updated: 2026-02-09 after roadmap revision with design-first approach*
+*Last updated: 2026-02-09 after completing Plan 01-01 (Wyatt Earp extraction)*
