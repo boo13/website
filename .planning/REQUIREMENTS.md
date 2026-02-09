@@ -9,6 +9,10 @@
 
 Requirements for index2.html — the full editorial portfolio site.
 
+### Housekeeping
+
+- [ ] **HOUSE-01**: Extract Wyatt Earp parallax section from index2.html into standalone case_study_wyatt.html, then remove from index2.html
+
 ### Hero / Landing
 
 - [ ] **HERO-01**: Hero reel autoplays muted on page load with seamless loop
@@ -90,38 +94,48 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| HERO-01 | — | Pending |
-| HERO-02 | — | Pending |
-| HERO-03 | — | Pending |
-| HERO-04 | — | Pending |
-| ABOU-01 | — | Pending |
-| ABOU-02 | — | Pending |
-| ABOU-03 | — | Pending |
-| WORK-01 | — | Pending |
-| WORK-02 | — | Pending |
-| WORK-03 | — | Pending |
-| WORK-04 | — | Pending |
-| CRED-01 | — | Pending |
-| CRED-02 | — | Pending |
-| CRED-03 | — | Pending |
-| ANIM-01 | — | Pending |
-| ANIM-02 | — | Pending |
-| ANIM-03 | — | Pending |
-| ANIM-04 | — | Pending |
-| CTA-01 | — | Pending |
-| CTA-02 | — | Pending |
-| MOBI-01 | — | Pending |
-| MOBI-02 | — | Pending |
-| PERF-01 | — | Pending |
-| PERF-02 | — | Pending |
-| ACCS-01 | — | Pending |
-| ACCS-02 | — | Pending |
+| HOUSE-01 | Phase 1 | Pending |
+| HERO-01 | Phase 2 | Pending |
+| HERO-02 | Phase 2 | Pending |
+| HERO-03 | Phase 2 | Pending |
+| HERO-04 | Phase 2 | Pending |
+| ABOU-01 | Phase 1 | Pending |
+| ABOU-02 | Phase 1 | Pending |
+| ABOU-03 | Phase 1 | Pending |
+| WORK-01 | Phase 3 | Pending |
+| WORK-02 | Phase 4 | Pending |
+| WORK-03 | Phase 3 | Pending |
+| WORK-04 | Phase 4 | Pending |
+| CRED-01 | Phase 3 | Pending |
+| CRED-02 | Phase 5 | Pending |
+| CRED-03 | Phase 5 | Pending |
+| ANIM-01 | Phase 2 | Pending |
+| ANIM-02 | Phase 1 | Pending |
+| ANIM-03 | Phase 2 | Pending |
+| ANIM-04 | Phase 3 | Pending |
+| CTA-01 | Phase 3 | Pending |
+| CTA-02 | Phase 3 | Pending |
+| MOBI-01 | Phase 6 | Pending |
+| MOBI-02 | Phase 6 | Pending |
+| PERF-01 | Phase 7 | Pending |
+| PERF-02 | Phase 6 | Pending |
+| ACCS-01 | Phase 7 | Pending |
+| ACCS-02 | Phase 4 | Pending |
 
 **Coverage:**
-- v2 requirements: 26 total
-- Mapped to phases: 0
-- Unmapped: 26
+- v2 requirements: 27 total (1 housekeeping + 26 feature)
+- Mapped to phases: 27
+- Unmapped: 0
+
+**Phase Distribution:**
+- Phase 1 (Housekeeping & About): 4 requirements
+- Phase 2 (Hero & Core Animations): 6 requirements
+- Phase 3 (Featured Work & Credits Layout): 6 requirements
+- Phase 4 (Video Lightbox & Interactivity): 4 requirements
+- Phase 5 (Credits Enhancements): 2 requirements
+- Phase 6 (Mobile Responsive & Performance): 3 requirements
+- Phase 7 (Optimization & Accessibility): 2 requirements
 
 ---
 *Requirements defined: 2026-02-09*
-*Last updated: 2026-02-09 after initial definition*
+*Last updated: 2026-02-09 after roadmap revision with design-first philosophy*

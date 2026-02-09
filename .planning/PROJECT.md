@@ -4,6 +4,8 @@
 
 A personal portfolio site for Randy Counsman, nonfiction video producer. Designed for recruiters evaluating him for hire and collaborators considering working with him. The site itself demonstrates design and web development skill through its presentation, while keeping the focus on the work — video projects across television, streaming, news, and social. Editorial and bold aesthetic. Single-page scroll experience built on Vite + GSAP.
 
+**Versioning:** v1 = existing bare-bones index.html (live). v2 = index2.html, the full editorial portfolio being built now. v3 = future enhancements (case studies, etc.).
+
 ## Core Value
 
 The work speaks for itself — every design decision exists to showcase Randy's video production work in its best light and make it effortless for recruiters to see what he's done and get in touch.
@@ -55,6 +57,9 @@ The work speaks for itself — every design decision exists to showcase Randy's 
 - Adobe Typekit provides custom web fonts
 - Site deploys to GitHub Pages from gh-pages branch
 - The about section concept: multiple short sections, each with 1-2 punchy lines (e.g., "Randy Counsman is a nonfiction producer" / "I've worked on STORYTELLING that goes BIG..." / "as well as STORYTELLING that fits in your hand..." / "but it's all about CHARACTER.")
+- About section comes immediately after hero — establishes identity before showing work
+- One about section features animated phone mockups scrolling with parallax (different speeds/sizes), showcasing digital/social work (ref: "ref/WORK - Digital.png")
+- Section order: Hero → About → Featured Work → Credits → CTA
 
 ## Constraints
 
@@ -70,7 +75,7 @@ The work speaks for itself — every design decision exists to showcase Randy's 
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Single-page scroll site for v1 | Recruiters want a quick, complete impression — not clicking through pages | — Pending |
+| Single-page scroll site for v2 | Recruiters want a quick, complete impression — not clicking through pages | — Pending |
 | Case studies deferred | Get the core portfolio live first, add depth later | — Pending |
 | Editorial & bold aesthetic | Shows design skill while staying professional for recruiter audience | — Pending |
 | Hero reel as first impression | Immediate visual impact — "this person makes professional things" | — Pending |
@@ -78,4 +83,4 @@ The work speaks for itself — every design decision exists to showcase Randy's 
 | Featured (3-5) vs additional credits split | Curated quality for first impression + comprehensive list for credibility | — Pending |
 
 ---
-*Last updated: 2026-02-09 after initialization*
+*Last updated: 2026-02-09 after requirements definition*
