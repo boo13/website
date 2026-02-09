@@ -209,13 +209,20 @@ Plans:
 
 **Dependencies:** Phases 1-6 (all features complete and mobile-tested)
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — FFmpeg VP9 two-pass video optimization (42MB to under 25MB)
+- [ ] 07-02-PLAN.md — ARIA landmarks, focus-visible keyboard styles, Vite vendor chunk splitting
+- [ ] 07-03-PLAN.md — Lighthouse audit, issue fixes, and cross-browser verification checkpoint
+
 **Requirements:**
 - PERF-01: Fast initial load — optimized video assets, smooth loading experience
 - ACCS-01: prefers-reduced-motion respected in all animations
 
 **Success Criteria:**
 1. All videos have optimized encoding (appropriate bitrate, resolution, format)
-2. Git LFS configured and tracking all video files (prevents repository size blowout)
+2. ~~Git LFS configured and tracking all video files~~ NOT APPLICABLE (GitHub Pages does not support Git LFS -- videos optimized and committed directly)
 3. Initial page load is fast (3G throttle test passes)
 4. All animations respect prefers-reduced-motion (content visible immediately without animation)
 5. Lighthouse audit passes (Performance 85+, Accessibility 95+, Best Practices 90+, SEO 95+)
@@ -223,11 +230,13 @@ Plans:
 7. Cross-browser testing complete (Chrome, Firefox, Safari, iOS Safari, Android Chrome)
 
 **Notes:**
-- Video optimization happens here, after content is finalized
-- FFmpeg encoding scripts documented for consistent quality/format
+- Video optimization via FFmpeg VP9 two-pass encoding (CRF 28 hero, CRF 33 gallery)
+- Git LFS not supported on GitHub Pages -- aggressive compression instead
+- Vite vendor chunk splitting for GSAP and GLightbox caching
+- :focus-visible styles for keyboard accessibility
+- Lighthouse CLI already installed for automated auditing
 - Accessibility testing on complete feature set
 - Final production validation before launch
-- May need Git LFS for video files depending on size
 
 ---
 
@@ -241,7 +250,7 @@ Plans:
 | 4 - Video Lightbox & Hover Interactivity | Planned | WORK-02, WORK-04, ACCS-02 | 0% |
 | 5 - Credits Section Enhancements | Pending | CRED-02, CRED-03 | 0% |
 | 6 - Mobile Responsive & Scroll Performance | Pending | MOBI-01, MOBI-02, PERF-02 | 0% |
-| 7 - Optimization & Accessibility Polish | Pending | PERF-01, ACCS-01 | 0% |
+| 7 - Optimization & Accessibility Polish | Planned | PERF-01, ACCS-01 | 0% |
 
 **Overall Progress:** 11/27 requirements complete (41%)
 
@@ -255,4 +264,4 @@ Plans:
 ---
 
 *Roadmap created: 2026-02-09*
-*Last updated: 2026-02-09 — Phase 4 planned (2 plans, 2 waves)*
+*Last updated: 2026-02-09 — Phase 7 planned (3 plans, 2 waves)*
