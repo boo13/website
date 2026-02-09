@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-02-09
 **Current Phase:** 01-housekeeping-about (1 of 7)
-**Current Plan:** 01-03 completed
+**Current Plan:** 01-04 completed
 
 ---
 
@@ -22,7 +22,7 @@ Roadmap revised with design-first philosophy. Ready to begin Phase 1: Housekeepi
 
 ### Phase Progress
 ```
-Phase 1: Housekeeping & About Section Structure  [████░░░░░░] 40%
+Phase 1: Housekeeping & About Section Structure  [████████░░] 80%
 Phase 2: Hero Section & Core Animations          [░░░░░░░░░░] 0%
 Phase 3: Featured Work & Credits Rough Layout    [░░░░░░░░░░] 0%
 Phase 4: Video Lightbox & Hover Interactivity    [░░░░░░░░░░] 0%
@@ -31,29 +31,30 @@ Phase 6: Mobile Responsive & Performance         [░░░░░░░░░░
 Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░] 0%
 ```
 
-**Overall:** 2/27 requirements complete (7.4%)
+**Overall:** 4/27 requirements complete (14.8%)
 
 ### Active Work
-- Phase 1 in progress: Housekeeping, About slides structure, and grid zoom animation complete
+- Phase 1 in progress: Housekeeping, About slides structure, animations, and checkpoint resolutions complete
 - Plan 01-01 complete: Wyatt Earp extraction successful
 - Plan 01-02 complete: About slides CSS layout and JS scaffold
 - Plan 01-03 complete: Grid zoom-out and text reveal animations
+- Plan 01-04 complete: Slide reorder, dramatic grid zoom expansion, phone slide pin and enlargement
 
 ### Status
-- **Phase:** 01-housekeeping-about (Plans 01, 02, 03 complete)
-- **Plan:** 01-03 completed
+- **Phase:** 01-housekeeping-about (Plans 01, 02, 03, 04 complete)
+- **Plan:** 01-04 completed
 - **Blockers:** None
-- **Next:** Plan 01-04 (if exists) or begin next phase planning
+- **Next:** Check for Plan 01-05 or begin Phase 1 review/completion
 
 ---
 
 ## Performance Metrics
 
 ### Velocity
-- **Requirements completed:** 2/27 (7.4%)
-- **Plans completed:** 3
+- **Requirements completed:** 4/27 (14.8%)
+- **Plans completed:** 4
 - **Phases completed:** 0/7
-- **Average plan duration:** 3 minutes
+- **Average plan duration:** 5.5 minutes
 
 ### Quality
 - **Build status:** Passing (existing codebase)
@@ -77,6 +78,10 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 | ABOU-02-scrub-timing | 2026-02-09 | Use SCRUB.smooth (1.5s) for grid zoom animation | 01-03 | Consistent with landing section, prevents jerky scrolling feel |
 | ABOU-02-text-separation | 2026-02-09 | Text animations trigger-based (not scrub-linked) | 01-03 | Independent timing control, text appears early while zoom progresses |
 | ABOU-02-text-hierarchy | 2026-02-09 | Handwritten intro fades in, headline uses text-mask-rise | 01-03 | Different animation styles create hierarchy: subtle intro vs dramatic headline |
+| ABOU-04-slide-reorder | 2026-02-09 | Reordered slides: "This is me" → "Goes BIG" → "In your hand" | 01-04 | Personal intro leads, then work showcase progression |
+| ABOU-04-grid-expansion | 2026-02-09 | Grid expanded to 7x7 with 7x initial scale for 9x9 feel | 01-04 | Dramatic 2800% initial zoom creates overwhelming reveal effect |
+| ABOU-04-phone-pin | 2026-02-09 | Phone slide pinned with 150% scroll length matching grid zoom | 01-04 | Extended viewing time for phone mockup showcase |
+| ABOU-04-phone-sizing | 2026-02-09 | Phones enlarged ~57% (small 140→220px, large 180→280px) | 01-04 | More prominent mockups, easier to see detail |
 
 **2026-02-09: Roadmap Revision - Design-First Philosophy**
 - Restructured from 8 phases to 7 phases based on user feedback
@@ -123,10 +128,11 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 - [x] Extract Wyatt Earp section (lines 108-157 in index2.html) ✓ Complete
 - [x] Create case_study_wyatt.html with HTML boilerplate ✓ Complete
 - [x] Remove Wyatt Earp from index2.html cleanly ✓ Complete
-- [x] Build About section HTML structure ✓ Complete (Plan 01 inserted HTML)
-- [x] Build About slides CSS layout and JS scaffold ✓ Complete (Plan 02)
-- [ ] Implement grid zoom animation (Plan 03)
-- [ ] Implement text reveal animation (Plan 04)
+- [x] Build About section HTML structure ✓ Complete (Plan 01-02 inserted HTML)
+- [x] Build About slides CSS layout and JS scaffold ✓ Complete (Plan 01-02)
+- [x] Implement grid zoom animation ✓ Complete (Plan 01-03)
+- [x] Implement text reveal animation ✓ Complete (Plan 01-03)
+- [x] Resolve checkpoint feedback (reorder, enlarge, pin) ✓ Complete (Plan 01-04)
 
 **Research Needed:**
 - [ ] Phase 4: Video lightbox implementation approach (GLightbox compatibility)
@@ -147,19 +153,17 @@ None currently. Roadmap revised and ready to begin Phase 1.
 ## Session Continuity
 
 ### What Just Happened
-Completed Plan 01-03: Implemented scrub-linked grid zoom-out animation (3x to 1x scale) and text reveal animations for Slide 1. Grid starts zoomed into center image and smoothly zooms out to reveal full oversized 3x3 grid as user scrolls. Slide pins during animation with SCRUB.smooth timing. Handwritten intro fades in, headline animates word-by-word with text-mask-rise effect. Duration: 3 minutes.
+Completed Plan 01-04: Resolved checkpoint feedback with three major changes: (1) Reordered slides to "This is me" → "Goes BIG" → "In your hand", (2) Expanded grid to 7x7 with 7x initial scale for dramatic 9x9 zoom-out feel (2800% initial zoom), (3) Pinned phone slide with 150% scroll length and enlarged phones ~57%. All user feedback addressed. Duration: 8 minutes.
 
-Previous: Plan 01-02 created CSS layout and JS scaffold. Plan 01-01 extracted Wyatt Earp to standalone page.
+Previous: Plan 01-03 implemented grid zoom-out and text reveals. Plan 01-02 created CSS layout and JS scaffold. Plan 01-01 extracted Wyatt Earp to standalone page.
 
 ### Context for Next Session
-- Plans 01-01, 01-02, and 01-03 complete (HOUSE-01 and ABOU-01 requirements in progress)
-- Slide 1 animations complete: grid zoom-out + text reveals working
-- Grid zoom is scrub-linked with pin, 150% scroll distance, smooth catch-up
-- Text animations trigger-based (not scrub-linked) for independent timing
-- GPU compositing enabled with will-change: transform
-- prefers-reduced-motion respected (all content visible immediately)
-- Slides 2 and 3 ready for future animations if needed
-- Next: Check if Plan 01-04 exists, or begin next phase planning
+- Plans 01-01, 01-02, 01-03, and 01-04 complete (Phase 1 at 80% completion)
+- About section narrative finalized: personal intro → work showcase progression
+- Grid zoom delivers dramatic effect: 7x7 grid, 7x initial scale, reveals 49 cells worth of content
+- Phone slide pinned for extended viewing, mockups significantly larger
+- All animations smooth and performant (GPU compositing, lazy loading, reduced motion support)
+- Phase 1 nearly complete - check for any remaining plans or begin phase review
 
 ### Key Files
 - `/Users/randy/Git/website/.planning/ROADMAP.md` — 7-phase structure with design-first philosophy
@@ -168,10 +172,11 @@ Previous: Plan 01-02 created CSS layout and JS scaffold. Plan 01-01 extracted Wy
 - `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-01-SUMMARY.md` — Wyatt extraction summary
 - `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-02-SUMMARY.md` — About slides structure summary
 - `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-03-SUMMARY.md` — Grid zoom animation summary
+- `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-04-SUMMARY.md` — Checkpoint resolution summary
 - `/Users/randy/Git/website/case_study_wyatt.html` — Standalone Wyatt Earp case study page
-- `/Users/randy/Git/website/index2.html` — About slides HTML between Hero and Gallery (lines 108-193)
-- `/Users/randy/Git/website/src/sections/about-slides.js` — About section initialization with gsap.context
-- `/Users/randy/Git/website/src/styles/about-slides.css` — Full-viewport slide layout CSS
+- `/Users/randy/Git/website/index2.html` — About slides HTML with reordered slides and 7x7 grid
+- `/Users/randy/Git/website/src/sections/about-slides.js` — About section with dramatic zoom and pinned phone slide
+- `/Users/randy/Git/website/src/styles/about-slides.css` — 7x7 grid layout, enlarged phones, full-viewport slides
 
 ### Recovery Point
 If context lost, read:
@@ -183,4 +188,4 @@ If context lost, read:
 ---
 
 *State initialized: 2026-02-09*
-*Last updated: 2026-02-09 after completing Plan 01-03 (Grid zoom animation)*
+*Last updated: 2026-02-09 after completing Plan 01-04 (Checkpoint resolution - slide reorder, grid expansion, phone pin/enlargement)*
