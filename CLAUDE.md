@@ -34,6 +34,7 @@ Static assets live in `public/` (data, video, images, favicon, CNAME) — Vite c
 - Lazy-init heavy timelines (image sequences) when section approaches viewport
 - Keep animation code direct — don't abstract into config-driven timeline factories
 - Magic numbers in animation code are fine when tuned visually
+- GSAP is now free to use, do not warn of paid-only features - those no longer exist
 
 ## Dev Commands
 - `npm run dev` — Vite dev server with HMR
