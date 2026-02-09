@@ -88,6 +88,12 @@ Plans:
 
 **Dependencies:** Phase 2 (hero complete, scroll patterns established)
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Update gallery to 5 curated featured work cards with network logos, verify credits table
+- [ ] 03-02-PLAN.md — Add CTA section with Buttondown newsletter form and contact button
+
 **Requirements:**
 - WORK-01: 3-5 curated project cards with thumbnail, title, role, and network/client
 - WORK-03: Network/client logos displayed on each project card
@@ -224,7 +230,7 @@ Plans:
 |-------|--------|--------------|------------|
 | 1 - Housekeeping & About Section Structure | ✓ Complete | HOUSE-01, ABOU-01, ABOU-02, ABOU-03, ANIM-02 | 100% |
 | 2 - Hero Section & Core Animations | Pending | HERO-01, HERO-02, HERO-03, HERO-04, ANIM-01, ANIM-03 | 0% |
-| 3 - Featured Work & Credits Rough Layout | Pending | WORK-01, WORK-03, CRED-01, ANIM-04, CTA-01, CTA-02 | 0% |
+| 3 - Featured Work & Credits Rough Layout | Planned | WORK-01, WORK-03, CRED-01, ANIM-04, CTA-01, CTA-02 | 0% |
 | 4 - Video Lightbox & Hover Interactivity | Pending | WORK-02, WORK-04, ACCS-02 | 0% |
 | 5 - Credits Section Enhancements | Pending | CRED-02, CRED-03 | 0% |
 | 6 - Mobile Responsive & Scroll Performance | Pending | MOBI-01, MOBI-02, PERF-02 | 0% |
@@ -236,10 +242,10 @@ Plans:
 
 ## Next Steps
 
-1. Plan Phase 2: `/gsd:discuss-phase 2` or `/gsd:plan-phase 2`
-2. Research may be needed for Phase 4 (video lightbox implementation) and Phase 3 (Buttondown API)
+1. Execute Phase 3: `/gsd:execute-phase 3`
+2. Research may be needed for Phase 4 (video lightbox implementation)
 
 ---
 
 *Roadmap created: 2026-02-09*
-*Last updated: 2026-02-09 — Phase 1 complete (4 plans, 3 waves, verified)*
+*Last updated: 2026-02-09 — Phase 3 planned (2 plans, 1 wave, parallel)*
