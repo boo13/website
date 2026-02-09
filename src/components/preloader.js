@@ -1,9 +1,9 @@
 import { gsap } from 'gsap';
 
 const FORCE_COMPLETE_AFTER_MS = 15000;
-const FAKE_PROGRESS_TICK_MS = 800;
-const FAKE_PROGRESS_MIN_STEP = 0.05;
-const FAKE_PROGRESS_MAX_STEP = 0.28;
+const FAKE_PROGRESS_TICK_MS = 240;
+const FAKE_PROGRESS_MIN_STEP = 0.01;
+const FAKE_PROGRESS_MAX_STEP = 0.05;
 
 const VIDEO_ASPECT_RATIO = 16 / 9;
 const DESKTOP_SIZES = { minWidth: 96, maxWidth: 520 };
@@ -72,22 +72,40 @@ function startCountdown(timerEl) {
   return () => window.clearInterval(timerId);
 }
 
-function animateEdges(edgesEl, progress) {
+function renderEdges(edgesEl, progress) {
   if (!edgesEl) {
     return;
   }
 
   const { minWidth, maxWidth } = getSizeConfig();
-  const width = Math.max(Math.round(maxWidth * progress), minWidth);
-  const height = Math.round(width / VIDEO_ASPECT_RATIO);
+  const width = Math.max(maxWidth * progress, minWidth);
+  const height = width / VIDEO_ASPECT_RATIO;
+  gsap.set(edgesEl, { width, height });
+}
 
-  gsap.to(edgesEl, {
-    width,
-    height,
-    duration: 1,
-    ease: 'sine.inOut',
-    overwrite: 'auto',
-  });
+function createProgressSmoother(edgesEl) {
+  const state = { value: 0 };
+
+  const render = () => {
+    renderEdges(edgesEl, state.value);
+  };
+
+  render();
+
+  return {
+    to(target) {
+      gsap.to(state, {
+        value: target,
+        duration: 0.65,
+        ease: 'power2.out',
+        overwrite: 'auto',
+        onUpdate: render,
+      });
+    },
+    kill() {
+      gsap.killTweensOf(state);
+    },
+  };
 }
 
 function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
@@ -154,6 +172,7 @@ export function runPreloader() {
 
     const edgesEl = overlayEl.querySelector('.preloader-edges');
     const timeEl = overlayEl.querySelector('.preloader-time');
+    const progressSmoother = createProgressSmoother(edgesEl);
 
     const clearCountdown = startCountdown(timeEl);
     const videos = Array.from(document.querySelectorAll('video'));
@@ -169,6 +188,7 @@ export function runPreloader() {
       window.clearInterval(fakeProgressIntervalId);
       window.clearTimeout(forceCompleteTimeoutId);
       clearCountdown();
+      progressSmoother.kill();
       metadataCleanupFns.forEach((cleanupFn) => cleanupFn());
     };
 
@@ -197,7 +217,7 @@ export function runPreloader() {
       }
 
       const progress = clamp(0.8 * fakeProgress + 0.2 * realProgress, 0, 1);
-      animateEdges(edgesEl, progress);
+      progressSmoother.to(progress);
 
       if (progress >= 1) {
         finish();

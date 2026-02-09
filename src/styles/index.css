@@ -280,6 +280,7 @@ nav {
   align-items: center;
   justify-content: center;
   transform-origin: center center;
+  will-change: width, height, transform, opacity;
 }
 
 .preloader-time {
