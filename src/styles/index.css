@@ -282,23 +282,13 @@ nav {
   transform-origin: center center;
 }
 
-.preloader-count {
-  font-family: 'futura-pt', 'Arial', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  z-index: 2;
-}
-
 .preloader-time {
-  position: absolute;
-  bottom: 20px;
   font-family: 'futura-pt', 'Arial', sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.02em;
+  z-index: 2;
 }
 
 .preloader-corner {
@@ -357,7 +347,6 @@ nav {
     height: 41px;
   }
 
-  .preloader-count,
   .preloader-time {
     font-size: 12px;
   }

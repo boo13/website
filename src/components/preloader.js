@@ -16,10 +16,6 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-function formatCounter(progress) {
-  return String(Math.round(progress * 100)).padStart(2, '0');
-}
-
 function getSizeConfig() {
   return window.matchMedia('(max-width: 480px)').matches ? MOBILE_SIZES : DESKTOP_SIZES;
 }
@@ -93,17 +89,13 @@ function animateEdges(edgesEl, progress) {
   });
 }
 
-function animateExit({ overlayEl, edgesEl, countEl, timeEl, onComplete }) {
+function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
   const timeline = gsap.timeline({
     defaults: {
       ease: 'power2.inOut',
     },
     onComplete,
   });
-
-  if (countEl) {
-    timeline.to(countEl, { autoAlpha: 0, duration: 0.35 }, 0);
-  }
 
   if (timeEl) {
     timeline.to(timeEl, { autoAlpha: 0, duration: 0.35 }, 0);
@@ -133,7 +125,6 @@ export function runPreloader() {
     }
 
     const edgesEl = overlayEl.querySelector('.preloader-edges');
-    const countEl = overlayEl.querySelector('.preloader-count');
     const timeEl = overlayEl.querySelector('.preloader-time');
 
     const clearCountdown = startCountdown(timeEl);
@@ -164,7 +155,6 @@ export function runPreloader() {
       animateExit({
         overlayEl,
         edgesEl,
-        countEl,
         timeEl,
         onComplete: () => {
           overlayEl.remove();
@@ -179,9 +169,6 @@ export function runPreloader() {
       }
 
       const progress = clamp(0.8 * fakeProgress + 0.2 * realProgress, 0, 1);
-      if (countEl) {
-        countEl.textContent = formatCounter(progress);
-      }
       animateEdges(edgesEl, progress);
 
       if (progress >= 1) {

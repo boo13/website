@@ -54,18 +54,11 @@
         justify-content: center;
       }
 
-      .preloader-count {
-        font-family: Arial, sans-serif;
-        color: #f0f2f1;
-        font-size: 14px;
-      }
-
       .preloader-time {
-        position: absolute;
-        bottom: 20px;
         font-family: Arial, sans-serif;
         color: #f0f2f1;
         font-size: 14px;
+        z-index: 2;
       }
 
       .preloader-corner {
@@ -111,7 +104,6 @@
           height: 14px;
         }
 
-        .preloader-count,
         .preloader-time {
           font-size: 12px;
         }
@@ -143,13 +135,12 @@
     <div class="loading-overlay">
       <div class="preloader-wrapper">
         <div class="preloader-edges">
-          <div class="preloader-count">00</div>
+          <div class="preloader-time">00:06:00</div>
           <div class="preloader-corner preloader-corner-lt"></div>
           <div class="preloader-corner preloader-corner-lb"></div>
           <div class="preloader-corner preloader-corner-rt"></div>
           <div class="preloader-corner preloader-corner-rb"></div>
         </div>
-        <div class="preloader-time">00:06:00</div>
       </div>
     </div>
 
