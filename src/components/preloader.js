@@ -107,7 +107,7 @@ function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
   });
 
   if (timeEl) {
-    timeline.to(timeEl, { autoAlpha: 0, duration: 0.35 }, 0);
+    timeline.to(timeEl, { autoAlpha: 0, duration: 0.55, ease: 'power1.out' }, 0);
   }
 
   cornerAnimations.forEach(({ selector, x, y }) => {
@@ -122,25 +122,25 @@ function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
         x,
         y,
         autoAlpha: 0,
-        duration: 0.55,
-        ease: 'power3.out',
+        duration: 1.05,
+        ease: 'power1.out',
       },
-      0.06,
+      0.08,
     );
   });
 
   if (edgesEl) {
-    timeline.to(edgesEl, { scale: 1.04, duration: 0.55, ease: 'power2.out' }, 0.06);
+    timeline.to(edgesEl, { scale: 1.04, duration: 1.0, ease: 'power1.out' }, 0.08);
   }
 
   timeline.to(
     overlayEl,
     {
-      delay: 0.35,
+      delay: 0.5,
       autoAlpha: 0,
-      duration: 0.9,
+      duration: 1.25,
     },
-    0.32,
+    0.45,
   );
 }
 
