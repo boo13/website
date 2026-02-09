@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-02-09
 **Current Phase:** Phase 3 - Featured Work & Credits Layout (In Progress)
-**Current Plan:** 03-01 Complete
+**Current Plan:** 03-02 Complete
 
 ---
 
@@ -24,35 +24,36 @@ Phase 1 complete. Ready to begin Phase 2: Hero Section & Core Animations.
 ```
 Phase 1: Housekeeping & About Section Structure  [██████████] 100% ✓
 Phase 2: Hero Section & Core Animations          [░░░░░░░░░░] 0%
-Phase 3: Featured Work & Credits Rough Layout    [██░░░░░░░░] 20%
+Phase 3: Featured Work & Credits Rough Layout    [████░░░░░░] 40%
 Phase 4: Video Lightbox & Hover Interactivity    [░░░░░░░░░░] 0%
 Phase 5: Credits Section Enhancements            [░░░░░░░░░░] 0%
 Phase 6: Mobile Responsive & Performance         [░░░░░░░░░░] 0%
 Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░] 0%
 ```
 
-**Overall:** 6/27 requirements complete (22%)
+**Overall:** 8/27 requirements complete (30%)
 
 ### Active Work
-- Phase 3 in progress - Plan 03-01 complete (gallery cards updated)
+- Phase 3 in progress - Plans 03-01 and 03-02 complete
 - Gallery section displays 5 curated project cards with network logos
+- CTA section added with newsletter signup form and contact button
 - Horizontal scroll animation ready, credits table verified functional
 
 ### Status
 - **Phase:** Phase 3 - Featured Work & Credits Layout
-- **Plan:** 03-01 complete, additional phase 3 plans may be pending
+- **Plan:** 03-02 complete (gallery cards + CTA section)
 - **Blockers:** None
-- **Next:** Continue with remaining Phase 3 plans or move to Phase 4
+- **Next:** Continue with remaining Phase 3 plans or verify phase completion
 
 ---
 
 ## Performance Metrics
 
 ### Velocity
-- **Requirements completed:** 5/27 (19%)
-- **Plans completed:** 4
+- **Requirements completed:** 8/27 (30%)
+- **Plans completed:** 6
 - **Phases completed:** 1/7
-- **Average plan duration:** 5.5 minutes
+- **Average plan duration:** 4.3 minutes
 
 ### Quality
 - **Build status:** Passing (existing codebase)
@@ -83,6 +84,9 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 | WORK-01-placeholder | 2026-02-09 | .card-media--placeholder pattern for missing thumbnails | 03-01 | Graceful degradation for cards without preview images |
 | WORK-01-video-selective | 2026-02-09 | Only include video elements for projects with videoStandard | 03-01 | Cleaner HTML, no broken video elements |
 | WORK-01-logo-mapping | 2026-02-09 | History Channel → History.png, CNN → CNN_logo_red.svg | 03-01 | Direct mapping from platform to logo assets |
+| CTA-01-html-form | 2026-02-09 | Newsletter form uses standard HTML POST to Buttondown (no JavaScript) | 03-02 | Simple, reliable form submission for rough layout phase |
+| CTA-02-new-tab | 2026-02-09 | Form target="_blank" opens Buttondown confirmation in new tab | 03-02 | User stays on portfolio site, confirmation appears separately |
+| CTA-03-mobile-stack | 2026-02-09 | Newsletter form stacks vertically on mobile (<768px) | 03-02 | Better touch targets, consistent with mobile patterns |
 
 **2026-02-09: Roadmap Revision - Design-First Philosophy**
 - Restructured from 8 phases to 7 phases based on user feedback
@@ -154,13 +158,13 @@ None currently. Roadmap revised and ready to begin Phase 1.
 ## Session Continuity
 
 ### What Just Happened
-Phase 3 Plan 01 complete. Gallery section updated from 3 hardcoded cards to 5 curated featured projects with network logos. Cards display: Wyatt Earp (2024, History, with video), upNEXT News (2026, placeholder styling), Sitting Bull (2025, History), The Men Who Built America (2012, History), Pope (2018, CNN). Progress indicator updated to X/5. Horizontal scroll animation verified working with 5 cards. Credits table still functional.
+Phase 3 Plans 01 and 02 complete. Plan 01: Gallery section updated from 3 hardcoded cards to 5 curated featured projects with network logos. Plan 02: CTA section added with newsletter signup form (Buttondown integration) and contact button, positioned between credits and about sections. Newsletter form functional with standard HTML POST, mobile responsive (stacks vertically <768px). Contact button uses consistent arrow SVG pattern.
 
 ### Context for Next Session
-- Phase 3 (Featured Work & Credits Layout) in progress - Plan 01 complete
-- Gallery section now shows 5 real project cards instead of 3 placeholder cards
-- Network logos (History.png, CNN_logo_red.svg) correctly displayed on 4 of 5 cards
-- upNEXT News uses placeholder gradient (no thumbnail, no logo for social platform)
+- Phase 3 (Featured Work & Credits Layout) in progress - Plans 01 and 02 complete
+- Gallery section now shows 5 real project cards (Wyatt Earp, upNEXT News, Sitting Bull, MWBA, Pope)
+- CTA section provides newsletter signup and prominent contact link
+- User setup required: Buttondown account configuration and username verification
 - Philosophy: Build rough layouts across full page before polishing any section
 
 ### Key Files
@@ -172,11 +176,12 @@ Phase 3 Plan 01 complete. Gallery section updated from 3 hardcoded cards to 5 cu
 - `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-03-SUMMARY.md` — Grid zoom animation summary
 - `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-04-SUMMARY.md` — Checkpoint resolution summary
 - `/Users/randy/Git/website/.planning/phases/03-featured-credits-layout/03-01-SUMMARY.md` — Gallery cards update summary
+- `/Users/randy/Git/website/.planning/phases/03-featured-credits-layout/03-02-SUMMARY.md` — CTA section summary
 - `/Users/randy/Git/website/case_study_wyatt.html` — Standalone Wyatt Earp case study page
-- `/Users/randy/Git/website/index2.html` — About slides + Gallery with 5 featured project cards
+- `/Users/randy/Git/website/index2.html` — About slides + Gallery with 5 cards + CTA section with newsletter form
 - `/Users/randy/Git/website/src/sections/about-slides.js` — About section with dramatic zoom and pinned phone slide
 - `/Users/randy/Git/website/src/styles/about-slides.css` — 7x7 grid layout, enlarged phones, full-viewport slides
-- `/Users/randy/Git/website/src/styles/index2.css` — Gallery card styles with placeholder pattern
+- `/Users/randy/Git/website/src/styles/index2.css` — Gallery card styles + CTA section styles
 
 ### Recovery Point
 If context lost, read:
@@ -188,4 +193,4 @@ If context lost, read:
 ---
 
 *State initialized: 2026-02-09*
-*Last updated: 2026-02-09 after completing Plan 03-01 (Gallery cards - 5 curated featured projects with network logos)*
+*Last updated: 2026-02-09 after completing Plan 03-02 (CTA section with newsletter signup form and contact button)*
