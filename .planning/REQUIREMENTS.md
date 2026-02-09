@@ -28,14 +28,14 @@ Requirements for index2.html — the full editorial portfolio site.
 
 ### Featured Work
 
-- [ ] **WORK-01**: 3-5 curated project cards with thumbnail, title, role, and network/client
+- [x] **WORK-01**: 3-5 curated project cards with thumbnail, title, role, and network/client
 - [ ] **WORK-02**: Video lightbox — click project to play video in modal overlay
-- [ ] **WORK-03**: Network/client logos displayed on each project card
+- [x] **WORK-03**: Network/client logos displayed on each project card
 - [ ] **WORK-04**: Hover video preview on desktop — thumbnail plays clip on hover
 
 ### Credits
 
-- [ ] **CRED-01**: Comprehensive credits table rendered from Projects.json
+- [x] **CRED-01**: Comprehensive credits table rendered from Projects.json
 - [ ] **CRED-02**: Cursor-tracking image preview on credit row hover
 - [ ] **CRED-03**: Staggered row reveal animation on scroll (IntersectionObserver)
 
@@ -44,12 +44,12 @@ Requirements for index2.html — the full editorial portfolio site.
 - [ ] **ANIM-01**: Signature hero zoom/depth animation moment
 - [x] **ANIM-02**: Scroll-driven text mask reveals for key content
 - [ ] **ANIM-03**: Choreographed section transitions between major sections
-- [ ] **ANIM-04**: Gallery scroll animation (horizontal scroll or animated card transitions)
+- [x] **ANIM-04**: Gallery scroll animation (horizontal scroll or animated card transitions)
 
 ### CTA
 
-- [ ] **CTA-01**: Inline newsletter signup form with Buttondown integration
-- [ ] **CTA-02**: CTA button linking to contact.html
+- [x] **CTA-01**: Inline newsletter signup form with Buttondown integration
+- [x] **CTA-02**: CTA button linking to contact.html
 
 ### Mobile & Performance
 
@@ -102,19 +102,19 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ABOU-01 | Phase 1 | Complete |
 | ABOU-02 | Phase 1 | Complete |
 | ABOU-03 | Phase 1 | Complete |
-| WORK-01 | Phase 3 | Pending |
+| WORK-01 | Phase 3 | Complete |
 | WORK-02 | Phase 4 | Pending |
-| WORK-03 | Phase 3 | Pending |
+| WORK-03 | Phase 3 | Complete |
 | WORK-04 | Phase 4 | Pending |
-| CRED-01 | Phase 3 | Pending |
+| CRED-01 | Phase 3 | Complete |
 | CRED-02 | Phase 5 | Pending |
 | CRED-03 | Phase 5 | Pending |
 | ANIM-01 | Phase 2 | Pending |
 | ANIM-02 | Phase 1 | Complete |
 | ANIM-03 | Phase 2 | Pending |
-| ANIM-04 | Phase 3 | Pending |
-| CTA-01 | Phase 3 | Pending |
-| CTA-02 | Phase 3 | Pending |
+| ANIM-04 | Phase 3 | Complete |
+| CTA-01 | Phase 3 | Complete |
+| CTA-02 | Phase 3 | Complete |
 | MOBI-01 | Phase 6 | Pending |
 | MOBI-02 | Phase 6 | Pending |
 | PERF-01 | Phase 7 | Pending |
