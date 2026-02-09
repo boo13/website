@@ -10,7 +10,7 @@ export function initCustomCursor() {
 
   // Target sections
   const sections = document.querySelectorAll(
-    '.hero-section, .parallax-section'
+    '.hero-section'
   );
   if (!sections.length) return () => {};
 

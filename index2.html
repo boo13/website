@@ -106,58 +106,94 @@
     </section>
 
     <!-- =====================================================
-         SECTION 2: WYATT EARP - PARALLAX RACK-FOCUS
-         Layered PNGs with blur/movement effect
-         BG blur 6px→0, FG inverse
+         SECTION: ABOUT SLIDES
+         Full-viewport scroll-driven narrative slides
+         "I've worked on..." -> "as well as..." -> "This is me..."
     ====================================================== -->
-    <section id="wyatt-earp" class="parallax-section">
-        <div class="parallax-container">
-            <!-- Background layer (town) -->
-            <img
-                class="parallax-layer parallax-bg"
-                src="images/Wyatt_Layer01_v01.png"
-                alt="Wyatt Earp background"
-                loading="lazy"
-            >
-            <div class="parallax-fade parallax-bg-fade"></div>
+    <section class="about-slides-section">
 
-            <!-- Text content layer -->
-            <div class="parallax-text">
-                <img
-                    class="network-logo"
-                    src="images/logos/Netflix_white.png"
-                    alt="Netflix"
-                >
-                <h2 class="project-title">Wyatt Earp and The Cowboy War</h2>
-                <div class="quotes">
-                    <blockquote class="quote">
-                        "Guns, grits, and global politics"
-                        <cite>— Wall Street Journal</cite>
-                    </blockquote>
-                    <blockquote class="quote">
-                        "A cracking good yarn"
-                        <cite>— The Spectator</cite>
-                    </blockquote>
-                    <blockquote class="quote">
-                        "Well-written and well-acted... Stream it!"
-                        <cite>— Decider</cite>
-                    </blockquote>
+        <!-- Slide 1: "Storytelling that goes BIG" -->
+        <div class="about-slide slide-goes-big">
+            <div class="slide-bg">
+                <!-- Background: grid of images, initially zoomed into center -->
+                <div class="grid-container">
+                    <!-- Center hero image (the dam burst still) -->
+                    <div class="grid-item grid-hero">
+                        <img src="images/portfolio/MWBA.jpg" alt="" loading="lazy">
+                    </div>
+                    <!-- Surrounding grid items (dramatic shots from previous work) -->
+                    <div class="grid-item"><img src="images/shows/CapsizedBloodInTheWater_TitleCard.webp" alt="" loading="lazy"></div>
+                    <div class="grid-item"><img src="images/portfolio/Pope.jpg" alt="" loading="lazy"></div>
+                    <div class="grid-item"><img src="images/Wyatt_Layer01_v01.png" alt="" loading="lazy"></div>
+                    <div class="grid-item"><img src="images/portfolio/SonsOfLiberty.jpg" alt="" loading="lazy"></div>
+                    <div class="grid-item"><img src="images/shows/TheWorldWars_TitleCard.webp" alt="" loading="lazy"></div>
+                    <div class="grid-item"><img src="images/portfolio/MakingOfTheMob.jpg" alt="" loading="lazy"></div>
+                    <div class="grid-item"><img src="images/Wyatt_Layer02_v01.png" alt="" loading="lazy"></div>
+                    <div class="grid-item"><img src="images/shows/TitansThatBuilt_TitleCard.webp" alt="" loading="lazy"></div>
                 </div>
             </div>
-
-            <!-- Foreground layer (Wyatt) -->
-            <img
-                class="parallax-layer parallax-fg"
-                src="images/Wyatt_Layer02_v01.png"
-                alt="Wyatt Earp foreground"
-                loading="lazy"
-            >
-            <div class="parallax-fade parallax-fg-fade"></div>
+            <div class="slide-content">
+                <p class="slide-intro handwritten">I've worked on</p>
+                <h2 class="slide-headline">Storytelling<br>that goes <em>BIG</em>...</h2>
+            </div>
         </div>
+
+        <!-- Slide 2: "Storytelling that fits in your hand" -->
+        <div class="about-slide slide-in-your-hand">
+            <div class="slide-content">
+                <p class="slide-intro handwritten">as well as</p>
+                <h2 class="slide-headline">Storytelling<br>that fits in your hand...</h2>
+            </div>
+            <div class="phone-mockups">
+                <!-- Layout matches WORK-Digital.png: 3 smaller phones left/center, 1 large phone right -->
+                <div class="phone-mockup phone-sm phone-1">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <!-- Placeholder: will be replaced with actual mockup images -->
+                            <div class="phone-placeholder"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phone-mockup phone-sm phone-2">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="phone-placeholder"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phone-mockup phone-sm phone-3">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="phone-placeholder"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="phone-mockup phone-lg phone-4">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="phone-placeholder"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: "This is me" -->
+        <div class="about-slide slide-this-is-me">
+            <div class="slide-content">
+                <p class="slide-intro handwritten this-is-me-text">This is me...</p>
+                <!-- Placeholder container for future portrait + particle/Gaussian splat effect -->
+                <div class="portrait-placeholder">
+                    <!-- Will eventually contain canvas/WebGL for particle effect -->
+                    <!-- For now, empty or with a subtle placeholder -->
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <!-- =====================================================
-         SECTION 3: FEATURED WORKS GALLERY
+         SECTION 2: FEATURED WORKS GALLERY
          Horizontal scroll triggered by vertical scroll
          Card size: ~60vw width, 70vh height
     ====================================================== -->
@@ -268,7 +304,7 @@
     </section>
 
     <!-- =====================================================
-         SECTION 4: ADDITIONAL CREDITS
+         SECTION 3: ADDITIONAL CREDITS
          Table layout with hover-preview interaction
     ====================================================== -->
     <section id="credits" class="credits-section">
@@ -289,7 +325,7 @@
     </section>
 
     <!-- =====================================================
-         SECTION 5: ABOUT
+         SECTION 4: ABOUT
          Split stats with scroll-reveal
          Network logo marquee
     ====================================================== -->
@@ -354,7 +390,7 @@
     </section>
 
     <!-- =====================================================
-         SECTION 6: CONTACT
+         SECTION 5: CONTACT
          Location, social links, CTA
     ====================================================== -->
     <section id="contact" class="contact-section">
