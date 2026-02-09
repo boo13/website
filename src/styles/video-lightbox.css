@@ -1,0 +1,49 @@
+/**
+ * Video Lightbox Dark Theme Overrides
+ * Customizes GLightbox to match site's dark aesthetic
+ */
+
+/* Dark backdrop */
+.glight-container .goverlay {
+  background: rgba(10, 10, 10, 0.95) !important;
+}
+
+/* Close button styling */
+.glight-container .gclose,
+.glight-container .gnext,
+.glight-container .gprev {
+  color: var(--color-offwhite, #f7f4f0) !important;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.glight-container .gclose:hover,
+.glight-container .gnext:hover,
+.glight-container .gprev:hover {
+  opacity: 1;
+}
+
+/* Video container - remove default borders/shadows */
+.glight-container .ginner-container {
+  border: none;
+  box-shadow: none;
+}
+
+/* Title and description text */
+.glight-container .gdesc-inner {
+  color: var(--color-offwhite, #f7f4f0);
+}
+
+.glight-container .gslide-title {
+  color: var(--color-offwhite, #f7f4f0);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.glight-container .gslide-description {
+  color: rgba(247, 244, 240, 0.8);
+  font-size: 0.95rem;
+}
+
+/* Z-index override (default is 100001/100002) */
+/* Already higher than cursor-preview (1000) and gallery-progress (100) */
