@@ -100,31 +100,24 @@ function startCountdown(timerEl) {
     return () => {};
   }
 
-  let hundredths = 999;
-  let seconds = 6;
-  let minutes = 0;
+  let remainingMs = 6000;
 
   const updateTime = () => {
-    hundredths -= 50;
-    if (hundredths <= 0) {
-      seconds -= 1;
-      hundredths = 999;
-    }
+    remainingMs -= 50;
 
-    if (seconds <= 0) {
-      minutes -= 1;
-      seconds = 60;
-    }
-
-    if (hundredths >= 0 && seconds >= 0 && minutes >= 0) {
-      const mm = String(minutes).padStart(2, '0');
-      const ss = String(seconds).padStart(2, '0');
-      const hh = String(Math.floor(hundredths / 10)).padStart(2, '0');
-      timerEl.textContent = `${mm}:${ss}:${hh}`;
+    if (remainingMs <= 0) {
+      timerEl.textContent = '00:00:00';
       return;
     }
 
-    timerEl.textContent = '00:00:00';
+    const mins = Math.floor(remainingMs / 60000);
+    const secs = Math.floor((remainingMs % 60000) / 1000);
+    const centis = Math.floor((remainingMs % 1000) / 10);
+
+    const mm = String(mins).padStart(2, '0');
+    const ss = String(secs).padStart(2, '0');
+    const hh = String(centis).padStart(2, '0');
+    timerEl.textContent = `${mm}:${ss}:${hh}`;
   };
 
   const timerId = window.setInterval(updateTime, 50);
