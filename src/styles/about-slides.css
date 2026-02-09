@@ -88,11 +88,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     transform-origin: center center;
-    width: 175%;
-    height: 175%;
+    width: 400%;
+    height: 400%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     gap: 1rem;
     will-change: transform;  /* GPU compositing for smooth animation */
 }
@@ -111,8 +111,8 @@
 
 /* Center hero image */
 .slide-goes-big .grid-hero {
-    grid-column: 2;
-    grid-row: 2;
+    grid-column: 4;
+    grid-row: 4;
 }
 
 /* Text overlay */
@@ -175,21 +175,21 @@
 
 /* Small phones */
 .phone-mockup.phone-sm {
-    width: 140px;
+    width: 220px;
 }
 
 .phone-mockup.phone-sm .phone-frame {
-    height: 280px;
+    height: 440px;
 }
 
 /* Large phone */
 .phone-mockup.phone-lg {
-    width: 180px;
+    width: 280px;
     margin-left: auto;
 }
 
 .phone-mockup.phone-lg .phone-frame {
-    height: 360px;
+    height: 560px;
 }
 
 /* Phone 2 - slightly raised */

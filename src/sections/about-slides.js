@@ -5,8 +5,9 @@ import { SCRUB } from '../config.js';
 /**
  * About Slides Section
  * Full-viewport scroll-driven narrative slides
- * Slide 1: Grid zoom-out from 3x to 1x scale (scrub-linked)
- *          + Text reveal animations (handwritten intro fade, headline mask-rise)
+ * Slide 1: "This is me" text reveal
+ * Slide 2: Grid zoom-out from 7x to 1x scale (scrub-linked, 7x7 grid)
+ * Slide 3: Phone mockups with pinned scroll
  */
 export function initAboutSlides() {
     const section = document.querySelector('.about-slides-section');
@@ -29,17 +30,41 @@ export function initAboutSlides() {
 
     const ctx = gsap.context(() => {
         // =====================================================
-        // SLIDE 1: GRID ZOOM-OUT ANIMATION
+        // SLIDE 1: "THIS IS ME" TEXT REVEAL
+        // =====================================================
+        const slideThisIsMe = section.querySelector('.slide-this-is-me');
+        const thisIsMeText = slideThisIsMe?.querySelector('.this-is-me-text');
+
+        if (thisIsMeText) {
+            gsap.fromTo(thisIsMeText,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.8,       // Slow, contemplative
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: slideThisIsMe,
+                        start: 'top 60%',  // Trigger when more visible (breather pacing)
+                        toggleActions: 'play none none none',
+                    },
+                }
+            );
+            // TODO: Replace with DrawSVGPlugin animation once SVG text paths are created
+        }
+
+        // =====================================================
+        // SLIDE 2: GRID ZOOM-OUT ANIMATION
         // =====================================================
         const slideGoesBig = section.querySelector('.slide-goes-big');
         const gridContainer = slideGoesBig?.querySelector('.grid-container');
 
         if (slideGoesBig && gridContainer) {
             // Set initial state — zoomed IN to center image
-            // Grid is 175% of viewport (CSS), at 3x scale = 525% total
-            // Center cell of 3x3 grid at 525% ≈ fills screen
+            // Grid is 400% of viewport (CSS), at 7x scale = 2800% total
+            // Center cell of 7x7 grid at 2800% ≈ fills screen with dramatic zoom
             gsap.set(gridContainer, {
-                scale: 3,
+                scale: 7,
                 transformOrigin: 'center center',
             });
 
@@ -64,7 +89,7 @@ export function initAboutSlides() {
             });
 
             // =====================================================
-            // SLIDE 1: TEXT REVEAL ANIMATIONS
+            // SLIDE 2: TEXT REVEAL ANIMATIONS
             // =====================================================
 
             // Handwritten intro text — simple fade and rise
@@ -107,12 +132,12 @@ export function initAboutSlides() {
         }
 
         // =====================================================
-        // SLIDE 1 -> SLIDE 2 CROSSFADE TRANSITION
+        // SLIDE 2 -> SLIDE 3 CROSSFADE TRANSITION
         // =====================================================
         const slideInYourHand = section.querySelector('.slide-in-your-hand');
 
         if (slideInYourHand) {
-            // Crossfade transition as Slide 2 enters viewport
+            // Crossfade transition as Slide 3 enters viewport
             gsap.fromTo(slideInYourHand,
                 { opacity: 0.7 },
                 {
@@ -130,7 +155,7 @@ export function initAboutSlides() {
         }
 
         // =====================================================
-        // SLIDE 2: PHONE MOCKUP STAGGER ANIMATION
+        // SLIDE 3: PHONE MOCKUP STAGGER ANIMATION WITH PIN
         // =====================================================
         const phones = section.querySelectorAll('.slide-in-your-hand .phone-mockup');
         if (phones.length) {
@@ -153,16 +178,25 @@ export function initAboutSlides() {
                     toggleActions: 'play none none reverse',
                 },
             });
+
+            // Pin the phone slide for extended viewing (matching grid zoom duration)
+            ScrollTrigger.create({
+                trigger: slideInYourHand,
+                start: 'top top',
+                end: '+=150%',        // Match grid zoom scroll distance
+                pin: true,
+                invalidateOnRefresh: true,
+            });
         }
 
         // =====================================================
-        // SLIDE 2: TEXT REVEAL ANIMATIONS
+        // SLIDE 3: TEXT REVEAL ANIMATIONS
         // =====================================================
-        const intro2 = slideInYourHand?.querySelector('.slide-intro');
-        const headline2 = slideInYourHand?.querySelector('.slide-headline');
+        const intro3 = slideInYourHand?.querySelector('.slide-intro');
+        const headline3 = slideInYourHand?.querySelector('.slide-headline');
 
-        if (intro2) {
-            gsap.fromTo(intro2,
+        if (intro3) {
+            gsap.fromTo(intro3,
                 { opacity: 0, y: 20 },
                 {
                     opacity: 1,
@@ -178,13 +212,13 @@ export function initAboutSlides() {
             );
         }
 
-        if (headline2) {
-            gsap.set(headline2, { opacity: 0 });
+        if (headline3) {
+            gsap.set(headline3, { opacity: 0 });
             ScrollTrigger.create({
                 trigger: slideInYourHand,
                 start: 'top 75%',
                 onEnter: () => {
-                    textMaskRiseWords(headline2, {
+                    textMaskRiseWords(headline3, {
                         duration: 1.5,
                         stagger: 0.15,
                         yOffset: 40,
@@ -193,30 +227,6 @@ export function initAboutSlides() {
                 },
                 once: true,
             });
-        }
-
-        // =====================================================
-        // SLIDE 3: "THIS IS ME" TEXT REVEAL
-        // =====================================================
-        const slideThisIsMe = section.querySelector('.slide-this-is-me');
-        const thisIsMeText = slideThisIsMe?.querySelector('.this-is-me-text');
-
-        if (thisIsMeText) {
-            gsap.fromTo(thisIsMeText,
-                { opacity: 0, y: 30 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1.8,       // Slow, contemplative
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: slideThisIsMe,
-                        start: 'top 60%',  // Trigger when more visible (breather pacing)
-                        toggleActions: 'play none none none',
-                    },
-                }
-            );
-            // TODO: Replace with DrawSVGPlugin animation once SVG text paths are created
         }
 
         ScrollTrigger.refresh();
