@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-02-09
 **Current Phase:** 01-housekeeping-about (1 of 7)
-**Current Plan:** 01-02 completed
+**Current Plan:** 01-03 completed
 
 ---
 
@@ -22,7 +22,7 @@ Roadmap revised with design-first philosophy. Ready to begin Phase 1: Housekeepi
 
 ### Phase Progress
 ```
-Phase 1: Housekeeping & About Section Structure  [██░░░░░░░░] 20%
+Phase 1: Housekeeping & About Section Structure  [████░░░░░░] 40%
 Phase 2: Hero Section & Core Animations          [░░░░░░░░░░] 0%
 Phase 3: Featured Work & Credits Rough Layout    [░░░░░░░░░░] 0%
 Phase 4: Video Lightbox & Hover Interactivity    [░░░░░░░░░░] 0%
@@ -34,15 +34,16 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 **Overall:** 2/27 requirements complete (7.4%)
 
 ### Active Work
-- Phase 1 in progress: Housekeeping and About slides structure complete
+- Phase 1 in progress: Housekeeping, About slides structure, and grid zoom animation complete
 - Plan 01-01 complete: Wyatt Earp extraction successful
 - Plan 01-02 complete: About slides CSS layout and JS scaffold
+- Plan 01-03 complete: Grid zoom-out and text reveal animations
 
 ### Status
-- **Phase:** 01-housekeeping-about (Plans 01, 02 complete)
-- **Plan:** 01-02 completed
+- **Phase:** 01-housekeeping-about (Plans 01, 02, 03 complete)
+- **Plan:** 01-03 completed
 - **Blockers:** None
-- **Next:** Plan 01-03 (Grid zoom animation) and 01-04 (Text reveal animation)
+- **Next:** Plan 01-04 (if exists) or begin next phase planning
 
 ---
 
@@ -50,7 +51,7 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 
 ### Velocity
 - **Requirements completed:** 2/27 (7.4%)
-- **Plans completed:** 2
+- **Plans completed:** 3
 - **Phases completed:** 0/7
 - **Average plan duration:** 3 minutes
 
@@ -72,6 +73,10 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 | ABOU-01-two-font-system | 2026-02-09 | Two-font typography: Caveat handwritten + ivypresto-display serif | 01-02 | Creates visual hierarchy and personal feel for About intros |
 | ABOU-01-grid-sizing | 2026-02-09 | Grid container at 175% viewport for zoom animation readiness | 01-02 | Enables Plan 03 zoom from 3x to 1x revealing surrounding images |
 | ABOU-01-phone-mockups | 2026-02-09 | CSS-only device frames with gradient placeholders | 01-02 | Ready for future image content, looks intentional as placeholder |
+| ABOU-02-zoom-scale | 2026-02-09 | Grid zoom from 3x to 1x scale with 150% scroll distance | 01-03 | Creates dramatic "zoom out to reveal" effect, 525% total at start fills screen with center cell |
+| ABOU-02-scrub-timing | 2026-02-09 | Use SCRUB.smooth (1.5s) for grid zoom animation | 01-03 | Consistent with landing section, prevents jerky scrolling feel |
+| ABOU-02-text-separation | 2026-02-09 | Text animations trigger-based (not scrub-linked) | 01-03 | Independent timing control, text appears early while zoom progresses |
+| ABOU-02-text-hierarchy | 2026-02-09 | Handwritten intro fades in, headline uses text-mask-rise | 01-03 | Different animation styles create hierarchy: subtle intro vs dramatic headline |
 
 **2026-02-09: Roadmap Revision - Design-First Philosophy**
 - Restructured from 8 phases to 7 phases based on user feedback
@@ -142,18 +147,19 @@ None currently. Roadmap revised and ready to begin Phase 1.
 ## Session Continuity
 
 ### What Just Happened
-Completed Plan 01-02: Built full-viewport About slides CSS layout and JavaScript initialization scaffold. Three slides now visible between Hero and Gallery sections with proper typography hierarchy (handwritten intros + serif headlines), phone mockup containers, and grid layout ready for zoom animation. All files wired into main.js with proper cleanup. Duration: 3 minutes.
+Completed Plan 01-03: Implemented scrub-linked grid zoom-out animation (3x to 1x scale) and text reveal animations for Slide 1. Grid starts zoomed into center image and smoothly zooms out to reveal full oversized 3x3 grid as user scrolls. Slide pins during animation with SCRUB.smooth timing. Handwritten intro fades in, headline animates word-by-word with text-mask-rise effect. Duration: 3 minutes.
 
-Previous: Plan 01-01 extracted Wyatt Earp to standalone page and inserted About section HTML structure.
+Previous: Plan 01-02 created CSS layout and JS scaffold. Plan 01-01 extracted Wyatt Earp to standalone page.
 
 ### Context for Next Session
-- Plans 01-01 and 01-02 complete (HOUSE-01 and ABOU-01 requirements in progress)
-- Three full-viewport About slides visible in index2.html between Hero and Gallery
-- CSS layout complete with 100svh support and responsive mobile adjustments
-- JavaScript scaffold in place with gsap.context and cleanup
-- Grid container sized at 175% viewport, ready for zoom animation in Plan 03
-- Typography hierarchy established, ready for text reveal in Plan 04
-- Next: Plans 01-03 (grid zoom) and 01-04 (text mask-rise reveals)
+- Plans 01-01, 01-02, and 01-03 complete (HOUSE-01 and ABOU-01 requirements in progress)
+- Slide 1 animations complete: grid zoom-out + text reveals working
+- Grid zoom is scrub-linked with pin, 150% scroll distance, smooth catch-up
+- Text animations trigger-based (not scrub-linked) for independent timing
+- GPU compositing enabled with will-change: transform
+- prefers-reduced-motion respected (all content visible immediately)
+- Slides 2 and 3 ready for future animations if needed
+- Next: Check if Plan 01-04 exists, or begin next phase planning
 
 ### Key Files
 - `/Users/randy/Git/website/.planning/ROADMAP.md` — 7-phase structure with design-first philosophy
@@ -161,6 +167,7 @@ Previous: Plan 01-01 extracted Wyatt Earp to standalone page and inserted About 
 - `/Users/randy/Git/website/.planning/STATE.md` — This file (project memory)
 - `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-01-SUMMARY.md` — Wyatt extraction summary
 - `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-02-SUMMARY.md` — About slides structure summary
+- `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-03-SUMMARY.md` — Grid zoom animation summary
 - `/Users/randy/Git/website/case_study_wyatt.html` — Standalone Wyatt Earp case study page
 - `/Users/randy/Git/website/index2.html` — About slides HTML between Hero and Gallery (lines 108-193)
 - `/Users/randy/Git/website/src/sections/about-slides.js` — About section initialization with gsap.context
@@ -176,4 +183,4 @@ If context lost, read:
 ---
 
 *State initialized: 2026-02-09*
-*Last updated: 2026-02-09 after completing Plan 01-02 (About slides structure)*
+*Last updated: 2026-02-09 after completing Plan 01-03 (Grid zoom animation)*
