@@ -1,0 +1,331 @@
+/**
+ * About Slides Section
+ * Full-viewport scroll-driven narrative slides
+ * Three slides: "Goes BIG" -> "In your hand" -> "This is me"
+ */
+
+/* =====================================================
+   SECTION WRAPPER
+====================================================== */
+.about-slides-section {
+    position: relative;
+    width: 100%;
+    background: var(--color-nearblack);
+}
+
+/* =====================================================
+   BASE SLIDE STYLES
+====================================================== */
+.about-slide {
+    position: relative;
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 2rem;
+    background: #0a0a0a;
+}
+
+/* Modern viewport units with fallback */
+@supports (height: 100svh) {
+    .about-slide {
+        height: 100svh;
+        min-height: 100svh;
+    }
+}
+
+/* =====================================================
+   TYPOGRAPHY - TWO-FONT SYSTEM
+====================================================== */
+
+/* Handwritten intro text */
+.slide-intro.handwritten {
+    font-family: 'Caveat', 'Segoe Script', cursive;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: rgba(247, 244, 240, 0.85);
+    margin-bottom: 1rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+/* Bold serif headline */
+.slide-headline {
+    font-family: var(--ff-display);
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    color: var(--color-offwhite);
+    line-height: 1.05;
+    margin: 0;
+}
+
+.slide-headline em {
+    font-style: italic;
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.1em;
+}
+
+/* =====================================================
+   SLIDE 1: "STORYTELLING THAT GOES BIG"
+====================================================== */
+.slide-goes-big {
+    overflow: hidden;
+}
+
+.slide-goes-big .slide-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Grid container - oversized, will be zoomed via GSAP */
+.slide-goes-big .grid-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    width: 175%;
+    height: 175%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.slide-goes-big .grid-item {
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.slide-goes-big .grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Center hero image */
+.slide-goes-big .grid-hero {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+/* Text overlay */
+.slide-goes-big .slide-content {
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    padding-left: 8vw;
+    max-width: 90%;
+}
+
+/* =====================================================
+   SLIDE 2: "STORYTELLING THAT FITS IN YOUR HAND"
+====================================================== */
+.slide-in-your-hand {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 4rem 6vw;
+}
+
+.slide-in-your-hand .slide-content {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+/* Phone mockups container */
+.phone-mockups {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 2rem;
+}
+
+.phone-mockup {
+    position: relative;
+}
+
+/* Small phones */
+.phone-mockup.phone-sm {
+    width: 140px;
+}
+
+.phone-mockup.phone-sm .phone-frame {
+    height: 280px;
+}
+
+/* Large phone */
+.phone-mockup.phone-lg {
+    width: 180px;
+    margin-left: auto;
+}
+
+.phone-mockup.phone-lg .phone-frame {
+    height: 360px;
+}
+
+/* Phone 2 - slightly raised */
+.phone-mockup.phone-2 {
+    transform: translateY(-1rem);
+}
+
+/* Phone 3 - slightly lowered */
+.phone-mockup.phone-3 {
+    transform: translateY(0.5rem);
+}
+
+/* Phone device frame */
+.phone-frame {
+    position: relative;
+    border-radius: 2.5rem;
+    background: #1a1a1a;
+    border: 3px solid #333;
+    padding: 0.75rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Notch suggestion */
+.phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 1.5rem;
+    background: #0a0a0a;
+    border-radius: 0 0 1rem 1rem;
+    z-index: 2;
+}
+
+/* Phone screen */
+.phone-screen {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2rem;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 9 / 19.5;
+    background: #000;
+}
+
+/* Placeholder gradient */
+.phone-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f1419 100%);
+}
+
+/* =====================================================
+   SLIDE 3: "THIS IS ME"
+====================================================== */
+.slide-this-is-me {
+    background: #000;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20vh 8vw;
+}
+
+.slide-this-is-me .slide-content {
+    text-align: left;
+}
+
+.slide-this-is-me .this-is-me-text {
+    font-size: clamp(2rem, 5vw, 4rem);
+}
+
+/* Portrait placeholder - space for future particle effect */
+.portrait-placeholder {
+    width: 300px;
+    height: 400px;
+    margin-top: 2rem;
+    background: transparent;
+    /* Will contain canvas/WebGL in future */
+}
+
+/* =====================================================
+   RESPONSIVE ADJUSTMENTS
+====================================================== */
+@media (max-width: 768px) {
+    .about-slide {
+        padding: 1.5rem;
+    }
+
+    /* Slide 1 adjustments */
+    .slide-goes-big .slide-content {
+        padding-left: 4vw;
+    }
+
+    .slide-headline {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .slide-intro.handwritten {
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+    }
+
+    /* Slide 2 adjustments - stack phones vertically */
+    .slide-in-your-hand {
+        padding: 2rem 4vw;
+    }
+
+    .phone-mockups {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: space-around;
+    }
+
+    .phone-mockup.phone-sm,
+    .phone-mockup.phone-lg {
+        width: 120px;
+    }
+
+    .phone-mockup.phone-sm .phone-frame {
+        height: 240px;
+    }
+
+    .phone-mockup.phone-lg {
+        width: 140px;
+        margin-left: 0;
+    }
+
+    .phone-mockup.phone-lg .phone-frame {
+        height: 280px;
+    }
+
+    /* Reset transforms on mobile */
+    .phone-mockup.phone-2,
+    .phone-mockup.phone-3 {
+        transform: none;
+    }
+
+    /* Slide 3 adjustments */
+    .slide-this-is-me {
+        padding: 15vh 4vw;
+    }
+
+    .portrait-placeholder {
+        width: 200px;
+        height: 300px;
+    }
+}
+
+/* =====================================================
+   REDUCED MOTION SUPPORT
+====================================================== */
+@media (prefers-reduced-motion: reduce) {
+    .about-slide,
+    .slide-content,
+    .grid-container,
+    .phone-mockup {
+        animation: none !important;
+        transition: none !important;
+    }
+}
