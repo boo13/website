@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-02-09
 **Current Phase:** 01-housekeeping-about (1 of 7)
-**Current Plan:** 01-01 completed
+**Current Plan:** 01-02 completed
 
 ---
 
@@ -22,7 +22,7 @@ Roadmap revised with design-first philosophy. Ready to begin Phase 1: Housekeepi
 
 ### Phase Progress
 ```
-Phase 1: Housekeeping & About Section Structure  [█░░░░░░░░░] 10%
+Phase 1: Housekeeping & About Section Structure  [██░░░░░░░░] 20%
 Phase 2: Hero Section & Core Animations          [░░░░░░░░░░] 0%
 Phase 3: Featured Work & Credits Rough Layout    [░░░░░░░░░░] 0%
 Phase 4: Video Lightbox & Hover Interactivity    [░░░░░░░░░░] 0%
@@ -31,26 +31,28 @@ Phase 6: Mobile Responsive & Performance         [░░░░░░░░░░
 Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░] 0%
 ```
 
-**Overall:** 1/27 requirements complete (3.7%)
+**Overall:** 2/27 requirements complete (7.4%)
 
 ### Active Work
-- Phase 1 in progress: Housekeeping complete, About section structure next
+- Phase 1 in progress: Housekeeping and About slides structure complete
 - Plan 01-01 complete: Wyatt Earp extraction successful
+- Plan 01-02 complete: About slides CSS layout and JS scaffold
 
 ### Status
-- **Phase:** 01-housekeeping-about (Plan 01 complete)
-- **Plan:** 01-01 completed
+- **Phase:** 01-housekeeping-about (Plans 01, 02 complete)
+- **Plan:** 01-02 completed
 - **Blockers:** None
-- **Next:** Continue Phase 1 with remaining plans (About section structure)
+- **Next:** Plan 01-03 (Grid zoom animation) and 01-04 (Text reveal animation)
 
 ---
 
 ## Performance Metrics
 
 ### Velocity
-- **Requirements completed:** 1/27 (3.7%)
-- **Plans completed:** 1
+- **Requirements completed:** 2/27 (7.4%)
+- **Plans completed:** 2
 - **Phases completed:** 0/7
+- **Average plan duration:** 3 minutes
 
 ### Quality
 - **Build status:** Passing (existing codebase)
@@ -67,6 +69,9 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 |----|------|----------|-------|--------|
 | HOUSE-01-extract-wyatt | 2026-02-09 | Extract Wyatt Earp parallax to standalone case study page | 01 | Establishes case study pattern, cleans index2.html structure |
 | HOUSE-01-reuse-animation | 2026-02-09 | Reuse featured-work.js module across multiple entry points | 01 | Clean code reuse, section-specific entry point pattern |
+| ABOU-01-two-font-system | 2026-02-09 | Two-font typography: Caveat handwritten + ivypresto-display serif | 01-02 | Creates visual hierarchy and personal feel for About intros |
+| ABOU-01-grid-sizing | 2026-02-09 | Grid container at 175% viewport for zoom animation readiness | 01-02 | Enables Plan 03 zoom from 3x to 1x revealing surrounding images |
+| ABOU-01-phone-mockups | 2026-02-09 | CSS-only device frames with gradient placeholders | 01-02 | Ready for future image content, looks intentional as placeholder |
 
 **2026-02-09: Roadmap Revision - Design-First Philosophy**
 - Restructured from 8 phases to 7 phases based on user feedback
@@ -113,7 +118,10 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 - [x] Extract Wyatt Earp section (lines 108-157 in index2.html) ✓ Complete
 - [x] Create case_study_wyatt.html with HTML boilerplate ✓ Complete
 - [x] Remove Wyatt Earp from index2.html cleanly ✓ Complete
-- [ ] Build About section structure after hero
+- [x] Build About section HTML structure ✓ Complete (Plan 01 inserted HTML)
+- [x] Build About slides CSS layout and JS scaffold ✓ Complete (Plan 02)
+- [ ] Implement grid zoom animation (Plan 03)
+- [ ] Implement text reveal animation (Plan 04)
 
 **Research Needed:**
 - [ ] Phase 4: Video lightbox implementation approach (GLightbox compatibility)
@@ -134,23 +142,29 @@ None currently. Roadmap revised and ready to begin Phase 1.
 ## Session Continuity
 
 ### What Just Happened
-Completed Plan 01-01: Extracted Wyatt Earp parallax section from index2.html to standalone case_study_wyatt.html page. Created entry point (main-wyatt.js) and extracted styles (wyatt.css). Systematically cleaned all orphaned references from index2.html (HTML, CSS, JS). Build passes, lint passes, both pages work correctly. Duration: 3 minutes.
+Completed Plan 01-02: Built full-viewport About slides CSS layout and JavaScript initialization scaffold. Three slides now visible between Hero and Gallery sections with proper typography hierarchy (handwritten intros + serif headlines), phone mockup containers, and grid layout ready for zoom animation. All files wired into main.js with proper cleanup. Duration: 3 minutes.
+
+Previous: Plan 01-01 extracted Wyatt Earp to standalone page and inserted About section HTML structure.
 
 ### Context for Next Session
-- Plan 01-01 complete (HOUSE-01 requirement satisfied)
-- index2.html is now clean and ready for About section insertion
-- Placeholder comment at line 108 marks insertion point for About slides
-- Section numbering updated: Gallery → Section 2, Credits → Section 3, About → Section 4, Contact → Section 5
-- Established pattern: case studies get standalone pages with section-specific entry points
-- Next: Continue Phase 1 with About section structure (remaining plans)
+- Plans 01-01 and 01-02 complete (HOUSE-01 and ABOU-01 requirements in progress)
+- Three full-viewport About slides visible in index2.html between Hero and Gallery
+- CSS layout complete with 100svh support and responsive mobile adjustments
+- JavaScript scaffold in place with gsap.context and cleanup
+- Grid container sized at 175% viewport, ready for zoom animation in Plan 03
+- Typography hierarchy established, ready for text reveal in Plan 04
+- Next: Plans 01-03 (grid zoom) and 01-04 (text mask-rise reveals)
 
 ### Key Files
 - `/Users/randy/Git/website/.planning/ROADMAP.md` — 7-phase structure with design-first philosophy
 - `/Users/randy/Git/website/.planning/REQUIREMENTS.md` — Updated with HOUSE-01 and revised traceability
 - `/Users/randy/Git/website/.planning/STATE.md` — This file (project memory)
 - `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-01-SUMMARY.md` — Wyatt extraction summary
+- `/Users/randy/Git/website/.planning/phases/01-housekeeping-about/01-02-SUMMARY.md` — About slides structure summary
 - `/Users/randy/Git/website/case_study_wyatt.html` — Standalone Wyatt Earp case study page
-- `/Users/randy/Git/website/index2.html` — Clean structure, ready for About insertion at line 108
+- `/Users/randy/Git/website/index2.html` — About slides HTML between Hero and Gallery (lines 108-193)
+- `/Users/randy/Git/website/src/sections/about-slides.js` — About section initialization with gsap.context
+- `/Users/randy/Git/website/src/styles/about-slides.css` — Full-viewport slide layout CSS
 
 ### Recovery Point
 If context lost, read:
@@ -162,4 +176,4 @@ If context lost, read:
 ---
 
 *State initialized: 2026-02-09*
-*Last updated: 2026-02-09 after completing Plan 01-01 (Wyatt Earp extraction)*
+*Last updated: 2026-02-09 after completing Plan 01-02 (About slides structure)*
