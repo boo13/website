@@ -100,27 +100,28 @@ function startCountdown(timerEl) {
     return () => {};
   }
 
-  let remainingMs = 6000;
+  const FPS = 24;
+  let totalFrames = 6 * FPS;
 
   const updateTime = () => {
-    remainingMs -= 50;
+    totalFrames -= 1;
 
-    if (remainingMs <= 0) {
+    if (totalFrames <= 0) {
       timerEl.textContent = '00:00:00';
       return;
     }
 
-    const mins = Math.floor(remainingMs / 60000);
-    const secs = Math.floor((remainingMs % 60000) / 1000);
-    const centis = Math.floor((remainingMs % 1000) / 10);
+    const mins = Math.floor(totalFrames / (60 * FPS));
+    const secs = Math.floor((totalFrames % (60 * FPS)) / FPS);
+    const frames = totalFrames % FPS;
 
     const mm = String(mins).padStart(2, '0');
     const ss = String(secs).padStart(2, '0');
-    const hh = String(centis).padStart(2, '0');
-    timerEl.textContent = `${mm}:${ss}:${hh}`;
+    const ff = String(frames).padStart(2, '0');
+    timerEl.textContent = `${mm}:${ss}:${ff}`;
   };
 
-  const timerId = window.setInterval(updateTime, 50);
+  const timerId = window.setInterval(updateTime, 1000 / FPS);
   return () => window.clearInterval(timerId);
 }
 
