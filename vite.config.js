@@ -13,7 +13,8 @@ export default defineConfig({
         contact: resolve(import.meta.dirname, 'contact.html'),
         resume: resolve(import.meta.dirname, 'resume.html'),
         examplesMockup: resolve(import.meta.dirname, 'examples_mockup.html'),
-        sandbox: resolve(import.meta.dirname, 'sandbox.html')
+        sandbox: resolve(import.meta.dirname, 'sandbox.html'),
+        wyatt: resolve(import.meta.dirname, 'case_study_wyatt.html')
       },
     },
   },
