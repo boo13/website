@@ -5,8 +5,9 @@ const FAKE_PROGRESS_TICK_MS = 800;
 const FAKE_PROGRESS_MIN_STEP = 0.05;
 const FAKE_PROGRESS_MAX_STEP = 0.28;
 
-const DESKTOP_SIZES = { minWidth: 67, minHeight: 67, maxWidth: 371, maxHeight: 220 };
-const MOBILE_SIZES = { minWidth: 41, minHeight: 41, maxWidth: 229, maxHeight: 136 };
+const VIDEO_ASPECT_RATIO = 16 / 9;
+const DESKTOP_SIZES = { minWidth: 67, maxWidth: 371 };
+const MOBILE_SIZES = { minWidth: 41, maxWidth: 229 };
 
 function randomStep(min, max) {
   return Math.random() * (max - min) + min;
@@ -76,9 +77,9 @@ function animateEdges(edgesEl, progress) {
     return;
   }
 
-  const { minWidth, minHeight, maxWidth, maxHeight } = getSizeConfig();
+  const { minWidth, maxWidth } = getSizeConfig();
   const width = Math.max(Math.round(maxWidth * progress), minWidth);
-  const height = Math.max(Math.round(maxHeight * progress), minHeight);
+  const height = Math.round(width / VIDEO_ASPECT_RATIO);
 
   gsap.to(edgesEl, {
     width,
