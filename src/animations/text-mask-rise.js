@@ -40,14 +40,29 @@ export function textMaskRiseWords(targets, overrides = {}) {
   // Ensure parent elements aren't stuck at opacity: 0 from CSS.
   gsap.set(elements, { opacity: 1 });
 
-  const splits = elements.map((element) =>
-    SplitText.create(element, {
+  const splits = elements.map((element) => {
+    const split = SplitText.create(element, {
       type: 'words',
       mask: 'words',
       tag: 'span',
       wordsClass: 'word',
-    }),
-  );
+    });
+
+    // SplitText's auto-aria adds aria-label to parent + aria-hidden to children.
+    // aria-label is prohibited on non-heading/non-interactive elements (div, p, span).
+    const tag = element.tagName.toLowerCase();
+    if (!/^h[1-6]$/.test(tag)) {
+      element.removeAttribute('aria-label');
+      split.words.forEach((word) => {
+        word.removeAttribute('aria-hidden');
+        if (word.parentElement !== element) {
+          word.parentElement?.removeAttribute('aria-hidden');
+        }
+      });
+    }
+
+    return split;
+  });
 
   let reverted = false;
   const revertSplits = () => {
