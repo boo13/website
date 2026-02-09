@@ -212,7 +212,7 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 07-01-PLAN.md — FFmpeg VP9 two-pass video optimization (42MB to under 25MB)
+- [ ] 07-01-PLAN.md — FFmpeg VP9 two-pass video optimization, re-upload to Cloudflare R2
 - [ ] 07-02-PLAN.md — ARIA landmarks, focus-visible keyboard styles, Vite vendor chunk splitting
 - [ ] 07-03-PLAN.md — Lighthouse audit, issue fixes, and cross-browser verification checkpoint
 
@@ -221,8 +221,8 @@ Plans:
 - ACCS-01: prefers-reduced-motion respected in all animations
 
 **Success Criteria:**
-1. All videos have optimized encoding (appropriate bitrate, resolution, format)
-2. ~~Git LFS configured and tracking all video files~~ NOT APPLICABLE (GitHub Pages does not support Git LFS -- videos optimized and committed directly)
+1. All videos have optimized encoding (appropriate bitrate, resolution, format) and uploaded to R2
+2. Videos served from Cloudflare R2 CDN (removed from git repo)
 3. Initial page load is fast (3G throttle test passes)
 4. All animations respect prefers-reduced-motion (content visible immediately without animation)
 5. Lighthouse audit passes (Performance 85+, Accessibility 95+, Best Practices 90+, SEO 95+)
@@ -230,8 +230,9 @@ Plans:
 7. Cross-browser testing complete (Chrome, Firefox, Safari, iOS Safari, Android Chrome)
 
 **Notes:**
+- Videos migrated to Cloudflare R2 bucket `portfolio-assets` (public/video/ gitignored)
 - Video optimization via FFmpeg VP9 two-pass encoding (CRF 28 hero, CRF 33 gallery)
-- Git LFS not supported on GitHub Pages -- aggressive compression instead
+- Optimized videos re-uploaded to R2 after encoding
 - Vite vendor chunk splitting for GSAP and GLightbox caching
 - :focus-visible styles for keyboard accessibility
 - Lighthouse CLI already installed for automated auditing

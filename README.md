@@ -28,10 +28,10 @@ src/
   animations/             # shared GSAP setup (plugin registration)
   components/             # reusable DOM components (Slider, ResponsiveVideo)
   styles/                 # CSS per page, imported from each entry point
-  config.js               # shared breakpoints and timing values
+  config.js               # shared breakpoints, timing values, CDN base URL
 ```
 
-Static assets (images, video, data, favicon) live in `public/` and get copied as-is to the build output.
+Static assets (images, data, favicon) live in `public/` and get copied as-is to the build output. Video files are hosted on [Cloudflare R2](https://developers.cloudflare.com/r2/) and referenced via CDN URLs — they are not stored in the git repository.
 
 ## Running locally
 
@@ -55,8 +55,16 @@ Each section on the main page (index2.html) exports an `init` function that sets
 
 GSAP's ScrollTrigger plugin drives most of the effects — pinning sections, scrubbing timelines based on scroll position, and triggering horizontal movement in the gallery. All sections respect `prefers-reduced-motion` and fall back to static layouts on mobile.
 
+## Video assets
+
+Videos are hosted on a Cloudflare R2 bucket (`portfolio-assets`) and served via CDN. They are **not** committed to the git repo — `public/video/` is gitignored.
+
+- **CDN base URL** is defined in `src/config.js` as `CDN_BASE`
+- **Upload new/optimized videos** with `npx wrangler r2 object put portfolio-assets/video/FILENAME --file public/video/FILENAME --content-type video/webm --remote`
+- **Optimize before uploading** using `scripts/optimize-videos.sh` (FFmpeg VP9 two-pass encoding)
+
 ## Contributing
 
 - Use small, focused commits with imperative messages (e.g., `update hero video`, `tweak contact form spacing`).
 - For visual changes, include a brief note on tested browsers/devices and, if possible, before/after screenshots.
-- Optimize media before committing — video and image files are large.
+- Optimize images before committing. Video files go to R2, not the repo.

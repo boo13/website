@@ -1,3 +1,5 @@
+import { CDN_BASE } from '../config.js';
+
 /**
  * Handles responsive source switching for the hero video.
  */
@@ -29,9 +31,9 @@ export class ResponsiveVideo {
 
     let newSrc;
     if (window.matchMedia('(max-aspect-ratio: 9/16)').matches) {
-      newSrc = './video/LandingPageMontagev05_9x16.webm';
+      newSrc = `${CDN_BASE}/video/LandingPageMontagev05_9x16.webm`;
     } else {
-      newSrc = './video/LandingPageMontagev04.2.webm';
+      newSrc = `${CDN_BASE}/video/LandingPageMontagev04.2.webm`;
     }
 
     const currentSrcPath = new URL(

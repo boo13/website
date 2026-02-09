@@ -56,6 +56,7 @@ The work speaks for itself — every design decision exists to showcase Randy's 
 - Projects.json contains filmography data used by credits section
 - Adobe Typekit provides custom web fonts
 - Site deploys to GitHub Pages from gh-pages branch
+- Video files hosted on Cloudflare R2 (CDN_BASE in src/config.js), not committed to git
 - The about section concept: multiple short sections, each with 1-2 punchy lines (e.g., "Randy Counsman is a nonfiction producer" / "I've worked on STORYTELLING that goes BIG..." / "as well as STORYTELLING that fits in your hand..." / "but it's all about CHARACTER.")
 - About section comes immediately after hero — establishes identity before showing work
 - One about section features animated phone mockups scrolling with parallax (different speeds/sizes), showcasing digital/social work (ref: "ref/WORK - Digital.png")
@@ -65,6 +66,7 @@ The work speaks for itself — every design decision exists to showcase Randy's 
 
 - **Tech stack**: Vanilla JS + GSAP + Vite — no frameworks, no build complexity beyond what exists
 - **Hosting**: GitHub Pages (static files only, no server-side processing)
+- **Video CDN**: Cloudflare R2 bucket `portfolio-assets` — videos are not in the git repo
 - **Fonts**: Adobe Typekit (already integrated)
 - **Newsletter**: Buttondown (already set up, public API)
 - **Contact**: Formspree (already working on contact.html)

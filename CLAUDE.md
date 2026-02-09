@@ -17,7 +17,7 @@ src/
   animations/           # shared animation utilities (scroll-defaults.js registers GSAP plugins)
   components/           # reusable DOM components (slider, responsive-video)
   styles/               # CSS per page, imported from JS entry points
-  config.js             # shared breakpoints, timing values
+  config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
   main.js               # entry for index2.html — imports sections + calls init()
   main-index.js         # entry for index.html (Slider + ResponsiveVideo)
   main-contact.js       # entry for contact.html (form handler)
@@ -26,7 +26,9 @@ src/
 ```
 Each section exports an `initSectionName()` function called from `main.js`.
 
-Static assets live in `public/` (data, video, images, favicon, CNAME) — Vite copies them as-is to the build output. HTML files stay at the repo root.
+Static assets live in `public/` (data, images, favicon, CNAME) — Vite copies them as-is to the build output. HTML files stay at the repo root.
+
+**Video assets** are hosted on **Cloudflare R2**, not in the git repo. The R2 CDN base URL is defined in `src/config.js` as `CDN_BASE`. Video references in HTML use full R2 URLs; JS files import `CDN_BASE` from config. Local copies in `public/video/` are gitignored but may exist for dev/optimization work.
 
 ## GSAP Conventions
 - Use `gsap.context()` per section for clean setup/teardown — no custom lifecycle wrappers
@@ -42,6 +44,16 @@ Static assets live in `public/` (data, video, images, favicon, CNAME) — Vite c
 - `npm run preview` — preview production build locally
 - `npm run lint` — ESLint on `src/`
 - `npm run format` — Prettier on `src/`
+
+## Video Hosting
+- Videos served from **Cloudflare R2** bucket `portfolio-assets`
+- CDN URL: `https://pub-722bb50dc4774406afca73534059fdd8.r2.dev`
+- `src/config.js` exports `CDN_BASE` — use this for all video URLs in JS
+- HTML files reference R2 URLs directly (not relative paths)
+- All `<video>` elements loading from R2 must have the `crossorigin` attribute (cross-origin fetch). If a `<link rel="preload">` also has `crossorigin`, the video element must match or the preloaded response is discarded.
+- `public/video/` is gitignored — local copies are for dev/optimization only
+- Upload optimized videos: `npx wrangler r2 object put portfolio-assets/video/FILENAME --file public/video/FILENAME --content-type video/webm --remote`
+- Optimization script: `scripts/optimize-videos.sh` (FFmpeg VP9 two-pass)
 
 ## Code Style
 - ES modules throughout (`"type": "module"` in package.json)

@@ -93,6 +93,20 @@ Phase 7: Optimization & Accessibility Polish     [░░░░░░░░░░
 | VL-03-gallery-navigation | 2026-02-09 | Enable arrow key navigation between all video cards | 04-01 | Natural gallery-style interaction, GLightbox supports this natively |
 | VL-04-hover-pause | 2026-02-09 | Pause hover preview videos when lightbox opens | 04-01 | Prevents multiple videos playing simultaneously |
 | VL-05-data-no-video | 2026-02-09 | Add data-no-video attribute to cards without video | 04-01 | Documents intent, enables future styling or behavior for non-video cards |
+| R2-01-video-migration | 2026-02-09 | Migrate videos from git repo to Cloudflare R2 bucket `portfolio-assets` | pre-07 | Removes 42MB from repo, zero egress CDN hosting, CDN_BASE in config.js |
+| R2-02-cdn-base | 2026-02-09 | CDN_BASE constant in src/config.js for all video URLs | pre-07 | Single source of truth for R2 URL, JS files import from config |
+| R2-03-gitignore-video | 2026-02-09 | public/video/ gitignored, local copies for dev/optimization only | pre-07 | Prevents re-committing videos, keeps repo lean |
+
+**2026-02-09: Video Migration to Cloudflare R2**
+- Videos migrated from public/video/ (git-tracked) to Cloudflare R2 bucket `portfolio-assets`
+- R2 CDN URL: `https://pub-722bb50dc4774406afca73534059fdd8.r2.dev`
+- CDN_BASE constant added to src/config.js; responsive-video.js imports it
+- HTML files updated to use full R2 URLs for video src, preload, and lightbox href
+- public/video/ and .wrangler/ added to .gitignore
+- 42MB of video files removed from git tracking (9 files, 5 unused)
+- 4 used videos uploaded to R2: hero (6.3MB), mobile hero (2.4MB), Beyond Spotlight (1.7MB), Cowboy War (1.6MB)
+- Phase 7 Plan 01 updated: optimize videos locally then re-upload to R2
+- Backups at /tmp/video-backup/
 
 **2026-02-09: Roadmap Revision - Design-First Philosophy**
 - Restructured from 8 phases to 7 phases based on user feedback

@@ -172,3 +172,9 @@ package
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/svelte,node,visualstudiocode
+
+# Video assets hosted on Cloudflare R2
+public/video/
+
+# Wrangler local state
+.wrangler/
