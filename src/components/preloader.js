@@ -72,6 +72,42 @@ function waitForFonts(onLoaded) {
   };
 }
 
+function startCountdown(timerEl) {
+  if (!timerEl) {
+    return () => {};
+  }
+
+  let hundredths = 999;
+  let seconds = 6;
+  let minutes = 0;
+
+  const updateTime = () => {
+    hundredths -= 50;
+    if (hundredths <= 0) {
+      seconds -= 1;
+      hundredths = 999;
+    }
+
+    if (seconds <= 0) {
+      minutes -= 1;
+      seconds = 60;
+    }
+
+    if (hundredths >= 0 && seconds >= 0 && minutes >= 0) {
+      const mm = String(minutes).padStart(2, '0');
+      const ss = String(seconds).padStart(2, '0');
+      const hh = String(Math.floor(hundredths / 10)).padStart(2, '0');
+      timerEl.textContent = `${mm}:${ss}:${hh}`;
+      return;
+    }
+
+    timerEl.textContent = '00:00:00';
+  };
+
+  const timerId = window.setInterval(updateTime, 50);
+  return () => window.clearInterval(timerId);
+}
+
 function renderEdges(edgesEl, progress) {
   if (!edgesEl) {
     return;
@@ -173,6 +209,7 @@ export function runPreloader() {
     const edgesEl = overlayEl.querySelector('.preloader-edges');
     const timeEl = overlayEl.querySelector('.preloader-time');
     const progressSmoother = createProgressSmoother(edgesEl);
+    const clearCountdown = startCountdown(timeEl);
 
     const videos = Array.from(document.querySelectorAll('video'));
     const images = Array.from(document.querySelectorAll('img'));
@@ -215,6 +252,7 @@ export function runPreloader() {
 
     const cleanup = () => {
       window.clearTimeout(forceCompleteTimeoutId);
+      clearCountdown();
       progressSmoother.kill();
       taskCleanupFns.forEach((cleanupFn) => cleanupFn());
     };
