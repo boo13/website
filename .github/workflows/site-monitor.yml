@@ -237,6 +237,7 @@ jobs:
             city: Dublin
 
     steps:
+      - uses: actions/checkout@v3
       - name: Check site via Globalping (${{ matrix.region.name }})
         id: globalping_check
         env:
