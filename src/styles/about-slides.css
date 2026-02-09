@@ -125,7 +125,7 @@
     pointer-events: none;  /* Allow clicks to pass through to grid */
 }
 
-/* Initial state for text animations (Plan 04) */
+/* Initial state for text animations */
 .slide-goes-big .slide-intro {
     opacity: 0;
 }
@@ -149,6 +149,15 @@
     margin-bottom: 2rem;
 }
 
+/* Initial state for text animations */
+.slide-in-your-hand .slide-intro {
+    opacity: 0;
+}
+
+.slide-in-your-hand .slide-headline {
+    opacity: 0;
+}
+
 /* Phone mockups container */
 .phone-mockups {
     display: flex;
@@ -161,6 +170,7 @@
 
 .phone-mockup {
     position: relative;
+    opacity: 0;  /* Initial state - JS handles reveal */
 }
 
 /* Small phones */
@@ -250,6 +260,7 @@
 
 .slide-this-is-me .this-is-me-text {
     font-size: clamp(2rem, 5vw, 4rem);
+    opacity: 0;  /* Initial state - JS handles reveal */
 }
 
 /* Portrait placeholder - space for future particle effect */

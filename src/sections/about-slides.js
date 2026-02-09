@@ -106,9 +106,119 @@ export function initAboutSlides() {
             }
         }
 
-        // Ensure other slide content is visible
-        gsap.set('.slide-in-your-hand .slide-content', { opacity: 1 });
-        gsap.set('.slide-this-is-me .slide-content', { opacity: 1 });
+        // =====================================================
+        // SLIDE 1 -> SLIDE 2 CROSSFADE TRANSITION
+        // =====================================================
+        const slideInYourHand = section.querySelector('.slide-in-your-hand');
+
+        if (slideInYourHand) {
+            // Crossfade transition as Slide 2 enters viewport
+            gsap.fromTo(slideInYourHand,
+                { opacity: 0.7 },
+                {
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: slideInYourHand,
+                        start: 'top 90%',
+                        end: 'top 40%',
+                        scrub: 1,
+                    },
+                }
+            );
+        }
+
+        // =====================================================
+        // SLIDE 2: PHONE MOCKUP STAGGER ANIMATION
+        // =====================================================
+        const phones = section.querySelectorAll('.slide-in-your-hand .phone-mockup');
+        if (phones.length) {
+            // Initial state: phones below viewport
+            gsap.set(phones, { y: 200, opacity: 0 });
+
+            // Staggered rise animation
+            gsap.to(phones, {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: 'power3.out',
+                stagger: {
+                    amount: 0.8,          // 0.8s total across all 4 phones
+                    from: 'start',        // Left to right (matches layout)
+                },
+                scrollTrigger: {
+                    trigger: slideInYourHand,
+                    start: 'top 70%',     // Start when slide is 70% into viewport
+                    toggleActions: 'play none none reverse',
+                },
+            });
+        }
+
+        // =====================================================
+        // SLIDE 2: TEXT REVEAL ANIMATIONS
+        // =====================================================
+        const intro2 = slideInYourHand?.querySelector('.slide-intro');
+        const headline2 = slideInYourHand?.querySelector('.slide-headline');
+
+        if (intro2) {
+            gsap.fromTo(intro2,
+                { opacity: 0, y: 20 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: slideInYourHand,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none',
+                    },
+                }
+            );
+        }
+
+        if (headline2) {
+            gsap.set(headline2, { opacity: 0 });
+            ScrollTrigger.create({
+                trigger: slideInYourHand,
+                start: 'top 75%',
+                onEnter: () => {
+                    textMaskRiseWords(headline2, {
+                        duration: 1.5,
+                        stagger: 0.15,
+                        yOffset: 40,
+                        delay: 0.3,
+                    });
+                },
+                once: true,
+            });
+        }
+
+        // =====================================================
+        // SLIDE 3: "THIS IS ME" TEXT REVEAL
+        // =====================================================
+        const slideThisIsMe = section.querySelector('.slide-this-is-me');
+        const thisIsMeText = slideThisIsMe?.querySelector('.this-is-me-text');
+
+        if (thisIsMeText) {
+            gsap.fromTo(thisIsMeText,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.8,       // Slow, contemplative
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: slideThisIsMe,
+                        start: 'top 60%',  // Trigger when more visible (breather pacing)
+                        toggleActions: 'play none none none',
+                    },
+                }
+            );
+            // TODO: Replace with DrawSVGPlugin animation once SVG text paths are created
+        }
+
         ScrollTrigger.refresh();
     }, section);
 
