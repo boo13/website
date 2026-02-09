@@ -11,7 +11,7 @@ Requirements for index2.html — the full editorial portfolio site.
 
 ### Housekeeping
 
-- [ ] **HOUSE-01**: Extract Wyatt Earp parallax section from index2.html into standalone case_study_wyatt.html, then remove from index2.html
+- [x] **HOUSE-01**: Extract Wyatt Earp parallax section from index2.html into standalone case_study_wyatt.html, then remove from index2.html
 
 ### Hero / Landing
 
@@ -22,9 +22,9 @@ Requirements for index2.html — the full editorial portfolio site.
 
 ### About (immediately after hero)
 
-- [ ] **ABOU-01**: Series of punchy scroll-driven statement sections (1-2 lines each)
-- [ ] **ABOU-02**: Scroll-driven text reveal animations on about statements
-- [ ] **ABOU-03**: Animated phone mockups section — multiple phones at different sizes scroll across screen with parallax (varying speeds/depths), showcasing digital/social work
+- [x] **ABOU-01**: Series of punchy scroll-driven statement sections (1-2 lines each)
+- [x] **ABOU-02**: Scroll-driven text reveal animations on about statements
+- [x] **ABOU-03**: Animated phone mockups section — multiple phones at different sizes scroll across screen with parallax (varying speeds/depths), showcasing digital/social work
 
 ### Featured Work
 
@@ -42,7 +42,7 @@ Requirements for index2.html — the full editorial portfolio site.
 ### Animations & Transitions
 
 - [ ] **ANIM-01**: Signature hero zoom/depth animation moment
-- [ ] **ANIM-02**: Scroll-driven text mask reveals for key content
+- [x] **ANIM-02**: Scroll-driven text mask reveals for key content
 - [ ] **ANIM-03**: Choreographed section transitions between major sections
 - [ ] **ANIM-04**: Gallery scroll animation (horizontal scroll or animated card transitions)
 
@@ -94,14 +94,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| HOUSE-01 | Phase 1 | Pending |
+| HOUSE-01 | Phase 1 | Complete |
 | HERO-01 | Phase 2 | Pending |
 | HERO-02 | Phase 2 | Pending |
 | HERO-03 | Phase 2 | Pending |
 | HERO-04 | Phase 2 | Pending |
-| ABOU-01 | Phase 1 | Pending |
-| ABOU-02 | Phase 1 | Pending |
-| ABOU-03 | Phase 1 | Pending |
+| ABOU-01 | Phase 1 | Complete |
+| ABOU-02 | Phase 1 | Complete |
+| ABOU-03 | Phase 1 | Complete |
 | WORK-01 | Phase 3 | Pending |
 | WORK-02 | Phase 4 | Pending |
 | WORK-03 | Phase 3 | Pending |
@@ -110,7 +110,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CRED-02 | Phase 5 | Pending |
 | CRED-03 | Phase 5 | Pending |
 | ANIM-01 | Phase 2 | Pending |
-| ANIM-02 | Phase 1 | Pending |
+| ANIM-02 | Phase 1 | Complete |
 | ANIM-03 | Phase 2 | Pending |
 | ANIM-04 | Phase 3 | Pending |
 | CTA-01 | Phase 3 | Pending |

@@ -222,7 +222,7 @@ Plans:
 
 | Phase | Status | Requirements | Completion |
 |-------|--------|--------------|------------|
-| 1 - Housekeeping & About Section Structure | Planned | HOUSE-01, ABOU-01, ABOU-02, ABOU-03, ANIM-02 | 0% |
+| 1 - Housekeeping & About Section Structure | ✓ Complete | HOUSE-01, ABOU-01, ABOU-02, ABOU-03, ANIM-02 | 100% |
 | 2 - Hero Section & Core Animations | Pending | HERO-01, HERO-02, HERO-03, HERO-04, ANIM-01, ANIM-03 | 0% |
 | 3 - Featured Work & Credits Rough Layout | Pending | WORK-01, WORK-03, CRED-01, ANIM-04, CTA-01, CTA-02 | 0% |
 | 4 - Video Lightbox & Hover Interactivity | Pending | WORK-02, WORK-04, ACCS-02 | 0% |
@@ -230,16 +230,16 @@ Plans:
 | 6 - Mobile Responsive & Scroll Performance | Pending | MOBI-01, MOBI-02, PERF-02 | 0% |
 | 7 - Optimization & Accessibility Polish | Pending | PERF-01, ACCS-01 | 0% |
 
-**Overall Progress:** 0/27 requirements complete (0%)
+**Overall Progress:** 5/27 requirements complete (19%)
 
 ---
 
 ## Next Steps
 
-1. Execute Phase 1: `/gsd:execute-phase 1`
-2. Research may be needed for Phase 4 (video lightbox implementation) and Phase 5 (Buttondown API)
+1. Plan Phase 2: `/gsd:discuss-phase 2` or `/gsd:plan-phase 2`
+2. Research may be needed for Phase 4 (video lightbox implementation) and Phase 3 (Buttondown API)
 
 ---
 
 *Roadmap created: 2026-02-09*
-*Last updated: 2026-02-09 with Phase 1 plans (4 plans in 3 waves)*
+*Last updated: 2026-02-09 — Phase 1 complete (4 plans, 3 waves, verified)*
