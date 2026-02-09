@@ -1,12 +1,10 @@
 /**
- * Handles video loading, responsive source switching, and loading overlay.
+ * Handles responsive source switching for the hero video.
  */
 export class ResponsiveVideo {
   constructor() {
-    this.loadingOverlay = document.querySelector('.loading-overlay');
     this.video = document.querySelector('section video');
     if (!this.video) {
-      if (this.loadingOverlay) this.loadingOverlay.style.display = 'none';
       return;
     }
     this.source = this.video.querySelector('source');
@@ -14,22 +12,14 @@ export class ResponsiveVideo {
   }
 
   init() {
-    this.handleLoadingOverlay();
+    this.prepareVideo();
     this.updateVideoSource();
     window.addEventListener('resize', () => this.updateVideoSource());
   }
 
-  handleLoadingOverlay() {
+  prepareVideo() {
     this.video.style.display = 'block';
     this.video.style.zIndex = '-1';
-
-    this.video.addEventListener('loadeddata', () => {
-      if (this.loadingOverlay) this.loadingOverlay.style.display = 'none';
-    });
-
-    setTimeout(() => {
-      if (this.loadingOverlay) this.loadingOverlay.style.display = 'none';
-    }, 5000);
   }
 
   updateVideoSource() {
