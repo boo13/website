@@ -9,7 +9,7 @@ def main(raw_value: str) -> int:
     if raw_value in ("", None, "null"):
         return 0
     try:
-        latency = float(raw_value)
+        latency = float(raw_value) / 1000
     except (TypeError, ValueError):
         return 0
 
