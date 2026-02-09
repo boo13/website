@@ -20,19 +20,19 @@ function getSizeConfig() {
   return window.matchMedia('(max-width: 480px)').matches ? MOBILE_SIZES : DESKTOP_SIZES;
 }
 
-function waitForLoadedMetadata(video, onLoaded) {
-  if (video.readyState >= 1) {
+function waitForVideoFrame(video, onLoaded) {
+  if (video.readyState >= 2) {
     onLoaded();
     return () => {};
   }
 
-  const onMetadataLoaded = () => {
-    video.removeEventListener('loadedmetadata', onMetadataLoaded);
+  const onFrameLoaded = () => {
+    video.removeEventListener('loadeddata', onFrameLoaded);
     onLoaded();
   };
 
-  video.addEventListener('loadedmetadata', onMetadataLoaded);
-  return () => video.removeEventListener('loadedmetadata', onMetadataLoaded);
+  video.addEventListener('loadeddata', onFrameLoaded);
+  return () => video.removeEventListener('loadeddata', onFrameLoaded);
 }
 
 function startCountdown(timerEl) {
@@ -194,7 +194,7 @@ export function runPreloader() {
 
     if (videos.length > 0) {
       videos.forEach((video) => {
-        const cleanupMetadataListener = waitForLoadedMetadata(video, () => {
+        const cleanupMetadataListener = waitForVideoFrame(video, () => {
           loadedVideos += 1;
           realProgress = loadedVideos / videos.length;
           updateProgress();

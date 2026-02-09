@@ -5,13 +5,13 @@ import { textMaskRiseWords } from './animations/text-mask-rise.js';
 import { runPreloader } from './components/preloader.js';
 
 function startExperience() {
-  new ResponsiveVideo();
   new Slider();
   textMaskRiseWords(['.landing-title', '.landing-subtitle'], { delay: 0.5 });
 }
 
 function init() {
   const fontsReady = document.fonts?.ready || Promise.resolve();
+  new ResponsiveVideo();
 
   runPreloader()
     .then(() => fontsReady)

@@ -34,7 +34,12 @@ export class ResponsiveVideo {
       newSrc = './video/LandingPageMontagev04.2.webm';
     }
 
-    if (this.source.src.endsWith(newSrc)) return;
+    const currentSrcPath = new URL(
+      this.source.getAttribute('src') || this.source.src,
+      window.location.href,
+    ).pathname;
+    const nextSrcPath = new URL(newSrc, window.location.href).pathname;
+    if (currentSrcPath === nextSrcPath) return;
 
     this.source.src = newSrc;
     this.video.load();
