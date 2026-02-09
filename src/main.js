@@ -8,8 +8,6 @@ import { initCustomCursor } from './components/custom-cursor.js';
 import { runPreloader } from './components/preloader.js';
 
 function init() {
-  document.body.classList.add('preloader-active');
-
   // Initialize sections (without landing animations yet)
   const cleanupCredits = initCredits();
   const cleanupCursor = initCustomCursor();
@@ -24,11 +22,10 @@ function init() {
     cleanupLanding = initLanding();
   }, { once: true });
 
-  runPreloader()
+  runPreloader({ criticalRootSelector: '#hero' })
     .catch(() => {})
     .finally(() => {
       // Start landing animations after preloader exits (or fails open)
-      document.body.classList.remove('preloader-active');
       document.dispatchEvent(new CustomEvent('loadingComplete'));
     });
 

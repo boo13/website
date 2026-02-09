@@ -66,6 +66,15 @@ function shouldTrackVideo(video) {
   return true;
 }
 
+function getCollectionRoot(criticalRootSelector) {
+  if (!criticalRootSelector) {
+    return document;
+  }
+
+  const rootEl = document.querySelector(criticalRootSelector);
+  return rootEl || document;
+}
+
 function waitForFonts(onLoaded) {
   if (!document.fonts?.ready) {
     onLoaded();
@@ -212,9 +221,10 @@ function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
   );
 }
 
-export function runPreloader() {
+export function runPreloader(options = {}) {
   return new Promise((resolve) => {
-    const overlayEl = document.querySelector('.loading-overlay');
+    const { overlaySelector = '.loading-overlay', criticalRootSelector } = options;
+    const overlayEl = document.querySelector(overlaySelector);
     if (!overlayEl) {
       resolve();
       return;
@@ -225,8 +235,9 @@ export function runPreloader() {
     const progressSmoother = createProgressSmoother(edgesEl);
     const clearCountdown = startCountdown(timeEl);
 
-    const videos = Array.from(document.querySelectorAll('video')).filter(shouldTrackVideo);
-    const images = Array.from(document.querySelectorAll('img')).filter(shouldTrackImage);
+    const collectionRoot = getCollectionRoot(criticalRootSelector);
+    const videos = Array.from(collectionRoot.querySelectorAll('video')).filter(shouldTrackVideo);
+    const images = Array.from(collectionRoot.querySelectorAll('img')).filter(shouldTrackImage);
 
     let loadedWeight = 0;
     let isComplete = false;
