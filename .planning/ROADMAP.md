@@ -21,6 +21,14 @@ Each phase delivers a coherent, verifiable capability. Housekeeping first (extra
 
 **Dependencies:** None (foundation work)
 
+**Plans:** 4 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Extract Wyatt Earp to standalone case_study_wyatt.html and clean up index2.html
+- [ ] 01-02-PLAN.md — Build About section HTML/CSS structure with 3 full-viewport slides and JS scaffold
+- [ ] 01-03-PLAN.md — Implement "Goes BIG" grid zoom-out animation and text mask-rise reveals
+- [ ] 01-04-PLAN.md — Phone mockup stagger animation, "This is me" reveal, slide transitions, and visual checkpoint
+
 **Requirements:**
 - HOUSE-01: Extract Wyatt Earp parallax section from index2.html into standalone case_study_wyatt.html, then remove from index2.html
 - ABOU-01: Series of punchy scroll-driven statement sections (1-2 lines each)
@@ -214,7 +222,7 @@ Each phase delivers a coherent, verifiable capability. Housekeeping first (extra
 
 | Phase | Status | Requirements | Completion |
 |-------|--------|--------------|------------|
-| 1 - Housekeeping & About Section Structure | Pending | HOUSE-01, ABOU-01, ABOU-02, ABOU-03, ANIM-02 | 0% |
+| 1 - Housekeeping & About Section Structure | Planned | HOUSE-01, ABOU-01, ABOU-02, ABOU-03, ANIM-02 | 0% |
 | 2 - Hero Section & Core Animations | Pending | HERO-01, HERO-02, HERO-03, HERO-04, ANIM-01, ANIM-03 | 0% |
 | 3 - Featured Work & Credits Rough Layout | Pending | WORK-01, WORK-03, CRED-01, ANIM-04, CTA-01, CTA-02 | 0% |
 | 4 - Video Lightbox & Hover Interactivity | Pending | WORK-02, WORK-04, ACCS-02 | 0% |
@@ -228,11 +236,10 @@ Each phase delivers a coherent, verifiable capability. Housekeeping first (extra
 
 ## Next Steps
 
-1. Review and approve this revised roadmap
-2. Begin Phase 1: `/gsd:plan-phase 1`
-3. Research may be needed for Phase 4 (video lightbox implementation) and Phase 5 (Buttondown API)
+1. Execute Phase 1: `/gsd:execute-phase 1`
+2. Research may be needed for Phase 4 (video lightbox implementation) and Phase 5 (Buttondown API)
 
 ---
 
 *Roadmap created: 2026-02-09*
-*Last updated: 2026-02-09 with design-first philosophy (rough layouts before optimization)*
+*Last updated: 2026-02-09 with Phase 1 plans (4 plans in 3 waves)*
