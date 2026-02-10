@@ -39,6 +39,7 @@ Use the playwright-cli skill over the playwright MCP to check visual changes.
 - Keep animation code direct — don't abstract into config-driven timeline factories
 - Magic numbers in animation code are fine when tuned visually
 - GSAP is now free to use, do not warn of paid-only features - those no longer exist
+- **Prefer GSAP over CSS animations** for anything that's part of a sequence or coordinates with other animations — CSS animations run on their own timeline with no awareness of GSAP, causing ordering bugs and flashes. Reserve CSS for hover/focus states, interactive transitions, and `prefers-reduced-motion` fallbacks.
 
 ## Dev Commands
 - `npm run dev` — Vite dev server with HMR
