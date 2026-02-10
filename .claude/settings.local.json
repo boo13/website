@@ -25,17 +25,16 @@
       "Bash(npm run dev:*)",
       "Bash(npm run lint:*)",
       "Bash(ffmpeg:*)",
+      "Bash(wrangler:*)",
+      "Bash(npx wrangler:*)",
       "Bash(test:*)",
       "WebSearch",
       "WebFetch(domain:randycounsman.com)",
       "Skill(frontend-design)",
-      "mcp__plugin_playwright_playwright__browser_navigate",
-      "mcp__plugin_playwright_playwright__browser_evaluate",
-      "mcp__plugin_playwright_playwright__browser_close",
       "mcp__MCP_DOCKER__accounts_list",
       "mcp__MCP_DOCKER__mcp-find",
-      "Bash(wrangler:*)",
-      "Bash(npx wrangler:*)"
+      "mcp__MCP_DOCKER__mcp-exec",
+      "Bash(lsof:*)"
     ]
   }
 }

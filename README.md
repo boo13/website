@@ -68,3 +68,7 @@ Videos are hosted on a Cloudflare R2 bucket (`portfolio-assets`) and served via 
 - Use small, focused commits with imperative messages (e.g., `update hero video`, `tweak contact form spacing`).
 - For visual changes, include a brief note on tested browsers/devices and, if possible, before/after screenshots.
 - Optimize images before committing. Video files go to R2, not the repo.
+
+## Links I've refrenced
+- [GSAP - Flip Hero/Footer Toggle](https://codepen.io/GreenSock/pen/ByzPBmd)
+- Use playwright-cli over playwright-mcp - [Playwright CLI vs MCP - a new tool for your coding agent](https://youtu.be/Be0ceKN81S8?si=04om80p0jWT96KDO)
