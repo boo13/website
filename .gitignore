@@ -178,3 +178,9 @@ public/video/
 
 # Wrangler local state
 .wrangler/
+
+# Playwright MCP folder (contains screenshots and logs)
+.playwright-mcp/
+
+# Playwright CLI snapshot yamls 
+.playwright-cli/*.yml

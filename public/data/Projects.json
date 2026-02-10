@@ -321,20 +321,6 @@
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2568868/",
       "preview": "images/portfolio/redrum.jpg"
-    },
-    {
-      "id": "modern-love",
-      "title": "Modern Love",
-      "platform": "Independent Short Film",
-      "year": "2005",
-      "role": "Actor (Jay)",
-      "description": "Narrative short about intertwined relationships; Randy appears on screen as Jay early in his career.",
-      "videoStandard": null,
-      "videoVertical": null,
-      "poster": null,
-      "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt1429075/",
-      "preview": "images/portfolio/modern-love.png"
     }
   ]
 }

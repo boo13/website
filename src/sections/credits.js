@@ -220,18 +220,19 @@ function initCreditsPreview() {
 function initCreditsRowReveal() {
   const rows = document.querySelectorAll('.credit-row');
   if (!rows.length) return () => {};
-  const rowToIndex = new Map(Array.from(rows).map((row, index) => [row, index]));
   const revealTimeouts = [];
 
   const observer = new IntersectionObserver(
     (entries) => {
+      // Only process newly-intersecting rows, staggered within this batch
+      let batchIndex = 0;
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const row = entry.target;
-          const index = rowToIndex.get(row) ?? 0;
           const timeoutId = window.setTimeout(() => {
             row.classList.add('revealed');
-          }, index * 80);
+          }, batchIndex * 80);
+          batchIndex++;
           revealTimeouts.push(timeoutId);
           observer.unobserve(row);
         }

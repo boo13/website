@@ -25,6 +25,19 @@ export function initGallery() {
 
   let currentIndex = 0;
 
+  function setupHoverCorners() {
+    cards.forEach((card) => {
+      if (card.querySelector('.gallery-card-corner')) return;
+
+      ['lt', 'lb', 'rt', 'rb'].forEach((position) => {
+        const corner = document.createElement('span');
+        corner.className = `gallery-card-corner gallery-card-corner-${position}`;
+        corner.setAttribute('aria-hidden', 'true');
+        card.appendChild(corner);
+      });
+    });
+  }
+
   function updateProgress(progress) {
     const totalCards = cards.length;
     const newIndex = Math.min(Math.floor(progress * totalCards) + 1, totalCards);
@@ -71,6 +84,8 @@ export function initGallery() {
     // We just need to ensure hover videos pause when lightbox opens
     // The lightbox component handles this via its 'open' event listener
   }
+
+  setupHoverCorners();
 
   if (prefersReducedMotion || isMobile) {
     track.style.flexDirection = 'column';

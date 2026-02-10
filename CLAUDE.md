@@ -6,7 +6,7 @@ GSAP-focused portfolio site for Randy Counsman (nonfiction video producer). Anim
 ## Stack
 - **Vite** for bundling, dev server, hot reload
 - **JavaScript**
-- **GSAP 3.14.2** via npm with ScrollTrigger, CustomEase, Observer
+- **GSAP 3.14.2** via npm with ScrollTrigger, CustomEase, Observer, Flip, ScrollSmoother
 - **Deployed** to gh-pages as static files
 
 ## Project Structure
@@ -29,6 +29,8 @@ Each section exports an `initSectionName()` function called from `main.js`.
 Static assets live in `public/` (data, images, favicon, CNAME) — Vite copies them as-is to the build output. HTML files stay at the repo root.
 
 **Video assets** are hosted on **Cloudflare R2**, not in the git repo. The R2 CDN base URL is defined in `src/config.js` as `CDN_BASE`. Video references in HTML use full R2 URLs; JS files import `CDN_BASE` from config. Local copies in `public/video/` are gitignored but may exist for dev/optimization work.
+
+Use the playwright-cli skill over the playwright MCP to check visual changes.
 
 ## GSAP Conventions
 - Use `gsap.context()` per section for clean setup/teardown — no custom lifecycle wrappers
