@@ -71,4 +71,5 @@ Videos are hosted on a Cloudflare R2 bucket (`portfolio-assets`) and served via 
 
 ## Links I've refrenced
 - [GSAP - Flip Hero/Footer Toggle](https://codepen.io/GreenSock/pen/ByzPBmd)
+- [GSAP - Staggered Text Effect](https://codepen.io/GreenSock/pen/podRjbe)
 - Use playwright-cli over playwright-mcp - [Playwright CLI vs MCP - a new tool for your coding agent](https://youtu.be/Be0ceKN81S8?si=04om80p0jWT96KDO)
