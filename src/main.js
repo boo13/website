@@ -7,6 +7,7 @@ import { initGallery } from './sections/gallery.js';
 import { initCredits } from './sections/credits.js';
 import { initAbout } from './sections/about.js';
 import { initAboutSlides } from './sections/about-slides.js';
+import { initFooterReveal } from './sections/footer-reveal.js';
 import { initCustomCursor } from './components/custom-cursor.js';
 import { runPreloader } from './components/preloader.js';
 import { initVideoLightbox } from './components/video-lightbox.js';
@@ -30,6 +31,7 @@ function init() {
   const cleanupAboutSlides = initAboutSlides();
   initGallery();
   initAbout();
+  const cleanupFooterReveal = initFooterReveal();
   const cleanupLightbox = initVideoLightbox();
 
   let cleanupLanding;
@@ -52,6 +54,7 @@ function init() {
     if (typeof cleanupCredits === 'function') cleanupCredits();
     if (typeof cleanupCursor === 'function') cleanupCursor();
     if (typeof cleanupAboutSlides === 'function') cleanupAboutSlides();
+    if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
     if (typeof cleanupLightbox === 'function') cleanupLightbox();
     if (typeof cleanupLanding === 'function') cleanupLanding();
   }, { once: true });

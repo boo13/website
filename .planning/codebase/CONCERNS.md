@@ -48,6 +48,13 @@ The following concerns from the 2026-01-12 audit have been resolved:
 - **Impact:** Slow experience on mobile or constrained networks
 - **Fix approach:** Audit asset sizes, consider lazy loading, compression, or CDN delivery
 
+### Hero Autoplay Broken on iOS
+
+- **Files:** `index.html`, `index2.html`, `src/components/responsive-video.js`
+- **Problem:** Hero videos only provide WebM sources; iOS Safari requires MP4/H.264 fallback so the video never loads or autoplays on phones
+- **Impact:** Users see a frozen poster and no hero motion on iPhone/iPad
+- **Fix approach:** Export H.264 versions of both landscape and portrait reels, add `<source type="video/mp4">` fallbacks, and ensure responsive swap logic references both formats
+
 ### No Pre-commit Hooks
 
 - **Problem:** No husky or lint-staged configured
