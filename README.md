@@ -69,7 +69,9 @@ Videos are hosted on a Cloudflare R2 bucket (`portfolio-assets`) and served via 
 - For visual changes, include a brief note on tested browsers/devices and, if possible, before/after screenshots.
 - Optimize images before committing. Video files go to R2, not the repo.
 
-## Links I've refrenced
+## Credit where due...
 - [GSAP - Flip Hero/Footer Toggle](https://codepen.io/GreenSock/pen/ByzPBmd)
 - [GSAP - Staggered Text Effect](https://codepen.io/GreenSock/pen/podRjbe)
-- Use playwright-cli over playwright-mcp - [Playwright CLI vs MCP - a new tool for your coding agent](https://youtu.be/Be0ceKN81S8?si=04om80p0jWT96KDO)
+- playwright-cli > playwright-mcp - [Playwright CLI vs MCP - a new tool for your coding agent](https://youtu.be/Be0ceKN81S8?si=04om80p0jWT96KDO)
+- Footer design/transition - [1820Productions](https://www.1820productions.com/)
+- Screensaver animation - [JasonBergh](https://www.JasonBergh.com/)

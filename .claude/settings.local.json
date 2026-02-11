@@ -42,7 +42,10 @@
       "Bash(DISPLAY=:0 playwright-cli open:*)",
       "Bash(npx playwright-cli --help)",
       "Skill(playwright-cli)",
-      "Bash(playwright-cli:*)"
+      "Bash(playwright-cli:*)",
+      "Bash(npx playwright-cli:*)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_run_code"
     ]
   }
 }

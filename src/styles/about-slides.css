@@ -68,6 +68,42 @@
 }
 
 /* =====================================================
+   SLIDES 2+3 TRANSITION WRAPPER
+   Single pinned container — both slides stacked absolutely
+====================================================== */
+.slide-transition-wrapper {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+@supports (height: 100svh) {
+    .slide-transition-wrapper {
+        height: 100svh;
+    }
+}
+
+/* Both slides fill the wrapper, stacked on top of each other */
+.slide-transition-wrapper .about-slide {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    min-height: 0;  /* Override base .about-slide min-height: 100vh */
+    width: 100%;
+}
+
+/* Slide 3 starts hidden — JS reveals it during the transition.
+   z-index: 2 ensures all Slide 3 contents (phones, text) render
+   above Slide 2's grid background (which has internal z-index: 1).
+   Transparent background lets the darkened grid show through faintly. */
+.slide-transition-wrapper .slide-in-your-hand {
+    opacity: 0;
+    visibility: hidden;
+    z-index: 2;
+    background: transparent;
+}
+
+/* =====================================================
    SLIDE 1: "STORYTELLING THAT GOES BIG"
 ====================================================== */
 .slide-goes-big {
@@ -219,12 +255,12 @@
 
 .slide-in-your-hand::before {
     top: 0;
-    background: linear-gradient(to bottom, #0a0a0a 0%, transparent 100%);
+    background: linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, transparent 100%);
 }
 
 .slide-in-your-hand::after {
     bottom: 0;
-    background: linear-gradient(to top, #0a0a0a 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 100%);
 }
 
 /* Phone mockup — frame image overlays video */
@@ -423,5 +459,11 @@
     .phone-mockup {
         animation: none !important;
         transition: none !important;
+    }
+
+    /* Override JS-hidden initial state so content is visible */
+    .slide-transition-wrapper .slide-in-your-hand {
+        opacity: 1;
+        visibility: visible;
     }
 }

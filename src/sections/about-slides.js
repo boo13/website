@@ -23,6 +23,8 @@ export function initAboutSlides() {
         gsap.set(section.querySelectorAll('.slide-intro'), { opacity: 1 });
         gsap.set(section.querySelectorAll('.slide-headline'), { opacity: 1 });
         gsap.set(section.querySelectorAll('.phone-mockup'), { opacity: 1 });
+        // Slide 3 is hidden by CSS in the wrapper — make it visible
+        gsap.set(section.querySelector('.slide-in-your-hand'), { opacity: 1, visibility: 'visible' });
         return () => {};
     }
 
@@ -56,128 +58,48 @@ export function initAboutSlides() {
         }
 
         // =====================================================
-        // SLIDE 2: GRID ZOOM-OUT ANIMATION
+        // SLIDES 2+3: PINNED CROSS-TRANSITION
+        // One wrapper, one pin, one master timeline:
+        //   Phase 1 (0–0.35):   Grid zoom-out (scale 7→1, tilt into 3D)
+        //   Phase 2 (0.35–0.50): Darken grid bg, Slide 2 text out
+        //   Phase 3 (0.50–0.60): Slide 3 appears, text-mask-rise
+        //   Phase 4 (0.55–1.0):  Phones scroll through
         // =====================================================
+        const wrapper = section.querySelector('.slide-transition-wrapper');
         const slideGoesBig = section.querySelector('.slide-goes-big');
+        const slideInYourHand = section.querySelector('.slide-in-your-hand');
         const gridContainer = slideGoesBig?.querySelector('.grid-container');
 
-        if (slideGoesBig && gridContainer) {
-            // Set initial state — zoomed IN to center cell (video), flat (no tilt)
-            // Grid is 100% of viewport (CSS), at 7x scale center cell = 100% viewport
-            // Each cell = 100%/7 ≈ 14.3%, at 7x → 14.3% × 7 = 100% (fills screen)
+        if (wrapper && slideGoesBig && slideInYourHand && gridContainer) {
+            // --- Slide 2 elements ---
+            const slideBg = slideGoesBig.querySelector('.slide-bg');
+            const intro2 = slideGoesBig.querySelector('.slide-intro');
+            const headline2 = slideGoesBig.querySelector('.slide-headline');
+
+            // --- Slide 3 elements ---
+            const intro3 = slideInYourHand.querySelector('.slide-intro');
+            const headline3 = slideInYourHand.querySelector('.slide-headline');
+            const phones = section.querySelectorAll('.slide-in-your-hand .phone-mockup');
+            const smallPhones = section.querySelectorAll('.slide-in-your-hand .phone-mockup.phone-sm');
+            const lgPhone = section.querySelector('.slide-in-your-hand .phone-mockup.phone-lg');
+
+            // --- Initial states ---
             gsap.set(gridContainer, {
                 scale: 7,
                 transformPerspective: 1200,
                 transformOrigin: 'center center',
             });
-
-            // Create scrub-linked timeline for zoom-out
-            // Grid starts flat, tilts into 3D as it zooms out (right edge closer)
-            const gridTl = gsap.timeline({ paused: true });
-
-            gridTl.to(gridContainer, {
-                scale: 1,
-                rotateY: -4,
-                duration: 1,
-                ease: 'none',  // Linear easing for scrub control
-            });
-
-            // Text elements for reveal when pin starts
-            const intro = slideGoesBig.querySelector('.slide-intro');
-            const headline = slideGoesBig.querySelector('.slide-headline');
-            let textRevealed = false;
-
-            // Pin slide and scrub-link the zoom animation
-            // Text animations fire once when pin begins (slide reaches top)
-            ScrollTrigger.create({
-                trigger: slideGoesBig,
-                start: 'top top',
-                end: '+=150%',        // Scroll distance = 1.5x viewport height
-                scrub: SCRUB.smooth,  // 1.5s smooth catch-up delay
-                pin: true,
-                animation: gridTl,
-                invalidateOnRefresh: true,  // Handle resize/orientation changes
-                onEnter: () => {
-                    if (textRevealed) return;
-                    textRevealed = true;
-
-                    // Handwritten intro — fade and rise
-                    if (intro) {
-                        gsap.fromTo(intro,
-                            { opacity: 0, y: 20 },
-                            {
-                                opacity: 1,
-                                y: 0,
-                                duration: 1.2,
-                                ease: 'power3.out',
-                            }
-                        );
-                    }
-
-                    // Headline — text-mask-rise word-by-word
-                    if (headline) {
-                        cleanupHeadline = textMaskRiseWords(headline, {
-                            duration: 1.5,
-                            stagger: 0.15,
-                            yOffset: 40,
-                            delay: 0.3,
-                        });
-                    }
-                },
-            });
-        }
-
-        // =====================================================
-        // SLIDE 2 -> SLIDE 3 CROSSFADE TRANSITION
-        // =====================================================
-        const slideInYourHand = section.querySelector('.slide-in-your-hand');
-
-        if (slideInYourHand) {
-            // Crossfade transition as Slide 3 enters viewport
-            gsap.fromTo(slideInYourHand,
-                { opacity: 0.7 },
-                {
-                    opacity: 1,
-                    duration: 0.5,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: slideInYourHand,
-                        start: 'top 90%',
-                        end: 'top 40%',
-                        scrub: 1,
-                    },
-                }
-            );
-        }
-
-        // =====================================================
-        // SLIDE 3: PHONE MOCKUPS — PINNED WITH PHONE SCROLL-THROUGH
-        // Section is pinned. Text stays fixed in place.
-        // Phones scroll from below the viewport to above it
-        // over the full pinned scroll distance.
-        // =====================================================
-        const phones = section.querySelectorAll('.slide-in-your-hand .phone-mockup');
-        const intro3 = slideInYourHand?.querySelector('.slide-intro');
-        const headline3 = slideInYourHand?.querySelector('.slide-headline');
-
-        const smallPhones = section.querySelectorAll('.slide-in-your-hand .phone-mockup.phone-sm');
-        const lgPhone = section.querySelector('.slide-in-your-hand .phone-mockup.phone-lg');
-
-        if (slideInYourHand && phones.length) {
-            // Per-phone variation: 3D tilt, scale, speed, depth layer
-            // rotateY tilts back into z-space; scale + zIndex create depth
-            const smallVariants = [
-                { rotateY: -3,  scale: 1,    speed: 0.95, delay: 0,     exitY: -125, behind: false },  // phone-1: front
-                { rotateY:  2,  scale: 0.88, speed: 1.0,  delay: 0.03,  exitY: -118, behind: true  },  // phone-2: behind text
-                { rotateY: -2,  scale: 1,    speed: 1.05, delay: 0.055, exitY: -130, behind: false },  // phone-3: front
-                { rotateY:  3,  scale: 0.85, speed: 0.92, delay: 0.08,  exitY: -115, behind: true  },  // phone-5: behind text
-                { rotateY: -1.5,scale: 0.92, speed: 0.98, delay: 0.10,  exitY: -122, behind: false },  // phone-6: front
-            ];
-
-            // Phones start below viewport, end above it
             gsap.set(phones, { opacity: 0, yPercent: 120 });
 
-            // Apply initial 3D tilt, scale, and depth to small phones
+            // Per-phone variation: 3D tilt, scale, speed, depth layer
+            const smallVariants = [
+                { rotateY: -3,  scale: 1,    speed: 0.95, delay: 0,     exitY: -125, behind: false },
+                { rotateY:  2,  scale: 0.88, speed: 1.0,  delay: 0.03,  exitY: -118, behind: true  },
+                { rotateY: -2,  scale: 1,    speed: 1.05, delay: 0.055, exitY: -130, behind: false },
+                { rotateY:  3,  scale: 0.85, speed: 0.92, delay: 0.08,  exitY: -115, behind: true  },
+                { rotateY: -1.5,scale: 0.92, speed: 0.98, delay: 0.10,  exitY: -122, behind: false },
+            ];
+
             Array.from(smallPhones).forEach((phone, i) => {
                 const v = smallVariants[i] || smallVariants[0];
                 gsap.set(phone, {
@@ -189,74 +111,121 @@ export function initAboutSlides() {
                 if (v.behind) phone.classList.add('phone-behind');
             });
 
-            // Build a timeline for scrub-linked phone travel
-            const phoneTl = gsap.timeline({ paused: true });
+            // =====================================================
+            // BUILD MASTER TIMELINE (normalized to duration 1)
+            // =====================================================
+            const masterTl = gsap.timeline({ paused: true });
 
-            // --- Small phones: staggered fade-in + varied travel speeds ---
+            // --- Phase 1: Grid zoom-out (0–0.35) ---
+            masterTl.to(gridContainer, {
+                scale: 1,
+                rotateY: -4,
+                duration: 0.35,
+                ease: 'none',
+            }, 0);
+
+            // --- Phase 2: Darken + Slide 2 text out (0.35–0.50) ---
+            if (slideBg) {
+                masterTl.to(slideBg, {
+                    opacity: 0.2,
+                    duration: 0.15,
+                    ease: 'none',
+                }, 0.35);
+            }
+
+            // Slide 2 text fades out + drops down
+            if (intro2) {
+                masterTl.to(intro2, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.12,
+                    ease: 'power2.in',
+                }, 0.35);
+            }
+            if (headline2) {
+                masterTl.to(headline2, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.12,
+                    ease: 'power2.in',
+                }, 0.37);
+            }
+
+            // --- Phase 3: Slide 3 appears (0.48–0.55) ---
+            // Visibility + opacity on the slide itself
+            masterTl.set(slideInYourHand, {
+                visibility: 'visible',
+            }, 0.48);
+            masterTl.to(slideInYourHand, {
+                opacity: 1,
+                duration: 0.07,
+                ease: 'none',
+            }, 0.48);
+
+            // --- Phase 4: Phones (placed directly in master timeline) ---
+            // Small phones travel through and exit by 0.88 (buffer for scrub lag).
+            // Large phone enters and holds — scrolls away naturally on unpin.
+            // More aggressive exitY so they clear the viewport completely.
+            const phoneStart = 0.50;    // Phones begin as Slide 3 appears
+            const phoneEnd = 0.88;      // Small phones finish before pin ends (scrub buffer)
+            const phoneDur = phoneEnd - phoneStart;  // 0.38
+
             Array.from(smallPhones).forEach((phone, i) => {
                 const v = smallVariants[i] || smallVariants[0];
+                const staggerOffset = v.delay * 0.15;  // Compress stagger into master scale
 
-                // Staggered fade-in
-                phoneTl.to(phone, {
+                // Quick fade-in
+                masterTl.to(phone, {
                     opacity: 1,
-                    duration: 0.1,
+                    duration: 0.03,
                     ease: 'power2.out',
-                }, v.delay);
+                }, phoneStart + staggerOffset);
 
-                // Each phone travels at its own speed (duration)
-                phoneTl.to(phone, {
-                    yPercent: v.exitY,
-                    duration: v.speed,
+                // Travel from below to well above viewport
+                masterTl.to(phone, {
+                    yPercent: v.exitY * 1.6,   // More aggressive exit — fully off-screen
+                    duration: phoneDur - staggerOffset,
                     ease: 'none',
-                }, v.delay);
+                }, phoneStart + staggerOffset);
             });
 
-            // --- Large phone: enters, holds in view, then exits ---
+            // Large phone: enters and settles — no exit tween.
             if (lgPhone) {
-                // Fade in
-                phoneTl.to(lgPhone, {
+                masterTl.to(lgPhone, {
                     opacity: 1,
-                    duration: 0.1,
+                    duration: 0.03,
                     ease: 'power2.out',
-                }, 0);
+                }, phoneStart);
 
-                // Phase 1: enter from below to resting position (0-25%)
-                phoneTl.fromTo(lgPhone,
+                masterTl.fromTo(lgPhone,
                     { yPercent: 120 },
                     {
                         yPercent: 0,
-                        duration: 0.25,
+                        duration: 0.15,
                         ease: 'power2.out',
-                    }, 0);
-
-                // Phase 2: hold in place (25-60%) — no tween needed, value stays
-
-                // Phase 3: exit upward (60-100%)
-                phoneTl.to(lgPhone, {
-                    yPercent: -140,
-                    duration: 0.4,
-                    ease: 'power2.in',
-                }, 0.6);
+                    }, phoneStart);
             }
 
-            // Text reveal flags
-            let textRevealed = false;
+            // --- Text reveal triggers (time-based, not scrub-linked) ---
+            let slide2TextRevealed = false;
+            let slide3TextRevealed = false;
 
-            // Pin the section and scrub-link the phone animation
+            // Pin wrapper and scrub the master timeline
             ScrollTrigger.create({
-                trigger: slideInYourHand,
+                trigger: wrapper,
                 start: 'top top',
-                end: '+=150%',
+                end: '+=350%',
                 scrub: SCRUB.smooth,
                 pin: true,
-                animation: phoneTl,
+                animation: masterTl,
                 invalidateOnRefresh: true,
                 onEnter: () => {
-                    if (textRevealed) return;
-                    textRevealed = true;
+                    // Slide 2 text fires once when pin starts (same as before)
+                    if (slide2TextRevealed) return;
+                    slide2TextRevealed = true;
 
-                    if (intro3) {
-                        gsap.fromTo(intro3,
+                    if (intro2) {
+                        gsap.fromTo(intro2,
                             { opacity: 0, y: 20 },
                             {
                                 opacity: 1,
@@ -267,8 +236,8 @@ export function initAboutSlides() {
                         );
                     }
 
-                    if (headline3) {
-                        textMaskRiseWords(headline3, {
+                    if (headline2) {
+                        cleanupHeadline = textMaskRiseWords(headline2, {
                             duration: 1.5,
                             stagger: 0.15,
                             yOffset: 40,
@@ -276,11 +245,36 @@ export function initAboutSlides() {
                         });
                     }
                 },
+                onUpdate: (self) => {
+                    // Slide 3 text fires once when we reach the transition point
+                    if (!slide3TextRevealed && self.progress >= 0.48) {
+                        slide3TextRevealed = true;
+
+                        if (intro3) {
+                            gsap.fromTo(intro3,
+                                { opacity: 0, y: 20 },
+                                {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 1.2,
+                                    ease: 'power3.out',
+                                }
+                            );
+                        }
+
+                        if (headline3) {
+                            textMaskRiseWords(headline3, {
+                                duration: 1.5,
+                                stagger: 0.15,
+                                yOffset: 40,
+                                delay: 0.3,
+                            });
+                        }
+                    }
+                },
             });
 
-            // Play/pause phone videos based on visibility.
-            // IntersectionObserver tracks actual rendered position,
-            // so it works correctly even though GSAP moves phones via transforms.
+            // Play/pause phone videos based on visibility
             const phoneObserver = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {
@@ -298,41 +292,6 @@ export function initAboutSlides() {
 
             phones.forEach((phone) => phoneObserver.observe(phone));
             cleanupObserver = () => phoneObserver.disconnect();
-        } else {
-            // Fallback text reveals if no phones found
-            if (intro3) {
-                gsap.fromTo(intro3,
-                    { opacity: 0, y: 20 },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1.2,
-                        ease: 'power3.out',
-                        scrollTrigger: {
-                            trigger: slideInYourHand,
-                            start: 'top 70%',
-                            toggleActions: 'play none none none',
-                        },
-                    }
-                );
-            }
-
-            if (headline3) {
-                gsap.set(headline3, { opacity: 0 });
-                ScrollTrigger.create({
-                    trigger: slideInYourHand,
-                    start: 'top 70%',
-                    onEnter: () => {
-                        textMaskRiseWords(headline3, {
-                            duration: 1.5,
-                            stagger: 0.15,
-                            yOffset: 40,
-                            delay: 0.3,
-                        });
-                    },
-                    once: true,
-                });
-            }
         }
 
         ScrollTrigger.refresh();

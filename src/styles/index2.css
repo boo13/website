@@ -74,7 +74,6 @@ a {
 
 #smooth-content {
     background: var(--color-nearblack);
-    background-clip: content-box;
 }
 
 /* =====================================================
@@ -896,8 +895,18 @@ a {
     left: 0;
     width: 100%;
     z-index: 0;
+    pointer-events: none;
     background: var(--color-nearblack);
     color: var(--color-offwhite);
+}
+
+.site-footer.site-footer--interactive {
+    pointer-events: auto;
+}
+
+.footer-spacer {
+    height: 0;
+    pointer-events: none;
 }
 
 .footer-inner {
