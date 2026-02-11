@@ -2,7 +2,11 @@
  * Hero Z-Depth Zoom Animation
  * Creates cinematic zoom transition where hero recedes as user scrolls
  */
-import { gsap, ScrollTrigger, ScrollSmoother } from '../animations/scroll-defaults.js';
+import {
+  gsap,
+  ScrollTrigger,
+  ScrollSmoother,
+} from '../animations/scroll-defaults.js';
 import Flip from 'gsap/Flip';
 import { textMaskRiseWords } from '../animations/text-mask-rise.js';
 
@@ -32,7 +36,7 @@ export function initLanding() {
   if (!hero) return () => {};
 
   const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)',
+    '(prefers-reduced-motion: reduce)'
   ).matches;
 
   if (prefersReducedMotion) {
@@ -60,13 +64,13 @@ export function initLanding() {
 
     cleanupHeroNameMask = textMaskRiseWords(nameAnimationTarget, {
       delay: 0.3,
-      duration: 1.2,
+      duration: 2.2,
       stagger: 0.12,
       yOffset: 30,
       colorTrail: {
         colors: ['#00d4ff', '#ff3366'],
         blendMode: 'screen',
-        staggerOffset: 0.06,
+        staggerOffset: 0.15,
       },
     });
 
@@ -100,10 +104,10 @@ export function initLanding() {
               const heroRect = heroName.getBoundingClientRect();
               const fixedRect = fixedHeroName.getBoundingClientRect();
               return (
-                Math.abs(fixedRect.x - heroRect.x)
-                + Math.abs(fixedRect.y - heroRect.y)
-                + Math.abs(fixedRect.width - heroRect.width)
-                + Math.abs(fixedRect.height - heroRect.height)
+                Math.abs(fixedRect.x - heroRect.x) +
+                Math.abs(fixedRect.y - heroRect.y) +
+                Math.abs(fixedRect.width - heroRect.width) +
+                Math.abs(fixedRect.height - heroRect.height)
               );
             };
 
@@ -152,7 +156,7 @@ export function initLanding() {
               // Entrance animation — after title text-mask-rise completes (~1.6s from load)
               subEntrance = gsap.to(fixedSubtitle, {
                 autoAlpha: 1,
-                delay: 1.8,
+                delay: 2.8,
                 duration: 1.2,
                 ease: 'expo.out',
               });
@@ -182,14 +186,16 @@ export function initLanding() {
               // Entrance animation — after subtitle starts
               socialEntrance = gsap.to(fixedSocial, {
                 autoAlpha: 1,
-                delay: 2.1,
+                delay: 3.1,
                 duration: 1.2,
                 ease: 'expo.out',
               });
             }
 
             // Make the fixed name scroll back to hero when clicked
-            const nameContainer = fixedHeroName.closest('.hero-fixed-name-container') || fixedHeroName;
+            const nameContainer =
+              fixedHeroName.closest('.hero-fixed-name-container') ||
+              fixedHeroName;
             const scrollToHero = (e) => {
               e.preventDefault();
               const smoother = ScrollSmoother.get();
@@ -210,7 +216,7 @@ export function initLanding() {
                 const progress = gsap.utils.interpolate(
                   heroProgress,
                   headerProgress,
-                  self.progress,
+                  self.progress
                 );
                 nameFlip.progress(progress);
 
@@ -229,7 +235,8 @@ export function initLanding() {
                     socialEntrance = null;
                   }
                   // Read title's current visual bottom edge
-                  const titleBottom = fixedHeroName.getBoundingClientRect().bottom;
+                  const titleBottom =
+                    fixedHeroName.getBoundingClientRect().bottom;
                   const fadeAlpha = 1 - self.progress;
 
                   if (hasSubtitle) {
@@ -255,7 +262,7 @@ export function initLanding() {
             // is only needed during the initial rise-in reveal; leaving
             // it active causes compositor glitches when Flip repeatedly
             // scales the parent between hero and header sizes.
-            gsap.delayedCall(2, () => {
+            gsap.delayedCall(3, () => {
               fixedHeroName.querySelectorAll('.word').forEach((w) => {
                 if (w.parentElement && w.parentElement !== fixedHeroName) {
                   w.parentElement.style.overflow = '';
@@ -278,7 +285,7 @@ export function initLanding() {
         duration: 1,
         ease: 'none',
       },
-      0,
+      0
     );
 
     if (video) {
@@ -289,7 +296,7 @@ export function initLanding() {
           duration: 0.8,
           ease: 'none',
         },
-        0,
+        0
       );
     }
 
@@ -302,7 +309,7 @@ export function initLanding() {
           duration: 0.5,
           ease: 'power2.in',
         },
-        0,
+        0
       );
     }
 
@@ -314,7 +321,7 @@ export function initLanding() {
           duration: 0.7,
           ease: 'none',
         },
-        0,
+        0
       );
     }
 
@@ -328,7 +335,7 @@ export function initLanding() {
         document.dispatchEvent(
           new CustomEvent('heroZoomProgress', {
             detail: { progress: self.progress },
-          }),
+          })
         );
       },
     });

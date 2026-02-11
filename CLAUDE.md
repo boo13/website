@@ -32,6 +32,8 @@ Static assets live in `public/` (data, images, favicon, CNAME) — Vite copies t
 
 Use the playwright-cli skill over the playwright MCP to check visual changes. If playwright is used to take screenshots, those screenshots should be removed after they used (unless the user asked for them.)
 
+**Screenshot timing matters:** Animations on this site can be deferred by `fonts.ready`, `requestAnimationFrame`, or `ctx.add()` — they may not start until 1-2s after page load. Before taking verification screenshots, first determine WHEN the animation actually runs (e.g. query for DOM elements the animation creates, check opacity/transform values at multiple timepoints). A screenshot taken outside the animation window is a false positive, not proof the fix works.
+
 ## GSAP Conventions
 - Use `gsap.context()` per section for clean setup/teardown — no custom lifecycle wrappers
 - Centralize `ScrollTrigger.defaults()` in one place to avoid pin conflicts
@@ -40,6 +42,8 @@ Use the playwright-cli skill over the playwright MCP to check visual changes. If
 - Magic numbers in animation code are fine when tuned visually
 - GSAP is now free to use, do not warn of paid-only features - those no longer exist
 - **Prefer GSAP over CSS animations** for anything that's part of a sequence or coordinates with other animations — CSS animations run on their own timeline with no awareness of GSAP, causing ordering bugs and flashes. Reserve CSS for hover/focus states, interactive transitions, and `prefers-reduced-motion` fallbacks.
+- **Stagger vs individual `fromTo` in timelines** — `tl.fromTo(array, from, to, pos)` with `stagger` applies from-values to ALL elements at `pos`. Individual `tl.fromTo(el, from, to, pos)` calls only apply from-values when each tween's position is reached. When synchronizing clones/duplicates with originals, use the same stagger approach so from-values are applied identically.
+- **SplitText mask wrapper sizing** — Mask wrappers can be taller than word elements (line-height, font metrics). Absolutely-positioned overlays inside wrappers need `word.offsetTop` positioning, not `top: 0`, or they'll extend beyond the visible text area.
 
 ## Dev Commands
 - `npm run dev` — Vite dev server with HMR

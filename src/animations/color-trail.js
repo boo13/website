@@ -41,13 +41,13 @@ export function createColorTrailWords(words, options = {}) {
       clone.setAttribute('aria-hidden', 'true');
       clone.style.position = 'absolute';
       clone.style.left = '0';
-      clone.style.top = '0';
+      clone.style.top = `${word.offsetTop}px`;
       clone.style.width = '100%';
-      clone.style.height = '100%';
       clone.style.zIndex = String(colorIndex + 1);
       clone.style.color = color;
       clone.style.mixBlendMode = blendMode;
       clone.style.pointerEvents = 'none';
+      clone.style.overflow = 'clip';
 
       // Insert before original so it renders behind
       maskWrapper.insertBefore(clone, word);

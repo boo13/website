@@ -45,7 +45,9 @@
       "Bash(playwright-cli snapshot:*)",
       "WebFetch(domain:cdpn.io)",
       "Bash(.claude/skills/playwright-cli/playwright-cli open:*)",
-      "Bash(npx playwright-cli --help)"
+      "Bash(npx playwright-cli --help)",
+      "Bash(playwright-cli close:*)",
+      "Bash(playwright-cli resize:*)"
     ]
   }
 }

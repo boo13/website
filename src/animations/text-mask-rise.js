@@ -127,42 +127,41 @@ export function textMaskRiseWords(targets, overrides = {}) {
         0,
       );
 
-      // Three non-overlapping tweens per clone word:
-      //   1. y  — full duration, same ease as original (perfect tracking)
-      //   2. opacity fade-in  — first 60% of duration (0 → 0.85)
-      //   3. opacity fade-out — last 40% of duration (0.85 → 0)
-      // Tweens 2 & 3 are sequential so they never conflict.
+      // Clone animation per layer:
+      // Each layer's y-animation starts later than the original, so clones
+      // physically lag behind during the rise — creating visible color trails.
+      // staggerOffset controls the delay (in seconds) per layer.
       trail.layers.forEach((layer, i) => {
-        const cloneStagger = settings.stagger + (i + 1) * staggerOffset;
-        const fadeInDur = settings.duration * 0.3;
-        const fadeOutDur = settings.duration * 0.2;
+        const layerDelay = (i + 1) * staggerOffset;
 
-        layer.words.forEach((word, wi) => {
-          const pos = cloneStagger * wi;
+        // Hide clones until their delayed entrance
+        tl.set(layer.words, { opacity: 0 }, 0);
 
-          // y: matches original timing exactly
-          tl.fromTo(
-            word,
-            { y: settings.yOffset },
-            { y: 0, duration: settings.duration, ease: settings.ease },
-            pos,
-          );
+        // Mirror original rise but delayed — spatial lag creates color trail
+        tl.fromTo(
+          layer.words,
+          { opacity: 0, y: settings.yOffset },
+          {
+            opacity: 0.85,
+            y: 0,
+            duration: settings.duration,
+            ease: settings.ease,
+            stagger: settings.stagger,
+          },
+          layerDelay,
+        );
 
-          // opacity in: 0 → 0.85
-          tl.fromTo(
-            word,
-            { opacity: 0 },
-            { opacity: 0.85, duration: fadeInDur, ease: 'power2.out' },
-            pos,
-          );
-
-          // opacity out: 0.85 → 0 (starts right after fade-in ends)
-          tl.to(
-            word,
-            { opacity: 0, duration: fadeOutDur, ease: 'power2.in' },
-            pos + fadeInDur,
-          );
-        });
+        // Fade out clones as they settle into final position
+        tl.to(
+          layer.words,
+          {
+            opacity: 0,
+            duration: settings.duration * 0.25,
+            ease: 'power2.in',
+            stagger: settings.stagger,
+          },
+          layerDelay + settings.duration * 0.75,
+        );
       });
     });
 
