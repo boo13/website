@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import SplitText from 'gsap/SplitText';
+import { createColorTrailWords } from './color-trail.js';
 
 gsap.registerPlugin(SplitText);
 
@@ -19,6 +20,17 @@ const toArray = (targets) => gsap.utils.toArray(targets).filter(Boolean);
 
 // Splits text into masked words and animates them upward into view.
 // Returns a cleanup function that reverts SplitText changes.
+//
+// When `colorTrail` is provided, colored clone words are inserted inside
+// each mask wrapper and animated with progressively larger staggers.
+// The effect is word-level (preserving the mask-rise feel) — clone words
+// lag behind the original during motion, revealing colored trails.
+//
+// colorTrail: {
+//   colors: ['#00d4ff', '#ff3366'],
+//   blendMode: 'screen',
+//   staggerOffset: 0.06,
+// }
 export function textMaskRiseWords(targets, overrides = {}) {
   const settings = { ...preset, ...overrides };
   const elements = toArray(targets);
@@ -40,6 +52,10 @@ export function textMaskRiseWords(targets, overrides = {}) {
   // Ensure parent elements aren't stuck at opacity: 0 from CSS.
   gsap.set(elements, { opacity: 1 });
 
+  const trailConfig = settings.colorTrail;
+  const hasTrail = trailConfig && trailConfig.colors && trailConfig.colors.length;
+
+  // Split all elements into words with mask wrappers (same for both paths).
   const splits = elements.map((element) => {
     const split = SplitText.create(element, {
       type: 'words',
@@ -75,6 +91,89 @@ export function textMaskRiseWords(targets, overrides = {}) {
     delay: settings.delay,
   });
 
+  // --- Color trail path: word-level animation with clone words in mask wrappers ---
+  if (hasTrail) {
+    const trailCleanups = [];
+    let trailsCleaned = false;
+
+    const removeTrailClones = () => {
+      if (trailsCleaned) return;
+      trailsCleaned = true;
+      trailCleanups.forEach((trail) => trail.cleanup());
+    };
+
+    tl.eventCallback('onComplete', removeTrailClones);
+
+    splits.forEach((split) => {
+      const trail = createColorTrailWords(split.words, {
+        colors: trailConfig.colors,
+        blendMode: trailConfig.blendMode || 'screen',
+      });
+      trailCleanups.push(trail);
+
+      const staggerOffset = trailConfig.staggerOffset ?? 0.06;
+
+      // Animate original words (on top, normal stagger)
+      tl.fromTo(
+        split.words,
+        { opacity: 0, y: settings.yOffset },
+        {
+          opacity: 1,
+          y: 0,
+          duration: settings.duration,
+          ease: settings.ease,
+          stagger: settings.stagger,
+        },
+        0,
+      );
+
+      // Three non-overlapping tweens per clone word:
+      //   1. y  — full duration, same ease as original (perfect tracking)
+      //   2. opacity fade-in  — first 60% of duration (0 → 0.85)
+      //   3. opacity fade-out — last 40% of duration (0.85 → 0)
+      // Tweens 2 & 3 are sequential so they never conflict.
+      trail.layers.forEach((layer, i) => {
+        const cloneStagger = settings.stagger + (i + 1) * staggerOffset;
+        const fadeInDur = settings.duration * 0.3;
+        const fadeOutDur = settings.duration * 0.2;
+
+        layer.words.forEach((word, wi) => {
+          const pos = cloneStagger * wi;
+
+          // y: matches original timing exactly
+          tl.fromTo(
+            word,
+            { y: settings.yOffset },
+            { y: 0, duration: settings.duration, ease: settings.ease },
+            pos,
+          );
+
+          // opacity in: 0 → 0.85
+          tl.fromTo(
+            word,
+            { opacity: 0 },
+            { opacity: 0.85, duration: fadeInDur, ease: 'power2.out' },
+            pos,
+          );
+
+          // opacity out: 0.85 → 0 (starts right after fade-in ends)
+          tl.to(
+            word,
+            { opacity: 0, duration: fadeOutDur, ease: 'power2.in' },
+            pos + fadeInDur,
+          );
+        });
+      });
+    });
+
+    return () => {
+      tl.kill();
+      removeTrailClones();
+      revertSplits();
+    };
+  }
+
+  // --- Default path: word-level animation (unchanged) ---
   splits.forEach((split) => {
     // Animate each word from below while the word mask clips overflow.
     tl.fromTo(

@@ -36,7 +36,16 @@
       "mcp__MCP_DOCKER__mcp-exec",
       "Bash(lsof:*)",
       "Skill(playwright-cli)",
-      "Bash(DISPLAY=:0 playwright-cli open:*)"
+      "Bash(DISPLAY=:0 playwright-cli open:*)",
+      "WebFetch(domain:codepen.io)",
+      "Bash(playwright-cli open:*)",
+      "Bash(playwright-cli run-code:*)",
+      "Bash(node .claude/skills/playwright-cli/cli.mjs:*)",
+      "Bash(playwright-cli goto:*)",
+      "Bash(playwright-cli snapshot:*)",
+      "WebFetch(domain:cdpn.io)",
+      "Bash(.claude/skills/playwright-cli/playwright-cli open:*)",
+      "Bash(npx playwright-cli --help)"
     ]
   }
 }
