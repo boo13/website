@@ -85,6 +85,37 @@ export function initGallery() {
     // The lightbox component handles this via its 'open' event listener
   }
 
+  function setupScrollVideoPlay(containerAnimation) {
+    cards.forEach((card) => {
+      const video = card.querySelector('.card-video');
+      if (!video) return;
+
+      ScrollTrigger.create({
+        trigger: card,
+        containerAnimation,
+        start: 'left 80%',
+        end: 'right 20%',
+        onEnter: () => {
+          if (video.readyState === 0) video.load();
+          video.play().catch(() => {});
+          card.classList.add('is-playing');
+        },
+        onLeave: () => {
+          video.pause();
+          card.classList.remove('is-playing');
+        },
+        onEnterBack: () => {
+          video.play().catch(() => {});
+          card.classList.add('is-playing');
+        },
+        onLeaveBack: () => {
+          video.pause();
+          card.classList.remove('is-playing');
+        },
+      });
+    });
+  }
+
   setupHoverCorners();
 
   if (prefersReducedMotion || isMobile) {
@@ -104,7 +135,7 @@ export function initGallery() {
     const viewportWidth = window.innerWidth;
     let scrollDistance = trackWidth - viewportWidth + 200;
 
-    gsap.to(track, {
+    const scrollTween = gsap.to(track, {
       x: () => -scrollDistance,
       ease: 'none',
       scrollTrigger: {
@@ -130,6 +161,7 @@ export function initGallery() {
       },
     });
 
+    setupScrollVideoPlay(scrollTween);
     updateProgress(0);
   }, section);
 

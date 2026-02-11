@@ -207,6 +207,23 @@ a {
     text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
 }
 
+.hero-social-fixed {
+    position: fixed;
+    z-index: 40;
+    pointer-events: none;
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Color trail clone words inside mask wrappers */
+.color-trail-word {
+    opacity: 1;
+    visibility: visible;
+    text-shadow: none;
+}
+
 /* SplitText word animation support */
 .hero-name .word,
 .hero-name-fixed .word {
@@ -232,7 +249,6 @@ a {
     text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
     opacity: 0;
     transform: translateY(20px);
-    animation: heroFadeIn 1.2s var(--ease-out-expo) 1.2s forwards;
 }
 
 .hero-social {
@@ -240,7 +256,6 @@ a {
     gap: 1rem;
     opacity: 0;
     transform: translateY(20px);
-    animation: heroFadeIn 1.2s var(--ease-out-expo) 1.7s forwards;
 }
 
 .social-icon {
@@ -351,11 +366,13 @@ a {
     opacity: 0;
 }
 
-.gallery-card:hover .card-video {
+.gallery-card:hover .card-video,
+.gallery-card.is-playing .card-video {
     opacity: 1;
 }
 
-.gallery-card:hover .card-thumbnail {
+.gallery-card:hover .card-thumbnail,
+.gallery-card.is-playing .card-thumbnail {
     opacity: 0;
 }
 

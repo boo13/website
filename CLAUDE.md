@@ -30,7 +30,7 @@ Static assets live in `public/` (data, images, favicon, CNAME) — Vite copies t
 
 **Video assets** are hosted on **Cloudflare R2**, not in the git repo. The R2 CDN base URL is defined in `src/config.js` as `CDN_BASE`. Video references in HTML use full R2 URLs; JS files import `CDN_BASE` from config. Local copies in `public/video/` are gitignored but may exist for dev/optimization work.
 
-Use the playwright-cli skill over the playwright MCP to check visual changes.
+Use the playwright-cli skill over the playwright MCP to check visual changes. If playwright is used to take screenshots, those screenshots should be removed after they used (unless the user asked for them.)
 
 ## GSAP Conventions
 - Use `gsap.context()` per section for clean setup/teardown — no custom lifecycle wrappers

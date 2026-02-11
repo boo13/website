@@ -2,7 +2,7 @@
  * Hero Z-Depth Zoom Animation
  * Creates cinematic zoom transition where hero recedes as user scrolls
  */
-import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
+import { gsap, ScrollTrigger, ScrollSmoother } from '../animations/scroll-defaults.js';
 import Flip from 'gsap/Flip';
 import { textMaskRiseWords } from '../animations/text-mask-rise.js';
 
@@ -26,6 +26,8 @@ export function initLanding() {
   const fixedHeroName = document.getElementById('hero-name-fixed');
   const heroSubtitle = hero?.querySelector('.hero-subtitle') ?? null;
   const fixedSubtitle = document.getElementById('hero-subtitle-fixed');
+  const heroSocial = hero?.querySelector('.hero-social') ?? null;
+  const fixedSocial = document.getElementById('hero-social-fixed');
 
   if (!hero) return () => {};
 
@@ -61,7 +63,20 @@ export function initLanding() {
       duration: 1.2,
       stagger: 0.12,
       yOffset: 30,
+      colorTrail: {
+        colors: ['#00d4ff', '#ff3366'],
+        blendMode: 'screen',
+        staggerOffset: 0.06,
+      },
     });
+
+    // Hide in-flow originals — fixed-position counterparts handle the entrance.
+    if (heroSubtitle) {
+      gsap.set(heroSubtitle, { autoAlpha: 0 });
+    }
+    if (heroSocial) {
+      gsap.set(heroSocial, { autoAlpha: 0 });
+    }
 
     if (heroName && fixedHeroName) {
       gsap.set(heroName, { autoAlpha: 0 });
@@ -103,17 +118,20 @@ export function initLanding() {
             nameFlip.progress(heroProgress);
             gsap.set(fixedHeroName, { autoAlpha: 1 });
 
-            // --- Subtitle: lock to title's bottom edge + fade out ---
+            // --- Subtitle + Social: lock to title's bottom edge + fade out ---
             let subEntrance = null;
+            let socialEntrance = null;
             let subInitialGap = 0;
             let subStartTop = 0;
+            let socialInitialGap = 0;
+            let socialStartTop = 0;
             let hasSubtitle = false;
+            let hasSocial = false;
 
             if (heroSubtitle && fixedSubtitle) {
               hasSubtitle = true;
 
-              // Kill CSS entrance animation to get true layout position
-              heroSubtitle.style.animation = 'none';
+              // Reset to layout position for measurement (animation already killed above)
               heroSubtitle.style.opacity = '1';
               heroSubtitle.style.transform = 'none';
 
@@ -124,22 +142,64 @@ export function initLanding() {
               subInitialGap = subRect.top - titleRect.bottom;
               subStartTop = subRect.top;
 
-              // Hide original, position fixed subtitle at hero location
-              gsap.set(heroSubtitle, { autoAlpha: 0 });
+              // Position fixed subtitle at hero location
               gsap.set(fixedSubtitle, {
                 left: subRect.left,
                 top: subStartTop,
                 autoAlpha: 0,
               });
 
-              // Entrance animation (after title text-mask-rise settles)
+              // Entrance animation — after title text-mask-rise completes (~1.6s from load)
               subEntrance = gsap.to(fixedSubtitle, {
                 autoAlpha: 1,
-                delay: 1.2,
+                delay: 1.8,
                 duration: 1.2,
                 ease: 'expo.out',
               });
             }
+
+            if (heroSocial && fixedSocial) {
+              hasSocial = true;
+
+              // Reset to layout position for measurement (animation already killed above)
+              heroSocial.style.opacity = '1';
+              heroSocial.style.transform = 'none';
+
+              const socialRect = heroSocial.getBoundingClientRect();
+              const titleRect = fixedHeroName.getBoundingClientRect();
+
+              // Gap between title bottom and social top at hero size
+              socialInitialGap = socialRect.top - titleRect.bottom;
+              socialStartTop = socialRect.top;
+
+              // Position fixed social at hero location
+              gsap.set(fixedSocial, {
+                left: socialRect.left,
+                top: socialStartTop,
+                autoAlpha: 0,
+              });
+
+              // Entrance animation — after subtitle starts
+              socialEntrance = gsap.to(fixedSocial, {
+                autoAlpha: 1,
+                delay: 2.1,
+                duration: 1.2,
+                ease: 'expo.out',
+              });
+            }
+
+            // Make the fixed name scroll back to hero when clicked
+            const nameContainer = fixedHeroName.closest('.hero-fixed-name-container') || fixedHeroName;
+            const scrollToHero = (e) => {
+              e.preventDefault();
+              const smoother = ScrollSmoother.get();
+              if (smoother) {
+                smoother.scrollTo(0, true);
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            };
+            nameContainer.addEventListener('click', scrollToHero);
 
             ScrollTrigger.create({
               trigger: hero,
@@ -154,17 +214,36 @@ export function initLanding() {
                 );
                 nameFlip.progress(progress);
 
-                if (hasSubtitle) {
+                // Enable click-to-scroll once name is in header position
+                const inHeader = self.progress > 0.95;
+                nameContainer.style.pointerEvents = inHeader ? 'auto' : '';
+                nameContainer.style.cursor = inHeader ? 'pointer' : '';
+
+                if (hasSubtitle || hasSocial) {
                   if (subEntrance) {
                     subEntrance.kill();
                     subEntrance = null;
                   }
-                  // Read title's current visual bottom edge, keep subtitle locked below it
+                  if (socialEntrance) {
+                    socialEntrance.kill();
+                    socialEntrance = null;
+                  }
+                  // Read title's current visual bottom edge
                   const titleBottom = fixedHeroName.getBoundingClientRect().bottom;
-                  gsap.set(fixedSubtitle, {
-                    y: titleBottom + subInitialGap - subStartTop,
-                    autoAlpha: 1 - self.progress,
-                  });
+                  const fadeAlpha = 1 - self.progress;
+
+                  if (hasSubtitle) {
+                    gsap.set(fixedSubtitle, {
+                      y: titleBottom + subInitialGap - subStartTop,
+                      autoAlpha: fadeAlpha,
+                    });
+                  }
+                  if (hasSocial) {
+                    gsap.set(fixedSocial, {
+                      y: titleBottom + socialInitialGap - socialStartTop,
+                      autoAlpha: fadeAlpha,
+                    });
+                  }
                 }
               },
             });
