@@ -1,5 +1,25 @@
 import { resolve } from 'path';
+import { readdirSync, existsSync } from 'node:fs';
 import { defineConfig } from 'vite';
+
+// Auto-discover project pages: projects/*/index.html
+function discoverProjects() {
+  try {
+    return Object.fromEntries(
+      readdirSync('projects', { withFileTypes: true })
+        .filter(
+          (d) =>
+            d.isDirectory() && existsSync(resolve('projects', d.name, 'index.html')),
+        )
+        .map((d) => [
+          `project-${d.name}`,
+          resolve(import.meta.dirname, `projects/${d.name}/index.html`),
+        ]),
+    );
+  } catch {
+    return {};
+  }
+}
 
 export default defineConfig({
   root: '.',
@@ -14,7 +34,7 @@ export default defineConfig({
         resume: resolve(import.meta.dirname, 'resume.html'),
         sandbox: resolve(import.meta.dirname, 'sandbox.html'),
         wyatt: resolve(import.meta.dirname, 'case_study_wyatt.html'),
-        wyatt2: resolve(import.meta.dirname, 'case_study_wyatt2.html'),
+        ...discoverProjects(),
       },
     },
   },

@@ -28,13 +28,22 @@ Root HTML pages and entry files:
 - case_study_wyatt.html -> src/main-wyatt.js
 - sandbox.html -> no page-specific JS entry
 
+projects/                           # project detail pages (auto-discovered by Vite)
+  wyatt-earp/index.html             # → /projects/wyatt-earp/
+  [project-name]/index.html         # add new projects by creating a folder
+
 src/
   sections/             # one file per scroll section (hero, gallery, credits, about, about-slides, footer-reveal, featured-work)
+    project-video.js    # video hero for project pages (.project-hero--video)
+    project-credits.js  # credits section for project pages (.project-credits)
+    project-footer.js   # footer for project pages (.project-footer)
   animations/           # shared animation utilities (scroll-defaults.js registers GSAP plugins)
   components/           # reusable DOM components (slider, responsive-video, video-lightbox, custom-cursor, preloader)
   styles/               # CSS per page, imported from JS entry points
+    project.css         # shared styles for all project pages (BEM: .project-hero--video, .project-credits, .project-footer)
   config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
   main.js               # entry for index2.html — imports sections + calls init()
+  main-project.js       # entry for ALL project pages — imports project sections
   main-index.js         # entry for index.html (Slider + ResponsiveVideo)
   main-contact.js       # entry for contact.html (form handler)
   main-resume.js        # entry for resume.html (page-specific layout tweaks)
@@ -52,7 +61,7 @@ src/
 - **SplitText mask wrapper sizing** — Mask wrappers can be taller than word elements (line-height, font metrics). Absolutely-positioned overlays inside wrappers need `word.offsetTop` positioning, not `top: 0`, or they'll extend beyond the visible text area.
 
 ## Website Sections
-1. **Hero** (`hero`) - Preloader then a looping montage video with text (hero-name and hero-subtitle)
+1. **Hero** - Preloader then a looping montage video with text (hero-name and hero-subtitle)
 2. **About** - Multiple slides
 3. **Featured Work (Gallery)** - Scrolling grid of video thumbnails; click opens lightbox
 4. **Credits**

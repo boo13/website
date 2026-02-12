@@ -1,14 +1,15 @@
 /* ============================================================
-   WYATT2 — Video Project Page
+   PROJECT PAGE — Shared styles for all project detail pages
+   Variants: --video, --image, --parallax (via BEM modifiers)
    ============================================================ */
 
 /* --- Variables --- */
 :root {
-  --w2-text: #f0f2f1;
-  --w2-bg: #020202;
-  --w2-bg-credits: #080808;
-  --w2-font-body: aktiv-grotesk, -apple-system, BlinkMacSystemFont, sans-serif;
-  --w2-font-display: ivypresto-display, Georgia, serif;
+  --project-text: #f0f2f1;
+  --project-bg: #020202;
+  --project-bg-credits: #080808;
+  --project-font-body: aktiv-grotesk, -apple-system, BlinkMacSystemFont, sans-serif;
+  --project-font-display: ivypresto-display, Georgia, serif;
 }
 
 /* --- Reset & Base --- */
@@ -25,9 +26,9 @@ html {
 }
 
 body {
-  background: var(--w2-bg);
-  color: var(--w2-text);
-  font-family: var(--w2-font-body);
+  background: var(--project-bg);
+  color: var(--project-text);
+  font-family: var(--project-font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -47,9 +48,9 @@ a {
 }
 
 /* ============================================================
-   VIDEO SECTION
+   HERO — Video variant (.project-hero--video)
    ============================================================ */
-.video-section {
+.project-hero--video {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -57,20 +58,20 @@ a {
   background: #000;
 }
 
-.player-wrapper {
+.project-hero__player {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
 /* --- Video element --- */
-.video-container {
+.project-hero__video-container {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.video-container video {
+.project-hero__video-container video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -78,7 +79,7 @@ a {
 }
 
 /* --- Close button (top right) --- */
-.close-btn {
+.project-hero__close {
   position: absolute;
   top: 77px;
   right: 20px;
@@ -91,12 +92,12 @@ a {
   transition: opacity 0.3s;
 }
 
-.close-btn:hover {
+.project-hero__close:hover {
   opacity: 1;
 }
 
 /* --- Scroll text (centered bottom area) --- */
-.scroll-text {
+.project-hero__scroll-text {
   position: absolute;
   bottom: 16px;
   left: 50%;
@@ -110,7 +111,7 @@ a {
 }
 
 /* --- Video Bottom Bar --- */
-.video-bottom {
+.project-hero__bottom {
   position: absolute;
   bottom: 0;
   left: 21px;
@@ -120,38 +121,38 @@ a {
 }
 
 /* Title + credits row */
-.video-info {
+.project-hero__info {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16px;
 }
 
-.info-left {
+.project-hero__info-left {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.info-left span {
+.project-hero__info-left span {
   font-size: 50px;
   font-weight: 500;
-  font-family: var(--w2-font-body);
+  font-family: var(--project-font-body);
   line-height: 1.1;
 }
 
-.play-btn {
+.project-hero__play-btn {
   font-size: 18px;
   opacity: 0.9;
   transition: opacity 0.2s;
   padding: 4px;
 }
 
-.play-btn:hover {
+.project-hero__play-btn:hover {
   opacity: 1;
 }
 
-.credits-btn {
+.project-hero__credits-btn {
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -159,12 +160,12 @@ a {
   transition: opacity 0.3s;
 }
 
-.credits-btn:hover {
+.project-hero__credits-btn:hover {
   opacity: 1;
 }
 
 /* --- Timeline --- */
-.timeline {
+.project-hero__timeline {
   position: relative;
   width: 100%;
   height: 2px;
@@ -173,18 +174,18 @@ a {
   cursor: pointer;
 }
 
-.timeline-progress {
+.project-hero__timeline-progress {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 0%;
-  background: var(--w2-text);
+  background: var(--project-text);
   transition: width 0.1s linear;
 }
 
 /* --- Time display --- */
-.time-display {
+.project-hero__time {
   display: flex;
   justify-content: space-between;
   font-size: 16px;
@@ -193,7 +194,7 @@ a {
 }
 
 /* --- Sound button (bottom right) --- */
-.sound-btn {
+.project-hero__sound-btn {
   position: absolute;
   bottom: 46px;
   right: 21px;
@@ -205,33 +206,33 @@ a {
   transition: opacity 0.3s;
 }
 
-.sound-btn:hover {
+.project-hero__sound-btn:hover {
   opacity: 1;
 }
 
 /* ============================================================
    CREDITS SECTION
    ============================================================ */
-.credits-section {
+.project-credits {
   position: relative;
-  background: var(--w2-bg-credits);
+  background: var(--project-bg-credits);
   min-height: 100vh;
 }
 
 /* --- Gradient fade at top --- */
-.credits-gradient {
+.project-credits__gradient {
   position: absolute;
   top: -270px;
   left: 0;
   right: 0;
   height: 270px;
-  background: linear-gradient(to top, var(--w2-bg-credits), transparent);
+  background: linear-gradient(to top, var(--project-bg-credits), transparent);
   pointer-events: none;
   z-index: 2;
 }
 
 /* --- Credits wrapper --- */
-.credits-wrapper {
+.project-credits__wrapper {
   display: flex;
   gap: 60px;
   padding: 263px 20px 150px;
@@ -240,43 +241,43 @@ a {
 }
 
 /* --- Text block (left side) --- */
-.credits-text-block {
+.project-credits__text {
   flex: 1;
   min-width: 0;
 }
 
 /* Title row */
-.credits-header {
+.project-credits__header {
   display: flex;
   align-items: baseline;
   gap: 16px;
   flex-wrap: wrap;
 }
 
-.credits-title {
-  font-family: var(--w2-font-body);
+.project-credits__title {
+  font-family: var(--project-font-body);
   font-size: 91px;
   font-weight: 500;
   line-height: 1.05;
 }
 
-.credits-year {
-  font-family: var(--w2-font-body);
+.project-credits__year {
+  font-family: var(--project-font-body);
   font-size: 60px;
   font-weight: 300;
   opacity: 0.8;
 }
 
 /* Divider lines */
-.credits-line {
+.project-credits__line {
   width: 100%;
   height: 1px;
-  background: var(--w2-text);
+  background: var(--project-text);
   margin: 55px 0 53px;
 }
 
 /* About section */
-.credits-subtitle {
+.project-credits__subtitle {
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -284,41 +285,41 @@ a {
   opacity: 0.7;
 }
 
-.credits-about {
+.project-credits__about {
   font-size: 40px;
   line-height: 48px;
   font-weight: 300;
 }
 
 /* Credits list */
-.credits-list {
+.project-credits__list {
   display: flex;
   flex-wrap: wrap;
   gap: 32px 24px;
 }
 
-.credit-item {
+.project-credits__item {
   width: 151px;
 }
 
-.credit-item-title {
+.project-credits__item-title {
   font-size: 16px;
   opacity: 0.6;
   margin-bottom: 4px;
 }
 
-.credit-item-text {
+.project-credits__item-text {
   font-size: 16px;
   font-weight: 500;
 }
 
 /* --- Poster image (right side) --- */
-.credits-image {
+.project-credits__image {
   flex-shrink: 0;
   width: 460px;
 }
 
-.credits-image img {
+.project-credits__image img {
   width: 100%;
   height: 615px;
   object-fit: cover;
@@ -328,7 +329,7 @@ a {
 /* ============================================================
    FOOTER
    ============================================================ */
-.credits-footer {
+.project-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -339,7 +340,7 @@ a {
 }
 
 /* Ticker / marquee */
-.ticker {
+.project-footer__ticker {
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -350,22 +351,22 @@ a {
   max-width: 300px;
 }
 
-.ticker:hover {
+.project-footer__ticker:hover {
   opacity: 1;
 }
 
-.ticker-inner {
+.project-footer__ticker-inner {
   display: inline-block;
-  animation: ticker-scroll 12s linear infinite;
+  animation: project-ticker-scroll 12s linear infinite;
 }
 
-@keyframes ticker-scroll {
+@keyframes project-ticker-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
 /* Back to video button */
-.back-to-video-btn {
+.project-footer__back-btn {
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -374,12 +375,12 @@ a {
   transition: border-color 0.3s, opacity 0.3s;
 }
 
-.back-to-video-btn:hover {
-  border-color: var(--w2-text);
+.project-footer__back-btn:hover {
+  border-color: var(--project-text);
 }
 
 /* Footer links */
-.footer-links {
+.project-footer__links {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -387,11 +388,11 @@ a {
   opacity: 0.6;
 }
 
-.footer-links a {
+.project-footer__links a {
   transition: opacity 0.3s;
 }
 
-.footer-links a:hover {
+.project-footer__links a:hover {
   opacity: 1;
 }
 
@@ -399,32 +400,32 @@ a {
    RESPONSIVE — Tablet
    ============================================================ */
 @media (max-width: 1024px) {
-  .info-left span {
+  .project-hero__info-left span {
     font-size: 36px;
   }
 
-  .credits-title {
+  .project-credits__title {
     font-size: 64px;
   }
 
-  .credits-year {
+  .project-credits__year {
     font-size: 42px;
   }
 
-  .credits-about {
+  .project-credits__about {
     font-size: 30px;
     line-height: 38px;
   }
 
-  .credits-image {
+  .project-credits__image {
     width: 340px;
   }
 
-  .credits-image img {
+  .project-credits__image img {
     height: 460px;
   }
 
-  .credits-wrapper {
+  .project-credits__wrapper {
     padding: 180px 20px 100px;
     gap: 40px;
   }
@@ -434,82 +435,82 @@ a {
    RESPONSIVE — Mobile
    ============================================================ */
 @media (max-width: 768px) {
-  .info-left span {
+  .project-hero__info-left span {
     font-size: 24px;
   }
 
-  .video-bottom {
+  .project-hero__bottom {
     left: 16px;
     right: 16px;
     padding-bottom: 32px;
   }
 
-  .close-btn {
+  .project-hero__close {
     top: 40px;
     right: 16px;
   }
 
-  .sound-btn {
+  .project-hero__sound-btn {
     right: 16px;
     bottom: 32px;
   }
 
-  .credits-wrapper {
+  .project-credits__wrapper {
     flex-direction: column;
     padding: 120px 16px 80px;
     gap: 40px;
   }
 
-  .credits-title {
+  .project-credits__title {
     font-size: 40px;
   }
 
-  .credits-year {
+  .project-credits__year {
     font-size: 28px;
   }
 
-  .credits-about {
+  .project-credits__about {
     font-size: 22px;
     line-height: 30px;
   }
 
-  .credits-line {
+  .project-credits__line {
     margin: 32px 0 30px;
   }
 
-  .credits-image {
+  .project-credits__image {
     width: 100%;
   }
 
-  .credits-image img {
+  .project-credits__image img {
     height: auto;
     aspect-ratio: 3 / 4;
   }
 
-  .credits-list {
+  .project-credits__list {
     gap: 24px 16px;
   }
 
-  .credit-item {
+  .project-credits__item {
     width: calc(50% - 8px);
   }
 
-  .credits-footer {
+  .project-footer {
     flex-direction: column;
     gap: 24px;
     padding: 32px 16px;
     text-align: center;
   }
 
-  .ticker {
+  .project-footer__ticker {
     max-width: 100%;
   }
 
-  .footer-links {
+  .project-footer__links {
     justify-content: center;
   }
 
-  .scroll-text {
+  .project-hero__scroll-text {
     font-size: 12px;
   }
 }
@@ -522,7 +523,7 @@ a {
     scroll-behavior: auto;
   }
 
-  .ticker-inner {
+  .project-footer__ticker-inner {
     animation: none;
   }
 }

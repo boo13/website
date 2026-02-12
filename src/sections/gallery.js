@@ -6,7 +6,7 @@ import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
 import { MOBILE_BREAKPOINT } from '../config.js';
 
 export function initGallery() {
-  const section = document.querySelector('.gallery-section');
+  const section = document.querySelector('.featured-work-section');
   const track = document.querySelector('.gallery-track');
   const cards = document.querySelectorAll('.gallery-card');
   const progressCurrent = document.querySelector(
