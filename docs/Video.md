@@ -5,7 +5,6 @@
 
 ## Commands
 - Upload optimized videos: `npx wrangler r2 object put portfolio-assets/video/FILENAME --file public/video/FILENAME --content-type video/webm --remote` (--content-type video/mp4 also works)
-- Optimization script: `scripts/optimize-videos.sh` (FFmpeg VP9 two-pass)
 
 ## Usage
 - All videos should be WebM/VP9 with mp4 fallback

@@ -10,7 +10,6 @@ The site is a multi-page static site. Each HTML file lives at the repo root:
 - **index.html** — An alternate landing with a full-screen video and image slider.
 - **contact.html** — Contact form powered by Formspree.
 - **resume.html** — Printable resume layout built to match the site's typography.
-- **examples_mockup.html** — Static comps that showcase layout explorations.
 - **sandbox.html** — A GSAP demo playground for text animation timing/easing experiments.
 
 ## How it's built
@@ -23,7 +22,6 @@ src/
   main-index.js           # index.html entry — Slider + ResponsiveVideo
   main-contact.js         # contact.html entry — form handler
   main-resume.js          # resume.html entry — typography + layout tweaks
-  main-examples-mockup.js # examples_mockup.html entry — grabs static styles
   sections/               # one file per scroll section (landing, featured-work, gallery, credits, about)
   animations/             # shared GSAP setup (plugin registration)
   components/             # reusable DOM components (Slider, ResponsiveVideo)
