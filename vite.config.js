@@ -14,6 +14,7 @@ export default defineConfig({
         resume: resolve(import.meta.dirname, 'resume.html'),
         sandbox: resolve(import.meta.dirname, 'sandbox.html'),
         wyatt: resolve(import.meta.dirname, 'case_study_wyatt.html'),
+        wyatt2: resolve(import.meta.dirname, 'case_study_wyatt2.html'),
       },
     },
   },

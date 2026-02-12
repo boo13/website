@@ -1,0 +1,528 @@
+/* ============================================================
+   WYATT2 — Video Project Page
+   ============================================================ */
+
+/* --- Variables --- */
+:root {
+  --w2-text: #f0f2f1;
+  --w2-bg: #020202;
+  --w2-bg-credits: #080808;
+  --w2-font-body: aktiv-grotesk, -apple-system, BlinkMacSystemFont, sans-serif;
+  --w2-font-display: ivypresto-display, Georgia, serif;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--w2-bg);
+  color: var(--w2-text);
+  font-family: var(--w2-font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================================
+   VIDEO SECTION
+   ============================================================ */
+.video-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.player-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Video element --- */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Close button (top right) --- */
+.close-btn {
+  position: absolute;
+  top: 77px;
+  right: 20px;
+  z-index: 10;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
+/* --- Scroll text (centered bottom area) --- */
+.scroll-text {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* --- Video Bottom Bar --- */
+.video-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 21px;
+  right: 21px;
+  padding-bottom: 46px;
+  z-index: 5;
+}
+
+/* Title + credits row */
+.video-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.info-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.info-left span {
+  font-size: 50px;
+  font-weight: 500;
+  font-family: var(--w2-font-body);
+  line-height: 1.1;
+}
+
+.play-btn {
+  font-size: 18px;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+  padding: 4px;
+}
+
+.play-btn:hover {
+  opacity: 1;
+}
+
+.credits-btn {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.credits-btn:hover {
+  opacity: 1;
+}
+
+/* --- Timeline --- */
+.timeline {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: rgba(240, 242, 241, 0.25);
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.timeline-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--w2-text);
+  transition: width 0.1s linear;
+}
+
+/* --- Time display --- */
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+/* --- Sound button (bottom right) --- */
+.sound-btn {
+  position: absolute;
+  bottom: 46px;
+  right: 21px;
+  z-index: 10;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.sound-btn:hover {
+  opacity: 1;
+}
+
+/* ============================================================
+   CREDITS SECTION
+   ============================================================ */
+.credits-section {
+  position: relative;
+  background: var(--w2-bg-credits);
+  min-height: 100vh;
+}
+
+/* --- Gradient fade at top --- */
+.credits-gradient {
+  position: absolute;
+  top: -270px;
+  left: 0;
+  right: 0;
+  height: 270px;
+  background: linear-gradient(to top, var(--w2-bg-credits), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --- Credits wrapper --- */
+.credits-wrapper {
+  display: flex;
+  gap: 60px;
+  padding: 263px 20px 150px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* --- Text block (left side) --- */
+.credits-text-block {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Title row */
+.credits-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.credits-title {
+  font-family: var(--w2-font-body);
+  font-size: 91px;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.credits-year {
+  font-family: var(--w2-font-body);
+  font-size: 60px;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+/* Divider lines */
+.credits-line {
+  width: 100%;
+  height: 1px;
+  background: var(--w2-text);
+  margin: 55px 0 53px;
+}
+
+/* About section */
+.credits-subtitle {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+  opacity: 0.7;
+}
+
+.credits-about {
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 300;
+}
+
+/* Credits list */
+.credits-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 24px;
+}
+
+.credit-item {
+  width: 151px;
+}
+
+.credit-item-title {
+  font-size: 16px;
+  opacity: 0.6;
+  margin-bottom: 4px;
+}
+
+.credit-item-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* --- Poster image (right side) --- */
+.credits-image {
+  flex-shrink: 0;
+  width: 460px;
+}
+
+.credits-image img {
+  width: 100%;
+  height: 615px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.credits-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 21px;
+  border-top: 1px solid rgba(240, 242, 241, 0.15);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Ticker / marquee */
+.ticker {
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 300px;
+}
+
+.ticker:hover {
+  opacity: 1;
+}
+
+.ticker-inner {
+  display: inline-block;
+  animation: ticker-scroll 12s linear infinite;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Back to video button */
+.back-to-video-btn {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 24px;
+  border: 1px solid rgba(240, 242, 241, 0.4);
+  transition: border-color 0.3s, opacity 0.3s;
+}
+
+.back-to-video-btn:hover {
+  border-color: var(--w2-text);
+}
+
+/* Footer links */
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.footer-links a {
+  transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+/* ============================================================
+   RESPONSIVE — Tablet
+   ============================================================ */
+@media (max-width: 1024px) {
+  .info-left span {
+    font-size: 36px;
+  }
+
+  .credits-title {
+    font-size: 64px;
+  }
+
+  .credits-year {
+    font-size: 42px;
+  }
+
+  .credits-about {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .credits-image {
+    width: 340px;
+  }
+
+  .credits-image img {
+    height: 460px;
+  }
+
+  .credits-wrapper {
+    padding: 180px 20px 100px;
+    gap: 40px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — Mobile
+   ============================================================ */
+@media (max-width: 768px) {
+  .info-left span {
+    font-size: 24px;
+  }
+
+  .video-bottom {
+    left: 16px;
+    right: 16px;
+    padding-bottom: 32px;
+  }
+
+  .close-btn {
+    top: 40px;
+    right: 16px;
+  }
+
+  .sound-btn {
+    right: 16px;
+    bottom: 32px;
+  }
+
+  .credits-wrapper {
+    flex-direction: column;
+    padding: 120px 16px 80px;
+    gap: 40px;
+  }
+
+  .credits-title {
+    font-size: 40px;
+  }
+
+  .credits-year {
+    font-size: 28px;
+  }
+
+  .credits-about {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .credits-line {
+    margin: 32px 0 30px;
+  }
+
+  .credits-image {
+    width: 100%;
+  }
+
+  .credits-image img {
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .credits-list {
+    gap: 24px 16px;
+  }
+
+  .credit-item {
+    width: calc(50% - 8px);
+  }
+
+  .credits-footer {
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 16px;
+    text-align: center;
+  }
+
+  .ticker {
+    max-width: 100%;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+
+  .scroll-text {
+    font-size: 12px;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ticker-inner {
+    animation: none;
+  }
+}

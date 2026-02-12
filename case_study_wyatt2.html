@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyatt Earp and The Cowboy War - Randy Counsman</title>
+    <meta name="description" content="Wyatt Earp and The Cowboy War — Netflix docudrama series produced by Randy Counsman">
+
+    <!-- Critical inline styles to prevent white flash -->
+    <style>
+      html, body {
+        background: #020202;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <!-- Typekit Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css">
+
+    <!-- Styles injected by Vite from src/main-wyatt2.js -->
+</head>
+<body>
+
+    <!-- =====================================================
+         SECTION 1: VIDEO
+         Full-viewport video with overlay controls
+    ====================================================== -->
+    <section class="video-section">
+        <div class="player-wrapper">
+            <a class="close-btn" href="index2.html">Close</a>
+            <div class="scroll-text">scroll to view credits</div>
+
+            <div class="video-container">
+                <video
+                    autoplay
+                    muted
+                    playsinline
+                    crossorigin
+                    poster="images/portfolio/WyattEarp.jpg"
+                >
+                    <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Cowboy.War.10secReel.v01_1920x1080.webm" type="video/webm">
+                </video>
+
+                <div class="video-bottom">
+                    <div class="video-info">
+                        <div class="info-left">
+                            <span>Wyatt Earp and The Cowboy War</span>
+                            <button class="play-btn" aria-label="Play/Pause">&#9654;</button>
+                        </div>
+                        <div class="info-right">
+                            <button class="credits-btn">credits</button>
+                        </div>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-progress"></div>
+                    </div>
+                    <div class="time-display">
+                        <span class="time-current">00:00</span>
+                        <span class="time-total">00:00</span>
+                    </div>
+                </div>
+
+                <button class="sound-btn" aria-label="Toggle sound">sound off</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 2: CREDITS
+         Scroll-revealed credits panel
+    ====================================================== -->
+    <section class="credits-section">
+        <div class="credits-gradient"></div>
+        <div class="credits-wrapper" id="credits">
+            <div class="credits-text-block">
+
+                <!-- Title row -->
+                <div class="credits-header">
+                    <div class="credits-title">Wyatt Earp and The Cowboy War</div>
+                    <div class="credits-year">(2023)</div>
+                </div>
+
+                <div class="credits-line"></div>
+
+                <!-- About -->
+                <div class="credits-about-section">
+                    <div class="credits-subtitle">About</div>
+                    <div class="credits-about">
+                        A sweeping docudrama chronicling the legendary conflict between Wyatt Earp and the outlaw Cowboys in 1880s Tombstone, Arizona. Blending dramatic reenactments with expert commentary.
+                    </div>
+                </div>
+
+                <div class="credits-line"></div>
+
+                <!-- Credits list -->
+                <div class="credits-detail-section">
+                    <div class="credits-subtitle">Credits</div>
+                    <div class="credits-list">
+                        <div class="credit-item">
+                            <div class="credit-item-title">Director</div>
+                            <div class="credit-item-text">John Doe</div>
+                        </div>
+                        <div class="credit-item">
+                            <div class="credit-item-title">Co-Executive Producer</div>
+                            <div class="credit-item-text">Randy Counsman</div>
+                        </div>
+                        <div class="credit-item">
+                            <div class="credit-item-title">Executive Producer</div>
+                            <div class="credit-item-text">Jane Smith</div>
+                        </div>
+                        <div class="credit-item">
+                            <div class="credit-item-title">Writer</div>
+                            <div class="credit-item-text">Alex Johnson</div>
+                        </div>
+                        <div class="credit-item">
+                            <div class="credit-item-title">Cinematography</div>
+                            <div class="credit-item-text">Chris Lee</div>
+                        </div>
+                        <div class="credit-item">
+                            <div class="credit-item-title">Editor</div>
+                            <div class="credit-item-text">Sam Rivera</div>
+                        </div>
+                        <div class="credit-item">
+                            <div class="credit-item-title">Music</div>
+                            <div class="credit-item-text">Morgan Taylor</div>
+                        </div>
+                        <div class="credit-item">
+                            <div class="credit-item-title">Network</div>
+                            <div class="credit-item-text">Netflix</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="credits-line"></div>
+            </div>
+
+            <div class="credits-image">
+                <img src="images/portfolio/WyattEarp.jpg" alt="Wyatt Earp and The Cowboy War poster">
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="credits-footer">
+            <a class="ticker" href="mailto:Email@gmail.com">
+                <span class="ticker-inner">get in touch today &nbsp;&mdash;&nbsp; get in touch today &nbsp;&mdash;&nbsp; get in touch today &nbsp;&mdash;&nbsp; get in touch today &nbsp;&mdash;&nbsp;</span>
+            </a>
+            <button class="back-to-video-btn">back to video</button>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/randycounsman/" target="_blank" rel="noopener">Li</a>
+                <a href="https://vimeo.com/randycounsman" target="_blank" rel="noopener">Vi</a>
+                <span>&copy; 2026</span>
+            </div>
+        </footer>
+    </section>
+
+    <script type="module" src="/src/main-wyatt2.js"></script>
+</body>
+</html>
