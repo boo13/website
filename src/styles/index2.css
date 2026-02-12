@@ -294,7 +294,7 @@ a {
    SECTION 2: HORIZONTAL SCROLL GALLERY
    Vertical scroll triggers horizontal card movement
 ====================================================== */
-.gallery-section {
+.featured-work-section {
     position: relative;
     width: 100%;
     background: var(--color-nearblack);
@@ -519,7 +519,7 @@ a {
     z-index: 100;
 }
 
-.gallery-section.active .gallery-progress {
+.featured-work-section.active .gallery-progress {
     opacity: 1;
 }
 
@@ -1074,7 +1074,7 @@ a {
     }
 
     /* Gallery converts to vertical swipe on tablet */
-    .gallery-section {
+    .featured-work-section {
         height: auto;
         padding: var(--section-padding) 0;
     }

@@ -73,7 +73,7 @@ public/
 ```javascript
 // src/sections/gallery.js
 export function initGallery() {
-  const section = document.querySelector('.gallery-section');
+  const section = document.querySelector('.featured-work-section');
   const track = document.querySelector('.gallery-track');
 
   const ctx = gsap.context(() => {
@@ -312,7 +312,7 @@ fetch('data/Projects.json')
 ```javascript
 // Source: src/sections/gallery.js
 export function initGallery() {
-  const section = document.querySelector('.gallery-section');
+  const section = document.querySelector('.featured-work-section');
 
   const ctx = gsap.context(() => {
     // All GSAP animations here
