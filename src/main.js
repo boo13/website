@@ -2,7 +2,7 @@ import './styles/index2.css';
 import './styles/about-slides.css';
 import './styles/video-lightbox.css';
 import { ScrollSmoother } from './animations/scroll-defaults.js';
-import { initLanding } from './sections/landing.js';
+import { initHero } from './sections/hero.js';
 import { initGallery } from './sections/gallery.js';
 import { initCredits } from './sections/credits.js';
 import { initAbout } from './sections/about.js';
@@ -25,7 +25,7 @@ function init() {
     });
   }
 
-  // Initialize sections (without landing animations yet)
+  // Initialize sections (without hero animations yet)
   const cleanupCredits = initCredits();
   const cleanupCursor = initCustomCursor();
   const cleanupAboutSlides = initAboutSlides();
@@ -34,17 +34,17 @@ function init() {
   const cleanupFooterReveal = initFooterReveal();
   const cleanupLightbox = initVideoLightbox();
 
-  let cleanupLanding;
+  let cleanupHero;
 
-  // Listen for loading complete event to start landing animations
+  // Listen for loading complete event to start hero animations
   document.addEventListener('loadingComplete', () => {
-    cleanupLanding = initLanding();
+    cleanupHero = initHero();
   }, { once: true });
 
   runPreloader({ criticalRootSelector: '#hero' })
     .catch(() => {})
     .finally(() => {
-      // Start landing animations after preloader exits (or fails open)
+      // Start hero animations after preloader exits (or fails open)
       document.dispatchEvent(new CustomEvent('loadingComplete'));
     });
 
@@ -56,7 +56,7 @@ function init() {
     if (typeof cleanupAboutSlides === 'function') cleanupAboutSlides();
     if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
     if (typeof cleanupLightbox === 'function') cleanupLightbox();
-    if (typeof cleanupLanding === 'function') cleanupLanding();
+    if (typeof cleanupHero === 'function') cleanupHero();
   }, { once: true });
 }
 

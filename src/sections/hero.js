@@ -21,7 +21,7 @@ const config = {
   nameFlipScrollDistance: '45%',
 };
 
-export function initLanding() {
+export function initHero() {
   const hero = document.querySelector('.hero-section');
   const video = document.querySelector('.hero-video');
   const content = document.querySelector('.hero-content');

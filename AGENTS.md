@@ -29,7 +29,7 @@ Root HTML pages and entry files:
 - sandbox.html -> no page-specific JS entry
 
 src/
-  sections/             # one file per scroll section (landing, gallery, credits, about, about-slides, footer-reveal, featured-work)
+  sections/             # one file per scroll section (hero, gallery, credits, about, about-slides, footer-reveal, featured-work)
   animations/           # shared animation utilities (scroll-defaults.js registers GSAP plugins)
   components/           # reusable DOM components (slider, responsive-video, video-lightbox, custom-cursor, preloader)
   styles/               # CSS per page, imported from JS entry points
@@ -52,7 +52,7 @@ src/
 - **SplitText mask wrapper sizing** — Mask wrappers can be taller than word elements (line-height, font metrics). Absolutely-positioned overlays inside wrappers need `word.offsetTop` positioning, not `top: 0`, or they'll extend beyond the visible text area.
 
 ## Website Sections
-1. **Hero** (`landing`) - Preloader then a looping video (LandingPageMontage) with text (hero-name and hero-subtitle)
+1. **Hero** (`hero`) - Preloader then a looping montage video with text (hero-name and hero-subtitle)
 2. **About** - Multiple slides
 3. **Featured Work (Gallery)** - Scrolling grid of video thumbnails; click opens lightbox
 4. **Credits**

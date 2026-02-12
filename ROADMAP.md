@@ -26,7 +26,7 @@ index2.html is the new GSAP-animated single-page portfolio. index.html (legacy s
 - [x] Loading screen with spinner
 - [x] Deployed to GitHub Pages
 
-### Landing Section
+### Hero Section
 - [x] Hero with looping background video montage
 - [x] Name + tagline with mask-rise text animation
 - [x] Social links (LinkedIn, Vimeo, Email)
