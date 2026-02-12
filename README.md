@@ -59,7 +59,7 @@ Videos are hosted on a Cloudflare R2 bucket (`portfolio-assets`) and served via 
 
 - **CDN base URL** is defined in `src/config.js` as `CDN_BASE`
 - **Upload new/optimized videos** with `npx wrangler r2 object put portfolio-assets/video/FILENAME --file public/video/FILENAME --content-type video/webm --remote`
-- **Optimize before uploading** using `scripts/optimize-videos.sh` (FFmpeg VP9 two-pass encoding)
+- **Optimize before uploading** with `bash scripts/optimize-videos.sh INPUT_FILE [--suffix 360p] [--max-width 1920] [--max-height 1080]` (outputs both `.webm` VP9 + `.mp4` H.264 into `public/video/`)
 
 ## Contributing
 
