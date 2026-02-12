@@ -5,8 +5,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd -P)"
 
 DEFAULT_OUT_DIR="${REPO_ROOT}/public/video"
-MAX_WIDTH=1920
-MAX_HEIGHT=1080
+MAX_WIDTH=""
+MAX_HEIGHT=""
+MAX_WIDTH_SET=false
+MAX_HEIGHT_SET=false
 SUFFIX=""
 OUT_DIR="${DEFAULT_OUT_DIR}"
 OVERWRITE=false
@@ -22,8 +24,8 @@ Usage:
 Options:
   --suffix SUFFIX    Append _SUFFIX to output stem (example: 360p, 9x16)
   --out-dir DIR      Output directory (default: <repo>/public/video)
-  --max-width N      Max output width (default: 1920)
-  --max-height N     Max output height (default: 1080)
+  --max-width N      Max output width (default: source width)
+  --max-height N     Max output height (default: source height)
   --overwrite        Overwrite existing output files
   --no-audio         Strip audio from outputs even if input has audio
   --dry-run          Print commands without running ffmpeg
@@ -103,11 +105,13 @@ while [[ $# -gt 0 ]]; do
     --max-width)
       [[ $# -ge 2 ]] || die "--max-width requires a value"
       MAX_WIDTH="$2"
+      MAX_WIDTH_SET=true
       shift 2
       ;;
     --max-height)
       [[ $# -ge 2 ]] || die "--max-height requires a value"
       MAX_HEIGHT="$2"
+      MAX_HEIGHT_SET=true
       shift 2
       ;;
     --overwrite)
@@ -163,12 +167,23 @@ require_encoder libvpx-vp9
 require_encoder libx264
 
 [[ -f "${INPUT_FILE}" ]] || die "Input file not found: ${INPUT_FILE}"
-is_positive_integer "${MAX_WIDTH}" || die "--max-width must be a positive integer"
-is_positive_integer "${MAX_HEIGHT}" || die "--max-height must be a positive integer"
+if [[ "${MAX_WIDTH_SET}" == "true" ]]; then
+  is_positive_integer "${MAX_WIDTH}" || die "--max-width must be a positive integer"
+fi
+if [[ "${MAX_HEIGHT_SET}" == "true" ]]; then
+  is_positive_integer "${MAX_HEIGHT}" || die "--max-height must be a positive integer"
+fi
 
 if ! ffprobe -v error -select_streams v:0 -show_entries stream=codec_type -of csv=p=0 "${INPUT_FILE}" | grep -q '^video$'; then
   die "Input file has no readable video stream: ${INPUT_FILE}"
 fi
+
+INPUT_DIMENSIONS="$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=x "${INPUT_FILE}" || true)"
+[[ -n "${INPUT_DIMENSIONS}" ]] || die "Could not read input dimensions: ${INPUT_FILE}"
+INPUT_WIDTH="${INPUT_DIMENSIONS%x*}"
+INPUT_HEIGHT="${INPUT_DIMENSIONS#*x}"
+is_positive_integer "${INPUT_WIDTH}" || die "Invalid input width from ffprobe: ${INPUT_WIDTH}"
+is_positive_integer "${INPUT_HEIGHT}" || die "Invalid input height from ffprobe: ${INPUT_HEIGHT}"
 
 HAS_AUDIO=false
 if ffprobe -v error -select_streams a:0 -show_entries stream=codec_type -of csv=p=0 "${INPUT_FILE}" | grep -q '^audio$'; then
@@ -212,16 +227,34 @@ else
   FFMPEG_OUTPUT_FLAG=(-n)
 fi
 
-SCALE_FILTER="scale=w=trunc(min(iw\\,${MAX_WIDTH})/2)*2:h=trunc(min(ih\\,${MAX_HEIGHT})/2)*2:force_original_aspect_ratio=decrease"
-INPUT_DIMENSIONS="$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0:s=x "${INPUT_FILE}" || true)"
+if [[ "${MAX_WIDTH_SET}" == "false" ]]; then
+  MAX_WIDTH="${INPUT_WIDTH}"
+fi
+if [[ "${MAX_HEIGHT_SET}" == "false" ]]; then
+  MAX_HEIGHT="${INPUT_HEIGHT}"
+fi
+
+USE_SCALING=false
+SCALE_FILTER=""
+VIDEO_FILTER_ARGS=()
+if [[ "${MAX_WIDTH_SET}" == "true" || "${MAX_HEIGHT_SET}" == "true" ]]; then
+  USE_SCALING=true
+  SCALE_FILTER="scale=w=trunc(min(iw\\,${MAX_WIDTH})/2)*2:h=trunc(min(ih\\,${MAX_HEIGHT})/2)*2:force_original_aspect_ratio=decrease"
+  VIDEO_FILTER_ARGS=(-vf "${SCALE_FILTER}")
+fi
 
 echo "Video optimization settings:"
 echo "  input: ${INPUT_FILE}"
 echo "  input dimensions: ${INPUT_DIMENSIONS:-unknown}"
 echo "  output WebM: ${WEBM_OUTPUT}"
 echo "  output MP4: ${MP4_OUTPUT}"
-echo "  scale filter: ${SCALE_FILTER}"
-echo "  max dimensions: ${MAX_WIDTH}x${MAX_HEIGHT}"
+if [[ "${USE_SCALING}" == "true" ]]; then
+  echo "  scale filter: ${SCALE_FILTER}"
+  echo "  max dimensions: ${MAX_WIDTH}x${MAX_HEIGHT}"
+else
+  echo "  scale filter: none (preserving source frame size)"
+  echo "  output dimensions: source size (${INPUT_WIDTH}x${INPUT_HEIGHT})"
+fi
 echo "  overwrite: ${OVERWRITE}"
 echo "  remove audio: ${REMOVE_AUDIO}"
 echo "  dry run: ${DRY_RUN}"
@@ -238,14 +271,14 @@ echo "  H.264 settings: libx264, crf=22, preset=slow, yuv420p, +faststart"
 if [[ "${INCLUDE_AUDIO}" == "true" ]]; then
   run_cmd ffmpeg -hide_banner -loglevel warning "${FFMPEG_OUTPUT_FLAG[@]}" -i "${INPUT_FILE}" \
     -map 0:v:0 -map 0:a:0? \
-    -vf "${SCALE_FILTER}" \
+    "${VIDEO_FILTER_ARGS[@]}" \
     -c:v libvpx-vp9 -pix_fmt yuv420p -row-mt 1 -deadline good -cpu-used 2 -b:v 0 -crf 33 \
     -c:a libopus -b:a 128k \
     "${WEBM_OUTPUT}"
 
   run_cmd ffmpeg -hide_banner -loglevel warning "${FFMPEG_OUTPUT_FLAG[@]}" -i "${INPUT_FILE}" \
     -map 0:v:0 -map 0:a:0? \
-    -vf "${SCALE_FILTER}" \
+    "${VIDEO_FILTER_ARGS[@]}" \
     -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p \
     -c:a aac -b:a 128k \
     -movflags +faststart \
@@ -253,13 +286,13 @@ if [[ "${INCLUDE_AUDIO}" == "true" ]]; then
 else
   run_cmd ffmpeg -hide_banner -loglevel warning "${FFMPEG_OUTPUT_FLAG[@]}" -i "${INPUT_FILE}" \
     -map 0:v:0 -an \
-    -vf "${SCALE_FILTER}" \
+    "${VIDEO_FILTER_ARGS[@]}" \
     -c:v libvpx-vp9 -pix_fmt yuv420p -row-mt 1 -deadline good -cpu-used 2 -b:v 0 -crf 33 \
     "${WEBM_OUTPUT}"
 
   run_cmd ffmpeg -hide_banner -loglevel warning "${FFMPEG_OUTPUT_FLAG[@]}" -i "${INPUT_FILE}" \
     -map 0:v:0 -an \
-    -vf "${SCALE_FILTER}" \
+    "${VIDEO_FILTER_ARGS[@]}" \
     -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p \
     -movflags +faststart \
     "${MP4_OUTPUT}"
