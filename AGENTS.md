@@ -69,7 +69,7 @@ src/
 6. **Footer** - Contact and location info; nav and social links
 
 ## Verification
-- **Use playwright-cli skill to check visual changes.** If playwright is used to take screenshots, delete them after use (unless the user asked for them or they are needed later.)
+- **Use playwright-cli rather than playwright plugin or mcp** If playwright is used to take screenshots, delete them after use (unless the user asked for them or they are needed later.)
 - **Screenshot timing matters:** Animations on this site can be deferred by `fonts.ready`, `requestAnimationFrame`, or `ctx.add()` — they may not start until 1-2s after page load. Before taking verification screenshots, first determine WHEN the animation actually runs (e.g. query for DOM elements the animation creates, check opacity/transform values at multiple timepoints). A screenshot taken outside the animation window is a false positive, not proof the fix works.
 
 ## Gotchas
