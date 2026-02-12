@@ -63,7 +63,7 @@ src/
 ## Website Sections
 1. **Hero** - Preloader then a looping montage video with text (hero-name and hero-subtitle)
 2. **About** - Multiple slides
-3. **Featured Work (Gallery)** - Scrolling grid of video thumbnails; click opens lightbox
+3. **Featured Work** - Scrolling gallery of video thumbnails; click opens lightbox
 4. **Credits**
 5. **Clients**
 6. **Footer** - Contact and location info; nav and social links
