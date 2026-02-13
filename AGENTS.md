@@ -74,8 +74,6 @@ src/
 - Keep animation code direct — don't abstract into config-driven timeline factories
 - GSAP is now free to use, do not warn of paid-only features
 - **Prefer GSAP over CSS animations** for anything that's part of a sequence or coordinates with other animations. Reserve CSS for hover/focus states and `prefers-reduced-motion` fallbacks.
-- **Stagger vs individual `fromTo` in timelines** — `tl.fromTo(array, from, to, pos)` with `stagger` applies from-values to ALL elements at `pos`. Individual `tl.fromTo(el, from, to, pos)` calls only apply from-values when each tween's position is reached. When synchronizing clones/duplicates with originals, use the same stagger approach so from-values are applied identically.
-- **SplitText mask wrapper sizing** — Mask wrappers can be taller than word elements (line-height, font metrics). Absolutely-positioned overlays inside wrappers need `word.offsetTop` positioning, not `top: 0`, or they'll extend beyond the visible text area.
 
 ## Website Sections
 1. **Hero** - Preloader then a looping montage video with text (hero-name and hero-subtitle)
@@ -86,9 +84,9 @@ src/
 6. **Footer** - Contact and location info; nav and social links
 
 ## Verification
-  - ✅ Use `playwright-cli` terminal commands for browser verification in this repo. (Tell user to install if not available.)
-  - ❌ Do not use MCP Playwright tools (`mcp__playwright__*`).
-  - ❌ Do not substitute with `npx playwright` / `@playwright/test` commands.
+- ✅ Use `playwright-cli` terminal commands for browser verification in this repo. (Tell user to install if not available.)
+- ❌ Do not use MCP Playwright tools (`mcp__playwright__*`).
+- ❌ Do not substitute with `npx playwright` / `@playwright/test` commands.
 
 ### Verification rules
 
@@ -99,6 +97,8 @@ src/
 
 ## Gotchas
 - All `<video>` elements loading from R2 must have the `crossorigin` attribute (cross-origin fetch). If a `<link rel="preload">` also has `crossorigin`, the video element must match or the preloaded response is discarded.
+- **Stagger vs individual `fromTo` in timelines** — `tl.fromTo(array, from, to, pos)` with `stagger` applies from-values to ALL elements at `pos`. Individual `tl.fromTo(el, from, to, pos)` calls only apply from-values when each tween's position is reached. When synchronizing clones/duplicates with originals, use the same stagger approach so from-values are applied identically.
+- **SplitText mask wrapper sizing** — Mask wrappers can be taller than word elements (line-height, font metrics). Absolutely-positioned overlays inside wrappers need `word.offsetTop` positioning, not `top: 0`, or they'll extend beyond the visible text area.
 
 # Communication Style
 - Be direct, concise, and critical. Do not use excessive positive affirmations like "That's a great idea," "Absolutely," or "Great question."
