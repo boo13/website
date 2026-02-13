@@ -8,13 +8,22 @@ This project is a video portfolio website using GSAP.
 - `npm run dev` — Vite server with HMR
 - `npm run lint` — ESLint on `src/` (run before commit; fix all errors before proceeding)
 - `npm run format` — Prettier on `src/`
+- `just video-publish FILE [--suffix S] [--out-dir DIR] ...` — Optimize video to WebM + MP4 and upload both to R2
+
+## Git Workflow
+- **`dev`** — working branch. All LLM and day-to-day work happens here.
+- **`gh-pages`** — production. Deploys automatically on push. Only updated by merging `dev` into it.
+- ❌ DO NOT commit directly to `gh-pages`.
+- For risky/experimental work, branch off `dev` and merge back if it works.
+- Do not commit unless asked or the task is fully complete and verified.
+- One logical change per commit — don't bundle unrelated edits.
 
 ## Boundaries
-- ❌ DO NOT edit index.html or main-index.js
+- ❌ DO NOT edit index.html or main-index.js (this is the legacy version)
 
 ## Project Structure
 - `index2.html` is the main portfolio page; `index.html` is a legacy/alternate version (do not edit).
-- Organized by **section**, not file type.
+- Primary UI code is organized by **section**, not file type. Shared utilities are grouped by type (`animations/`, `components/`, `styles/`).
 - Each section exports an `initSectionName()` function called from `main.js`.
 - Static assets live in `public/` (data, images, favicon, CNAME) — Vite copies them as-is to the build output. HTML files stay at the repo root.
 - **Video assets** hosted on Cloudflare R2 (not in git). Base URL: `CDN_BASE` in `src/config.js`. Local copies in `public/video/` are gitignored.
@@ -41,6 +50,14 @@ src/
   components/           # reusable DOM components (slider, responsive-video, video-lightbox, custom-cursor, preloader)
   styles/               # CSS per page, imported from JS entry points
     project.css         # shared styles for all project pages (BEM: .project-hero--video, .project-credits, .project-footer)
+    index2.css          # main portfolio page (index2.html)
+    about-intro.css     # about section (index2.html)
+    about-slides.css    # about slides section (index2.html)
+    video-lightbox.css  # lightbox overlay (index2.html)
+    contact.css         # contact.html
+    resume.css          # resume.html
+    wyatt.css           # case_study_wyatt.html
+    index.css           # legacy index.html (do not edit)
   config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
   main.js               # entry for index2.html — imports sections + calls init()
   main-project.js       # entry for ALL project pages — imports project sections
@@ -69,7 +86,7 @@ src/
 6. **Footer** - Contact and location info; nav and social links
 
 ## Verification
-  - ✅ Use `playwright-cli` terminal commands for browser verification in this repo.
+  - ✅ Use `playwright-cli` terminal commands for browser verification in this repo. (Tell user to install if not available.)
   - ❌ Do not use MCP Playwright tools (`mcp__playwright__*`).
   - ❌ Do not substitute with `npx playwright` / `@playwright/test` commands.
 
@@ -86,7 +103,6 @@ src/
 # Communication Style
 - Be direct, concise, and critical. Do not use excessive positive affirmations like "That's a great idea," "Absolutely," or "Great question."
 - If an idea has flaws, say so immediately. Challenge assumptions, point out potential issues, and ask hard questions about implementation, scalability, and real-world viability.
-- Do not merely paraphrase user input; engage with it critically.
 - Do not confirm results simply because they were suggested. Verify them independently.
 - If you are unsure, do not go with the flow—admit it or ask for clarification.
 

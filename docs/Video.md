@@ -19,7 +19,6 @@
 
 ## Adding a New Video
 1. Place source file in `public/video/` if not already there
-2. Run `bash scripts/optimize-videos.sh public/video/YourSource.mp4 --suffix 360p`
-3. Upload each output with the wrangler command above (WebM and MP4 content types)
-4. Reference via `CDN_BASE` in JS or full URL in HTML
-5. Add `crossorigin` attribute to the `<video>` element
+2. Optimize + upload in one step: `just video-publish public/video/YourSource.mp4 --suffix 360p`
+3. Reference via `CDN_BASE` in JS or full URL in HTML
+4. Add `crossorigin` attribute to the `<video>` element
