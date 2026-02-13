@@ -41,6 +41,17 @@ src/
   components/           # reusable DOM components (slider, responsive-video, video-lightbox, custom-cursor, preloader)
   styles/               # CSS per page, imported from JS entry points
     project.css         # shared styles for all project pages (BEM: .project-hero--video, .project-credits, .project-footer)
+<<<<<<< Updated upstream
+=======
+    index2.css          # main portfolio page (index2.html)
+    about-intro.css     # about section (index2.html)
+    about-slides.css    # about slides section (index2.html)
+    video-lightbox.css  # lightbox overlay (index2.html)
+    contact.css         # contact.html
+    resume.css          # resume.html
+    wyatt.css           # case_study_wyatt.html
+    index.css           # legacy index.html
+>>>>>>> Stashed changes
   config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
   main.js               # entry for index2.html — imports sections + calls init()
   main-project.js       # entry for ALL project pages — imports project sections
@@ -64,8 +75,8 @@ src/
 1. **Hero** - Preloader then a looping montage video with text (hero-name and hero-subtitle)
 2. **About** - Multiple slides
 3. **Featured Work** - Scrolling gallery of video thumbnails; click opens lightbox
-4. **Credits**
-5. **Clients**
+4. **Credits** - Table listing additional work examples; cursor-follow shows preview and row-reveal animations
+5. **Clients** - Network/brand logo marquee and summary blurb
 6. **Footer** - Contact and location info; nav and social links
 
 ## Verification
