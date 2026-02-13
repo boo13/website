@@ -48,6 +48,7 @@ export function initAboutIntro() {
     ScrollTrigger.create({
       id: 'about-intro-pin',
       trigger: section,
+      start: 'top top',
       pin: true,
       scrub: SCRUB.default,
       end: '+=200%',

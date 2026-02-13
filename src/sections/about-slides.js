@@ -34,6 +34,7 @@ export function initAboutSlides() {
   let cleanupSlide1Headline = () => {};
   let cleanupSlide2Headline = () => {};
   let cleanupObserver = () => {};
+  let cleanupGridVideos = () => {};
 
   const ctx = gsap.context(() => {
     // =====================================================
@@ -61,12 +62,28 @@ export function initAboutSlides() {
       const phones = section.querySelectorAll(
         '.slide-in-your-hand .phone-mockup'
       );
+      const gridVideos = gridContainer.querySelectorAll('video');
       const smallPhones = section.querySelectorAll(
         '.slide-in-your-hand .phone-mockup.phone-sm'
       );
       const lgPhone = section.querySelector(
         '.slide-in-your-hand .phone-mockup.phone-lg'
       );
+      let gridVideosPaused = false;
+
+      const setGridVideosPaused = (shouldPause) => {
+        if (gridVideosPaused === shouldPause) return;
+        gridVideosPaused = shouldPause;
+
+        gridVideos.forEach((video) => {
+          if (shouldPause) {
+            video.pause();
+          } else {
+            video.play().catch(() => {});
+          }
+        });
+      };
+      cleanupGridVideos = () => setGridVideosPaused(false);
 
       // --- Initial states ---
       gsap.set(gridContainer, {
@@ -313,6 +330,9 @@ export function initAboutSlides() {
           }
         },
         onUpdate: (self) => {
+          // Pause hidden grid videos before phone videos begin to reduce decode load.
+          setGridVideosPaused(self.progress >= 0.45);
+
           // Slide 2 text fires once when we reach the transition point
           if (!slide2TextRevealed && self.progress >= 0.48) {
             slide2TextRevealed = true;
@@ -342,6 +362,8 @@ export function initAboutSlides() {
           }
         },
         onLeaveBack: () => {
+          setGridVideosPaused(false);
+
           // Reset one-shot reveal flags/states so text reveals can replay.
           slide1TextRevealed = false;
           slide2TextRevealed = false;
@@ -377,8 +399,6 @@ export function initAboutSlides() {
       phones.forEach((phone) => phoneObserver.observe(phone));
       cleanupObserver = () => phoneObserver.disconnect();
     }
-
-    ScrollTrigger.refresh();
   }, section);
 
   return () => {
@@ -386,5 +406,6 @@ export function initAboutSlides() {
     cleanupSlide1Headline();
     cleanupSlide2Headline();
     cleanupObserver();
+    cleanupGridVideos();
   };
 }

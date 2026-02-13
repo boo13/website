@@ -69,11 +69,26 @@ src/
 6. **Footer** - Contact and location info; nav and social links
 
 ## Verification
-- **Use playwright-cli rather than playwright plugin or mcp** If playwright is used to take screenshots, delete them after use (unless the user asked for them or they are needed later.)
-- **Screenshot timing matters:** Animations on this site can be deferred by `fonts.ready`, `requestAnimationFrame`, or `ctx.add()` — they may not start until 1-2s after page load. Before taking verification screenshots, first determine WHEN the animation actually runs (e.g. query for DOM elements the animation creates, check opacity/transform values at multiple timepoints). A screenshot taken outside the animation window is a false positive, not proof the fix works.
+  - ✅ Use `playwright-cli` terminal commands for browser verification in this repo.
+  - ❌ Do not use MCP Playwright tools (`mcp__playwright__*`).
+  - ❌ Do not substitute with `npx playwright` / `@playwright/test` commands.
+
+### Verification rules
+
+- **Screenshot timing matters:** Before taking verification screenshots, first determine WHEN the animation actually runs (e.g. query for DOM elements the animation creates, check opacity/transform values at multiple timepoints).
+  - Animations on this site can be deferred by `fonts.ready`, `requestAnimationFrame`, or `ctx.add()` — they may not start until 1-2s after page load. 
+  - ⚠️ BEWARE - A screenshot taken outside the animation window is a false positive, not proof the fix works.
+- **Cleanup screenshots:** delete temp screenshots unless user asked to keep them.
 
 ## Gotchas
 - All `<video>` elements loading from R2 must have the `crossorigin` attribute (cross-origin fetch). If a `<link rel="preload">` also has `crossorigin`, the video element must match or the preloaded response is discarded.
+
+# Communication Style
+- Be direct, concise, and critical. Do not use excessive positive affirmations like "That's a great idea," "Absolutely," or "Great question."
+- If an idea has flaws, say so immediately. Challenge assumptions, point out potential issues, and ask hard questions about implementation, scalability, and real-world viability.
+- Do not merely paraphrase user input; engage with it critically.
+- Do not confirm results simply because they were suggested. Verify them independently.
+- If you are unsure, do not go with the flow—admit it or ask for clarification.
 
 ## Further Documentation
 - **Video**: Read `docs/Video.md` when adding, uploading, or converting videos

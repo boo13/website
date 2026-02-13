@@ -2,7 +2,7 @@ import './styles/index2.css';
 import './styles/about-intro.css';
 import './styles/about-slides.css';
 import './styles/video-lightbox.css';
-import { ScrollSmoother } from './animations/scroll-defaults.js';
+import { ScrollSmoother, ScrollTrigger } from './animations/scroll-defaults.js';
 import { initHero } from './sections/hero.js';
 import { initGallery } from './sections/gallery.js';
 import { initCredits } from './sections/credits.js';
@@ -38,6 +38,9 @@ function init() {
   initAbout();
   const cleanupFooterReveal = initFooterReveal();
   const cleanupLightbox = initVideoLightbox();
+
+  // Refresh once after all sections register their triggers.
+  ScrollTrigger.refresh();
 
   let cleanupHero;
 
