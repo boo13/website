@@ -34,6 +34,7 @@ export function initAboutSlides() {
   let cleanupSlide1Headline = () => {};
   let cleanupSlide2Headline = () => {};
   let cleanupObserver = () => {};
+  let cleanupGridVideoLoader = () => {};
   let cleanupGridVideos = () => {};
 
   const ctx = gsap.context(() => {
@@ -62,7 +63,7 @@ export function initAboutSlides() {
       const phones = section.querySelectorAll(
         '.slide-in-your-hand .phone-mockup'
       );
-      const gridVideos = gridContainer.querySelectorAll('video');
+      const gridVideos = Array.from(gridContainer.querySelectorAll('video'));
       const smallPhones = section.querySelectorAll(
         '.slide-in-your-hand .phone-mockup.phone-sm'
       );
@@ -83,7 +84,32 @@ export function initAboutSlides() {
           }
         });
       };
-      cleanupGridVideos = () => setGridVideosPaused(false);
+      cleanupGridVideos = () => setGridVideosPaused(true);
+
+      // Defer all grid video network/decode work until section is nearby.
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          if (!entries[0]?.isIntersecting) return;
+
+          gridVideos.forEach((video) => {
+            let hasDeferredSources = false;
+
+            video.querySelectorAll('source').forEach((source) => {
+              if (!source.dataset.src || source.src) return;
+              source.src = source.dataset.src;
+              hasDeferredSources = true;
+            });
+
+            if (hasDeferredSources) video.load();
+            video.play().catch(() => {});
+          });
+
+          sectionObserver.disconnect();
+        },
+        { rootMargin: '300px' }
+      );
+      sectionObserver.observe(section);
+      cleanupGridVideoLoader = () => sectionObserver.disconnect();
 
       // --- Initial states ---
       gsap.set(gridContainer, {
@@ -302,6 +328,8 @@ export function initAboutSlides() {
         animation: masterTl,
         invalidateOnRefresh: true,
         onEnter: () => {
+          setGridVideosPaused(false);
+
           // Slide 1 text fires once when pin starts.
           if (slide1TextRevealed) return;
           slide1TextRevealed = true;
@@ -378,6 +406,9 @@ export function initAboutSlides() {
           if (slide2Intro) gsap.set(slide2Intro, { opacity: 0, y: 0 });
           if (slide2Headline) gsap.set(slide2Headline, { opacity: 0, y: 0 });
         },
+        onLeave: () => {
+          setGridVideosPaused(true);
+        },
       });
 
       // Play/pause phone videos based on visibility
@@ -406,6 +437,7 @@ export function initAboutSlides() {
     cleanupSlide1Headline();
     cleanupSlide2Headline();
     cleanupObserver();
+    cleanupGridVideoLoader();
     cleanupGridVideos();
   };
 }
