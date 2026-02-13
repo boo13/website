@@ -165,7 +165,6 @@
   overflow: hidden;
   background: #1a1a1a;
   content-visibility: auto;
-  contain-intrinsic-size: auto 1fr;
 }
 
 .slide-goes-big .grid-item img {
