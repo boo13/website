@@ -38,15 +38,15 @@ function initCreditsPreview() {
     // with JS cursor-positioning behavior.
     leftTitleSafeZone = readPxVariable(
       '--credits-title-safe-zone',
-      defaultLeftTitleSafeZone,
+      defaultLeftTitleSafeZone
     );
     leftTitleBlendWidth = readPxVariable(
       '--credits-title-blend-width',
-      defaultLeftTitleBlendWidth,
+      defaultLeftTitleBlendWidth
     );
     cursorRightOffset = readPxVariable(
       '--credits-cursor-right-offset',
-      defaultCursorRightOffset,
+      defaultCursorRightOffset
     );
   }
 
@@ -121,8 +121,15 @@ function initCreditsPreview() {
 
     // If cursor is left of the table, resolve row by Y using a probe point
     // just inside the table so hover previews still work in the left margin.
-    if ((!row || !table.contains(row)) && withinTableY && mouseX < tableRect.left) {
-      const probeX = Math.min(Math.max(Math.floor(tableRect.left + 1), 0), window.innerWidth - 1);
+    if (
+      (!row || !table.contains(row)) &&
+      withinTableY &&
+      mouseX < tableRect.left
+    ) {
+      const probeX = Math.min(
+        Math.max(Math.floor(tableRect.left + 1), 0),
+        window.innerWidth - 1
+      );
       const probeElement = document.elementFromPoint(probeX, mouseY);
       row = probeElement?.closest('.credit-row');
     }
@@ -238,7 +245,7 @@ function initCreditsRowReveal() {
         }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' },
+    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
   );
 
   rows.forEach((row) => observer.observe(row));

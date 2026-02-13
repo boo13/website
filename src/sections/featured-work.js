@@ -39,7 +39,7 @@ export function initFeaturedWork() {
   if (!section || !bg || !fg) return;
 
   const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)',
+    '(prefers-reduced-motion: reduce)'
   ).matches;
   const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
 
@@ -99,7 +99,7 @@ export function initFeaturedWork() {
         duration: 0.5,
         ease: 'power1.inOut',
       },
-      0,
+      0
     );
 
     // Foreground: blur increases, subtle movement
@@ -112,7 +112,7 @@ export function initFeaturedWork() {
         duration: 0.5,
         ease: 'power1.inOut',
       },
-      0,
+      0
     );
 
     // Text sharpens quickly
@@ -124,7 +124,7 @@ export function initFeaturedWork() {
           duration: 0.25,
           ease: 'power2.out',
         },
-        0,
+        0
       );
       tl.to(
         textLayer,
@@ -133,7 +133,7 @@ export function initFeaturedWork() {
           duration: 1,
           ease: 'none',
         },
-        0,
+        0
       );
     }
 
@@ -144,8 +144,13 @@ export function initFeaturedWork() {
     tl.to(bg, { opacity: 0.15, duration: 0.2, ease: 'power1.in' }, 0.55);
     tl.to(
       bg,
-      { opacity: 0.03, filter: 'blur(12px)', duration: 0.25, ease: 'power1.in' },
-      0.75,
+      {
+        opacity: 0.03,
+        filter: 'blur(12px)',
+        duration: 0.25,
+        ease: 'power1.in',
+      },
+      0.75
     );
 
     if (fgFade) {
@@ -155,15 +160,11 @@ export function initFeaturedWork() {
     tl.to(
       fg,
       { opacity: 0.05, filter: 'blur(10px)', duration: 0.2, ease: 'power1.in' },
-      0.8,
+      0.8
     );
 
     if (textLayer) {
-      tl.to(
-        textLayer,
-        { opacity: 0.85, duration: 0.15, ease: 'none' },
-        0.85,
-      );
+      tl.to(textLayer, { opacity: 0.85, duration: 0.15, ease: 'none' }, 0.85);
     }
 
     ScrollTrigger.create({
@@ -176,7 +177,7 @@ export function initFeaturedWork() {
         document.dispatchEvent(
           new CustomEvent('parallaxProgress', {
             detail: { progress: self.progress },
-          }),
+          })
         );
       },
     });

@@ -40,7 +40,7 @@ export function textMaskRiseWords(targets, overrides = {}) {
   }
 
   const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)',
+    '(prefers-reduced-motion: reduce)'
   ).matches;
 
   if (prefersReducedMotion) {
@@ -53,7 +53,8 @@ export function textMaskRiseWords(targets, overrides = {}) {
   gsap.set(elements, { opacity: 1 });
 
   const trailConfig = settings.colorTrail;
-  const hasTrail = trailConfig && trailConfig.colors && trailConfig.colors.length;
+  const hasTrail =
+    trailConfig && trailConfig.colors && trailConfig.colors.length;
 
   // Split all elements into words with mask wrappers (same for both paths).
   const splits = elements.map((element) => {
@@ -124,7 +125,7 @@ export function textMaskRiseWords(targets, overrides = {}) {
           ease: settings.ease,
           stagger: settings.stagger,
         },
-        0,
+        0
       );
 
       // Clone animation per layer:
@@ -148,7 +149,7 @@ export function textMaskRiseWords(targets, overrides = {}) {
             ease: settings.ease,
             stagger: settings.stagger,
           },
-          layerDelay,
+          layerDelay
         );
 
         // Fade out clones as they settle into final position
@@ -160,7 +161,7 @@ export function textMaskRiseWords(targets, overrides = {}) {
             ease: 'power2.in',
             stagger: settings.stagger,
           },
-          layerDelay + settings.duration * 0.75,
+          layerDelay + settings.duration * 0.75
         );
       });
     });
@@ -185,7 +186,7 @@ export function textMaskRiseWords(targets, overrides = {}) {
         ease: settings.ease,
         stagger: settings.stagger,
       },
-      0,
+      0
     );
   });
 

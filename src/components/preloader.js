@@ -14,7 +14,9 @@ function clamp(value, min, max) {
 }
 
 function getSizeConfig() {
-  return window.matchMedia('(max-width: 480px)').matches ? MOBILE_SIZES : DESKTOP_SIZES;
+  return window.matchMedia('(max-width: 480px)').matches
+    ? MOBILE_SIZES
+    : DESKTOP_SIZES;
 }
 
 function waitForVideoFrame(video, onLoaded) {
@@ -162,9 +164,15 @@ function createProgressSmoother(edgesEl) {
 }
 
 function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
-  const travelDistance = window.matchMedia('(max-width: 480px)').matches ? 28 : 44;
+  const travelDistance = window.matchMedia('(max-width: 480px)').matches
+    ? 28
+    : 44;
   const cornerAnimations = [
-    { selector: '.preloader-corner-lt', x: -travelDistance, y: -travelDistance },
+    {
+      selector: '.preloader-corner-lt',
+      x: -travelDistance,
+      y: -travelDistance,
+    },
     { selector: '.preloader-corner-lb', x: -travelDistance, y: travelDistance },
     { selector: '.preloader-corner-rt', x: travelDistance, y: -travelDistance },
     { selector: '.preloader-corner-rb', x: travelDistance, y: travelDistance },
@@ -178,7 +186,11 @@ function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
   });
 
   if (timeEl) {
-    timeline.to(timeEl, { autoAlpha: 0, duration: 0.55, ease: 'power1.out' }, 0);
+    timeline.to(
+      timeEl,
+      { autoAlpha: 0, duration: 0.55, ease: 'power1.out' },
+      0
+    );
   }
 
   cornerAnimations.forEach(({ selector, x, y }) => {
@@ -196,12 +208,16 @@ function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
         duration: 1.05,
         ease: 'power1.out',
       },
-      0.08,
+      0.08
     );
   });
 
   if (edgesEl) {
-    timeline.to(edgesEl, { scale: 1.04, duration: 1.0, ease: 'power1.out' }, 0.08);
+    timeline.to(
+      edgesEl,
+      { scale: 1.04, duration: 1.0, ease: 'power1.out' },
+      0.08
+    );
   }
 
   timeline.to(
@@ -211,13 +227,14 @@ function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
       autoAlpha: 0,
       duration: 1.25,
     },
-    0.45,
+    0.45
   );
 }
 
 export function runPreloader(options = {}) {
   return new Promise((resolve) => {
-    const { overlaySelector = '.loading-overlay', criticalRootSelector } = options;
+    const { overlaySelector = '.loading-overlay', criticalRootSelector } =
+      options;
     const overlayEl = document.querySelector(overlaySelector);
     if (!overlayEl) {
       resolve();
@@ -230,8 +247,12 @@ export function runPreloader(options = {}) {
     const clearCountdown = startCountdown(timeEl);
 
     const collectionRoot = getCollectionRoot(criticalRootSelector);
-    const videos = Array.from(collectionRoot.querySelectorAll('video')).filter(shouldTrackVideo);
-    const images = Array.from(collectionRoot.querySelectorAll('img')).filter(shouldTrackImage);
+    const videos = Array.from(collectionRoot.querySelectorAll('video')).filter(
+      shouldTrackVideo
+    );
+    const images = Array.from(collectionRoot.querySelectorAll('img')).filter(
+      shouldTrackImage
+    );
 
     let loadedWeight = 0;
     let isComplete = false;
@@ -256,7 +277,8 @@ export function runPreloader(options = {}) {
         return;
       }
 
-      const progress = totalWeight > 0 ? clamp(loadedWeight / totalWeight, 0, 1) : 1;
+      const progress =
+        totalWeight > 0 ? clamp(loadedWeight / totalWeight, 0, 1) : 1;
       progressSmoother.to(progress);
 
       if (progress >= 1) {
@@ -300,10 +322,15 @@ export function runPreloader(options = {}) {
       updateProgress();
     };
 
-    const forceCompleteTimeoutId = window.setTimeout(forceComplete, FORCE_COMPLETE_AFTER_MS);
+    const forceCompleteTimeoutId = window.setTimeout(
+      forceComplete,
+      FORCE_COMPLETE_AFTER_MS
+    );
 
     tasks.forEach((task) => {
-      const cleanupTaskListener = task.register(() => markTaskLoaded(task.weight));
+      const cleanupTaskListener = task.register(() =>
+        markTaskLoaded(task.weight)
+      );
       taskCleanupFns.push(cleanupTaskListener);
     });
 

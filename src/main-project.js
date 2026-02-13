@@ -5,13 +5,17 @@ import { initProjectFooter } from './sections/project-footer.js';
 
 function init() {
   // Each returns early if its DOM section is absent
-  const cleanups = [initProjectVideo(), initProjectCredits(), initProjectFooter()];
+  const cleanups = [
+    initProjectVideo(),
+    initProjectCredits(),
+    initProjectFooter(),
+  ];
   window.addEventListener(
     'pagehide',
     () => {
       cleanups.forEach((fn) => typeof fn === 'function' && fn());
     },
-    { once: true },
+    { once: true }
   );
 }
 

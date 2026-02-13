@@ -38,7 +38,10 @@ export function initFooterReveal() {
       const clipPx = self.progress * footer.offsetHeight;
       smoothWrapper.style.clipPath = `inset(0 0 ${clipPx}px 0)`;
       // Enable pointer-events when fully revealed
-      footer.classList.toggle('site-footer--interactive', self.progress >= 0.99);
+      footer.classList.toggle(
+        'site-footer--interactive',
+        self.progress >= 0.99
+      );
     },
     onLeaveBack: () => {
       smoothWrapper.style.clipPath = '';

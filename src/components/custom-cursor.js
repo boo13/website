@@ -9,9 +9,7 @@ export function initCustomCursor() {
     return () => {};
 
   // Target sections
-  const sections = document.querySelectorAll(
-    '.hero-section'
-  );
+  const sections = document.querySelectorAll('.hero-section');
   if (!sections.length) return () => {};
 
   // Create cursor elements (fixed position, not per-section)

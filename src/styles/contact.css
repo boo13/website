@@ -57,9 +57,9 @@ body {
   outline-offset: -1px;
 }
 
-#fs-frm [type="button"],
-#fs-frm [type="submit"],
-#fs-frm [type="reset"] {
+#fs-frm [type='button'],
+#fs-frm [type='submit'],
+#fs-frm [type='reset'] {
   width: auto;
   cursor: pointer;
   -webkit-appearance: button;
@@ -67,18 +67,18 @@ body {
   appearance: button;
 }
 
-#fs-frm [type="button"][disabled],
-#fs-frm [type="submit"][disabled] {
+#fs-frm [type='button'][disabled],
+#fs-frm [type='submit'][disabled] {
   cursor: progress;
   color: #888;
 }
 
-#fs-frm [type="button"]:focus,
-#fs-frm [type="submit"]:focus,
-#fs-frm [type="reset"]:focus {
+#fs-frm [type='button']:focus,
+#fs-frm [type='submit']:focus,
+#fs-frm [type='reset']:focus {
   outline: none;
 }
-#fs-frm [type="submit"],
-#fs-frm [type="reset"] {
+#fs-frm [type='submit'],
+#fs-frm [type='reset'] {
   margin-bottom: 0;
 }

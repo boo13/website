@@ -10,16 +10,16 @@ export function initGallery() {
   const track = document.querySelector('.gallery-track');
   const cards = document.querySelectorAll('.gallery-card');
   const progressCurrent = document.querySelector(
-    '.gallery-progress .progress-current',
+    '.gallery-progress .progress-current'
   );
   const progressTotal = document.querySelector(
-    '.gallery-progress .progress-total',
+    '.gallery-progress .progress-total'
   );
 
   if (!section || !track || !cards.length) return;
 
   const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)',
+    '(prefers-reduced-motion: reduce)'
   ).matches;
   let isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
 
@@ -40,7 +40,10 @@ export function initGallery() {
 
   function updateProgress(progress) {
     const totalCards = cards.length;
-    const newIndex = Math.min(Math.floor(progress * totalCards) + 1, totalCards);
+    const newIndex = Math.min(
+      Math.floor(progress * totalCards) + 1,
+      totalCards
+    );
     if (newIndex !== currentIndex) {
       currentIndex = newIndex;
       if (progressCurrent) progressCurrent.textContent = newIndex;
@@ -50,7 +53,8 @@ export function initGallery() {
 
   function setupVideoHover() {
     // Skip hover previews on touch devices
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isTouchDevice =
+      'ontouchstart' in window || navigator.maxTouchPoints > 0;
     if (isTouchDevice) return;
 
     cards.forEach((card) => {

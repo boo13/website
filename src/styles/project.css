@@ -8,7 +8,8 @@
   --project-text: #f0f2f1;
   --project-bg: #020202;
   --project-bg-credits: #080808;
-  --project-font-body: aktiv-grotesk, -apple-system, BlinkMacSystemFont, sans-serif;
+  --project-font-body:
+    aktiv-grotesk, -apple-system, BlinkMacSystemFont, sans-serif;
   --project-font-display: ivypresto-display, Georgia, serif;
 }
 
@@ -361,8 +362,12 @@ a {
 }
 
 @keyframes project-ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Back to video button */
@@ -372,7 +377,9 @@ a {
   letter-spacing: 0.06em;
   padding: 10px 24px;
   border: 1px solid rgba(240, 242, 241, 0.4);
-  transition: border-color 0.3s, opacity 0.3s;
+  transition:
+    border-color 0.3s,
+    opacity 0.3s;
 }
 
 .project-footer__back-btn:hover {

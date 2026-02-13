@@ -211,23 +211,53 @@
     </section>
 
     <!-- =====================================================
-         SECTION: ABOUT SLIDES
-         Full-viewport scroll-driven narrative slides
-         "This is me..." -> "I've worked on..." -> "as well as..."
+         SECTION: ABOUT INTRO
+         Scroll-to-fill text + dot background + client marquee
     ====================================================== -->
-    <section class="about-slides-section">
-
-        <!-- Slide 1: "This is me" -->
-        <div class="about-slide slide-this-is-me">
-            <div class="slide-content">
-                <p class="slide-intro handwritten this-is-me-text">this is me...</p>
-                <!-- Placeholder container for future portrait + particle/Gaussian splat effect -->
-                <div class="portrait-placeholder">
-                    <!-- Will eventually contain canvas/WebGL for particle effect -->
-                    <!-- For now, empty or with a subtle placeholder -->
-                </div>
+    <section class="about-intro-section">
+        <div class="about-intro__dot-bg" aria-hidden="true"></div>
+        <div class="about-intro__content">
+            <p class="about-intro__text">
+                A creative leader in nonfiction storytelling, crafting
+                narratives across television, streaming, and digital
+                platforms. From Emmy-nominated series to innovative social
+                content, every project starts with a great story and
+                a vision for how to tell it.
+            </p>
+        </div>
+        <div class="about-intro__marquee">
+            <div class="about-intro__marquee-track">
+                <span class="about-intro__marquee-item">Netflix</span>
+                <span class="about-intro__marquee-item">History</span>
+                <span class="about-intro__marquee-item">PBS</span>
+                <span class="about-intro__marquee-item">AMC</span>
+                <span class="about-intro__marquee-item">Amazon</span>
+                <span class="about-intro__marquee-item">Nat Geo</span>
+                <span class="about-intro__marquee-item">Discovery</span>
+                <span class="about-intro__marquee-item">CNN</span>
+                <span class="about-intro__marquee-item">CNBC</span>
+                <span class="about-intro__marquee-item">Fox Nation</span>
+                <!-- Duplicate for seamless CSS loop -->
+                <span class="about-intro__marquee-item">Netflix</span>
+                <span class="about-intro__marquee-item">History</span>
+                <span class="about-intro__marquee-item">PBS</span>
+                <span class="about-intro__marquee-item">AMC</span>
+                <span class="about-intro__marquee-item">Amazon</span>
+                <span class="about-intro__marquee-item">Nat Geo</span>
+                <span class="about-intro__marquee-item">Discovery</span>
+                <span class="about-intro__marquee-item">CNN</span>
+                <span class="about-intro__marquee-item">CNBC</span>
+                <span class="about-intro__marquee-item">Fox Nation</span>
             </div>
         </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: ABOUT SLIDES
+         Full-viewport scroll-driven narrative slides
+         Slide 1: "Goes BIG" grid zoom  |  Slide 2: "In your hand" phones
+    ====================================================== -->
+    <section class="about-slides-section">
 
         <!-- Slides 2+3 wrapper: pinned as one continuous sequence -->
         <div class="slide-transition-wrapper">

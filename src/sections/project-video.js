@@ -19,7 +19,9 @@ export function initProjectVideo() {
   const soundBtn = section.querySelector('.project-hero__sound-btn');
   const creditsBtn = section.querySelector('.project-hero__credits-btn');
   const backBtn = document.querySelector('.project-footer__back-btn');
-  const timelineFill = section.querySelector('.project-hero__timeline-progress');
+  const timelineFill = section.querySelector(
+    '.project-hero__timeline-progress'
+  );
   const timelineRail = section.querySelector('.project-hero__timeline');
   const timeCurrent = section.querySelector('.project-hero__time-current');
   const timeTotal = section.querySelector('.project-hero__time-total');

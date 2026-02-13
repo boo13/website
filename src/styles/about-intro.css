@@ -1,0 +1,176 @@
+/**
+ * About Intro Section
+ * Scroll-to-fill text + dot grid background + client marquee
+ */
+
+/* =====================================================
+   SECTION LAYOUT
+====================================================== */
+.about-intro-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-nearblack);
+  overflow: hidden;
+  padding: 6rem 2rem;
+}
+
+@supports (min-height: 100svh) {
+  .about-intro-section {
+    min-height: 100svh;
+  }
+}
+
+/* =====================================================
+   DOT GRID BACKGROUND
+====================================================== */
+.about-intro__dot-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    rgba(247, 244, 240, 0.5) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* =====================================================
+   TEXT CONTENT
+====================================================== */
+.about-intro__content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-intro__text {
+  font-family: var(--ff-display);
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--color-offwhite);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* =====================================================
+   CLIENT MARQUEE
+====================================================== */
+.about-intro__marquee {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 3rem;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.about-intro__marquee-track {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: about-intro-marquee 30s linear infinite;
+  width: max-content;
+}
+
+.about-intro__marquee-item {
+  font-family: var(--ff-body, 'Inter', sans-serif);
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  font-weight: 400;
+  color: rgba(247, 244, 240, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  flex-shrink: 0;
+}
+
+@keyframes about-intro-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+====================================================== */
+@media (max-width: 768px) {
+  .about-intro-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .about-intro__text {
+    font-size: clamp(1.3rem, 5vw, 2rem);
+  }
+
+  .about-intro__dot-bg {
+    background-size: 20px 20px;
+  }
+
+  .about-intro__marquee-track {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-intro-section {
+    padding: 3rem 1rem;
+  }
+
+  .about-intro__text {
+    font-size: clamp(1.1rem, 5.5vw, 1.6rem);
+  }
+
+  .about-intro__dot-bg {
+    background-size: 16px 16px;
+  }
+
+  .about-intro__marquee-track {
+    gap: 1.5rem;
+  }
+
+  .about-intro__marquee-item {
+    font-size: 0.65rem;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+====================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .about-intro__text {
+    color: var(--color-offwhite);
+  }
+
+  .about-intro__marquee-track {
+    animation-play-state: paused;
+  }
+}

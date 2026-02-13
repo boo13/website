@@ -6,9 +6,13 @@ function init() {
   const cleanupFeaturedWork = initFeaturedWork();
 
   // Cleanup on page unload
-  window.addEventListener('pagehide', () => {
-    if (typeof cleanupFeaturedWork === 'function') cleanupFeaturedWork();
-  }, { once: true });
+  window.addEventListener(
+    'pagehide',
+    () => {
+      if (typeof cleanupFeaturedWork === 'function') cleanupFeaturedWork();
+    },
+    { once: true }
+  );
 }
 
 if (document.readyState === 'loading') {

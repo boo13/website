@@ -38,7 +38,7 @@ export class ResponsiveVideo {
 
     const currentSrcPath = new URL(
       this.source.getAttribute('src') || this.source.src,
-      window.location.href,
+      window.location.href
     ).pathname;
     const nextSrcPath = new URL(newSrc, window.location.href).pathname;
     if (currentSrcPath === nextSrcPath) return;
@@ -46,13 +46,10 @@ export class ResponsiveVideo {
     this.source.src = newSrc;
     this.video.load();
 
-    this.video.addEventListener(
-      'loadedmetadata',
-      function restorePlayback() {
-        this.currentTime = currentTime;
-        if (!wasPaused) this.play();
-        this.removeEventListener('loadedmetadata', restorePlayback);
-      },
-    );
+    this.video.addEventListener('loadedmetadata', function restorePlayback() {
+      this.currentTime = currentTime;
+      if (!wasPaused) this.play();
+      this.removeEventListener('loadedmetadata', restorePlayback);
+    });
   }
 }

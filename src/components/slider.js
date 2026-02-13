@@ -22,7 +22,7 @@ export class Slider {
 
     CustomEase.create(
       'hop',
-      'M0,0 C0.071,0.505 0.192,0.726 0.318,0.852 0.45,0.984 0.504,1 1,1',
+      'M0,0 C0.071,0.505 0.192,0.726 0.318,0.852 0.45,0.984 0.504,1 1,1'
     );
 
     this.initEvents();
@@ -86,7 +86,7 @@ export class Slider {
         clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
         duration: 1.5,
         ease: 'hop',
-      },
+      }
     );
     gsap.to(slideImgElem, {
       x: 0,
