@@ -75,4 +75,4 @@ Videos are hosted on a Cloudflare R2 bucket (`portfolio-assets`) and served via 
 - playwright-cli > playwright-mcp - [Playwright CLI vs MCP - a new tool for your coding agent](https://youtu.be/Be0ceKN81S8?si=04om80p0jWT96KDO)
 - Footer design/transition - [1820Productions](https://www.1820productions.com/)
 - Screensaver animation - [JasonBergh](https://www.JasonBergh.com/)
-- About text section - [redomedia](https://redomedia.co/)
+- Cursor effect - [Sileent](https://www.sileent.com/)

@@ -77,6 +77,14 @@ function init() {
   );
 }
 
+// Grid overlay toggle (Ctrl+G / Cmd+G)
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'g') {
+    e.preventDefault();
+    document.body.classList.toggle('show-grid');
+  }
+});
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
