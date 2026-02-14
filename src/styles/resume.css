@@ -1,15 +1,20 @@
 :root {
   color-scheme: dark;
-  --bg: #050505;
-  --text: #f6f6f6;
-  --muted: #9b9b9b;
-  --line: #1b1b1b;
+  --bg: oklch(0.115 0 0);
+  --text: oklch(0.97 0 0);
+  --muted: oklch(0.68 0 0);
+  --line: oklch(0.21 0 0);
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html {
+  background: #050505;
+  color: #f6f6f6;
 }
 
 body {
@@ -59,7 +64,7 @@ main {
 }
 
 .hero-title {
-  color: #ababab;
+  color: oklch(0.741 0 0);
 }
 
 .hero-link {
@@ -168,7 +173,7 @@ main {
 .experience-meta p {
   margin: 2px 0;
   font-size: 15px;
-  color: #cfcfcf;
+  color: oklch(0.855 0 0);
 }
 
 .experience-meta p:first-of-type {
@@ -256,7 +261,7 @@ main {
 }
 
 .credits-list li:hover strong {
-  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-decoration-color: oklch(1 0 0 / 0.4);
 }
 
 .hover-preview {
@@ -274,8 +279,8 @@ main {
     opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
+    0 25px 50px -12px oklch(0 0 0 / 0.6),
+    0 0 0 1px oklch(1 0 0 / 0.08);
 }
 
 .hover-preview.active {
@@ -292,7 +297,7 @@ main {
 .credits-list strong {
   display: block;
   font-size: 15px;
-  color: #fff;
+  color: oklch(1 0 0);
 }
 
 .credits-list span {

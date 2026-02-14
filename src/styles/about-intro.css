@@ -32,7 +32,7 @@
   inset: 0;
   background-image: radial-gradient(
     circle,
-    rgba(247, 244, 240, 0.5) 1px,
+    oklch(0.968 0.006 75 / 0.5) 1px,
     transparent 1px
   );
   background-size: 24px 24px;
@@ -104,7 +104,7 @@
   font-family: var(--ff-body, 'Inter', sans-serif);
   font-size: clamp(0.7rem, 1.2vw, 0.9rem);
   font-weight: 400;
-  color: rgba(247, 244, 240, 0.35);
+  color: oklch(0.968 0.006 75 / 0.35);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   flex-shrink: 0;

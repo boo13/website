@@ -5,14 +5,14 @@
 
 /* Dark backdrop */
 .glight-container .goverlay {
-  background: rgba(10, 10, 10, 0.95) !important;
+  background: oklch(0.14 0 0 / 0.95) !important;
 }
 
 /* Close button styling */
 .glight-container .gclose,
 .glight-container .gnext,
 .glight-container .gprev {
-  color: var(--color-offwhite, #f7f4f0) !important;
+  color: var(--color-offwhite, oklch(0.968 0.006 75)) !important;
   opacity: 0.8;
   transition: opacity 0.3s ease;
 }
@@ -31,17 +31,17 @@
 
 /* Title and description text */
 .glight-container .gdesc-inner {
-  color: var(--color-offwhite, #f7f4f0);
+  color: var(--color-offwhite, oklch(0.968 0.006 75));
 }
 
 .glight-container .gslide-title {
-  color: var(--color-offwhite, #f7f4f0);
+  color: var(--color-offwhite, oklch(0.968 0.006 75));
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
 .glight-container .gslide-description {
-  color: rgba(247, 244, 240, 0.8);
+  color: oklch(0.968 0.006 75 / 0.8);
   font-size: 0.95rem;
 }
 

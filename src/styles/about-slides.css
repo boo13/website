@@ -25,7 +25,7 @@
   justify-content: center;
   overflow: hidden;
   padding: 2rem;
-  background: #0a0a0a;
+  background: oklch(0.14 0 0);
 }
 
 /* Modern viewport units with fallback */
@@ -44,7 +44,7 @@
 .slide-intro.handwritten {
   font-family: 'felt-tip-senior', 'Segoe Script', cursive;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
-  color: rgba(247, 244, 240, 0.85);
+  color: oklch(0.968 0.006 75 / 0.85);
   margin-bottom: 1rem;
   font-weight: 400;
   line-height: 1.2;
@@ -126,8 +126,8 @@
   z-index: 1;
   background: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0.25) 35%,
+    oklch(0 0 0 / 0.65) 0%,
+    oklch(0 0 0 / 0.25) 35%,
     transparent 60%
   );
   pointer-events: none;
@@ -142,7 +142,7 @@
   background: radial-gradient(
     ellipse at 66% 50%,
     transparent 25%,
-    rgba(0, 0, 0, 0.3) 80%
+    oklch(0 0 0 / 0.3) 80%
   );
   pointer-events: none;
 }
@@ -163,7 +163,7 @@
 
 .slide-goes-big .grid-item {
   overflow: hidden;
-  background: #1a1a1a;
+  background: oklch(0.20 0 0);
   content-visibility: auto;
 }
 
@@ -284,7 +284,7 @@
   top: 0;
   background: linear-gradient(
     to bottom,
-    rgba(10, 10, 10, 0.7) 0%,
+    oklch(0.14 0 0 / 0.7) 0%,
     transparent 100%
   );
 }
@@ -293,7 +293,7 @@
   bottom: 0;
   background: linear-gradient(
     to top,
-    rgba(10, 10, 10, 0.7) 0%,
+    oklch(0.14 0 0 / 0.7) 0%,
     transparent 100%
   );
 }
@@ -305,8 +305,8 @@
   border-radius: 11% / 5.5%;
   /* Front-layer phones get a stronger shadow; behind-layer overridden below */
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.55),
-    0 2px 6px rgba(0, 0, 0, 0.3);
+    0 8px 24px oklch(0 0 0 / 0.55),
+    0 2px 6px oklch(0 0 0 / 0.3);
 }
 
 .phone-frame-img {
@@ -333,16 +333,16 @@
 /* Depth shadows — behind phones get a softer, more diffuse shadow */
 .phone-mockup.phone-behind {
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.35),
-    0 1px 4px rgba(0, 0, 0, 0.2);
+    0 4px 16px oklch(0 0 0 / 0.35),
+    0 1px 4px oklch(0 0 0 / 0.2);
 }
 
 /* Large phone gets a stronger shadow + subtle warm glow for presence */
 .phone-mockup.phone-lg {
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.6),
-    0 4px 12px rgba(0, 0, 0, 0.4),
-    0 0 60px rgba(255, 200, 120, 0.06);
+    0 12px 40px oklch(0 0 0 / 0.6),
+    0 4px 12px oklch(0 0 0 / 0.4),
+    0 0 60px oklch(0.865 0.116 76 / 0.06);
 }
 
 /* Phone sizes — scale with viewport, no restrictive caps */

@@ -7,12 +7,12 @@
    CSS VARIABLES
 ====================================================== */
 :root {
-  /* Colors */
-  --color-offwhite: #f7f4f0;
-  --color-cream: #e8e3dc;
-  --color-nearblack: #0a0a0a;
-  --color-charcoal: #1a1a1a;
-  --color-gray: #666;
+  /* Colors (OKLCH) */
+  --color-offwhite: oklch(0.968 0.006 75);
+  --color-cream: oklch(0.918 0.011 77);
+  --color-nearblack: oklch(0.14 0 0);
+  --color-charcoal: oklch(0.20 0 0);
+  --color-gray: oklch(0.51 0 0);
 
   /* Typography */
   --ff-display: 'ivypresto-display', Georgia, serif;
@@ -42,6 +42,7 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  color: #f7f4f0;
 }
 
 body {
@@ -126,7 +127,7 @@ a {
   line-height: 1.1;
   color: var(--color-offwhite);
   margin-bottom: 1.5rem;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 20px oklch(0 0 0 / 0.8);
 }
 
 .parallax-text .quotes {
@@ -139,15 +140,15 @@ a {
 .parallax-text .quote {
   font-size: clamp(1rem, 2vw, 1.5rem);
   font-style: italic;
-  color: rgba(232, 227, 220, 0.9);
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+  color: oklch(0.918 0.011 77 / 0.9);
+  text-shadow: 0 1px 10px oklch(0 0 0 / 0.7);
 }
 
 .parallax-text .quote cite {
   display: block;
   font-style: normal;
   font-size: 0.85em;
-  color: rgba(232, 227, 220, 0.6);
+  color: oklch(0.918 0.011 77 / 0.6);
   margin-top: 0.25rem;
 }
 
@@ -165,8 +166,8 @@ a {
   height: 80%;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.6) 40%,
+    oklch(0 0 0 / 0.95) 0%,
+    oklch(0 0 0 / 0.6) 40%,
     transparent 100%
   );
 }
@@ -176,8 +177,8 @@ a {
   height: 50%;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
+    oklch(0 0 0 / 0.9) 0%,
+    oklch(0 0 0 / 0.4) 50%,
     transparent 100%
   );
 }

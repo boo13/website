@@ -3,6 +3,7 @@ body {
   padding: 0;
   min-height: 100vh;
   background-color: black;
+  background-color: oklch(0 0 0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,18 +43,18 @@ body {
 #fs-frm input,
 #fs-frm select,
 #fs-frm textarea {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid oklch(0 0 0 / 0.2);
+  background-color: oklch(1 0 0 / 0.9);
   padding: 0.75em 1rem;
   margin-bottom: 1.5rem;
 }
 #fs-frm input:focus,
 #fs-frm select:focus,
 #fs-frm textarea:focus {
-  background-color: white;
+  background-color: oklch(1 0 0);
   outline-style: solid;
   outline-width: thin;
-  outline-color: gray;
+  outline-color: oklch(0.60 0 0);
   outline-offset: -1px;
 }
 
@@ -70,7 +71,7 @@ body {
 #fs-frm [type='button'][disabled],
 #fs-frm [type='submit'][disabled] {
   cursor: progress;
-  color: #888;
+  color: oklch(0.63 0 0);
 }
 
 #fs-frm [type='button']:focus,

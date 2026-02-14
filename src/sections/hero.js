@@ -68,7 +68,7 @@ export function initHero() {
       stagger: 0.12,
       yOffset: 30,
       colorTrail: {
-        colors: ['#00d4ff', '#ff3366'],
+        colors: ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'],
         blendMode: 'screen',
         staggerOffset: 0.15,
       },
@@ -317,7 +317,7 @@ export function initHero() {
       tl.to(
         gradient,
         {
-          background: 'rgba(0, 0, 0, 0.9)',
+          background: 'oklch(0 0 0 / 0.9)',
           duration: 0.7,
           ease: 'none',
         },

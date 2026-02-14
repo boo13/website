@@ -14,12 +14,12 @@
  *
  * @param {Element[]} words - Array of word elements from SplitText
  * @param {Object} [options]
- * @param {string[]} [options.colors=['#00d4ff','#ff3366']] - Trail colors
+ * @param {string[]} [options.colors=['oklch(0.804 0.146 220)','oklch(0.656 0.235 13)']] - Trail colors
  * @param {string} [options.blendMode='screen'] - CSS mix-blend-mode for clones
  * @returns {{ layers: { words: Element[], color: string }[], cleanup: Function }}
  */
 export function createColorTrailWords(words, options = {}) {
-  const { colors = ['#00d4ff', '#ff3366'], blendMode = 'screen' } = options;
+  const { colors = ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'], blendMode = 'screen' } = options;
 
   if (!words.length || !colors.length) {
     return { layers: [], cleanup() {} };

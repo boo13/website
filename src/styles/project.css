@@ -5,9 +5,9 @@
 
 /* --- Variables --- */
 :root {
-  --project-text: #f0f2f1;
-  --project-bg: #020202;
-  --project-bg-credits: #080808;
+  --project-text: oklch(0.959 0.003 165);
+  --project-bg: oklch(0.08 0 0);
+  --project-bg-credits: oklch(0.134 0 0);
   --project-font-body:
     aktiv-grotesk, -apple-system, BlinkMacSystemFont, sans-serif;
   --project-font-display: ivypresto-display, Georgia, serif;
@@ -24,6 +24,7 @@
 
 html {
   scroll-behavior: smooth;
+  color: #f0f2f1;
 }
 
 body {
@@ -56,7 +57,7 @@ a {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: #000;
+  background: oklch(0 0 0);
 }
 
 .project-hero__player {
@@ -170,7 +171,7 @@ a {
   position: relative;
   width: 100%;
   height: 2px;
-  background: rgba(240, 242, 241, 0.25);
+  background: oklch(0.959 0.003 165 / 0.25);
   margin-bottom: 12px;
   cursor: pointer;
 }
@@ -335,7 +336,7 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 40px 21px;
-  border-top: 1px solid rgba(240, 242, 241, 0.15);
+  border-top: 1px solid oklch(0.959 0.003 165 / 0.15);
   max-width: 1600px;
   margin: 0 auto;
 }
@@ -376,7 +377,7 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 10px 24px;
-  border: 1px solid rgba(240, 242, 241, 0.4);
+  border: 1px solid oklch(0.959 0.003 165 / 0.4);
   transition:
     border-color 0.3s,
     opacity 0.3s;
