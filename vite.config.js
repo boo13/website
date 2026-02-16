@@ -29,6 +29,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
+        legacy: resolve(import.meta.dirname, 'index-legacy.html'),
         index2: resolve(import.meta.dirname, 'index2.html'),
         contact: resolve(import.meta.dirname, 'contact.html'),
         resume: resolve(import.meta.dirname, 'resume.html'),

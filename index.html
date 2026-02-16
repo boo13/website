@@ -1,15 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Randy Counsman</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Randy Counsman is a documentary producer specializing in nonfiction content across television, streaming, and digital media.">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randy Counsman - Nonfiction Video Development & Production</title>
+    <meta name="description" content="Randy Counsman is a video producer and Creative Director specializing in nonfiction content across television, streaming, news, and social.">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/LandingPageMontagev04.2.webm" as="video" type="video/webm" crossorigin>
 
     <!-- Critical inline styles to prevent white flash -->
     <style>
       html, body {
-        background: #232323;
+        background: #0a0a0a;
         margin: 0;
         padding: 0;
       }
@@ -17,14 +20,11 @@
       /* Preloader - ensures dark background immediately */
       .loading-overlay {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        inset: 0;
         background-color: rgba(0, 0, 0, 0.8);
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         z-index: 10000;
         opacity: 1;
         transition: opacity 0.6s ease;
@@ -111,145 +111,797 @@
       }
     </style>
 
-    <!-- Styles injected by Vite from src/main-index.js -->
-    <link rel="stylesheet" href="https://use.typekit.net/gya6int.css" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="favicon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="favicon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="favicon/site.webmanifest" />
-  </head>
-  <body>
+    <!-- Typekit Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css">
+    <link rel="stylesheet" href="https://use.typekit.net/gya6int.css">
+
+    <!-- Styles injected by Vite from src/main.js -->
+</head>
+<body>
+    <div class="bg-columns" aria-hidden="true">
+        <div class="bg-columns-col"></div>
+        <div class="bg-columns-col"></div>
+        <div class="bg-columns-col"></div>
+        <div class="bg-columns-col"></div>
+        <div class="bg-columns-col"></div>
+        <div class="bg-columns-col"></div>
+    </div>
+
+    <!-- Loading overlay -->
     <div class="loading-overlay">
-      <div class="preloader-wrapper">
-        <div class="preloader-edges">
-          <div class="preloader-time">00:06:00</div>
-          <div class="preloader-corner preloader-corner-lt"></div>
-          <div class="preloader-corner preloader-corner-lb"></div>
-          <div class="preloader-corner preloader-corner-rt"></div>
-          <div class="preloader-corner preloader-corner-rb"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="snap-sections">
-      <section class="snap-section" id="home">
-        <video autoplay loop muted playsinline crossorigin poster="images/landing-poster.jpg">
-          <source
-            src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/LandingPageMontagev04.2.webm"
-            type="video/webm"
-          />
-          <p>
-            Your browser does not support the video tag. Please try a different
-            browser or check the video file.
-          </p>
-        </video>
-        <div class="landing-container fade-up">
-          <h1 class="landing-title">Randy Counsman</h1>
-          <p class="landing-subtitle">Documentary Producer</p>
-          <div class="landing-icons">
-            <a
-              href="https://www.linkedin.com/in/randycounsman/"
-              target="_blank"
-              aria-label="LinkedIn"
-            >
-              <img
-                src="images/icons/linkedin-svgrepo-com.svg"
-                width="28"
-                height="28"
-                alt="LinkedIn"
-              />
-            </a>
-            <a
-              href="https://vimeo.com/randycounsman"
-              target="_blank"
-              aria-label="Vimeo"
-            >
-              <img
-                src="images/icons/vimeo-svgrepo-com.svg"
-                width="28"
-                height="28"
-                alt="Vimeo"
-              />
-            </a>
-            <a href="contact.html" target="_blank" aria-label="Email">
-              <img
-                src="images/icons/email-svgrepo-com.svg"
-                width="28"
-                height="28"
-                alt="Email"
-              />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- <section class="snap-section" id="about"><h1>About</h1></section> -->
-      <!-- <section class="snap-section" id="work">
-        <div class="slider">
-              <div class="slider-images">
-                <div class="img"><img src="./images/portfolio-1.jpg" alt="" /></div>
-              </div>
-              <div class="slider-title">
-                <div class="slider-title-wrapper">
-                  <p>Wyatt Earp and the Cowboy War</p>
-                  <p>Sons of Liberty</p>
-                  <p>The Making of the Mob</p>
-                  <p>Pope</p>
-                  <p>The Men Who Built America</p>
-                </div>
-              </div>
-              <div class="slider-info"><p>Select Work</p></div>
-              <div class="slider-counter">
-                <div class="counter">
-                  <p>1</p>
-                  <p>2</p>
-                  <p>3</p>
-                  <p>4</p>
-                  <p>5</p>
-                </div>
-                <div><p>&mdash;</p></div>
-                <div><p>5</p></div>
-              </div>
-              <div class="slider-preview">
-                <div class="preview active"><img src="./images/portfolio-1.jpg" alt=""></div>
-                <div class="preview"><img src="./images/portfolio-2.jpg" alt=""></div>
-                <div class="preview"><img src="./images/portfolio-3.jpg" alt=""></div>
-                <div class="preview"><img src="./images/portfolio-4.jpg" alt=""></div>
-                <div class="preview"><img src="./images/portfolio-5.jpg" alt=""></div>
-              </div>
-              <div class="slider-indicators">
-                <p>+</p>
-                <p>+</p>
-              </div>
+        <div class="preloader-wrapper">
+            <div class="preloader-edges">
+                <div class="preloader-time">00:06:00</div>
+                <div class="preloader-corner preloader-corner-lt"></div>
+                <div class="preloader-corner preloader-corner-lb"></div>
+                <div class="preloader-corner preloader-corner-rt"></div>
+                <div class="preloader-corner preloader-corner-rb"></div>
             </div>
-      </section> -->
-      <!-- <section class="snap-section" id="contact">
-        <video autoplay loop muted playsinline>
-          <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Beyond.the.Spotlight.10secReel.v01_1920x1080.webm" type="video/webm" />
-          <p>Your browser does not support the video tag. Please try a different browser or check the video file.</p>
-        </video>
-        <div class="landing-container fade-up">
-          <h1 class="landing-title">Contact</h1>
         </div>
-      </section> -->
     </div>
 
-    <footer></footer>
+    <!-- Fixed-position elements must stay outside ScrollSmoother wrapper -->
+    <div class="cursor-preview">
+        <img src="" alt="">
+    </div>
+    <div class="gallery-progress">
+        <span class="progress-current">1</span>
+        <span class="progress-divider">/</span>
+        <span class="progress-total">5</span>
+    </div>
+    <div class="hero-fixed-name-container" aria-hidden="true">
+        <h1 id="hero-name-fixed" class="hero-name hero-name-fixed">Randy Counsman</h1>
+    </div>
+    <p id="hero-subtitle-fixed" class="hero-subtitle-fixed" aria-hidden="true">Nonfiction Video Development &amp; Production</p>
+    <div id="hero-social-fixed" class="hero-social-fixed" aria-hidden="true">
+        <a href="https://www.linkedin.com/in/randycounsman/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+        </a>
+        <a href="https://vimeo.com/randycounsman" target="_blank" rel="noopener" class="social-icon" aria-label="Vimeo">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                <path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 8.816 3.834 7.522 3.01 7.522c-.179 0-.806.378-1.881 1.132L0 7.197c1.185-1.044 2.351-2.084 3.501-3.128C5.08 2.701 6.266 1.984 7.055 1.91c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.614-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.493 4.797l-.013.01z"/>
+            </svg>
+        </a>
+        <a href="mailto:RandyCounsman@gmail.com" class="social-icon" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+        </a>
+    </div>
 
-    <script type="module" src="/src/main-index.js"></script>
-  </body>
+    <div id="smooth-wrapper">
+    <div id="smooth-content">
+
+    <!-- =====================================================
+         SECTION 1: HERO
+         Z-depth zoom transition over looping montage video
+         Pinned until threshold, then z-translates backward
+    ====================================================== -->
+    <section id="hero" class="hero-section">
+        <div class="hero-video-container">
+            <video
+                class="hero-video"
+                autoplay
+                loop
+                muted
+                playsinline
+                crossorigin
+                poster="images/1x1black.jpg"
+            >
+                <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/LandingPageMontagev04.2.webm" type="video/webm">
+            </video>
+            <div class="hero-gradient"></div>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-name">Randy Counsman</h1>
+            <p class="hero-subtitle">Nonfiction Video Development & Production</p>
+
+            <div class="hero-social">
+                <a href="https://www.linkedin.com/in/randycounsman/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                <a href="https://vimeo.com/randycounsman" target="_blank" rel="noopener" class="social-icon" aria-label="Vimeo">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M23.977 6.416c-.105 2.338-1.739 5.543-4.894 9.609-3.268 4.247-6.026 6.37-8.29 6.37-1.409 0-2.578-1.294-3.553-3.881L5.322 11.4C4.603 8.816 3.834 7.522 3.01 7.522c-.179 0-.806.378-1.881 1.132L0 7.197c1.185-1.044 2.351-2.084 3.501-3.128C5.08 2.701 6.266 1.984 7.055 1.91c1.867-.18 3.016 1.1 3.447 3.838.465 2.953.789 4.789.971 5.507.539 2.45 1.131 3.674 1.776 3.674.502 0 1.256-.796 2.265-2.385 1.004-1.589 1.54-2.797 1.612-3.628.144-1.371-.395-2.061-1.614-2.061-.574 0-1.167.121-1.777.391 1.186-3.868 3.434-5.757 6.762-5.637 2.473.06 3.628 1.664 3.493 4.797l-.013.01z"/>
+                    </svg>
+                </a>
+                <a href="mailto:RandyCounsman@gmail.com" class="social-icon" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: ABOUT INTRO
+         Scroll-to-fill text + dot background + client marquee
+    ====================================================== -->
+    <section class="about-intro-section">
+        <div class="about-intro__dot-bg" aria-hidden="true"></div>
+        <div class="about-intro__content">
+            <p class="about-intro__text">
+                A creative leader in nonfiction storytelling, crafting
+                narratives across television, streaming, and digital
+                platforms.
+            </p>
+        </div>
+        <div class="about-intro__marquee">
+            <div class="about-intro__marquee-track">
+                <span class="about-intro__marquee-item">Netflix</span>
+                <span class="about-intro__marquee-item">History</span>
+                <span class="about-intro__marquee-item">PBS</span>
+                <span class="about-intro__marquee-item">AMC</span>
+                <span class="about-intro__marquee-item">Amazon</span>
+                <span class="about-intro__marquee-item">Nat Geo</span>
+                <span class="about-intro__marquee-item">Hilton</span>
+                <span class="about-intro__marquee-item">Discovery</span>
+                <span class="about-intro__marquee-item">CNN</span>
+                <span class="about-intro__marquee-item">CNBC</span>
+                <span class="about-intro__marquee-item">Fox</span>
+                <span class="about-intro__marquee-item">NASCAR</span>
+                <!-- Duplicate for seamless CSS loop -->
+                <span class="about-intro__marquee-item">Netflix</span>
+                <span class="about-intro__marquee-item">History</span>
+                <span class="about-intro__marquee-item">PBS</span>
+                <span class="about-intro__marquee-item">AMC</span>
+                <span class="about-intro__marquee-item">Amazon</span>
+                <span class="about-intro__marquee-item">Nat Geo</span>
+                <span class="about-intro__marquee-item">Hilton</span>
+                <span class="about-intro__marquee-item">Discovery</span>
+                <span class="about-intro__marquee-item">CNN</span>
+                <span class="about-intro__marquee-item">CNBC</span>
+                <span class="about-intro__marquee-item">Fox</span>
+                <span class="about-intro__marquee-item">NASCAR</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION: ABOUT SLIDES
+         Full-viewport scroll-driven narrative slides
+         Slide 1: "Goes BIG" grid zoom  |  Slide 2: "In your hand" phones
+    ====================================================== -->
+    <section class="about-slides-section">
+
+        <!-- Slides 2+3 wrapper: pinned as one continuous sequence -->
+        <div class="slide-transition-wrapper">
+
+        <!-- Slide 2: "Storytelling that goes BIG" -->
+        <div class="about-slide slide-goes-big">
+            <div class="slide-bg">
+                <!-- Background: grid of images, initially zoomed into center -->
+                <div class="grid-container">
+                    <!-- 7x7 grid (49 cells). Hero video at center (cell 25, grid-column:4 grid-row:4) -->
+                    <!-- Row 1 -->
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/AmericanGenius_clip_bullet_cgi.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/BeyondSpotlight_clip_SamuelLJackson.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/AmericanGenius_clip_camera_colt.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/BeyondSpotlight_clip_SamuelLJackson02.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/AmericanGenius_clip_colt_wife.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/BeyondSpotlight_clip_SamuelLJackson.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/AmericanGenius_clip_jobs_design.jpg" alt="" loading="lazy">
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/BeyondSpotlight_clip_SamuelLJackson02.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_jobs_garage_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_jobs_garage_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/BeyondSpotlight_clip_SamuelLJackson_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/BeyondSpotlight_clip_SamuelLJackson_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_young_gates_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_young_gates_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/BeyondSpotlight_clip_SamuelLJackson02_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/BeyondSpotlight_clip_SamuelLJackson02_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_bullet_cgi_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_bullet_cgi_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/Capsized_clip_capsizing_wave.jpg" alt="" loading="lazy">
+                    </div>
+                    <!-- Row 3 -->
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/AmericanGenius_clip_camera_colt.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_capsizing_wave_1_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_capsizing_wave_1_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_colt_wife_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_colt_wife_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_duhamel_radio_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_duhamel_radio_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_jobs_design_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_jobs_design_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_underwater_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_underwater_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/AmericanGenius_clip_jobs_garage.jpg" alt="" loading="lazy">
+                    </div>
+                    <!-- Row 4 -->
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/Capsized_clip_capsizing_wave.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_young_gates_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/AmericanGenius_clip_young_gates_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_capsizing_wave_1_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_capsizing_wave_1_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item grid-hero">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/portfolio/MWBA.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/MWBA_Protest_CraneShot.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/MWBA_Protest_CraneShot.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_duhamel_radio_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Capsized_clip_duhamel_radio_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_gun_dolly_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_gun_dolly_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/Capsized_clip_underwater.jpg" alt="" loading="lazy">
+                    </div>
+                    <!-- Row 5 -->
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/CowboyWar_clip_slow_strut03.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_caravan_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_caravan_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_slowmo_strut01_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_slowmo_strut01_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_printing_press_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_printing_press_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_slowmo_strut02_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_slowmo_strut02_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_sutter_gold_find_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_sutter_gold_find_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/CowboyWar_clip_body_in_town.jpg" alt="" loading="lazy">
+                    </div>
+                    <!-- Row 6 -->
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/GoldFever_clip_caravan.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_gun_dolly_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_gun_dolly_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_printing_press_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_printing_press_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_slow_strut03_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_slow_strut03_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_sutter_gold_find_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/GoldFever_clip_sutter_gold_find_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item">
+                        <video loop muted playsinline crossorigin preload="none" poster="images/1x1black.jpg">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_slowmo_strut01_360p.webm" type="video/webm">
+                            <source data-src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/CowboyWar_clip_slowmo_strut01_360p.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/MrChristmas_clip_house_reveal01.jpg" alt="" loading="lazy">
+                    </div>
+                    <!-- Row 7 -->
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/CowboyWar_clip_slowmo_strut02.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/MrChristmas_clip_house_reveal01.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/MWBA_clip_Rockefeller_court.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/MrChristmas_clip_house_reveal01.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/MWBA_clip_Rockefeller_court.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/MrChristmas_clip_house_reveal01.jpg" alt="" loading="lazy">
+                    </div>
+                    <div class="grid-item grid-outer">
+                        <img src="images/grid-posters/MWBA_clip_Rockefeller_court.jpg" alt="" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            <div class="slide-content">
+                <p class="slide-intro handwritten">Sometimes</p>
+                <h2 class="slide-headline">the stories I<br>tell are <em>EPIC</em>...</h2>
+            </div>
+        </div>
+
+        <!-- Slide 3: "Storytelling that fits in your hand" -->
+        <div class="about-slide slide-in-your-hand">
+            <div class="slide-content">
+                <p class="slide-intro handwritten">Sometimes</p>
+                <h2 class="slide-headline"><span class="headline-over">the stories</span><span class="headline-under">fit in your hand...</span></h2>
+            </div>
+            <div class="phone-mockups">
+                <div class="phone-mockup phone-sm phone-1">
+                    <video class="phone-video" muted loop playsinline crossorigin preload="none">
+                        <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/upnext_chart_bitcoin_11.17.mp4" type="video/mp4">
+                    </video>
+                    <img class="phone-frame-img" src="images/iphone_mockups/iphone14_silver.png" alt="" draggable="false">
+                </div>
+                <div class="phone-mockup phone-sm phone-2">
+                    <video class="phone-video" muted loop playsinline crossorigin preload="none">
+                        <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/upnext_send11.17.mp4" type="video/mp4">
+                    </video>
+                    <img class="phone-frame-img" src="images/iphone_mockups/iphone14_silver.png" alt="" draggable="false">
+                </div>
+                <div class="phone-mockup phone-sm phone-3">
+                    <video class="phone-video" muted loop playsinline crossorigin preload="none">
+                        <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/upnext_notes_11.18.mp4" type="video/mp4">
+                    </video>
+                    <img class="phone-frame-img" src="images/iphone_mockups/iphone14_silver.png" alt="" draggable="false">
+                </div>
+                <div class="phone-mockup phone-sm phone-5">
+                    <video class="phone-video" muted loop playsinline crossorigin preload="none">
+                        <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/upnext_cover_11.20_explained.mp4" type="video/mp4">
+                    </video>
+                    <img class="phone-frame-img" src="images/iphone_mockups/iphone14_silver.png" alt="" draggable="false">
+                </div>
+                <div class="phone-mockup phone-sm phone-6">
+                    <video class="phone-video" muted loop playsinline crossorigin preload="none">
+                        <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/upnext_send11.17.mp4" type="video/mp4">
+                    </video>
+                    <img class="phone-frame-img" src="images/iphone_mockups/iphone14_silver.png" alt="" draggable="false">
+                </div>
+                <div class="phone-mockup phone-lg phone-4">
+                    <video class="phone-video" muted loop playsinline crossorigin preload="none">
+                        <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/upnext_wh_gala_11.19.mp4" type="video/mp4">
+                    </video>
+                    <img class="phone-frame-img" src="images/iphone_mockups/iphone14_silver.png" alt="" draggable="false">
+                </div>
+            </div>
+        </div>
+
+        </div><!-- /.slide-transition-wrapper -->
+
+    </section>
+
+    <!-- =====================================================
+         SECTION 2: FEATURED WORKS GALLERY
+         Horizontal scroll triggered by vertical scroll
+         Card size: ~60vw width, 70vh height
+    ====================================================== -->
+    <section id="work" class="featured-work-section">
+        <div class="gallery-container">
+            <div class="gallery-track">
+                <!-- Card 1: Wyatt Earp and the Cowboy War -->
+                <article
+                    class="gallery-card glightbox-video"
+                    data-project="wyatt-earp"
+                    data-glightbox="type: video"
+                    data-title="Wyatt Earp and the Cowboy War"
+                    data-description="Co-Executive Producer, 2024"
+                    data-href="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Cowboy.War.10secReel.v01_1920x1080.webm"
+                >
+                    <div class="card-media">
+                        <img
+                            class="card-thumbnail"
+                            src="images/portfolio/WyattEarp.jpg"
+                            alt="Wyatt Earp and the Cowboy War"
+                            loading="lazy"
+                        >
+                        <video
+                            class="card-video"
+                            muted
+                            loop
+                            playsinline
+                            crossorigin
+                            preload="none"
+                        >
+                            <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Cowboy.War.10secReel.v01_1920x1080.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div class="card-content">
+                        <img
+                            class="card-network"
+                            src="images/logos/Netflix_white2.png"
+                            alt="Netflix"
+                        >
+                        <h3 class="card-title">Wyatt Earp and the Cowboy War</h3>
+                        <p class="card-role">Co-Executive Producer</p>
+                        <span class="card-year">2024</span>
+                    </div>
+                </article>
+
+                <!-- Card 2: upNEXT News -->
+                <article class="gallery-card" data-project="upnext-news" data-no-video>
+                    <div class="card-media card-media--placeholder">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">upNEXT News</h3>
+                        <p class="card-role">Creative Director</p>
+                        <span class="card-year">2026</span>
+                    </div>
+                </article>
+
+                <!-- Card 3: Sitting Bull -->
+                <article
+                    class="gallery-card glightbox-video"
+                    data-project="sitting-bull"
+                    data-glightbox="type: video"
+                    data-title="Sitting Bull"
+                    data-description="Co-Executive Producer / Writer, 2025"
+                    data-href="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/SittingBull_Teaser_Trailer.mp4"
+                >
+                    <div class="card-media">
+                        <img
+                            class="card-thumbnail"
+                            src="images/portfolio/sitting-bull.jpg"
+                            alt="Sitting Bull"
+                            loading="lazy"
+                        >
+                        <video
+                            class="card-video"
+                            muted
+                            loop
+                            playsinline
+                            crossorigin
+                            preload="none"
+                        >
+                            <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/SittingBull_10sClip01.webm" type="video/webm">
+                            <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/SittingBull_10sClip01.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="card-content">
+                        <img
+                            class="card-network"
+                            src="images/logos/History.png"
+                            alt="History Channel"
+                        >
+                        <h3 class="card-title">Sitting Bull</h3>
+                        <p class="card-role">Co-Executive Producer / Writer</p>
+                        <span class="card-year">2025</span>
+                    </div>
+                </article>
+
+                <!-- Card 4: The Men Who Built America -->
+                <article
+                    class="gallery-card glightbox-video"
+                    data-project="mwba"
+                    data-glightbox="type: video"
+                    data-title="The Men Who Built America"
+                    data-description="Writer, 2012"
+                    data-href="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/MWBA_Trailer_%28360p%29.mp4"
+                >
+                    <div class="card-media">
+                        <img
+                            class="card-thumbnail"
+                            src="images/portfolio/MWBA.jpg"
+                            alt="The Men Who Built America"
+                            loading="lazy"
+                        >
+                        <video
+                            class="card-video"
+                            muted
+                            loop
+                            playsinline
+                            crossorigin
+                            preload="none"
+                        >
+                            <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/MWBA_Protest_CraneShot.webm" type="video/webm">
+                            <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/MWBA_Protest_CraneShot.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="card-content">
+                        <img
+                            class="card-network"
+                            src="images/logos/History.png"
+                            alt="History Channel"
+                        >
+                        <h3 class="card-title">The Men Who Built America</h3>
+                        <p class="card-role">Writer</p>
+                        <span class="card-year">2012</span>
+                    </div>
+                </article>
+
+                <!-- Card 5: Pope: The Most Powerful Man in History -->
+                <article class="gallery-card" data-project="pope" data-no-video>
+                    <div class="card-media">
+                        <img
+                            class="card-thumbnail"
+                            src="images/portfolio/Pope.jpg"
+                            alt="Pope: The Most Powerful Man in History"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="card-content">
+                        <img
+                            class="card-network"
+                            src="images/logos/CNN_logo_red.svg"
+                            alt="CNN"
+                        >
+                        <h3 class="card-title">Pope: The Most Powerful Man in History</h3>
+                        <p class="card-role">Writer</p>
+                        <span class="card-year">2018</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+         SECTION 3: ADDITIONAL CREDITS
+         Table layout with hover-preview interaction
+    ====================================================== -->
+    <section id="credits" class="credits-section">
+        <div class="container">
+            <h2 class="section-title">Additional Credits</h2>
+
+            <table class="credits-table">
+                <tbody>
+                    <tr><td colspan="2">Loading credits...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+         SECTION: CALL TO ACTION
+         Newsletter signup + contact link
+    ====================================================== -->
+    <section id="cta" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-heading">Stay in the loop</h2>
+                <p class="cta-subtext">Get occasional updates on new projects and productions.</p>
+
+                <form
+                    action="https://buttondown.com/api/emails/embed-subscribe/randycounsman"
+                    method="post"
+                    class="newsletter-form"
+                    target="_blank"
+                >
+                    <div class="newsletter-input-group">
+                        <label for="newsletter-email" class="sr-only">Email address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="newsletter-email"
+                            placeholder="your@email.com"
+                            required
+                            autocomplete="email"
+                        >
+                        <input type="hidden" name="embed" value="1">
+                        <button type="submit" class="newsletter-submit">Subscribe</button>
+                    </div>
+                </form>
+
+                <div class="cta-divider"></div>
+
+                <a href="contact.html" class="cta-contact-btn">
+                    Get in Touch
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 4: CLIENTS
+         Network logo marquee + resume CTA
+    ====================================================== -->
+    <section id="clients" class="clients-section">
+        <div class="container">
+            <!-- <div class="about-stats">
+                <div class="stat" data-stat="years">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat" data-stat="views">
+                    <span class="stat-number">20M+</span>
+                    <span class="stat-label">Views</span>
+                </div>
+                <div class="stat" data-stat="netflix">
+                    <span class="stat-number">Top 3</span>
+                    <span class="stat-label">Netflix</span>
+                </div>
+                <div class="stat" data-stat="emmy">
+                    <span class="stat-number">Emmy</span>
+                    <span class="stat-label">Nominated</span>
+                </div>
+            </div> -->
+            
+            <h2 class="clients-heading">Networks &amp; Brands<br>I've worked with...</h2>
+
+            <p class="clients-summary">
+                A createive team leader crafting narratives with audio and video. Telling true stories about business, tech, history, news, and the way the world works.
+            </p>
+
+            <div class="network-marquee">
+                <div class="marquee-track">
+                    <span class="marquee-item">Netflix</span>
+                    <span class="marquee-item">History</span>
+                    <span class="marquee-item">PBS</span>
+                    <span class="marquee-item">AMC</span>
+                    <span class="marquee-item">Amazon</span>
+                    <span class="marquee-item">Nat Geo</span>
+                    <span class="marquee-item">Discovery</span>
+                    <span class="marquee-item">CNN</span>
+                    <span class="marquee-item">CNBC</span>
+                    <span class="marquee-item">Fox Nation</span>
+                    <!-- Duplicate for seamless loop -->
+                    <span class="marquee-item">Netflix</span>
+                    <span class="marquee-item">History</span>
+                    <span class="marquee-item">PBS</span>
+                    <span class="marquee-item">AMC</span>
+                    <span class="marquee-item">Amazon</span>
+                    <span class="marquee-item">Nat Geo</span>
+                    <span class="marquee-item">Discovery</span>
+                    <span class="marquee-item">CNN</span>
+                    <span class="marquee-item">CNBC</span>
+                    <span class="marquee-item">Fox Nation</span>
+                </div>
+            </div>
+
+
+            <!-- <a href="resume.html" class="cta-link">
+                Full Resume
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </a> -->
+        </div>
+    </section>
+
+    <div class="footer-spacer"></div>
+    </div><!-- #smooth-content -->
+    </div><!-- #smooth-wrapper -->
+
+    <footer class="site-footer" id="site-footer">
+        <div class="footer-inner">
+            <!-- Top: Tagline left + Nav right -->
+            <div class="footer-top">
+                <p class="footer-tagline">Got a project? Let's make<br>something together.</p>
+                <nav class="footer-nav" aria-label="Footer navigation">
+                    <a href="#hero" class="footer-nav-link">Home</a>
+                    <a href="#work" class="footer-nav-link">Work</a>
+                    <a href="#credits" class="footer-nav-link">Credits</a>
+                    <a href="#clients" class="footer-nav-link">Clients</a>
+                    <a href="contact.html" class="footer-nav-link">Contact</a>
+                    <a href="resume.html" class="footer-nav-link footer-nav-link--external">Resume
+                        <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Middle: 3-column grid with lines above -->
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <span class="footer-col-label">Location</span>
+                    <p class="footer-col-text">New York, NY</p>
+                </div>
+                <div class="footer-col">
+                    <span class="footer-col-label">Get in Touch</span>
+                    <a href="contact.html" class="footer-col-link">Contact Form</a>
+                </div>
+                <div class="footer-col">
+                    <span class="footer-col-label">Socials</span>
+                    <a href="https://www.linkedin.com/in/randycounsman/" target="_blank" rel="noopener" class="footer-col-link">LinkedIn</a>
+                    <a href="https://vimeo.com/randycounsman" target="_blank" rel="noopener" class="footer-col-link">Vimeo</a>
+                </div>
+            </div>
+
+            <!-- Bottom: Copyright -->
+            <p class="footer-copyright">&copy; Randy Counsman, 2026</p>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
 </html>

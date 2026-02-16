@@ -6,8 +6,9 @@ Portfolio site for Randy Counsman, a nonfiction video producer. The site is heav
 
 The site is a multi-page static site. Each HTML file lives at the repo root:
 
-- **index2.html** — The primary portfolio page. Hero zoom, parallax rack-focus, horizontal scroll gallery, credits table, and stats section.
-- **index.html** — An alternate legacy version with a full-screen video and image slider.
+- **index.html** — The primary portfolio page. Hero zoom, parallax rack-focus, horizontal scroll gallery, credits table, and stats section.
+- **index-legacy.html** — Archived legacy version with a full-screen video and image slider.
+- **index2.html** — Temporary redirect shim to `/` for stale bookmarks.
 - **contact.html** — Contact form powered by Formspree.
 - **resume.html** — Printable resume layout built to match the site's typography.
 - **sandbox.html** — A GSAP demo playground for text animation timing/easing experiments.
@@ -18,8 +19,8 @@ The site uses [Vite](https://vite.dev/) for bundling and [GSAP](https://gsap.com
 
 ```
 src/
-  main.js                 # index2.html entry — imports all scroll sections
-  main-index.js           # index.html entry — Slider + ResponsiveVideo
+  main.js                 # index.html entry — imports all scroll sections
+  main-index.js           # index-legacy.html entry — Slider + ResponsiveVideo
   main-contact.js         # contact.html entry — form handler
   main-resume.js          # resume.html entry — typography + layout tweaks
   sections/               # one file per scroll section (hero, featured-work, gallery, credits, about)
@@ -51,7 +52,7 @@ Other commands:
 
 ## How the animations work
 
-Each section on the main page (index2.html) exports an `init` function that sets up its GSAP animations inside a `gsap.context()` scoped to that section's DOM element. The entry point (`src/main.js`) calls each init function on page load.
+Each section on the main page (index.html) exports an `init` function that sets up its GSAP animations inside a `gsap.context()` scoped to that section's DOM element. The entry point (`src/main.js`) calls each init function on page load.
 
 GSAP's ScrollTrigger plugin drives most of the effects — pinning sections, scrubbing timelines based on scroll position, and triggering horizontal movement in the gallery. All sections respect `prefers-reduced-motion` and fall back to static layouts on mobile.
 

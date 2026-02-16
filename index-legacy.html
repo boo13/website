@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Randy Counsman</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Randy Counsman is a documentary producer specializing in nonfiction content across television, streaming, and digital media.">
+
+    <!-- Critical inline styles to prevent white flash -->
+    <style>
+      html, body {
+        background: #232323;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Preloader - ensures dark background immediately */
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        opacity: 1;
+        transition: opacity 0.6s ease;
+      }
+
+      .loading-overlay.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .preloader-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .preloader-edges {
+        position: relative;
+        width: 96px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        will-change: width, height, transform, opacity;
+      }
+
+      .preloader-time {
+        font-family: Arial, sans-serif;
+        color: #f0f2f1;
+        font-size: 14px;
+        z-index: 2;
+      }
+
+      .preloader-corner {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+      }
+
+      .preloader-corner::before,
+      .preloader-corner::after {
+        content: '';
+        position: absolute;
+        background: #f0f2f1;
+      }
+
+      .preloader-corner::before {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+      }
+
+      .preloader-corner::after {
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 100%;
+      }
+
+      .preloader-corner-lt { top: 0; left: 0; }
+      .preloader-corner-lb { bottom: 0; left: 0; transform: scaleY(-1); }
+      .preloader-corner-rt { top: 0; right: 0; transform: scaleX(-1); }
+      .preloader-corner-rb { bottom: 0; right: 0; transform: scale(-1); }
+
+      @media (max-width: 480px) {
+        .preloader-edges {
+          width: 64px;
+          height: 36px;
+        }
+
+        .preloader-corner {
+          width: 14px;
+          height: 14px;
+        }
+
+        .preloader-time {
+          font-size: 12px;
+        }
+      }
+    </style>
+
+    <!-- Styles injected by Vite from src/main-index.js -->
+    <link rel="stylesheet" href="https://use.typekit.net/gya6int.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+  </head>
+  <body>
+    <div class="loading-overlay">
+      <div class="preloader-wrapper">
+        <div class="preloader-edges">
+          <div class="preloader-time">00:06:00</div>
+          <div class="preloader-corner preloader-corner-lt"></div>
+          <div class="preloader-corner preloader-corner-lb"></div>
+          <div class="preloader-corner preloader-corner-rt"></div>
+          <div class="preloader-corner preloader-corner-rb"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="snap-sections">
+      <section class="snap-section" id="home">
+        <video autoplay loop muted playsinline crossorigin poster="images/landing-poster.jpg">
+          <source
+            src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/LandingPageMontagev04.2.webm"
+            type="video/webm"
+          />
+          <p>
+            Your browser does not support the video tag. Please try a different
+            browser or check the video file.
+          </p>
+        </video>
+        <div class="landing-container fade-up">
+          <h1 class="landing-title">Randy Counsman</h1>
+          <p class="landing-subtitle">Documentary Producer</p>
+          <div class="landing-icons">
+            <a
+              href="https://www.linkedin.com/in/randycounsman/"
+              target="_blank"
+              aria-label="LinkedIn"
+            >
+              <img
+                src="images/icons/linkedin-svgrepo-com.svg"
+                width="28"
+                height="28"
+                alt="LinkedIn"
+              />
+            </a>
+            <a
+              href="https://vimeo.com/randycounsman"
+              target="_blank"
+              aria-label="Vimeo"
+            >
+              <img
+                src="images/icons/vimeo-svgrepo-com.svg"
+                width="28"
+                height="28"
+                alt="Vimeo"
+              />
+            </a>
+            <a href="contact.html" target="_blank" aria-label="Email">
+              <img
+                src="images/icons/email-svgrepo-com.svg"
+                width="28"
+                height="28"
+                alt="Email"
+              />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- <section class="snap-section" id="about"><h1>About</h1></section> -->
+      <!-- <section class="snap-section" id="work">
+        <div class="slider">
+              <div class="slider-images">
+                <div class="img"><img src="./images/portfolio-1.jpg" alt="" /></div>
+              </div>
+              <div class="slider-title">
+                <div class="slider-title-wrapper">
+                  <p>Wyatt Earp and the Cowboy War</p>
+                  <p>Sons of Liberty</p>
+                  <p>The Making of the Mob</p>
+                  <p>Pope</p>
+                  <p>The Men Who Built America</p>
+                </div>
+              </div>
+              <div class="slider-info"><p>Select Work</p></div>
+              <div class="slider-counter">
+                <div class="counter">
+                  <p>1</p>
+                  <p>2</p>
+                  <p>3</p>
+                  <p>4</p>
+                  <p>5</p>
+                </div>
+                <div><p>&mdash;</p></div>
+                <div><p>5</p></div>
+              </div>
+              <div class="slider-preview">
+                <div class="preview active"><img src="./images/portfolio-1.jpg" alt=""></div>
+                <div class="preview"><img src="./images/portfolio-2.jpg" alt=""></div>
+                <div class="preview"><img src="./images/portfolio-3.jpg" alt=""></div>
+                <div class="preview"><img src="./images/portfolio-4.jpg" alt=""></div>
+                <div class="preview"><img src="./images/portfolio-5.jpg" alt=""></div>
+              </div>
+              <div class="slider-indicators">
+                <p>+</p>
+                <p>+</p>
+              </div>
+            </div>
+      </section> -->
+      <!-- <section class="snap-section" id="contact">
+        <video autoplay loop muted playsinline>
+          <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/Beyond.the.Spotlight.10secReel.v01_1920x1080.webm" type="video/webm" />
+          <p>Your browser does not support the video tag. Please try a different browser or check the video file.</p>
+        </video>
+        <div class="landing-container fade-up">
+          <h1 class="landing-title">Contact</h1>
+        </div>
+      </section> -->
+    </div>
+
+    <footer></footer>
+
+    <script type="module" src="/src/main-index.js"></script>
+  </body>
+</html>

@@ -2,9 +2,9 @@
 
 ## Current Status
 
-**Transitioning:** index.html → index2.html as primary page
+**Current primary page:** index.html
 
-index2.html is the new GSAP-animated single-page portfolio. index.html (legacy slider version) will be archived once index2 is ready to ship.
+index.html is the GSAP-animated single-page portfolio. Legacy slider experience is archived at index-legacy.html, and index2.html temporarily redirects to `/` for stale links.
 
 ---
 
@@ -92,15 +92,16 @@ index2.html is the new GSAP-animated single-page portfolio. index.html (legacy s
 
 | Page | Entry | Status |
 |------|-------|--------|
-| index2.html | main.js | **New primary** — in development |
+| index.html | main.js | **Primary** |
 | contact.html | main-contact.js | Form handler |
 | resume.html | main-resume.js | Resume page |
-| index.html | main-index.js | Legacy — to be archived/renamed |
+| index-legacy.html | main-index.js | Legacy archive |
+| index2.html | redirect shim | Temporary alias to `/` |
 
 ### Transition Plan
-- [ ] Finish index2.html
-- [ ] Rename index.html → index-legacy.html (or delete)
-- [ ] Rename index2.html → index.html
+- [x] Promote index2.html experience to index.html
+- [x] Rename index.html → index-legacy.html
+- [x] Add temporary index2.html redirect shim to `/`
 
 ---
 

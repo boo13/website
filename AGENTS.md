@@ -19,10 +19,10 @@ This project is a video portfolio website using GSAP.
 - One logical change per commit — don't bundle unrelated edits.
 
 ## Boundaries
-- ❌ DO NOT edit index.html or main-index.js (this is the legacy version)
+- ❌ DO NOT edit `index-legacy.html` or `src/main-index.js` unless explicitly asked (legacy archive)
 
 ## Project Structure
-- `index2.html` is the main portfolio page; `index.html` is a legacy/alternate version (do not edit).
+- `index.html` is the main portfolio page. `index-legacy.html` is an archived/alternate version.
 - Primary UI code is organized by **section**, not file type. Shared utilities are grouped by type (`animations/`, `components/`, `styles/`).
 - Each section exports an `initSectionName()` function called from `main.js`.
 - Static assets live in `public/` (data, images, favicon, CNAME) — Vite copies them as-is to the build output. HTML files stay at the repo root.
@@ -30,8 +30,9 @@ This project is a video portfolio website using GSAP.
 
 ```
 Root HTML pages and entry files:
-- index2.html -> src/main.js
-- index.html -> src/main-index.js
+- index.html -> src/main.js
+- index-legacy.html -> src/main-index.js
+- index2.html -> redirect shim to /
 - contact.html -> src/main-contact.js
 - resume.html -> src/main-resume.js
 - case_study_wyatt.html -> src/main-wyatt.js
@@ -50,18 +51,18 @@ src/
   components/           # reusable DOM components (slider, responsive-video, video-lightbox, custom-cursor, preloader)
   styles/               # CSS per page, imported from JS entry points
     project.css         # shared styles for all project pages (BEM: .project-hero--video, .project-credits, .project-footer)
-    index2.css          # main portfolio page (index2.html)
-    about-intro.css     # about section (index2.html)
-    about-slides.css    # about slides section (index2.html)
-    video-lightbox.css  # lightbox overlay (index2.html)
+    index2.css          # main portfolio page styles (used by index.html)
+    about-intro.css     # about section (index.html)
+    about-slides.css    # about slides section (index.html)
+    video-lightbox.css  # lightbox overlay (index.html)
     contact.css         # contact.html
     resume.css          # resume.html
     wyatt.css           # case_study_wyatt.html
-    index.css           # legacy index.html (do not edit)
+    index.css           # legacy index-legacy.html
   config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
-  main.js               # entry for index2.html — imports sections + calls init()
+  main.js               # entry for index.html — imports sections + calls init()
   main-project.js       # entry for ALL project pages — imports project sections
-  main-index.js         # entry for index.html (Slider + ResponsiveVideo)
+  main-index.js         # entry for index-legacy.html (Slider + ResponsiveVideo)
   main-contact.js       # entry for contact.html (form handler)
   main-resume.js        # entry for resume.html (page-specific layout tweaks)
   main-wyatt.js         # entry for case_study_wyatt.html (featured-work effects)
