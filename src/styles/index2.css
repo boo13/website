@@ -1157,11 +1157,11 @@ body.show-grid .bg-columns {
   }
 
   .hero-top-transition-gradient {
-    height: clamp(2rem, 7vh, 3.5rem);
+    height: clamp(2.5rem, 9vh, 4.25rem);
     background: linear-gradient(
       180deg,
-      oklch(0 0 0 / 0.44) 0%,
-      oklch(0 0 0 / 0.22) 50%,
+      oklch(0 0 0 / 0.68) 0%,
+      oklch(0 0 0 / 0.34) 56%,
       oklch(0 0 0 / 0) 100%
     );
   }
@@ -1260,11 +1260,11 @@ body.show-grid .bg-columns {
   }
 
   .hero-top-transition-gradient {
-    height: clamp(1.75rem, 6vh, 2.75rem);
+    height: clamp(2.25rem, 8vh, 3.5rem);
     background: linear-gradient(
       180deg,
-      oklch(0 0 0 / 0.36) 0%,
-      oklch(0 0 0 / 0.18) 48%,
+      oklch(0 0 0 / 0.76) 0%,
+      oklch(0 0 0 / 0.44) 56%,
       oklch(0 0 0 / 0) 100%
     );
   }
