@@ -1111,6 +1111,8 @@ body.show-grid .bg-columns {
 
   .gallery-container {
     height: auto;
+    display: block;
+    overflow: visible;
   }
 
   .gallery-track {
