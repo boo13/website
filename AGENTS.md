@@ -27,6 +27,7 @@ This project is a video portfolio website using GSAP.
 - Each section exports an `initSectionName()` function called from `main.js`.
 - Static assets live in `public/` (data, images, favicon, CNAME) — Vite copies them as-is to the build output. HTML files stay at the repo root.
 - **Video assets** hosted on Cloudflare R2 (not in git). Base URL: `CDN_BASE` in `src/config.js`. Local copies in `public/video/` are gitignored.
+- CLAUDE.md and GEMINI.md are sym-linked to AGENTS.md
 
 ```
 Root HTML pages and entry files:
@@ -100,6 +101,8 @@ src/
 - All `<video>` elements loading from R2 must have the `crossorigin` attribute (cross-origin fetch). If a `<link rel="preload">` also has `crossorigin`, the video element must match or the preloaded response is discarded.
 - **Stagger vs individual `fromTo` in timelines** — `tl.fromTo(array, from, to, pos)` with `stagger` applies from-values to ALL elements at `pos`. Individual `tl.fromTo(el, from, to, pos)` calls only apply from-values when each tween's position is reached. When synchronizing clones/duplicates with originals, use the same stagger approach so from-values are applied identically.
 - **SplitText mask wrapper sizing** — Mask wrappers can be taller than word elements (line-height, font metrics). Absolutely-positioned overlays inside wrappers need `word.offsetTop` positioning, not `top: 0`, or they'll extend beyond the visible text area.
+- **Flex + overflow:hidden blocks column child width** — A flex container with `overflow: hidden` prevents children from calculating their width when the track switches to `flex-direction: column` (circular dependency resolves to 0). Override the container to `display: block; overflow: visible` in the media query, or the children render at 0×0.
+- **Use ScrollTrigger, not IntersectionObserver, when ScrollSmoother is active** — ScrollSmoother uses transform-based scrolling, so IntersectionObserver sees real DOM positions instead of the smoothed visual positions. This causes timing mismatches for enter/leave detection. Always use ScrollTrigger for viewport-based behavior on this site.
 
 # Communication Style
 - Be direct, concise, and critical. Do not use excessive positive affirmations like "That's a great idea," "Absolutely," or "Great question."
