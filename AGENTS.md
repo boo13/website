@@ -9,6 +9,7 @@ This project is a video portfolio website using GSAP.
 - `npm run lint` — ESLint on `src/` (run before commit; fix all errors before proceeding)
 - `npm run format` — Prettier on `src/`
 - `just video-publish FILE [--suffix S] [--out-dir DIR] ...` — Optimize video to WebM + MP4 and upload both to R2
+- `just visual-audit` — Capture timestamped visual audit across desktop, tablet, and phone sizes
 
 ## Git Workflow
 - **`dev`** — working branch. All LLM and day-to-day work happens here.
@@ -20,6 +21,8 @@ This project is a video portfolio website using GSAP.
 
 ## Boundaries
 - ❌ DO NOT edit `index-legacy.html` or `src/main-index.js` unless explicitly asked (legacy archive)
+
+
 
 ## Project Structure
 - `index.html` is the main portfolio page. `index-legacy.html` is an archived/alternate version.

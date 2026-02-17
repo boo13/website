@@ -184,3 +184,6 @@ public/video/
 
 # Playwright CLI snapshot yamls 
 .playwright-cli/*.yml
+
+# Screenshots folder used for visual testing
+screenshots/
