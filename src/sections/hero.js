@@ -26,6 +26,9 @@ export function initHero() {
   const video = document.querySelector('.hero-video');
   const content = document.querySelector('.hero-content');
   const gradient = document.querySelector('.hero-gradient');
+  const topTransitionGradient = document.querySelector(
+    '.hero-top-transition-gradient'
+  );
   const heroName = hero?.querySelector('.hero-content .hero-name') ?? null;
   const fixedHeroName = document.getElementById('hero-name-fixed');
   const heroSubtitle = hero?.querySelector('.hero-subtitle') ?? null;
@@ -41,6 +44,9 @@ export function initHero() {
 
   if (prefersReducedMotion) {
     gsap.set(hero, { opacity: 1 });
+    if (topTransitionGradient) {
+      gsap.set(topTransitionGradient, { autoAlpha: 0.5 });
+    }
     return () => {};
   }
 
@@ -319,6 +325,18 @@ export function initHero() {
         {
           background: 'oklch(0 0 0 / 0.9)',
           duration: 0.7,
+          ease: 'none',
+        },
+        0
+      );
+    }
+
+    if (topTransitionGradient) {
+      tl.to(
+        topTransitionGradient,
+        {
+          autoAlpha: 1,
+          duration: 0.65,
           ease: 'none',
         },
         0

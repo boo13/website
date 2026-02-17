@@ -193,6 +193,23 @@ body.show-grid .bg-columns {
   pointer-events: none;
 }
 
+.hero-top-transition-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(4.5rem, 16vh, 9rem);
+  z-index: 35;
+  background: linear-gradient(
+    180deg,
+    oklch(0 0 0 / 0.5) 0%,
+    oklch(0 0 0 / 0.28) 52%,
+    oklch(0 0 0 / 0) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
 .hero-content {
   position: absolute;
   top: 50%;
@@ -1107,6 +1124,16 @@ body.show-grid .bg-columns {
     left: 1.5rem;
   }
 
+  .hero-top-transition-gradient {
+    height: clamp(4rem, 14vh, 7rem);
+    background: linear-gradient(
+      180deg,
+      oklch(0 0 0 / 0.44) 0%,
+      oklch(0 0 0 / 0.22) 50%,
+      oklch(0 0 0 / 0) 100%
+    );
+  }
+
   .hero-name {
     font-size: clamp(2.5rem, 10vw, 4rem);
   }
@@ -1225,6 +1252,16 @@ body.show-grid .bg-columns {
     }
 
   .hero-content {
+  }
+
+  .hero-top-transition-gradient {
+    height: clamp(3.5rem, 12vh, 5.5rem);
+    background: linear-gradient(
+      180deg,
+      oklch(0 0 0 / 0.36) 0%,
+      oklch(0 0 0 / 0.18) 48%,
+      oklch(0 0 0 / 0) 100%
+    );
   }
 
   .hero-social {
