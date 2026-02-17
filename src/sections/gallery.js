@@ -3,7 +3,7 @@
  * Vertical scroll triggers horizontal card movement
  */
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
-import { MOBILE_BREAKPOINT } from '../config.js';
+import { GALLERY_BREAKPOINT } from '../config.js';
 
 export function initGallery() {
   const section = document.querySelector('.featured-work-section');
@@ -21,7 +21,8 @@ export function initGallery() {
   const prefersReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   ).matches;
-  let isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+  // sync with @media (max-width: 1024px) in index2.css
+  let isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
 
   let currentIndex = 0;
 
@@ -82,11 +83,6 @@ export function initGallery() {
         video.currentTime = 0;
       });
     });
-
-    // GLightbox event integration
-    // Note: GLightbox binds to .glightbox-video elements automatically
-    // We just need to ensure hover videos pause when lightbox opens
-    // The lightbox component handles this via its 'open' event listener
   }
 
   function setupScrollVideoPlay(containerAnimation) {
@@ -120,20 +116,80 @@ export function initGallery() {
     });
   }
 
-  setupHoverCorners();
-
-  if (prefersReducedMotion || isMobile) {
-    track.style.flexDirection = 'column';
-    track.style.gap = '2rem';
+  /** Vertical ScrollTrigger autoplay for mobile/tablet (no containerAnimation) */
+  function setupVerticalVideoPlay() {
     cards.forEach((card) => {
-      card.style.width = '100%';
-      card.style.maxWidth = '800px';
-      card.style.margin = '0 auto';
+      const video = card.querySelector('.card-video');
+      if (!video) return;
+
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        onEnter: () => {
+          if (video.readyState === 0) video.load();
+          video.play().catch(() => {});
+          card.classList.add('is-playing');
+        },
+        onLeave: () => {
+          video.pause();
+          card.classList.remove('is-playing');
+        },
+        onEnterBack: () => {
+          video.play().catch(() => {});
+          card.classList.add('is-playing');
+        },
+        onLeaveBack: () => {
+          video.pause();
+          card.classList.remove('is-playing');
+        },
+      });
     });
-    setupVideoHover();
-    return;
   }
 
+  setupHoverCorners();
+
+  // --- Mobile / tablet / reduced-motion path ---
+  if (prefersReducedMotion || isCompact) {
+    // CSS handles all layout (flex-direction, widths, etc.) via @media (max-width: 1024px)
+    // JS only sets up video autoplay via vertical ScrollTrigger
+    const ctx = gsap.context(() => {
+      if (!prefersReducedMotion) {
+        setupVerticalVideoPlay();
+      }
+    }, section);
+
+    setupVideoHover();
+
+    // Resume autoplay after lightbox closes
+    function onLightboxClose() {
+      ScrollTrigger.getAll().forEach((st) => {
+        if (st.trigger && st.trigger.classList.contains('gallery-card')) {
+          if (st.isActive) {
+            const video = st.trigger.querySelector('.card-video');
+            if (video) {
+              video.play().catch(() => {});
+              st.trigger.classList.add('is-playing');
+            }
+          }
+        }
+      });
+    }
+    document.addEventListener('gallery:lightbox-close', onLightboxClose);
+
+    function handleResize() {
+      const wasCompact = isCompact;
+      isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
+      if (wasCompact !== isCompact) {
+        window.location.reload();
+      }
+    }
+    window.addEventListener('resize', handleResize);
+
+    return ctx;
+  }
+
+  // --- Desktop path (horizontal scroll) ---
   const ctx = gsap.context(() => {
     const trackWidth = track.scrollWidth;
     const viewportWidth = window.innerWidth;
@@ -172,13 +228,13 @@ export function initGallery() {
   setupVideoHover();
 
   function handleResize() {
-    const wasMobile = isMobile;
-    isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
-    if (wasMobile !== isMobile) {
+    const wasCompact = isCompact;
+    isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
+    if (wasCompact !== isCompact) {
       window.location.reload();
       return;
     }
-    if (!isMobile) {
+    if (!isCompact) {
       ScrollTrigger.refresh();
     }
   }

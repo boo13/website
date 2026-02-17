@@ -29,6 +29,11 @@ export function initVideoLightbox() {
     });
   });
 
+  // Notify gallery to resume visible card autoplay after lightbox closes
+  lightbox.on('close', () => {
+    document.dispatchEvent(new CustomEvent('gallery:lightbox-close'));
+  });
+
   // Return cleanup function
   return () => {
     if (lightbox) {

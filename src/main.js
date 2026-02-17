@@ -34,7 +34,7 @@ function init() {
   const cleanupCursor = initCustomCursor();
   const cleanupAboutIntro = initAboutIntro();
   const cleanupAboutSlides = initAboutSlides();
-  initGallery();
+  const cleanupGallery = initGallery();
   initAbout();
   const cleanupFooterReveal = initFooterReveal();
   const cleanupLightbox = initVideoLightbox();
@@ -71,6 +71,7 @@ function init() {
       if (typeof cleanupAboutSlides === 'function') cleanupAboutSlides();
       if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
       if (typeof cleanupLightbox === 'function') cleanupLightbox();
+      if (cleanupGallery) cleanupGallery.revert();
       if (typeof cleanupHero === 'function') cleanupHero();
     },
     { once: true }
