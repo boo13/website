@@ -100,24 +100,48 @@ function waitForFonts(onLoaded) {
 const COUNTDOWN_FPS = 24;
 const COUNTDOWN_START_FRAMES = 6 * COUNTDOWN_FPS;
 
-function renderTimer(timeEl, progress) {
+// Minimum delta per tick (0.4 frames at 24fps = ~15s to drain fully — matches force-complete timeout)
+const COUNTDOWN_MIN_DELTA = 0.4;
+
+function startCountdown(timeEl) {
   if (!timeEl) {
-    return;
+    return { setProgress() {}, kill() {} };
   }
 
-  const totalFrames = Math.max(
-    Math.round(COUNTDOWN_START_FRAMES * (1 - progress)),
-    0
-  );
+  let currentFrames = COUNTDOWN_START_FRAMES;
+  let progressTarget = COUNTDOWN_START_FRAMES;
 
-  const mins = Math.floor(totalFrames / (60 * COUNTDOWN_FPS));
-  const secs = Math.floor((totalFrames % (60 * COUNTDOWN_FPS)) / COUNTDOWN_FPS);
-  const frames = totalFrames % COUNTDOWN_FPS;
+  const tick = () => {
+    if (currentFrames <= 0) return;
 
-  const mm = String(mins).padStart(2, '0');
-  const ss = String(secs).padStart(2, '0');
-  const ff = String(frames).padStart(2, '0');
-  timeEl.textContent = `${mm}:${ss}:${ff}`;
+    // Accelerate to catch up to progress target; never slower than COUNTDOWN_MIN_DELTA
+    const gap = currentFrames - progressTarget;
+    const delta =
+      gap > 0
+        ? Math.max(COUNTDOWN_MIN_DELTA, gap * 0.12 + COUNTDOWN_MIN_DELTA)
+        : COUNTDOWN_MIN_DELTA;
+
+    currentFrames = Math.max(currentFrames - delta, 0);
+
+    const intFrames = Math.floor(currentFrames);
+    const mins = Math.floor(intFrames / (60 * COUNTDOWN_FPS));
+    const secs = Math.floor(
+      (intFrames % (60 * COUNTDOWN_FPS)) / COUNTDOWN_FPS
+    );
+    const frames = intFrames % COUNTDOWN_FPS;
+    timeEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}:${String(frames).padStart(2, '0')}`;
+  };
+
+  const id = setInterval(tick, 1000 / COUNTDOWN_FPS);
+
+  return {
+    setProgress(p) {
+      progressTarget = Math.round(COUNTDOWN_START_FRAMES * (1 - p));
+    },
+    kill() {
+      clearInterval(id);
+    },
+  };
 }
 
 function renderEdges(edgesEl, progress) {
@@ -131,12 +155,12 @@ function renderEdges(edgesEl, progress) {
   gsap.set(edgesEl, { width, height });
 }
 
-function createProgressSmoother(edgesEl, timeEl) {
+function createProgressSmoother(edgesEl, countdown) {
   const state = { value: 0 };
 
   const render = () => {
     renderEdges(edgesEl, state.value);
-    renderTimer(timeEl, state.value);
+    countdown.setProgress(state.value);
   };
 
   render();
@@ -237,7 +261,8 @@ export function runPreloader(options = {}) {
 
     const edgesEl = overlayEl.querySelector('.preloader-edges');
     const timeEl = overlayEl.querySelector('.preloader-time');
-    const progressSmoother = createProgressSmoother(edgesEl, timeEl);
+    const countdown = startCountdown(timeEl);
+    const progressSmoother = createProgressSmoother(edgesEl, countdown);
 
     const collectionRoot = getCollectionRoot(criticalRootSelector);
     const videos = Array.from(collectionRoot.querySelectorAll('video')).filter(
@@ -286,6 +311,7 @@ export function runPreloader(options = {}) {
 
     const cleanup = () => {
       window.clearTimeout(forceCompleteTimeoutId);
+      countdown.kill();
       progressSmoother.kill();
       taskCleanupFns.forEach((cleanupFn) => cleanupFn());
     };
