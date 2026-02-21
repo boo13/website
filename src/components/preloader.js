@@ -97,34 +97,27 @@ function waitForFonts(onLoaded) {
   };
 }
 
-function startCountdown(timerEl) {
-  if (!timerEl) {
-    return () => {};
+const COUNTDOWN_FPS = 24;
+const COUNTDOWN_START_FRAMES = 6 * COUNTDOWN_FPS;
+
+function renderTimer(timeEl, progress) {
+  if (!timeEl) {
+    return;
   }
 
-  const FPS = 24;
-  let totalFrames = 6 * FPS;
+  const totalFrames = Math.max(
+    Math.round(COUNTDOWN_START_FRAMES * (1 - progress)),
+    0
+  );
 
-  const updateTime = () => {
-    totalFrames -= 1;
+  const mins = Math.floor(totalFrames / (60 * COUNTDOWN_FPS));
+  const secs = Math.floor((totalFrames % (60 * COUNTDOWN_FPS)) / COUNTDOWN_FPS);
+  const frames = totalFrames % COUNTDOWN_FPS;
 
-    if (totalFrames <= 0) {
-      timerEl.textContent = '00:00:00';
-      return;
-    }
-
-    const mins = Math.floor(totalFrames / (60 * FPS));
-    const secs = Math.floor((totalFrames % (60 * FPS)) / FPS);
-    const frames = totalFrames % FPS;
-
-    const mm = String(mins).padStart(2, '0');
-    const ss = String(secs).padStart(2, '0');
-    const ff = String(frames).padStart(2, '0');
-    timerEl.textContent = `${mm}:${ss}:${ff}`;
-  };
-
-  const timerId = window.setInterval(updateTime, 1000 / FPS);
-  return () => window.clearInterval(timerId);
+  const mm = String(mins).padStart(2, '0');
+  const ss = String(secs).padStart(2, '0');
+  const ff = String(frames).padStart(2, '0');
+  timeEl.textContent = `${mm}:${ss}:${ff}`;
 }
 
 function renderEdges(edgesEl, progress) {
@@ -138,11 +131,12 @@ function renderEdges(edgesEl, progress) {
   gsap.set(edgesEl, { width, height });
 }
 
-function createProgressSmoother(edgesEl) {
+function createProgressSmoother(edgesEl, timeEl) {
   const state = { value: 0 };
 
   const render = () => {
     renderEdges(edgesEl, state.value);
+    renderTimer(timeEl, state.value);
   };
 
   render();
@@ -243,8 +237,7 @@ export function runPreloader(options = {}) {
 
     const edgesEl = overlayEl.querySelector('.preloader-edges');
     const timeEl = overlayEl.querySelector('.preloader-time');
-    const progressSmoother = createProgressSmoother(edgesEl);
-    const clearCountdown = startCountdown(timeEl);
+    const progressSmoother = createProgressSmoother(edgesEl, timeEl);
 
     const collectionRoot = getCollectionRoot(criticalRootSelector);
     const videos = Array.from(collectionRoot.querySelectorAll('video')).filter(
@@ -293,7 +286,6 @@ export function runPreloader(options = {}) {
 
     const cleanup = () => {
       window.clearTimeout(forceCompleteTimeoutId);
-      clearCountdown();
       progressSmoother.kill();
       taskCleanupFns.forEach((cleanupFn) => cleanupFn());
     };
