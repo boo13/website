@@ -46,16 +46,18 @@
 .about-intro__content {
   position: relative;
   z-index: 1;
-  max-width: 900px;
+  max-width: var(--grid-max-width);
   width: 100%;
-  text-align: center;
+  padding: 0 var(--container-padding);
   flex: 1;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: 0 var(--grid-gutter);
   align-items: center;
-  justify-content: center;
 }
 
 .about-intro__text {
+  grid-column: 2 / 6;
   font-family: var(--ff-display);
   font-size: clamp(1.5rem, 3.5vw, 3rem);
   font-style: italic;
@@ -64,6 +66,7 @@
   color: var(--color-offwhite);
   margin: 0;
   letter-spacing: 0.01em;
+  text-align: left;
 }
 
 /* =====================================================
@@ -128,6 +131,7 @@
   }
 
   .about-intro__text {
+    grid-column: 1 / -1;
     font-size: clamp(1.3rem, 5vw, 2rem);
   }
 

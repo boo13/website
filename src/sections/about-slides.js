@@ -86,6 +86,33 @@ export function initAboutSlides() {
       };
       cleanupGridVideos = () => setGridVideosPaused(true);
 
+      // Pre-compute column index (0–6) for each video — O(N) once at init,
+      // O(1) per lookup. Avoids re-allocating an array and doing a linear
+      // search on every activation call.
+      const videoColIndex = new Map();
+      Array.from(gridContainer.children).forEach((item, i) => {
+        const vid = item.querySelector('video');
+        if (vid) videoColIndex.set(vid, i % 7);
+      });
+
+      // Returns a predicate that tests whether a video's column is at least
+      // partially within the horizontal viewport at scale:1. Call once per
+      // activation round so grid metrics are read from the DOM a single time
+      // rather than on every video. Uses layout math — not getBoundingClientRect
+      // — to avoid interference from GSAP's scale:7 transform on the container.
+      const buildVisibilityCheck = () => {
+        const gap = 3; // matches gap: 3px in .slide-goes-big .grid-container
+        const containerHeight = gridContainer.offsetHeight;
+        const cellWidth = ((containerHeight - gap * 6) / 7) * (16 / 9);
+        const gridWidth = cellWidth * 7 + gap * 6;
+        const gridLeft = (window.innerWidth - gridWidth) / 2;
+        return (video) => {
+          const colLeft =
+            gridLeft + (videoColIndex.get(video) ?? 0) * (cellWidth + gap);
+          return colLeft + cellWidth > 0 && colLeft < window.innerWidth;
+        };
+      };
+
       // Activate deferred sources on a single video (idempotent — skips if
       // source.src is already set, so prefetch and ScrollTrigger paths are safe
       // to run in any order without double-loading).
@@ -107,7 +134,10 @@ export function initAboutSlides() {
         trigger: section,
         start: 'top bottom+=300',
         once: true,
-        onEnter: () => gridVideos.forEach(activateVideo),
+        onEnter: () => {
+          const isVisible = buildVisibilityCheck();
+          gridVideos.filter(isVisible).forEach(activateVideo);
+        },
       });
 
       // Idle prefetch: warm up grid videos after the hero preloader finishes.
@@ -137,8 +167,9 @@ export function initAboutSlides() {
       const onLoadingComplete = () => {
         const ric = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
         idleCallbackId = ric(() => {
+          const isVisible = buildVisibilityCheck();
           if (heroGridVideo) activateVideo(heroGridVideo);
-          loadBatch(otherGridVideos, 0);
+          loadBatch(otherGridVideos.filter(isVisible), 0);
         });
       };
       document.addEventListener('loadingComplete', onLoadingComplete, {
