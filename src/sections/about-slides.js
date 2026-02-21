@@ -86,30 +86,72 @@ export function initAboutSlides() {
       };
       cleanupGridVideos = () => setGridVideosPaused(true);
 
-      // Defer all grid video network/decode work until section is nearby.
-      const sectionObserver = new IntersectionObserver(
-        (entries) => {
-          if (!entries[0]?.isIntersecting) return;
+      // Activate deferred sources on a single video (idempotent — skips if
+      // source.src is already set, so prefetch and ScrollTrigger paths are safe
+      // to run in any order without double-loading).
+      const activateVideo = (video) => {
+        let hasDeferredSources = false;
+        video.querySelectorAll('source').forEach((source) => {
+          if (!source.dataset.src || source.src) return;
+          source.src = source.dataset.src;
+          hasDeferredSources = true;
+        });
+        if (hasDeferredSources) video.load();
+        video.play().catch(() => {});
+      };
 
-          gridVideos.forEach((video) => {
-            let hasDeferredSources = false;
+      // ScrollTrigger fallback: activates any remaining un-prefetched grid
+      // videos when the section is 300px from the viewport. Uses ScrollTrigger
+      // instead of IntersectionObserver to fix ScrollSmoother position mismatch.
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom+=300',
+        once: true,
+        onEnter: () => gridVideos.forEach(activateVideo),
+      });
 
-            video.querySelectorAll('source').forEach((source) => {
-              if (!source.dataset.src || source.src) return;
-              source.src = source.dataset.src;
-              hasDeferredSources = true;
-            });
+      // Idle prefetch: warm up grid videos after the hero preloader finishes.
+      // Center cell (grid-hero) loads first — it's visible at 7× zoom.
+      // Remaining videos load in batches of 4, chained via loadeddata/error
+      // so a single stalled video doesn't block the whole queue.
+      let idleCallbackId = null;
+      const heroGridVideo = gridContainer.querySelector('.grid-hero video');
+      const otherGridVideos = gridVideos.filter((v) => v !== heroGridVideo);
 
-            if (hasDeferredSources) video.load();
-            video.play().catch(() => {});
-          });
+      const loadBatch = (videos, startIndex) => {
+        const batch = videos.slice(startIndex, startIndex + 4);
+        if (!batch.length) return;
+        batch.forEach(activateVideo);
+        const nextIndex = startIndex + 4;
+        if (nextIndex >= videos.length) return;
+        const pivot = batch[0];
+        const advance = () => {
+          pivot.removeEventListener('loadeddata', advance);
+          pivot.removeEventListener('error', advance);
+          loadBatch(videos, nextIndex);
+        };
+        pivot.addEventListener('loadeddata', advance);
+        pivot.addEventListener('error', advance);
+      };
 
-          sectionObserver.disconnect();
-        },
-        { rootMargin: '300px' }
-      );
-      sectionObserver.observe(section);
-      cleanupGridVideoLoader = () => sectionObserver.disconnect();
+      const onLoadingComplete = () => {
+        const ric = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
+        idleCallbackId = ric(() => {
+          if (heroGridVideo) activateVideo(heroGridVideo);
+          loadBatch(otherGridVideos, 0);
+        });
+      };
+      document.addEventListener('loadingComplete', onLoadingComplete, {
+        once: true,
+      });
+      cleanupGridVideoLoader = () => {
+        document.removeEventListener('loadingComplete', onLoadingComplete);
+        if (idleCallbackId !== null) {
+          const cric = window.cancelIdleCallback || clearTimeout;
+          cric(idleCallbackId);
+          idleCallbackId = null;
+        }
+      };
 
       // --- Initial states ---
       gsap.set(gridContainer, {
