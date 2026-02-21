@@ -47,7 +47,7 @@ projects/                           # project detail pages (auto-discovered by V
   [project-name]/index.html         # add new projects by creating a folder
 
 src/
-  sections/             # one file per scroll section (hero, gallery, credits, about, about-slides, footer-reveal, featured-work)
+  sections/             # one file per scroll section (hero, gallery, credits, about, about-intro, about-slides, footer-reveal, featured-work)
     project-video.js    # video hero for project pages (.project-hero--video)
     project-credits.js  # credits section for project pages (.project-credits)
     project-footer.js   # footer for project pages (.project-footer)
@@ -82,7 +82,7 @@ src/
 
 ## Website Sections
 1. **Hero** - Preloader then a looping montage video with text (hero-name and hero-subtitle)
-2. **About** - Multiple slides
+2. **About** - Intro blurb (about-intro), bio slides (about-slides), and shared wrapper (about)
 3. **Featured Work** - Scrolling gallery of video thumbnails; click opens lightbox
 4. **Credits** - Table listing additional work examples; cursor-follow shows preview and row-reveal animations
 5. **Clients** - Network/brand logo marquee and summary blurb
