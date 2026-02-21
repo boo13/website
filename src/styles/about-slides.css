@@ -155,10 +155,17 @@
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, calc((100vh - 18px) / 7 * 16 / 9));
   grid-template-rows: repeat(7, 1fr);
+  justify-content: center;
   gap: 3px;
   will-change: transform; /* GPU compositing for smooth animation */
+}
+
+@supports (height: 100svh) {
+  .slide-goes-big .grid-container {
+    grid-template-columns: repeat(7, calc((100svh - 18px) / 7 * 16 / 9));
+  }
 }
 
 .slide-goes-big .grid-item {
