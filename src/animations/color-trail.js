@@ -16,10 +16,11 @@
  * @param {Object} [options]
  * @param {string[]} [options.colors=['oklch(0.804 0.146 220)','oklch(0.656 0.235 13)']] - Trail colors
  * @param {string} [options.blendMode='screen'] - CSS mix-blend-mode for clones
+ * @param {number} [options.blur=0.4] - Gaussian blur radius in px applied to clones
  * @returns {{ layers: { words: Element[], color: string }[], cleanup: Function }}
  */
 export function createColorTrailWords(words, options = {}) {
-  const { colors = ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'], blendMode = 'screen' } = options;
+  const { colors = ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'], blendMode = 'screen', blur = 0.4 } = options;
 
   if (!words.length || !colors.length) {
     return { layers: [], cleanup() {} };
@@ -46,6 +47,7 @@ export function createColorTrailWords(words, options = {}) {
       clone.style.zIndex = String(colorIndex + 1);
       clone.style.color = color;
       clone.style.mixBlendMode = blendMode;
+      if (blur > 0) clone.style.filter = `blur(${blur}px)`;
       clone.style.pointerEvents = 'none';
       clone.style.overflow = 'clip';
 
