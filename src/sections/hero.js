@@ -9,6 +9,12 @@ import {
 } from '../animations/scroll-defaults.js';
 import Flip from 'gsap/Flip';
 import { textMaskRiseWords } from '../animations/text-mask-rise.js';
+import {
+  TRAIL_K,
+  TRAIL_MAX_PX,
+  TRAIL_THRESH,
+  TRAIL_OPACITY,
+} from '../config.js';
 
 gsap.registerPlugin(Flip);
 
@@ -52,6 +58,8 @@ export function initHero() {
 
   let cleanupHeroNameMask = () => {};
   let nameRafId = null;
+  let tickerFn = null;
+  let springBackTween = null;
 
   const ctx = gsap.context(() => {
     // Force GPU compositing BEFORE any measurements to ensure stable layout
@@ -77,6 +85,75 @@ export function initHero() {
         colors: ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'],
         blendMode: 'screen',
         staggerOffset: 0.15,
+      },
+      retainClones: true,
+      onComplete: (clones) => {
+        const allClones = clones.flat();
+        if (!allClones.length) return;
+
+        const numLayers = clones.length;
+        let isActive = false;
+        let isSpringBack = false;
+
+        // Both sections are pinned, so ScrollTrigger start/end positions based
+        // on element height don't cover the full pin scroll distance. Read
+        // existing ScrollTrigger state directly each frame instead.
+        // about-intro uses a named trigger; gallery manages an .active class.
+        const aboutIntroPinST = ScrollTrigger.getById('about-intro-pin');
+        const galleryEl = document.querySelector('.featured-work-section');
+
+        tickerFn = function trailTicker() {
+          const vel = ScrollSmoother.get()?.getVelocity() ?? 0;
+          const absVel = Math.abs(vel);
+          const suppressed =
+            (aboutIntroPinST?.isActive ?? false) ||
+            (galleryEl?.classList.contains('active') ?? false);
+
+          if (!suppressed && absVel > TRAIL_THRESH) {
+            if (springBackTween) {
+              springBackTween.kill();
+              springBackTween = null;
+            }
+            isSpringBack = false;
+            isActive = true;
+            const baseYOff = gsap.utils.clamp(
+              -TRAIL_MAX_PX,
+              TRAIL_MAX_PX,
+              vel * -TRAIL_K
+            );
+            const baseOp = gsap.utils.mapRange(
+              TRAIL_THRESH,
+              TRAIL_THRESH * 6,
+              0,
+              TRAIL_OPACITY,
+              absVel
+            );
+            // Apply staggered offsets per layer — later layers lag further behind,
+            // matching the spatial separation from the initial mask-rise animation.
+            clones.forEach((layerClones, i) => {
+              const fraction = (i + 1) / numLayers;
+              gsap.set(layerClones, {
+                y: baseYOff * fraction,
+                opacity: Math.min(baseOp * fraction, TRAIL_OPACITY),
+              });
+            });
+          } else if (isActive && !isSpringBack) {
+            isSpringBack = true;
+            springBackTween = gsap.to(allClones, {
+              y: 0,
+              opacity: 0,
+              ease: 'power2.out',
+              duration: 0.5,
+              onComplete() {
+                isSpringBack = false;
+                isActive = false;
+                springBackTween = null;
+              },
+            });
+          }
+        };
+
+        gsap.ticker.add(tickerFn);
       },
     });
 
@@ -361,6 +438,14 @@ export function initHero() {
 
   return () => {
     if (nameRafId !== null) cancelAnimationFrame(nameRafId);
+    if (tickerFn !== null) {
+      gsap.ticker.remove(tickerFn);
+      tickerFn = null;
+    }
+    if (springBackTween) {
+      springBackTween.kill();
+      springBackTween = null;
+    }
     ctx.revert();
     cleanupHeroNameMask();
   };

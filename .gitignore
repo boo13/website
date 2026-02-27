@@ -187,3 +187,6 @@ public/video/
 
 # Screenshots folder used for visual testing
 screenshots/
+
+# Architecture overview from Amp
+docs/AmpOverview/

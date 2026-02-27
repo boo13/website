@@ -94,6 +94,8 @@ export function textMaskRiseWords(targets, overrides = {}) {
 
   // --- Color trail path: word-level animation with clone words in mask wrappers ---
   if (hasTrail) {
+    const retainClones = !!settings.retainClones;
+    const onCompleteCallback = settings.onComplete ?? null;
     const trailCleanups = [];
     let trailsCleaned = false;
 
@@ -103,12 +105,11 @@ export function textMaskRiseWords(targets, overrides = {}) {
       trailCleanups.forEach((trail) => trail.cleanup());
     };
 
-    tl.eventCallback('onComplete', removeTrailClones);
-
     splits.forEach((split) => {
       const trail = createColorTrailWords(split.words, {
         colors: trailConfig.colors,
         blendMode: trailConfig.blendMode || 'screen',
+        blur: trailConfig.blur,
       });
       trailCleanups.push(trail);
 
@@ -165,6 +166,24 @@ export function textMaskRiseWords(targets, overrides = {}) {
         );
       });
     });
+
+    // When retainClones is true, clones stay in the DOM at opacity:0 after
+    // the rise animation. The onComplete callback receives them for scroll-driven
+    // reuse (e.g. velocity ticker). Manual teardown via the returned cleanup
+    // function still removes them.
+    if (retainClones) {
+      if (onCompleteCallback) {
+        tl.eventCallback('onComplete', () => {
+          const numColors = trailConfig.colors.length;
+          const clonesByLayer = Array.from({ length: numColors }, (_, i) =>
+            trailCleanups.flatMap((trail) => trail.layers[i]?.words ?? [])
+          );
+          onCompleteCallback(clonesByLayer);
+        });
+      }
+    } else {
+      tl.eventCallback('onComplete', removeTrailClones);
+    }
 
     return () => {
       tl.kill();

@@ -1171,12 +1171,12 @@ body.show-grid .bg-columns {
   }
 
   .hero-subtitle {
-    font-size: 0.75rem;
+    font-size: clamp(0.55rem, 2.8vw, 0.75rem);
     letter-spacing: 0.1em;
   }
 
   .hero-subtitle-fixed {
-    font-size: 0.75rem;
+    font-size: clamp(0.55rem, 2.8vw, 0.75rem);
     letter-spacing: 0.1em;
   }
 

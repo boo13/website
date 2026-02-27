@@ -86,30 +86,103 @@ export function initAboutSlides() {
       };
       cleanupGridVideos = () => setGridVideosPaused(true);
 
-      // Defer all grid video network/decode work until section is nearby.
-      const sectionObserver = new IntersectionObserver(
-        (entries) => {
-          if (!entries[0]?.isIntersecting) return;
+      // Pre-compute column index (0–6) for each video — O(N) once at init,
+      // O(1) per lookup. Avoids re-allocating an array and doing a linear
+      // search on every activation call.
+      const videoColIndex = new Map();
+      Array.from(gridContainer.children).forEach((item, i) => {
+        const vid = item.querySelector('video');
+        if (vid) videoColIndex.set(vid, i % 7);
+      });
 
-          gridVideos.forEach((video) => {
-            let hasDeferredSources = false;
+      // Returns a predicate that tests whether a video's column is at least
+      // partially within the horizontal viewport at scale:1. Call once per
+      // activation round so grid metrics are read from the DOM a single time
+      // rather than on every video. Uses layout math — not getBoundingClientRect
+      // — to avoid interference from GSAP's scale:7 transform on the container.
+      const buildVisibilityCheck = () => {
+        const gap = 3; // matches gap: 3px in .slide-goes-big .grid-container
+        const containerHeight = gridContainer.offsetHeight;
+        const cellWidth = ((containerHeight - gap * 6) / 7) * (16 / 9);
+        const gridWidth = cellWidth * 7 + gap * 6;
+        const gridLeft = (window.innerWidth - gridWidth) / 2;
+        return (video) => {
+          const colLeft =
+            gridLeft + (videoColIndex.get(video) ?? 0) * (cellWidth + gap);
+          return colLeft + cellWidth > 0 && colLeft < window.innerWidth;
+        };
+      };
 
-            video.querySelectorAll('source').forEach((source) => {
-              if (!source.dataset.src || source.src) return;
-              source.src = source.dataset.src;
-              hasDeferredSources = true;
-            });
+      // Activate deferred sources on a single video (idempotent — skips if
+      // source.src is already set, so prefetch and ScrollTrigger paths are safe
+      // to run in any order without double-loading).
+      const activateVideo = (video) => {
+        let hasDeferredSources = false;
+        video.querySelectorAll('source').forEach((source) => {
+          if (!source.dataset.src || source.src) return;
+          source.src = source.dataset.src;
+          hasDeferredSources = true;
+        });
+        if (hasDeferredSources) video.load();
+        video.play().catch(() => {});
+      };
 
-            if (hasDeferredSources) video.load();
-            video.play().catch(() => {});
-          });
-
-          sectionObserver.disconnect();
+      // ScrollTrigger fallback: activates any remaining un-prefetched grid
+      // videos when the section is 300px from the viewport. Uses ScrollTrigger
+      // instead of IntersectionObserver to fix ScrollSmoother position mismatch.
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom+=300',
+        once: true,
+        onEnter: () => {
+          const isVisible = buildVisibilityCheck();
+          gridVideos.filter(isVisible).forEach(activateVideo);
         },
-        { rootMargin: '300px' }
-      );
-      sectionObserver.observe(section);
-      cleanupGridVideoLoader = () => sectionObserver.disconnect();
+      });
+
+      // Idle prefetch: warm up grid videos after the hero preloader finishes.
+      // Center cell (grid-hero) loads first — it's visible at 7× zoom.
+      // Remaining videos load in batches of 4, chained via loadeddata/error
+      // so a single stalled video doesn't block the whole queue.
+      let idleCallbackId = null;
+      const heroGridVideo = gridContainer.querySelector('.grid-hero video');
+      const otherGridVideos = gridVideos.filter((v) => v !== heroGridVideo);
+
+      const loadBatch = (videos, startIndex) => {
+        const batch = videos.slice(startIndex, startIndex + 4);
+        if (!batch.length) return;
+        batch.forEach(activateVideo);
+        const nextIndex = startIndex + 4;
+        if (nextIndex >= videos.length) return;
+        const pivot = batch[0];
+        const advance = () => {
+          pivot.removeEventListener('loadeddata', advance);
+          pivot.removeEventListener('error', advance);
+          loadBatch(videos, nextIndex);
+        };
+        pivot.addEventListener('loadeddata', advance);
+        pivot.addEventListener('error', advance);
+      };
+
+      const onLoadingComplete = () => {
+        const ric = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
+        idleCallbackId = ric(() => {
+          const isVisible = buildVisibilityCheck();
+          if (heroGridVideo) activateVideo(heroGridVideo);
+          loadBatch(otherGridVideos.filter(isVisible), 0);
+        });
+      };
+      document.addEventListener('loadingComplete', onLoadingComplete, {
+        once: true,
+      });
+      cleanupGridVideoLoader = () => {
+        document.removeEventListener('loadingComplete', onLoadingComplete);
+        if (idleCallbackId !== null) {
+          const cric = window.cancelIdleCallback || clearTimeout;
+          cric(idleCallbackId);
+          idleCallbackId = null;
+        }
+      };
 
       // --- Initial states ---
       gsap.set(gridContainer, {

@@ -1,7 +1,7 @@
 ---
 title: Fix Featured Work Gallery Mobile/Tablet Layout
 type: fix
-status: active
+status: completed
 date: 2026-02-16
 brainstorm: docs/brainstorms/2026-02-16-featured-work-mobile-fix-brainstorm.md
 ---
