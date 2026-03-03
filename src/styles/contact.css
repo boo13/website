@@ -54,7 +54,7 @@ body {
   background-color: oklch(1 0 0);
   outline-style: solid;
   outline-width: thin;
-  outline-color: oklch(0.60 0 0);
+  outline-color: oklch(0.6 0 0);
   outline-offset: -1px;
 }
 

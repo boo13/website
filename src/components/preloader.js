@@ -125,9 +125,7 @@ function startCountdown(timeEl) {
 
     const intFrames = Math.floor(currentFrames);
     const mins = Math.floor(intFrames / (60 * COUNTDOWN_FPS));
-    const secs = Math.floor(
-      (intFrames % (60 * COUNTDOWN_FPS)) / COUNTDOWN_FPS
-    );
+    const secs = Math.floor((intFrames % (60 * COUNTDOWN_FPS)) / COUNTDOWN_FPS);
     const frames = intFrames % COUNTDOWN_FPS;
     timeEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}:${String(frames).padStart(2, '0')}`;
   };

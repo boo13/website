@@ -11,7 +11,7 @@ export const SCRUB = {
 };
 
 // Hero name scroll color-trail tuning
-export const TRAIL_K = 0.03;       // velocity → Y-offset multiplier (px per px/s)
-export const TRAIL_MAX_PX = 5;    // max Y-offset clamp in px
-export const TRAIL_THRESH = 30;    // px/s — below this, spring-back triggers
+export const TRAIL_K = 0.03; // velocity → Y-offset multiplier (px per px/s)
+export const TRAIL_MAX_PX = 5; // max Y-offset clamp in px
+export const TRAIL_THRESH = 30; // px/s — below this, spring-back triggers
 export const TRAIL_OPACITY = 0.85; // max clone opacity

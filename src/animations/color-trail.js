@@ -20,7 +20,11 @@
  * @returns {{ layers: { words: Element[], color: string }[], cleanup: Function }}
  */
 export function createColorTrailWords(words, options = {}) {
-  const { colors = ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'], blendMode = 'screen', blur = 0.4 } = options;
+  const {
+    colors = ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'],
+    blendMode = 'screen',
+    blur = 0.4,
+  } = options;
 
   if (!words.length || !colors.length) {
     return { layers: [], cleanup() {} };

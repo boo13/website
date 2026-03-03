@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Guide - Randy Counsman Portfolio</title>
+
+  <!-- Current fonts (Adobe Typekit) -->
+  <link rel="stylesheet" href="https://use.typekit.net/vkq8wfl.css">
+
+  <!-- Alternative Google Fonts for comparison -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Bodoni+Moda:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --sg-bg: #0a0a0a;
+      --sg-surface: #141414;
+      --sg-surface-2: #1e1e1e;
+      --sg-border: rgba(255,255,255,0.08);
+      --sg-text: #f0ede8;
+      --sg-text-muted: rgba(240,237,232,0.5);
+      --sg-accent: oklch(0.767 0.139 91);
+      --sg-container: 1200px;
+      --sg-gap: 2rem;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'aktiv-grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--sg-bg);
+      color: var(--sg-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== LAYOUT ===== */
+    .sg-container {
+      max-width: var(--sg-container);
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .sg-header {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--sg-border);
+      margin-bottom: 3rem;
+    }
+
+    .sg-header h1 {
+      font-family: 'ivypresto-display', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .sg-header p {
+      color: var(--sg-text-muted);
+      font-size: 1rem;
+      max-width: 600px;
+    }
+
+    /* ===== SECTION ===== */
+    .sg-section {
+      margin-bottom: 5rem;
+    }
+
+    .sg-section-title {
+      font-family: 'aktiv-grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--sg-accent);
+      margin-bottom: 2rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--sg-border);
+    }
+
+    .sg-subsection {
+      margin-bottom: 3rem;
+    }
+
+    .sg-label {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--sg-text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .sg-note {
+      font-size: 0.8125rem;
+      color: var(--sg-text-muted);
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+
+    /* ===== COLOR PALETTES ===== */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--sg-gap);
+    }
+
+    .palette-card {
+      background: var(--sg-surface);
+      border: 1px solid var(--sg-border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .palette-card:hover {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .palette-card.active {
+      border-color: var(--sg-accent);
+      box-shadow: 0 0 0 1px var(--sg-accent);
+    }
+
+    .palette-card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: var(--sg-accent);
+      color: var(--sg-bg);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .palette-card.active .palette-card-badge {
+      opacity: 1;
+    }
+
+    .palette-preview {
+      display: flex;
+      height: 80px;
+    }
+
+    .palette-preview-swatch {
+      flex: 1;
+      position: relative;
+    }
+
+    .palette-preview-swatch::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.5625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .palette-preview-swatch:hover::after { opacity: 0.8; }
+
+    .palette-info {
+      padding: 1rem 1.25rem;
+    }
+
+    .palette-name {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .palette-desc {
+      font-size: 0.75rem;
+      color: var(--sg-text-muted);
+    }
+
+    .palette-values {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+
+    .palette-value {
+      font-size: 0.6875rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--sg-text-muted);
+      background: var(--sg-surface-2);
+      padding: 2px 6px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .palette-value:hover { color: var(--sg-text); }
+
+    /* ===== COLOR SWATCHES (current) ===== */
+    .swatch-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .swatch-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .swatch-name {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .swatch-hex {
+      font-size: 0.625rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--sg-text-muted);
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .type-pair-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--sg-gap);
+    }
+
+    .type-pair-card {
+      background: var(--sg-surface);
+      border: 1px solid var(--sg-border);
+      border-radius: 8px;
+      padding: 2rem;
+      cursor: pointer;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .type-pair-card:hover {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .type-pair-card.active {
+      border-color: var(--sg-accent);
+      box-shadow: 0 0 0 1px var(--sg-accent);
+    }
+
+    .type-pair-heading {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .type-pair-body {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: rgba(240,237,232,0.8);
+      margin-bottom: 1.25rem;
+    }
+
+    .type-pair-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--sg-border);
+    }
+
+    .type-pair-names {
+      font-size: 0.75rem;
+      color: var(--sg-text-muted);
+    }
+
+    .type-pair-tag {
+      font-size: 0.5625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: var(--sg-accent);
+      color: var(--sg-bg);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .type-pair-card.active .type-pair-tag {
+      opacity: 1;
+    }
+
+    /* ===== TYPE SCALE ===== */
+    .type-scale {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .type-scale-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      align-items: baseline;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--sg-border);
+      gap: 1.5rem;
+    }
+
+    .type-scale-label {
+      font-size: 0.6875rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--sg-text-muted);
+    }
+
+    .type-scale-sample {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ===== MOCK COMPOSITIONS ===== */
+    .mock-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--sg-gap);
+    }
+
+    .mock-card {
+      background: var(--sg-surface);
+      border: 1px solid var(--sg-border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .mock-card:hover {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .mock-hero {
+      position: relative;
+      height: 200px;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+
+    .mock-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%);
+    }
+
+    .mock-hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    }
+
+    .mock-hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .mock-hero-name {
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+
+    .mock-hero-subtitle {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.6;
+    }
+
+    .mock-body {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .mock-body p {
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      color: rgba(240,237,232,0.7);
+    }
+
+    .mock-label {
+      text-align: center;
+      padding: 0.75rem;
+      font-size: 0.6875rem;
+      color: var(--sg-text-muted);
+      border-top: 1px solid var(--sg-border);
+    }
+
+    /* ===== ACCENT COLORS ===== */
+    .accent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .accent-card {
+      background: var(--sg-surface);
+      border: 1px solid var(--sg-border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .accent-card:hover {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .accent-card.active {
+      border-color: var(--sg-accent);
+      box-shadow: 0 0 0 1px var(--sg-accent);
+    }
+
+    .accent-swatch {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin: 0 auto 0.75rem;
+    }
+
+    .accent-name {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .accent-hex {
+      font-size: 0.6875rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--sg-text-muted);
+    }
+
+    .accent-usage {
+      font-size: 0.6875rem;
+      color: var(--sg-text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* Accent demo bar */
+    .accent-demo {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: var(--sg-surface);
+      border: 1px solid var(--sg-border);
+      border-radius: 8px;
+    }
+
+    .accent-demo-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .accent-demo-text {
+      font-family: 'ivypresto-display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      transition: color 0.3s ease;
+    }
+
+    .accent-demo-link {
+      font-size: 0.875rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .accent-demo-btn {
+      font-family: 'aktiv-grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.6rem 1.5rem;
+      border: 1px solid;
+      border-radius: 4px;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .accent-demo-btn:hover {
+      color: var(--sg-bg) !important;
+    }
+
+    .accent-demo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+
+    /* ===== SPACING ===== */
+    .spacing-scale {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .spacing-item {
+      display: grid;
+      grid-template-columns: 60px 1fr 80px;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .spacing-bar {
+      height: 24px;
+      background: var(--sg-accent);
+      opacity: 0.3;
+      border-radius: 2px;
+    }
+
+    .spacing-token {
+      font-size: 0.6875rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--sg-text-muted);
+    }
+
+    /* ===== EFFECTS ===== */
+    .effects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--sg-gap);
+    }
+
+    .effect-card {
+      background: var(--sg-surface);
+      border: 1px solid var(--sg-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .effect-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .effect-preview {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .effect-code {
+      font-size: 0.6875rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--sg-text-muted);
+      background: var(--sg-surface-2);
+      padding: 0.5rem;
+      border-radius: 4px;
+      word-break: break-all;
+    }
+
+    /* Easing preview */
+    .easing-box {
+      width: 40px;
+      height: 40px;
+      background: var(--sg-accent);
+      border-radius: 4px;
+      opacity: 0.6;
+    }
+
+    .effect-card:hover .easing-box {
+      transform: translateX(120px);
+    }
+
+    .ease-out-expo {
+      transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .ease-in-out-circ {
+      transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+    }
+
+    .ease-default {
+      transition: transform 0.8s ease;
+    }
+
+    /* Shadow preview */
+    .shadow-box {
+      width: 80px;
+      height: 50px;
+      background: var(--sg-surface-2);
+      border-radius: 4px;
+    }
+
+    /* ===== INTERACTIVE PREVIEW ===== */
+    .preview-section {
+      background: var(--sg-surface);
+      border: 1px solid var(--sg-border);
+      border-radius: 8px;
+      padding: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .preview-hero {
+      margin-bottom: 2rem;
+    }
+
+    .preview-hero-name {
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 0.5rem;
+      transition: font-family 0.3s ease;
+    }
+
+    .preview-hero-subtitle {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      opacity: 0.6;
+      margin-bottom: 1.5rem;
+      transition: font-family 0.3s ease;
+    }
+
+    .preview-body-text {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      max-width: 600px;
+      color: rgba(240,237,232,0.8);
+      transition: font-family 0.3s ease;
+    }
+
+    .preview-credit-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--sg-border);
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .preview-credit-row:hover {
+      padding-left: 0.5rem;
+    }
+
+    .preview-credit-title {
+      font-size: 0.9375rem;
+      transition: font-family 0.3s ease, color 0.3s ease;
+    }
+
+    .preview-credit-row:hover .preview-credit-title {
+      color: var(--sg-accent);
+    }
+
+    .preview-credit-network {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.5;
+    }
+
+    /* ===== NAV (sticky TOC) ===== */
+    .sg-nav {
+      position: fixed;
+      top: 50%;
+      right: clamp(0.75rem, 2vw, 2rem);
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .sg-nav a {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transition: background 0.3s ease, transform 0.3s ease;
+      text-decoration: none;
+    }
+
+    .sg-nav a:hover,
+    .sg-nav a.active {
+      background: var(--sg-accent);
+      transform: scale(1.5);
+    }
+
+    .sg-nav a::before {
+      content: attr(data-label);
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--sg-text-muted);
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .sg-nav a:hover::before { opacity: 1; }
+
+    /* ===== FOOTER ===== */
+    .sg-footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--sg-border);
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .sg-footer p {
+      font-size: 0.75rem;
+      color: var(--sg-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .sg-nav { display: none; }
+      .type-scale-row { grid-template-columns: 70px 1fr; }
+      .type-scale-row:nth-child(n) .type-scale-label:last-child { display: none; }
+      .palette-grid { grid-template-columns: 1fr; }
+      .type-pair-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sticky nav dots -->
+<nav class="sg-nav" aria-label="Style guide sections">
+  <a href="#colors-current" data-label="Current Colors" title="Current Colors"></a>
+  <a href="#palettes" data-label="Palettes" title="Color Palettes"></a>
+  <a href="#accents" data-label="Accents" title="Accent Colors"></a>
+  <a href="#typography" data-label="Typography" title="Font Pairings"></a>
+  <a href="#type-scale" data-label="Type Scale" title="Type Scale"></a>
+  <a href="#effects" data-label="Effects" title="Effects"></a>
+  <a href="#preview" data-label="Preview" title="Live Preview"></a>
+</nav>
+
+<div class="sg-container">
+
+  <!-- HEADER -->
+  <header class="sg-header">
+    <h1>Style Guide</h1>
+    <p>Design decisions for the video portfolio. Click any palette, font pairing, or accent to see it applied in the live preview below.</p>
+  </header>
+
+  <!-- ===== SECTION: CURRENT COLORS ===== -->
+  <section class="sg-section" id="colors-current">
+    <h2 class="sg-section-title">Current Color Tokens</h2>
+
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="swatch-circle" style="background: oklch(0.968 0.006 75);"></div>
+        <span class="swatch-name">Off-white</span>
+        <span class="swatch-hex">#f7f4f0</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: oklch(0.918 0.011 77);"></div>
+        <span class="swatch-name">Cream</span>
+        <span class="swatch-hex">#e8e1d5</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: oklch(0.14 0 0);"></div>
+        <span class="swatch-name">Near-black</span>
+        <span class="swatch-hex">#0a0a0a</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: oklch(0.20 0 0);"></div>
+        <span class="swatch-name">Charcoal</span>
+        <span class="swatch-hex">#1e1e1e</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: oklch(0.51 0 0);"></div>
+        <span class="swatch-name">Gray</span>
+        <span class="swatch-hex">#6b6b6b</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: oklch(0.767 0.139 91);"></div>
+        <span class="swatch-name">Gold Accent</span>
+        <span class="swatch-hex">#c4a43a</span>
+      </div>
+    </div>
+    <p class="sg-note">These are the OKLCH-defined CSS custom properties currently in index2.css. The gold accent is used on credit row hovers and section highlights.</p>
+  </section>
+
+  <!-- ===== SECTION: COLOR PALETTES ===== -->
+  <section class="sg-section" id="palettes">
+    <h2 class="sg-section-title">Color Palette Options</h2>
+    <p class="sg-label">Click a palette to apply it to the live preview</p>
+
+    <div class="palette-grid">
+      <!-- Palette A: Current (warm neutrals + gold) -->
+      <div class="palette-card active" data-palette="current"
+           data-bg="#0a0a0a" data-surface="#1e1e1e" data-text="#f7f4f0"
+           data-accent="#c4a43a" data-muted="rgba(247,244,240,0.5)">
+        <span class="palette-card-badge">Active</span>
+        <div class="palette-preview">
+          <div class="palette-preview-swatch" style="background:#0a0a0a;" data-label="bg"></div>
+          <div class="palette-preview-swatch" style="background:#1e1e1e;" data-label="surface"></div>
+          <div class="palette-preview-swatch" style="background:#2a2a2a;" data-label="border"></div>
+          <div class="palette-preview-swatch" style="background:#c4a43a;" data-label="accent"></div>
+          <div class="palette-preview-swatch" style="background:#f7f4f0; color:#0a0a0a;" data-label="text"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Warm Cinema (Current)</div>
+          <div class="palette-desc">Warm off-whites on near-black with gold accent. Editorial, film-inspired warmth.</div>
+          <div class="palette-values">
+            <span class="palette-value">#0a0a0a</span>
+            <span class="palette-value">#1e1e1e</span>
+            <span class="palette-value">#c4a43a</span>
+            <span class="palette-value">#f7f4f0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Palette B: Cool cinema (deep navy + red) -->
+      <div class="palette-card" data-palette="cool-cinema"
+           data-bg="#000000" data-surface="#0F0F23" data-text="#F8FAFC"
+           data-accent="#E11D48" data-muted="rgba(248,250,252,0.5)">
+        <span class="palette-card-badge">Active</span>
+        <div class="palette-preview">
+          <div class="palette-preview-swatch" style="background:#000000;" data-label="bg"></div>
+          <div class="palette-preview-swatch" style="background:#0F0F23;" data-label="surface"></div>
+          <div class="palette-preview-swatch" style="background:#1E1B4B;" data-label="secondary"></div>
+          <div class="palette-preview-swatch" style="background:#E11D48;" data-label="accent"></div>
+          <div class="palette-preview-swatch" style="background:#F8FAFC; color:#000;" data-label="text"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Cool Cinema</div>
+          <div class="palette-desc">Deep navy-black with play-button red. Bold, streaming-platform energy.</div>
+          <div class="palette-values">
+            <span class="palette-value">#000000</span>
+            <span class="palette-value">#0F0F23</span>
+            <span class="palette-value">#E11D48</span>
+            <span class="palette-value">#F8FAFC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Palette C: Monochrome + blue -->
+      <div class="palette-card" data-palette="mono-blue"
+           data-bg="#09090B" data-surface="#18181B" data-text="#FAFAFA"
+           data-accent="#2563EB" data-muted="rgba(250,250,250,0.5)">
+        <span class="palette-card-badge">Active</span>
+        <div class="palette-preview">
+          <div class="palette-preview-swatch" style="background:#09090B;" data-label="bg"></div>
+          <div class="palette-preview-swatch" style="background:#18181B;" data-label="surface"></div>
+          <div class="palette-preview-swatch" style="background:#3F3F46;" data-label="muted"></div>
+          <div class="palette-preview-swatch" style="background:#2563EB;" data-label="accent"></div>
+          <div class="palette-preview-swatch" style="background:#FAFAFA; color:#09090B;" data-label="text"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Monochrome Blue</div>
+          <div class="palette-desc">Pure zinc scale with electric blue accent. Clean, modern, tech-forward.</div>
+          <div class="palette-values">
+            <span class="palette-value">#09090B</span>
+            <span class="palette-value">#18181B</span>
+            <span class="palette-value">#2563EB</span>
+            <span class="palette-value">#FAFAFA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Palette D: Premium dark + gold -->
+      <div class="palette-card" data-palette="dark-gold"
+           data-bg="#0C0A09" data-surface="#1C1917" data-text="#FAFAF9"
+           data-accent="#CA8A04" data-muted="rgba(250,250,249,0.5)">
+        <span class="palette-card-badge">Active</span>
+        <div class="palette-preview">
+          <div class="palette-preview-swatch" style="background:#0C0A09;" data-label="bg"></div>
+          <div class="palette-preview-swatch" style="background:#1C1917;" data-label="surface"></div>
+          <div class="palette-preview-swatch" style="background:#44403C;" data-label="muted"></div>
+          <div class="palette-preview-swatch" style="background:#CA8A04;" data-label="accent"></div>
+          <div class="palette-preview-swatch" style="background:#FAFAF9; color:#0C0A09;" data-label="text"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Stone Gold</div>
+          <div class="palette-desc">Stone-tinted dark with amber gold. Premium, awards-show feel.</div>
+          <div class="palette-values">
+            <span class="palette-value">#0C0A09</span>
+            <span class="palette-value">#1C1917</span>
+            <span class="palette-value">#CA8A04</span>
+            <span class="palette-value">#FAFAF9</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Palette E: Slate + emerald -->
+      <div class="palette-card" data-palette="slate-emerald"
+           data-bg="#020617" data-surface="#0F172A" data-text="#F8FAFC"
+           data-accent="#10B981" data-muted="rgba(248,250,252,0.5)">
+        <span class="palette-card-badge">Active</span>
+        <div class="palette-preview">
+          <div class="palette-preview-swatch" style="background:#020617;" data-label="bg"></div>
+          <div class="palette-preview-swatch" style="background:#0F172A;" data-label="surface"></div>
+          <div class="palette-preview-swatch" style="background:#1E293B;" data-label="muted"></div>
+          <div class="palette-preview-swatch" style="background:#10B981;" data-label="accent"></div>
+          <div class="palette-preview-swatch" style="background:#F8FAFC; color:#020617;" data-label="text"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Midnight Emerald</div>
+          <div class="palette-desc">Deep slate-blue with emerald accent. Sophisticated, editorial edge.</div>
+          <div class="palette-values">
+            <span class="palette-value">#020617</span>
+            <span class="palette-value">#0F172A</span>
+            <span class="palette-value">#10B981</span>
+            <span class="palette-value">#F8FAFC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Palette F: Pure black + warm white -->
+      <div class="palette-card" data-palette="pure-minimal"
+           data-bg="#000000" data-surface="#111111" data-text="#ededed"
+           data-accent="#ededed" data-muted="rgba(237,237,237,0.45)">
+        <span class="palette-card-badge">Active</span>
+        <div class="palette-preview">
+          <div class="palette-preview-swatch" style="background:#000000;" data-label="bg"></div>
+          <div class="palette-preview-swatch" style="background:#111111;" data-label="surface"></div>
+          <div class="palette-preview-swatch" style="background:#222222;" data-label="border"></div>
+          <div class="palette-preview-swatch" style="background:#555555;" data-label="muted"></div>
+          <div class="palette-preview-swatch" style="background:#ededed; color:#000;" data-label="text"></div>
+        </div>
+        <div class="palette-info">
+          <div class="palette-name">Pure Monochrome</div>
+          <div class="palette-desc">No accent color. Content is the color. Maximum focus on video work.</div>
+          <div class="palette-values">
+            <span class="palette-value">#000000</span>
+            <span class="palette-value">#111111</span>
+            <span class="palette-value">#ededed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: ACCENT COLORS ===== -->
+  <section class="sg-section" id="accents">
+    <h2 class="sg-section-title">Accent Color Options</h2>
+    <p class="sg-label">The accent is used for hover states, active indicators, and subtle highlights. Click to preview.</p>
+
+    <div class="accent-grid">
+      <div class="accent-card active" data-accent="#c4a43a">
+        <div class="accent-swatch" style="background: #c4a43a;"></div>
+        <div class="accent-name">Gold (Current)</div>
+        <div class="accent-hex">#c4a43a</div>
+        <div class="accent-usage">Warm, editorial, cinematic</div>
+      </div>
+      <div class="accent-card" data-accent="#CA8A04">
+        <div class="accent-swatch" style="background: #CA8A04;"></div>
+        <div class="accent-name">Amber</div>
+        <div class="accent-hex">#CA8A04</div>
+        <div class="accent-usage">Premium, awards-show</div>
+      </div>
+      <div class="accent-card" data-accent="#E11D48">
+        <div class="accent-swatch" style="background: #E11D48;"></div>
+        <div class="accent-name">Rose</div>
+        <div class="accent-hex">#E11D48</div>
+        <div class="accent-usage">Bold, play-button, streaming</div>
+      </div>
+      <div class="accent-card" data-accent="#2563EB">
+        <div class="accent-swatch" style="background: #2563EB;"></div>
+        <div class="accent-name">Blue</div>
+        <div class="accent-hex">#2563EB</div>
+        <div class="accent-usage">Clean, professional, tech</div>
+      </div>
+      <div class="accent-card" data-accent="#10B981">
+        <div class="accent-swatch" style="background: #10B981;"></div>
+        <div class="accent-name">Emerald</div>
+        <div class="accent-hex">#10B981</div>
+        <div class="accent-usage">Fresh, editorial, modern</div>
+      </div>
+      <div class="accent-card" data-accent="#ededed">
+        <div class="accent-swatch" style="background: #ededed;"></div>
+        <div class="accent-name">White</div>
+        <div class="accent-hex">#ededed</div>
+        <div class="accent-usage">No accent, pure content focus</div>
+      </div>
+    </div>
+
+    <!-- Accent in context -->
+    <div class="accent-demo">
+      <p class="sg-label" style="margin-bottom:1rem;">Accent in context</p>
+      <div class="accent-demo-row">
+        <span class="accent-demo-text" id="accent-demo-heading" style="color: var(--sg-accent);">Heading Highlight</span>
+        <a class="accent-demo-link" id="accent-demo-link" style="color: var(--sg-accent); border-color: var(--sg-accent);">View Project</a>
+        <button class="accent-demo-btn" id="accent-demo-btn" style="color: var(--sg-accent); border-color: var(--sg-accent);">Contact</button>
+        <span class="accent-demo-dot" id="accent-demo-dot" style="background: var(--sg-accent);"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: TYPOGRAPHY ===== -->
+  <section class="sg-section" id="typography">
+    <h2 class="sg-section-title">Font Pairing Options</h2>
+    <p class="sg-label">Click a pairing to apply it to the live preview</p>
+
+    <div class="type-pair-grid">
+      <!-- Current: IvyPresto + Aktiv -->
+      <div class="type-pair-card active" data-pair="current"
+           data-heading-font="'ivypresto-display', Georgia, serif"
+           data-body-font="'aktiv-grotesk', -apple-system, sans-serif">
+        <div class="type-pair-heading" style="font-family: 'ivypresto-display', Georgia, serif;">
+          Randy Counsman
+        </div>
+        <div class="type-pair-body" style="font-family: 'aktiv-grotesk', sans-serif;">
+          A creative director and producer specializing in nonfiction content across television, streaming, news, and social media. Over a decade of visual storytelling.
+        </div>
+        <div class="type-pair-meta">
+          <span class="type-pair-names">IvyPresto Display + Aktiv Grotesk</span>
+          <span class="type-pair-tag">Active</span>
+        </div>
+      </div>
+
+      <!-- Playfair + Inter -->
+      <div class="type-pair-card" data-pair="playfair-inter"
+           data-heading-font="'Playfair Display', Georgia, serif"
+           data-body-font="'Inter', -apple-system, sans-serif">
+        <div class="type-pair-heading" style="font-family: 'Playfair Display', Georgia, serif;">
+          Randy Counsman
+        </div>
+        <div class="type-pair-body" style="font-family: 'Inter', sans-serif;">
+          A creative director and producer specializing in nonfiction content across television, streaming, news, and social media. Over a decade of visual storytelling.
+        </div>
+        <div class="type-pair-meta">
+          <span class="type-pair-names">Playfair Display + Inter</span>
+          <span class="type-pair-tag">Active</span>
+        </div>
+      </div>
+
+      <!-- Cormorant + Montserrat -->
+      <div class="type-pair-card" data-pair="cormorant-montserrat"
+           data-heading-font="'Cormorant', Georgia, serif"
+           data-body-font="'Montserrat', -apple-system, sans-serif">
+        <div class="type-pair-heading" style="font-family: 'Cormorant', Georgia, serif;">
+          Randy Counsman
+        </div>
+        <div class="type-pair-body" style="font-family: 'Montserrat', sans-serif;">
+          A creative director and producer specializing in nonfiction content across television, streaming, news, and social media. Over a decade of visual storytelling.
+        </div>
+        <div class="type-pair-meta">
+          <span class="type-pair-names">Cormorant + Montserrat</span>
+          <span class="type-pair-tag">Active</span>
+        </div>
+      </div>
+
+      <!-- Archivo + Space Grotesk -->
+      <div class="type-pair-card" data-pair="archivo-space"
+           data-heading-font="'Archivo', sans-serif"
+           data-body-font="'Space Grotesk', sans-serif">
+        <div class="type-pair-heading" style="font-family: 'Archivo', sans-serif; font-weight: 600;">
+          Randy Counsman
+        </div>
+        <div class="type-pair-body" style="font-family: 'Space Grotesk', sans-serif;">
+          A creative director and producer specializing in nonfiction content across television, streaming, news, and social media. Over a decade of visual storytelling.
+        </div>
+        <div class="type-pair-meta">
+          <span class="type-pair-names">Archivo + Space Grotesk</span>
+          <span class="type-pair-tag">Active</span>
+        </div>
+      </div>
+
+      <!-- Bodoni Moda + Jost -->
+      <div class="type-pair-card" data-pair="bodoni-jost"
+           data-heading-font="'Bodoni Moda', Georgia, serif"
+           data-body-font="'Jost', -apple-system, sans-serif">
+        <div class="type-pair-heading" style="font-family: 'Bodoni Moda', Georgia, serif;">
+          Randy Counsman
+        </div>
+        <div class="type-pair-body" style="font-family: 'Jost', sans-serif;">
+          A creative director and producer specializing in nonfiction content across television, streaming, news, and social media. Over a decade of visual storytelling.
+        </div>
+        <div class="type-pair-meta">
+          <span class="type-pair-names">Bodoni Moda + Jost</span>
+          <span class="type-pair-tag">Active</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: TYPE SCALE ===== -->
+  <section class="sg-section" id="type-scale">
+    <h2 class="sg-section-title">Type Scale</h2>
+    <p class="sg-label">Current scale from index2.css using clamp() for fluid sizing</p>
+
+    <div class="type-scale">
+      <div class="type-scale-row">
+        <span class="type-scale-label">Hero</span>
+        <span class="type-scale-sample" style="font-family:'ivypresto-display',Georgia,serif; font-size:clamp(3rem,8vw,6rem); font-weight:300; line-height:1;">Randy Counsman</span>
+      </div>
+      <div class="type-scale-row">
+        <span class="type-scale-label">Section</span>
+        <span class="type-scale-sample" style="font-family:'ivypresto-display',Georgia,serif; font-size:clamp(2rem,4vw,3rem); font-weight:400;">Additional Credits</span>
+      </div>
+      <div class="type-scale-row">
+        <span class="type-scale-label">Card Title</span>
+        <span class="type-scale-sample" style="font-family:'ivypresto-display',Georgia,serif; font-size:clamp(1.5rem,3vw,2.5rem); font-weight:400; line-height:1.2;">The American Buffalo</span>
+      </div>
+      <div class="type-scale-row">
+        <span class="type-scale-label">Clients</span>
+        <span class="type-scale-sample" style="font-family:'ivypresto-display',Georgia,serif; font-size:clamp(1.25rem,3vw,2rem); font-weight:400; line-height:1.4;">Telling stories that resonate</span>
+      </div>
+      <div class="type-scale-row">
+        <span class="type-scale-label">Body</span>
+        <span class="type-scale-sample" style="font-size:0.9375rem; line-height:1.6;">Nonfiction video development and production across television, streaming, news, and social platforms.</span>
+      </div>
+      <div class="type-scale-row">
+        <span class="type-scale-label">Caption</span>
+        <span class="type-scale-sample" style="font-size:0.875rem; color:rgba(240,237,232,0.6);">Creative Director / Producer</span>
+      </div>
+      <div class="type-scale-row">
+        <span class="type-scale-label">Overline</span>
+        <span class="type-scale-sample" style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.15em; color:rgba(240,237,232,0.7);">Video Development & Production</span>
+      </div>
+      <div class="type-scale-row">
+        <span class="type-scale-label">Micro</span>
+        <span class="type-scale-sample" style="font-size:0.625rem; text-transform:uppercase; letter-spacing:0.1em; color:rgba(240,237,232,0.4);">2024</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: EFFECTS ===== -->
+  <section class="sg-section" id="effects">
+    <h2 class="sg-section-title">Motion & Effects</h2>
+    <p class="sg-label">Hover each card to see the easing curve in action</p>
+
+    <div class="effects-grid">
+      <div class="effect-card">
+        <div class="effect-name">Ease Out Expo</div>
+        <div class="effect-preview">
+          <div class="easing-box ease-out-expo"></div>
+        </div>
+        <div class="effect-code">cubic-bezier(0.19, 1, 0.22, 1)</div>
+        <p class="sg-note">Primary easing. Used for reveals, row transitions, corner animations.</p>
+      </div>
+      <div class="effect-card">
+        <div class="effect-name">Ease In-Out Circ</div>
+        <div class="effect-preview">
+          <div class="easing-box ease-in-out-circ"></div>
+        </div>
+        <div class="effect-code">cubic-bezier(0.85, 0, 0.15, 1)</div>
+        <p class="sg-note">Secondary easing. Used for symmetrical transitions.</p>
+      </div>
+      <div class="effect-card">
+        <div class="effect-name">CSS ease (default)</div>
+        <div class="effect-preview">
+          <div class="easing-box ease-default"></div>
+        </div>
+        <div class="effect-code">ease</div>
+        <p class="sg-note">Fallback for simple hover states and opacity transitions.</p>
+      </div>
+      <div class="effect-card">
+        <div class="effect-name">Card Hover Corners</div>
+        <div class="effect-preview">
+          <div style="width:80px; height:50px; position:relative; border:1px solid rgba(255,255,255,0.15);">
+            <div style="position:absolute; top:-4px; left:-4px; width:10px; height:10px; border-top:1px solid var(--sg-text); border-left:1px solid var(--sg-text); transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);"></div>
+            <div style="position:absolute; top:-4px; right:-4px; width:10px; height:10px; border-top:1px solid var(--sg-text); border-right:1px solid var(--sg-text); transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);"></div>
+            <div style="position:absolute; bottom:-4px; left:-4px; width:10px; height:10px; border-bottom:1px solid var(--sg-text); border-left:1px solid var(--sg-text); transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);"></div>
+            <div style="position:absolute; bottom:-4px; right:-4px; width:10px; height:10px; border-bottom:1px solid var(--sg-text); border-right:1px solid var(--sg-text); transition: transform 0.5s cubic-bezier(0.19,1,0.22,1);"></div>
+          </div>
+        </div>
+        <div class="effect-code">L-shaped corners expand 12px on hover</div>
+        <p class="sg-note">Gallery card signature interaction. Corners fly outward on hover.</p>
+      </div>
+      <div class="effect-card">
+        <div class="effect-name">Video Gradient</div>
+        <div class="effect-preview">
+          <div style="width:120px; height:50px; border-radius:4px; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.2) 45%, transparent 65%);"></div>
+        </div>
+        <div class="effect-code">4-stop gradient overlay on video cards</div>
+        <p class="sg-note">Ensures text readability over video thumbnails.</p>
+      </div>
+      <div class="effect-card">
+        <div class="effect-name">Row Hover Tint</div>
+        <div class="effect-preview">
+          <div style="width:160px; padding:8px 12px; background: oklch(0.767 0.139 91 / 0.08); border-radius:2px;">
+            <span style="font-size:0.75rem; color: oklch(0.767 0.139 91);">Credit Title</span>
+            <span style="float:right; font-size:0.625rem; opacity:0.5;">NBC</span>
+          </div>
+        </div>
+        <div class="effect-code">background: oklch(accent / 0.08)</div>
+        <p class="sg-note">Credit rows get a subtle tinted background + accent text on hover.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: SPACING ===== -->
+  <section class="sg-section" id="spacing">
+    <h2 class="sg-section-title">Spacing Scale</h2>
+
+    <div class="spacing-scale">
+      <div class="spacing-item">
+        <span class="spacing-token">--xs</span>
+        <div class="spacing-bar" style="width: 8px;"></div>
+        <span class="spacing-token">0.5rem</span>
+      </div>
+      <div class="spacing-item">
+        <span class="spacing-token">--sm</span>
+        <div class="spacing-bar" style="width: 16px;"></div>
+        <span class="spacing-token">1rem</span>
+      </div>
+      <div class="spacing-item">
+        <span class="spacing-token">--md</span>
+        <div class="spacing-bar" style="width: 24px;"></div>
+        <span class="spacing-token">1.5rem</span>
+      </div>
+      <div class="spacing-item">
+        <span class="spacing-token">--lg</span>
+        <div class="spacing-bar" style="width: 32px;"></div>
+        <span class="spacing-token">2rem</span>
+      </div>
+      <div class="spacing-item">
+        <span class="spacing-token">--xl</span>
+        <div class="spacing-bar" style="width: 48px;"></div>
+        <span class="spacing-token">3rem</span>
+      </div>
+      <div class="spacing-item">
+        <span class="spacing-token">section</span>
+        <div class="spacing-bar" style="width: 96px;"></div>
+        <span class="spacing-token">clamp(4rem, 10vh, 8rem)</span>
+      </div>
+      <div class="spacing-item">
+        <span class="spacing-token">container</span>
+        <div class="spacing-bar" style="width: 64px;"></div>
+        <span class="spacing-token">clamp(1.5rem, 5vw, 4rem)</span>
+      </div>
+      <div class="spacing-item">
+        <span class="spacing-token">gutter</span>
+        <div class="spacing-bar" style="width: 20px;"></div>
+        <span class="spacing-token">20px</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION: LIVE PREVIEW ===== -->
+  <section class="sg-section" id="preview">
+    <h2 class="sg-section-title">Live Preview</h2>
+    <p class="sg-label">This updates when you click palettes, fonts, or accents above</p>
+
+    <div class="preview-section" id="live-preview">
+      <!-- Simulated hero -->
+      <div class="preview-hero">
+        <div class="preview-hero-name" id="preview-heading" style="font-family:'ivypresto-display',Georgia,serif; font-size:clamp(2.5rem,6vw,4rem);">
+          Randy Counsman
+        </div>
+        <div class="preview-hero-subtitle" id="preview-subtitle">
+          Video Development & Production
+        </div>
+      </div>
+
+      <!-- Simulated body text -->
+      <div style="margin-bottom:2rem;">
+        <p class="preview-body-text" id="preview-body">
+          A creative director and producer specializing in nonfiction content across television, streaming, news, and social media. From concept development to final delivery, bringing visual stories to life with precision and purpose.
+        </p>
+      </div>
+
+      <!-- Simulated credits table -->
+      <div>
+        <p class="sg-label" style="margin-bottom:0.75rem;">Credits table simulation</p>
+        <div class="preview-credit-row" id="preview-row-1">
+          <span class="preview-credit-title" id="preview-credit-1">The American Buffalo</span>
+          <span class="preview-credit-network">PBS</span>
+        </div>
+        <div class="preview-credit-row" id="preview-row-2">
+          <span class="preview-credit-title" id="preview-credit-2">VICE News Tonight</span>
+          <span class="preview-credit-network">HBO</span>
+        </div>
+        <div class="preview-credit-row" id="preview-row-3">
+          <span class="preview-credit-title" id="preview-credit-3">Wyatt Earp and the Cowboy War</span>
+          <span class="preview-credit-network">Netflix</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="sg-footer">
+  <div class="sg-container">
+    <p>Style Guide for Randy Counsman Portfolio</p>
+  </div>
+</footer>
+
+<script>
+  // ===== STATE =====
+  const state = {
+    palette: 'current',
+    headingFont: "'ivypresto-display', Georgia, serif",
+    bodyFont: "'aktiv-grotesk', -apple-system, sans-serif",
+    accent: '#c4a43a',
+    bg: '#0a0a0a',
+    surface: '#1e1e1e',
+    text: '#f7f4f0',
+    muted: 'rgba(247,244,240,0.5)',
+  };
+
+  // ===== PALETTE CARDS =====
+  document.querySelectorAll('.palette-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.palette-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+
+      state.bg = card.dataset.bg;
+      state.surface = card.dataset.surface;
+      state.text = card.dataset.text;
+      state.accent = card.dataset.accent;
+      state.muted = card.dataset.muted;
+
+      // Also update accent cards to match
+      document.querySelectorAll('.accent-card').forEach(a => {
+        a.classList.toggle('active', a.dataset.accent === state.accent);
+      });
+
+      updatePreview();
+    });
+  });
+
+  // ===== ACCENT CARDS =====
+  document.querySelectorAll('.accent-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.accent-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      state.accent = card.dataset.accent;
+      updatePreview();
+      updateAccentDemo();
+    });
+  });
+
+  // ===== FONT PAIR CARDS =====
+  document.querySelectorAll('.type-pair-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.type-pair-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      state.headingFont = card.dataset.headingFont;
+      state.bodyFont = card.dataset.bodyFont;
+      updatePreview();
+    });
+  });
+
+  // ===== UPDATE PREVIEW =====
+  function updatePreview() {
+    const preview = document.getElementById('live-preview');
+    preview.style.background = state.surface;
+    preview.style.borderColor = `${state.text}15`;
+
+    // Heading
+    const heading = document.getElementById('preview-heading');
+    heading.style.fontFamily = state.headingFont;
+    heading.style.color = state.text;
+
+    // Subtitle
+    const subtitle = document.getElementById('preview-subtitle');
+    subtitle.style.fontFamily = state.bodyFont;
+    subtitle.style.color = state.muted;
+
+    // Body
+    const body = document.getElementById('preview-body');
+    body.style.fontFamily = state.bodyFont;
+    body.style.color = state.muted;
+
+    // Credit rows
+    document.querySelectorAll('.preview-credit-row').forEach(row => {
+      row.style.borderColor = `${state.text}15`;
+    });
+
+    document.querySelectorAll('.preview-credit-title').forEach(title => {
+      title.style.fontFamily = state.bodyFont;
+      title.style.color = state.text;
+    });
+
+    document.querySelectorAll('.preview-credit-network').forEach(net => {
+      net.style.color = state.muted;
+    });
+
+    // Update CSS variable for accent demo
+    document.documentElement.style.setProperty('--sg-accent', state.accent);
+
+    // Credit row hover colors
+    const style = document.getElementById('dynamic-hover-style') || document.createElement('style');
+    style.id = 'dynamic-hover-style';
+    style.textContent = `
+      .preview-credit-row:hover { background: ${state.accent}14; padding-left: 0.5rem; }
+      .preview-credit-row:hover .preview-credit-title { color: ${state.accent} !important; }
+    `;
+    if (!style.parentNode) document.head.appendChild(style);
+  }
+
+  function updateAccentDemo() {
+    const accent = state.accent;
+    document.getElementById('accent-demo-heading').style.color = accent;
+    document.getElementById('accent-demo-link').style.color = accent;
+    document.getElementById('accent-demo-link').style.borderColor = accent;
+    const btn = document.getElementById('accent-demo-btn');
+    btn.style.color = accent;
+    btn.style.borderColor = accent;
+    btn.onmouseenter = () => { btn.style.background = accent; };
+    btn.onmouseleave = () => { btn.style.background = 'transparent'; btn.style.color = accent; };
+    document.getElementById('accent-demo-dot').style.background = accent;
+  }
+
+  // ===== NAV ACTIVE STATE =====
+  const sections = document.querySelectorAll('.sg-section');
+  const navLinks = document.querySelectorAll('.sg-nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => { if (s.id) observer.observe(s); });
+
+  // ===== COPY HEX ON CLICK =====
+  document.querySelectorAll('.palette-value, .accent-hex, .swatch-hex').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const text = el.textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'copied!';
+        setTimeout(() => { el.textContent = orig; }, 1000);
+      });
+    });
+    el.style.cursor = 'pointer';
+  });
+
+  // Init accent demo
+  updateAccentDemo();
+</script>
+
+</body>
+</html>

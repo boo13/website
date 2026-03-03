@@ -170,7 +170,7 @@
 
 .slide-goes-big .grid-item {
   overflow: hidden;
-  background: oklch(0.20 0 0);
+  background: oklch(0.2 0 0);
   content-visibility: auto;
 }
 
