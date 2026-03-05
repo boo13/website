@@ -1,5 +1,6 @@
 .DS_Store
 .vscode
+.venv
 # Created by https://www.toptal.com/developers/gitignore/api/svelte,node,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=svelte,node,visualstudiocode
 
@@ -184,9 +185,13 @@ public/video/
 
 # Playwright CLI snapshot yamls 
 .playwright-cli/*.yml
+.playwright-cli/*.png
 
 # Screenshots folder used for visual testing
 screenshots/
 
 # Architecture overview from Amp
 docs/AmpOverview/
+
+# Temp folder
+tmp/
