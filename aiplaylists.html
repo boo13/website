@@ -10,7 +10,6 @@
     />
     <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css" />
     <link rel="stylesheet" href="https://use.typekit.net/gya6int.css" />
-    <!-- Styles injected by Vite from src/main-aiplaylists.js -->
   </head>
   <body>
     <div class="feed-shell">
@@ -24,34 +23,28 @@
           <div class="hero__copy">
             <h1>AI playlists with enough shape to leave fingerprints.</h1>
             <p class="hero__lede">
-              Daily experiments, one-off deep dives, and machine-assisted curation from the AIHome stack.
-              Every entry links out to YouTube Music and ships from a public JSON feed instead of hand-edited
-              markdown.
+              Daily experiments, one-off deep dives, and machine-assisted curation from the AIHome
+              stack. Every entry links out to YouTube Music.
             </p>
           </div>
           <div class="hero__meta">
             <div class="meta-card">
               <span class="meta-card__label">Feed</span>
-              <strong id="feed-count" class="meta-card__value">...</strong>
-              <span class="meta-card__note">public playlists</span>
+              <strong id="feed-count" class="meta-card__value">&hellip;</strong>
+              <span class="meta-card__note">playlists</span>
             </div>
             <div class="meta-card">
               <span class="meta-card__label">Status</span>
               <strong id="feed-status" class="meta-card__value">Loading</strong>
-              <span id="feed-updated" class="meta-card__note">Waiting for feed</span>
+              <span id="feed-updated" class="meta-card__note"></span>
             </div>
           </div>
         </div>
       </header>
 
-      <main class="playlist-feed">
-        <section class="playlist-feed__intro">
-          <p>
-            This page stays intentionally narrow: title, source, date, description, optional quote, track count, and
-            the exit ramp to YouTube Music. No search box. No pagination theatre.
-          </p>
-        </section>
+      <hr class="hero__divider" aria-hidden="true" />
 
+      <main class="playlist-feed">
         <section id="feed-state" class="feed-state" aria-live="polite">
           <div class="feed-state__card">
             <p class="feed-state__eyebrow">Loading</p>
