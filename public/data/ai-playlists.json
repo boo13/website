@@ -1,0 +1,252 @@
+{
+  "generated_at": "2026-03-15T15:50:44-04:00",
+  "count": 9,
+  "items": [
+    {
+      "slug": "2026-03-15-nlm-acid-jazz-90s-grooves-2026-03-15",
+      "title": "NLM: Acid Jazz & 90s Grooves 2026-03-15",
+      "source": "nlm",
+      "playlist_kind": "daily_nlm",
+      "genre": "Acid Jazz & 90s Grooves",
+      "description": "Acid jazz emerged in the 1990s as a UK hybrid of American soul music that brought a new electronic twist to 1970s influences. The genre fostered crossover success by bridging generations, uniting older jazz enthusiasts with younger hip hop fans. It also pioneered new live configurations by seamlessly blending traditional live bands with DJs on stage.",
+      "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist.",
+      "quote_source": "King Britt, 'We Cross Examine with Old Sonic DNA' in Organised Sound",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EkH8MS82SlWzvGNdQiDu0h9",
+      "track_count": 20,
+      "created_at": "2026-03-15T00:00:00+00:00",
+      "tracks_preview": [
+        {
+          "artist": "magazinu1",
+          "title": "SOUL II SOUL - Jazzie's Groove (HQ Sound)"
+        },
+        {
+          "artist": "platine 45",
+          "title": "Soul II Soul - Pleasure dome ''Album Version'' (1997)"
+        },
+        {
+          "artist": "Acid Jazz Records",
+          "title": "BRAND NEW HEAVIES - 'Dream Come True' (official video - Acid Jazz Records)"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-14-codex-basslines-for-difficult-people",
+      "title": "Codex: Basslines for Difficult People",
+      "source": "codex",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "Mutant disco and post-punk-funk from the 1979-1983 corridor where no-wave abrasion, dub space, disco momentum, and bass-first minimalism all started speaking the same language. Built around tracks with enough critical or artist commentary to support a quote-backed playlist email.",
+      "quote": null,
+      "quote_source": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EkZPiNdYteVsqLDlZwUz2BN",
+      "track_count": 10,
+      "created_at": "2026-03-14T00:00:00+00:00",
+      "tracks_preview": [
+        {
+          "artist": "ESG",
+          "title": "U.F.O"
+        },
+        {
+          "artist": "Liquid Liquid",
+          "title": "Cavern"
+        },
+        {
+          "artist": "Bush Tetras",
+          "title": "Too Many Creeps"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-13-sonnet-rust-and-blue-a-rothko-meditation",
+      "title": "Sonnet: Rust and Blue — A Rothko Meditation",
+      "source": "sonnet",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "Inspired by Mark Rothko's *No. 61 (Rust and Blue)* (1953). Ambient, neo-classical, and drone music that mirrors the painting's luminous stillness, emotional weight, and tension between warm rust and cool blue. Sent to randycounsman@gmail.com with painting image and per-track explanations.",
+      "quote": null,
+      "quote_source": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElwQh7Bi9XKA23lJnVxgjFf",
+      "track_count": 10,
+      "created_at": "2026-03-13T00:00:00+00:00",
+      "tracks_preview": [
+        {
+          "artist": "Morton Feldman",
+          "title": "Rothko Chapel"
+        },
+        {
+          "artist": "Arvo Pärt",
+          "title": "Spiegel im Spiegel"
+        },
+        {
+          "artist": "Brian Eno",
+          "title": "An Ending (Ascent)"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-13-sonnet-delta-shadows-obscure-architects-of-the-blues",
+      "title": "Sonnet: Delta Shadows — Obscure Architects of the Blues",
+      "source": "sonnet",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "The unheralded pioneers who built the blues — artists so influential that everyone knows their sound but almost no one knows their name. Pre-war Delta and city blues from artists who shaped Robert Johnson, Muddy Waters, and everything that followed. 12 tracks.",
+      "quote": null,
+      "quote_source": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Enzu8nDaUZOrUOIGCkUYmJP",
+      "track_count": 12,
+      "created_at": "2026-03-13T00:00:00+00:00",
+      "tracks_preview": [
+        {
+          "artist": "Charley Patton",
+          "title": "Pony Blues"
+        },
+        {
+          "artist": "Blind Blake",
+          "title": "Police Dog Blues"
+        },
+        {
+          "artist": "Tommy Johnson",
+          "title": "Big Road Blues"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-13-sonnet-bad-brains-adjacent-best-of-the-billing",
+      "title": "Sonnet: Bad Brains Adjacent — Best of the Billing",
+      "source": "sonnet",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "36 bands that shared a documented concert bill with Bad Brains, each represented by their signature track. Source: ChatGPT conversation using Concert Archives data.",
+      "quote": null,
+      "quote_source": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Enk7UNRe8U3VTtWrHFFOOco",
+      "track_count": 36,
+      "created_at": "2026-03-13T00:00:00+00:00",
+      "tracks_preview": [
+        {
+          "artist": "Circle Jerks",
+          "title": "Wild in the Streets"
+        },
+        {
+          "artist": "Living Colour",
+          "title": "Cult of Personality"
+        },
+        {
+          "artist": "Leeway",
+          "title": "Rise and Fall"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-13-codex-velvet-traffic",
+      "title": "Codex: Velvet Traffic",
+      "source": "codex",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "A warm, left-field groove travelogue for a listener whose taste already jumps from post-punk and jazz to Japanese music and deep catalog discovery. Ethiopian jazz, Brazilian psych-funk, synth-soul, downtown minimalism, and late-night city-pop glow all sit in the same lane here.",
+      "quote": null,
+      "quote_source": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EmTfiDon5eTE85I7KyLJqBE",
+      "track_count": 13,
+      "created_at": "2026-03-13T00:00:00+00:00",
+      "tracks_preview": [
+        {
+          "artist": "Cortex",
+          "title": "Huit octobre 1971"
+        },
+        {
+          "artist": "Mulatu Astatke",
+          "title": "Tezeta (Nostalgia)"
+        },
+        {
+          "artist": "Dorothy Ashby",
+          "title": "Soul Vibrations"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-12-sonnet-tokyo-burning",
+      "title": "Sonnet: Tokyo Burning",
+      "source": "sonnet",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "Japanese punk, hardcore, and no-wave from the 80s and 90s. Spans Blue Hearts pop-punk to GISM noise-metal to Shonen Knife power-pop to Boredoms chaos.",
+      "quote": null,
+      "quote_source": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-El3y8iqdvDps4XEmaEMCBwM",
+      "track_count": 21,
+      "created_at": "2026-03-12T00:00:00+00:00",
+      "tracks_preview": [
+        {
+          "artist": "The Blue Hearts",
+          "title": "TRAIN-TRAIN",
+          "status": "✅"
+        },
+        {
+          "artist": "The Blue Hearts",
+          "title": "Linda Linda",
+          "status": "✅"
+        },
+        {
+          "artist": "The Blue Hearts",
+          "title": "情熱の薔薇 (Jounetsu no Bara)",
+          "status": "✅"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-12-sonnet-orange-and-yellow",
+      "title": "Sonnet: Orange and Yellow",
+      "source": "sonnet",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "Inspired by Mark Rothko's *Orange and Yellow* (1956) — warm, luminous, meditative color field painting. Ambient, spiritual jazz, neo-classical, and drone for deep listening.",
+      "quote": null,
+      "quote_source": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElWhWMLE9zs0BxoFQJqxAEM",
+      "track_count": 20,
+      "created_at": "2026-03-12T00:00:00+00:00",
+      "tracks_preview": [
+        {
+          "artist": "Grouper",
+          "title": "Alien Observer"
+        },
+        {
+          "artist": "Stars of the Lid",
+          "title": "Articulate Silences, Pt. 1"
+        },
+        {
+          "artist": "Alice Coltrane",
+          "title": "Journey in Satchidananda (Full Album)"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-12-sonnet-new-horizons",
+      "title": "Sonnet: New Horizons",
+      "source": "sonnet",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "Discovery playlist — all new artists, zero overlap with existing library. Inspired by existing taste across post-punk, soul, hip-hop, jazz, and experimental.",
+      "quote": null,
+      "quote_source": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElShsalDWhpYQUgI3InVzYT",
+      "track_count": 32,
+      "created_at": "2026-03-12T00:00:00+00:00",
+      "tracks_preview": [
+        {
+          "artist": "Yard Act",
+          "title": "The Overload"
+        },
+        {
+          "artist": "Dry Cleaning",
+          "title": "Scratchcard Lanyard"
+        },
+        {
+          "artist": "shame",
+          "title": "Alphabet"
+        }
+      ]
+    }
+  ]
+}

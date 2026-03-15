@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Playlists | Randy Counsman</title>
+    <meta
+      name="description"
+      content="A public archive of AI-generated playlists created through AIHome and published to YouTube Music."
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/gya6int.css" />
+    <!-- Styles injected by Vite from src/main-aiplaylists.js -->
+  </head>
+  <body>
+    <div class="feed-shell">
+      <div class="feed-glow feed-glow--top" aria-hidden="true"></div>
+      <div class="feed-glow feed-glow--bottom" aria-hidden="true"></div>
+
+      <header class="hero">
+        <a class="hero__home" href="/">Randy Counsman</a>
+        <p class="hero__eyebrow">AIHome Public Feed</p>
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <h1>AI playlists with enough shape to leave fingerprints.</h1>
+            <p class="hero__lede">
+              Daily experiments, one-off deep dives, and machine-assisted curation from the AIHome stack.
+              Every entry links out to YouTube Music and ships from a public JSON feed instead of hand-edited
+              markdown.
+            </p>
+          </div>
+          <div class="hero__meta">
+            <div class="meta-card">
+              <span class="meta-card__label">Feed</span>
+              <strong id="feed-count" class="meta-card__value">...</strong>
+              <span class="meta-card__note">public playlists</span>
+            </div>
+            <div class="meta-card">
+              <span class="meta-card__label">Status</span>
+              <strong id="feed-status" class="meta-card__value">Loading</strong>
+              <span id="feed-updated" class="meta-card__note">Waiting for feed</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="playlist-feed">
+        <section class="playlist-feed__intro">
+          <p>
+            This page stays intentionally narrow: title, source, date, description, optional quote, track count, and
+            the exit ramp to YouTube Music. No search box. No pagination theatre.
+          </p>
+        </section>
+
+        <section id="feed-state" class="feed-state" aria-live="polite">
+          <div class="feed-state__card">
+            <p class="feed-state__eyebrow">Loading</p>
+            <h2>Pulling the latest public feed.</h2>
+            <p>Reading <code>/data/ai-playlists.json</code> and assembling the archive.</p>
+          </div>
+        </section>
+
+        <section id="playlist-list" class="playlist-list" hidden></section>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main-aiplaylists.js"></script>
+  </body>
+</html>
