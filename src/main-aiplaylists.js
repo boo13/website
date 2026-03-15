@@ -1,4 +1,5 @@
 import './styles/aiplaylists.css';
+import { CDN_BASE } from './config.js';
 
 const FEED_URL = '/data/ai-playlists.json';
 
@@ -107,6 +108,14 @@ function createTrackPreview(tracks) {
   return `<div class="playlist-card__tracks"><ul>${items}</ul></div>`;
 }
 
+function coverImagePath(value) {
+  const raw = String(value ?? '').trim();
+  if (!raw) return null;
+  if (/^https?:\/\//.test(raw)) return raw;
+  const path = raw.replace(/^\/+/, '');
+  return `${CDN_BASE}/${path}`;
+}
+
 /* ─── Card rendering ─────────────────────────────────────── */
 
 function renderPlaylists(items) {
@@ -117,6 +126,7 @@ function renderPlaylists(items) {
         const hasUrl =
           typeof item.playlist_url === 'string' && item.playlist_url.startsWith('https://');
         const coverStyle = coverBackground(item.title);
+        const coverSrc = coverImagePath(item.cover_image);
 
         const trackHtml = createTrackPreview(item.tracks_preview);
         const ctaHtml = hasUrl
@@ -132,7 +142,13 @@ function renderPlaylists(items) {
           <span class="playlist-card__index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
 
           <div class="playlist-card__cover">
-            <div class="playlist-card__cover-art" style="background: ${coverStyle}"></div>
+            <div class="playlist-card__cover-art" style="background: ${coverStyle}">
+              ${
+                coverSrc
+                  ? `<img class="playlist-card__cover-image" src="${escHtml(coverSrc)}" alt="" loading="lazy" decoding="async" width="512" height="512">`
+                  : ''
+              }
+            </div>
             <span class="playlist-card__cover-badge">${escHtml(item.track_count)} tracks</span>
             ${
               hasUrl
@@ -171,6 +187,16 @@ function renderPlaylists(items) {
       },
     )
     .join('');
+
+  for (const img of playlistList.querySelectorAll('.playlist-card__cover-image')) {
+    img.addEventListener(
+      'error',
+      () => {
+        img.remove();
+      },
+      { once: true },
+    );
+  }
 
   // Staggered entrance
   requestAnimationFrame(() => {

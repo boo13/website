@@ -24,6 +24,10 @@ video-publish file *ARGS:
           --file "$f" --content-type "video/${ext}" --remote
     done
 
+# Generate Gemini cover art for any playlist missing a cover image
+cover-gen *ARGS:
+    node scripts/generate-playlist-covers.mjs {{ ARGS }}
+
 # Run a full visual audit across desktop, tablet, and phone sizes
 visual-audit:
     #!/usr/bin/env bash
