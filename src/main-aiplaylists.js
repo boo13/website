@@ -118,8 +118,19 @@ function renderPlaylists(items) {
           typeof item.playlist_url === 'string' && item.playlist_url.startsWith('https://');
         const coverStyle = coverBackground(item.title);
 
+        const trackHtml = createTrackPreview(item.tracks_preview);
+        const ctaHtml = hasUrl
+          ? `<a class="playlist-card__cta" href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener">Open in YTM ${ARROW_ICON}</a>`
+          : '';
+        const footerHtml =
+          trackHtml || ctaHtml
+            ? `<div class="playlist-card__footer">${trackHtml}${ctaHtml}</div>`
+            : '';
+
         return `
         <article class="playlist-card" style="--card-delay:${index * 80}ms">
+          <span class="playlist-card__index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
+
           <div class="playlist-card__cover">
             <div class="playlist-card__cover-art" style="background: ${coverStyle}"></div>
             <span class="playlist-card__cover-badge">${escHtml(item.track_count)} tracks</span>
@@ -131,17 +142,16 @@ function renderPlaylists(items) {
           </div>
 
           <div class="playlist-card__content">
-            <div class="playlist-card__tags">
+            <div class="playlist-card__eyebrow">
               <span class="playlist-card__tag playlist-card__tag--kind">${labelForKind(item.playlist_kind)}</span>
+              <span class="playlist-card__eyebrow-sep" aria-hidden="true">/</span>
               <span class="playlist-card__tag playlist-card__tag--source playlist-card__tag--${sourceKey}">${labelForSource(item.source)}</span>
+              <span class="playlist-card__eyebrow-sep" aria-hidden="true">/</span>
+              <span class="playlist-card__eyebrow-date">${formatDate(item.created_at)}</span>
+              ${item.genre ? `<span class="playlist-card__eyebrow-sep" aria-hidden="true">/</span><span class="playlist-card__eyebrow-genre">${escHtml(item.genre)}</span>` : ''}
             </div>
 
             <h2>${escHtml(item.title)}</h2>
-
-            <div class="playlist-card__meta">
-              <span>${formatDate(item.created_at)}</span>
-              ${item.genre ? `<span class="playlist-card__genre">${escHtml(item.genre)}</span>` : ''}
-            </div>
 
             <p class="playlist-card__description">${escHtml(item.description)}</p>
 
@@ -154,13 +164,7 @@ function renderPlaylists(items) {
                 : ''
             }
 
-            ${createTrackPreview(item.tracks_preview)}
-
-            ${
-              hasUrl
-                ? `<a class="playlist-card__cta" href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener">Open in YouTube Music ${ARROW_ICON}</a>`
-                : ''
-            }
+            ${footerHtml}
           </div>
         </article>
       `;
