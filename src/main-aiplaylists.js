@@ -54,7 +54,11 @@ function labelForKind(kind) {
 }
 
 function stripSourcePrefix(title) {
-  return String(title ?? '').replace(/^[^:]+:\s*/, '');
+  return String(title ?? '')
+    .replace(/^[^:]+:\s*/, '')
+    .replace(/^\d{4}-\d{2}-\d{2}\s*/, '')
+    .replace(/\s*\d{4}-\d{2}-\d{2}$/, '')
+    .trim();
 }
 
 /* ─── Generative cover art ───────────────────────────────── */
