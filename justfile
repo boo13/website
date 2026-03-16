@@ -24,6 +24,10 @@ video-publish file *ARGS:
           --file "$f" --content-type "video/${ext}" --remote
     done
 
+# Scaffold a new project detail page from Projects.json
+project-scaffold id:
+    node scripts/scaffold-project.mjs {{ id }}
+
 # Run a full visual audit across desktop, tablet, and phone sizes
 visual-audit:
     #!/usr/bin/env bash
