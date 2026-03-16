@@ -28,6 +28,10 @@ video-publish file *ARGS:
 cover-gen *ARGS:
     node scripts/generate-playlist-covers.mjs {{ ARGS }}
 
+# Scaffold a new project detail page from Projects.json
+project-scaffold id:
+    node scripts/scaffold-project.mjs {{ id }}
+
 # Run a full visual audit across desktop, tablet, and phone sizes
 visual-audit:
     #!/usr/bin/env bash
