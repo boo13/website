@@ -106,6 +106,7 @@ src/
 - **SplitText mask wrapper sizing** — Mask wrappers can be taller than word elements (line-height, font metrics). Absolutely-positioned overlays inside wrappers need `word.offsetTop` positioning, not `top: 0`, or they'll extend beyond the visible text area.
 - **Flex + overflow:hidden blocks column child width** — A flex container with `overflow: hidden` prevents children from calculating their width when the track switches to `flex-direction: column` (circular dependency resolves to 0). Override the container to `display: block; overflow: visible` in the media query, or the children render at 0×0.
 - **Use ScrollTrigger, not IntersectionObserver, when ScrollSmoother is active** — ScrollSmoother uses transform-based scrolling, so IntersectionObserver sees real DOM positions instead of the smoothed visual positions. This causes timing mismatches for enter/leave detection. Always use ScrollTrigger for viewport-based behavior on this site.
+- **SVG viewBox + width:100% in positioned containers** — SVG elements with `width: 100%` inside `position: absolute` or `position: fixed` containers that lack an explicit `width` create circular sizing dependencies (parent shrink-wraps to child, child sizes to parent). Always set explicit width on the positioned container. This also breaks GSAP Flip.fit since both targets collapse to the same intrinsic size.
 
 # Communication Style
 - Be direct, concise, and critical. Do not use excessive positive affirmations like "That's a great idea," "Absolutely," or "Great question."
@@ -115,3 +116,41 @@ src/
 
 ## Further Documentation
 - **Video**: Read `docs/Video.md` when adding, uploading, or converting videos
+
+## Agent Content Management
+
+The portfolio's content is data-driven via `public/data/Projects.json`. A Vite plugin (`build/inject-gallery.js`) reads this file and injects gallery card HTML into `index.html` at build time. Agents can manage content by editing the JSON file — no HTML editing needed for gallery changes.
+
+### Adding a project to the gallery
+
+1. Add or update the project entry in `public/data/Projects.json` with gallery fields:
+   - `"featured": true` — includes the project in the gallery
+   - `"galleryOrder": N` — controls card position (lower = earlier)
+   - `"gallerySlug": "short-slug"` — overrides `data-project` attribute if different from `id` (optional)
+   - `"networkLogo": "images/logos/Logo.png"` — network logo shown on card (optional)
+   - `"networkLogoAlt": "Network Name"` — alt text for network logo (optional)
+   - `"hoverVideo": "video/filename.webm"` — R2 path for hover preview (optional)
+   - `"hoverVideoFallback": "video/filename.mp4"` — R2 path for mp4 fallback source (optional, for Safari)
+   - `"lightboxVideo": "video/filename.mp4"` — R2 path for click-to-play lightbox (optional)
+2. Gallery cards are injected at build time — run `npm run dev` to see changes, `npm run build` for production.
+
+### Adding a project detail page
+
+Run: `just project-scaffold <project-id>`
+
+This generates `projects/<id>/index.html` from the project's JSON entry. Edit the generated page to add full credits and customize.
+
+### Removing a project from the gallery
+
+Set `"featured": false` or remove the `featured` field. The project remains in the credits table.
+
+### Reordering gallery cards
+
+Change the `galleryOrder` values. Lower numbers appear first.
+
+### Adding a new project entirely
+
+1. Add the project entry to `public/data/Projects.json`
+2. Upload video/images: `just video-publish <file>` for videos, copy images to `public/images/portfolio/`
+3. Optionally feature it: set `featured: true` and `galleryOrder`
+4. Optionally create a detail page: `just project-scaffold <project-id>`
