@@ -5,10 +5,6 @@
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
 import { textMaskRiseWords } from '../animations/text-mask-rise.js';
 
-const prefersReducedMotion = window.matchMedia(
-  '(prefers-reduced-motion: reduce)'
-).matches;
-
 function initCaseHero(ctx) {
   const hero = document.querySelector('.case-study__hero');
   if (!hero) return;
@@ -267,12 +263,11 @@ export function initProjectCaseStudy() {
   const root = document.querySelector('.case-study__hero');
   if (!root) return;
 
-  if (prefersReducedMotion) {
-    // Content is visible via CSS reduced-motion rules; skip all JS animations
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }
 
-  const ctx = gsap.context(() => {});
+  const ctx = gsap.context(() => {}, document.body);
 
   initCaseHero(ctx);
   initCaseIntro(ctx);

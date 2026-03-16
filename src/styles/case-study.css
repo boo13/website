@@ -15,7 +15,6 @@
 .case-study__hero-image {
   position: absolute;
   inset: 0;
-  will-change: transform;
 }
 
 .case-study__hero-image img {
@@ -125,7 +124,6 @@
 .case-study__statement-image {
   position: absolute;
   inset: -10% 0;
-  will-change: transform;
 }
 
 .case-study__statement-image img {
