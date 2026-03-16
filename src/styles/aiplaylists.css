@@ -55,15 +55,29 @@ code {
   overflow: hidden;
 }
 
+/* Fine grain */
 .feed-shell::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 200;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 256px 256px;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Coarser paper texture underneath */
+.feed-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 199;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 400px 400px;
+  mix-blend-mode: overlay;
 }
 
 /* ─── Ambient glow ───────────────────────────────────────────── */
@@ -102,66 +116,48 @@ code {
 
 /* ─── Hero ────────────────────────────────────────────────────── */
 .hero {
-  padding: clamp(2rem, 5vw, 4.5rem) clamp(1.5rem, 3vw, 2.5rem);
-  padding-bottom: clamp(2.5rem, 5vw, 5rem);
+  padding: clamp(3.5rem, 10vw, 8rem) clamp(1.5rem, 3vw, 2.5rem) clamp(2.5rem, 5vw, 5rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.hero__home {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--pl-dim);
-  transition: color 200ms ease;
-}
-
-.hero__home:hover {
-  color: var(--pl-ink);
-}
-
-.hero__eyebrow {
-  margin: 0 0 1.5rem;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--pl-accent);
-}
-
-.hero__grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: end;
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero h1 {
   margin: 0;
-  max-width: 14ch;
   font-family: var(--pl-display);
-  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  font-size: clamp(3rem, 9vw, 7rem);
   font-weight: 300;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
 }
 
 .hero__lede {
-  margin: 1.6rem 0 0;
-  max-width: 34rem;
+  margin: 1.8rem 0 0;
+  max-width: 36rem;
   font-family: var(--pl-body);
-  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
   font-weight: 300;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--pl-muted);
   letter-spacing: 0.01em;
+  text-align: center;
 }
 
 /* ─── Meta pills ─────────────────────────────────────────────── */
 .hero__meta {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.65rem;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
 }
 
 .meta-card {
@@ -273,7 +269,7 @@ code {
 .playlist-card {
   position: relative;
   display: grid;
-  grid-template-columns: 2.5rem clamp(140px, 14vw, 190px) 1fr;
+  grid-template-columns: 2.5rem clamp(180px, 18vw, 280px) 1fr;
   column-gap: clamp(1.5rem, 2.5vw, 2.5rem);
   padding: clamp(2rem, 4vw, 3rem) 0;
   border-bottom: 1px solid var(--pl-line);
@@ -594,24 +590,9 @@ code {
     width: min(100%, calc(100vw - 1.5rem));
   }
 
-  .hero__grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .hero__meta {
-    flex-direction: row;
-    align-items: stretch;
-    flex-wrap: wrap;
-  }
-
-  .hero h1 {
-    max-width: 12ch;
-  }
-
-  /* Tablet: drop index column */
+  /* Tablet: drop index column, keep cover prominent */
   .playlist-card {
-    grid-template-columns: clamp(100px, 22vw, 130px) 1fr;
+    grid-template-columns: clamp(140px, 28vw, 200px) 1fr;
     column-gap: 1.25rem;
     padding: 1.75rem 0;
   }
@@ -635,15 +616,16 @@ code {
 }
 
 @media (max-width: 480px) {
-  /* Mobile: stack — wide cover band, then content */
+  /* Mobile: stack — square cover, then content */
   .playlist-card {
     grid-template-columns: 1fr;
     padding: 1.5rem 0;
   }
 
   .playlist-card__cover {
-    aspect-ratio: 16 / 7;
-    width: 100%;
+    aspect-ratio: 1;
+    width: min(100%, 320px);
+    margin: 0 auto;
   }
 
   .playlist-card__cover-badge {
@@ -652,8 +634,8 @@ code {
     left: 0.5rem;
   }
 
-  .hero__lede {
-    font-size: 0.92rem;
+  .hero h1 {
+    font-size: clamp(2.8rem, 14vw, 4rem);
   }
 
   .meta-card {
