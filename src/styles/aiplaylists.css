@@ -116,18 +116,18 @@ code {
 
 /* ─── Hero ────────────────────────────────────────────────────── */
 .hero {
-  padding: clamp(3.5rem, 10vw, 8rem) clamp(1.5rem, 3vw, 2.5rem) clamp(2.5rem, 5vw, 5rem);
-  text-align: center;
+  padding: clamp(4rem, 12vw, 10rem) clamp(1.5rem, 3vw, 2.5rem) clamp(3rem, 6vw, 6rem);
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: flex-start;
+  gap: clamp(2rem, 4vw, 3rem);
 }
 
 .hero__copy {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .hero h1 {
@@ -140,7 +140,7 @@ code {
 }
 
 .hero__lede {
-  margin: 1.8rem 0 0;
+  margin: 2rem 0 0;
   max-width: 36rem;
   font-family: var(--pl-body);
   font-size: clamp(0.9rem, 1.5vw, 1.05rem);
@@ -148,7 +148,7 @@ code {
   line-height: 1.7;
   color: var(--pl-muted);
   letter-spacing: 0.01em;
-  text-align: center;
+  text-align: left;
 }
 
 /* ─── Meta pills ─────────────────────────────────────────────── */
@@ -157,7 +157,7 @@ code {
   flex-direction: row;
   gap: 0.65rem;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .meta-card {
@@ -201,7 +201,7 @@ code {
 
 /* ─── Feed area ──────────────────────────────────────────────── */
 .playlist-feed {
-  padding: clamp(1.5rem, 3vw, 2.5rem) 0 5rem;
+  padding: clamp(2rem, 4vw, 3.5rem) 0 6rem;
 }
 
 .playlist-feed__intro {
@@ -250,6 +250,7 @@ code {
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 300;
   line-height: 1;
+  letter-spacing: 0.04em;
 }
 
 .feed-state__card p {
@@ -270,8 +271,8 @@ code {
   position: relative;
   display: grid;
   grid-template-columns: 2.5rem clamp(180px, 18vw, 280px) 1fr;
-  column-gap: clamp(1.5rem, 2.5vw, 2.5rem);
-  padding: clamp(2rem, 4vw, 3rem) 0;
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
   border-bottom: 1px solid var(--pl-line);
   background: transparent;
   overflow: visible;
@@ -457,12 +458,12 @@ code {
 
 /* Title */
 .playlist-card h2 {
-  margin: 0 0 0.65rem;
+  margin: 0 0 0.85rem;
   font-family: var(--pl-display);
   font-size: clamp(1.45rem, 2.8vw, 2.1rem);
   font-weight: 300;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
 }
 
 /* Description */
@@ -552,6 +553,17 @@ code {
   color: var(--pl-muted);
 }
 
+.track-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.track-link:hover {
+  color: var(--pl-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* CTA */
 .playlist-card__cta {
   display: inline-flex;
@@ -587,14 +599,18 @@ code {
 @media (max-width: 768px) {
   .hero,
   .playlist-feed {
-    width: min(100%, calc(100vw - 1.5rem));
+    width: min(100%, calc(100vw - 2rem));
   }
 
-  /* Tablet: drop index column, keep cover prominent */
+  .hero {
+    padding: clamp(3rem, 8vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Tablet: drop index, keep 2-col but with safer sizing */
   .playlist-card {
-    grid-template-columns: clamp(140px, 28vw, 200px) 1fr;
+    grid-template-columns: clamp(120px, 22vw, 180px) 1fr;
     column-gap: 1.25rem;
-    padding: 1.75rem 0;
+    padding: 2rem 0;
   }
 
   .playlist-card__index {
@@ -602,7 +618,8 @@ code {
   }
 
   .playlist-card h2 {
-    font-size: clamp(1.25rem, 5vw, 1.6rem);
+    font-size: clamp(1.15rem, 3.5vw, 1.5rem);
+    letter-spacing: 0.03em;
   }
 
   .playlist-card__description {
@@ -613,19 +630,44 @@ code {
   .playlist-card__quote {
     display: none;
   }
+
+  .playlist-card__footer {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .playlist-card__tracks ul {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .playlist-card__tracks li:not(:last-child)::after {
+    display: none;
+  }
+
+  .playlist-card__cta {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 480px) {
-  /* Mobile: stack — square cover, then content */
+  .hero,
+  .playlist-feed {
+    width: min(100%, calc(100vw - 1.5rem));
+  }
+
+  /* Mobile: stack — cover above content, no overlap */
   .playlist-card {
     grid-template-columns: 1fr;
-    padding: 1.5rem 0;
+    row-gap: 1rem;
+    padding: 2rem 0;
   }
 
   .playlist-card__cover {
     aspect-ratio: 1;
-    width: min(100%, 320px);
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
   }
 
   .playlist-card__cover-badge {
@@ -635,20 +677,24 @@ code {
   }
 
   .hero h1 {
-    font-size: clamp(2.8rem, 14vw, 4rem);
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
+  }
+
+  .hero__lede {
+    font-size: 0.88rem;
   }
 
   .meta-card {
     font-size: 0.72rem;
   }
 
-  .playlist-card__footer {
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  .playlist-card h2 {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
   }
 
-  .playlist-card__cta {
-    margin-left: 0;
+  .playlist-card__description {
+    -webkit-line-clamp: 3;
+    font-size: 0.88rem;
   }
 }
 

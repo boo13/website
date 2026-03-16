@@ -101,6 +101,11 @@ const ARROW_ICON = `<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" s
 
 /* ─── Track preview ──────────────────────────────────────── */
 
+function trackSearchUrl(track) {
+  const q = [track.artist, track.title].filter(Boolean).join(' ');
+  return `https://music.youtube.com/search?q=${encodeURIComponent(q)}`;
+}
+
 function createTrackPreview(tracks) {
   if (!Array.isArray(tracks) || tracks.length === 0) return '';
 
@@ -108,8 +113,8 @@ function createTrackPreview(tracks) {
     .slice(0, 3)
     .map((t) => {
       const artist = escHtml(t.artist || 'Unknown');
-      const title = escHtml(t.title || 'Untitled');
-      return `<li><span class="track-artist">${artist}</span> ${title}</li>`;
+      const href = escHtml(trackSearchUrl(t));
+      return `<li><a class="track-link" href="${href}" target="_blank" rel="noopener">${artist}</a></li>`;
     })
     .join('');
 
