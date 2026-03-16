@@ -12,7 +12,10 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": null,
-      "preview": null
+      "preview": "images/upNEXT_Examples_Mockup_01_web/upNEXT_Examples_Mockup_01_web_00001.jpg",
+      "featured": true,
+      "galleryOrder": 2,
+      "hoverVideo": "video/upnext_cover_11.20_explained.mp4"
     },
     {
       "id": "sitting-bull",
@@ -26,7 +29,14 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt18382254/",
-      "preview": "images/portfolio/sitting-bull.jpg"
+      "preview": "images/portfolio/sitting-bull.jpg",
+      "featured": true,
+      "galleryOrder": 3,
+      "networkLogo": "images/logos/History.png",
+      "networkLogoAlt": "History Channel",
+      "hoverVideo": "video/SittingBull_10sClip01.webm",
+      "hoverVideoFallback": "video/SittingBull_10sClip01.mp4",
+      "lightboxVideo": "video/SittingBull_Teaser_Trailer.mp4"
     },
     {
       "id": "wyatt-earp-and-the-cowboy-war",
@@ -40,7 +50,14 @@
       "videoVertical": "./video/Cowboy.War.10secReel.v01_9x16.webm",
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt33038128/"
+      "imdbLink": "https://www.imdb.com/title/tt33038128/",
+      "featured": true,
+      "galleryOrder": 1,
+      "gallerySlug": "wyatt-earp",
+      "networkLogo": "images/logos/Netflix_white2.png",
+      "networkLogoAlt": "Netflix",
+      "hoverVideo": "video/Cowboy.War.10secReel.v01_1920x1080.webm",
+      "lightboxVideo": "video/Cowboy.War.10secReel.v01_1920x1080.webm"
     },
     {
       "id": "george-rise-of-a-revolutionary",
@@ -250,7 +267,12 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt6903234/"
+      "imdbLink": "https://www.imdb.com/title/tt6903234/",
+      "featured": true,
+      "galleryOrder": 5,
+      "gallerySlug": "pope",
+      "networkLogo": "images/logos/CNN_logo_red.svg",
+      "networkLogoAlt": "CNN"
     },
     {
       "id": "hamilton-building-america",
@@ -292,7 +314,15 @@
       "videoVertical": null,
       "poster": null,
       "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt2167393/"
+      "imdbLink": "https://www.imdb.com/title/tt2167393/",
+      "featured": true,
+      "galleryOrder": 4,
+      "gallerySlug": "mwba",
+      "networkLogo": "images/logos/History.png",
+      "networkLogoAlt": "History Channel",
+      "hoverVideo": "video/MWBA_Protest_CraneShot.webm",
+      "hoverVideoFallback": "video/MWBA_Protest_CraneShot.mp4",
+      "lightboxVideo": "video/MWBA_Trailer_%28360p%29.mp4"
     },
     {
       "id": "inside-the-nsa",
