@@ -53,6 +53,10 @@ function labelForKind(kind) {
   return KIND_LABELS[kind] || escHtml(kind) || 'Playlist';
 }
 
+function stripSourcePrefix(title) {
+  return String(title ?? '').replace(/^[^:]+:\s*/, '');
+}
+
 /* ─── Generative cover art ───────────────────────────────── */
 
 function hashCode(s) {
@@ -152,7 +156,7 @@ function renderPlaylists(items) {
             <span class="playlist-card__cover-badge">${escHtml(item.track_count)} tracks</span>
             ${
               hasUrl
-                ? `<a class="playlist-card__cover-play" href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener" aria-label="Open ${escHtml(item.title)} in YouTube Music">${PLAY_ICON}</a>`
+                ? `<a class="playlist-card__cover-play" href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener" aria-label="Open ${escHtml(stripSourcePrefix(item.title))} in YouTube Music">${PLAY_ICON}</a>`
                 : `<span class="playlist-card__cover-play">${PLAY_ICON}</span>`
             }
           </div>
@@ -167,7 +171,7 @@ function renderPlaylists(items) {
               ${item.genre ? `<span class="playlist-card__eyebrow-sep" aria-hidden="true">/</span><span class="playlist-card__eyebrow-genre">${escHtml(item.genre)}</span>` : ''}
             </div>
 
-            <h2>${escHtml(item.title)}</h2>
+            <h2>${escHtml(stripSourcePrefix(item.title))}</h2>
 
             <p class="playlist-card__description">${escHtml(item.description)}</p>
 
