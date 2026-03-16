@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import { readdirSync, existsSync } from 'node:fs';
 import { defineConfig } from 'vite';
+import injectGallery from './build/inject-gallery.js';
 
 // Auto-discover project pages: projects/*/index.html
 function discoverProjects() {
@@ -24,6 +25,7 @@ function discoverProjects() {
 export default defineConfig({
   root: '.',
   publicDir: 'public',
+  plugins: [injectGallery()],
   build: {
     outDir: 'dist',
     rollupOptions: {
