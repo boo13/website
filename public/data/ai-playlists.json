@@ -1,7 +1,69 @@
 {
-  "generated_at": "2026-03-16T02:05:39+00:00",
-  "count": 9,
+  "generated_at": "2026-03-16T18:48:15+00:00",
+  "count": 11,
   "items": [
+    {
+      "slug": "2026-03-16-nlm-deep-focus-idm-2026-03-16",
+      "title": "NLM: Deep Focus IDM 2026-03-16",
+      "source": "nlm",
+      "playlist_kind": "ai_curated",
+      "genre": "IDM",
+      "description": "This playlist harnesses the intricate rhythms and atmospheric synthesizers of IDM to maintain momentum and clarity during deep work sessions. Rooted in the electronic experimentation and vibrant scenes discussed by King Britt, these instrumental tracks provide an immersive, forward-moving soundscape. The music balances energetic drive with analytical structure to perfectly power your cognitive focus throughout a busy Monday.",
+      "quote": "We cross examine with old sonic DNA.",
+      "quote_source": "'We Cross Examine with Old Sonic DNA': King Britt and Tara Rodgers in conversation on Blacktronika, music technology and pedagogy | Organised Sound",
+      "cover_image": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-En8yarlyRBGnLH69HErxLfg",
+      "track_count": 12,
+      "created_at": "2026-03-16T18:43:44+00:00",
+      "tracks_preview": [
+        {
+          "artist": "Aphex Twin",
+          "title": "Alberto Balsalm",
+          "video_id": "ulj5UJ5GHvE"
+        },
+        {
+          "artist": "Boards of Canada",
+          "title": "Roygbiv",
+          "video_id": "SM4tQcUt_mQ"
+        },
+        {
+          "artist": "Autechre",
+          "title": "Teartear",
+          "video_id": "UJ76iblZcZ8"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-16-nlm-acid-jazz-essentials-2026-03-16",
+      "title": "NLM: Acid Jazz Essentials 2026-03-16",
+      "source": "nlm",
+      "playlist_kind": "daily_nlm",
+      "genre": "Acid Jazz",
+      "description": "Acid jazz emerged in the 1990s as a vibrant UK hybrid of American soul music that incorporated a new electronic twist [1]. The genre successfully bridged generations by bringing together older jazz enthusiasts and younger hip hop fans in a unique cultural crossover [2]. It frequently featured innovative live configurations, such as live bands performing alongside DJs, which helped change the landscape of club music [1].",
+      "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States.",
+      "quote_source": "King Britt in 'We Cross Examine with Old Sonic DNA' [1]",
+      "cover_image": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-El2hIZI4xF_r26YAJaj_t7Z",
+      "track_count": 18,
+      "created_at": "2026-03-16T07:04:16+00:00",
+      "tracks_preview": [
+        {
+          "artist": "magazinu1",
+          "title": "SOUL II SOUL - Jazzie's Groove (HQ Sound)",
+          "video_id": "LVBdbmda0I8"
+        },
+        {
+          "artist": "AcidJazz",
+          "title": "The Best of Acid Jazz Funk & Soul Vol 3 | Warm Breeze & Cool Drinks [Funk, House, Acid Jazz Vibes]",
+          "video_id": "vHcTC8ZM6l8"
+        },
+        {
+          "artist": "Acid Jazz Records",
+          "title": "BRAND NEW HEAVIES - 'Dream Come True' (official video - Acid Jazz Records)",
+          "video_id": "mRjEejt-ViQ"
+        }
+      ]
+    },
     {
       "slug": "2026-03-15-nlm-acid-jazz-90s-grooves-2026-03-15",
       "title": "NLM: Acid Jazz & 90s Grooves 2026-03-15",
