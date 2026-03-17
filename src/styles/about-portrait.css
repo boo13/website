@@ -1,0 +1,151 @@
+/**
+ * About Portrait Section
+ * Dual-layer: Three.js canvas (behind) + DOM photo/tagline (on top)
+ * Pinned by ScrollTrigger — no CSS sticky needed.
+ */
+
+/* =====================================================
+   SECTION LAYOUT
+====================================================== */
+.about-portrait {
+  position: relative;
+  height: 100vh;
+  background: var(--color-nearblack);
+  overflow: hidden;
+}
+
+@supports (height: 100svh) {
+  .about-portrait {
+    height: 100svh;
+  }
+}
+
+/* =====================================================
+   WEBGL CANVAS
+====================================================== */
+.about-portrait__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+
+/* =====================================================
+   DOM OVERLAY (photo + tagline)
+====================================================== */
+.about-portrait__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.about-portrait__photo {
+  max-width: min(88vw, 1100px);
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* =====================================================
+   TAGLINE
+====================================================== */
+.about-portrait__tagline {
+  margin-top: 1.5rem;
+  overflow: hidden;
+  font-family: var(--ff-display);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-offwhite);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.about-portrait__tagline-inner {
+  display: block;
+}
+
+/* =====================================================
+   MID-SCROLL TEXT
+====================================================== */
+.about-portrait__midtext {
+  /* Hidden by default — text lives as a 3D plane in the WebGL scene.
+     This DOM element is the font source + reduced-motion fallback. */
+  position: absolute;
+  bottom: 15%;
+  left: 0;
+  width: 100%;
+  font-family: var(--ff-display);
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-offwhite);
+  letter-spacing: 0.04em;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.about-portrait__midtext-inner {
+  display: block;
+}
+
+/* =====================================================
+   RESPONSIVE
+====================================================== */
+@media (max-width: 768px) {
+  .about-portrait__photo {
+    max-width: 92vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-portrait__photo {
+    max-width: 96vw;
+  }
+
+  .about-portrait__tagline {
+    font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+  }
+
+  .about-portrait__midtext {
+    font-size: clamp(1rem, 4vw, 1.4rem);
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION
+====================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .about-portrait {
+    height: auto;
+  }
+
+  .about-portrait__canvas {
+    display: none;
+  }
+
+  .about-portrait__overlay {
+    position: relative;
+    padding: 4rem 2rem;
+  }
+
+  .about-portrait__midtext {
+    position: relative;
+    opacity: 1;
+    margin-top: 1.5rem;
+  }
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Depth Displacement Sandbox</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08090c;
+      --ink: #e8ecf4;
+      --accent: #f06b4a;
+      --panel: rgba(15, 18, 26, 0.85);
+      --border: rgba(244, 246, 251, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "IBM Plex Mono", monospace;
+      overflow-x: hidden;
+    }
+
+    #canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      display: block;
+    }
+
+    #scroll-proxy {
+      position: relative;
+      z-index: 1;
+      height: 400vh;
+      pointer-events: none;
+    }
+    .scroll-label {
+      position: absolute;
+      left: 32px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(244, 246, 251, 0.25);
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+    .scroll-label::before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: rgba(244, 246, 251, 0.2);
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    /* Controls panel */
+    #controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      width: 260px;
+      background: var(--panel);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 0.75rem;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    #controls.visible { opacity: 1; }
+    .ctrl-section { margin-bottom: 14px; }
+    .ctrl-section:last-child { margin-bottom: 0; }
+    .ctrl-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: rgba(244, 246, 251, 0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.65rem;
+      margin-bottom: 6px;
+    }
+    .ctrl-label .val { color: var(--ink); font-weight: 500; }
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(244, 246, 251, 0.12);
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Stats */
+    #stats {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 10;
+      font-size: 0.65rem;
+      color: rgba(244, 246, 251, 0.3);
+      line-height: 1.6;
+    }
+
+    /* Scroll hint */
+    #scroll-hint {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(244, 246, 251, 0.3);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+    #scroll-hint.hidden { display: none; }
+
+    /* Loading */
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-inner { text-align: center; }
+    .loader-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(244, 246, 251, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-title">Loading Textures</div>
+    </div>
+  </div>
+
+  <div id="controls">
+    <div class="ctrl-section">
+      <div class="ctrl-label">Depth Strength <span class="val" id="depth-val">1.0</span></div>
+      <input type="range" id="depth-strength" min="0" max="3" step="0.05" value="1.0">
+    </div>
+    <div class="ctrl-section">
+      <div class="ctrl-label">Mesh Detail <span class="val" id="detail-val">256</span></div>
+      <input type="range" id="mesh-detail" min="32" max="512" step="32" value="256">
+    </div>
+    <div class="ctrl-section">
+      <div class="ctrl-label" style="font-size: 0.55rem; color: rgba(244,246,251,0.35); line-height: 1.5;">
+        Scroll to reveal depth. Adjust detail then reload.
+      </div>
+    </div>
+  </div>
+
+  <div id="stats"></div>
+  <div id="scroll-hint">Scroll to explore</div>
+
+  <div id="scroll-proxy">
+    <div class="scroll-label" style="top: 5%;">Flat Image</div>
+    <div class="scroll-label" style="top: 25%;">Depth Reveal</div>
+    <div class="scroll-label" style="top: 50%;">Orbit</div>
+    <div class="scroll-label" style="top: 75%;">Return</div>
+  </div>
+
+  <script type="module" src="/src/main-sandbox-3d-depth.js"></script>
+</body>
+</html>
