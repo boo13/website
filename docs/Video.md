@@ -1,6 +1,6 @@
 ## Video Hosting Overview
 - Videos served from **Cloudflare R2** bucket `portfolio-assets`
-- CDN URL (reference only — always use `CDN_BASE` from `src/config.js` in JS): `https://pub-722bb50dc4774406afca73534059fdd8.r2.dev`
+- CDN URL (reference only — always use `CDN_BASE` from `src/config.js` in JS): `https://media.randycounsman.com`
 - All `<video>` elements must have the `crossorigin` attribute
 
 ## Commands
@@ -22,3 +22,6 @@
 2. Optimize + upload in one step: `just video-publish public/video/YourSource.mp4 --suffix 360p`
 3. Reference via `CDN_BASE` in JS or full URL in HTML
 4. Add `crossorigin` attribute to the `<video>` element
+5. Move the optimized output files to `public/video/uploaded/` to mark them as done
+
+`public/video/` root = source files not yet uploaded. `public/video/uploaded/` = confirmed on R2.
