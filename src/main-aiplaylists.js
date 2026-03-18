@@ -159,7 +159,9 @@ function renderPlaylists(items) {
             <div class="playlist-card__cover-art" style="background: ${coverStyle}">
               ${
                 coverSrc
-                  ? `<img class="playlist-card__cover-image" src="${escHtml(coverSrc)}" alt="" loading="lazy" decoding="async" width="512" height="512">`
+                  ? coverSrc.toLowerCase().endsWith('.mp4')
+                    ? `<video class="playlist-card__cover-image" src="${escHtml(coverSrc)}" autoplay loop muted playsinline poster="${escHtml(coverSrc.replace('.mp4', '.jpg'))}"></video>`
+                    : `<img class="playlist-card__cover-image" src="${escHtml(coverSrc)}" alt="" loading="lazy" decoding="async" width="512" height="512">`
                   : ''
               }
             </div>
@@ -213,6 +215,7 @@ function renderPlaylists(items) {
     .join('');
 
   for (const img of playlistList.querySelectorAll('.playlist-card__cover-image')) {
+    if (img.tagName === 'VIDEO') continue;
     img.addEventListener(
       'error',
       () => {
