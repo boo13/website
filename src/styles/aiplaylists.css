@@ -719,7 +719,6 @@ code {
     transform: scale(1);
   }
 }
-<<<<<<< HEAD
 
 /* ─── Audio intro panel ──────────────────────────────────────── */
 .playlist-card__listen-toggle {
@@ -758,5 +757,3 @@ code {
   line-height: 1.5;
   color: var(--pl-muted);
 }
-=======
->>>>>>> 284ad73 (feat: restore and update AI playlists page with generated covers)

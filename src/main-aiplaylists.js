@@ -121,11 +121,7 @@ function createTrackPreview(tracks) {
   return `<div class="playlist-card__tracks"><ul>${items}</ul></div>`;
 }
 
-<<<<<<< HEAD
 function resolveAssetPath(value) {
-=======
-function coverImagePath(value) {
->>>>>>> 284ad73 (feat: restore and update AI playlists page with generated covers)
   const raw = String(value ?? '').trim();
   if (!raw) return null;
   if (/^https?:\/\//.test(raw)) return raw;
@@ -143,20 +139,12 @@ function renderPlaylists(items) {
         const hasUrl =
           typeof item.playlist_url === 'string' && item.playlist_url.startsWith('https://');
         const coverStyle = coverBackground(item.title);
-<<<<<<< HEAD
         const coverSrc = resolveAssetPath(item.cover_image);
         const audioSrc = resolveAssetPath(item.audio_intro_url);
 
         const trackHtml = createTrackPreview(item.tracks_preview);
         const ctaHtml = hasUrl
           ? `<a class="playlist-card__cta" href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener">Open in YouTube Music ${ARROW_ICON}</a>`
-=======
-        const coverSrc = coverImagePath(item.cover_image);
-
-        const trackHtml = createTrackPreview(item.tracks_preview);
-        const ctaHtml = hasUrl
-          ? `<a class="playlist-card__cta" href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener">Open in YTM ${ARROW_ICON}</a>`
->>>>>>> 284ad73 (feat: restore and update AI playlists page with generated covers)
           : '';
         const footerHtml =
           trackHtml || ctaHtml
@@ -206,7 +194,6 @@ function renderPlaylists(items) {
                 : ''
             }
 
-<<<<<<< HEAD
             ${
               audioSrc
                 ? `<button class="playlist-card__listen-toggle" aria-expanded="false" onclick="window.toggleAudioPanel(this)">&#9654; Listen</button>
@@ -217,8 +204,6 @@ function renderPlaylists(items) {
                 : ''
             }
 
-=======
->>>>>>> 284ad73 (feat: restore and update AI playlists page with generated covers)
             ${footerHtml}
           </div>
         </article>
@@ -322,7 +307,6 @@ async function loadFeed() {
 }
 
 loadFeed();
-<<<<<<< HEAD
 
 window.toggleAudioPanel = function(btn) {
   const panel = btn.nextElementSibling;
@@ -330,5 +314,3 @@ window.toggleAudioPanel = function(btn) {
   btn.setAttribute('aria-expanded', String(!expanded));
   panel.hidden = expanded;
 };
-=======
->>>>>>> 284ad73 (feat: restore and update AI playlists page with generated covers)
