@@ -1,24 +1,7 @@
 {
-  "generated_at": "2026-03-18T09:28:53+00:00",
-  "count": 13,
+  "generated_at": "2026-03-18T09:38:53+00:00",
+  "count": 12,
   "items": [
-    {
-      "slug": "test-ambient-drone",
-      "title": "Test: Ambient Drone",
-      "source": "custom",
-      "playlist_kind": "ai_curated",
-      "genre": "Ambient Drone",
-      "description": "Ethereal, slow-evolving soundscapes with deep sub-bass and celestial textures. Inspired by vast oceanic depths and deep space silence.",
-      "quote": null,
-      "quote_source": null,
-      "cover_image": "ai-playlists/test-ambient-drone.jpg",
-      "audio_intro_url": null,
-      "narration_text": null,
-      "playlist_url": "https://music.youtube.com/playlist?list=TEST",
-      "track_count": 0,
-      "created_at": "2026-03-18T00:00:00Z",
-      "tracks_preview": []
-    },
     {
       "slug": "2026-03-17-nlm-acid-jazz-90s-crossover-2026-03-17",
       "title": "NLM: Acid Jazz & 90s Crossover 2026-03-17",
