@@ -1,17 +1,111 @@
 {
-  "generated_at": "2026-03-19T03:29:28+00:00",
-  "count": 14,
+  "generated_at": "2026-03-21T14:41:09+00:00",
+  "count": 15,
   "items": [
+    {
+      "slug": "2026-03-21-sonnet-in-full-bloom-2026-03-21",
+      "title": "Sonnet: In Full Bloom 2026-03-21",
+      "source": "sonnet",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "A spring playlist spanning folk, soul, indie, pop, and classical — songs that feel like open windows, new leaves, and the first warm afternoon of the year. Curated for renewal and brightness.",
+      "quote": null,
+      "quote_source": null,
+      "cover_image": null,
+      "cover_video_url": null,
+      "audio_intro_url": null,
+      "narration_text": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EmBFyp9OspuKRA_3Ya5M72I",
+      "track_count": 15,
+      "created_at": "2026-03-21T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "The Beatles",
+          "title": "Here Comes The Sun (Official Music Video) [2019 Mix]"
+        },
+        {
+          "artist": "Katrina & The Waves",
+          "title": "Walking On Sunshine (Official Music Video)"
+        },
+        {
+          "artist": "Electric Light Orchestra",
+          "title": "Mr. Blue Sky (Official Video)"
+        },
+        {
+          "artist": "Simon & Garfunkel",
+          "title": "April Come She Will"
+        },
+        {
+          "artist": "The Paper Kites",
+          "title": "Bloom (Official Music Video)"
+        },
+        {
+          "artist": "Noah and the Whale",
+          "title": "The First Days of Spring"
+        },
+        {
+          "artist": "Bill Withers",
+          "title": "Lovely Day (Official Audio)"
+        },
+        {
+          "artist": "Yael Naim",
+          "title": "New Soul (Official Video)"
+        },
+        {
+          "artist": "Talking Heads",
+          "title": "This Must Be the Place (Naïve Melody) (Official Video)"
+        },
+        {
+          "artist": "The Mamas & The Papas",
+          "title": "California Dreamin'"
+        },
+        {
+          "artist": "The Lovin' Spoonful",
+          "title": "Daydream (Ed Sullivan Show)"
+        },
+        {
+          "artist": "Vivaldi / Voices of Music",
+          "title": "Four Seasons: Spring (La Primavera) — Youssefian"
+        },
+        {
+          "artist": "Modest Mouse",
+          "title": "Float On (Official Music Video)"
+        },
+        {
+          "artist": "Natasha Bedingfield",
+          "title": "Pocketful of Sunshine (Official Video)"
+        },
+        {
+          "artist": "Miley Cyrus",
+          "title": "Flowers (Official Video)"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "The Beatles",
+          "title": "Here Comes The Sun (Official Music Video) [2019 Mix]"
+        },
+        {
+          "artist": "Katrina & The Waves",
+          "title": "Walking On Sunshine (Official Music Video)"
+        },
+        {
+          "artist": "Electric Light Orchestra",
+          "title": "Mr. Blue Sky (Official Video)"
+        }
+      ]
+    },
     {
       "slug": "2026-03-18-nlm-smoked-glass-pop-2026-03-18",
       "title": "NLM: Smoked Glass Pop 2026-03-18",
       "source": "codex_fallback",
       "playlist_kind": "daily_nlm",
-      "genre": "Sophisti-pop",
+      "genre": "Smoked Glass Pop",
       "description": "Sophisti-pop is what happens when pop music grows expensive taste: velvet-smooth grooves, immaculate arrangements, and lyrics that sound like they’ve actually lived a little. It sits between new wave, soul, jazz-pop, and adult heartbreak, and when it hits, it feels glamorous, nocturnal, and devastating at the same time.",
       "quote": "Pop with smoked-glass windows, perfect tailoring, and a bruise under the cuff.",
       "quote_source": "Codex fallback synthesis",
       "cover_image": null,
+      "cover_video_url": null,
       "audio_intro_url": "/audio/playlists/2026-03-18-nlm-smoked-glass-pop-2026-03-18.mp3",
       "narration_text": "Today's playlist leans into Sophisti-pop. Sophisti-pop is what happens when pop music grows expensive taste: velvet-smooth grooves, immaculate arrangements, and lyrics that sound like they’ve actually lived a little. It sits between new wave, soul, jazz-pop, and adult heartbreak, and when it hits, it feels glamorous, nocturnal, and devastating at the same time. It moves through essential stops from Prefab Sprout, The Blue Nile, and Scritti Politti. As Codex fallback synthesis put it, \"Pop with smoked-glass windows, perfect tailoring, and a bruise under the cuff.\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EkiwS3akiL-uh1GbqdqZBlg",
@@ -19,116 +113,90 @@
       "created_at": "2026-03-18T17:47:30+00:00",
       "tracks": [
         {
-          "artist": "The Album Years Clips",
-          "title": "Prefab Sprout Steve McQueen: Sophisti-Pop Sensation | The Album Years Podcast",
-          "video_id": "2PHVJMSEr5g"
-        },
-        {
           "artist": "Ani 🎧",
-          "title": "Prefab Sprout - Enchanted 432 Hz",
-          "video_id": "VmKOMu9qXC8"
+          "title": "Prefab Sprout - Enchanted 432 Hz"
         },
         {
           "artist": "The Blue Nile Official",
-          "title": "The Blue Nile - A Certain Kind of Angel (Official Audio)",
-          "video_id": "er1GGwS0zwI"
+          "title": "The Blue Nile - A Certain Kind of Angel (Official Audio)"
         },
         {
           "artist": "Williams Schmilliams",
-          "title": "The Blue Nile Album Ranking",
-          "video_id": "EuZzEL63-6s"
+          "title": "The Blue Nile Album Ranking"
         },
         {
           "artist": "Joseph Arruda",
-          "title": "Sounds That Have Been Made: Scritti Politti",
-          "video_id": "KJCpyIXaYoI"
+          "title": "Sounds That Have Been Made: Scritti Politti"
         },
         {
           "artist": "Madness",
-          "title": "Madness - Sweetest Girl",
-          "video_id": "DduE7ZtxPrs"
+          "title": "Madness - Sweetest Girl"
         },
         {
           "artist": "Domsta",
-          "title": "【Mashup】Swing Out Sister x Dua Lipa - Twilight World x Break My Heart",
-          "video_id": "ZAAd7mhRu0w"
+          "title": "【Mashup】Swing Out Sister x Dua Lipa - Twilight World x Break My Heart"
         },
         {
           "artist": "Pianokeys88",
-          "title": "Swing Out Sister - A Non-Stop Jazz / Sophisti-Pop Mega-Medley",
-          "video_id": "EuX6azr9p-k"
+          "title": "Swing Out Sister - A Non-Stop Jazz / Sophisti-Pop Mega-Medley"
         },
         {
           "artist": "sweatingfretboards",
-          "title": "Everything But The Girl - Sugar Finney",
-          "video_id": "vMaeRwdBZfY"
+          "title": "Everything But The Girl - Sugar Finney"
         },
         {
           "artist": "Everything But The Girl - Topic",
-          "title": "Driving (Acoustic)",
-          "video_id": "dm5Qw55x0Es"
+          "title": "Driving (Acoustic)"
         },
         {
           "artist": "TheStyleCouncilVEVO",
-          "title": "The Style Council - Boy Who Cried Wolf",
-          "video_id": "OHg7HHLO3Pc"
+          "title": "The Style Council - Boy Who Cried Wolf"
         },
         {
           "artist": "The Style Council Archive",
-          "title": "The Style Council  How She Threw It All Away 1988",
-          "video_id": "38iQjC7EXIg"
+          "title": "The Style Council  How She Threw It All Away 1988"
         },
         {
           "artist": "SadeVEVO",
-          "title": "Sade - No Ordinary Love - Official - 1992",
-          "video_id": "_WcWHZc8s2I"
+          "title": "Sade - No Ordinary Love - Official - 1992"
         },
         {
           "artist": "Barry D's 80's Music Video Of The Day",
-          "title": "The Blow Monkeys - It Doesn't Have To Be That Way Censored - Barry D's 80's Music Video Of The Day",
-          "video_id": "oRxDzcIgQ2s"
+          "title": "The Blow Monkeys - It Doesn't Have To Be That Way Censored - Barry D's 80's Music Video Of The Day"
         },
         {
           "artist": "Basia - Topic",
-          "title": "Copernicus (Album Version)",
-          "video_id": "cTzG9zjb9Dc"
+          "title": "Copernicus (Album Version)"
         },
         {
           "artist": "samuraiinCfede",
-          "title": "Aztec Camera - Just Like Gold (7\")",
-          "video_id": "5jtzu8RdicQ"
+          "title": "Aztec Camera - Just Like Gold (7\")"
         },
         {
           "artist": "TOP NUMBER ONE HITS",
-          "title": "05 - Carmel - More, More, More - Now That's What I Call Music 2",
-          "video_id": "aLzncZAx1cY"
+          "title": "05 - Carmel - More, More, More - Now That's What I Call Music 2"
         },
         {
           "artist": "Retro HQ Music",
-          "title": "SWING OUT SISTER - Ángel Casas Show (TV3 - 1987) [HQ Audio] - Surrender, Twilight world",
-          "video_id": "QgHro48Fvl4"
+          "title": "SWING OUT SISTER - Ángel Casas Show (TV3 - 1987) [HQ Audio] - Surrender, Twilight world"
         },
         {
           "artist": "Matt Bianco",
-          "title": "Matt Bianco - Get Out Of Your Lazy Bed (Official Music Video)",
-          "video_id": "BWSG3rrqJH0"
+          "title": "Matt Bianco - Get Out Of Your Lazy Bed (Official Music Video)"
         }
       ],
       "tracks_preview": [
         {
-          "artist": "The Album Years Clips",
-          "title": "Prefab Sprout Steve McQueen: Sophisti-Pop Sensation | The Album Years Podcast",
-          "video_id": "2PHVJMSEr5g"
-        },
-        {
           "artist": "Ani 🎧",
-          "title": "Prefab Sprout - Enchanted 432 Hz",
-          "video_id": "VmKOMu9qXC8"
+          "title": "Prefab Sprout - Enchanted 432 Hz"
         },
         {
           "artist": "The Blue Nile Official",
-          "title": "The Blue Nile - A Certain Kind of Angel (Official Audio)",
-          "video_id": "er1GGwS0zwI"
+          "title": "The Blue Nile - A Certain Kind of Angel (Official Audio)"
+        },
+        {
+          "artist": "Williams Schmilliams",
+          "title": "The Blue Nile Album Ranking"
         }
       ]
     },
@@ -142,6 +210,7 @@
       "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist [1].",
       "quote_source": "King Britt, Organised Sound, Volume 27, Issue 1 [1, 4]",
       "cover_image": null,
+      "cover_video_url": null,
       "audio_intro_url": "/audio/playlists/2026-03-17-nlm-acid-jazz-90s-crossover-2026-03-17.mp3",
       "narration_text": "Today's playlist leans into Acid jazz. Acid jazz is a UK hybrid of American soul music that incorporates 1970s influences with a distinct electronic twist [1]. It emerged strongly in the 1990s alongside hip hop, bridging older generations who loved jazz with younger crowds who loved electronic music [1, 2]. The genre frequently featured live bands performin. It moves through essential stops from Soul II Soul, Brand New Heavies, and Digable Planets. As King Britt, Organised Sound, Volume 27, Issue 1 [1, 4] put it, \"Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist [1].\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-En1aE5znhM3tfLPtK18jLV5",
@@ -242,6 +311,7 @@
       "quote": "There's a real sense of shared experience in Dublin right now; a generation articulating its frustration and its beauty through noise.",
       "quote_source": "Grian Chatten (Fontaines D.C.)",
       "cover_image": null,
+      "cover_video_url": null,
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Elc7Kzhi_u3GTrHjPAWpC6y",
@@ -322,6 +392,7 @@
       "quote": "We cross examine with old sonic DNA.",
       "quote_source": "'We Cross Examine with Old Sonic DNA': King Britt and Tara Rodgers in conversation on Blacktronika, music technology and pedagogy | Organised Sound",
       "cover_image": null,
+      "cover_video_url": null,
       "audio_intro_url": "/audio/playlists/2026-03-16-nlm-deep-focus-idm-2026-03-16.mp3",
       "narration_text": "Today's playlist leans into IDM. This playlist harnesses the intricate rhythms and atmospheric synthesizers of IDM to maintain momentum and clarity during deep work sessions. Rooted in the electronic experimentation and vibrant scenes discussed by King Britt, these instrumental tracks provide an immersive, forward-moving soundscape. The music balances. It moves through essential stops from Aphex Twin, Boards of Canada, and Autechre. As 'We Cross Examine with Old Sonic DNA': King Britt and Tara Rodgers in conversation on Blacktronika, music technology and put it, \"We cross examine with old sonic DNA.\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-En8yarlyRBGnLH69HErxLfg",
@@ -402,6 +473,7 @@
       "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States.",
       "quote_source": "King Britt in 'We Cross Examine with Old Sonic DNA' [1]",
       "cover_image": null,
+      "cover_video_url": null,
       "audio_intro_url": "/audio/playlists/2026-03-16-nlm-acid-jazz-essentials-2026-03-16.mp3",
       "narration_text": "Today's playlist leans into Acid Jazz. Acid jazz emerged in the 1990s as a vibrant UK hybrid of American soul music that incorporated a new electronic twist [1]. The genre successfully bridged generations by bringing together older jazz enthusiasts and younger hip hop fans in a unique cultural crossover [2]. It frequently featured innovative live configurat. It moves through essential stops from Soul II Soul, Brand New Heavies, and Digable Planets. As King Britt in 'We Cross Examine with Old Sonic DNA' [1] put it, \"Acid jazz, the UK hybrid of American soul music, started to resonate here in the States.\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-El2hIZI4xF_r26YAJaj_t7Z",
@@ -502,6 +574,7 @@
       "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist.",
       "quote_source": "King Britt, 'We Cross Examine with Old Sonic DNA' in Organised Sound",
       "cover_image": "ai-playlists/2026-03-15-nlm-acid-jazz-90s-grooves-2026-03-15.jpg",
+      "cover_video_url": null,
       "audio_intro_url": "/audio/playlists/2026-03-15-nlm-acid-jazz-90s-grooves-2026-03-15.mp3",
       "narration_text": "Today's playlist leans into Acid Jazz & 90s Grooves. Acid jazz emerged in the 1990s as a UK hybrid of American soul music that brought a new electronic twist to 1970s influences. The genre fostered crossover success by bridging generations, uniting older jazz enthusiasts with younger hip hop fans. It also pioneered new live configurations by seamlessly blending tradition. It moves through essential stops from magazinu1, platine 45, and Acid Jazz Records. As King Britt, 'We Cross Examine with Old Sonic DNA' in Organised Sound put it, \"Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist.\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EkH8MS82SlWzvGNdQiDu0h9",
@@ -614,6 +687,7 @@
       "quote": null,
       "quote_source": null,
       "cover_image": "ai-playlists/2026-03-14-codex-basslines-for-difficult-people.jpg",
+      "cover_video_url": null,
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EkZPiNdYteVsqLDlZwUz2BN",
@@ -686,6 +760,7 @@
       "quote": null,
       "quote_source": null,
       "cover_image": "ai-playlists/2026-03-13-sonnet-rust-and-blue-a-rothko-meditation.jpg",
+      "cover_video_url": null,
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElwQh7Bi9XKA23lJnVxgjFf",
@@ -758,6 +833,7 @@
       "quote": null,
       "quote_source": null,
       "cover_image": "ai-playlists/2026-03-13-sonnet-delta-shadows-obscure-architects-of-the-blues.jpg",
+      "cover_video_url": null,
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Enzu8nDaUZOrUOIGCkUYmJP",
@@ -838,6 +914,7 @@
       "quote": null,
       "quote_source": null,
       "cover_image": "ai-playlists/2026-03-13-sonnet-bad-brains-adjacent-best-of-the-billing.jpg",
+      "cover_video_url": null,
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Enk7UNRe8U3VTtWrHFFOOco",
@@ -1014,6 +1091,7 @@
       "quote": null,
       "quote_source": null,
       "cover_image": "ai-playlists/2026-03-13-codex-velvet-traffic.jpg",
+      "cover_video_url": null,
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EmTfiDon5eTE85I7KyLJqBE",
@@ -1098,6 +1176,7 @@
       "quote": null,
       "quote_source": null,
       "cover_image": "ai-playlists/2026-03-12-sonnet-tokyo-burning.jpg",
+      "cover_video_url": null,
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-El3y8iqdvDps4XEmaEMCBwM",
@@ -1248,6 +1327,7 @@
       "quote": null,
       "quote_source": null,
       "cover_image": "ai-playlists/2026-03-12-sonnet-orange-and-yellow.jpg",
+      "cover_video_url": null,
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElWhWMLE9zs0BxoFQJqxAEM",
@@ -1360,6 +1440,7 @@
       "quote": null,
       "quote_source": null,
       "cover_image": "ai-playlists/2026-03-12-sonnet-new-horizons.jpg",
+      "cover_video_url": null,
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElShsalDWhpYQUgI3InVzYT",
