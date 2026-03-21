@@ -1,14 +1,12 @@
 import './styles/index2.css';
 import './styles/about-intro.css';
 import './styles/about-slides.css';
-import './styles/about-portrait.css';
 import './styles/video-lightbox.css';
 import { ScrollSmoother, ScrollTrigger } from './animations/scroll-defaults.js';
 import { initHero } from './sections/hero.js';
 import { initGallery } from './sections/gallery.js';
 import { initCredits } from './sections/credits.js';
 import { initAbout } from './sections/about.js';
-import { initAboutPortrait } from './sections/about-portrait.js';
 import { initAboutIntro } from './sections/about-intro.js';
 import { initAboutSlides } from './sections/about-slides.js';
 import { initFooterReveal } from './sections/footer-reveal.js';
@@ -32,7 +30,6 @@ function init() {
   }
 
   // Initialize sections (without hero animations yet)
-  const cleanupAboutPortrait = initAboutPortrait();
   const cleanupCredits = initCredits();
   const cleanupCursor = initCustomCursor();
   const cleanupAboutIntro = initAboutIntro();
@@ -68,7 +65,6 @@ function init() {
     'pagehide',
     () => {
       if (smoother) smoother.kill();
-      if (typeof cleanupAboutPortrait === 'function') cleanupAboutPortrait();
       if (typeof cleanupCredits === 'function') cleanupCredits();
       if (typeof cleanupCursor === 'function') cleanupCursor();
       if (typeof cleanupAboutIntro === 'function') cleanupAboutIntro();
