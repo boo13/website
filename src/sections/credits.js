@@ -109,10 +109,10 @@ export function initCredits() {
   };
 
   // Toggle hero-name between dark (over light credits bg) and default (over dark bg).
-  // Uses CSS class + transition to avoid conflicts with the Flip/SplitText on fixedHeroName.
+  // Direct style.color to bypass CSS specificity; CSS transition on .hero-name-fixed animates it.
   function setHeroNameOnLight(onLight) {
     if (!fixedHeroName) return;
-    fixedHeroName.classList.toggle('hero-name--on-light', onLight);
+    fixedHeroName.style.color = onLight ? 'oklch(0.14 0 0)' : '';
   }
 
   // Adds a color inversion tween to `tl` at position `pos`.
@@ -278,17 +278,13 @@ export function initCredits() {
       trigger: section,
       start: 'top top',
       end: 'bottom top',
-      onEnter() {
-        if (!activeRow) setHeroNameOnLight(true);
-      },
-      onLeave() {
-        setHeroNameOnLight(false);
-      },
-      onEnterBack() {
-        if (!activeRow) setHeroNameOnLight(true);
-      },
-      onLeaveBack() {
-        setHeroNameOnLight(false);
+      onEnter() { if (!activeRow) setHeroNameOnLight(true); },
+      onLeave() { setHeroNameOnLight(false); },
+      onEnterBack() { if (!activeRow) setHeroNameOnLight(true); },
+      onLeaveBack() { setHeroNameOnLight(false); },
+      // onRefresh fires after recalculation — handles already-active state on load/refresh
+      onRefresh(self) {
+        if (!activeRow) setHeroNameOnLight(self.isActive);
       },
     });
   });

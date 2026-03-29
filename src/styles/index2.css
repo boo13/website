@@ -247,10 +247,6 @@ body.show-grid .bg-columns {
   transition: color 0.7s cubic-bezier(0.45, 0, 0.55, 1);
 }
 
-.hero-name--on-light {
-  color: var(--color-nearblack);
-}
-
 .hero-subtitle-fixed {
   position: fixed;
   z-index: 40;
