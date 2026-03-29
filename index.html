@@ -141,9 +141,6 @@
     </div>
 
     <!-- Fixed-position elements must stay outside ScrollSmoother wrapper -->
-    <div class="cursor-preview">
-        <img src="" alt="">
-    </div>
     <div class="gallery-progress">
         <span class="progress-current">1</span>
         <span class="progress-divider">/</span>
@@ -583,17 +580,14 @@
 
     <!-- =====================================================
          SECTION 3: ADDITIONAL CREDITS
-         Table layout with hover-preview interaction
+         Accordion (mb.studio style)
     ====================================================== -->
     <section id="credits" class="credits-section">
         <div class="container">
             <h2 class="section-title">Additional Credits</h2>
-
-            <table class="credits-table">
-                <tbody>
-                    <tr><td colspan="2">Loading credits...</td></tr>
-                </tbody>
-            </table>
+            <div class="credits-list" role="list">
+                <p class="credits-loading">Loading credits...</p>
+            </div>
         </div>
 
     </section>

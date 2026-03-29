@@ -586,12 +586,19 @@ body.show-grid .bg-columns {
 
 /* =====================================================
    SECTION 3: ADDITIONAL CREDITS
-   Table with hover preview
+   Accordion (mb.studio style)
 ====================================================== */
 .credits-section {
+  --credits-bg: oklch(0.968 0.006 75);
+  --credits-text: oklch(0.14 0 0);
+  --credits-border: oklch(0.14 0 0 / 0.1);
+  --credits-hover-bg: oklch(0.14 0 0 / 0.04);
+  --credits-hover-title: oklch(0.55 0.15 91);
+  --credits-muted: oklch(0.14 0 0 / 0.5);
   position: relative;
   padding: var(--section-padding) 0;
-  background: var(--color-nearblack);
+  background: var(--credits-bg);
+  color: var(--credits-text);
 }
 
 .credits-section .section-title {
@@ -599,85 +606,104 @@ body.show-grid .bg-columns {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 400;
   margin-bottom: 3rem;
+  color: var(--credits-text);
 }
 
-.credits-table {
+.credits-list {
   width: 100%;
-  border-collapse: collapse;
-  --credits-title-safe-zone: 120px;
-  --credits-title-blend-width: 80px;
-  --credits-cursor-right-offset: 16px;
 }
 
+/* Single accordion row */
 .credit-row {
-  border-bottom: 1px solid oklch(0.968 0.006 75 / 0.1);
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.6s var(--ease-out-expo),
-    transform 0.6s var(--ease-out-expo),
-    background 0.4s ease;
+  border-bottom: 1px solid var(--credits-border);
 }
 
-.credit-row.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.credit-row:hover {
-  background: oklch(0.767 0.139 91 / 0.08);
-}
-
-.credit-row:hover .credit-title {
-  color: oklch(0.767 0.139 91);
-  transition: color 0.3s ease;
-}
-
-.credit-row td {
+/* Row header: icon | title | platform | role */
+.credit-row__header {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto auto;
+  gap: 0 1.5rem;
+  align-items: center;
+  width: 100%;
   padding: 1.25rem 0;
-  vertical-align: middle;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
 }
 
-.credit-title {
+.credit-row__header:hover {
+  background: var(--credits-hover-bg);
+}
+
+.credit-row__header:hover .credit-row__title {
+  color: var(--credits-hover-title);
+}
+
+.credit-row__icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--credits-muted);
+  transition: color 0.2s ease;
+}
+
+.credit-row.is-active .credit-row__icon {
+  color: var(--credits-hover-title);
+}
+
+.credit-row__title {
   font-size: clamp(1rem, 2vw, 1.25rem);
   font-weight: 400;
+  transition: color 0.2s ease;
 }
 
-.credit-network {
-  text-align: right;
+.credit-row__platform,
+.credit-row__role {
   font-size: 0.875rem;
-  color: oklch(0.968 0.006 75 / 0.6);
+  color: var(--credits-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-.cursor-preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 350px;
-  pointer-events: none;
-  opacity: 0;
-  transform: scale(0.95);
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-  z-index: 1000;
+/* Details panel: collapsed by default */
+.credit-row__details {
+  height: 0;
+  overflow: clip;
+}
+
+/* Expanded details: 3-column grid */
+.credit-row__details-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem 0 3rem 2rem;
+}
+
+.credit-row__detail-title {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--credits-text);
+}
+
+.credit-row__detail-image {
+  aspect-ratio: 4 / 3;
+}
+
+.credit-row__detail-image img {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
   border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px oklch(0 0 0 / 0.5);
 }
 
-.cursor-preview.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.cursor-preview img {
-  width: 100%;
-  height: auto;
-  display: block;
+.credit-row__detail-desc {
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--credits-muted);
 }
 
 /* =====================================================
@@ -1099,7 +1125,7 @@ body.show-grid .bg-columns {
     grid-column: 3 / -1;
   }
 
-  .credits-table {
+  .credits-list {
     grid-column: 3 / -1;
     width: 100%;
     margin-left: 0;
@@ -1204,17 +1230,17 @@ body.show-grid .bg-columns {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .cursor-preview {
+  /* Credits accordion adjustments */
+  .credit-row__role {
     display: none;
   }
 
-  /* Credits table adjustments */
-  .credit-row td {
-    padding: 1rem 0;
+  .credit-row__header {
+    grid-template-columns: 2rem 1fr auto;
   }
 
-  .credit-title {
-    font-size: 1rem;
+  .credit-row__details-inner {
+    grid-template-columns: 1fr;
   }
 
   /* Footer responsive */
@@ -1346,6 +1372,19 @@ body.show-grid .bg-columns {
   .credit-row {
     opacity: 1;
     transform: none;
+  }
+
+  .credit-row__details {
+    overflow: visible;
+  }
+
+  .credits-section.is-expanded {
+    --credits-bg: oklch(0.14 0 0);
+    --credits-text: oklch(0.968 0.006 75);
+    --credits-border: oklch(0.968 0.006 75 / 0.1);
+    --credits-hover-bg: oklch(0.767 0.139 91 / 0.08);
+    --credits-hover-title: oklch(0.767 0.139 91);
+    --credits-muted: oklch(0.968 0.006 75 / 0.6);
   }
 
   .marquee-track {

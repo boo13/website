@@ -1,314 +1,261 @@
 /**
- * Credits Table with Cursor-Following Preview
- * Hover on credit row shows image preview that follows cursor
+ * Credits Section — mb.studio-style accordion
+ * Click a row to expand with large title + preview image + description.
+ * Section inverts to black when any row is open.
  */
 
-function initCreditsPreview() {
-  const table = document.querySelector('.credits-table');
-  const rows = document.querySelectorAll('.credit-row');
-  const preview = document.querySelector('.cursor-preview');
-  const previewImg = preview?.querySelector('img');
+import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
 
-  if (!table || !rows.length || !preview || !previewImg) return () => {};
-  if ('ontouchstart' in window) return () => {};
+const prefersReducedMotion = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
 
-  let isVisible = false;
-  let currentSrc = null;
-  let rafId = null;
-  let mouseX = -1;
-  let mouseY = -1;
+function buildRow(project) {
+  const row = document.createElement('div');
+  row.className = 'credit-row';
+  row.setAttribute('role', 'listitem');
 
-  const edgePadding = 16;
-  const cursorInsetX = 8;
-  const cursorInsetY = 8;
-  const defaultLeftTitleSafeZone = 120;
-  const defaultLeftTitleBlendWidth = 80;
-  const defaultCursorRightOffset = 16;
-  let leftTitleSafeZone = defaultLeftTitleSafeZone;
-  let leftTitleBlendWidth = defaultLeftTitleBlendWidth;
-  let cursorRightOffset = defaultCursorRightOffset;
+  // Header button
+  const header = document.createElement('button');
+  header.className = 'credit-row__header';
+  header.setAttribute('aria-expanded', 'false');
+  header.type = 'button';
 
-  function readPxVariable(name, fallback) {
-    const value = parseFloat(getComputedStyle(table).getPropertyValue(name));
-    return Number.isFinite(value) ? value : fallback;
+  const icon = document.createElement('span');
+  icon.className = 'credit-row__icon';
+  icon.textContent = '+';
+  icon.setAttribute('aria-hidden', 'true');
+
+  const title = document.createElement('span');
+  title.className = 'credit-row__title';
+  title.textContent = project.title;
+
+  const platform = document.createElement('span');
+  platform.className = 'credit-row__platform';
+  platform.textContent = project.platform || '';
+
+  const role = document.createElement('span');
+  role.className = 'credit-row__role';
+  role.textContent = project.role || '';
+
+  header.appendChild(icon);
+  header.appendChild(title);
+  header.appendChild(platform);
+  header.appendChild(role);
+
+  // Details panel
+  const details = document.createElement('div');
+  details.className = 'credit-row__details';
+  details.setAttribute('aria-hidden', 'true');
+
+  const inner = document.createElement('div');
+  inner.className = 'credit-row__details-inner';
+
+  const detailTitle = document.createElement('h3');
+  detailTitle.className = 'credit-row__detail-title';
+  detailTitle.textContent = project.title;
+
+  const detailImage = document.createElement('div');
+  detailImage.className = 'credit-row__detail-image';
+  const img = document.createElement('img');
+  img.alt = project.title;
+  if (project.preview) {
+    img.dataset.src = project.preview;
+  } else if (project.poster) {
+    img.dataset.src = project.poster;
+  }
+  detailImage.appendChild(img);
+
+  const detailDesc = document.createElement('p');
+  detailDesc.className = 'credit-row__detail-desc';
+  if (project.description) {
+    detailDesc.textContent = project.description;
+  } else {
+    detailDesc.style.display = 'none';
   }
 
-  function syncCursorPositioningVars() {
-    // These values are defined in CSS so table layout changes stay in sync
-    // with JS cursor-positioning behavior.
-    leftTitleSafeZone = readPxVariable(
-      '--credits-title-safe-zone',
-      defaultLeftTitleSafeZone
-    );
-    leftTitleBlendWidth = readPxVariable(
-      '--credits-title-blend-width',
-      defaultLeftTitleBlendWidth
-    );
-    cursorRightOffset = readPxVariable(
-      '--credits-cursor-right-offset',
-      defaultCursorRightOffset
-    );
-  }
+  inner.appendChild(detailTitle);
+  inner.appendChild(detailImage);
+  inner.appendChild(detailDesc);
+  details.appendChild(inner);
 
-  syncCursorPositioningVars();
+  row.appendChild(header);
+  row.appendChild(details);
 
-  function updatePosition() {
-    if (!isVisible) return;
-
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const previewRect = preview.getBoundingClientRect();
-
-    const tableRect = table.getBoundingClientRect();
-    const blendStartX = tableRect.left + leftTitleSafeZone;
-    const blendWidth = Math.max(leftTitleBlendWidth, 1);
-    const blendEndX = blendStartX + blendWidth;
-    const xWhenRightOfCursor = mouseX + cursorRightOffset;
-    const xWhenInset = mouseX - cursorInsetX;
-
-    let x = xWhenInset;
-    if (mouseX <= blendStartX) {
-      x = xWhenRightOfCursor;
-    } else if (mouseX < blendEndX) {
-      // Smoothly blend from "right of cursor" to "inset left of cursor"
-      // near the title column to avoid abrupt flips/flicker.
-      const t = (mouseX - blendStartX) / blendWidth;
-      x = xWhenRightOfCursor + (xWhenInset - xWhenRightOfCursor) * t;
-    }
-    let y = mouseY - cursorInsetY;
-
-    if (x + previewRect.width > viewportWidth - edgePadding) {
-      x = viewportWidth - previewRect.width - edgePadding;
-    }
-    if (y + previewRect.height > viewportHeight - edgePadding) {
-      y = viewportHeight - previewRect.height - edgePadding;
-    }
-    if (x < edgePadding) x = edgePadding;
-    if (y < edgePadding) y = edgePadding;
-
-    preview.style.left = `${x}px`;
-    preview.style.top = `${y}px`;
-  }
-
-  function setPreviewForRow(row) {
-    if (!row) {
-      hidePreview();
-      return;
-    }
-
-    const previewSrc = row.dataset.preview;
-    if (!previewSrc) {
-      hidePreview();
-      return;
-    }
-
-    if (previewSrc !== currentSrc) {
-      currentSrc = previewSrc;
-      previewImg.src = previewSrc;
-      previewImg.alt = row.querySelector('.credit-title')?.textContent || '';
-    }
-
-    showPreview();
-  }
-
-  function syncRowUnderCursor() {
-    if (mouseX < 0 || mouseY < 0) return;
-    const tableRect = table.getBoundingClientRect();
-    const withinTableY = mouseY >= tableRect.top && mouseY <= tableRect.bottom;
-
-    const element = document.elementFromPoint(mouseX, mouseY);
-    let row = element?.closest('.credit-row');
-
-    // If cursor is left of the table, resolve row by Y using a probe point
-    // just inside the table so hover previews still work in the left margin.
-    if (
-      (!row || !table.contains(row)) &&
-      withinTableY &&
-      mouseX < tableRect.left
-    ) {
-      const probeX = Math.min(
-        Math.max(Math.floor(tableRect.left + 1), 0),
-        window.innerWidth - 1
-      );
-      const probeElement = document.elementFromPoint(probeX, mouseY);
-      row = probeElement?.closest('.credit-row');
-    }
-
-    if (row && table.contains(row)) {
-      setPreviewForRow(row);
-    } else {
-      hidePreview();
-    }
-  }
-
-  function requestUpdate() {
-    if (rafId) return;
-    rafId = requestAnimationFrame(() => {
-      rafId = null;
-      syncRowUnderCursor();
-      updatePosition();
-    });
-  }
-
-  function showPreview() {
-    isVisible = true;
-    preview.classList.add('visible');
-    updatePosition();
-  }
-
-  function hidePreview() {
-    isVisible = false;
-    preview.classList.remove('visible');
-  }
-
-  function handlePreviewImageLoad() {
-    requestUpdate();
-  }
-
-  function handlePreviewImageError() {
-    hidePreview();
-  }
-
-  function handleMouseMove(e) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    requestUpdate();
-  }
-
-  function handleScroll() {
-    requestUpdate();
-  }
-
-  function handleResize() {
-    syncCursorPositioningVars();
-    requestUpdate();
-  }
-
-  previewImg.addEventListener('load', handlePreviewImageLoad);
-  previewImg.addEventListener('error', handlePreviewImageError);
-
-  const rowListeners = [];
-  rows.forEach((row) => {
-    const handleMouseEnter = (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      setPreviewForRow(row);
-      requestUpdate();
-    };
-    const handleMouseLeave = () => requestUpdate();
-
-    row.addEventListener('mouseenter', handleMouseEnter);
-    row.addEventListener('mouseleave', handleMouseLeave);
-    rowListeners.push({ row, handleMouseEnter, handleMouseLeave });
-  });
-
-  document.addEventListener('mousemove', handleMouseMove);
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('resize', handleResize);
-
-  return () => {
-    if (rafId) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
-    }
-    rowListeners.forEach(({ row, handleMouseEnter, handleMouseLeave }) => {
-      row.removeEventListener('mouseenter', handleMouseEnter);
-      row.removeEventListener('mouseleave', handleMouseLeave);
-    });
-    document.removeEventListener('mousemove', handleMouseMove);
-    window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('resize', handleResize);
-    previewImg.removeEventListener('load', handlePreviewImageLoad);
-    previewImg.removeEventListener('error', handlePreviewImageError);
-    hidePreview();
-  };
-}
-
-function initCreditsRowReveal() {
-  const rows = document.querySelectorAll('.credit-row');
-  if (!rows.length) return () => {};
-  const revealTimeouts = [];
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      // Only process newly-intersecting rows, staggered within this batch
-      let batchIndex = 0;
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const row = entry.target;
-          const timeoutId = window.setTimeout(() => {
-            row.classList.add('revealed');
-          }, batchIndex * 80);
-          batchIndex++;
-          revealTimeouts.push(timeoutId);
-          observer.unobserve(row);
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
-  );
-
-  rows.forEach((row) => observer.observe(row));
-
-  return () => {
-    observer.disconnect();
-    revealTimeouts.forEach((timeoutId) => clearTimeout(timeoutId));
-  };
+  return row;
 }
 
 export function initCredits() {
-  const tableBody = document.querySelector('.credits-table tbody');
-  if (!tableBody) return () => {};
-  let isDisposed = false;
-  let cleanupPreview = () => {};
-  let cleanupRowReveal = () => {};
+  const section = document.querySelector('.credits-section');
+  const list = document.querySelector('.credits-list');
+  if (!section || !list) return () => {};
 
-  function initCreditsEffects() {
-    cleanupPreview();
-    cleanupRowReveal();
-    cleanupPreview = initCreditsPreview();
-    cleanupRowReveal = initCreditsRowReveal();
+  let activeRow = null;
+  let activeTween = null;
+  let isDisposed = false;
+
+  const ctx = gsap.context(() => {});
+
+  function invertColors(toDark) {
+    if (prefersReducedMotion) {
+      section.classList.toggle('is-expanded', toDark);
+      return;
+    }
+    const dark = {
+      '--credits-bg': 'oklch(0.14 0 0)',
+      '--credits-text': 'oklch(0.968 0.006 75)',
+      '--credits-border': 'oklch(0.968 0.006 75 / 0.1)',
+      '--credits-hover-bg': 'oklch(0.767 0.139 91 / 0.08)',
+      '--credits-hover-title': 'oklch(0.767 0.139 91)',
+      '--credits-muted': 'oklch(0.968 0.006 75 / 0.6)',
+    };
+    const light = {
+      '--credits-bg': 'oklch(0.968 0.006 75)',
+      '--credits-text': 'oklch(0.14 0 0)',
+      '--credits-border': 'oklch(0.14 0 0 / 0.1)',
+      '--credits-hover-bg': 'oklch(0.14 0 0 / 0.04)',
+      '--credits-hover-title': 'oklch(0.55 0.15 91)',
+      '--credits-muted': 'oklch(0.14 0 0 / 0.5)',
+    };
+    gsap.to(section, { ...(toDark ? dark : light), duration: 0.4, ease: 'expo.out' });
+  }
+
+  function collapseRow(row) {
+    const details = row.querySelector('.credit-row__details');
+    row.classList.remove('is-active');
+    row.querySelector('.credit-row__icon').textContent = '+';
+    row.querySelector('.credit-row__header').setAttribute('aria-expanded', 'false');
+    details.setAttribute('aria-hidden', 'true');
+    details.style.overflow = 'clip';
+
+    if (prefersReducedMotion) {
+      details.style.height = '0';
+      ScrollTrigger.refresh();
+      return;
+    }
+
+    gsap.to(details, {
+      height: 0,
+      duration: 0.4,
+      ease: 'expo.inOut',
+      onComplete() {
+        ScrollTrigger.refresh();
+      },
+    });
+  }
+
+  function handleRowClick(row) {
+    if (isDisposed) return;
+
+    // Snap any in-progress tween to end
+    if (activeTween?.isActive()) activeTween.progress(1);
+
+    if (activeRow === row) {
+      // Toggle closed
+      collapseRow(row);
+      activeRow = null;
+      invertColors(false);
+    } else {
+      const tl = gsap.timeline();
+
+      if (activeRow) {
+        // Close previous row (stay dark)
+        const prevDetails = activeRow.querySelector('.credit-row__details');
+        activeRow.classList.remove('is-active');
+        activeRow.querySelector('.credit-row__icon').textContent = '+';
+        activeRow.querySelector('.credit-row__header').setAttribute('aria-expanded', 'false');
+        prevDetails.setAttribute('aria-hidden', 'true');
+        prevDetails.style.overflow = 'clip';
+
+        if (prefersReducedMotion) {
+          prevDetails.style.height = '0';
+        } else {
+          tl.to(prevDetails, { height: 0, duration: 0.3, ease: 'expo.inOut' }, 0);
+        }
+      } else {
+        // First expansion: invert to dark
+        invertColors(true);
+      }
+
+      // Expand new row
+      const details = row.querySelector('.credit-row__details');
+      row.classList.add('is-active');
+      row.querySelector('.credit-row__icon').textContent = '\u2022';
+      row.querySelector('.credit-row__header').setAttribute('aria-expanded', 'true');
+      details.setAttribute('aria-hidden', 'false');
+
+      // Lazy-load image on first expand
+      const img = details.querySelector('img[data-src]');
+      if (img) {
+        img.src = img.dataset.src;
+        delete img.dataset.src;
+      }
+
+      if (prefersReducedMotion) {
+        details.style.height = 'auto';
+        ScrollTrigger.refresh();
+      } else {
+        tl.to(
+          details,
+          {
+            height: 'auto',
+            duration: 0.5,
+            ease: 'expo.out',
+            onComplete() {
+              details.style.overflow = 'visible';
+              ScrollTrigger.refresh();
+            },
+          },
+          activeRow ? 0.1 : 0
+        );
+      }
+
+      activeRow = row;
+      activeTween = tl;
+    }
   }
 
   fetch('data/Projects.json')
     .then((response) => response.json())
     .then((data) => {
       if (isDisposed) return;
-      tableBody.innerHTML = '';
+
+      list.innerHTML = '';
       data.projects.forEach((project) => {
-        const tr = document.createElement('tr');
-        tr.className = 'credit-row';
-
-        if (project.preview) {
-          tr.setAttribute('data-preview', project.preview);
-        } else if (project.poster) {
-          tr.setAttribute('data-preview', project.poster);
-        }
-
-        const tdTitle = document.createElement('td');
-        tdTitle.className = 'credit-title';
-        tdTitle.textContent = project.title;
-        tr.appendChild(tdTitle);
-
-        const tdNetwork = document.createElement('td');
-        tdNetwork.className = 'credit-network';
-        tdNetwork.textContent = project.platform || '';
-        tr.appendChild(tdNetwork);
-
-        tableBody.appendChild(tr);
+        const row = buildRow(project);
+        row.querySelector('.credit-row__header').addEventListener('click', () =>
+          handleRowClick(row)
+        );
+        list.appendChild(row);
       });
 
-      initCreditsEffects();
+      // Row entrance animation
+      if (!prefersReducedMotion) {
+        ctx.add(() => {
+          gsap.from('.credit-row', {
+            opacity: 0,
+            y: 15,
+            duration: 0.6,
+            ease: 'expo.out',
+            stagger: 0.04,
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 85%',
+              once: true,
+            },
+          });
+        });
+      }
+
+      ScrollTrigger.refresh();
     })
     .catch((err) => {
       if (isDisposed) return;
       console.error('Error loading projects:', err);
-      initCreditsEffects();
     });
 
   return () => {
     isDisposed = true;
-    cleanupPreview();
-    cleanupRowReveal();
+    ctx.revert();
   };
 }
