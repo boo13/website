@@ -89,6 +89,10 @@ export function initCredits() {
   let activeTween = null;
   let isDisposed = false;
 
+  const fixedHeroName = document.getElementById('hero-name-fixed');
+  const heroColorDefault = 'oklch(0.968 0.006 75)'; // off-white (over dark bg)
+  const heroColorInverted = 'oklch(0.14 0 0)'; // near-black (over light credits bg)
+
   const ctx = gsap.context(() => {});
 
   const darkVars = {
@@ -106,11 +110,25 @@ export function initCredits() {
     '--credits-muted': 'oklch(0.14 0 0 / 0.5)',
   };
 
+  function setHeroNameColor(color, tl, pos) {
+    if (!fixedHeroName) return;
+    if (prefersReducedMotion) {
+      gsap.set(fixedHeroName, { color });
+      return;
+    }
+    if (tl) {
+      tl.to(fixedHeroName, { color, duration: 0.9, ease: 'power2.inOut' }, pos ?? 0);
+    } else {
+      gsap.to(fixedHeroName, { color, duration: 0.7, ease: 'power2.inOut' });
+    }
+  }
+
   // Adds a color inversion tween to `tl` at position `pos`.
   // Slower and in the same timeline as the row expansion so it feels coupled.
   function invertColors(toDark, tl, pos) {
     if (prefersReducedMotion) {
       section.classList.toggle('is-expanded', toDark);
+      setHeroNameColor(toDark ? heroColorDefault : heroColorInverted);
       return;
     }
     const vars = { ...(toDark ? darkVars : lightVars), duration: 0.9, ease: 'power2.inOut' };
@@ -119,6 +137,7 @@ export function initCredits() {
     } else {
       gsap.to(section, vars);
     }
+    setHeroNameColor(toDark ? heroColorDefault : heroColorInverted, tl, pos);
   }
 
   // Grow the header title to display size; shrink it back when closing.
@@ -260,6 +279,27 @@ export function initCredits() {
       activeTween = tl;
     }
   }
+
+  // Hero-name color: near-black when credits (light bg) is in view, default off-white otherwise.
+  ctx.add(() => {
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top 8%',
+      end: 'bottom top',
+      onEnter() {
+        if (!activeRow) setHeroNameColor(heroColorInverted);
+      },
+      onLeave() {
+        setHeroNameColor(heroColorDefault);
+      },
+      onEnterBack() {
+        if (!activeRow) setHeroNameColor(heroColorInverted);
+      },
+      onLeaveBack() {
+        setHeroNameColor(heroColorDefault);
+      },
+    });
+  });
 
   fetch('data/Projects.json')
     .then((response) => response.json())
