@@ -90,8 +90,6 @@ export function initCredits() {
   let isDisposed = false;
 
   const fixedHeroName = document.getElementById('hero-name-fixed');
-  const heroColorDefault = 'oklch(0.968 0.006 75)'; // off-white (over dark bg)
-  const heroColorInverted = 'oklch(0.14 0 0)'; // near-black (over light credits bg)
 
   const ctx = gsap.context(() => {});
 
@@ -110,17 +108,11 @@ export function initCredits() {
     '--credits-muted': 'oklch(0.14 0 0 / 0.5)',
   };
 
-  function setHeroNameColor(color, tl, pos) {
+  // Toggle hero-name between dark (over light credits bg) and default (over dark bg).
+  // Uses CSS class + transition to avoid conflicts with the Flip/SplitText on fixedHeroName.
+  function setHeroNameOnLight(onLight) {
     if (!fixedHeroName) return;
-    if (prefersReducedMotion) {
-      gsap.set(fixedHeroName, { color });
-      return;
-    }
-    if (tl) {
-      tl.to(fixedHeroName, { color, duration: 0.9, ease: 'power2.inOut' }, pos ?? 0);
-    } else {
-      gsap.to(fixedHeroName, { color, duration: 0.7, ease: 'power2.inOut' });
-    }
+    fixedHeroName.classList.toggle('hero-name--on-light', onLight);
   }
 
   // Adds a color inversion tween to `tl` at position `pos`.
@@ -128,7 +120,7 @@ export function initCredits() {
   function invertColors(toDark, tl, pos) {
     if (prefersReducedMotion) {
       section.classList.toggle('is-expanded', toDark);
-      setHeroNameColor(toDark ? heroColorDefault : heroColorInverted);
+      setHeroNameOnLight(!toDark);
       return;
     }
     const vars = { ...(toDark ? darkVars : lightVars), duration: 0.9, ease: 'power2.inOut' };
@@ -137,7 +129,7 @@ export function initCredits() {
     } else {
       gsap.to(section, vars);
     }
-    setHeroNameColor(toDark ? heroColorDefault : heroColorInverted, tl, pos);
+    setHeroNameOnLight(!toDark);
   }
 
   // Grow the header title to display size; shrink it back when closing.
@@ -280,23 +272,23 @@ export function initCredits() {
     }
   }
 
-  // Hero-name color: near-black when credits (light bg) is in view, default off-white otherwise.
+  // Hero-name color: dark when credits (light bg) is at the top of the viewport.
   ctx.add(() => {
     ScrollTrigger.create({
       trigger: section,
-      start: 'top 8%',
+      start: 'top top',
       end: 'bottom top',
       onEnter() {
-        if (!activeRow) setHeroNameColor(heroColorInverted);
+        if (!activeRow) setHeroNameOnLight(true);
       },
       onLeave() {
-        setHeroNameColor(heroColorDefault);
+        setHeroNameOnLight(false);
       },
       onEnterBack() {
-        if (!activeRow) setHeroNameColor(heroColorInverted);
+        if (!activeRow) setHeroNameOnLight(true);
       },
       onLeaveBack() {
-        setHeroNameColor(heroColorDefault);
+        setHeroNameOnLight(false);
       },
     });
   });
