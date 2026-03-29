@@ -77,3 +77,4 @@ Videos are hosted on a Cloudflare R2 bucket (`portfolio-assets`) and served via 
 - Footer design/transition - [1820Productions](https://www.1820productions.com/)
 - Screensaver animation - [JasonBergh](https://www.JasonBergh.com/)
 - Cursor effect - [Sileent](https://www.sileent.com/)
+- Accordian with bkg transition - [MB Studio](https://www.mb.studio)
