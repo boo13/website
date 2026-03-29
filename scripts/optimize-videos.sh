@@ -271,14 +271,14 @@ echo "  H.264 settings: libx264, crf=22, preset=slow, yuv420p, +faststart"
 if [[ "${INCLUDE_AUDIO}" == "true" ]]; then
   run_cmd ffmpeg -hide_banner -loglevel warning "${FFMPEG_OUTPUT_FLAG[@]}" -i "${INPUT_FILE}" \
     -map 0:v:0 -map 0:a:0? \
-    "${VIDEO_FILTER_ARGS[@]}" \
+    ${VIDEO_FILTER_ARGS[@]+"${VIDEO_FILTER_ARGS[@]}"} \
     -c:v libvpx-vp9 -pix_fmt yuv420p -row-mt 1 -deadline good -cpu-used 2 -b:v 0 -crf 33 \
     -c:a libopus -b:a 128k \
     "${WEBM_OUTPUT}"
 
   run_cmd ffmpeg -hide_banner -loglevel warning "${FFMPEG_OUTPUT_FLAG[@]}" -i "${INPUT_FILE}" \
     -map 0:v:0 -map 0:a:0? \
-    "${VIDEO_FILTER_ARGS[@]}" \
+    ${VIDEO_FILTER_ARGS[@]+"${VIDEO_FILTER_ARGS[@]}"} \
     -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p \
     -c:a aac -b:a 128k \
     -movflags +faststart \
@@ -286,13 +286,13 @@ if [[ "${INCLUDE_AUDIO}" == "true" ]]; then
 else
   run_cmd ffmpeg -hide_banner -loglevel warning "${FFMPEG_OUTPUT_FLAG[@]}" -i "${INPUT_FILE}" \
     -map 0:v:0 -an \
-    "${VIDEO_FILTER_ARGS[@]}" \
+    ${VIDEO_FILTER_ARGS[@]+"${VIDEO_FILTER_ARGS[@]}"} \
     -c:v libvpx-vp9 -pix_fmt yuv420p -row-mt 1 -deadline good -cpu-used 2 -b:v 0 -crf 33 \
     "${WEBM_OUTPUT}"
 
   run_cmd ffmpeg -hide_banner -loglevel warning "${FFMPEG_OUTPUT_FLAG[@]}" -i "${INPUT_FILE}" \
     -map 0:v:0 -an \
-    "${VIDEO_FILTER_ARGS[@]}" \
+    ${VIDEO_FILTER_ARGS[@]+"${VIDEO_FILTER_ARGS[@]}"} \
     -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p \
     -movflags +faststart \
     "${MP4_OUTPUT}"

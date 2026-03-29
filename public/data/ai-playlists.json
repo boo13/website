@@ -1,7 +1,205 @@
 {
-  "generated_at": "2026-03-18T09:38:53+00:00",
-  "count": 12,
+  "generated_at": "2026-03-21T14:41:09+00:00",
+  "count": 15,
   "items": [
+    {
+      "slug": "2026-03-21-sonnet-in-full-bloom-2026-03-21",
+      "title": "Sonnet: In Full Bloom 2026-03-21",
+      "source": "sonnet",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "A spring playlist spanning folk, soul, indie, pop, and classical — songs that feel like open windows, new leaves, and the first warm afternoon of the year. Curated for renewal and brightness.",
+      "quote": null,
+      "quote_source": null,
+      "cover_image": "ai-playlists/2026-03-21-sonnet-in-full-bloom-2026-03-21.jpg",
+      "cover_video_url": "ai-playlists/2026-03-21-sonnet-in-full-bloom-2026-03-21.mp4",
+      "audio_intro_url": null,
+      "narration_text": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EmBFyp9OspuKRA_3Ya5M72I",
+      "track_count": 15,
+      "created_at": "2026-03-21T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "The Beatles",
+          "title": "Here Comes The Sun (Official Music Video) [2019 Mix]"
+        },
+        {
+          "artist": "Katrina & The Waves",
+          "title": "Walking On Sunshine (Official Music Video)"
+        },
+        {
+          "artist": "Electric Light Orchestra",
+          "title": "Mr. Blue Sky (Official Video)"
+        },
+        {
+          "artist": "Simon & Garfunkel",
+          "title": "April Come She Will"
+        },
+        {
+          "artist": "The Paper Kites",
+          "title": "Bloom (Official Music Video)"
+        },
+        {
+          "artist": "Noah and the Whale",
+          "title": "The First Days of Spring"
+        },
+        {
+          "artist": "Bill Withers",
+          "title": "Lovely Day (Official Audio)"
+        },
+        {
+          "artist": "Yael Naim",
+          "title": "New Soul (Official Video)"
+        },
+        {
+          "artist": "Talking Heads",
+          "title": "This Must Be the Place (Naïve Melody) (Official Video)"
+        },
+        {
+          "artist": "The Mamas & The Papas",
+          "title": "California Dreamin'"
+        },
+        {
+          "artist": "The Lovin' Spoonful",
+          "title": "Daydream (Ed Sullivan Show)"
+        },
+        {
+          "artist": "Vivaldi / Voices of Music",
+          "title": "Four Seasons: Spring (La Primavera) — Youssefian"
+        },
+        {
+          "artist": "Modest Mouse",
+          "title": "Float On (Official Music Video)"
+        },
+        {
+          "artist": "Natasha Bedingfield",
+          "title": "Pocketful of Sunshine (Official Video)"
+        },
+        {
+          "artist": "Miley Cyrus",
+          "title": "Flowers (Official Video)"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "The Beatles",
+          "title": "Here Comes The Sun (Official Music Video) [2019 Mix]"
+        },
+        {
+          "artist": "Katrina & The Waves",
+          "title": "Walking On Sunshine (Official Music Video)"
+        },
+        {
+          "artist": "Electric Light Orchestra",
+          "title": "Mr. Blue Sky (Official Video)"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-18-nlm-smoked-glass-pop-2026-03-18",
+      "title": "NLM: Smoked Glass Pop 2026-03-18",
+      "source": "codex_fallback",
+      "playlist_kind": "daily_nlm",
+      "genre": "Smoked Glass Pop",
+      "description": "Sophisti-pop is what happens when pop music grows expensive taste: velvet-smooth grooves, immaculate arrangements, and lyrics that sound like they’ve actually lived a little. It sits between new wave, soul, jazz-pop, and adult heartbreak, and when it hits, it feels glamorous, nocturnal, and devastating at the same time.",
+      "quote": "Pop with smoked-glass windows, perfect tailoring, and a bruise under the cuff.",
+      "quote_source": "Codex fallback synthesis",
+      "cover_image": "ai-playlists/2026-03-18-nlm-smoked-glass-pop-2026-03-18.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-03-18-nlm-smoked-glass-pop-2026-03-18.mp3",
+      "narration_text": "Today's playlist leans into Sophisti-pop. Sophisti-pop is what happens when pop music grows expensive taste: velvet-smooth grooves, immaculate arrangements, and lyrics that sound like they’ve actually lived a little. It sits between new wave, soul, jazz-pop, and adult heartbreak, and when it hits, it feels glamorous, nocturnal, and devastating at the same time. It moves through essential stops from Prefab Sprout, The Blue Nile, and Scritti Politti. As Codex fallback synthesis put it, \"Pop with smoked-glass windows, perfect tailoring, and a bruise under the cuff.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EkiwS3akiL-uh1GbqdqZBlg",
+      "track_count": 19,
+      "created_at": "2026-03-18T17:47:30+00:00",
+      "tracks": [
+        {
+          "artist": "Ani 🎧",
+          "title": "Prefab Sprout - Enchanted 432 Hz"
+        },
+        {
+          "artist": "The Blue Nile Official",
+          "title": "The Blue Nile - A Certain Kind of Angel (Official Audio)"
+        },
+        {
+          "artist": "Williams Schmilliams",
+          "title": "The Blue Nile Album Ranking"
+        },
+        {
+          "artist": "Joseph Arruda",
+          "title": "Sounds That Have Been Made: Scritti Politti"
+        },
+        {
+          "artist": "Madness",
+          "title": "Madness - Sweetest Girl"
+        },
+        {
+          "artist": "Domsta",
+          "title": "【Mashup】Swing Out Sister x Dua Lipa - Twilight World x Break My Heart"
+        },
+        {
+          "artist": "Pianokeys88",
+          "title": "Swing Out Sister - A Non-Stop Jazz / Sophisti-Pop Mega-Medley"
+        },
+        {
+          "artist": "sweatingfretboards",
+          "title": "Everything But The Girl - Sugar Finney"
+        },
+        {
+          "artist": "Everything But The Girl - Topic",
+          "title": "Driving (Acoustic)"
+        },
+        {
+          "artist": "TheStyleCouncilVEVO",
+          "title": "The Style Council - Boy Who Cried Wolf"
+        },
+        {
+          "artist": "The Style Council Archive",
+          "title": "The Style Council  How She Threw It All Away 1988"
+        },
+        {
+          "artist": "SadeVEVO",
+          "title": "Sade - No Ordinary Love - Official - 1992"
+        },
+        {
+          "artist": "Barry D's 80's Music Video Of The Day",
+          "title": "The Blow Monkeys - It Doesn't Have To Be That Way Censored - Barry D's 80's Music Video Of The Day"
+        },
+        {
+          "artist": "Basia - Topic",
+          "title": "Copernicus (Album Version)"
+        },
+        {
+          "artist": "samuraiinCfede",
+          "title": "Aztec Camera - Just Like Gold (7\")"
+        },
+        {
+          "artist": "TOP NUMBER ONE HITS",
+          "title": "05 - Carmel - More, More, More - Now That's What I Call Music 2"
+        },
+        {
+          "artist": "Retro HQ Music",
+          "title": "SWING OUT SISTER - Ángel Casas Show (TV3 - 1987) [HQ Audio] - Surrender, Twilight world"
+        },
+        {
+          "artist": "Matt Bianco",
+          "title": "Matt Bianco - Get Out Of Your Lazy Bed (Official Music Video)"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "Ani 🎧",
+          "title": "Prefab Sprout - Enchanted 432 Hz"
+        },
+        {
+          "artist": "The Blue Nile Official",
+          "title": "The Blue Nile - A Certain Kind of Angel (Official Audio)"
+        },
+        {
+          "artist": "Williams Schmilliams",
+          "title": "The Blue Nile Album Ranking"
+        }
+      ]
+    },
     {
       "slug": "2026-03-17-nlm-acid-jazz-90s-crossover-2026-03-17",
       "title": "NLM: Acid Jazz & 90s Crossover 2026-03-17",
@@ -11,12 +209,83 @@
       "description": "Acid jazz is a UK hybrid of American soul music that incorporates 1970s influences with a distinct electronic twist [1]. It emerged strongly in the 1990s alongside hip hop, bridging older generations who loved jazz with younger crowds who loved electronic music [1, 2]. The genre frequently featured live bands performing alongside DJs, creating a crossover configuration that bubbled up from the underground to the mainstream [1, 3].",
       "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist [1].",
       "quote_source": "King Britt, Organised Sound, Volume 27, Issue 1 [1, 4]",
-      "cover_image": "ai-playlists/2026-03-17-nlm-acid-jazz-90s-crossover-2026-03-17.mp4",
-      "audio_intro_url": null,
-      "narration_text": null,
+      "cover_image": "ai-playlists/2026-03-17-nlm-acid-jazz-90s-crossover-2026-03-17.jpg",
+      "cover_video_url": "ai-playlists/2026-03-17-nlm-acid-jazz-90s-crossover-2026-03-17.mp4",
+      "audio_intro_url": "/audio/playlists/2026-03-17-nlm-acid-jazz-90s-crossover-2026-03-17.mp3",
+      "narration_text": "Today's playlist leans into Acid jazz. Acid jazz is a UK hybrid of American soul music that incorporates 1970s influences with a distinct electronic twist [1]. It emerged strongly in the 1990s alongside hip hop, bridging older generations who loved jazz with younger crowds who loved electronic music [1, 2]. The genre frequently featured live bands performin. It moves through essential stops from Soul II Soul, Brand New Heavies, and Digable Planets. As King Britt, Organised Sound, Volume 27, Issue 1 [1, 4] put it, \"Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist [1].\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-En1aE5znhM3tfLPtK18jLV5",
       "track_count": 18,
-      "created_at": "2026-03-17T00:00:00+00:00",
+      "created_at": "2026-03-17T07:01:38+00:00",
+      "tracks": [
+        {
+          "artist": "magazinu1",
+          "title": "SOUL II SOUL - Jazzie's Groove (HQ Sound)"
+        },
+        {
+          "artist": "Acid Jazz Records",
+          "title": "BRAND NEW HEAVIES - 'Dream Come True' (official video - Acid Jazz Records)"
+        },
+        {
+          "artist": "London Records",
+          "title": "The Brand New Heavies - Midnight At The Oasis (Official Video)"
+        },
+        {
+          "artist": "DigablePlanetsVEVO",
+          "title": "Digable Planets - Rebirth of Slick (Cool Like Dat) (Official Music Video)"
+        },
+        {
+          "artist": "UPROXX",
+          "title": "Digable Planets - Where I'm From"
+        },
+        {
+          "artist": "1mistaGROOVE",
+          "title": "Apparently Nothin' - Young Disciples (1991)"
+        },
+        {
+          "artist": "SoulStylistJukeBox",
+          "title": "Young Disciples featuring Joy Malcolm \"Bad Weather\""
+        },
+        {
+          "artist": "TribeCalledQuestVEVO",
+          "title": "A Tribe Called Quest - Jazz (We've Got) Buggin' Out (Official HD Video)"
+        },
+        {
+          "artist": "Davie Studios",
+          "title": "Acid Jazz Vol.11  (\"Check the Rhime\" by A Tribe Called Quest)"
+        },
+        {
+          "artist": "UPROXX",
+          "title": "Guru - Feel The Music"
+        },
+        {
+          "artist": "Alex Lenada",
+          "title": "Gang Starr - Jazz Thing"
+        },
+        {
+          "artist": "Jazz&Gruv",
+          "title": "jazz & gruv feat 4hero invisible man spirit in transit movie"
+        },
+        {
+          "artist": "La Cazouille",
+          "title": "Jacob's Optical Stairway (4 Hero) - The Fusion Formula (Jacob's Optical Stairway, 1995)"
+        },
+        {
+          "artist": "PLANET V",
+          "title": "Roni Size, DJ Suv - Soul Power"
+        },
+        {
+          "artist": "morelagthanskill",
+          "title": "Roni Size - Siren Sounds    [Touching Down]"
+        },
+        {
+          "artist": "Seven Beats Music",
+          "title": "Thievery Corporation • Chet Faker • Bonobo • Morcheeba - Special Coffeeshop Selection [Seven Beats]"
+        },
+        {
+          "artist": "Kosmik Dstroyer",
+          "title": "DJ Cam - Abstract Manifesto (Downtempo, Acid Jazz, Trip Hop, Hip Hop) (1996)"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "magazinu1",
@@ -33,6 +302,87 @@
       ]
     },
     {
+      "slug": "2026-03-17-gemini-st-patrick-s-day-2026-dublin-post-punk-pulse-2026-03-17",
+      "title": "Gemini: St. Patrick's Day 2026: Dublin Post-Punk Pulse 2026-03-17",
+      "source": "gemini",
+      "playlist_kind": "ai_curated",
+      "genre": null,
+      "description": "A visceral deep-dive into the contemporary Dublin post-punk revival and the broader Irish alternative scene. This selection captures the poetic grit and sonic intensity of a generation redefining Irish identity through sharp lyrics and jagged guitars.",
+      "quote": "There's a real sense of shared experience in Dublin right now; a generation articulating its frustration and its beauty through noise.",
+      "quote_source": "Grian Chatten (Fontaines D.C.)",
+      "cover_image": "ai-playlists/2026-03-17-gemini-st-patrick-s-day-2026-dublin-post-punk-pulse-2026-03-17.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": null,
+      "narration_text": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Elc7Kzhi_u3GTrHjPAWpC6y",
+      "track_count": 12,
+      "created_at": "2026-03-17T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "Fontaines D.C.",
+          "title": "Starburster"
+        },
+        {
+          "artist": "The Murder Capital",
+          "title": "Ethel"
+        },
+        {
+          "artist": "Kneecap",
+          "title": "Better Way to Live (feat. Grian Chatten)"
+        },
+        {
+          "artist": "Sprints",
+          "title": "Literary Mind"
+        },
+        {
+          "artist": "Gilla Band",
+          "title": "Eight Thiver"
+        },
+        {
+          "artist": "Just Mustard",
+          "title": "Still"
+        },
+        {
+          "artist": "Gurriers",
+          "title": "Nausea"
+        },
+        {
+          "artist": "Silverbacks",
+          "title": "Rolodex City"
+        },
+        {
+          "artist": "NewDad",
+          "title": "Nightmares"
+        },
+        {
+          "artist": "Enola Gay",
+          "title": "Scrappers"
+        },
+        {
+          "artist": "Cardinals",
+          "title": "Roseland"
+        },
+        {
+          "artist": "Meryl Streek",
+          "title": "False Apologies"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "Fontaines D.C.",
+          "title": "Starburster"
+        },
+        {
+          "artist": "The Murder Capital",
+          "title": "Ethel"
+        },
+        {
+          "artist": "Kneecap",
+          "title": "Better Way to Live (feat. Grian Chatten)"
+        }
+      ]
+    },
+    {
       "slug": "2026-03-16-nlm-deep-focus-idm-2026-03-16",
       "title": "NLM: Deep Focus IDM 2026-03-16",
       "source": "nlm",
@@ -41,12 +391,63 @@
       "description": "This playlist harnesses the intricate rhythms and atmospheric synthesizers of IDM to maintain momentum and clarity during deep work sessions. Rooted in the electronic experimentation and vibrant scenes discussed by King Britt, these instrumental tracks provide an immersive, forward-moving soundscape. The music balances energetic drive with analytical structure to perfectly power your cognitive focus throughout a busy Monday. Requested as a focused Monday work playlist with no vocals.",
       "quote": "We cross examine with old sonic DNA.",
       "quote_source": "'We Cross Examine with Old Sonic DNA': King Britt and Tara Rodgers in conversation on Blacktronika, music technology and pedagogy | Organised Sound",
-      "cover_image": "ai-playlists/2026-03-16-nlm-deep-focus-idm-2026-03-16.mp4",
-      "audio_intro_url": null,
-      "narration_text": null,
+      "cover_image": "ai-playlists/2026-03-16-nlm-deep-focus-idm-2026-03-16.jpg",
+      "cover_video_url": "ai-playlists/2026-03-16-nlm-deep-focus-idm-2026-03-16.mp4",
+      "audio_intro_url": "/audio/playlists/2026-03-16-nlm-deep-focus-idm-2026-03-16.mp3",
+      "narration_text": "Today's playlist leans into IDM. This playlist harnesses the intricate rhythms and atmospheric synthesizers of IDM to maintain momentum and clarity during deep work sessions. Rooted in the electronic experimentation and vibrant scenes discussed by King Britt, these instrumental tracks provide an immersive, forward-moving soundscape. The music balances. It moves through essential stops from Aphex Twin, Boards of Canada, and Autechre. As 'We Cross Examine with Old Sonic DNA': King Britt and Tara Rodgers in conversation on Blacktronika, music technology and put it, \"We cross examine with old sonic DNA.\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-En8yarlyRBGnLH69HErxLfg",
       "track_count": 12,
-      "created_at": "2026-03-16T00:00:00+00:00",
+      "created_at": "2026-03-16T18:43:44+00:00",
+      "tracks": [
+        {
+          "artist": "Aphex Twin",
+          "title": "Alberto Balsalm"
+        },
+        {
+          "artist": "Boards of Canada",
+          "title": "Roygbiv"
+        },
+        {
+          "artist": "Autechre",
+          "title": "Teartear"
+        },
+        {
+          "artist": "Plaid",
+          "title": "Ralome"
+        },
+        {
+          "artist": "Squarepusher",
+          "title": "Port Rhombus"
+        },
+        {
+          "artist": "Clark",
+          "title": "Ted"
+        },
+        {
+          "artist": "Tycho",
+          "title": "A Walk"
+        },
+        {
+          "artist": "Jon Hopkins",
+          "title": "Neon Pattern Drum"
+        },
+        {
+          "artist": "Four Tet",
+          "title": "Parallel Jalebi"
+        },
+        {
+          "artist": "Floating Points",
+          "title": "LesAlpx"
+        },
+        {
+          "artist": "Rival Consoles",
+          "title": "Recovery"
+        },
+        {
+          "artist": "Bicep",
+          "title": "Opal"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "Aphex Twin",
@@ -71,12 +472,83 @@
       "description": "Acid jazz emerged in the 1990s as a vibrant UK hybrid of American soul music that incorporated a new electronic twist [1]. The genre successfully bridged generations by bringing together older jazz enthusiasts and younger hip hop fans in a unique cultural crossover [2]. It frequently featured innovative live configurations, such as live bands performing alongside DJs, which helped change the landscape of club music [1].",
       "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States.",
       "quote_source": "King Britt in 'We Cross Examine with Old Sonic DNA' [1]",
-      "cover_image": "ai-playlists/2026-03-16-nlm-acid-jazz-essentials-2026-03-16.mp4",
-      "audio_intro_url": null,
-      "narration_text": null,
+      "cover_image": "ai-playlists/2026-03-16-nlm-acid-jazz-essentials-2026-03-16.jpg",
+      "cover_video_url": "ai-playlists/2026-03-16-nlm-acid-jazz-essentials-2026-03-16.mp4",
+      "audio_intro_url": "/audio/playlists/2026-03-16-nlm-acid-jazz-essentials-2026-03-16.mp3",
+      "narration_text": "Today's playlist leans into Acid Jazz. Acid jazz emerged in the 1990s as a vibrant UK hybrid of American soul music that incorporated a new electronic twist [1]. The genre successfully bridged generations by bringing together older jazz enthusiasts and younger hip hop fans in a unique cultural crossover [2]. It frequently featured innovative live configurat. It moves through essential stops from Soul II Soul, Brand New Heavies, and Digable Planets. As King Britt in 'We Cross Examine with Old Sonic DNA' [1] put it, \"Acid jazz, the UK hybrid of American soul music, started to resonate here in the States.\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-El2hIZI4xF_r26YAJaj_t7Z",
       "track_count": 18,
-      "created_at": "2026-03-16T00:00:00+00:00",
+      "created_at": "2026-03-16T07:04:16+00:00",
+      "tracks": [
+        {
+          "artist": "magazinu1",
+          "title": "SOUL II SOUL - Jazzie's Groove (HQ Sound)"
+        },
+        {
+          "artist": "Acid Jazz Records",
+          "title": "BRAND NEW HEAVIES - 'Dream Come True' (official video - Acid Jazz Records)"
+        },
+        {
+          "artist": "London Records",
+          "title": "The Brand New Heavies - Midnight At The Oasis (Official Video)"
+        },
+        {
+          "artist": "DigablePlanetsVEVO",
+          "title": "Digable Planets - Rebirth of Slick (Cool Like Dat) (Official Music Video)"
+        },
+        {
+          "artist": "UPROXX",
+          "title": "Digable Planets - Where I'm From"
+        },
+        {
+          "artist": "1mistaGROOVE",
+          "title": "Apparently Nothin' - Young Disciples (1991)"
+        },
+        {
+          "artist": "SoulStylistJukeBox",
+          "title": "Young Disciples featuring Joy Malcolm \"Bad Weather\""
+        },
+        {
+          "artist": "TribeCalledQuestVEVO",
+          "title": "A Tribe Called Quest - Jazz (We've Got) Buggin' Out (Official HD Video)"
+        },
+        {
+          "artist": "Davie Studios",
+          "title": "Acid Jazz Vol.11  (\"Check the Rhime\" by A Tribe Called Quest)"
+        },
+        {
+          "artist": "pakalolo06",
+          "title": "Guru - State of Clarity (Feat. Common & Bob James)"
+        },
+        {
+          "artist": "Guru - Topic",
+          "title": "Infinite (feat. Blackalicious)"
+        },
+        {
+          "artist": "Jazz&Gruv",
+          "title": "jazz & gruv feat 4hero invisible man spirit in transit movie"
+        },
+        {
+          "artist": "La Cazouille",
+          "title": "Jacob's Optical Stairway (4 Hero) - The Fusion Formula (Jacob's Optical Stairway, 1995)"
+        },
+        {
+          "artist": "PLANET V",
+          "title": "Roni Size, DJ Suv - Soul Power"
+        },
+        {
+          "artist": "morelagthanskill",
+          "title": "Roni Size - Siren Sounds    [Touching Down]"
+        },
+        {
+          "artist": "Seven Beats Music",
+          "title": "Thievery Corporation • Chet Faker • Bonobo • Morcheeba - Special Coffeeshop Selection [Seven Beats]"
+        },
+        {
+          "artist": "xenobiology",
+          "title": "King Britt Presents Sylk 130 - The Reason"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "magazinu1",
@@ -101,12 +573,95 @@
       "description": "Acid jazz emerged in the 1990s as a UK hybrid of American soul music that brought a new electronic twist to 1970s influences. The genre fostered crossover success by bridging generations, uniting older jazz enthusiasts with younger hip hop fans. It also pioneered new live configurations by seamlessly blending traditional live bands with DJs on stage.",
       "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist.",
       "quote_source": "King Britt, 'We Cross Examine with Old Sonic DNA' in Organised Sound",
-      "cover_image": "ai-playlists/2026-03-15-nlm-acid-jazz-90s-grooves-2026-03-15.mp4",
-      "audio_intro_url": null,
-      "narration_text": null,
+      "cover_image": "ai-playlists/2026-03-15-nlm-acid-jazz-90s-grooves-2026-03-15.jpg",
+      "cover_video_url": "ai-playlists/2026-03-15-nlm-acid-jazz-90s-grooves-2026-03-15.mp4",
+      "audio_intro_url": "/audio/playlists/2026-03-15-nlm-acid-jazz-90s-grooves-2026-03-15.mp3",
+      "narration_text": "Today's playlist leans into Acid Jazz & 90s Grooves. Acid jazz emerged in the 1990s as a UK hybrid of American soul music that brought a new electronic twist to 1970s influences. The genre fostered crossover success by bridging generations, uniting older jazz enthusiasts with younger hip hop fans. It also pioneered new live configurations by seamlessly blending tradition. It moves through essential stops from magazinu1, platine 45, and Acid Jazz Records. As King Britt, 'We Cross Examine with Old Sonic DNA' in Organised Sound put it, \"Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist.\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EkH8MS82SlWzvGNdQiDu0h9",
       "track_count": 20,
       "created_at": "2026-03-15T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "magazinu1",
+          "title": "SOUL II SOUL - Jazzie's Groove (HQ Sound)"
+        },
+        {
+          "artist": "platine 45",
+          "title": "Soul II Soul - Pleasure dome ''Album Version'' (1997)"
+        },
+        {
+          "artist": "Acid Jazz Records",
+          "title": "BRAND NEW HEAVIES - 'Dream Come True' (official video - Acid Jazz Records)"
+        },
+        {
+          "artist": "London Records",
+          "title": "The Brand New Heavies - Midnight At The Oasis (Official Video)"
+        },
+        {
+          "artist": "1mistaGROOVE",
+          "title": "Apparently Nothin' - Young Disciples (1991)"
+        },
+        {
+          "artist": "SoulStylistJukeBox",
+          "title": "Young Disciples featuring Joy Malcolm \"Bad Weather\""
+        },
+        {
+          "artist": "DigablePlanetsVEVO",
+          "title": "Digable Planets - Rebirth of Slick (Cool Like Dat) (Official Music Video)"
+        },
+        {
+          "artist": "UPROXX",
+          "title": "Digable Planets - Where I'm From"
+        },
+        {
+          "artist": "TribeCalledQuestVEVO",
+          "title": "A Tribe Called Quest - Jazz (We've Got) Buggin' Out (Official HD Video)"
+        },
+        {
+          "artist": "Davie Studios",
+          "title": "Acid Jazz Vol.11  (\"Check the Rhime\" by A Tribe Called Quest)"
+        },
+        {
+          "artist": "Guru - Topic",
+          "title": "Fine and Free (feat. Vivian Green)"
+        },
+        {
+          "artist": "Guru - Topic",
+          "title": "Insert A (Mental Relaxation) / Medicine"
+        },
+        {
+          "artist": "Jazz&Gruv",
+          "title": "jazz & gruv feat 4hero invisible man spirit in transit movie"
+        },
+        {
+          "artist": "La Cazouille",
+          "title": "Jacob's Optical Stairway (4 Hero) - The Fusion Formula (Jacob's Optical Stairway, 1995)"
+        },
+        {
+          "artist": "Seven Beats Music",
+          "title": "Thievery Corporation • Chet Faker • Bonobo • Morcheeba - Special Coffeeshop Selection [Seven Beats]"
+        },
+        {
+          "artist": "Kosmik Dstroyer",
+          "title": "DJ Cam - Abstract Manifesto (Downtempo, Acid Jazz, Trip Hop, Hip Hop) (1996)"
+        },
+        {
+          "artist": "Chancey Wigglesworth",
+          "title": "Shadow Records - DJ Cam - MAD BLUNTED JAZZ Disc 1 - Breakbeat / Downtempo / Trip-Hop / aCiD jAzZ"
+        },
+        {
+          "artist": "PLANET V",
+          "title": "Roni Size, DJ Suv - Soul Power"
+        },
+        {
+          "artist": "morelagthanskill",
+          "title": "Roni Size - Siren Sounds    [Touching Down]"
+        },
+        {
+          "artist": "xenobiology",
+          "title": "King Britt Presents Sylk 130 - The Reason"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "magazinu1",
@@ -131,12 +686,55 @@
       "description": "Mutant disco and post-punk-funk from the 1979-1983 corridor where no-wave abrasion, dub space, disco momentum, and bass-first minimalism all started speaking the same language. Built around tracks with enough critical or artist commentary to support a quote-backed playlist email.",
       "quote": null,
       "quote_source": null,
-      "cover_image": "ai-playlists/2026-03-14-codex-basslines-for-difficult-people.mp4",
+      "cover_image": "ai-playlists/2026-03-14-codex-basslines-for-difficult-people.jpg",
+      "cover_video_url": "ai-playlists/2026-03-14-codex-basslines-for-difficult-people.mp4",
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EkZPiNdYteVsqLDlZwUz2BN",
       "track_count": 10,
       "created_at": "2026-03-14T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "ESG",
+          "title": "U.F.O"
+        },
+        {
+          "artist": "Liquid Liquid",
+          "title": "Cavern"
+        },
+        {
+          "artist": "Bush Tetras",
+          "title": "Too Many Creeps"
+        },
+        {
+          "artist": "Chandra",
+          "title": "Kate"
+        },
+        {
+          "artist": "Delta 5",
+          "title": "Mind Your Own Business"
+        },
+        {
+          "artist": "Maximum Joy",
+          "title": "Stretch"
+        },
+        {
+          "artist": "A Certain Ratio",
+          "title": "Knife Slits Water"
+        },
+        {
+          "artist": "Vivien Goldman",
+          "title": "Launderette"
+        },
+        {
+          "artist": "Lizzy Mercier Descloux",
+          "title": "Wawa"
+        },
+        {
+          "artist": "Konk",
+          "title": "Love Attack"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "ESG",
@@ -161,12 +759,55 @@
       "description": "Inspired by Mark Rothko's *No. 61 (Rust and Blue)* (1953). Ambient, neo-classical, and drone music that mirrors the painting's luminous stillness, emotional weight, and tension between warm rust and cool blue. Sent to randycounsman@gmail.com with painting image and per-track explanations.",
       "quote": null,
       "quote_source": null,
-      "cover_image": "ai-playlists/2026-03-13-sonnet-rust-and-blue-a-rothko-meditation.mp4",
+      "cover_image": "ai-playlists/2026-03-13-sonnet-rust-and-blue-a-rothko-meditation.jpg",
+      "cover_video_url": "ai-playlists/2026-03-13-sonnet-rust-and-blue-a-rothko-meditation.mp4",
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElwQh7Bi9XKA23lJnVxgjFf",
       "track_count": 10,
       "created_at": "2026-03-13T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "Morton Feldman",
+          "title": "Rothko Chapel"
+        },
+        {
+          "artist": "Arvo Pärt",
+          "title": "Spiegel im Spiegel"
+        },
+        {
+          "artist": "Brian Eno",
+          "title": "An Ending (Ascent)"
+        },
+        {
+          "artist": "Max Richter",
+          "title": "On the Nature of Daylight"
+        },
+        {
+          "artist": "Harold Budd & Brian Eno",
+          "title": "First Light"
+        },
+        {
+          "artist": "Stars of the Lid",
+          "title": "Requiem for Dying Mothers"
+        },
+        {
+          "artist": "Johann Jóhannsson",
+          "title": "The Sun's Gone Dim"
+        },
+        {
+          "artist": "Nils Frahm",
+          "title": "Says"
+        },
+        {
+          "artist": "Grouper",
+          "title": "Lighthouse"
+        },
+        {
+          "artist": "William Basinski",
+          "title": "dlp 1.1"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "Morton Feldman",
@@ -191,12 +832,63 @@
       "description": "The unheralded pioneers who built the blues — artists so influential that everyone knows their sound but almost no one knows their name. Pre-war Delta and city blues from artists who shaped Robert Johnson, Muddy Waters, and everything that followed. 12 tracks.",
       "quote": null,
       "quote_source": null,
-      "cover_image": "ai-playlists/2026-03-13-sonnet-delta-shadows-obscure-architects-of-the-blues.mp4",
+      "cover_image": "ai-playlists/2026-03-13-sonnet-delta-shadows-obscure-architects-of-the-blues.jpg",
+      "cover_video_url": "ai-playlists/2026-03-13-sonnet-delta-shadows-obscure-architects-of-the-blues.mp4",
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Enzu8nDaUZOrUOIGCkUYmJP",
       "track_count": 12,
       "created_at": "2026-03-13T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "Charley Patton",
+          "title": "Pony Blues"
+        },
+        {
+          "artist": "Blind Blake",
+          "title": "Police Dog Blues"
+        },
+        {
+          "artist": "Tommy Johnson",
+          "title": "Big Road Blues"
+        },
+        {
+          "artist": "Leroy Carr",
+          "title": "How Long, How Long Blues"
+        },
+        {
+          "artist": "Kokomo Arnold",
+          "title": "Milk Cow Blues"
+        },
+        {
+          "artist": "Peetie Wheatstraw",
+          "title": "Peetie Wheatstraw Stomp"
+        },
+        {
+          "artist": "Tampa Red & Georgia Tom",
+          "title": "It's Tight Like That"
+        },
+        {
+          "artist": "Geeshie Wiley",
+          "title": "Last Kind Words Blues"
+        },
+        {
+          "artist": "Sleepy John Estes",
+          "title": "Drop Down Mama"
+        },
+        {
+          "artist": "Mississippi Sheiks",
+          "title": "Sittin' On Top of the World"
+        },
+        {
+          "artist": "Frank Stokes",
+          "title": "Taint Nobody's Business If I Do"
+        },
+        {
+          "artist": "Scrapper Blackwell",
+          "title": "Kokomo Blues"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "Charley Patton",
@@ -221,12 +913,159 @@
       "description": "36 bands that shared a documented concert bill with Bad Brains, each represented by their signature track. Source: ChatGPT conversation using Concert Archives data.",
       "quote": null,
       "quote_source": null,
-      "cover_image": "ai-playlists/2026-03-13-sonnet-bad-brains-adjacent-best-of-the-billing.mp4",
+      "cover_image": "ai-playlists/2026-03-13-sonnet-bad-brains-adjacent-best-of-the-billing.jpg",
+      "cover_video_url": "ai-playlists/2026-03-13-sonnet-bad-brains-adjacent-best-of-the-billing.mp4",
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Enk7UNRe8U3VTtWrHFFOOco",
       "track_count": 36,
       "created_at": "2026-03-13T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "Circle Jerks",
+          "title": "Wild in the Streets"
+        },
+        {
+          "artist": "Living Colour",
+          "title": "Cult of Personality"
+        },
+        {
+          "artist": "Leeway",
+          "title": "Rise and Fall"
+        },
+        {
+          "artist": "Slayer",
+          "title": "Raining Blood"
+        },
+        {
+          "artist": "Megadeth",
+          "title": "Holy Wars... The Punishment Due"
+        },
+        {
+          "artist": "Sick of It All",
+          "title": "Step Down"
+        },
+        {
+          "artist": "Murphy's Law",
+          "title": "Quest for Herb"
+        },
+        {
+          "artist": "Candiria",
+          "title": "Pull"
+        },
+        {
+          "artist": "Vision of Disorder",
+          "title": "Through My Eyes"
+        },
+        {
+          "artist": "Slightly Stoopid",
+          "title": "2 AM"
+        },
+        {
+          "artist": "The Expendables",
+          "title": "Bowl for Two"
+        },
+        {
+          "artist": "Valient Thorr",
+          "title": "Double Crossed"
+        },
+        {
+          "artist": "Dub Trio",
+          "title": "Not for Nothing"
+        },
+        {
+          "artist": "Foo Fighters",
+          "title": "Everlong"
+        },
+        {
+          "artist": "Royal Blood",
+          "title": "Out of the Black"
+        },
+        {
+          "artist": "Body Count",
+          "title": "Body Count's in the House"
+        },
+        {
+          "artist": "Trash Talk",
+          "title": "Awake"
+        },
+        {
+          "artist": "Fishbone",
+          "title": "Party at Ground Zero"
+        },
+        {
+          "artist": "Straight Line Stitch",
+          "title": "Black Veil"
+        },
+        {
+          "artist": "Unlocking the Truth",
+          "title": "Monster"
+        },
+        {
+          "artist": "The Bots",
+          "title": "All I Really Want"
+        },
+        {
+          "artist": "Shabazz Palaces",
+          "title": "Swerve... The Reeping of All That Is Worthwhile"
+        },
+        {
+          "artist": "The Internet",
+          "title": "Girl"
+        },
+        {
+          "artist": "Cro-Mags",
+          "title": "We Gotta Know"
+        },
+        {
+          "artist": "Sharon Jones & The Dap-Kings",
+          "title": "100 Days, 100 Nights"
+        },
+        {
+          "artist": "A Tribe Called Red",
+          "title": "Electric Pow Wow Drum"
+        },
+        {
+          "artist": "clipping.",
+          "title": "Work Work"
+        },
+        {
+          "artist": "Cypress Hill",
+          "title": "Insane in the Brain"
+        },
+        {
+          "artist": "Pennywise",
+          "title": "Bro Hymn"
+        },
+        {
+          "artist": "Sublime with Rome",
+          "title": "Panic"
+        },
+        {
+          "artist": "Deftones",
+          "title": "My Own Summer (Shove It)"
+        },
+        {
+          "artist": "Misfits",
+          "title": "Last Caress"
+        },
+        {
+          "artist": "Dead Kennedys",
+          "title": "Holiday in Cambodia"
+        },
+        {
+          "artist": "Reagan Youth",
+          "title": "Reagan Youth"
+        },
+        {
+          "artist": "Beastie Boys",
+          "title": "Sabotage"
+        },
+        {
+          "artist": "The Roots",
+          "title": "The Seed (2.0)"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "Circle Jerks",
@@ -251,12 +1090,67 @@
       "description": "A warm, left-field groove travelogue for a listener whose taste already jumps from post-punk and jazz to Japanese music and deep catalog discovery. Ethiopian jazz, Brazilian psych-funk, synth-soul, downtown minimalism, and late-night city-pop glow all sit in the same lane here.",
       "quote": null,
       "quote_source": null,
-      "cover_image": "ai-playlists/2026-03-13-codex-velvet-traffic.mp4",
+      "cover_image": "ai-playlists/2026-03-13-codex-velvet-traffic.jpg",
+      "cover_video_url": "ai-playlists/2026-03-13-codex-velvet-traffic.mp4",
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EmTfiDon5eTE85I7KyLJqBE",
       "track_count": 13,
       "created_at": "2026-03-13T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "Cortex",
+          "title": "Huit octobre 1971"
+        },
+        {
+          "artist": "Mulatu Astatke",
+          "title": "Tezeta (Nostalgia)"
+        },
+        {
+          "artist": "Dorothy Ashby",
+          "title": "Soul Vibrations"
+        },
+        {
+          "artist": "Cymande",
+          "title": "Dove"
+        },
+        {
+          "artist": "Jorge Ben",
+          "title": "Ponta de Lança Africano (Umbabarauma)"
+        },
+        {
+          "artist": "William Onyeabor",
+          "title": "Fantastic Man"
+        },
+        {
+          "artist": "Azymuth",
+          "title": "Linha Do Horizonte"
+        },
+        {
+          "artist": "Dur-Dur Band",
+          "title": "Dooyo"
+        },
+        {
+          "artist": "Asha Puthli",
+          "title": "Space Talk"
+        },
+        {
+          "artist": "ESG",
+          "title": "U.F.O"
+        },
+        {
+          "artist": "WITCH",
+          "title": "Lazy Bones"
+        },
+        {
+          "artist": "Yasuaki Shimizu",
+          "title": "Kakashi"
+        },
+        {
+          "artist": "Shuggie Otis",
+          "title": "Aht Uh Mi Hed"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "Cortex",
@@ -281,12 +1175,130 @@
       "description": "Japanese punk, hardcore, and no-wave from the 80s and 90s. Spans Blue Hearts pop-punk to GISM noise-metal to Shonen Knife power-pop to Boredoms chaos.",
       "quote": null,
       "quote_source": null,
-      "cover_image": "ai-playlists/2026-03-12-sonnet-tokyo-burning.mp4",
+      "cover_image": "ai-playlists/2026-03-12-sonnet-tokyo-burning.jpg",
+      "cover_video_url": "ai-playlists/2026-03-12-sonnet-tokyo-burning.mp4",
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-El3y8iqdvDps4XEmaEMCBwM",
       "track_count": 21,
       "created_at": "2026-03-12T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "The Blue Hearts",
+          "title": "TRAIN-TRAIN",
+          "status": "✅"
+        },
+        {
+          "artist": "The Blue Hearts",
+          "title": "Linda Linda",
+          "status": "✅"
+        },
+        {
+          "artist": "The Blue Hearts",
+          "title": "情熱の薔薇 (Jounetsu no Bara)",
+          "status": "✅"
+        },
+        {
+          "artist": "Shonen Knife",
+          "title": "Riding on the Rocket",
+          "status": "✅"
+        },
+        {
+          "artist": "Shonen Knife",
+          "title": "Twist Barbie",
+          "status": "✅"
+        },
+        {
+          "artist": "RC Succession",
+          "title": "雨あがりの夜空に",
+          "status": "✅"
+        },
+        {
+          "artist": "RC Succession",
+          "title": "トランジスタ・ラジオ",
+          "status": "✅"
+        },
+        {
+          "artist": "The Roosters",
+          "title": "Do the Rooster",
+          "status": "✅"
+        },
+        {
+          "artist": "Friction",
+          "title": "Zone B",
+          "status": "✅"
+        },
+        {
+          "artist": "INU",
+          "title": "メシ食うな！",
+          "status": "✅"
+        },
+        {
+          "artist": "Zelda",
+          "title": "Onsoku de Aruke",
+          "status": "✅"
+        },
+        {
+          "artist": "JAGATARA",
+          "title": "もうがまんできない",
+          "status": "✅"
+        },
+        {
+          "artist": "The Stalin",
+          "title": "Trash",
+          "status": "✅"
+        },
+        {
+          "artist": "GISM",
+          "title": "Detestation",
+          "status": "✅"
+        },
+        {
+          "artist": "Gauze",
+          "title": "Equalizer",
+          "status": "✅"
+        },
+        {
+          "artist": "Lip Cream",
+          "title": "Execute",
+          "status": "✅"
+        },
+        {
+          "artist": "Death Side",
+          "title": "Pledge of Pain",
+          "status": "✅"
+        },
+        {
+          "artist": "The Comes",
+          "title": "No Side",
+          "status": "✅"
+        },
+        {
+          "artist": "Boredoms",
+          "title": "Fly Jiku",
+          "status": "✅"
+        },
+        {
+          "artist": "Togawa Jun",
+          "title": "Suki Suki Daisuki",
+          "status": "✅"
+        },
+        {
+          "artist": "Auto-Mod",
+          "title": "Metamorphosis",
+          "status": "❌ not on YTM"
+        },
+        {
+          "artist": "P-Model",
+          "title": "Asphalt Jungle",
+          "status": "✅"
+        },
+        {
+          "artist": "Aburadako",
+          "title": "Jibakurei",
+          "status": "❌ not on YTM"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "The Blue Hearts",
@@ -314,12 +1326,95 @@
       "description": "Inspired by Mark Rothko's *Orange and Yellow* (1956) — warm, luminous, meditative color field painting. Ambient, spiritual jazz, neo-classical, and drone for deep listening.",
       "quote": null,
       "quote_source": null,
-      "cover_image": "ai-playlists/2026-03-12-sonnet-orange-and-yellow.mp4",
+      "cover_image": "ai-playlists/2026-03-12-sonnet-orange-and-yellow.jpg",
+      "cover_video_url": "ai-playlists/2026-03-12-sonnet-orange-and-yellow.mp4",
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElWhWMLE9zs0BxoFQJqxAEM",
       "track_count": 20,
       "created_at": "2026-03-12T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "Grouper",
+          "title": "Alien Observer"
+        },
+        {
+          "artist": "Stars of the Lid",
+          "title": "Articulate Silences, Pt. 1"
+        },
+        {
+          "artist": "Alice Coltrane",
+          "title": "Journey in Satchidananda (Full Album)"
+        },
+        {
+          "artist": "Nils Frahm",
+          "title": "Says"
+        },
+        {
+          "artist": "Max Richter",
+          "title": "On the Nature of Daylight"
+        },
+        {
+          "artist": "Weyes Blood",
+          "title": "Andromeda"
+        },
+        {
+          "artist": "Julianna Barwick",
+          "title": "Nepenthe"
+        },
+        {
+          "artist": "Tim Hecker",
+          "title": "The Ravedeath, 1972 (Full Album)"
+        },
+        {
+          "artist": "Sun Ra",
+          "title": "Love In Outer Space"
+        },
+        {
+          "artist": "Laraaji",
+          "title": "Deep Celestial"
+        },
+        {
+          "artist": "Sigur Rós",
+          "title": "Svefn-g-englar"
+        },
+        {
+          "artist": "Jóhann Jóhannsson",
+          "title": "The Sun's Gone Dim and the Sky's Turned Black"
+        },
+        {
+          "artist": "Hammock",
+          "title": "Winter Light"
+        },
+        {
+          "artist": "Mary Lattimore",
+          "title": "Jimmy V"
+        },
+        {
+          "artist": "Godspeed You! Black Emperor",
+          "title": "Lift Your Skinny Fists Like Antennas to Heaven"
+        },
+        {
+          "artist": "Eluvium",
+          "title": "Zerthis Was a Shivering Human Image"
+        },
+        {
+          "artist": "Hiroshi Yoshimura",
+          "title": "Wet Land (Full Album)"
+        },
+        {
+          "artist": "Fennesz",
+          "title": "Caecilia"
+        },
+        {
+          "artist": "Explosions in the Sky",
+          "title": "The Only Moment We Were Alone"
+        },
+        {
+          "artist": "Julia Holter",
+          "title": "Sea Calls Me Home"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "Grouper",
@@ -344,12 +1439,143 @@
       "description": "Discovery playlist — all new artists, zero overlap with existing library. Inspired by existing taste across post-punk, soul, hip-hop, jazz, and experimental.",
       "quote": null,
       "quote_source": null,
-      "cover_image": "ai-playlists/2026-03-12-sonnet-new-horizons.mp4",
+      "cover_image": "ai-playlists/2026-03-12-sonnet-new-horizons.jpg",
+      "cover_video_url": "ai-playlists/2026-03-12-sonnet-new-horizons.mp4",
       "audio_intro_url": null,
       "narration_text": null,
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElShsalDWhpYQUgI3InVzYT",
       "track_count": 32,
       "created_at": "2026-03-12T00:00:00+00:00",
+      "tracks": [
+        {
+          "artist": "Yard Act",
+          "title": "The Overload"
+        },
+        {
+          "artist": "Dry Cleaning",
+          "title": "Scratchcard Lanyard"
+        },
+        {
+          "artist": "shame",
+          "title": "Alphabet"
+        },
+        {
+          "artist": "Nation of Language",
+          "title": "On Division St"
+        },
+        {
+          "artist": "The Murder Capital",
+          "title": "Don't Cling To Life"
+        },
+        {
+          "artist": "SAULT",
+          "title": "Wildfires"
+        },
+        {
+          "artist": "Sudan Archives",
+          "title": "Nont for Sale"
+        },
+        {
+          "artist": "Jordan Rakei",
+          "title": "Clouds"
+        },
+        {
+          "artist": "Franc Moody",
+          "title": "Dance Moves"
+        },
+        {
+          "artist": "billy woods & Kenny Segal",
+          "title": "spongebob"
+        },
+        {
+          "artist": "Saba",
+          "title": "LOGOUT feat. Chance the Rapper"
+        },
+        {
+          "artist": "JPEGMafia",
+          "title": "1539 N. Calvert"
+        },
+        {
+          "artist": "Ezra Collective",
+          "title": "Life Goes On feat. Sampa the Great"
+        },
+        {
+          "artist": "Nubya Garcia",
+          "title": "Source"
+        },
+        {
+          "artist": "Arooj Aftab",
+          "title": "Mohabbat"
+        },
+        {
+          "artist": "Toro y Moi",
+          "title": "Ordinary Pleasure"
+        },
+        {
+          "artist": "SG Lewis & Clairo",
+          "title": "Throwaway"
+        },
+        {
+          "artist": "MUNA",
+          "title": "Silk Chiffon feat. Phoebe Bridgers"
+        },
+        {
+          "artist": "Purple Disco Machine",
+          "title": "Fireworks"
+        },
+        {
+          "artist": "English Teacher",
+          "title": "R&B"
+        },
+        {
+          "artist": "Armand Hammer",
+          "title": "Bitter Cassava feat. Pink Siifu"
+        },
+        {
+          "artist": "Lucky Daye",
+          "title": "Roll Some Mo"
+        },
+        {
+          "artist": "Makaya McCraven",
+          "title": "In These Times (Live)"
+        },
+        {
+          "artist": "Squid",
+          "title": "Pamphlets"
+        },
+        {
+          "artist": "Samm Henshaw",
+          "title": "Church feat. EARTHGANG"
+        },
+        {
+          "artist": "SPRINTS",
+          "title": "How Does The Story Go?"
+        },
+        {
+          "artist": "Haruomi Hosono",
+          "title": "花に水 (Watering a Flower)"
+        },
+        {
+          "artist": "Cautious Clay",
+          "title": "Cold War"
+        },
+        {
+          "artist": "MIKE",
+          "title": "Evil Eye"
+        },
+        {
+          "artist": "Uyama Hiroto",
+          "title": "A Son of the Sun"
+        },
+        {
+          "artist": "Isaiah Collier & The Chosen Few",
+          "title": "Full Performance (Live on KEXP)"
+        },
+        {
+          "artist": "Nujabes",
+          "title": "Luv(sic) feat. Shing02"
+        }
+      ],
       "tracks_preview": [
         {
           "artist": "Yard Act",
