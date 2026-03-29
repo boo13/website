@@ -51,10 +51,6 @@ function buildRow(project) {
   const inner = document.createElement('div');
   inner.className = 'credit-row__details-inner';
 
-  const detailTitle = document.createElement('h3');
-  detailTitle.className = 'credit-row__detail-title';
-  detailTitle.textContent = project.title;
-
   const detailImage = document.createElement('div');
   detailImage.className = 'credit-row__detail-image';
   const img = document.createElement('img');
@@ -74,7 +70,6 @@ function buildRow(project) {
     detailDesc.style.display = 'none';
   }
 
-  inner.appendChild(detailTitle);
   inner.appendChild(detailImage);
   inner.appendChild(detailDesc);
   details.appendChild(inner);
@@ -96,52 +91,62 @@ export function initCredits() {
 
   const ctx = gsap.context(() => {});
 
-  function invertColors(toDark) {
+  const darkVars = {
+    '--credits-bg': 'oklch(0.14 0 0)',
+    '--credits-text': 'oklch(0.968 0.006 75)',
+    '--credits-border': 'oklch(0.968 0.006 75 / 0.1)',
+    '--credits-hover-bg': 'oklch(1 0 0 / 0.06)',
+    '--credits-muted': 'oklch(0.968 0.006 75 / 0.6)',
+  };
+  const lightVars = {
+    '--credits-bg': 'oklch(0.968 0.006 75)',
+    '--credits-text': 'oklch(0.14 0 0)',
+    '--credits-border': 'oklch(0.14 0 0 / 0.1)',
+    '--credits-hover-bg': 'oklch(0.14 0 0 / 0.04)',
+    '--credits-muted': 'oklch(0.14 0 0 / 0.5)',
+  };
+
+  // Adds a color inversion tween to `tl` at position `pos`.
+  // Slower and in the same timeline as the row expansion so it feels coupled.
+  function invertColors(toDark, tl, pos) {
     if (prefersReducedMotion) {
       section.classList.toggle('is-expanded', toDark);
       return;
     }
-    const dark = {
-      '--credits-bg': 'oklch(0.14 0 0)',
-      '--credits-text': 'oklch(0.968 0.006 75)',
-      '--credits-border': 'oklch(0.968 0.006 75 / 0.1)',
-      '--credits-hover-bg': 'oklch(0.767 0.139 91 / 0.08)',
-      '--credits-hover-title': 'oklch(0.767 0.139 91)',
-      '--credits-muted': 'oklch(0.968 0.006 75 / 0.6)',
-    };
-    const light = {
-      '--credits-bg': 'oklch(0.968 0.006 75)',
-      '--credits-text': 'oklch(0.14 0 0)',
-      '--credits-border': 'oklch(0.14 0 0 / 0.1)',
-      '--credits-hover-bg': 'oklch(0.14 0 0 / 0.04)',
-      '--credits-hover-title': 'oklch(0.55 0.15 91)',
-      '--credits-muted': 'oklch(0.14 0 0 / 0.5)',
-    };
-    gsap.to(section, { ...(toDark ? dark : light), duration: 0.4, ease: 'expo.out' });
+    const vars = { ...(toDark ? darkVars : lightVars), duration: 0.9, ease: 'power2.inOut' };
+    if (tl) {
+      tl.to(section, vars, pos ?? 0);
+    } else {
+      gsap.to(section, vars);
+    }
   }
 
-  function collapseRow(row) {
-    const details = row.querySelector('.credit-row__details');
-    row.classList.remove('is-active');
-    row.querySelector('.credit-row__icon').textContent = '+';
-    row.querySelector('.credit-row__header').setAttribute('aria-expanded', 'false');
-    details.setAttribute('aria-hidden', 'true');
-    details.style.overflow = 'clip';
+  // Grow the header title to display size; shrink it back when closing.
+  // fontFamily must be swapped before calling so the display font scales up from small.
+  function growTitle(titleEl, tl, pos) {
+    const startPx = parseFloat(getComputedStyle(titleEl).fontSize);
+    titleEl.dataset.baseSize = startPx;
+    tl.fromTo(titleEl, { fontSize: startPx }, { fontSize: '2.25rem', duration: 0.5, ease: 'expo.out' }, pos);
+  }
 
-    if (prefersReducedMotion) {
-      details.style.height = '0';
-      ScrollTrigger.refresh();
-      return;
-    }
-
-    gsap.to(details, {
-      height: 0,
-      duration: 0.4,
-      ease: 'expo.inOut',
-      onComplete() {
-        ScrollTrigger.refresh();
+  function shrinkTitle(titleEl, tl, pos) {
+    const basePx = parseFloat(titleEl.dataset.baseSize || getComputedStyle(titleEl).fontSize);
+    tl.to(
+      titleEl,
+      {
+        fontSize: basePx,
+        duration: 0.35,
+        ease: 'expo.inOut',
+        onComplete() {
+          // Clear inline overrides so CSS resumes control
+          titleEl.style.fontFamily = '';
+          titleEl.style.letterSpacing = '';
+          titleEl.style.lineHeight = '';
+          gsap.set(titleEl, { clearProps: 'fontSize' });
+        },
       },
-    });
+      pos
+    );
   }
 
   function handleRowClick(row) {
@@ -150,39 +155,73 @@ export function initCredits() {
     // Snap any in-progress tween to end
     if (activeTween?.isActive()) activeTween.progress(1);
 
+    const titleEl = row.querySelector('.credit-row__title');
+
     if (activeRow === row) {
-      // Toggle closed
-      collapseRow(row);
+      // Toggle closed: shrink title + collapse height + return to light
+      const details = row.querySelector('.credit-row__details');
+      row.classList.remove('is-active');
+      row.querySelector('.credit-row__header').setAttribute('aria-expanded', 'false');
+      details.setAttribute('aria-hidden', 'true');
+      details.style.overflow = 'clip';
       activeRow = null;
-      invertColors(false);
+
+      if (prefersReducedMotion) {
+        details.style.height = '0';
+        ScrollTrigger.refresh();
+        invertColors(false);
+        titleEl.style.fontFamily = '';
+        gsap.set(titleEl, { clearProps: 'fontSize' });
+      } else {
+        const closeTl = gsap.timeline();
+        invertColors(false, closeTl, 0);
+        shrinkTitle(titleEl, closeTl, 0);
+        closeTl.to(
+          details,
+          { height: 0, duration: 0.4, ease: 'expo.inOut', onComplete: () => ScrollTrigger.refresh() },
+          0
+        );
+        activeTween = closeTl;
+      }
     } else {
       const tl = gsap.timeline();
 
       if (activeRow) {
-        // Close previous row (stay dark)
+        // Switch rows: shrink previous title + close its panel (stay dark)
+        const prevTitleEl = activeRow.querySelector('.credit-row__title');
         const prevDetails = activeRow.querySelector('.credit-row__details');
         activeRow.classList.remove('is-active');
-        activeRow.querySelector('.credit-row__icon').textContent = '+';
         activeRow.querySelector('.credit-row__header').setAttribute('aria-expanded', 'false');
         prevDetails.setAttribute('aria-hidden', 'true');
         prevDetails.style.overflow = 'clip';
 
         if (prefersReducedMotion) {
           prevDetails.style.height = '0';
+          prevTitleEl.style.fontFamily = '';
+          gsap.set(prevTitleEl, { clearProps: 'fontSize' });
         } else {
+          shrinkTitle(prevTitleEl, tl, 0);
           tl.to(prevDetails, { height: 0, duration: 0.3, ease: 'expo.inOut' }, 0);
         }
       } else {
         // First expansion: invert to dark
-        invertColors(true);
+        invertColors(true, prefersReducedMotion ? null : tl, 0);
       }
 
-      // Expand new row
+      // Expand new row — switch title to display font before growing
       const details = row.querySelector('.credit-row__details');
+      const inner = details.querySelector('.credit-row__details-inner');
       row.classList.add('is-active');
-      row.querySelector('.credit-row__icon').textContent = '\u2022';
       row.querySelector('.credit-row__header').setAttribute('aria-expanded', 'true');
       details.setAttribute('aria-hidden', 'false');
+
+      if (!prefersReducedMotion) {
+        // Swap font-family immediately so display font scales up from small
+        titleEl.style.fontFamily = 'ivypresto-display, Georgia, serif';
+        titleEl.style.letterSpacing = '-0.02em';
+        titleEl.style.lineHeight = '1';
+        growTitle(titleEl, tl, activeRow ? 0.05 : 0);
+      }
 
       // Lazy-load image on first expand
       const img = details.querySelector('img[data-src]');
@@ -204,6 +243,13 @@ export function initCredits() {
             onComplete() {
               details.style.overflow = 'visible';
               ScrollTrigger.refresh();
+              gsap.from(inner.children, {
+                opacity: 0,
+                y: 16,
+                duration: 0.5,
+                ease: 'expo.out',
+                stagger: 0.07,
+              });
             },
           },
           activeRow ? 0.1 : 0
