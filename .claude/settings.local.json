@@ -43,9 +43,7 @@
       "Bash(playwright-cli navigate:*)",
       "Bash(playwright-cli open:*)",
       "Bash(playwright-cli resize:*)",
-      "Bash(playwright-cli eval:*)",
-      "Bash(chmod +x /Users/randy/Git/website/scripts/batch-publish-upnext.sh)",
-      "Bash(bash scripts/batch-publish-upnext.sh)"
+      "Bash(playwright-cli eval:*)"
     ]
   }
 }
