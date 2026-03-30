@@ -23,9 +23,6 @@ const PLAY_ICON = `<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circ
 const ARROW_RIGHT_ICON = `<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>`;
 const ARROW_LEFT_ICON = `<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 7H1M6 2 1 7l5 5"/></svg>`;
 
-const feedCount = document.getElementById('feed-count');
-const feedStatus = document.getElementById('feed-status');
-const feedUpdated = document.getElementById('feed-updated');
 const feedState = document.getElementById('feed-state');
 const playlistList = document.getElementById('playlist-list');
 
@@ -269,16 +266,6 @@ function renderPlaylists(items) {
   teardownCoverflow();
 
   playlistList.innerHTML = `
-    <section class="showcase-head">
-      <div>
-        <p class="showcase-head__eyebrow">Playlists</p>
-        <h2>Flip the sleeve.</h2>
-      </div>
-      <p class="showcase-head__note">
-        Use the arrows, your keyboard, or a horizontal swipe. Bring a sleeve into focus, then tap the artwork to read the back cover.
-      </p>
-    </section>
-
     <section class="coverflow" aria-label="AI playlist cover flow">
       <div class="coverflow__frame">
         <button class="coverflow__nav coverflow__nav--prev" type="button" aria-label="Previous playlist">
@@ -296,17 +283,7 @@ function renderPlaylists(items) {
         </button>
       </div>
 
-      <div class="coverflow__status">
-        <div class="coverflow__status-copy">
-          <p id="coverflow-kicker" class="coverflow__status-kicker"></p>
-          <h3 id="coverflow-title" class="coverflow__status-title"></h3>
-          <p id="coverflow-caption" class="coverflow__status-caption"></p>
-        </div>
-        <div class="coverflow__status-meta">
-          <p id="coverflow-counter" class="coverflow__counter"></p>
-          <p class="coverflow__gesture">Swipe on mobile. Press escape to close the back cover.</p>
-        </div>
-      </div>
+      <p id="coverflow-counter" class="coverflow__counter"></p>
     </section>
   `;
 
@@ -338,12 +315,9 @@ function mountCoverflow(items) {
   const viewport = playlistList.querySelector('.coverflow__viewport');
   const prevButton = playlistList.querySelector('.coverflow__nav--prev');
   const nextButton = playlistList.querySelector('.coverflow__nav--next');
-  const kicker = playlistList.querySelector('#coverflow-kicker');
-  const title = playlistList.querySelector('#coverflow-title');
-  const caption = playlistList.querySelector('#coverflow-caption');
   const counter = playlistList.querySelector('#coverflow-counter');
 
-  if (!viewport || !prevButton || !nextButton || !kicker || !title || !caption || !counter) {
+  if (!viewport || !prevButton || !nextButton || !counter) {
     return;
   }
 
@@ -435,12 +409,11 @@ function mountCoverflow(items) {
   }
 
   function updateStatus() {
-    const item = items[activeIndex];
-    const genre = item.genre ? ` / ${item.genre}` : '';
-    kicker.textContent = `${labelForKind(item.playlist_kind)} / ${labelForSource(item.source)} / ${formatDate(item.created_at)}${genre}`;
-    title.textContent = stripSourcePrefix(item.title);
-    caption.textContent = excerpt(item.description);
-    counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
+    const newCount = `${String(activeIndex + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
+    counter.textContent = newCount;
+    if (!REDUCED_MOTION) {
+      gsap.fromTo(counter, { autoAlpha: 0, y: 3 }, { autoAlpha: 1, y: 0, duration: 0.25, ease: 'power2.out' });
+    }
     prevButton.disabled = activeIndex === 0;
     nextButton.disabled = activeIndex === items.length - 1;
   }
@@ -649,7 +622,7 @@ function mountCoverflow(items) {
   syncLayout();
 
   if (!REDUCED_MOTION) {
-    gsap.from(playlistList.querySelectorAll('.showcase-head > *, .coverflow__nav, .coverflow__status > *'), {
+    gsap.from(playlistList.querySelectorAll('.coverflow__nav, .coverflow__counter'), {
       y: 18,
       autoAlpha: 0,
       duration: 0.7,
@@ -693,10 +666,6 @@ async function loadFeed() {
 
     if (!items) throw new Error('Feed payload is malformed');
 
-    feedCount.textContent = String(items.length);
-    feedStatus.textContent = items.length > 0 ? 'Live' : 'Empty';
-    feedUpdated.textContent = payload.generated_at ? `Updated ${formatDate(payload.generated_at)}` : '';
-
     if (items.length === 0) {
       renderState({
         eyebrow: 'Empty feed',
@@ -710,9 +679,6 @@ async function loadFeed() {
     playlistList.hidden = false;
     renderPlaylists(items);
   } catch (error) {
-    feedCount.textContent = '—';
-    feedStatus.textContent = 'Error';
-    feedUpdated.textContent = error instanceof Error ? error.message : 'Feed request failed';
     renderState({
       eyebrow: 'Feed error',
       title: 'The playlist archive could not be loaded.',
