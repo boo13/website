@@ -2,6 +2,7 @@ name: Notify Linear on Failure
 
 on:
   workflow_run:
+    workflows: ["CI", "Deploy to GitHub Pages", "Weekly Site Monitoring"]
     types: [completed]
   workflow_dispatch:
 
@@ -17,7 +18,7 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'failure' && github.event.workflow_run.name != github.workflow) }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - name: Manual dispatch noop
         if: github.event_name == 'workflow_dispatch'
