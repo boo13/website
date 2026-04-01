@@ -1,0 +1,80 @@
+name: Notify Linear on Failure
+
+on:
+  workflow_run:
+    workflows: ["CI", "Deploy to GitHub Pages", "Weekly Site Monitoring"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  LINEAR_TEAM_ID: 4258d345-edbf-42d1-a370-dd9bf16025c8
+  LINEAR_PROJECT_ID: 983e014c-09bf-41be-8037-4ef84a91d2bd
+  LINEAR_LABEL_ID: caf498ef-14a8-4833-8cc2-35f9a80b329d
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: Manual dispatch noop
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "Manual dispatch complete. This workflow creates Linear issues only for failed workflow_run events."
+
+      - name: Create Linear issue
+        if: github.event_name != 'workflow_dispatch'
+        env:
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+        run: |
+          set -euo pipefail
+
+          TITLE="[${{ github.repository }}] Workflow failed: ${{ github.event.workflow_run.name }}"
+          DESCRIPTION=$(cat <<EOF2
+          **Branch:** \`${{ github.event.workflow_run.head_branch }}\`
+
+          **Commit:** [${{ github.event.workflow_run.head_sha }}](https://github.com/${{ github.repository }}/commit/${{ github.event.workflow_run.head_sha }})
+
+          **Run:** ${{ github.event.workflow_run.html_url }}
+          EOF2
+          )
+
+          PAYLOAD=$(jq -n \
+            --arg title "$TITLE" \
+            --arg description "$DESCRIPTION" \
+            --arg teamId "$LINEAR_TEAM_ID" \
+            --arg projectId "$LINEAR_PROJECT_ID" \
+            --arg labelId "$LINEAR_LABEL_ID" \
+            '{
+              query: "mutation CreateIssue($input: IssueCreateInput!) { issueCreate(input: $input) { success issue { id title url } } }",
+              variables: {
+                input: {
+                  title: $title,
+                  description: $description,
+                  teamId: $teamId,
+                  projectId: $projectId,
+                  priority: 1,
+                  labelIds: [$labelId]
+                }
+              }
+            }')
+
+          RESPONSE=$(curl -sS -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: $LINEAR_API_KEY" \
+            -d "$PAYLOAD" \
+            https://api.linear.app/graphql)
+
+          echo "Linear response: $RESPONSE"
+
+          SUCCESS=$(echo "$RESPONSE" | jq -r '.data.issueCreate.success // false')
+          if [ "$SUCCESS" != "true" ]; then
+            echo "ERROR: Failed to create Linear issue"
+            echo "$RESPONSE" | jq '.'
+            exit 1
+          fi
+
+          ISSUE_TITLE=$(echo "$RESPONSE" | jq -r '.data.issueCreate.issue.title')
+          echo "Created Linear issue: $ISSUE_TITLE"
