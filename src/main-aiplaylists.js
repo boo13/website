@@ -4,6 +4,8 @@ import { CDN_BASE } from './config.js';
 
 const FEED_URL = '/data/ai-playlists.json';
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), audio[controls], [tabindex]:not([tabindex="-1"])';
 
 const SOURCE_LABELS = {
   nlm: 'NotebookLM',
@@ -19,17 +21,14 @@ const KIND_LABELS = {
   ai_curated: 'One-off curation',
 };
 
-const PLAY_ICON = `<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5"/><path d="M19 15.5L33 24L19 32.5V15.5Z" fill="currentColor"/></svg>`;
 const ARROW_RIGHT_ICON = `<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5"/></svg>`;
 const ARROW_LEFT_ICON = `<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 7H1M6 2 1 7l5 5"/></svg>`;
+const CLOSE_ICON = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg>`;
 
-const feedCount = document.getElementById('feed-count');
-const feedStatus = document.getElementById('feed-status');
-const feedUpdated = document.getElementById('feed-updated');
 const feedState = document.getElementById('feed-state');
 const playlistList = document.getElementById('playlist-list');
 
-let teardownCoverflow = () => {};
+let teardownShowcase = () => {};
 
 function escHtml(str) {
   return String(str ?? '')
@@ -67,16 +66,9 @@ function stripSourcePrefix(title) {
     .trim();
 }
 
-function excerpt(text, limit = 148) {
-  const value = String(text ?? '').replace(/\s+/g, ' ').trim();
-  if (!value) return 'No description yet.';
-  if (value.length <= limit) return value;
-  return `${value.slice(0, limit - 1).trimEnd()}…`;
-}
-
 function hashCode(value) {
   let hash = 0;
-  for (let i = 0; i < value.length; i++) {
+  for (let i = 0; i < value.length; i += 1) {
     hash = (Math.imul(31, hash) + value.charCodeAt(i)) | 0;
   }
   return Math.abs(hash);
@@ -85,27 +77,19 @@ function hashCode(value) {
 function coverBackground(title) {
   const hash = hashCode(title);
   const hueA = hash % 360;
-  const hueB = (hueA + 25 + ((hash >> 4) % 90)) % 360;
-  const hueC = (hueA + 180 + ((hash >> 9) % 70)) % 360;
-  const angle = (hash >> 13) % 180;
-  const xA = 18 + ((hash >> 3) % 32);
-  const yA = 12 + ((hash >> 5) % 40);
-  const xB = 56 + ((hash >> 7) % 28);
-  const yB = 40 + ((hash >> 11) % 28);
-  const xC = 68 + ((hash >> 15) % 18);
-  const yC = 14 + ((hash >> 18) % 26);
+  const hueB = (hueA + 42 + ((hash >> 3) % 70)) % 360;
+  const hueC = (hueA + 204 + ((hash >> 7) % 54)) % 360;
+  const angle = 110 + ((hash >> 9) % 60);
+  const xA = 18 + ((hash >> 4) % 28);
+  const yA = 16 + ((hash >> 6) % 32);
+  const xB = 60 + ((hash >> 10) % 18);
+  const yB = 46 + ((hash >> 12) % 20);
 
   return [
-    `radial-gradient(circle at ${xA}% ${yA}%, oklch(0.74 0.18 ${hueA} / 0.9), transparent 32%)`,
-    `radial-gradient(circle at ${xB}% ${yB}%, oklch(0.62 0.14 ${hueB} / 0.8), transparent 38%)`,
-    `radial-gradient(circle at ${xC}% ${yC}%, oklch(0.55 0.12 ${hueC} / 0.65), transparent 42%)`,
-    `linear-gradient(${angle + 22}deg, oklch(0.15 0.02 ${hueA}) 0%, oklch(0.08 0.01 ${hueC}) 100%)`,
+    `radial-gradient(circle at ${xA}% ${yA}%, oklch(0.78 0.17 ${hueA} / 0.92), transparent 30%)`,
+    `radial-gradient(circle at ${xB}% ${yB}%, oklch(0.62 0.16 ${hueB} / 0.82), transparent 38%)`,
+    `linear-gradient(${angle}deg, oklch(0.18 0.03 ${hueC}) 0%, oklch(0.08 0.015 ${hueA}) 100%)`,
   ].join(', ');
-}
-
-function trackSearchUrl(track) {
-  const query = [track.artist, track.title].filter(Boolean).join(' ');
-  return `https://music.youtube.com/search?q=${encodeURIComponent(query)}`;
 }
 
 function resolveAssetPath(value) {
@@ -121,19 +105,24 @@ function getTracks(item) {
   return [];
 }
 
-function renderTrackList(item) {
+function trackSearchUrl(track) {
+  const query = [track.artist, track.title].filter(Boolean).join(' ');
+  return `https://music.youtube.com/search?q=${encodeURIComponent(query)}`;
+}
+
+function buildTrackMarkup(item) {
   const tracks = getTracks(item);
   const hasFullTracklist = Array.isArray(item.tracks) && item.tracks.length > 0;
   const heading = hasFullTracklist ? 'Tracklist' : 'Track preview';
 
   if (!tracks.length) {
     return `
-      <section class="coverflow-card__track-panel">
-        <div class="coverflow-card__track-head">
+      <section class="playlist-modal__track-panel">
+        <div class="playlist-modal__track-head">
           <p>${heading}</p>
           <span>${escHtml(String(item.track_count || 0))} total</span>
         </div>
-        <p class="coverflow-card__track-empty">Track data is not available for this playlist yet.</p>
+        <p class="playlist-modal__track-empty">Track data is not available for this playlist yet.</p>
       </section>
     `;
   }
@@ -142,10 +131,11 @@ function renderTrackList(item) {
     .map((track, index) => {
       const artist = escHtml(track.artist || 'Unknown artist');
       const title = escHtml(track.title || 'Unknown track');
+
       return `
         <li>
-          <span class="coverflow-card__track-index">${String(index + 1).padStart(2, '0')}</span>
-          <div class="coverflow-card__track-copy">
+          <span class="playlist-modal__track-index">${String(index + 1).padStart(2, '0')}</span>
+          <div class="playlist-modal__track-copy">
             <a href="${escHtml(trackSearchUrl(track))}" target="_blank" rel="noopener">${title}</a>
             <span>${artist}</span>
           </div>
@@ -155,12 +145,12 @@ function renderTrackList(item) {
     .join('');
 
   return `
-    <section class="coverflow-card__track-panel">
-      <div class="coverflow-card__track-head">
+    <section class="playlist-modal__track-panel">
+      <div class="playlist-modal__track-head">
         <p>${heading}</p>
         <span>${escHtml(String(item.track_count || tracks.length))} total</span>
       </div>
-      <ol class="coverflow-card__tracklist">${items}</ol>
+      <ol class="playlist-modal__tracklist">${items}</ol>
     </section>
   `;
 }
@@ -170,187 +160,330 @@ function createPlaylistCard(item, index) {
   const coverStyle = coverBackground(item.title || cleanTitle || `playlist-${index}`);
   const coverSrc = resolveAssetPath(item.cover_image);
   const coverVideoSrc = resolveAssetPath(item.cover_video_url);
-  const audioSrc = resolveAssetPath(item.audio_intro_url);
-  const hasPlaylistUrl =
-    typeof item.playlist_url === 'string' && item.playlist_url.startsWith('https://');
-  const metaLine = [
-    labelForKind(item.playlist_kind),
-    labelForSource(item.source),
-    formatDate(item.created_at),
-  ]
+  const meta = [labelForKind(item.playlist_kind), labelForSource(item.source)]
     .filter(Boolean)
     .join(' / ');
+  const trackCount = `${escHtml(String(item.track_count || 0))} tracks`;
 
   return `
-    <article class="coverflow-card" data-index="${index}" aria-label="${escHtml(cleanTitle)}">
-      <div class="coverflow-card__shell">
-        <div class="coverflow-card__inner">
-          <button
-            class="coverflow-card__face coverflow-card__face--front coverflow-card__flip-trigger"
-            type="button"
-            aria-expanded="false"
-            aria-label="Flip ${escHtml(cleanTitle)} to reveal playlist details"
-          >
-            <span class="coverflow-card__cover-art" style="background:${coverStyle}">
-              ${
-                coverVideoSrc
-                  ? `<video class="coverflow-card__cover-video" src="${escHtml(coverVideoSrc)}" ${coverSrc ? `poster="${escHtml(coverSrc)}"` : ''} autoplay muted loop playsinline preload="metadata" crossorigin></video>`
-                  : ''
-              }
-              ${
-                coverSrc
-                  ? `<img class="coverflow-card__cover-image" src="${escHtml(coverSrc)}" alt="" loading="lazy" decoding="async" width="768" height="768">`
-                  : ''
-              }
+    <article class="coverflow-card" data-index="${index}" aria-hidden="true">
+      <button
+        class="coverflow-card__button"
+        type="button"
+        aria-label="Focus ${escHtml(cleanTitle)}"
+      >
+        <span class="coverflow-card__vinyl" aria-hidden="true"></span>
+        <span class="coverflow-card__cover" style="background:${coverStyle}">
+          ${
+            coverVideoSrc
+              ? `<video class="coverflow-card__cover-video" src="${escHtml(coverVideoSrc)}" ${coverSrc ? `poster="${escHtml(coverSrc)}"` : ''} autoplay muted loop playsinline preload="metadata" crossorigin></video>`
+              : ''
+          }
+          ${
+            coverSrc
+              ? `<img class="coverflow-card__cover-image" src="${escHtml(coverSrc)}" alt="" loading="lazy" decoding="async" width="768" height="768">`
+              : ''
+          }
+          <span class="coverflow-card__noise" aria-hidden="true"></span>
+          <span class="coverflow-card__copy">
+            <span class="coverflow-card__kicker">${escHtml(meta)}</span>
+            <strong class="coverflow-card__title">${escHtml(cleanTitle)}</strong>
+            <span class="coverflow-card__meta">
+              <span>${trackCount}</span>
+              <span>${escHtml(formatDate(item.created_at))}</span>
             </span>
-            <span class="coverflow-card__front-copy">
-              <span class="coverflow-card__front-kicker">${escHtml(item.genre || labelForKind(item.playlist_kind))}</span>
-              <strong class="coverflow-card__front-title">${escHtml(cleanTitle)}</strong>
-              <span class="coverflow-card__front-meta">${escHtml(String(item.track_count || 0))} tracks</span>
-            </span>
-            <span class="coverflow-card__front-hint">Tap to flip</span>
-          </button>
-
-          <div class="coverflow-card__face coverflow-card__face--back">
-            <div class="coverflow-card__notes">
-              <div class="coverflow-card__notes-top">
-                <p class="coverflow-card__notes-kicker">${escHtml(metaLine)}</p>
-                <button class="coverflow-card__close" type="button" data-action="flip-close">Close</button>
-              </div>
-
-              <h3>${escHtml(cleanTitle)}</h3>
-              <p class="coverflow-card__back-description">${escHtml(item.description || 'No description yet.')}</p>
-
-              ${
-                item.quote
-                  ? `<blockquote class="coverflow-card__quote">
-                      <p>${escHtml(item.quote)}</p>
-                      ${item.quote_source ? `<footer>${escHtml(item.quote_source)}</footer>` : ''}
-                    </blockquote>`
-                  : ''
-              }
-
-              <div class="coverflow-card__action-row">
-                ${
-                  audioSrc
-                    ? `<button class="coverflow-card__action" type="button" data-action="audio-toggle" aria-expanded="false">${PLAY_ICON}<span>Play narration</span></button>`
-                    : ''
-                }
-                ${
-                  hasPlaylistUrl
-                    ? `<a class="coverflow-card__action coverflow-card__action--primary" href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener">Open in YouTube Music ${ARROW_RIGHT_ICON}</a>`
-                    : ''
-                }
-              </div>
-
-              ${
-                audioSrc
-                  ? `<div class="coverflow-card__audio-panel" hidden>
-                      <audio controls preload="none" src="${escHtml(audioSrc)}"></audio>
-                      ${
-                        item.narration_text
-                          ? `<p class="coverflow-card__liner-notes">${escHtml(item.narration_text)}</p>`
-                          : ''
-                      }
-                    </div>`
-                  : ''
-              }
-
-              ${renderTrackList(item)}
-            </div>
-          </div>
-        </div>
-      </div>
+          </span>
+        </span>
+      </button>
     </article>
   `;
 }
 
-function renderPlaylists(items) {
-  teardownCoverflow();
+function createModalRoot() {
+  const modal = document.createElement('div');
+  modal.className = 'playlist-modal';
+  modal.hidden = true;
+  modal.innerHTML = `
+    <div class="playlist-modal__backdrop" data-modal-close></div>
+    <div
+      class="playlist-modal__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="playlist-modal-title"
+      tabindex="-1"
+    >
+      <button class="playlist-modal__close" type="button" aria-label="Close playlist details" data-modal-close>
+        ${CLOSE_ICON}
+      </button>
+      <div class="playlist-modal__body"></div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  return modal;
+}
 
-  playlistList.innerHTML = `
-    <section class="showcase-head">
-      <div>
-        <p class="showcase-head__eyebrow">Playlists</p>
-        <h2>Flip the sleeve.</h2>
-      </div>
-      <p class="showcase-head__note">
-        Use the arrows, your keyboard, or a horizontal swipe. Bring a sleeve into focus, then tap the artwork to read the back cover.
-      </p>
-    </section>
+function createModalController() {
+  const root = createModalRoot();
+  const dialog = root.querySelector('.playlist-modal__dialog');
+  const body = root.querySelector('.playlist-modal__body');
+  const closeButton = root.querySelector('.playlist-modal__close');
+  let lastFocusedElement = null;
 
-    <section class="coverflow" aria-label="AI playlist cover flow">
-      <div class="coverflow__frame">
-        <button class="coverflow__nav coverflow__nav--prev" type="button" aria-label="Previous playlist">
-          ${ARROW_LEFT_ICON}
-        </button>
+  function resetAudio() {
+    for (const audio of root.querySelectorAll('audio')) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }
 
-        <div class="coverflow__viewport">
-          <div class="coverflow__track">
-            ${items.map((item, index) => createPlaylistCard(item, index)).join('')}
+  function trapFocus(event) {
+    if (event.key !== 'Tab') return;
+
+    const focusable = Array.from(dialog.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
+      (element) => !element.hasAttribute('disabled'),
+    );
+
+    if (!focusable.length) {
+      event.preventDefault();
+      dialog.focus();
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+      return;
+    }
+
+    if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function close() {
+    if (root.hidden) return;
+
+    resetAudio();
+    document.body.classList.remove('playlist-modal-open');
+    root.classList.remove('is-open');
+    root.hidden = true;
+    body.innerHTML = '';
+    window.removeEventListener('keydown', onKeydown);
+
+    if (lastFocusedElement instanceof HTMLElement) {
+      lastFocusedElement.focus({ preventScroll: true });
+    }
+  }
+
+  function onKeydown(event) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      close();
+      return;
+    }
+
+    trapFocus(event);
+  }
+
+  function open(item, trigger) {
+    lastFocusedElement = trigger instanceof HTMLElement ? trigger : document.activeElement;
+
+    const cleanTitle = stripSourcePrefix(item.title);
+    const coverSrc = resolveAssetPath(item.cover_image);
+    const coverVideoSrc = resolveAssetPath(item.cover_video_url);
+    const audioSrc = resolveAssetPath(item.audio_intro_url);
+    const hasPlaylistUrl =
+      typeof item.playlist_url === 'string' && item.playlist_url.startsWith('https://');
+
+    body.innerHTML = `
+      <div class="playlist-modal__hero">
+        <div class="playlist-modal__art-shell">
+          <div class="playlist-modal__art" style="background:${coverBackground(item.title || cleanTitle)}">
+            ${
+              coverVideoSrc
+                ? `<video class="playlist-modal__cover-video" src="${escHtml(coverVideoSrc)}" ${coverSrc ? `poster="${escHtml(coverSrc)}"` : ''} autoplay muted loop playsinline preload="metadata" crossorigin></video>`
+                : ''
+            }
+            ${
+              coverSrc
+                ? `<img class="playlist-modal__cover-image" src="${escHtml(coverSrc)}" alt="" loading="lazy" decoding="async" width="960" height="960">`
+                : ''
+            }
+            <span class="playlist-modal__art-noise" aria-hidden="true"></span>
           </div>
         </div>
 
-        <button class="coverflow__nav coverflow__nav--next" type="button" aria-label="Next playlist">
-          ${ARROW_RIGHT_ICON}
-        </button>
+        <div class="playlist-modal__summary">
+          <p class="playlist-modal__eyebrow">${escHtml(labelForKind(item.playlist_kind))} / ${escHtml(labelForSource(item.source))}</p>
+          <h2 id="playlist-modal-title">${escHtml(cleanTitle)}</h2>
+          <p class="playlist-modal__meta">${escHtml(formatDate(item.created_at))}${item.genre ? ` / ${escHtml(item.genre)}` : ''} / ${escHtml(String(item.track_count || getTracks(item).length || 0))} tracks</p>
+          <p class="playlist-modal__description">${escHtml(item.description || 'No description yet.')}</p>
+
+          ${
+            item.quote
+              ? `<blockquote class="playlist-modal__quote">
+                  <p>${escHtml(item.quote)}</p>
+                  ${item.quote_source ? `<footer>${escHtml(item.quote_source)}</footer>` : ''}
+                </blockquote>`
+              : ''
+          }
+
+          <div class="playlist-modal__actions">
+            ${
+              hasPlaylistUrl
+                ? `<a class="playlist-modal__action playlist-modal__action--primary" href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener">Open in YouTube Music ${ARROW_RIGHT_ICON}</a>`
+                : ''
+            }
+            ${
+              audioSrc
+                ? `<a class="playlist-modal__action" href="${escHtml(audioSrc)}" target="_blank" rel="noopener">Open narration audio ${ARROW_RIGHT_ICON}</a>`
+                : ''
+            }
+          </div>
+        </div>
       </div>
 
-      <div class="coverflow__status">
-        <div class="coverflow__status-copy">
-          <p id="coverflow-kicker" class="coverflow__status-kicker"></p>
-          <h3 id="coverflow-title" class="coverflow__status-title"></h3>
-          <p id="coverflow-caption" class="coverflow__status-caption"></p>
+      <div class="playlist-modal__details">
+        ${
+          audioSrc
+            ? `<section class="playlist-modal__panel">
+                <div class="playlist-modal__panel-head">
+                  <p>Narration</p>
+                </div>
+                <audio controls preload="none" src="${escHtml(audioSrc)}"></audio>
+                ${
+                  item.narration_text
+                    ? `<p class="playlist-modal__liner-notes">${escHtml(item.narration_text)}</p>`
+                    : '<p class="playlist-modal__liner-notes">Narration audio is available for this playlist, but no transcript text was published.</p>'
+                }
+              </section>`
+            : ''
+        }
+
+        <section class="playlist-modal__panel">
+          ${buildTrackMarkup(item)}
+        </section>
+      </div>
+    `;
+
+    for (const media of body.querySelectorAll('.playlist-modal__cover-image, .playlist-modal__cover-video')) {
+      media.addEventListener(
+        'error',
+        () => {
+          media.remove();
+        },
+        { once: true },
+      );
+    }
+
+    root.hidden = false;
+    document.body.classList.add('playlist-modal-open');
+    root.classList.add('is-open');
+    window.addEventListener('keydown', onKeydown);
+
+    if (closeButton instanceof HTMLElement) {
+      closeButton.focus({ preventScroll: true });
+      window.setTimeout(() => {
+        closeButton.focus({ preventScroll: true });
+      }, 0);
+    } else {
+      dialog.focus({ preventScroll: true });
+      window.setTimeout(() => {
+        dialog.focus({ preventScroll: true });
+      }, 0);
+    }
+
+    if (!REDUCED_MOTION) {
+      gsap.fromTo(
+        dialog,
+        { autoAlpha: 0, y: 32, scale: 0.98 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.28, ease: 'power2.out', clearProps: 'opacity,transform' },
+      );
+      gsap.fromTo(
+        root.querySelector('.playlist-modal__backdrop'),
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.24, ease: 'power1.out', clearProps: 'opacity' },
+      );
+    }
+  }
+
+  root.addEventListener('click', (event) => {
+    if (event.target instanceof HTMLElement && event.target.closest('[data-modal-close]')) {
+      close();
+    }
+  });
+
+  return {
+    open,
+    close,
+    destroy() {
+      close();
+      root.remove();
+    },
+  };
+}
+
+function renderShowcase(items) {
+  teardownShowcase();
+
+  playlistList.innerHTML = `
+    <section class="coverflow" aria-label="AI playlist cover flow">
+      <button class="coverflow__nav coverflow__nav--prev" type="button" aria-label="Previous playlist">
+        ${ARROW_LEFT_ICON}
+      </button>
+
+      <div class="coverflow__viewport">
+        <div class="coverflow__track">
+          ${items.map((item, index) => createPlaylistCard(item, index)).join('')}
         </div>
-        <div class="coverflow__status-meta">
-          <p id="coverflow-counter" class="coverflow__counter"></p>
-          <p class="coverflow__gesture">Swipe on mobile. Press escape to close the back cover.</p>
-        </div>
+      </div>
+
+      <button class="coverflow__nav coverflow__nav--next" type="button" aria-label="Next playlist">
+        ${ARROW_RIGHT_ICON}
+      </button>
+
+      <div class="coverflow__caption">
+        <h3 id="coverflow-title" class="coverflow__caption-title"></h3>
+        <p id="coverflow-counter" class="coverflow__counter"></p>
+        <p class="coverflow__hint">Click the centered cover to open the playlist dossier.</p>
       </div>
     </section>
   `;
 
-  for (const img of playlistList.querySelectorAll('.coverflow-card__cover-image')) {
-    img.addEventListener(
+  for (const media of playlistList.querySelectorAll('.coverflow-card__cover-image, .coverflow-card__cover-video')) {
+    media.addEventListener(
       'error',
       () => {
-        img.remove();
+        media.remove();
       },
       { once: true },
     );
   }
 
-  for (const video of playlistList.querySelectorAll('.coverflow-card__cover-video')) {
-    video.addEventListener(
-      'error',
-      () => {
-        video.remove();
-      },
-      { once: true },
-    );
-  }
-
-  mountCoverflow(items);
+  mountShowcase(items);
 }
 
-function mountCoverflow(items) {
+function mountShowcase(items) {
   const cards = Array.from(playlistList.querySelectorAll('.coverflow-card'));
   const viewport = playlistList.querySelector('.coverflow__viewport');
   const prevButton = playlistList.querySelector('.coverflow__nav--prev');
   const nextButton = playlistList.querySelector('.coverflow__nav--next');
-  const kicker = playlistList.querySelector('#coverflow-kicker');
   const title = playlistList.querySelector('#coverflow-title');
-  const caption = playlistList.querySelector('#coverflow-caption');
   const counter = playlistList.querySelector('#coverflow-counter');
 
-  if (!viewport || !prevButton || !nextButton || !kicker || !title || !caption || !counter) {
+  if (!cards.length || !viewport || !prevButton || !nextButton || !title || !counter) {
     return;
   }
 
-  let activeIndex = 0;
-  let flippedIndex = null;
+  const modal = createModalController();
   const cleanup = [];
+  let activeIndex = Math.floor(Math.max(0, items.length - 1) / 2);
   let pointerStart = null;
+  let wheelLock = false;
 
   const context = gsap.context(() => {
     gsap.set(cards, {
@@ -360,12 +493,7 @@ function mountCoverflow(items) {
       xPercent: -50,
       yPercent: -50,
       transformStyle: 'preserve-3d',
-      transformPerspective: 1800,
-    });
-
-    gsap.set(cards.map((card) => card.querySelector('.coverflow-card__inner')), {
-      transformStyle: 'preserve-3d',
-      rotationY: 0,
+      transformPerspective: 2200,
     });
   }, playlistList);
 
@@ -374,72 +502,13 @@ function mountCoverflow(items) {
     cleanup.push(() => target.removeEventListener(eventName, handler, options));
   }
 
-  function resetAudio(card) {
-    const toggle = card.querySelector('[data-action="audio-toggle"]');
-    const panel = card.querySelector('.coverflow-card__audio-panel');
-    const audio = panel?.querySelector('audio');
-    const label = toggle?.querySelector('span');
-
-    if (audio) {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-
-    if (panel) panel.hidden = true;
-    if (toggle) toggle.setAttribute('aria-expanded', 'false');
-    if (label) label.textContent = 'Play narration';
+  function currentItem() {
+    return items[activeIndex];
   }
 
-  function closeFlippedCard(index = flippedIndex) {
-    if (index == null) return;
-
-    const card = cards[index];
-    const inner = card.querySelector('.coverflow-card__inner');
-    const trigger = card.querySelector('.coverflow-card__flip-trigger');
-
-    resetAudio(card);
-    card.classList.remove('is-flipped');
-    trigger?.setAttribute('aria-expanded', 'false');
-
-    gsap.to(inner, {
-      rotationY: 0,
-      duration: REDUCED_MOTION ? 0 : 0.72,
-      ease: 'power3.inOut',
-    });
-
-    if (flippedIndex === index) flippedIndex = null;
-  }
-
-  function openFlippedCard(index) {
-    if (index !== activeIndex) {
-      setActive(index);
-      return;
-    }
-
-    if (flippedIndex != null && flippedIndex !== index) closeFlippedCard(flippedIndex);
-    if (flippedIndex === index) return;
-
-    const card = cards[index];
-    const inner = card.querySelector('.coverflow-card__inner');
-    const trigger = card.querySelector('.coverflow-card__flip-trigger');
-
-    card.classList.add('is-flipped');
-    trigger?.setAttribute('aria-expanded', 'true');
-    flippedIndex = index;
-
-    gsap.to(inner, {
-      rotationY: 180,
-      duration: REDUCED_MOTION ? 0 : 0.82,
-      ease: 'power3.inOut',
-    });
-  }
-
-  function updateStatus() {
-    const item = items[activeIndex];
-    const genre = item.genre ? ` / ${item.genre}` : '';
-    kicker.textContent = `${labelForKind(item.playlist_kind)} / ${labelForSource(item.source)} / ${formatDate(item.created_at)}${genre}`;
+  function updateCaption() {
+    const item = currentItem();
     title.textContent = stripSourcePrefix(item.title);
-    caption.textContent = excerpt(item.description);
     counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
     prevButton.disabled = activeIndex === 0;
     nextButton.disabled = activeIndex === items.length - 1;
@@ -447,47 +516,70 @@ function mountCoverflow(items) {
 
   function layoutCard(card, offset) {
     const absOffset = Math.abs(offset);
-    const isMobile = window.innerWidth <= 768;
-    const baseSpread = isMobile ? Math.min(viewport.clientWidth * 0.46, 180) : Math.min(viewport.clientWidth * 0.38, 320);
-    const secondarySpread = isMobile ? baseSpread * 1.6 : baseSpread * 1.75;
+    const isMobile = window.innerWidth <= 720;
+    const nearSpread = isMobile
+      ? Math.min(viewport.clientWidth * 0.54, 170)
+      : Math.min(viewport.clientWidth * 0.34, 260);
+    const farSpread = isMobile
+      ? Math.min(viewport.clientWidth * 0.8, 260)
+      : Math.min(viewport.clientWidth * 0.56, 430);
 
     const config =
       absOffset === 0
-        ? { x: 0, y: 0, z: 220, scale: 1, rotateY: 0, opacity: 1 }
+        ? {
+            x: 0,
+            y: 0,
+            z: 260,
+            scale: 1,
+            rotateY: 0,
+            rotateZ: 0,
+            opacity: 1,
+          }
         : absOffset === 1
           ? {
-              x: offset * baseSpread,
-              y: 12,
-              z: -140,
-              scale: isMobile ? 0.72 : 0.78,
-              rotateY: offset < 0 ? 58 : -58,
-              opacity: isMobile ? 0.55 : 0.72,
+              x: offset * nearSpread,
+              y: isMobile ? 20 : 8,
+              z: -30,
+              scale: isMobile ? 0.74 : 0.78,
+              rotateY: offset < 0 ? 64 : -64,
+              rotateZ: offset < 0 ? -2.5 : 2.5,
+              opacity: 0.92,
             }
           : absOffset === 2
             ? {
-                x: offset * secondarySpread,
-                y: 18,
-                z: -320,
-                scale: isMobile ? 0.48 : 0.58,
-                rotateY: offset < 0 ? 74 : -74,
-                opacity: isMobile ? 0.18 : 0.3,
+                x: offset * farSpread,
+                y: isMobile ? 28 : 16,
+                z: -210,
+                scale: isMobile ? 0.5 : 0.56,
+                rotateY: offset < 0 ? 76 : -76,
+                rotateZ: offset < 0 ? -3.5 : 3.5,
+                opacity: 0.34,
               }
             : {
-                x: offset * secondarySpread * 1.12,
-                y: 26,
-                z: -520,
-                scale: 0.38,
+                x: offset * farSpread * 1.08,
+                y: 34,
+                z: -460,
+                scale: 0.42,
                 rotateY: offset < 0 ? 82 : -82,
+                rotateZ: 0,
                 opacity: 0,
               };
 
     card.classList.toggle('is-active', absOffset === 0);
+    card.classList.toggle('is-near', absOffset <= 1);
     card.setAttribute('aria-hidden', absOffset === 0 ? 'false' : 'true');
-    card.style.zIndex = String(50 - absOffset);
-    card.style.pointerEvents = absOffset <= 1 ? 'auto' : 'none';
+    card.style.zIndex = String(100 - absOffset);
 
-    const trigger = card.querySelector('.coverflow-card__flip-trigger');
-    if (trigger) trigger.tabIndex = absOffset === 0 ? 0 : -1;
+    const button = card.querySelector('.coverflow-card__button');
+    if (button) {
+      button.tabIndex = absOffset === 0 ? 0 : -1;
+      button.setAttribute(
+        'aria-label',
+        absOffset === 0
+          ? `Open ${stripSourcePrefix(items[Number(card.dataset.index)].title)}`
+          : `Focus ${stripSourcePrefix(items[Number(card.dataset.index)].title)}`,
+      );
+    }
 
     gsap.to(card, {
       x: config.x,
@@ -495,92 +587,43 @@ function mountCoverflow(items) {
       z: config.z,
       scale: config.scale,
       rotationY: config.rotateY,
+      rotationZ: config.rotateZ,
       autoAlpha: config.opacity,
-      duration: REDUCED_MOTION ? 0 : 0.88,
-      ease: 'power3.inOut',
+      duration: REDUCED_MOTION ? 0 : 0.68,
+      ease: 'power3.out',
       overwrite: true,
     });
   }
 
   function syncLayout() {
     cards.forEach((card, index) => {
-      const offset = index - activeIndex;
-      if (flippedIndex != null && flippedIndex !== activeIndex) closeFlippedCard(flippedIndex);
-      if (offset !== 0 && index === flippedIndex) closeFlippedCard(index);
-      layoutCard(card, offset);
+      layoutCard(card, index - activeIndex);
     });
-    updateStatus();
+    updateCaption();
   }
 
   function setActive(nextIndex) {
     const bounded = Math.max(0, Math.min(items.length - 1, nextIndex));
     if (bounded === activeIndex) return;
-
-    if (flippedIndex != null) closeFlippedCard(flippedIndex);
     activeIndex = bounded;
     syncLayout();
   }
 
-  function toggleAudio(card) {
-    const toggle = card.querySelector('[data-action="audio-toggle"]');
-    const panel = card.querySelector('.coverflow-card__audio-panel');
-    const audio = panel?.querySelector('audio');
-    const label = toggle?.querySelector('span');
-
-    if (!toggle || !panel || !audio) return;
-
-    const shouldOpen = panel.hidden;
-
-    for (const otherCard of cards) {
-      if (otherCard !== card) resetAudio(otherCard);
-    }
-
-    panel.hidden = !shouldOpen;
-    toggle.setAttribute('aria-expanded', String(shouldOpen));
-    if (label) label.textContent = shouldOpen ? 'Hide narration' : 'Play narration';
-
-    if (shouldOpen) {
-      const playPromise = audio.play();
-      if (playPromise?.catch) playPromise.catch(() => {});
-      return;
-    }
-
-    audio.pause();
+  function openActive(trigger) {
+    modal.open(currentItem(), trigger);
   }
 
   cards.forEach((card, index) => {
-    const flipTrigger = card.querySelector('.coverflow-card__flip-trigger');
-    const closeButton = card.querySelector('[data-action="flip-close"]');
-    const audioButton = card.querySelector('[data-action="audio-toggle"]');
+    const button = card.querySelector('.coverflow-card__button');
+    if (!button) return;
 
-    if (flipTrigger) {
-      on(flipTrigger, 'click', (event) => {
-        event.stopPropagation();
-        if (index !== activeIndex) {
-          setActive(index);
-          return;
-        }
-        openFlippedCard(index);
-      });
-    }
+    on(button, 'click', () => {
+      if (index !== activeIndex) {
+        setActive(index);
+        return;
+      }
 
-    if (closeButton) {
-      on(closeButton, 'click', (event) => {
-        event.stopPropagation();
-        closeFlippedCard(index);
-      });
-    }
-
-    if (audioButton) {
-      on(audioButton, 'click', (event) => {
-        event.stopPropagation();
-        toggleAudio(card);
-      });
-    }
-
-    on(card, 'click', (event) => {
-      if (event.target.closest('a, button, audio, .coverflow-card__audio-panel')) return;
-      if (index !== activeIndex) setActive(index);
+      openActive(button);
     });
   });
 
@@ -589,7 +632,9 @@ function mountCoverflow(items) {
 
   on(window, 'keydown', (event) => {
     const target = event.target;
-    if (target instanceof HTMLElement && target.closest('input, textarea, select, audio')) return;
+    if (target instanceof HTMLElement && target.closest('.playlist-modal, input, textarea, select, audio')) {
+      return;
+    }
 
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
@@ -603,26 +648,17 @@ function mountCoverflow(items) {
       return;
     }
 
-    if (event.key === 'Escape' && flippedIndex != null) {
-      event.preventDefault();
-      closeFlippedCard(flippedIndex);
-      return;
-    }
-
-    if ((event.key === 'Enter' || event.key === ' ') && flippedIndex == null) {
-      const focused = document.activeElement;
-      const interactiveFocused =
-        focused instanceof HTMLElement && focused.closest('a, button, input, textarea, select, audio');
-      if (!interactiveFocused || focused === cards[activeIndex].querySelector('.coverflow-card__flip-trigger')) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      const activeCardButton = cards[activeIndex]?.querySelector('.coverflow-card__button');
+      if (document.activeElement === activeCardButton) {
         event.preventDefault();
-        openFlippedCard(activeIndex);
+        openActive(document.activeElement);
       }
     }
   });
 
   on(viewport, 'pointerdown', (event) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
-    if (event.target.closest('a, button, audio, .coverflow-card__audio-panel')) return;
     pointerStart = { x: event.clientX, y: event.clientY };
   });
 
@@ -633,7 +669,7 @@ function mountCoverflow(items) {
     const deltaY = event.clientY - pointerStart.y;
     pointerStart = null;
 
-    if (Math.abs(deltaX) < 44 || Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return;
+    if (Math.abs(deltaX) < 40 || Math.abs(deltaX) < Math.abs(deltaY) * 1.1) return;
     if (deltaX < 0) setActive(activeIndex + 1);
     if (deltaX > 0) setActive(activeIndex - 1);
   });
@@ -642,14 +678,28 @@ function mountCoverflow(items) {
     pointerStart = null;
   });
 
-  on(window, 'resize', () => {
-    syncLayout();
-  });
+  on(viewport, 'wheel', (event) => {
+    if (wheelLock) return;
+
+    const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey;
+    if (!horizontalIntent) return;
+
+    event.preventDefault();
+    wheelLock = true;
+    window.setTimeout(() => {
+      wheelLock = false;
+    }, 220);
+
+    if (event.deltaX > 8 || event.deltaY > 8) setActive(activeIndex + 1);
+    if (event.deltaX < -8 || event.deltaY < -8) setActive(activeIndex - 1);
+  }, { passive: false });
+
+  on(window, 'resize', syncLayout);
 
   syncLayout();
 
   if (!REDUCED_MOTION) {
-    gsap.from(playlistList.querySelectorAll('.showcase-head > *, .coverflow__nav, .coverflow__status > *'), {
+    gsap.from(playlistList.querySelectorAll('.coverflow__caption > *, .coverflow__nav'), {
       y: 18,
       autoAlpha: 0,
       duration: 0.7,
@@ -659,15 +709,16 @@ function mountCoverflow(items) {
     });
   }
 
-  teardownCoverflow = () => {
+  teardownShowcase = () => {
     cleanup.forEach((fn) => fn());
+    modal.destroy();
     context.revert();
-    teardownCoverflow = () => {};
+    teardownShowcase = () => {};
   };
 }
 
 function renderState({ eyebrow, title, description, error = false }) {
-  teardownCoverflow();
+  teardownShowcase();
   feedState.hidden = false;
   playlistList.hidden = true;
   feedState.innerHTML = `
@@ -693,10 +744,6 @@ async function loadFeed() {
 
     if (!items) throw new Error('Feed payload is malformed');
 
-    feedCount.textContent = String(items.length);
-    feedStatus.textContent = items.length > 0 ? 'Live' : 'Empty';
-    feedUpdated.textContent = payload.generated_at ? `Updated ${formatDate(payload.generated_at)}` : '';
-
     if (items.length === 0) {
       renderState({
         eyebrow: 'Empty feed',
@@ -708,11 +755,8 @@ async function loadFeed() {
 
     feedState.hidden = true;
     playlistList.hidden = false;
-    renderPlaylists(items);
-  } catch (error) {
-    feedCount.textContent = '—';
-    feedStatus.textContent = 'Error';
-    feedUpdated.textContent = error instanceof Error ? error.message : 'Feed request failed';
+    renderShowcase(items);
+  } catch {
     renderState({
       eyebrow: 'Feed error',
       title: 'The playlist archive could not be loaded.',
