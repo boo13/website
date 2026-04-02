@@ -32,7 +32,6 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         legacy: resolve(import.meta.dirname, 'index-legacy.html'),
-        index2: resolve(import.meta.dirname, 'index2.html'),
         aiplaylists: resolve(import.meta.dirname, 'aiplaylists.html'),
         contact: resolve(import.meta.dirname, 'contact.html'),
         resume: resolve(import.meta.dirname, 'resume.html'),

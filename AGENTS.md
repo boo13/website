@@ -36,7 +36,6 @@ This project is a video portfolio website using GSAP.
 Root HTML pages and entry files:
 - index.html -> src/main.js
 - index-legacy.html -> src/main-index.js
-- index2.html -> redirect shim to /
 - contact.html -> src/main-contact.js
 - resume.html -> src/main-resume.js
 - case_study_wyatt.html -> src/main-wyatt.js
