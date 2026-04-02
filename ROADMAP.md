@@ -4,7 +4,7 @@
 
 **Current primary page:** index.html
 
-index.html is the GSAP-animated single-page portfolio. Legacy slider experience is archived at index-legacy.html, and index2.html temporarily redirects to `/` for stale links.
+index.html is the GSAP-animated single-page portfolio. Legacy slider experience is archived at index-legacy.html.
 
 ---
 
@@ -96,12 +96,11 @@ index.html is the GSAP-animated single-page portfolio. Legacy slider experience 
 | contact.html | main-contact.js | Form handler |
 | resume.html | main-resume.js | Resume page |
 | index-legacy.html | main-index.js | Legacy archive |
-| index2.html | redirect shim | Temporary alias to `/` |
 
 ### Transition Plan
 - [x] Promote index2.html experience to index.html
 - [x] Rename index.html → index-legacy.html
-- [x] Add temporary index2.html redirect shim to `/`
+- [x] Retire the temporary index2.html alias
 
 ---
 
