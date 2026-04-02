@@ -8,7 +8,6 @@ The site is a multi-page static site. Each HTML file lives at the repo root:
 
 - **index.html** — The primary portfolio page. Hero zoom, parallax rack-focus, horizontal scroll gallery, credits table, and stats section.
 - **index-legacy.html** — Archived legacy version with a full-screen video and image slider.
-- **index2.html** — Temporary redirect shim to `/` for stale bookmarks.
 - **contact.html** — Contact form powered by Formspree.
 - **resume.html** — Printable resume layout built to match the site's typography.
 - **sandbox.html** — A GSAP demo playground for text animation timing/easing experiments.
