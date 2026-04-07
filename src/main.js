@@ -1,6 +1,5 @@
 import './styles/index2.css';
 import './styles/about-intro.css';
-import './styles/about-slides.css';
 import './styles/video-lightbox.css';
 import { ScrollSmoother, ScrollTrigger } from './animations/scroll-defaults.js';
 import { initHero } from './sections/hero.js';
@@ -8,7 +7,6 @@ import { initGallery } from './sections/gallery.js';
 import { initCredits } from './sections/credits.js';
 import { initAbout } from './sections/about.js';
 import { initAboutIntro } from './sections/about-intro.js';
-import { initAboutSlides } from './sections/about-slides.js';
 import { initFooterReveal } from './sections/footer-reveal.js';
 import { initCustomCursor } from './components/custom-cursor.js';
 import { runPreloader } from './components/preloader.js';
@@ -33,7 +31,6 @@ function init() {
   const cleanupCredits = initCredits();
   const cleanupCursor = initCustomCursor();
   const cleanupAboutIntro = initAboutIntro();
-  const cleanupAboutSlides = initAboutSlides();
   const cleanupGallery = initGallery();
   initAbout();
   const cleanupFooterReveal = initFooterReveal();
@@ -68,7 +65,6 @@ function init() {
       if (typeof cleanupCredits === 'function') cleanupCredits();
       if (typeof cleanupCursor === 'function') cleanupCursor();
       if (typeof cleanupAboutIntro === 'function') cleanupAboutIntro();
-      if (typeof cleanupAboutSlides === 'function') cleanupAboutSlides();
       if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
       if (typeof cleanupLightbox === 'function') cleanupLightbox();
       if (cleanupGallery) cleanupGallery.revert();
