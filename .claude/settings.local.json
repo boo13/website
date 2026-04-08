@@ -43,7 +43,8 @@
       "Bash(playwright-cli navigate:*)",
       "Bash(playwright-cli open:*)",
       "Bash(playwright-cli resize:*)",
-      "Bash(playwright-cli eval:*)"
+      "Bash(playwright-cli eval:*)",
+      "Bash(rtk git:*)"
     ]
   }
 }

@@ -89,9 +89,21 @@ export function initCredits() {
   let activeTween = null;
   let isDisposed = false;
 
-  const fixedHeroName = document.getElementById('hero-name-fixed');
-
   const ctx = gsap.context(() => {});
+
+  const fixedHeroName = document.getElementById('hero-name-fixed');
+  const topGradient = document.querySelector('.hero-top-transition-gradient');
+
+  const lightGradient = 'linear-gradient(180deg, oklch(1 0 0 / 0.55) 0%, oklch(1 0 0 / 0.3) 52%, oklch(1 0 0 / 0) 100%)';
+
+  // Toggle the fixed header gradient + hero name between light-bg and dark-bg modes.
+  function setHeroHeaderLight(onLight) {
+    if (topGradient) topGradient.style.background = onLight ? lightGradient : '';
+    if (fixedHeroName) {
+      fixedHeroName.style.color = onLight ? 'oklch(0.14 0 0)' : '';
+      fixedHeroName.style.textShadow = onLight ? 'none' : '';
+    }
+  }
 
   const darkVars = {
     '--credits-bg': 'oklch(0.14 0 0)',
@@ -120,7 +132,9 @@ export function initCredits() {
   function invertColors(toDark, tl, pos) {
     if (prefersReducedMotion) {
       section.classList.toggle('is-expanded', toDark);
-      setHeroNameOnLight(!toDark);
+      // When row is expanded (toDark), credits bg goes dark → hero header stays dark.
+      // When row is closed (!toDark), credits bg returns to light → hero header goes light.
+      setHeroHeaderLight(!toDark);
       return;
     }
     const vars = { ...(toDark ? darkVars : lightVars), duration: 0.9, ease: 'power2.inOut' };
