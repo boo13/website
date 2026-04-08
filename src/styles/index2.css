@@ -198,7 +198,7 @@ body.show-grid .bg-columns {
   top: 0;
   left: 0;
   width: 100%;
-  height: clamp(2.25rem, 8vh, 4.5rem);
+  height: clamp(3rem, 10vh, 5.5rem);
   z-index: 35;
   background: linear-gradient(
     180deg,
@@ -206,6 +206,9 @@ body.show-grid .bg-columns {
     oklch(0 0 0 / 0.28) 52%,
     oklch(0 0 0 / 0) 100%
   );
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: background 0.7s cubic-bezier(0.45, 0, 0.55, 1);
   opacity: 0;
   pointer-events: none;
 }
@@ -244,6 +247,7 @@ body.show-grid .bg-columns {
   white-space: nowrap;
   opacity: 0;
   visibility: hidden;
+  transition: color 0.7s cubic-bezier(0.45, 0, 0.55, 1), text-shadow 0.7s cubic-bezier(0.45, 0, 0.55, 1);
 }
 
 .hero-subtitle-fixed {
@@ -1239,7 +1243,7 @@ body.show-grid .bg-columns {
   }
 
   .hero-top-transition-gradient {
-    height: clamp(2.5rem, 9vh, 4.25rem);
+    height: clamp(2.75rem, 9vh, 4.75rem);
     background: linear-gradient(
       180deg,
       oklch(0 0 0 / 0.68) 0%,
@@ -1347,7 +1351,7 @@ body.show-grid .bg-columns {
   }
 
   .hero-top-transition-gradient {
-    height: clamp(2.25rem, 8vh, 3.5rem);
+    height: clamp(2.5rem, 9vh, 4rem);
     background: linear-gradient(
       180deg,
       oklch(0 0 0 / 0.76) 0%,

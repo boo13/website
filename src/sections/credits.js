@@ -91,6 +91,20 @@ export function initCredits() {
 
   const ctx = gsap.context(() => {});
 
+  const fixedHeroName = document.getElementById('hero-name-fixed');
+  const topGradient = document.querySelector('.hero-top-transition-gradient');
+
+  const lightGradient = 'linear-gradient(180deg, oklch(1 0 0 / 0.55) 0%, oklch(1 0 0 / 0.3) 52%, oklch(1 0 0 / 0) 100%)';
+
+  // Toggle the fixed header gradient + hero name between light-bg and dark-bg modes.
+  function setHeroHeaderLight(onLight) {
+    if (topGradient) topGradient.style.background = onLight ? lightGradient : '';
+    if (fixedHeroName) {
+      fixedHeroName.style.color = onLight ? 'oklch(0.14 0 0)' : '';
+      fixedHeroName.style.textShadow = onLight ? 'none' : '';
+    }
+  }
+
   const darkVars = {
     '--credits-bg': 'oklch(0.14 0 0)',
     '--credits-text': 'oklch(0.968 0.006 75)',
@@ -111,6 +125,9 @@ export function initCredits() {
   function invertColors(toDark, tl, pos) {
     if (prefersReducedMotion) {
       section.classList.toggle('is-expanded', toDark);
+      // When row is expanded (toDark), credits bg goes dark → hero header stays dark.
+      // When row is closed (!toDark), credits bg returns to light → hero header goes light.
+      setHeroHeaderLight(!toDark);
       return;
     }
     const vars = { ...(toDark ? darkVars : lightVars), duration: 0.9, ease: 'power2.inOut' };
@@ -119,6 +136,7 @@ export function initCredits() {
     } else {
       gsap.to(section, vars);
     }
+    setHeroHeaderLight(!toDark);
   }
 
   // Grow the header title to display size; shrink it back when closing.
@@ -260,6 +278,32 @@ export function initCredits() {
       activeTween = tl;
     }
   }
+
+  // Hero header color: switch to light mode when the credits section (offwhite bg)
+  // is at the top of the viewport, dark mode otherwise.
+  ctx.add(() => {
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: 'bottom top',
+      onEnter() {
+        if (!activeRow) setHeroHeaderLight(true);
+      },
+      onLeave() {
+        setHeroHeaderLight(false);
+      },
+      onEnterBack() {
+        if (!activeRow) setHeroHeaderLight(true);
+      },
+      onLeaveBack() {
+        setHeroHeaderLight(false);
+      },
+      // Handle already-scrolled-into state on load/refresh
+      onRefresh(self) {
+        if (!activeRow) setHeroHeaderLight(self.isActive);
+      },
+    });
+  });
 
   fetch('data/Projects.json')
     .then((response) => response.json())
