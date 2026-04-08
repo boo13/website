@@ -31,6 +31,16 @@ src/
 
 Static assets (images, data, favicon) live in `public/` and get copied as-is to the build output. Video files are hosted on [Cloudflare R2](https://developers.cloudflare.com/r2/) and referenced via CDN URLs — they are not stored in the git repository.
 
+## Deployment
+
+The live site at `www.randycounsman.com` currently sits behind Cloudflare, but it does not appear to be fully hosted on Cloudflare Pages yet.
+
+- DNS for `www.randycounsman.com` resolves to Cloudflare IPs, so Cloudflare is the edge layer.
+- The live HTTP response still exposes GitHub Pages / Fastly headers such as `x-github-request-id`, `x-served-by`, `x-fastly-request-id`, and `via: 1.1 varnish`.
+- In practical terms: Cloudflare is proxying the site, while GitHub Pages still appears to be the origin.
+
+Until that changes, treat `gh-pages` as the current production origin branch rather than assuming Cloudflare Pages is the deploy target.
+
 ## Running locally
 
 ```sh

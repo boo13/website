@@ -2,7 +2,7 @@
 This project is a video portfolio website using GSAP.
 
 - **Tech Stack** - Vite 7.3.1, JavaScript, GSAP 3.14.2 (via npm with ScrollTrigger, CustomEase, Flip, ScrollSmoother)
-- **Deployed** to gh-pages as static files
+- **Hosting topology** — `www.randycounsman.com` is proxied by Cloudflare, but the current origin still appears to be GitHub Pages. This repo still deploys by merging `dev` into `gh-pages`.
 
 ## Key Commands
 - `npm run dev` — Vite server with HMR
@@ -13,11 +13,16 @@ This project is a video portfolio website using GSAP.
 
 ## Git Workflow
 - **`dev`** — working branch. All LLM and day-to-day work happens here.
-- **`gh-pages`** — production. Deploys automatically on push. Only updated by merging `dev` into it.
+- **`gh-pages`** — current production origin branch. It is still the backing host behind the Cloudflare-proxied domain and is updated by merging `dev` into it.
 - ❌ DO NOT commit directly to `gh-pages`.
 - For risky/experimental work, branch off `dev` and merge back if it works.
 - Do not commit unless asked or the task is fully complete and verified.
 - One logical change per commit — don't bundle unrelated edits.
+
+## Deployment Reality
+- `www.randycounsman.com` currently resolves to Cloudflare IPs, so browsers hit Cloudflare first.
+- The live response still exposes GitHub Pages / Fastly headers (`x-github-request-id`, `x-served-by`, `x-fastly-request-id`, `via: 1.1 varnish`), which indicates the origin has not been fully moved off GitHub Pages.
+- Do not describe the site as "on Cloudflare Pages" unless the origin and deploy workflow have actually been migrated.
 
 ## Boundaries
 - ❌ DO NOT edit `index-legacy.html` or `src/main-index.js` unless explicitly asked (legacy archive)
