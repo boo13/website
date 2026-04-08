@@ -89,6 +89,8 @@ export function initCredits() {
   let activeTween = null;
   let isDisposed = false;
 
+  const fixedHeroName = document.getElementById('hero-name-fixed');
+
   const ctx = gsap.context(() => {});
 
   const fixedHeroName = document.getElementById('hero-name-fixed');
@@ -120,6 +122,13 @@ export function initCredits() {
     '--credits-muted': 'oklch(0.14 0 0 / 0.5)',
   };
 
+  // Toggle hero-name between dark (over light credits bg) and default (over dark bg).
+  // Direct style.color to bypass CSS specificity; CSS transition on .hero-name-fixed animates it.
+  function setHeroNameOnLight(onLight) {
+    if (!fixedHeroName) return;
+    fixedHeroName.style.color = onLight ? 'oklch(0.14 0 0)' : '';
+  }
+
   // Adds a color inversion tween to `tl` at position `pos`.
   // Slower and in the same timeline as the row expansion so it feels coupled.
   function invertColors(toDark, tl, pos) {
@@ -136,7 +145,7 @@ export function initCredits() {
     } else {
       gsap.to(section, vars);
     }
-    setHeroHeaderLight(!toDark);
+    setHeroNameOnLight(!toDark);
   }
 
   // Grow the header title to display size; shrink it back when closing.
@@ -279,28 +288,19 @@ export function initCredits() {
     }
   }
 
-  // Hero header color: switch to light mode when the credits section (offwhite bg)
-  // is at the top of the viewport, dark mode otherwise.
+  // Hero-name color: dark when credits (light bg) is at the top of the viewport.
   ctx.add(() => {
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
       end: 'bottom top',
-      onEnter() {
-        if (!activeRow) setHeroHeaderLight(true);
-      },
-      onLeave() {
-        setHeroHeaderLight(false);
-      },
-      onEnterBack() {
-        if (!activeRow) setHeroHeaderLight(true);
-      },
-      onLeaveBack() {
-        setHeroHeaderLight(false);
-      },
-      // Handle already-scrolled-into state on load/refresh
+      onEnter() { if (!activeRow) setHeroNameOnLight(true); },
+      onLeave() { setHeroNameOnLight(false); },
+      onEnterBack() { if (!activeRow) setHeroNameOnLight(true); },
+      onLeaveBack() { setHeroNameOnLight(false); },
+      // onRefresh fires after recalculation — handles already-active state on load/refresh
       onRefresh(self) {
-        if (!activeRow) setHeroHeaderLight(self.isActive);
+        if (!activeRow) setHeroNameOnLight(self.isActive);
       },
     });
   });
