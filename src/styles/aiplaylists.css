@@ -262,6 +262,11 @@ code {
   background: oklch(0.12 0.016 250 / 0.82);
 }
 
+.coverflow__nav:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.94);
+  background: oklch(0.1 0.014 252 / 0.9);
+}
+
 .coverflow__nav:disabled {
   opacity: 0.28;
   cursor: default;
@@ -451,10 +456,22 @@ code {
 }
 
 .coverflow-card.is-active .coverflow-card__cover {
-  box-shadow:
-    0 34px 90px oklch(0.01 0.01 250 / 0.56),
-    0 0 72px oklch(0.78 0.14 70 / 0.07),
-    inset 0 0 0 1px oklch(1 0 0 / 0.08);
+  animation: card-glow-pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes card-glow-pulse {
+  from {
+    box-shadow:
+      0 34px 90px oklch(0.01 0.01 250 / 0.56),
+      0 0 72px oklch(0.78 0.14 70 / 0.07),
+      inset 0 0 0 1px oklch(1 0 0 / 0.08);
+  }
+  to {
+    box-shadow:
+      0 34px 90px oklch(0.01 0.01 250 / 0.62),
+      0 0 96px oklch(0.78 0.14 70 / 0.18),
+      inset 0 0 0 1px oklch(1 0 0 / 0.14);
+  }
 }
 
 .playlist-modal {
@@ -911,5 +928,9 @@ code {
   .coverflow-card__cover,
   .playlist-modal__action {
     transition: none;
+  }
+
+  .coverflow-card.is-active .coverflow-card__cover {
+    animation: none;
   }
 }
