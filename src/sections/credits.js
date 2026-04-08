@@ -89,8 +89,6 @@ export function initCredits() {
   let activeTween = null;
   let isDisposed = false;
 
-  const fixedHeroName = document.getElementById('hero-name-fixed');
-
   const ctx = gsap.context(() => {});
 
   const fixedHeroName = document.getElementById('hero-name-fixed');
