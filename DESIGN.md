@@ -6,7 +6,7 @@ This document describes the actual design and interaction model of the main port
 
 - Applies to the main portfolio homepage only: [`index.html`](/Users/randy/Git/website/index.html)
 - Backed by [`src/main.js`](/Users/randy/Git/website/src/main.js) and the homepage styles:
-  - [`src/styles/index2.css`](/Users/randy/Git/website/src/styles/index2.css)
+  - [`src/styles/index.css`](/Users/randy/Git/website/src/styles/index.css)
   - [`src/styles/about-intro.css`](/Users/randy/Git/website/src/styles/about-intro.css)
   - [`src/styles/about-slides.css`](/Users/randy/Git/website/src/styles/about-slides.css)
 - Does not describe `contact.html`, `resume.html`, project detail pages, or the archived `index-legacy.html`
@@ -27,7 +27,7 @@ The page should feel like a title sequence and portfolio reel, not a SaaS landin
 
 ### Color palette
 
-The live homepage uses the following CSS tokens from [`src/styles/index2.css`](/Users/randy/Git/website/src/styles/index2.css):
+The live homepage uses the following CSS tokens from [`src/styles/index.css`](/Users/randy/Git/website/src/styles/index.css):
 
 - `--color-offwhite: oklch(0.968 0.006 75)`
 - `--color-cream: oklch(0.918 0.011 77)`

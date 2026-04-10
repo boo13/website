@@ -59,14 +59,14 @@ src/
   components/           # reusable DOM components (slider, responsive-video, video-lightbox, custom-cursor, preloader)
   styles/               # CSS per page, imported from JS entry points
     project.css         # shared styles for all project pages (BEM: .project-hero--video, .project-credits, .project-footer)
-    index2.css          # main portfolio page styles (used by index.html)
+    index.css           # main portfolio page styles (used by index.html)
     about-intro.css     # about section (index.html)
     about-slides.css    # about slides section (index.html)
     video-lightbox.css  # lightbox overlay (index.html)
     contact.css         # contact.html
     resume.css          # resume.html
     wyatt.css           # case_study_wyatt.html
-    index.css           # legacy index-legacy.html
+    index-legacy.css    # legacy index-legacy.html
   config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
   main.js               # entry for index.html — imports sections + calls init()
   main-project.js       # entry for ALL project pages — imports project sections

@@ -15,8 +15,8 @@ Add a subtle top-of-frame gradient that fades in during the hero-to-about transi
 
 The current transition already fades hero content and darkens the full-frame hero gradient, but it does not provide a dedicated top-edge readability layer under the fixed header title during the handoff into About.
 
-- Existing hero gradient is full-frame and optimized for video mood, not targeted top-header separation (`/Users/randy/Git/website/src/styles/index2.css:183`).
-- Fixed header title is a separate high-z-index layer that persists independently (`/Users/randy/Git/website/src/styles/index2.css:205`).
+- Existing hero gradient is full-frame and optimized for video mood, not targeted top-header separation (`/Users/randy/Git/website/src/styles/index.css:183`).
+- Fixed header title is a separate high-z-index layer that persists independently (`/Users/randy/Git/website/src/styles/index.css:205`).
 - Transition timing already exists in `initHero()` and is the correct place to synchronize this new effect (`/Users/randy/Git/website/src/sections/hero.js:24`).
 
 ## Research Summary
@@ -24,9 +24,9 @@ The current transition already fades hero content and darkens the full-frame her
 ### Repository Patterns
 
 - Hero structure already includes an overlay node (`.hero-gradient`) in the hero media container (`/Users/randy/Git/website/index.html:195`).
-- Fixed header text exists outside hero section and uses fixed positioning + safe-area offset (`/Users/randy/Git/website/index.html:152`, `/Users/randy/Git/website/src/styles/index2.css:207`).
+- Fixed header text exists outside hero section and uses fixed positioning + safe-area offset (`/Users/randy/Git/website/index.html:152`, `/Users/randy/Git/website/src/styles/index.css:207`).
 - Hero transition animation is controlled by a scrubbed GSAP timeline with ScrollTrigger (`/Users/randy/Git/website/src/sections/hero.js:328`).
-- Mobile breakpoints already tune hero header spacing and typography (`/Users/randy/Git/website/src/styles/index2.css:1096`, `/Users/randy/Git/website/src/styles/index2.css:1218`).
+- Mobile breakpoints already tune hero header spacing and typography (`/Users/randy/Git/website/src/styles/index.css:1096`, `/Users/randy/Git/website/src/styles/index.css:1218`).
 
 ### Institutional Learnings
 
@@ -44,7 +44,7 @@ Skipped external research. This is a low-risk UI enhancement and the codebase al
 Introduce a dedicated top transition gradient layer and drive it from the existing hero ScrollTrigger timeline.
 
 1. Add a new decorative gradient element in `/Users/randy/Git/website/index.html` near existing fixed hero header layers so it can stay fixed during section handoff.
-2. Add styles in `/Users/randy/Git/website/src/styles/index2.css` for:
+2. Add styles in `/Users/randy/Git/website/src/styles/index.css` for:
    - fixed positioning at top of viewport
    - subtle vertical fade (dark at top to transparent)
    - no pointer capture (`pointer-events: none`)
@@ -90,7 +90,7 @@ Introduce a dedicated top transition gradient layer and drive it from the existi
 ## Implementation Tasks
 
 - [x] `/Users/randy/Git/website/index.html`: add new top-transition gradient element under fixed header text layer.
-- [x] `/Users/randy/Git/website/src/styles/index2.css`: add base + responsive styles for new gradient class and z-index rules.
+- [x] `/Users/randy/Git/website/src/styles/index.css`: add base + responsive styles for new gradient class and z-index rules.
 - [x] `/Users/randy/Git/website/src/sections/hero.js`: query gradient node and add scrubbed fade tween in existing timeline.
 - [x] `/Users/randy/Git/website/src/sections/hero.js`: ensure reduced-motion path sets a non-animated safe default.
 - [x] `/Users/randy/Git/website/docs/plans/2026-02-16-feat-hero-about-transition-gradient-plan.md`: update status/notes after implementation and verification.
@@ -138,7 +138,7 @@ Introduce a dedicated top transition gradient layer and drive it from the existi
 ## Implementation Notes (2026-02-17)
 
 - Added `<div class="hero-top-transition-gradient" aria-hidden="true"></div>` just below the fixed header name container in `/Users/randy/Git/website/index.html`.
-- Added `.hero-top-transition-gradient` styles in `/Users/randy/Git/website/src/styles/index2.css` with `position: fixed`, `z-index: 35`, `pointer-events: none`, and responsive height/intensity tuning for `<=768px` and `<=480px`.
+- Added `.hero-top-transition-gradient` styles in `/Users/randy/Git/website/src/styles/index.css` with `position: fixed`, `z-index: 35`, `pointer-events: none`, and responsive height/intensity tuning for `<=768px` and `<=480px`.
 - Updated `/Users/randy/Git/website/src/sections/hero.js` to:
   - query `.hero-top-transition-gradient`
   - fade it in via the existing hero ScrollTrigger timeline (`autoAlpha` tween)
@@ -162,10 +162,10 @@ Introduce a dedicated top transition gradient layer and drive it from the existi
 - `/Users/randy/Git/website/index.html:152`
 - `/Users/randy/Git/website/index.html:195`
 - `/Users/randy/Git/website/index.html:226`
-- `/Users/randy/Git/website/src/styles/index2.css:183`
-- `/Users/randy/Git/website/src/styles/index2.css:205`
-- `/Users/randy/Git/website/src/styles/index2.css:1096`
-- `/Users/randy/Git/website/src/styles/index2.css:1218`
+- `/Users/randy/Git/website/src/styles/index.css:183`
+- `/Users/randy/Git/website/src/styles/index.css:205`
+- `/Users/randy/Git/website/src/styles/index.css:1096`
+- `/Users/randy/Git/website/src/styles/index.css:1218`
 - `/Users/randy/Git/website/src/sections/hero.js:24`
 - `/Users/randy/Git/website/src/sections/hero.js:316`
 - `/Users/randy/Git/website/src/sections/hero.js:328`
