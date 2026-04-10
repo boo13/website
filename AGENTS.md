@@ -27,7 +27,11 @@ This project is a video portfolio website using GSAP.
 ## Boundaries
 - ❌ DO NOT edit `index-legacy.html` or `src/main-index.js` unless explicitly asked (legacy archive)
 
-
+## Design System
+- **`DESIGN.md`** is the source of truth for all visual and motion design decisions on `index.html` and project pages (`projects/*/index.html`).
+- Consult DESIGN.md before making any design decision: colors, typography, spacing, animation timing, easing, layout, breakpoints, z-index.
+- If new work introduces a pattern not covered by DESIGN.md, propose an update to the document before (or alongside) implementing it.
+- If code and DESIGN.md conflict, flag it — don't silently follow either one.
 
 ## Project Structure
 - `index.html` is the main portfolio page. `index-legacy.html` is an archived/alternate version.
@@ -77,20 +81,15 @@ src/
 ```
 
 ## GSAP Conventions
+- Full motion design rules (easing palette, timing, scroll patterns, reusable animations) are in **DESIGN.md sections 5–6**.
 - Use `gsap.context()` per section for clean setup/teardown — no custom lifecycle wrappers
 - Centralize `ScrollTrigger.defaults()` in one place to avoid pin conflicts
-- Lazy-init heavy timelines (image sequences) when section approaches viewport
+- Lazy-init heavy timelines when section approaches viewport
 - Keep animation code direct — don't abstract into config-driven timeline factories
 - GSAP is now free to use, do not warn of paid-only features
-- **Prefer GSAP over CSS animations** for anything that's part of a sequence or coordinates with other animations. Reserve CSS for hover/focus states and `prefers-reduced-motion` fallbacks.
 
 ## Website Sections
-1. **Hero** - Preloader then a looping montage video with text (hero-name and hero-subtitle)
-2. **About** - Intro blurb (about-intro), bio slides (about-slides), and shared wrapper (about)
-3. **Featured Work** - Scrolling gallery of video thumbnails; click opens lightbox
-4. **Credits** - Table listing additional work examples; cursor-follow shows preview and row-reveal animations
-5. **Clients** - Network/brand logo marquee and summary blurb
-6. **Footer** - Contact and location info; nav and social links
+See **DESIGN.md section 9** for detailed per-section specs (selectors, key classes, scroll behavior, pin distances, backgrounds) for both homepage and project page variants.
 
 ## Verification
 - ✅ Use `playwright-cli` terminal commands for browser verification in this repo. (Tell user to install if not available.)
