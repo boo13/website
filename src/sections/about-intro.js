@@ -1,4 +1,4 @@
-import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
+import { gsap, ScrollTrigger, ScrollSmoother } from '../animations/scroll-defaults.js';
 import SplitText from 'gsap/SplitText';
 import { SCRUB } from '../config.js';
 
@@ -123,7 +123,7 @@ export function initAboutIntro() {
       invalidateOnRefresh: true,
       onUpdate: () => {
         if (!marqueeTween) return;
-        const v = Math.abs(ScrollTrigger.getVelocity());
+        const v = Math.abs(ScrollSmoother.get()?.getVelocity() ?? 0);
         gsap.to(marqueeTween, {
           timeScale: v > 50 ? Math.max(1, 1 + v / 800) : 1,
           duration: v > 50 ? 0.4 : 1.5,
