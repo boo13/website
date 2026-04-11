@@ -644,7 +644,7 @@ body.show-grid .bg-columns {
 }
 
 .credit-row__header:hover .credit-row__title {
-  animation: credits-ca-flash 0.5s var(--ease-out-expo) forwards;
+  --ca-spread: 5px;
 }
 
 .credit-row__icon {
@@ -663,21 +663,21 @@ body.show-grid .bg-columns {
   transform: rotate(45deg);
 }
 
-@keyframes credits-ca-flash {
-  from {
-    text-shadow:
-      -5px 0 oklch(0.804 0.146 220 / 0.9),
-      5px 0 oklch(0.656 0.235 13 / 0.9);
-  }
-  to {
-    text-shadow: none;
-  }
+@property --ca-spread {
+  syntax: '<length>';
+  initial-value: 0px;
+  inherits: false;
 }
 
 .credit-row__title {
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 400;
-  transition: color 0.25s ease;
+  transition:
+    color 0.25s ease,
+    --ca-spread 0.5s var(--ease-out-expo);
+  text-shadow:
+    calc(var(--ca-spread) * -1) 0 oklch(0.804 0.146 220 / 0.9),
+    var(--ca-spread) 0 oklch(0.656 0.235 13 / 0.9);
 }
 
 .credit-row__platform,
