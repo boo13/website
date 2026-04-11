@@ -16,6 +16,8 @@ export function initVideoLightbox() {
     closeOnOutsideClick: true,
     keyboardNavigation: true,
     videosWidth: '90vw',
+    openEffect: 'fade',
+    closeEffect: 'fade',
   });
 
   // Pause any playing hover preview videos when lightbox opens
