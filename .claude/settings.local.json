@@ -44,7 +44,9 @@
       "Bash(playwright-cli open:*)",
       "Bash(playwright-cli resize:*)",
       "Bash(playwright-cli eval:*)",
-      "Bash(rtk git:*)"
+      "Bash(rtk git:*)",
+      "WebFetch(domain:media.randycounsman.com)",
+      "Bash(git push:*)"
     ]
   }
 }

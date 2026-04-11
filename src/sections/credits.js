@@ -193,7 +193,7 @@ export function initCredits() {
 
       if (prefersReducedMotion) {
         details.style.height = '0';
-        ScrollTrigger.refresh();
+        gsap.delayedCall(0, () => ScrollTrigger.refresh());
         invertColors(false);
         titleEl.style.fontFamily = '';
         gsap.set(titleEl, { clearProps: 'fontSize' });
@@ -203,7 +203,7 @@ export function initCredits() {
         shrinkTitle(titleEl, closeTl, 0);
         closeTl.to(
           details,
-          { height: 0, duration: 0.4, ease: 'expo.inOut', onComplete: () => ScrollTrigger.refresh() },
+          { height: 0, duration: 0.4, ease: 'expo.inOut', onComplete: () => gsap.delayedCall(0, () => ScrollTrigger.refresh()) },
           0
         );
         activeTween = closeTl;
@@ -251,13 +251,15 @@ export function initCredits() {
       // Lazy-load image on first expand
       const img = details.querySelector('img[data-src]');
       if (img) {
+        gsap.set(img, { opacity: 0 });
+        img.onload = () => gsap.to(img, { opacity: 1, duration: 0.4, ease: 'power2.out' });
         img.src = img.dataset.src;
         delete img.dataset.src;
       }
 
       if (prefersReducedMotion) {
         details.style.height = 'auto';
-        ScrollTrigger.refresh();
+        gsap.delayedCall(0, () => ScrollTrigger.refresh());
       } else {
         tl.to(
           details,
@@ -267,10 +269,11 @@ export function initCredits() {
             ease: 'expo.out',
             onComplete() {
               details.style.overflow = 'visible';
-              ScrollTrigger.refresh();
+              gsap.delayedCall(0, () => ScrollTrigger.refresh());
               gsap.from(inner.children, {
                 opacity: 0,
                 y: 16,
+                filter: 'blur(4px)',
                 duration: 0.5,
                 ease: 'expo.out',
                 stagger: 0.07,
@@ -323,6 +326,7 @@ export function initCredits() {
           gsap.from('.credit-row', {
             opacity: 0,
             y: 15,
+            filter: 'blur(4px)',
             duration: 0.6,
             ease: 'expo.out',
             stagger: 0.04,

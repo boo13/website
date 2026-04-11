@@ -11,6 +11,7 @@ import { initFooterReveal } from './sections/footer-reveal.js';
 import { initCustomCursor } from './components/custom-cursor.js';
 import { runPreloader } from './components/preloader.js';
 import { initVideoLightbox } from './components/video-lightbox.js';
+import { initNav } from './sections/nav.js';
 
 let smoother;
 
@@ -32,6 +33,7 @@ function init() {
   const cleanupCursor = initCustomCursor();
   const cleanupAboutIntro = initAboutIntro();
   const cleanupGallery = initGallery();
+  const cleanupNav = initNav();
   initAbout();
   const cleanupFooterReveal = initFooterReveal();
   const cleanupLightbox = initVideoLightbox();
@@ -69,10 +71,15 @@ function init() {
       if (typeof cleanupLightbox === 'function') cleanupLightbox();
       if (cleanupGallery) cleanupGallery.revert();
       if (typeof cleanupHero === 'function') cleanupHero();
+      if (typeof cleanupNav === 'function') cleanupNav();
     },
     { once: true }
   );
 }
+
+// Dynamic copyright year
+const yearEl = document.getElementById('footer-year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Grid overlay toggle (Ctrl+G / Cmd+G)
 document.addEventListener('keydown', (e) => {

@@ -169,6 +169,12 @@
         </a>
     </div>
 
+    <nav class="pill-nav" id="pill-nav" aria-label="Site navigation">
+        <a href="#work" class="pill-nav__item" data-section="work">Work</a>
+        <a href="#credits" class="pill-nav__item" data-section="credits">Credits</a>
+        <a href="contact.html" class="pill-nav__item">Contact</a>
+    </nav>
+
     <div id="smooth-wrapper">
     <div id="smooth-content">
 
@@ -223,6 +229,32 @@
     ====================================================== -->
     <section class="about-intro-section">
         <div class="about-intro__dot-bg" aria-hidden="true"></div>
+        <div class="about-intro__phones" aria-hidden="true">
+            <div class="about-intro__phone about-intro__phone--sm about-intro__phone--1">
+                <video class="about-intro__phone-video" loop muted playsinline crossorigin preload="none">
+                    <source src="https://media.randycounsman.com/video/upnext_send11.17.mp4" type="video/mp4">
+                </video>
+                <img class="about-intro__phone-frame" src="images/iphone_mockups/iphone14_silver.png" alt="">
+            </div>
+            <div class="about-intro__phone about-intro__phone--sm about-intro__phone--2">
+                <video class="about-intro__phone-video" loop muted playsinline crossorigin preload="none">
+                    <source src="https://media.randycounsman.com/video/upnext_chart_bitcoin_11.17.mp4" type="video/mp4">
+                </video>
+                <img class="about-intro__phone-frame" src="images/iphone_mockups/iphone14_silver.png" alt="">
+            </div>
+            <div class="about-intro__phone about-intro__phone--sm about-intro__phone--3">
+                <video class="about-intro__phone-video" loop muted playsinline crossorigin preload="none">
+                    <source src="https://media.randycounsman.com/video/upnext_notes_11.18.mp4" type="video/mp4">
+                </video>
+                <img class="about-intro__phone-frame" src="images/iphone_mockups/iphone14_silver.png" alt="">
+            </div>
+            <div class="about-intro__phone about-intro__phone--lg about-intro__phone--4">
+                <video class="about-intro__phone-video" loop muted playsinline crossorigin preload="none">
+                    <source src="https://media.randycounsman.com/video/upnext_wh_gala_11.19.mp4" type="video/mp4">
+                </video>
+                <img class="about-intro__phone-frame" src="images/iphone_mockups/iphone14_silver.png" alt="">
+            </div>
+        </div>
         <div class="about-intro__content">
             <p class="about-intro__text">
                 A creative leader in nonfiction storytelling, crafting
@@ -230,21 +262,8 @@
                 platforms.
             </p>
         </div>
-        <div class="about-intro__marquee">
+        <div class="about-intro__marquee" aria-hidden="true">
             <div class="about-intro__marquee-track">
-                <span class="about-intro__marquee-item">Netflix</span>
-                <span class="about-intro__marquee-item">History</span>
-                <span class="about-intro__marquee-item">PBS</span>
-                <span class="about-intro__marquee-item">AMC</span>
-                <span class="about-intro__marquee-item">Amazon</span>
-                <span class="about-intro__marquee-item">Nat Geo</span>
-                <span class="about-intro__marquee-item">Hilton</span>
-                <span class="about-intro__marquee-item">Discovery</span>
-                <span class="about-intro__marquee-item">CNN</span>
-                <span class="about-intro__marquee-item">CNBC</span>
-                <span class="about-intro__marquee-item">Fox</span>
-                <span class="about-intro__marquee-item">NASCAR</span>
-                <!-- Duplicate for seamless CSS loop -->
                 <span class="about-intro__marquee-item">Netflix</span>
                 <span class="about-intro__marquee-item">History</span>
                 <span class="about-intro__marquee-item">PBS</span>
@@ -320,7 +339,7 @@
                     </div>
                 </form>
 
-                <div class="cta-divider"></div>
+                <hr class="cta-divider">
 
                 <a href="contact.html" class="cta-contact-btn">
                     Get in Touch
@@ -371,7 +390,7 @@
             </div>
 
             <!-- Bottom: Copyright -->
-            <p class="footer-copyright">&copy; Randy Counsman, 2026</p>
+            <p class="footer-copyright">&copy; Randy Counsman, <span id="footer-year">2026</span></p>
         </div>
     </footer>
 

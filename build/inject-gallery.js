@@ -74,6 +74,7 @@ function renderGalleryCards(projects) {
         : '';
 
       const noVideoAttr = hasHoverVideo ? '' : ' data-no-video';
+      const detailUrl = p.detailPage ? `/projects/${slug}/` : null;
 
       let videoHtml = '';
       if (hasHoverVideo) {
@@ -114,7 +115,13 @@ function renderGalleryCards(projects) {
                     <div class="card-content">${networkLogoHtml}
                         <h3 class="card-title">${escHtml(p.title)}</h3>
                         <p class="card-role">${escHtml(p.role)}</p>
-                        <span class="card-year">${escHtml(p.year)}</span>
+                        <span class="card-year">${escHtml(p.year)}</span>${detailUrl ? `
+                        <a class="card-detail-link" href="${detailUrl}">
+                            View Project
+                            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                                <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </a>` : ''}
                     </div>
                 </article>`;
     })
