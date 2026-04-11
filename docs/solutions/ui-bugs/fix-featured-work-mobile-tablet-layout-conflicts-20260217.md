@@ -16,7 +16,7 @@ tags:
   - inline-styles-override
 related_files:
   - src/config.js
-  - src/styles/index2.css
+  - src/styles/index.css
   - src/sections/gallery.js
   - src/main.js
   - src/components/video-lightbox.js
@@ -44,12 +44,12 @@ The gallery was designed desktop-first with horizontal scroll as the primary lay
 
 ```javascript
 export const MOBILE_BREAKPOINT = 768;
-export const GALLERY_BREAKPOINT = 1024; // sync with @media (max-width: 1024px) in index2.css
+export const GALLERY_BREAKPOINT = 1024; // sync with @media (max-width: 1024px) in index.css
 ```
 
 Separate constant avoids affecting `featured-work.js` parallax section which imports `MOBILE_BREAKPOINT`.
 
-### Step 2: CSS-driven layout at all breakpoints (`src/styles/index2.css`)
+### Step 2: CSS-driven layout at all breakpoints (`src/styles/index.css`)
 
 ```css
 /* Tablet + mobile: vertical gallery stack — sync with GALLERY_BREAKPOINT in gallery.js */

@@ -1,4 +1,4 @@
-import './styles/index2.css';
+import './styles/index.css';
 import './styles/about-intro.css';
 import './styles/video-lightbox.css';
 import { ScrollSmoother, ScrollTrigger } from './animations/scroll-defaults.js';

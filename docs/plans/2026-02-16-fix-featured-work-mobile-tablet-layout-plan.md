@@ -50,7 +50,7 @@ Five interrelated issues make the gallery unusable on mobile/tablet:
 |------|---------|
 | `src/config.js` | Add `GALLERY_BREAKPOINT = 1024` export |
 | `src/sections/gallery.js` | Refactor mobile path: remove inline styles, add `gsap.context()`, add vertical ScrollTrigger video autoplay, use `GALLERY_BREAKPOINT` |
-| `src/styles/index2.css` | Add 1024px media query for gallery, switch card heights to `aspect-ratio: 4/3` on mobile/tablet, add `dvh` fallback for gallery-container, hide corners on touch |
+| `src/styles/index.css` | Add 1024px media query for gallery, switch card heights to `aspect-ratio: 4/3` on mobile/tablet, add `dvh` fallback for gallery-container, hide corners on touch |
 | `src/main.js` | Capture `initGallery()` return value, add to `pagehide` cleanup |
 | `src/components/video-lightbox.js` | Add `lightbox.on('close')` handler to resume visible card autoplay |
 
@@ -129,7 +129,7 @@ In `video-lightbox.js`, add a `close` callback that dispatches a custom event (`
 ## Implementation Sequence
 
 1. `src/config.js` — add `GALLERY_BREAKPOINT` constant
-2. `src/styles/index2.css` — CSS breakpoint changes (layout works without JS changes)
+2. `src/styles/index.css` — CSS breakpoint changes (layout works without JS changes)
 3. `src/sections/gallery.js` — refactor mobile path, add video autoplay, fix cleanup
 4. `src/main.js` — capture and clean up gallery context
 5. `src/components/video-lightbox.js` — add close handler for video resume
@@ -139,7 +139,7 @@ In `video-lightbox.js`, add a `close` callback that dispatches a custom event (`
 
 - Brainstorm: `docs/brainstorms/2026-02-16-featured-work-mobile-fix-brainstorm.md`
 - Gallery JS: `src/sections/gallery.js` (mobile path lines 125-135, desktop ScrollTrigger lines 137-170, resize handler lines 174-186)
-- Gallery CSS: `src/styles/index2.css` (base styles ~line 350, 1024px query ~line 1106, 768px query ~line 1113, 480px query ~line 1245)
+- Gallery CSS: `src/styles/index.css` (base styles ~line 350, 1024px query ~line 1106, 768px query ~line 1113, 480px query ~line 1245)
 - Config: `src/config.js` (MOBILE_BREAKPOINT line 2)
 - Main init: `src/main.js` (initGallery call line 37, pagehide cleanup lines 64-77)
 - Video lightbox: `src/components/video-lightbox.js` (pause-all on open lines 22-29)

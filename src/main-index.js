@@ -1,4 +1,4 @@
-import './styles/index.css';
+import './styles/index-legacy.css';
 import { Slider } from './components/slider.js';
 import { ResponsiveVideo } from './components/responsive-video.js';
 import { textMaskRiseWords } from './animations/text-mask-rise.js';

@@ -21,7 +21,7 @@ export function initGallery() {
   const prefersReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   ).matches;
-  // sync with @media (max-width: 1024px) in index2.css
+  // sync with @media (max-width: 1024px) in index.css
   let isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
 
   let currentIndex = 0;
