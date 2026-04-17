@@ -211,6 +211,9 @@ export function initGallery() {
     const scrollTween = gsap.to(track, {
       x: () => -scrollDistance,
       ease: 'none',
+      modifiers: {
+        x: gsap.utils.snap(1),
+      },
       scrollTrigger: {
         trigger: section,
         start: 'top top',

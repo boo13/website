@@ -378,11 +378,18 @@ body.show-grid .bg-columns {
   position: relative;
   border-radius: 0;
   overflow: visible;
-  background: var(--color-charcoal);
+  background: var(--color-nearblack);
   cursor: pointer;
 }
 
-.gallery-card::after {
+.card-media {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.card-media::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -395,13 +402,6 @@ body.show-grid .bg-columns {
     oklch(0 0 0 / 0.2) 45%,
     transparent 65%
   );
-}
-
-.card-media {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  overflow: hidden;
 }
 
 .card-media--placeholder {
@@ -418,8 +418,6 @@ body.show-grid .bg-columns {
   height: 100%;
   object-fit: cover;
   transition: opacity 0.5s ease;
-  backface-visibility: hidden;
-  will-change: opacity;
 }
 
 .card-video {
