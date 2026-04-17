@@ -198,3 +198,4 @@ tmp/
 
 # Git worktrees
 .worktrees/
+docs/unused-r2-files.md
