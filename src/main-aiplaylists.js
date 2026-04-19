@@ -66,6 +66,15 @@ function stripSourcePrefix(title) {
     .trim();
 }
 
+function extractPlaylistId(url) {
+  if (typeof url !== 'string') return null;
+  try {
+    return new URL(url).searchParams.get('list') || null;
+  } catch {
+    return null;
+  }
+}
+
 function hashCode(value) {
   let hash = 0;
   for (let i = 0; i < value.length; i += 1) {
@@ -298,6 +307,7 @@ function createModalController() {
     const audioSrc = resolveAssetPath(item.audio_intro_url);
     const hasPlaylistUrl =
       typeof item.playlist_url === 'string' && item.playlist_url.startsWith('https://');
+    const playlistId = extractPlaylistId(item.playlist_url);
 
     body.innerHTML = `
       <div class="playlist-modal__hero">
@@ -346,6 +356,21 @@ function createModalController() {
           </div>
         </div>
       </div>
+
+      ${playlistId
+        ? `<div class="playlist-modal__embed">
+            <iframe
+              src="https://www.youtube.com/embed/videoseries?list=${escHtml(playlistId)}&rel=0"
+              title="YouTube playlist player"
+              frameborder="0"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <p class="playlist-modal__embed-note">Some tracks may be unavailable for embedding. <a href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener">Open in YouTube Music</a> for the full playlist.</p>
+          </div>`
+        : ''}
 
       <div class="playlist-modal__details">
         ${
@@ -408,7 +433,7 @@ function createModalController() {
         { autoAlpha: 0 },
         { autoAlpha: 1, duration: 0.32, ease: 'power1.out', clearProps: 'opacity' },
       );
-      gsap.from(body.querySelectorAll('.playlist-modal__hero, .playlist-modal__details'), {
+      gsap.from(body.querySelectorAll('.playlist-modal__hero, .playlist-modal__embed, .playlist-modal__details'), {
         y: 24,
         autoAlpha: 0,
         duration: 0.45,

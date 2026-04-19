@@ -712,6 +712,36 @@ code {
   border-color: oklch(0.24 0.02 250);
 }
 
+.playlist-modal__embed {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.playlist-modal__embed iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 0;
+  background: oklch(0.06 0.01 255);
+}
+
+.playlist-modal__embed-note {
+  margin: 0;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: oklch(0.46 0.025 250);
+}
+
+.playlist-modal__embed-note a {
+  color: oklch(0.36 0.04 250);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.playlist-modal__embed-note a:hover {
+  color: oklch(0.24 0.03 250);
+}
+
 .playlist-modal__details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -916,6 +946,10 @@ code {
   .playlist-modal__actions,
   .playlist-modal__details {
     grid-template-columns: 1fr;
+  }
+
+  .playlist-modal__embed iframe {
+    min-height: 200px;
   }
 }
 
