@@ -75,6 +75,17 @@ function extractPlaylistId(url) {
   }
 }
 
+function buildEmbedUrl(item) {
+  const listId = extractPlaylistId(item.playlist_url);
+  if (!listId) return null;
+  const tracks = getTracks(item);
+  const firstVideoId = tracks.find((t) => t.video_id)?.video_id;
+  if (firstVideoId) {
+    return `https://www.youtube.com/embed/${encodeURIComponent(firstVideoId)}?list=${encodeURIComponent(listId)}&rel=0`;
+  }
+  return `https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(listId)}&rel=0`;
+}
+
 function hashCode(value) {
   let hash = 0;
   for (let i = 0; i < value.length; i += 1) {
@@ -307,7 +318,7 @@ function createModalController() {
     const audioSrc = resolveAssetPath(item.audio_intro_url);
     const hasPlaylistUrl =
       typeof item.playlist_url === 'string' && item.playlist_url.startsWith('https://');
-    const playlistId = extractPlaylistId(item.playlist_url);
+    const embedUrl = buildEmbedUrl(item);
 
     body.innerHTML = `
       <div class="playlist-modal__hero">
@@ -357,10 +368,10 @@ function createModalController() {
         </div>
       </div>
 
-      ${playlistId
+      ${embedUrl
         ? `<div class="playlist-modal__embed">
             <iframe
-              src="https://www.youtube.com/embed/videoseries?list=${escHtml(playlistId)}&rel=0"
+              src="${escHtml(embedUrl)}"
               title="YouTube playlist player"
               frameborder="0"
               allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
