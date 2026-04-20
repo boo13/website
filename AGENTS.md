@@ -9,6 +9,8 @@ This project is a video portfolio website using GSAP.
 - `npm run lint` — ESLint on `src/` (run before commit; fix all errors before proceeding)
 - `npm run format` — Prettier on `src/`
 - `just video-publish FILE [--suffix S] [--out-dir DIR] ...` — Optimize video to WebM + MP4 and upload both to R2
+- `rclone ls r2-portfolio:portfolio-assets` — List all R2 files (rclone configured; use for audits and bulk deletes)
+- `rclone delete r2-portfolio:portfolio-assets/<key>` — Delete an R2 object; supports `--include` glob for bulk ops
 - `just visual-audit` — Capture timestamped visual audit across desktop, tablet, and phone sizes
 
 ## Git Workflow
