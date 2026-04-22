@@ -1,3 +1,103 @@
+---
+version: "alpha"
+name: "Randy Counsman Portfolio"
+description: "Cinematic dark portfolio — title sequence and reel aesthetic"
+
+colors:
+  # Homepage tokens (defined on :root in src/styles/index2.css)
+  offwhite: "oklch(0.968 0.006 75)"
+  cream: "oklch(0.918 0.011 77)"
+  nearblack: "oklch(0.14 0 0)"
+  charcoal: "oklch(0.2 0 0)"
+  gray: "oklch(0.51 0 0)"
+  # Project page tokens (defined on :root in src/styles/project.css)
+  project-text: "oklch(0.959 0.003 165)"
+  project-bg: "oklch(0.08 0 0)"
+  project-bg-credits: "oklch(0.134 0 0)"
+  # Chromatic accents — homepage only
+  accent-blue: "oklch(0.804 0.146 220)"
+  accent-red: "oklch(0.656 0.235 13)"
+  # Credits inversion — light state (default)
+  credits-bg-light: "oklch(0.968 0.006 75)"
+  credits-text-light: "oklch(0.14 0 0)"
+  # Credits inversion — dark state (when a row is open)
+  credits-bg-dark: "oklch(0.14 0 0)"
+  credits-text-dark: "oklch(0.968 0.006 75)"
+
+typography:
+  display:
+    fontFamily: "ivypresto-display, Georgia, serif"
+    fontWeight: 300
+  body:
+    fontFamily: "aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontWeight: 400
+  hero-name:
+    fontFamily: "ivypresto-display, Georgia, serif"
+    fontSize: "clamp(3rem, 8vw, 6rem)"
+    fontWeight: 300
+    lineHeight: "1"
+  hero-name-fixed:
+    fontFamily: "ivypresto-display, Georgia, serif"
+    fontSize: "clamp(1.25rem, 3.2vw, 2.25rem)"
+    fontWeight: 300
+    lineHeight: "1"
+  hero-subtitle:
+    fontFamily: "aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    fontSize: "clamp(0.875rem, 2vw, 1.125rem)"
+    fontWeight: 400
+    letterSpacing: "0.15em"
+  about-intro:
+    fontFamily: "ivypresto-display, Georgia, serif"
+    fontSize: "clamp(1.5rem, 3.5vw, 3rem)"
+    fontWeight: 300
+    lineHeight: "1.4"
+    letterSpacing: "0.01em"
+  section-title:
+    fontFamily: "ivypresto-display, Georgia, serif"
+    fontSize: "clamp(2rem, 4vw, 3rem)"
+    fontWeight: 400
+  card-title:
+    fontFamily: "ivypresto-display, Georgia, serif"
+    fontSize: "clamp(1.5rem, 3vw, 2.5rem)"
+    fontWeight: 400
+    lineHeight: "1.2"
+  cta-heading:
+    fontFamily: "ivypresto-display, Georgia, serif"
+    fontSize: "clamp(1.75rem, 3vw, 2.5rem)"
+    fontWeight: 400
+  footer-tagline:
+    fontFamily: "ivypresto-display, Georgia, serif"
+    fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)"
+    fontWeight: 600
+    lineHeight: "1.4"
+
+spacing:
+  container-padding: "clamp(1.5rem, 5vw, 4rem)"
+  section-padding: "clamp(4rem, 10vh, 8rem)"
+  grid-gutter: "20px"
+  grid-max-width: "1400px"
+  grid-columns: "6"
+  project-max-width: "1600px"
+
+components:
+  gallery-card:
+    backgroundColor: "{colors.nearblack}"
+    textColor: "{colors.offwhite}"
+    typography: "{typography.card-title}"
+  credits-section-light:
+    backgroundColor: "{colors.credits-bg-light}"
+    textColor: "{colors.credits-text-light}"
+  credits-section-dark:
+    backgroundColor: "{colors.credits-bg-dark}"
+    textColor: "{colors.credits-text-dark}"
+  preloader:
+    backgroundColor: "{colors.nearblack}"
+    textColor: "{colors.offwhite}"
+  hero-name-header:
+    textColor: "{colors.offwhite}"
+    typography: "{typography.hero-name-fixed}"
+---
+
 # Design Rulebook
 
 **Scope:** Homepage (`index.html`) and project detail pages (`projects/*/index.html`). Does not govern utility pages (contact, resume).
@@ -8,7 +108,7 @@
 
 ---
 
-## 1. Creative Direction
+## Overview
 
 The site is a cinematic portfolio — a title sequence and reel, not a SaaS landing page or brochure. Design constraints:
 
@@ -28,11 +128,11 @@ Project pages are intentionally darker and more focused than the homepage. They 
 
 ---
 
-## 2. Color System
+## Colors
 
 All colors use the OKLCH color space. Do not introduce hex or HSL values.
 
-### 2a. Homepage Tokens
+### Homepage Tokens
 
 Defined on `:root` in `src/styles/index2.css`:
 
@@ -44,7 +144,7 @@ Defined on `:root` in `src/styles/index2.css`:
 | `--color-charcoal` | `oklch(0.2 0 0)` | Secondary dark background |
 | `--color-gray` | `oklch(0.51 0 0)` | Defined but unused on homepage |
 
-### 2b. Project Page Tokens
+### Project Page Tokens
 
 Defined on `:root` in `src/styles/project.css`:
 
@@ -56,7 +156,7 @@ Defined on `:root` in `src/styles/project.css`:
 
 The divergence is intentional: homepage text is warm (hue 75), project text is cool (hue 165). Project backgrounds are significantly darker than homepage backgrounds.
 
-### 2c. Opacity Ramp — Text Hierarchy
+### Opacity Ramp — Text Hierarchy
 
 Text hierarchy on dark backgrounds is built from a single base color at varying alpha. Never introduce a new hue for text.
 
@@ -87,7 +187,7 @@ Text hierarchy on dark backgrounds is built from a single base color at varying 
 | 0.25 | Timeline rail background |
 | 0.15 | Footer border |
 
-### 2d. Credits Color Inversion (Homepage Only)
+### Credits Color Inversion (Homepage Only)
 
 The credits section is the only homepage section that inverts to a light background. It uses scoped custom properties on `.credits-section`:
 
@@ -113,7 +213,7 @@ The credits section is the only homepage section that inverts to a light backgro
 
 Transition: 0.9s `power2.inOut` on the CSS custom properties via GSAP. The fixed hero name and top gradient also adapt when the credits section scrolls into view.
 
-### 2e. Chromatic Accents
+### Chromatic Accents
 
 Two chromatic colors exist in the system. Both are homepage-only and used exclusively for the patterns listed below. Do not use them for text, backgrounds, or any other purpose.
 
@@ -124,9 +224,9 @@ Two chromatic colors exist in the system. Both are homepage-only and used exclus
 
 ---
 
-## 3. Typography
+## Typography
 
-### 3a. Font Stack
+### Font Stack
 
 Two fonts. Shared across all page types.
 
@@ -137,7 +237,7 @@ Two fonts. Shared across all page types.
 
 Both loaded via Typekit (`bnp0hyp.css`). There is no third font.
 
-### 3b. Homepage Type Scale
+### Homepage Type Scale
 
 All fluid via `clamp()`:
 
@@ -157,7 +257,7 @@ All fluid via `clamp()`:
 | Footer labels | `.footer-col-label` | body | 0.75rem | — | uppercase | — | 0.1em |
 | Marquee items | `.about-intro__marquee-item` | body | `clamp(0.7rem, 1.2vw, 0.9rem)` | 400 | uppercase | — | 0.15em |
 
-### 3c. Project Page Type Scale
+### Project Page Type Scale
 
 Fixed px values with breakpoint tiers. The one exception is the case study hero title.
 
@@ -172,7 +272,7 @@ Fixed px values with breakpoint tiers. The one exception is the case study hero 
 | Case study hero | `.case-study__title` | `clamp(40px, 6vw, 96px)` | — | — |
 | Case study intro | `.case-study__intro-text` | `clamp(24px, 3vw, 40px)`, display serif | — | — |
 
-### 3d. Rules
+### Typography Rules
 
 1. **Display font weight:** 300 or 400 only. Never 500 or higher on the display font. `.footer-tagline` at 600 is the sole exception.
 2. **Italic:** Only `.about-intro__text`. Never italic on headings or UI text.
@@ -183,9 +283,9 @@ Fixed px values with breakpoint tiers. The one exception is the case study hero 
 
 ---
 
-## 4. Layout
+## Layout
 
-### 4a. Homepage Grid
+### Homepage Grid
 
 | Token | Value |
 |-------|-------|
@@ -201,7 +301,7 @@ Credits and footer use CSS subgrid on desktop (≥1025px) for deep column alignm
 
 Debug grid overlay: `.bg-columns` (6 column divs), toggled via `Ctrl/Cmd+G` (adds `body.show-grid`).
 
-### 4b. Project Pages
+### Project Pages
 
 No CSS grid system. Flex-based layouts throughout. Max-width 1600px.
 
@@ -210,15 +310,170 @@ Spacing is hardcoded px:
 - Image grids: 8px gaps (tight, magazine-style)
 - Case study side padding: 40px (desktop) → 24px (≤1024px) → 16px (≤768px)
 
-### 4c. Spacing Note
+### Spacing Note
 
 Neither page type uses a strict mathematical spacing scale. Use `--section-padding` and `--container-padding` as anchors on the homepage. On project pages, match the existing px rhythm.
 
+### Responsive Breakpoints
+
+`GALLERY_BREAKPOINT = 1024` and `MOBILE_BREAKPOINT = 768` in `src/config.js`. Gallery JS does a full page reload when the user crosses 1024px.
+
+`--container-padding` overridden to `1.25rem` at ≤480px.
+
+**Homepage:**
+
+| Breakpoint | Grid | Gallery | Credits | Footer |
+|-----------|------|---------|---------|--------|
+| ≥1025px | 6-col, subgrid | Horizontal scroll, pinned, progress visible | Subgrid, role column visible | Subgrid, 3-col |
+| ≤1024px | 6-col | Vertical stack, `aspect-ratio: 4/3`, progress hidden | — | — |
+| ≤768px | 4-col | — | Role column hidden, 1-col details | Block layout, 2-col info grid |
+| ≤480px | 2-col | min-height 280px, fixed card title 1.25rem | — | 1-col info |
+| `hover: none` | — | Corner brackets hidden entirely | — | — |
+
+**Project Pages:**
+
+| Breakpoint | Credits | Case Study | Video Hero | Footer |
+|-----------|---------|------------|------------|--------|
+| >1024px | 2-col (text left, 460px/460px poster right) | 40px side padding, full image grids | 100vh | Row layout |
+| 768–1024px | Poster 340px wide, 460px tall | 24px side padding | 100vh | — |
+| <768px | 1-col stack, poster full-width 3:4 aspect | 16px side padding, grids collapse to 1-col | 80vh | Centered stack |
+
 ---
 
-## 5. Motion Design System
+## Elevation & Depth
 
-### 5a. Stack
+### Homepage Layers
+
+| Layer | Selector | z-index | Notes |
+|-------|----------|---------|-------|
+| Preloader | `.loading-overlay` | 10000 | Removed from DOM after exit |
+| Cursor dot | `.custom-cursor-dot` | 10000 | `gsap.quickTo` positioned |
+| Cursor ring | `.custom-cursor-ring` | 10000 | `gsap.quickTo` positioned, trails dot |
+| Hero name (header) | `.hero-fixed-name-container > #hero-name-fixed` | 40 | Flip-animated between hero and fixed positions |
+| Hero subtitle (fixed) | `#hero-subtitle-fixed` | 40 | Tracks title bottom edge, fades on scroll |
+| Hero social (fixed) | `#hero-social-fixed` | 40 | Tracks title bottom edge, fades on scroll |
+| Top gradient | `.hero-top-transition-gradient` | 35 | Backdrop-blur, transitions dark↔light for credits |
+| Gallery progress | `.gallery-progress` | 100 | Visible only when `.featured-work-section.active` |
+| Debug grid | `.bg-columns` | 2 | Toggled by `body.show-grid` |
+| Footer | `#site-footer` | 0 | Fixed behind scroll wrapper, clip-path revealed |
+| Scroll wrapper | `#smooth-wrapper > #smooth-content` | 1 | ScrollSmoother target |
+
+### Project Pages
+
+No fixed layers. Native scroll. Video controls are inline in the hero section.
+
+---
+
+## Components
+
+### Gallery Card Hover (Homepage)
+
+Desktop only (`hover: hover` media query):
+- 200ms hover-intent delay before video plays
+- `.card-video` fades in (opacity 0→1), `.card-thumbnail` fades out simultaneously — both 0.5s
+- Corner brackets translate outward 12px
+- On mouseleave: video pauses, `currentTime` resets to 0
+
+### Gallery Video Autoplay
+
+- Desktop: nested ScrollTrigger via `containerAnimation`, `start: 'left 80%'`, `end: 'right 20%'`
+- Mobile: vertical ScrollTrigger, `start: 'top 80%'`, `end: 'bottom 20%'`
+- Cards get `.is-playing` class while video is active
+
+### Credits Accordion (Homepage)
+
+- Single row open at a time
+- On expand: font swaps to display serif, `fontSize` tweens to `2.25rem` (`0.5s expo.out`), height `0→auto` (`0.5s expo.out`), children stagger `opacity 0, y 16` → visible
+- Hover: CA flash — `credits-ca-flash` keyframe, blue/red text-shadow offsets, `0.5s var(--ease-out-expo)`
+- Plus icon rotates 45° on `.is-active`
+
+### Lightbox (Homepage)
+
+- GLightbox targeting `.glightbox-video`, `videosWidth: '90vw'`
+- Dark overlay: `oklch(0.14 0 0 / 0.95)`
+- On open: all `.card-video` pause and reset to frame 0
+- On close: dispatches `'gallery:lightbox-close'`
+
+### Scroll-to Navigation
+
+`gsap.to(window, { scrollTo: target, duration: 0.9, ease: 'power2.out' })`
+
+### Video Hero Controls (Project Pages)
+
+Custom UI — play/pause, sound toggle, timeline scrub, smooth scroll to credits. DOM-imperative; no GSAP tweens currently in `src/sections/project-video.js`.
+
+### Case Study (Project Pages)
+
+All scroll-triggered, no user interaction required. Entrance fades, parallax, and clip-path wipes are automatic.
+
+### Footer Ticker (Project Pages)
+
+CSS-only `@keyframes project-ticker-scroll`, 12s linear infinite horizontal scroll.
+
+### Section Quick-Reference
+
+**Hero** — `section.hero-section` | `src/sections/hero.js`
+- Pin: 150% | Scrub: 1.5 | BG: full-bleed video + multi-stop gradient overlay
+- Key classes: `.hero-video-container`, `.hero-video`, `.hero-gradient`, `.hero-content`, `.hero-name`, `.hero-subtitle`, `.hero-social`
+- Scroll behavior: zoom (scale→1.15), blur (→8px), content exits, gradient darkens. Name Flips to fixed header over first 45%.
+
+**About Intro** — `section.about-intro-section` | `src/sections/about-intro.js`
+- Pin: 200% | Scrub: 1 | BG: `--color-nearblack` + radial dot-grid texture at ~7.5% effective opacity
+- Key classes: `.about-intro__dot-bg`, `.about-intro__content`, `.about-intro__text`, `.about-intro__marquee`, `.about-intro__marquee-track`
+- Scroll behavior: char-level opacity fill (0.15→1) across pinned section. Marquee loops via CSS.
+
+**Featured Work** — `section#work.featured-work-section` | `src/sections/gallery.js`
+- Pin: trackWidth (desktop) or none (≤1024px) | Scrub: 1 | BG: `--color-nearblack`
+- Key classes: `.gallery-container`, `.gallery-track`, `.gallery-card`, `.card-media`, `.card-thumbnail`, `.card-video`, `.card-content`, `.card-title`, `.gallery-progress`
+- Desktop: horizontal scroll. Mobile: vertical stack. Section gains `.active` while pinned.
+
+**Credits** — `section#credits.credits-section` | `src/sections/credits.js`
+- No pin | BG: light (`--color-offwhite`) inverting to dark when rows open
+- Key classes: `.credits-list`, `.credit-row`, `.credit-row__header`, `.credit-row__details-inner`
+- Dynamically built from `public/data/Projects.json`. Images lazy-load on first expand.
+
+**CTA** — `section#cta.cta-section` | no JS module
+- No pin | BG: `--color-nearblack`
+- Key classes: `.cta-heading`, `.cta-subtext`, `.newsletter-form`, `.newsletter-input-group`, `.newsletter-submit`, `.cta-contact-btn`
+
+**Footer** — `footer.site-footer#site-footer` | `src/sections/footer-reveal.js`
+- Fixed, z-index 0, revealed via `clip-path: inset()` scrub on `#smooth-wrapper`
+- Key classes: `.footer-inner`, `.footer-top`, `.footer-tagline`, `.footer-nav`, `.footer-columns`, `.footer-col`, `.footer-copyright`
+
+**Video Hero** — `section.project-hero--video` | `src/sections/project-video.js`
+- 100vh | BG: `oklch(0 0 0)` (pure black)
+- Key classes: `.project-hero__video`, `.project-hero__controls`, `.project-hero__timeline`, `.project-hero__label`
+- Custom video player UI. Smooth scroll to credits on button click.
+
+**Project Credits** — `.project-credits` | `src/sections/project-credits.js` (stub, animations pending)
+- BG: `--project-bg-credits`
+- Key classes: `.project-credits__gradient`, `.project-credits__title`, `.project-credits__year`, `.project-credits__about`, `.project-credits__roles`, `.project-credits__poster`
+- Static, hand-authored HTML per project. Gradient bridge dissolves from hero.
+
+**Project Footer** — `footer.project-footer` | `src/sections/project-footer.js` (stub)
+- Key classes: `.project-footer__ticker`, `.project-footer__back`, `.project-footer__socials`
+- CSS-animated ticker, back-to-video button, abbreviated socials.
+
+**Case Study Hero** — `section.case-study__hero` | `src/sections/project-case-study.js`
+- 100vh | Parallax zoom-out (scale 1.15→1, scrub 1.5) | BG: dark image
+- Key classes: `.case-study__hero-image`, `.case-study__hero-overlay`, `.case-study__title`, `.case-study__meta`
+
+**Case Study Intro** — `section.case-study__intro`
+- Text-mask-rise triggered at `top 75%`, once
+- Key class: `.case-study__intro-text`
+
+**Image Sections** — `.case-study__pair`, `.case-study__statement`, `.case-study__triptych`, `.case-study__asymmetric`, `.case-study__closing`
+- Pair: staggered `y: 60` entrance fade, trigger `top 75%`
+- Statement: entrance fade + `yPercent: -10→10` parallax scrub, start `top bottom` to `bottom top`
+- Triptych: clip-path wipe (`inset(100% 0 0 0)` → `inset(0%)`), staggered, trigger `top 70%`
+- Asymmetric: dominant y:50, accent y:80 + continuous `yPercent: -5→5` drift
+- Closing: entrance fade + scrub-linked fade-to-black transitioning into credits
+
+---
+
+## Motion
+
+### Stack
 
 GSAP 3.14.2 via npm. Plugins registered in `src/animations/scroll-defaults.js`:
 
@@ -230,7 +485,7 @@ GSAP 3.14.2 via npm. Plugins registered in `src/animations/scroll-defaults.js`:
 
 CSS `@keyframes` only for always-running loops (marquees, ticker). Everything else uses GSAP.
 
-### 5b. Easing Palette
+### Easing Palette
 
 Shared across both page types:
 
@@ -249,7 +504,7 @@ Shared across both page types:
 
 **Rule:** Scrub-driven animations always use `ease: 'none'`. Easing on top of scrub creates jitter.
 
-### 5c. Timing Vocabulary
+### Timing Vocabulary
 
 | Band | Duration | Examples |
 |------|----------|---------|
@@ -259,7 +514,7 @@ Shared across both page types:
 | Slow | 1.0–1.5s | Text-mask-rise (1.5s default), subtitle entrance (1.2s), case study reveals (1.0–1.4s) |
 | Very Slow | 2.0+ | Hero name rise (2.2s), client marquee (30s CSS), project footer ticker (12s CSS) |
 
-### 5d. Scroll-Driven Patterns
+### Scroll-Driven Patterns
 
 Scrub constants from `src/config.js`:
 
@@ -277,7 +532,7 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 
 **Case study parallax:** Hero image `scale: 1.15→1` scrubbed. Statement images `yPercent: -10→10`, `start: 'top bottom'` to `end: 'bottom top'`, ease none.
 
-### 5e. Reusable Animation Patterns
+### Reusable Animation Patterns
 
 **Text Mask Rise** (`src/animations/text-mask-rise.js`):
 - SplitText `type: 'words'` with mask wrappers (`overflow: clip`)
@@ -312,7 +567,7 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 - `duration: 1.2s`, `ease: 'power3.inOut'`, `stagger: 0.15s`
 - Trigger: `start: 'top 70%'`, `once: true`
 
-### 5f. Homepage-Only Patterns
+### Homepage-Only Patterns
 
 **Preloader** (`src/components/preloader.js`):
 - Markup: `.loading-overlay` > `.preloader-wrapper` > `.preloader-edges` (+ `.preloader-time` + four `.preloader-corner` variants)
@@ -348,7 +603,7 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 - ScrollTrigger on spacer: `start: 'top bottom'`, `end: 'bottom bottom'`, updates `clip-path: inset(0 0 Npx 0)` on `#smooth-wrapper`
 - `pointer-events: auto` on footer when `progress ≥ 0.99`
 
-### 5g. Reduced Motion Contract
+### Reduced Motion Contract
 
 Every animation module checks `window.matchMedia('(prefers-reduced-motion: reduce)')`.
 
@@ -366,192 +621,37 @@ Every animation module checks `window.matchMedia('(prefers-reduced-motion: reduc
 
 ---
 
-## 6. Interaction Patterns
+## Do's and Don'ts
 
-### Homepage
+### When to Consult DESIGN.md
 
-**Gallery card hover** (desktop, `hover: hover` media query only):
-- 200ms hover-intent delay before video plays
-- `.card-video` fades in (opacity 0→1), `.card-thumbnail` fades out simultaneously — both 0.5s
-- Corner brackets translate outward 12px
-- On mouseleave: video pauses, `currentTime` resets to 0
-
-**Gallery video autoplay:**
-- Desktop: nested ScrollTrigger via `containerAnimation`, `start: 'left 80%'`, `end: 'right 20%'`
-- Mobile: vertical ScrollTrigger, `start: 'top 80%'`, `end: 'bottom 20%'`
-- Cards get `.is-playing` class while video is active
-
-**Credits accordion:**
-- Single row open at a time
-- On expand: font swaps to display serif, `fontSize` tweens to `2.25rem` (`0.5s expo.out`), height `0→auto` (`0.5s expo.out`), children stagger `opacity 0, y 16` → visible
-- Hover: CA flash — `credits-ca-flash` keyframe, blue/red text-shadow offsets, `0.5s var(--ease-out-expo)`
-- Plus icon rotates 45° on `.is-active`
-
-**Lightbox:**
-- GLightbox targeting `.glightbox-video`, `videosWidth: '90vw'`
-- Dark overlay: `oklch(0.14 0 0 / 0.95)`
-- On open: all `.card-video` pause and reset to frame 0
-- On close: dispatches `'gallery:lightbox-close'`
-
-**Scroll-to navigation:** `gsap.to(window, { scrollTo: target, duration: 0.9, ease: 'power2.out' })`
-
-### Project Pages
-
-**Video hero controls:** Custom UI — play/pause, sound toggle, timeline scrub, smooth scroll to credits. DOM-imperative; no GSAP tweens currently in `src/sections/project-video.js`.
-
-**Case study:** All scroll-triggered, no user interaction required. Entrance fades, parallax, and clip-path wipes are automatic.
-
-**Footer ticker:** CSS-only `@keyframes project-ticker-scroll`, 12s linear infinite horizontal scroll.
-
----
-
-## 7. Responsive Breakpoints
-
-### Homepage
-
-| Breakpoint | Grid | Gallery | Credits | Footer |
-|-----------|------|---------|---------|--------|
-| ≥1025px | 6-col, subgrid | Horizontal scroll, pinned, progress visible | Subgrid, role column visible | Subgrid, 3-col |
-| ≤1024px | 6-col | Vertical stack, `aspect-ratio: 4/3`, progress hidden | — | — |
-| ≤768px | 4-col | — | Role column hidden, 1-col details | Block layout, 2-col info grid |
-| ≤480px | 2-col | min-height 280px, fixed card title 1.25rem | — | 1-col info |
-| `hover: none` | — | Corner brackets hidden entirely | — | — |
-
-`GALLERY_BREAKPOINT = 1024` and `MOBILE_BREAKPOINT = 768` in `src/config.js`. Gallery JS does a full page reload when the user crosses 1024px.
-
-`--container-padding` overridden to `1.25rem` at ≤480px.
-
-### Project Pages
-
-| Breakpoint | Credits | Case Study | Video Hero | Footer |
-|-----------|---------|------------|------------|--------|
-| >1024px | 2-col (text left, 460px/460px poster right) | 40px side padding, full image grids | 100vh | Row layout |
-| 768–1024px | Poster 340px wide, 460px tall | 24px side padding | 100vh | — |
-| <768px | 1-col stack, poster full-width 3:4 aspect | 16px side padding, grids collapse to 1-col | 80vh | Centered stack |
-
----
-
-## 8. Fixed Chrome & Page Shell
-
-### Homepage Layers
-
-| Layer | Selector | z-index | Notes |
-|-------|----------|---------|-------|
-| Preloader | `.loading-overlay` | 10000 | Removed from DOM after exit |
-| Cursor dot | `.custom-cursor-dot` | 10000 | `gsap.quickTo` positioned |
-| Cursor ring | `.custom-cursor-ring` | 10000 | `gsap.quickTo` positioned, trails dot |
-| Hero name (header) | `.hero-fixed-name-container > #hero-name-fixed` | 40 | Flip-animated between hero and fixed positions |
-| Hero subtitle (fixed) | `#hero-subtitle-fixed` | 40 | Tracks title bottom edge, fades on scroll |
-| Hero social (fixed) | `#hero-social-fixed` | 40 | Tracks title bottom edge, fades on scroll |
-| Top gradient | `.hero-top-transition-gradient` | 35 | Backdrop-blur, transitions dark↔light for credits |
-| Gallery progress | `.gallery-progress` | 100 | Visible only when `.featured-work-section.active` |
-| Debug grid | `.bg-columns` | 2 | Toggled by `body.show-grid` |
-| Footer | `#site-footer` | 0 | Fixed behind scroll wrapper, clip-path revealed |
-| Scroll wrapper | `#smooth-wrapper > #smooth-content` | 1 | ScrollSmoother target |
-
-### Project Pages
-
-No fixed layers. Native scroll. Video controls are inline in the hero section.
-
----
-
-## 9. Section Quick-Reference
-
-### Homepage
-
-**Hero** — `section.hero-section` | `src/sections/hero.js`
-- Pin: 150% | Scrub: 1.5 | BG: full-bleed video + multi-stop gradient overlay
-- Key classes: `.hero-video-container`, `.hero-video`, `.hero-gradient`, `.hero-content`, `.hero-name`, `.hero-subtitle`, `.hero-social`
-- Scroll behavior: zoom (scale→1.15), blur (→8px), content exits, gradient darkens. Name Flips to fixed header over first 45%.
-
-**About Intro** — `section.about-intro-section` | `src/sections/about-intro.js`
-- Pin: 200% | Scrub: 1 | BG: `--color-nearblack` + radial dot-grid texture at ~7.5% effective opacity
-- Key classes: `.about-intro__dot-bg`, `.about-intro__content`, `.about-intro__text`, `.about-intro__marquee`, `.about-intro__marquee-track`
-- Scroll behavior: char-level opacity fill (0.15→1) across pinned section. Marquee loops via CSS.
-
-**Featured Work** — `section#work.featured-work-section` | `src/sections/gallery.js`
-- Pin: trackWidth (desktop) or none (≤1024px) | Scrub: 1 | BG: `--color-nearblack`
-- Key classes: `.gallery-container`, `.gallery-track`, `.gallery-card`, `.card-media`, `.card-thumbnail`, `.card-video`, `.card-content`, `.card-title`, `.gallery-progress`
-- Desktop: horizontal scroll. Mobile: vertical stack. Section gains `.active` while pinned.
-
-**Credits** — `section#credits.credits-section` | `src/sections/credits.js`
-- No pin | BG: light (`--color-offwhite`) inverting to dark when rows open
-- Key classes: `.credits-list`, `.credit-row`, `.credit-row__header`, `.credit-row__details-inner`
-- Dynamically built from `public/data/Projects.json`. Images lazy-load on first expand.
-
-**CTA** — `section#cta.cta-section` | no JS module
-- No pin | BG: `--color-nearblack`
-- Key classes: `.cta-heading`, `.cta-subtext`, `.newsletter-form`, `.newsletter-input-group`, `.newsletter-submit`, `.cta-contact-btn`
-
-**Footer** — `footer.site-footer#site-footer` | `src/sections/footer-reveal.js`
-- Fixed, z-index 0, revealed via `clip-path: inset()` scrub on `#smooth-wrapper`
-- Key classes: `.footer-inner`, `.footer-top`, `.footer-tagline`, `.footer-nav`, `.footer-columns`, `.footer-col`, `.footer-copyright`
-
-### Project Pages — Video Hero Variant
-
-**Video Hero** — `section.project-hero--video` | `src/sections/project-video.js`
-- 100vh | BG: `oklch(0 0 0)` (pure black)
-- Key classes: `.project-hero__video`, `.project-hero__controls`, `.project-hero__timeline`, `.project-hero__label`
-- Custom video player UI. Smooth scroll to credits on button click.
-
-**Project Credits** — `.project-credits` | `src/sections/project-credits.js` (stub, animations pending)
-- BG: `--project-bg-credits`
-- Key classes: `.project-credits__gradient`, `.project-credits__title`, `.project-credits__year`, `.project-credits__about`, `.project-credits__roles`, `.project-credits__poster`
-- Static, hand-authored HTML per project. Gradient bridge dissolves from hero.
-
-**Project Footer** — `footer.project-footer` | `src/sections/project-footer.js` (stub)
-- Key classes: `.project-footer__ticker`, `.project-footer__back`, `.project-footer__socials`
-- CSS-animated ticker, back-to-video button, abbreviated socials.
-
-### Project Pages — Case Study Variant
-
-**Case Study Hero** — `section.case-study__hero` | `src/sections/project-case-study.js`
-- 100vh | Parallax zoom-out (scale 1.15→1, scrub 1.5) | BG: dark image
-- Key classes: `.case-study__hero-image`, `.case-study__hero-overlay`, `.case-study__title`, `.case-study__meta`
-
-**Case Study Intro** — `section.case-study__intro`
-- Text-mask-rise triggered at `top 75%`, once
-- Key class: `.case-study__intro-text`
-
-**Image Sections** — `.case-study__pair`, `.case-study__statement`, `.case-study__triptych`, `.case-study__asymmetric`, `.case-study__closing`
-- Pair: staggered `y: 60` entrance fade, trigger `top 75%`
-- Statement: entrance fade + `yPercent: -10→10` parallax scrub, start `top bottom` to `bottom top`
-- Triptych: clip-path wipe (`inset(100% 0 0 0)` → `inset(0%)`), staggered, trigger `top 70%`
-- Asymmetric: dominant y:50, accent y:80 + continuous `yPercent: -5→5` drift
-- Closing: entrance fade + scrub-linked fade-to-black transitioning into credits
-
-**Project Credits + Footer:** Same components as video hero variant.
-
----
-
-## 10. Working With This Document
-
-DESIGN.md is a living rulebook, not a frozen spec. It evolves through collaboration.
-
-### When to consult
 - Before any visual or motion change to governed pages (`index.html`, project pages)
 - When building a new section, component, or page that should be consistent with existing design
 - When reviewing code for design adherence
 - When asked "does this match our design?" or "what does the design say about X?"
 
-### When to propose updates
+### When to Propose Updates
+
 - A new pattern emerges that isn't captured (new easing, new color usage, new component)
 - A design decision is made in conversation that changes or extends an existing rule
 - An existing rule is found to conflict with a new requirement
 
-### How to propose updates
+### How to Propose Updates
+
 - State the current rule, the proposed change, and why
 - Wait for confirmation before editing DESIGN.md
 - Keep the same style: prescriptive, specific values, no hedging
 
-### Checking code against the document
-- **Color:** verify CSS custom properties and inline values match the token tables (sections 2a–2e)
-- **Typography:** verify font-family, size, weight, line-height match the type scales (sections 3b–3c)
-- **Animation:** verify easing, duration, and stagger match the timing vocabulary and pattern specs (sections 5b–5e)
-- **Layout:** verify grid tokens, container padding, breakpoint behavior match sections 4 and 7
+### Checking Code Against This Document
+
+- **Color:** verify CSS custom properties and inline values match the token tables in the Colors section
+- **Typography:** verify font-family, size, weight, line-height match the type scales in the Typography section
+- **Animation:** verify easing, duration, and stagger match the timing vocabulary and pattern specs in the Motion section
+- **Layout:** verify grid tokens, container padding, breakpoint behavior match the Layout section
 - When a mismatch is found: report it — don't assume the code or the doc is correct, ask
 
-### Conflicts between code and document
+### Conflicts Between Code and Document
+
 - Neither automatically wins. Flag the conflict: state what the code does vs what the doc says, then ask.
 - If code is intentionally different (evolved past the doc), update DESIGN.md.
 - If code drifted unintentionally, fix the code.
