@@ -1,7 +1,138 @@
 {
-  "generated_at": "2026-04-19T21:37:04+00:00",
-  "count": 26,
+  "generated_at": "2026-04-24T07:02:10+00:00",
+  "count": 27,
   "items": [
+    {
+      "slug": "2026-04-24-notebooklm-deep-south-sludge-2026-04-24",
+      "title": "NotebookLM: Deep South Sludge 2026-04-24",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Sludge metal",
+      "description": "Sludge metal is an extreme subgenre of heavy metal born in the American Deep South that fuses the slow, trudging tempos of doom metal with the raw aggression of hardcore punk. The music is characterized by heavily distorted, down-tuned guitars, abrasive screamed vocals, and an intensely visceral atmosphere. Lyrically, the genre typically explores harsh, real-world themes such as poverty, addiction, and pollution with a sneering sense of nihilism.",
+      "quote": "Eyehategod started as a way to piss people off... All the heavy music around here was fast, thrashy stuff, so Eyehategod slowed it down as much as possible and made a bunch of noise, basically.",
+      "quote_source": "Mike Williams, quoted in 'Doomed to Fail: The Incredibly Loud History of Doom, Sludge, and Post-Metal' by J.J. Anselmi",
+      "cover_image": "ai-playlists/2026-04-24-notebooklm-deep-south-sludge-2026-04-24.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": null,
+      "narration_text": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EmVVSMfhWPaC1luZZicB-ky",
+      "track_count": 19,
+      "created_at": "2026-04-24T07:01:57+00:00",
+      "tracks": [
+        {
+          "artist": "Century Media Records",
+          "title": "EYEHATEGOD - Medicine Noose (OFFICIAL VIDEO)",
+          "video_id": "VepTkVmh-WA"
+        },
+        {
+          "artist": "Doom Tones",
+          "title": "Top 13 Eyehategod Riffs (Sludge/Doom Metal)",
+          "video_id": "lAuBk5AgoAk"
+        },
+        {
+          "artist": "Crowbar - Topic",
+          "title": "REPULSIVE IN ITS SPLENDID BEAUTY",
+          "video_id": "AGXxQ1QMhYw"
+        },
+        {
+          "artist": "Andreas",
+          "title": "CROWBAR - Existence Is Punishment (Enhanced HD) 1993",
+          "video_id": "JB0Syoj5EzY"
+        },
+        {
+          "artist": "Acid Bath - Topic",
+          "title": "Paegan Love Song",
+          "video_id": "fIuSc4k2oSU"
+        },
+        {
+          "artist": "ROTTEN RECORDS",
+          "title": "ACID BATH - Toubabo Koomi - Official Video - Rotten Records",
+          "video_id": "LC5PU9YNlGM"
+        },
+        {
+          "artist": "Mitch Connor",
+          "title": "Down - Eyes Of The South (NOLA)",
+          "video_id": "roQpKo_7i18"
+        },
+        {
+          "artist": "Fleshlips",
+          "title": "NOLA: Life, Death and Heavy Blues from the Bayou (Full Noisey Documentary)",
+          "video_id": "InjcCSB1D1E"
+        },
+        {
+          "artist": "Chad Chad",
+          "title": "Soilent Green - Last One In The Noose",
+          "video_id": "-3Ms7erIKU8"
+        },
+        {
+          "artist": "Metal Blade Records",
+          "title": "Soilent Green \"Inevitable Collapse In the Presence Of Conviction\" LP Stream",
+          "video_id": "e6eyJ_1PFTM"
+        },
+        {
+          "artist": "JDWilly",
+          "title": "Damad - Burning Cold",
+          "video_id": "2jXrdTUY4EY"
+        },
+        {
+          "artist": "Xombie_ghoul",
+          "title": "Damad - Hide and Seek",
+          "video_id": "ghQa75rZuf0"
+        },
+        {
+          "artist": "Baroness",
+          "title": "BARONESS – Shock Me [OFFICIAL]",
+          "video_id": "hS5osAdTnm0"
+        },
+        {
+          "artist": "Baroness",
+          "title": "BARONESS - Fifty Percent [Making Purple]",
+          "video_id": "MXHUkOQh2_g"
+        },
+        {
+          "artist": "Season of Mist",
+          "title": "Black Tusk - \"Dance on Your Grave\" (Official Music Video) 2024",
+          "video_id": "rUVgmcXuZm4"
+        },
+        {
+          "artist": "RelapseRecords",
+          "title": "BLACK TUSK - \"Truth Untold\" (Official Music Video)",
+          "video_id": "yJXIvu4HqiY"
+        },
+        {
+          "artist": "AbsurdExistence",
+          "title": "Kylesa - Scapegoat",
+          "video_id": "AMnTQE68Xts"
+        },
+        {
+          "artist": "Kylesa - Topic",
+          "title": "Scapegoat (2022 Remaster)",
+          "video_id": "YnsW-0mhr3o"
+        },
+        {
+          "artist": "Mastodon",
+          "title": "Mastodon - The Motherload [Official Music Video]",
+          "video_id": "jWFWazj7Ud8"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "Century Media Records",
+          "title": "EYEHATEGOD - Medicine Noose (OFFICIAL VIDEO)",
+          "video_id": "VepTkVmh-WA"
+        },
+        {
+          "artist": "Doom Tones",
+          "title": "Top 13 Eyehategod Riffs (Sludge/Doom Metal)",
+          "video_id": "lAuBk5AgoAk"
+        },
+        {
+          "artist": "Crowbar - Topic",
+          "title": "REPULSIVE IN ITS SPLENDID BEAUTY",
+          "video_id": "AGXxQ1QMhYw"
+        }
+      ]
+    },
     {
       "slug": "2026-04-19-notebooklm-cowpunk-pioneers-2026-04-19-180630",
       "title": "NotebookLM: Cowpunk Pioneers 2026-04-19",
