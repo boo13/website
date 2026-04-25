@@ -1,7 +1,138 @@
 {
-  "generated_at": "2026-04-24T07:02:10+00:00",
-  "count": 27,
+  "generated_at": "2026-04-25T07:02:07+00:00",
+  "count": 28,
   "items": [
+    {
+      "slug": "2026-04-25-notebooklm-blackgaze-dynamics-2026-04-25",
+      "title": "NotebookLM: Blackgaze Dynamics 2026-04-25",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Blackgaze",
+      "description": "Blackgaze is an experimental fusion genre that blends the abrasive intensity of black metal with the hazy, heavily distorted guitar textures of shoegaze. The style is heavily characterized by radical dynamic contrasts, shifting abruptly from quiet, reflective melodies into overwhelmingly loud walls of sound and aggressive blast-beat drumming. By pairing harsh shrieked vocals with dreamy atmospheres, the genre pushes extreme music into highly emotional and expansive new territories.",
+      "quote": "melding its blast beats, dungeon wailing and razorwire guitars with the more reflective melodies of post-rock, shoegaze and post-hardcore.",
+      "quote_source": "Tom Howells, The Guardian",
+      "cover_image": "ai-playlists/2026-04-25-notebooklm-blackgaze-dynamics-2026-04-25.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": null,
+      "narration_text": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElcOuw9jEuvQfaw8dqUTeMr",
+      "track_count": 19,
+      "created_at": "2026-04-25T07:01:51+00:00",
+      "tracks": [
+        {
+          "artist": "theneedledrop",
+          "title": "Deafheaven - Lonely People with Power ALBUM REVIEW",
+          "video_id": "wzSCutIMRUo"
+        },
+        {
+          "artist": "LSDamorino",
+          "title": "Deafheaven - Sunbather (The Slowed and Sludged Version)",
+          "video_id": "kmjHi-OQ8mE"
+        },
+        {
+          "artist": "Nuclear Blast Records",
+          "title": "ALCEST - Sapphire (OFFICIAL MUSIC VIDEO)",
+          "video_id": "69fnUZhV8SI"
+        },
+        {
+          "artist": "Nuclear Blast Records",
+          "title": "ALCEST - Flamme Jumelle (OFFICIAL MUSIC VIDEO)",
+          "video_id": "B_fCrew2ZOQ"
+        },
+        {
+          "artist": "DreadfulYgg",
+          "title": "Vaura - The Fire",
+          "video_id": "eDqCuJw_oO8"
+        },
+        {
+          "artist": "Mis Tripas",
+          "title": "Somnambula -   Желтоглазый",
+          "video_id": "AYyqnH9vO8Y"
+        },
+        {
+          "artist": "Amesoeurs - Topic",
+          "title": "Amesoeurs",
+          "video_id": "9KxMhMstbRI"
+        },
+        {
+          "artist": "IronGnome",
+          "title": "Amesoeurs - Ruines humaines (2006, EP) ** Blackgaze/Post-Punk",
+          "video_id": "TVt17F8Cyxw"
+        },
+        {
+          "artist": "Dimka Volloff",
+          "title": "Bosse-de-Nage - All Fours (2015) atmospheric black | post black metal | post rock | depressive black",
+          "video_id": "jOZKPdmci0U"
+        },
+        {
+          "artist": "The Metal Meltdown",
+          "title": "\"Hidden Fires Burn Hottest\" by Bosse-de-Nage | ALBUM REVIEW",
+          "video_id": "aTaXyNGYGz4"
+        },
+        {
+          "artist": "theneedledrop",
+          "title": "Oathbreaker - Rheia ALBUM REVIEW",
+          "video_id": "8yVjQqOESzI"
+        },
+        {
+          "artist": "Deathwishinc",
+          "title": "Oathbreaker \"10:56\" / \"Second Son of R.\" (Official Video)",
+          "video_id": "tMTAkIDRHiA"
+        },
+        {
+          "artist": "Spectrum Pulse",
+          "title": "Fen - Winter - Album Review",
+          "video_id": "Z3jhurl3t5Q"
+        },
+        {
+          "artist": "beinert",
+          "title": "Fen - Bereft (Fan Music Video)",
+          "video_id": "8j9fQAsYBME"
+        },
+        {
+          "artist": "Wax Bodega",
+          "title": "Holy Fawn - \"Dimensional Bleed\" (Official Audio)",
+          "video_id": "-CSMM0Id9mw"
+        },
+        {
+          "artist": "WherePostRockDwells 2.0",
+          "title": "HOLY FAWN - DEATH SPELLS [2018 Album] | Blackgaze, Post-Rock",
+          "video_id": "Z8oKXXjUK1w"
+        },
+        {
+          "artist": "Csaba Vincze",
+          "title": "Myrkur - Dybt I Skoven - HD - Vienna @ Arena 2016 03 28",
+          "video_id": "80zK7pVIymk"
+        },
+        {
+          "artist": "Metal Extrême Français",
+          "title": "Nature Morte : White Goat, Dark Hoof",
+          "video_id": "2NLjoS76JkE"
+        },
+        {
+          "artist": "Breath of the Wild",
+          "title": "Worros - Unfortunate Being",
+          "video_id": "RJCrkYrBA-E"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "theneedledrop",
+          "title": "Deafheaven - Lonely People with Power ALBUM REVIEW",
+          "video_id": "wzSCutIMRUo"
+        },
+        {
+          "artist": "LSDamorino",
+          "title": "Deafheaven - Sunbather (The Slowed and Sludged Version)",
+          "video_id": "kmjHi-OQ8mE"
+        },
+        {
+          "artist": "Nuclear Blast Records",
+          "title": "ALCEST - Sapphire (OFFICIAL MUSIC VIDEO)",
+          "video_id": "69fnUZhV8SI"
+        }
+      ]
+    },
     {
       "slug": "2026-04-24-notebooklm-deep-south-sludge-2026-04-24",
       "title": "NotebookLM: Deep South Sludge 2026-04-24",
