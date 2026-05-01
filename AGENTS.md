@@ -1,6 +1,7 @@
 # Project Overview
 This project is a video portfolio website using GSAP.
 
+<!-- override: ~/Git/AIHome/docs/global-rules/tools.md package-managers — this project uses npm, not pnpm -->
 - **Tech Stack** - Vite 7.3.1, JavaScript, GSAP 3.14.2 (via npm with ScrollTrigger, CustomEase, Flip, ScrollSmoother)
 - **Hosting topology** — `www.randycounsman.com` is proxied by Cloudflare, but the current origin still appears to be GitHub Pages. This repo still deploys by merging `dev` into `gh-pages`.
 
