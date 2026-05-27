@@ -686,6 +686,18 @@ body.show-grid .bg-columns {
   --credits-border: oklch(0.14 0 0 / 0.1);
   --credits-hover-bg: oklch(0.14 0 0 / 0.04);
   --credits-muted: oklch(0.14 0 0 / 0.5);
+  /* Dim non-hovered rows (fixed values) */
+  --credits-dim-blur: 0.7px;
+  --credits-dim-opacity: 0.2;
+  --credits-dim-duration: 1000ms;
+  --credits-dim-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* CA flash (driven by tweak pane) */
+  --credits-ca-offset: 2px;
+  --credits-ca-blur: 2px;
+  --credits-ca-opacity: 0.9;
+  --credits-ca-duration: 1500ms;
+  --credits-ca-blue: oklch(0.804 0.146 220);
+  --credits-ca-red: oklch(0.656 0.235 13);
   position: relative;
   padding: var(--section-padding) 0;
   background: var(--credits-bg);
@@ -731,15 +743,6 @@ body.show-grid .bg-columns {
   background: var(--credits-hover-bg);
 }
 
-.credit-row__header:active {
-  transform: scale(0.98);
-  transition: transform 0.1s ease;
-}
-
-.credit-row__header:hover .credit-row__title {
-  --ca-spread: 5px;
-}
-
 .credit-row__icon {
   font-size: 1rem;
   font-weight: 300;
@@ -756,21 +759,9 @@ body.show-grid .bg-columns {
   transform: rotate(45deg);
 }
 
-@property --ca-spread {
-  syntax: '<length>';
-  initial-value: 0px;
-  inherits: false;
-}
-
 .credit-row__title {
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 400;
-  transition:
-    color 0.25s ease,
-    --ca-spread 0.5s var(--ease-out-expo);
-  text-shadow:
-    calc(var(--ca-spread) * -1) 0 oklch(0.804 0.146 220 / 0.9),
-    var(--ca-spread) 0 oklch(0.656 0.235 13 / 0.9);
 }
 
 .credit-row__platform,
@@ -779,6 +770,93 @@ body.show-grid .bg-columns {
   color: var(--credits-muted);
   text-transform: uppercase;
   letter-spacing: 0.07em;
+}
+.credit-row__title,
+.credit-row__platform,
+.credit-row__role {
+  opacity: 1;
+  filter: blur(0px);
+  transition:
+    color 0.25s ease,
+    opacity var(--credits-dim-duration) var(--credits-dim-ease),
+    filter var(--credits-dim-duration) var(--credits-dim-ease);
+}
+
+.credits-list.is-row-hovered .credit-row__header .credit-row__title,
+.credits-list.is-row-hovered .credit-row__header .credit-row__platform,
+.credits-list.is-row-hovered .credit-row__header .credit-row__role {
+  opacity: var(--credits-dim-opacity);
+  filter: blur(var(--credits-dim-blur));
+}
+
+.credits-list.is-row-hovered .credit-row__header.is-hovered .credit-row__title,
+.credits-list.is-row-hovered .credit-row__header.is-hovered .credit-row__platform,
+.credits-list.is-row-hovered .credit-row__header.is-hovered .credit-row__role {
+  opacity: 1;
+  filter: blur(0px);
+}
+
+/* CA flash keyframes — three decay curves */
+@keyframes credits-ca-shrink-fade {
+  from {
+    text-shadow:
+      calc(var(--credits-ca-offset) * -1) 0 var(--credits-ca-blur) color-mix(in oklch, var(--credits-ca-blue), transparent calc((1 - var(--credits-ca-opacity)) * 100%)),
+      var(--credits-ca-offset) 0 var(--credits-ca-blur) color-mix(in oklch, var(--credits-ca-red), transparent calc((1 - var(--credits-ca-opacity)) * 100%));
+  }
+  to {
+    text-shadow:
+      0 0 0 transparent,
+      0 0 0 transparent;
+  }
+}
+
+@keyframes credits-ca-fade-only {
+  from {
+    text-shadow:
+      calc(var(--credits-ca-offset) * -1) 0 var(--credits-ca-blur) color-mix(in oklch, var(--credits-ca-blue), transparent calc((1 - var(--credits-ca-opacity)) * 100%)),
+      var(--credits-ca-offset) 0 var(--credits-ca-blur) color-mix(in oklch, var(--credits-ca-red), transparent calc((1 - var(--credits-ca-opacity)) * 100%));
+  }
+  to {
+    text-shadow:
+      calc(var(--credits-ca-offset) * -1) 0 var(--credits-ca-blur) transparent,
+      var(--credits-ca-offset) 0 var(--credits-ca-blur) transparent;
+  }
+}
+
+@keyframes credits-ca-bloom {
+  from {
+    text-shadow:
+      calc(var(--credits-ca-offset) * -1) 0 var(--credits-ca-blur) color-mix(in oklch, var(--credits-ca-blue), transparent calc((1 - var(--credits-ca-opacity)) * 100%)),
+      var(--credits-ca-offset) 0 var(--credits-ca-blur) color-mix(in oklch, var(--credits-ca-red), transparent calc((1 - var(--credits-ca-opacity)) * 100%));
+  }
+  50% {
+    text-shadow:
+      calc(var(--credits-ca-offset) * -0.5) 0 calc(var(--credits-ca-blur) * 2) color-mix(in oklch, var(--credits-ca-blue), transparent calc((1 - var(--credits-ca-opacity) * 0.6) * 100%)),
+      calc(var(--credits-ca-offset) * 0.5) 0 calc(var(--credits-ca-blur) * 2) color-mix(in oklch, var(--credits-ca-red), transparent calc((1 - var(--credits-ca-opacity) * 0.6) * 100%));
+  }
+  to {
+    text-shadow:
+      0 0 0 transparent,
+      0 0 0 transparent;
+  }
+}
+
+/* Apply CA animation via JS-managed .is-hovered class, curve selected by data-ca-curve */
+.credits-section[data-ca-curve='shrink-fade'] .credit-row__header.is-hovered .credit-row__title {
+  animation: credits-ca-shrink-fade var(--credits-ca-duration) var(--ease-out-expo) forwards;
+}
+.credits-section[data-ca-curve='fade-only'] .credit-row__header.is-hovered .credit-row__title {
+  animation: credits-ca-fade-only var(--credits-ca-duration) var(--ease-out-expo) forwards;
+}
+.credits-section[data-ca-curve='bloom'] .credit-row__header.is-hovered .credit-row__title {
+  animation: credits-ca-bloom var(--credits-ca-duration) var(--ease-out-expo) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .credits-section[data-ca-curve] .credit-row__header.is-hovered .credit-row__title {
+    animation: none;
+    text-shadow: none;
+  }
 }
 
 /* Details panel: collapsed by default */
@@ -813,6 +891,7 @@ body.show-grid .bg-columns {
   color: var(--credits-muted);
   align-self: center;
 }
+
 
 /* =====================================================
    CTA Section
