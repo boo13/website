@@ -88,8 +88,11 @@ export function initCredits() {
   let activeRow = null;
   let activeTween = null;
   let isDisposed = false;
+  let hoveredHeader = null;
+  const cleanupHandlers = [];
 
   const ctx = gsap.context(() => {});
+  section.dataset.caCurve ??= 'fade-only';
 
   const fixedHeroName = document.getElementById('hero-name-fixed');
   const topGradient = document.querySelector('.hero-top-transition-gradient');
@@ -306,6 +309,38 @@ export function initCredits() {
     });
   });
 
+  function setHoveredHeader(nextHeader) {
+    if (hoveredHeader === nextHeader) return;
+
+    hoveredHeader = nextHeader;
+    const headers = list.querySelectorAll('.credit-row__header');
+    headers.forEach((headerEl) => {
+      headerEl.classList.toggle('is-hovered', headerEl === nextHeader);
+    });
+    list.classList.toggle('is-row-hovered', Boolean(nextHeader));
+  }
+
+  function clearHoveredHeader() {
+    setHoveredHeader(null);
+  }
+
+  const handleListPointerLeave = (event) => {
+    if (!event.relatedTarget || !list.contains(event.relatedTarget)) {
+      clearHoveredHeader();
+    }
+  };
+  const handleListFocusOut = (event) => {
+    if (!event.relatedTarget || !list.contains(event.relatedTarget)) {
+      clearHoveredHeader();
+    }
+  };
+  list.addEventListener('pointerleave', handleListPointerLeave);
+  list.addEventListener('focusout', handleListFocusOut);
+  cleanupHandlers.push(() => {
+    list.removeEventListener('pointerleave', handleListPointerLeave);
+    list.removeEventListener('focusout', handleListFocusOut);
+  });
+
   fetch('data/Projects.json')
     .then((response) => response.json())
     .then((data) => {
@@ -314,9 +349,19 @@ export function initCredits() {
       list.innerHTML = '';
       data.projects.forEach((project) => {
         const row = buildRow(project);
-        row.querySelector('.credit-row__header').addEventListener('click', () =>
-          handleRowClick(row)
-        );
+        const header = row.querySelector('.credit-row__header');
+        const handleClick = () => handleRowClick(row);
+        const handlePointerEnter = () => setHoveredHeader(header);
+        const handleFocus = () => setHoveredHeader(header);
+
+        header.addEventListener('click', handleClick);
+        header.addEventListener('pointerenter', handlePointerEnter);
+        header.addEventListener('focus', handleFocus);
+        cleanupHandlers.push(() => {
+          header.removeEventListener('click', handleClick);
+          header.removeEventListener('pointerenter', handlePointerEnter);
+          header.removeEventListener('focus', handleFocus);
+        });
         list.appendChild(row);
       });
 
@@ -348,6 +393,8 @@ export function initCredits() {
 
   return () => {
     isDisposed = true;
+    cleanupHandlers.forEach((cleanup) => cleanup());
+    list.classList.remove('is-row-hovered');
     ctx.revert();
   };
 }
