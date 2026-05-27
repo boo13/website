@@ -694,7 +694,6 @@ body.show-grid .bg-columns {
   /* CA flash (driven by tweak pane) */
   --credits-ca-offset: 2px;
   --credits-ca-blur: 2px;
-  --credits-ca-opacity: 0.9;
   --credits-ca-duration: 1500ms;
   --credits-ca-blue: oklch(0.804 0.146 220);
   --credits-ca-red: oklch(0.656 0.235 13);
