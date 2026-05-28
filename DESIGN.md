@@ -447,8 +447,13 @@ CSS-only `@keyframes project-ticker-scroll`, 12s linear infinite horizontal scro
 
 **Project Credits** — `.project-credits` | `src/sections/project-credits.js` (stub, animations pending)
 - BG: `--project-bg-credits`
-- Key classes: `.project-credits__gradient`, `.project-credits__title`, `.project-credits__year`, `.project-credits__about`, `.project-credits__roles`, `.project-credits__poster`
-- Static, hand-authored HTML per project. Gradient bridge dissolves from hero.
+- Key classes: `.project-credits__gradient`, `.project-credits__title`, `.project-credits__year`, `.project-credits__about`, `.project-credits__network`, `.project-credits__list`, `.project-credits__item`, `.project-credits__item--highlight`
+- HTML per project is hand-authored (or generated from `scripts/scaffold-project.mjs`). Gradient bridge dissolves from hero.
+- **Network logo** — rendered as `.project-credits__network img` above the title row (60px tall desktop, 44px tablet, 36px mobile). Never show network as a text grid row.
+- **Credits curation** — 3–5 entries only (his role + marquee talent + 1–2 key creatives). This is a sales tool, not a full crew list.
+- **Multi-name credits** — `names` array in JSON, rendered with `white-space: pre-line` (newline-joined). Never comma-separated.
+- **Highlight modifier** — `.project-credits__item--highlight` colors the name `#C84A24` to distinguish Randy's own credit.
+- **"Credits" subtitle removed** — the hero "credits" button scrolls to this section; no subtitle needed.
 
 **Project Footer** — `footer.project-footer` | `src/sections/project-footer.js` (stub)
 - Key classes: `.project-footer__ticker`, `.project-footer__back`, `.project-footer__socials`

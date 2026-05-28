@@ -123,7 +123,11 @@ const html = `<!DOCTYPE html>
         <div class="project-credits__gradient"></div>
         <div class="project-credits__wrapper">
             <div class="project-credits__text">
-
+${project.networkLogo ? `
+                <div class="project-credits__network">
+                    <img src="/${project.networkLogo}" alt="${escAttr(project.networkLogoAlt || project.platform)}">
+                </div>
+` : ''}
                 <div class="project-credits__header">
                     <div class="project-credits__title">${esc(project.title)}</div>
                     <div class="project-credits__year">(${esc(yearDisplay)})</div>
@@ -140,18 +144,9 @@ const html = `<!DOCTYPE html>
 
                 <div class="project-credits__line"></div>
 
-                <!-- TODO: Add full credits list -->
                 <div class="project-credits__detail-section">
-                    <div class="project-credits__subtitle">Credits</div>
                     <div class="project-credits__list">
-                        <div class="project-credits__item">
-                            <div class="project-credits__item-title">${esc(project.role)}</div>
-                            <div class="project-credits__item-text">Randy Counsman</div>
-                        </div>
-                        <div class="project-credits__item">
-                            <div class="project-credits__item-title">Network</div>
-                            <div class="project-credits__item-text">${esc(project.platform)}</div>
-                        </div>
+${buildCreditsHtml(project.credits, project.role)}
                     </div>
                 </div>
 
@@ -186,6 +181,23 @@ console.log(`Created ${dir}/index.html`);
 console.log('  → Edit the credits section to add full crew list');
 if (!videoSrc) {
   console.log('  ⚠ No video source found — add a <source> tag manually');
+}
+
+function buildCreditsHtml(credits, fallbackRole) {
+  if (!credits || credits.length === 0) {
+    return `                        <div class="project-credits__item project-credits__item--highlight">
+                            <div class="project-credits__item-title">${esc(fallbackRole)}</div>
+                            <div class="project-credits__item-text">Randy Counsman</div>
+                        </div>`;
+  }
+  return credits.map(c => {
+    const modifier = c.highlight ? ' project-credits__item--highlight' : '';
+    const names = Array.isArray(c.names) ? c.names.join('\n') : (c.names || '');
+    return `                        <div class="project-credits__item${modifier}">
+                            <div class="project-credits__item-title">${esc(c.role)}</div>
+                            <div class="project-credits__item-text">${esc(names)}</div>
+                        </div>`;
+  }).join('\n');
 }
 
 function esc(str) {

@@ -44,7 +44,7 @@
       "id": "wyatt-earp-and-the-cowboy-war",
       "title": "Wyatt Earp and the Cowboy War",
       "preview": "images/portfolio/WyattEarp.jpg",
-      "platform": "History Channel",
+      "platform": "Netflix",
       "year": "2024",
       "role": "Co-Executive Producer",
       "description": "Docudrama retelling the feud between Wyatt Earp and Ike Clanton with cinematic reenactments and expert commentary.",
@@ -60,7 +60,13 @@
       "networkLogo": "images/logos/Netflix_white2.png",
       "networkLogoAlt": "Netflix",
       "hoverVideo": "video/Cowboy.War.10secReel.v01_1920x1080.webm",
-      "lightboxVideo": "video/Cowboy.War.10secReel.v01_1920x1080.webm"
+      "lightboxVideo": "video/Cowboy.War.10secReel.v01_1920x1080.webm",
+      "credits": [
+        { "role": "Co-Executive Producer", "names": ["Randy Counsman"], "highlight": true },
+        { "role": "Narrator", "names": ["Ed Harris"] },
+        { "role": "Director", "names": ["Patrick Reams"] },
+        { "role": "Writer", "names": ["Stephen David"] }
+      ]
     },
     {
       "id": "george-rise-of-a-revolutionary",

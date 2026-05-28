@@ -293,15 +293,23 @@ a {
   font-weight: 300;
 }
 
-/* Credits list */
-.project-credits__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px 24px;
+/* Network logo above title */
+.project-credits__network {
+  margin-bottom: 40px;
 }
 
-.project-credits__item {
-  width: 151px;
+.project-credits__network img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+/* Credits list */
+.project-credits__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 40px 32px;
+  align-items: start;
 }
 
 .project-credits__item-title {
@@ -313,6 +321,11 @@ a {
 .project-credits__item-text {
   font-size: 16px;
   font-weight: 500;
+  white-space: pre-line;
+}
+
+.project-credits__item--highlight .project-credits__item-text {
+  color: #C84A24;
 }
 
 /* --- Poster image (right side) --- */
@@ -425,6 +438,10 @@ a {
     line-height: 38px;
   }
 
+  .project-credits__network img {
+    height: 44px;
+  }
+
   .project-credits__image {
     width: 340px;
   }
@@ -461,6 +478,10 @@ a {
   .project-hero__sound-btn {
     right: 16px;
     bottom: 32px;
+  }
+
+  .project-credits__network img {
+    height: 36px;
   }
 
   .project-credits__wrapper {
