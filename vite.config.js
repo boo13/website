@@ -22,6 +22,25 @@ function discoverProjects() {
   }
 }
 
+// Auto-discover experiment pages: experiments/*/index.html
+function discoverExperiments() {
+  try {
+    return Object.fromEntries(
+      readdirSync('experiments', { withFileTypes: true })
+        .filter(
+          (d) =>
+            d.isDirectory() && existsSync(resolve('experiments', d.name, 'index.html')),
+        )
+        .map((d) => [
+          `experiment-${d.name}`,
+          resolve(import.meta.dirname, `experiments/${d.name}/index.html`),
+        ]),
+    );
+  } catch {
+    return {};
+  }
+}
+
 export default defineConfig({
   root: '.',
   publicDir: 'public',
@@ -37,7 +56,9 @@ export default defineConfig({
         resume: resolve(import.meta.dirname, 'resume.html'),
         sandbox: resolve(import.meta.dirname, 'sandbox.html'),
         wyatt: resolve(import.meta.dirname, 'case_study_wyatt.html'),
+        experiments: resolve(import.meta.dirname, 'experiments/index.html'),
         ...discoverProjects(),
+        ...discoverExperiments(),
       },
     },
   },
