@@ -4,7 +4,7 @@ name: "Randy Counsman Portfolio"
 description: "Cinematic dark portfolio — title sequence and reel aesthetic"
 
 colors:
-  # Homepage tokens (defined on :root in src/styles/index2.css)
+  # Homepage tokens (defined on :root in src/styles/index.css)
   offwhite: "oklch(0.968 0.006 75)"
   cream: "oklch(0.918 0.011 77)"
   nearblack: "oklch(0.14 0 0)"
@@ -102,7 +102,7 @@ components:
 
 **Scope:** Homepage (`index.html`) and project detail pages (`projects/*/index.html`). Does not govern utility pages (contact, resume).
 
-**Governed files:** `src/styles/index2.css`, `src/styles/about-intro.css`, `src/styles/project.css`, `src/styles/video-lightbox.css`, `src/main.js`, `src/main-project.js`, and all section/component modules they import.
+**Governed files:** `src/styles/index.css`, `src/styles/about-intro.css`, `src/styles/project.css`, `src/styles/video-lightbox.css`, `src/main.js`, `src/main-project.js`, and all section/component modules they import.
 
 **Purpose:** Prescriptive rules for design decisions. Every rule here can be applied to new work. Where something is not specified, it is not constrained.
 
@@ -134,7 +134,7 @@ All colors use the OKLCH color space. Do not introduce hex or HSL values.
 
 ### Homepage Tokens
 
-Defined on `:root` in `src/styles/index2.css`:
+Defined on `:root` in `src/styles/index.css`:
 
 | Token | Value | Role |
 |-------|-------|------|
@@ -168,7 +168,7 @@ Text hierarchy on dark backgrounds is built from a single base color at varying 
 | 0.7 | Subtitles, secondary labels |
 | 0.6 | Gallery progress, tertiary text |
 | 0.5 | Card year, credits muted text |
-| 0.4 | Marquee items (index2.css) |
+| 0.4 | Marquee items |
 | 0.35 | Marquee items (about-intro.css), form placeholders |
 | 0.3 | Copyright |
 | 0.2 | Borders, dividers |
@@ -447,8 +447,13 @@ CSS-only `@keyframes project-ticker-scroll`, 12s linear infinite horizontal scro
 
 **Project Credits** — `.project-credits` | `src/sections/project-credits.js` (stub, animations pending)
 - BG: `--project-bg-credits`
-- Key classes: `.project-credits__gradient`, `.project-credits__title`, `.project-credits__year`, `.project-credits__about`, `.project-credits__roles`, `.project-credits__poster`
-- Static, hand-authored HTML per project. Gradient bridge dissolves from hero.
+- Key classes: `.project-credits__gradient`, `.project-credits__title`, `.project-credits__year`, `.project-credits__about`, `.project-credits__network`, `.project-credits__list`, `.project-credits__item`, `.project-credits__item--highlight`
+- HTML per project is hand-authored (or generated from `scripts/scaffold-project.mjs`). Gradient bridge dissolves from hero.
+- **Network logo** — rendered as `.project-credits__network img` above the title row (60px tall desktop, 44px tablet, 36px mobile). Never show network as a text grid row.
+- **Credits curation** — 3–5 entries only (his role + marquee talent + 1–2 key creatives). This is a sales tool, not a full crew list.
+- **Multi-name credits** — `names` array in JSON, rendered with `white-space: pre-line` (newline-joined). Never comma-separated.
+- **Highlight modifier** — `.project-credits__item--highlight` colors the name `#C84A24` to distinguish Randy's own credit.
+- **"Credits" subtitle removed** — the hero "credits" button scrolls to this section; no subtitle needed.
 
 **Project Footer** — `footer.project-footer` | `src/sections/project-footer.js` (stub)
 - Key classes: `.project-footer__ticker`, `.project-footer__back`, `.project-footer__socials`

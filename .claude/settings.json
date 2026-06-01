@@ -1,7 +1,4 @@
 {
-  "enabledPlugins": {
-    "chrome-devtools-mcp@claude-plugins-official": true
-  },
   "permissions": {
     "allow": [
       "Bash(cp:*)",
@@ -59,5 +56,9 @@
       "mcp__plugin_linear_linear__list_teams",
       "mcp__plugin_linear_linear__save_issue"
     ]
+  },
+  "enabledPlugins": {
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true
   }
 }

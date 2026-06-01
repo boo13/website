@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Aperture — Experiments</title>
+  <style>html, body { background: #0a0a0a; margin: 0; padding: 0; }</style>
+  <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css">
+  <link rel="stylesheet" href="https://use.typekit.net/gya6int.css">
+  <script type="module" src="/src/experiments/hero-aperture.js"></script>
+</head>
+<body>
+  <div class="exp-chrome">
+    <a href="/experiments/" class="exp-back">&larr; Experiments</a>
+    <span class="exp-label">center aperture · blurred video edges · radial separation</span>
+  </div>
+
+  <div id="smooth-wrapper">
+  <div id="smooth-content">
+
+    <section id="hero" class="portal-scene portal-scene--aperture">
+      <div class="portal-scene__about">
+        <div class="portal-scene__about-inner">
+          <span class="portal-scene__about-kicker" aria-hidden="true"></span>
+          <p class="about-stub__label">About</p>
+          <h2 class="about-stub__headline">Story, structure, and style for shows that need to cut through.</h2>
+          <p class="about-stub__body">
+            The video never fully disappears here. It stays alive as a blurred perimeter while the center opens onto the About layer behind it.
+          </p>
+        </div>
+      </div>
+
+      <div class="hero-video-container aperture-video-shell">
+        <video
+          class="hero-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          crossorigin
+          poster=""
+        >
+          <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/LandingPageMontagev04.2.webm" type="video/webm">
+        </video>
+        <div class="hero-gradient"></div>
+      </div>
+
+      <div class="aperture-edge-vignette" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-name">Randy Counsman</h1>
+        <p class="hero-subtitle">Nonfiction Video Development &amp; Production</p>
+      </div>
+    </section>
+
+  </div>
+  </div>
+</body>
+</html>
