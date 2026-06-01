@@ -277,6 +277,56 @@ body.show-grid .bg-columns {
   visibility: hidden;
 }
 
+/* =====================================================
+   FLOATING TEXT NAVIGATION
+====================================================== */
+.pill-nav {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + clamp(0.75rem, 2vh, 1.5rem));
+  right: var(--container-padding);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+}
+
+.pill-nav.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.pill-nav__item {
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(0.968 0.006 75 / 0.4);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.pill-nav__item:hover {
+  color: oklch(0.968 0.006 75 / 0.85);
+}
+
+.pill-nav__item.is-active {
+  color: oklch(0.968 0.006 75 / 0.9);
+}
+
+@media (max-width: 768px) {
+  .pill-nav {
+    display: none;
+  }
+}
+
 /* Color trail clone words inside mask wrappers */
 .color-trail-word {
   opacity: 1;
