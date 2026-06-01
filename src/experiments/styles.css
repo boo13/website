@@ -1,0 +1,504 @@
+/**
+ * Shared styles for all experiment pages.
+ * Extracts only the hero + about-stub essentials from index.css.
+ */
+
+:root {
+  --color-offwhite: oklch(0.968 0.006 75);
+  --color-cream: oklch(0.918 0.011 77);
+  --color-nearblack: oklch(0.14 0 0);
+  --ff-display: 'ivypresto-display', Georgia, serif;
+  --ff-body: 'aktiv-grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --container-padding: clamp(1.5rem, 5vw, 4rem);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { font-size: 16px; color: #f7f4f0; }
+
+body {
+  font-family: var(--ff-body);
+  background: var(--color-nearblack);
+  color: var(--color-offwhite);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* =====================================================
+   SCROLL SMOOTHER WRAPPER
+====================================================== */
+#smooth-wrapper {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#smooth-content {
+  background: var(--color-nearblack);
+}
+
+/* =====================================================
+   HERO SECTION
+====================================================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  will-change: transform;
+  cursor: default;
+}
+
+.hero-video-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    oklch(0 0 0 / 0.3) 0%,
+    oklch(0 0 0 / 0.1) 40%,
+    oklch(0 0 0 / 0.4) 80%,
+    oklch(0 0 0 / 0.7) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-top-transition-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(3rem, 10vh, 5.5rem);
+  z-index: 35;
+  background: linear-gradient(
+    180deg,
+    oklch(0 0 0 / 0.5) 0%,
+    oklch(0 0 0 / 0.28) 52%,
+    oklch(0 0 0 / 0) 100%
+  );
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: var(--container-padding);
+  transform: translateY(-50%);
+  z-index: 10;
+  max-width: 800px;
+}
+
+.hero-name {
+  font-family: var(--ff-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-offwhite);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 4px 30px oklch(0 0 0 / 0.5);
+}
+
+.hero-subtitle {
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: oklch(0.968 0.006 75 / 0.7);
+  text-shadow: 0 2px 15px oklch(0 0 0 / 0.4);
+}
+
+@media (max-width: 768px) {
+  .hero-content { left: 1.5rem; right: 1.5rem; }
+  .hero-name { font-size: clamp(2.5rem, 10vw, 4rem); }
+  .hero-subtitle { font-size: clamp(0.55rem, 2.8vw, 0.75rem); letter-spacing: 0.1em; }
+}
+
+/* =====================================================
+   ABOUT STUB
+   Minimal stand-in for the About section — just enough
+   to confirm the hero exit is complete.
+====================================================== */
+.about-stub {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--color-nearblack);
+  padding: 0 var(--container-padding);
+}
+
+.about-stub__inner {
+  max-width: 700px;
+}
+
+.about-stub__label {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: oklch(0.968 0.006 75 / 0.4);
+  margin-bottom: 1.5rem;
+}
+
+.about-stub__headline {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--color-offwhite);
+  margin-bottom: 1.5rem;
+}
+
+.about-stub__body {
+  color: oklch(0.968 0.006 75 / 0.6);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+/* =====================================================
+   EXPERIMENT CHROME
+   Back link + config label, fixed outside the scroller
+====================================================== */
+.exp-chrome {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.exp-back {
+  background: oklch(0 0 0 / 0.7);
+  color: oklch(0.968 0.006 75 / 0.8);
+  border: 1px solid oklch(0.968 0.006 75 / 0.15);
+  padding: 0.4rem 0.8rem;
+  border-radius: 3px;
+  pointer-events: auto;
+  transition: background 0.2s;
+}
+
+.exp-back:hover { background: oklch(0 0 0 / 0.9); }
+
+.exp-label {
+  background: oklch(0 0 0 / 0.7);
+  color: oklch(0.968 0.006 75 / 0.5);
+  border: 1px solid oklch(0.968 0.006 75 / 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 3px;
+}
+
+/* =====================================================
+   EXPERIMENTS LANDING PAGE
+====================================================== */
+.exp-landing {
+  min-height: 100vh;
+  padding: clamp(4rem, 10vh, 6rem) var(--container-padding);
+}
+
+.exp-landing__header {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid oklch(0.968 0.006 75 / 0.1);
+  padding-bottom: 2rem;
+}
+
+.exp-landing__title {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.exp-landing__subtitle {
+  color: oklch(0.968 0.006 75 / 0.5);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.exp-card {
+  border: 1px solid oklch(0.968 0.006 75 / 0.12);
+  border-radius: 4px;
+  padding: 1.75rem;
+  transition: border-color 0.2s, background 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.exp-card:hover {
+  border-color: oklch(0.968 0.006 75 / 0.3);
+  background: oklch(0.968 0.006 75 / 0.03);
+}
+
+.exp-card__name {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: oklch(0.968 0.006 75 / 0.4);
+}
+
+.exp-card__title {
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--color-offwhite);
+}
+
+.exp-card__desc {
+  font-size: 0.875rem;
+  color: oklch(0.968 0.006 75 / 0.5);
+  line-height: 1.6;
+}
+
+.exp-card__params {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid oklch(0.968 0.006 75 / 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.exp-param {
+  font-size: 0.65rem;
+  font-family: 'Courier New', monospace;
+  background: oklch(0.968 0.006 75 / 0.06);
+  color: oklch(0.968 0.006 75 / 0.6);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+}
+
+/* =====================================================
+   PINNED PORTAL EXPERIMENTS
+====================================================== */
+.portal-scene {
+  --portal-shade: 0;
+  --aperture-hole: 0vmin;
+  --aperture-feather: 10vmin;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-nearblack);
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  isolation: isolate;
+}
+
+.portal-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background:
+    radial-gradient(
+      circle at 50% 52%,
+      oklch(0 0 0 / 0) 0%,
+      oklch(0 0 0 / 0.18) 44%,
+      oklch(0 0 0 / 0.72) 100%
+    );
+  opacity: var(--portal-shade);
+  pointer-events: none;
+}
+
+.portal-scene__hero.hero-section {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  height: 100%;
+  transform-origin: 50% 52%;
+}
+
+.portal-scene__about {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--container-padding);
+  opacity: 0;
+  transform-origin: 50% 52%;
+  will-change: transform, opacity, filter;
+}
+
+.portal-scene__about-inner {
+  position: relative;
+  width: min(78vw, 920px);
+  max-width: 920px;
+  text-align: left;
+}
+
+.portal-scene__about-inner::before {
+  content: '';
+  position: absolute;
+  inset: -34% -24%;
+  z-index: -1;
+  background:
+    radial-gradient(
+      circle at 42% 48%,
+      oklch(0.968 0.006 75 / 0.2) 0%,
+      oklch(0.14 0 0 / 0.78) 39%,
+      oklch(0.14 0 0 / 0) 70%
+    );
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.portal-scene__about-kicker {
+  display: block;
+  width: 4.5rem;
+  height: 1px;
+  margin-bottom: 1.4rem;
+  background: oklch(0.968 0.006 75 / 0.44);
+}
+
+.portal-scene__depth-lines {
+  position: absolute;
+  inset: -18%;
+  z-index: 7;
+  background:
+    repeating-radial-gradient(
+      circle at 50% 52%,
+      oklch(0.968 0.006 75 / 0) 0,
+      oklch(0.968 0.006 75 / 0) 11.5vmin,
+      oklch(0.968 0.006 75 / 0.12) 11.62vmin,
+      oklch(0.968 0.006 75 / 0) 11.78vmin
+    );
+  opacity: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transform-origin: 50% 52%;
+  will-change: transform, opacity;
+}
+
+.portal-scene--through .hero-video {
+  transform-origin: 50% 52%;
+  will-change: transform, filter;
+}
+
+.portal-scene--through .hero-gradient {
+  background:
+    radial-gradient(
+      circle at 50% 52%,
+      oklch(0 0 0 / 0.04) 0%,
+      oklch(0 0 0 / 0.18) 36%,
+      oklch(0 0 0 / 0.82) 100%
+    );
+}
+
+.portal-scene--aperture .portal-scene__about {
+  z-index: 3;
+}
+
+.portal-scene--aperture .portal-scene__about-inner::before {
+  inset: -46% -30%;
+  background:
+    radial-gradient(
+      circle at 48% 50%,
+      oklch(0.968 0.006 75 / 0.24) 0%,
+      oklch(0.14 0 0 / 0.92) 38%,
+      oklch(0.14 0 0 / 0.16) 64%,
+      oklch(0.14 0 0 / 0) 78%
+    );
+}
+
+.aperture-video-shell {
+  z-index: 6;
+  --aperture-hole: 0vmin;
+  --aperture-feather: 10vmin;
+  -webkit-mask-image:
+    radial-gradient(
+      circle at 50% 52%,
+      transparent var(--aperture-hole),
+      black calc(var(--aperture-hole) + var(--aperture-feather))
+    );
+          mask-image:
+    radial-gradient(
+      circle at 50% 52%,
+      transparent var(--aperture-hole),
+      black calc(var(--aperture-hole) + var(--aperture-feather))
+    );
+  will-change: filter, opacity, -webkit-mask-image, mask-image;
+}
+
+.portal-scene--aperture .hero-video {
+  transform-origin: 50% 52%;
+  will-change: transform, filter;
+}
+
+.portal-scene--aperture .hero-content {
+  z-index: 10;
+}
+
+.aperture-edge-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  background:
+    radial-gradient(
+      circle at 50% 52%,
+      oklch(0 0 0 / 0) 0%,
+      oklch(0 0 0 / 0) 38%,
+      oklch(0 0 0 / 0.48) 74%,
+      oklch(0 0 0 / 0.86) 100%
+    );
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .portal-scene__about {
+    justify-content: flex-start;
+  }
+
+  .portal-scene__about-inner {
+    width: 100%;
+  }
+
+  .portal-scene__about-inner::before {
+    inset: -28% -18%;
+  }
+
+  .portal-scene__about-kicker {
+    width: 3.25rem;
+    margin-bottom: 1rem;
+  }
+}

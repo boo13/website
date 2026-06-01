@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tweak Pane — Experiments</title>
+  <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css">
+  <link rel="stylesheet" href="https://use.typekit.net/gya6int.css">
+  <style>
+    html, body { background: #0a0a0a; margin: 0; padding: 0; }
+
+    /* Controls panel — fixed left, outside smooth wrapper */
+    .tw-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      z-index: 200;
+      background: oklch(0.1 0 0 / 0.92);
+      border-right: 1px solid oklch(0.968 0.006 75 / 0.1);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      overflow-y: auto;
+      font-family: 'aktiv-grotesk', -apple-system, sans-serif;
+      font-size: 0.75rem;
+      color: oklch(0.968 0.006 75 / 0.7);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .tw-panel__title {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: oklch(0.968 0.006 75 / 0.4);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid oklch(0.968 0.006 75 / 0.08);
+    }
+
+    .tw-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .tw-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tw-val {
+      font-family: 'Courier New', monospace;
+      color: oklch(0.968 0.006 75 / 0.9);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: oklch(0.7 0.15 220);
+    }
+
+    select {
+      width: 100%;
+      background: oklch(0.15 0 0);
+      color: oklch(0.968 0.006 75 / 0.8);
+      border: 1px solid oklch(0.968 0.006 75 / 0.15);
+      border-radius: 3px;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.75rem;
+      font-family: inherit;
+    }
+
+    .tw-apply {
+      width: 100%;
+      background: oklch(0.25 0 0);
+      color: oklch(0.968 0.006 75 / 0.9);
+      border: 1px solid oklch(0.968 0.006 75 / 0.2);
+      border-radius: 3px;
+      padding: 0.6rem;
+      font-size: 0.75rem;
+      font-family: inherit;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .tw-apply:hover { background: oklch(0.3 0 0); }
+
+    .tw-divider {
+      border: none;
+      border-top: 1px solid oklch(0.968 0.006 75 / 0.08);
+    }
+
+    .tw-back {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: oklch(0.968 0.006 75 / 0.35);
+      text-decoration: none;
+    }
+    .tw-back:hover { color: oklch(0.968 0.006 75 / 0.7); }
+
+    /* Shift smooth wrapper to make room for panel */
+    #smooth-wrapper {
+      left: 260px;
+      width: calc(100% - 260px);
+    }
+  </style>
+  <script type="module" src="/src/experiments/tweak.js"></script>
+</head>
+<body>
+
+  <!-- Control panel — outside smooth wrapper -->
+  <nav class="tw-panel">
+    <span class="tw-panel__title">Tweak Pane</span>
+
+    <div class="tw-row">
+      <label for="tw-preset" class="tw-label"><span>Preset</span></label>
+      <select id="tw-preset">
+        <option value="restrained">Restrained (current)</option>
+        <option value="aggressive">Aggressive (v2)</option>
+        <option value="zdepth">Z-Depth (v4)</option>
+      </select>
+    </div>
+
+    <hr class="tw-divider">
+
+    <div class="tw-row">
+      <label for="tw-scale" class="tw-label">
+        <span>Zoom Scale</span>
+        <span id="tw-scale-val" class="tw-val">1.15</span>
+      </label>
+      <input id="tw-scale" type="range" min="1.0" max="3.0" step="0.05" value="1.15">
+    </div>
+
+    <div class="tw-row">
+      <label for="tw-blur" class="tw-label">
+        <span>Blur Max</span>
+        <span id="tw-blur-val" class="tw-val">8px</span>
+      </label>
+      <input id="tw-blur" type="range" min="0" max="30" step="1" value="8">
+    </div>
+
+    <div class="tw-row">
+      <label for="tw-distance" class="tw-label"><span>Scroll Distance</span></label>
+      <select id="tw-distance">
+        <option value="100%">100%</option>
+        <option value="150%" selected>150%</option>
+        <option value="200%">200%</option>
+        <option value="300%">300%</option>
+        <option value="400%">400%</option>
+        <option value="600%">600%</option>
+        <option value="800%">800%</option>
+      </select>
+    </div>
+
+    <div class="tw-row">
+      <label for="tw-scrub" class="tw-label">
+        <span>Scrub Amount</span>
+        <span id="tw-scrub-val" class="tw-val">1.5</span>
+      </label>
+      <input id="tw-scrub" type="range" min="0.3" max="6.0" step="0.1" value="1.5">
+    </div>
+
+    <button id="tw-apply" class="tw-apply">Apply &amp; Reset Scroll</button>
+
+    <hr class="tw-divider">
+    <a href="/experiments/" class="tw-back">← All Experiments</a>
+  </nav>
+
+  <div class="hero-top-transition-gradient" aria-hidden="true"></div>
+
+  <div id="smooth-wrapper">
+  <div id="smooth-content">
+
+    <section id="hero" class="hero-section">
+      <div class="hero-video-container">
+        <video
+          class="hero-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          crossorigin
+          poster=""
+        >
+          <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/LandingPageMontagev04.2.webm" type="video/webm">
+        </video>
+        <div class="hero-gradient"></div>
+      </div>
+
+      <div class="hero-content">
+        <h1 class="hero-name">Randy Counsman</h1>
+        <p class="hero-subtitle">Nonfiction Video Development &amp; Production</p>
+      </div>
+    </section>
+
+    <section class="about-stub">
+      <div class="about-stub__inner">
+        <p class="about-stub__label">About</p>
+        <h2 class="about-stub__headline">I make things that matter to viewers.</h2>
+        <p class="about-stub__body">
+          Scroll back up, adjust controls, click Apply.
+        </p>
+      </div>
+    </section>
+
+  </div>
+  </div>
+</body>
+</html>

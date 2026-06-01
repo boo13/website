@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiments — Randy Counsman</title>
+  <style>html, body { background: #0a0a0a; margin: 0; padding: 0; }</style>
+  <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css">
+  <link rel="stylesheet" href="https://use.typekit.net/gya6int.css">
+  <script type="module" src="/src/main-experiments.js"></script>
+</head>
+<body>
+  <main class="exp-landing">
+    <header class="exp-landing__header">
+      <h1 class="exp-landing__title">Experiments</h1>
+      <p class="exp-landing__subtitle">Hero → About Transition · Round 1</p>
+    </header>
+
+    <div class="exp-grid">
+
+      <a href="/experiments/hero-restrained/" class="exp-card">
+        <span class="exp-card__name">Variant 1 · Baseline</span>
+        <h2 class="exp-card__title">Restrained</h2>
+        <p class="exp-card__desc">
+          Current production config. Subtle zoom-through — hero scales 1.15× while
+          the video softens to 8px blur. Short scroll window, fast scrub.
+        </p>
+        <div class="exp-card__params">
+          <span class="exp-param">scale 1.15×</span>
+          <span class="exp-param">blur 8px</span>
+          <span class="exp-param">scroll 150%</span>
+          <span class="exp-param">scrub 1.5</span>
+        </div>
+      </a>
+
+      <a href="/experiments/hero-aggressive/" class="exp-card">
+        <span class="exp-card__name">Variant 2 · v2 Port</span>
+        <h2 class="exp-card__title">Aggressive</h2>
+        <p class="exp-card__desc">
+          Ported from bd9f06e v2/zoom-transition.js. High-impact zoom — hero rushes
+          forward at 2.5× while the video hits 20px blur. About emerges from the fog.
+        </p>
+        <div class="exp-card__params">
+          <span class="exp-param">scale 2.5×</span>
+          <span class="exp-param">blur 20px</span>
+          <span class="exp-param">scroll 200%</span>
+          <span class="exp-param">scrub 1.2</span>
+        </div>
+      </a>
+
+      <a href="/experiments/hero-zdepth/" class="exp-card">
+        <span class="exp-card__name">Variant 3 · v4 Inspired</span>
+        <h2 class="exp-card__title">Z-Depth</h2>
+        <p class="exp-card__desc">
+          Inspired by 0cc8d3b v4/CinematicZoom.js. Very high scrub (4×) means the
+          camera moves in slow, deliberate pulls. Rack-focus blur of 18px.
+          Long scroll window gives it a film-edit feel.
+        </p>
+        <div class="exp-card__params">
+          <span class="exp-param">scale 1.25×</span>
+          <span class="exp-param">blur 18px</span>
+          <span class="exp-param">scroll 300%</span>
+          <span class="exp-param">scrub 4.0</span>
+        </div>
+      </a>
+
+      <a href="/experiments/hero-through/" class="exp-card">
+        <span class="exp-card__name">Variant 4 · Portal</span>
+        <h2 class="exp-card__title">Through About</h2>
+        <p class="exp-card__desc">
+          The About layer sits behind the hero in a pinned scene. The camera pushes
+          through the landing page instead of scrolling down to the next section.
+        </p>
+        <div class="exp-card__params">
+          <span class="exp-param">pin 240%</span>
+          <span class="exp-param">scale 3.35×</span>
+          <span class="exp-param">depth layer</span>
+          <span class="exp-param">focus pull</span>
+        </div>
+      </a>
+
+      <a href="/experiments/hero-aperture/" class="exp-card">
+        <span class="exp-card__name">Variant 5 · Aperture</span>
+        <h2 class="exp-card__title">Video Edges</h2>
+        <p class="exp-card__desc">
+          Keeps the montage playing as a blurred perimeter while a center aperture
+          opens onto the About section with radial separation behind the text.
+        </p>
+        <div class="exp-card__params">
+          <span class="exp-param">pin 260%</span>
+          <span class="exp-param">radial mask</span>
+          <span class="exp-param">edge video</span>
+          <span class="exp-param">center glow</span>
+        </div>
+      </a>
+
+      <a href="/experiments/_tweak/" class="exp-card">
+        <span class="exp-card__name">Tool</span>
+        <h2 class="exp-card__title">Tweak Pane</h2>
+        <p class="exp-card__desc">
+          Live controls. Adjust scale, blur, scroll distance, and scrub amount
+          in real-time. Load a preset or dial in a custom config.
+        </p>
+        <div class="exp-card__params">
+          <span class="exp-param">interactive</span>
+          <span class="exp-param">preset loader</span>
+        </div>
+      </a>
+
+    </div>
+  </main>
+</body>
+</html>
