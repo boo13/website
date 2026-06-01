@@ -1,4 +1,7 @@
 {
+  "enabledPlugins": {
+    "chrome-devtools-mcp@claude-plugins-official": true
+  },
   "permissions": {
     "allow": [
       "Bash(cp:*)",
@@ -44,8 +47,17 @@
       "Bash(playwright-cli open:*)",
       "Bash(playwright-cli resize:*)",
       "Bash(playwright-cli eval:*)",
-      "Bash(chmod +x /Users/randy/Git/website/scripts/batch-publish-upnext.sh)",
-      "Bash(bash scripts/batch-publish-upnext.sh)"
+      "Bash(rtk git:*)",
+      "WebFetch(domain:media.randycounsman.com)",
+      "Bash(git push:*)",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__navigate_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_console_messages",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_network_requests",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__evaluate_script",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_snapshot",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__click",
+      "mcp__plugin_linear_linear__list_teams",
+      "mcp__plugin_linear_linear__save_issue"
     ]
   }
 }

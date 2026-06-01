@@ -66,6 +66,26 @@ function stripSourcePrefix(title) {
     .trim();
 }
 
+function extractPlaylistId(url) {
+  if (typeof url !== 'string') return null;
+  try {
+    return new URL(url).searchParams.get('list') || null;
+  } catch {
+    return null;
+  }
+}
+
+function buildEmbedUrl(item) {
+  const listId = extractPlaylistId(item.playlist_url);
+  if (!listId) return null;
+  const tracks = getTracks(item);
+  const firstVideoId = tracks.find((t) => t.video_id)?.video_id;
+  if (firstVideoId) {
+    return `https://www.youtube.com/embed/${encodeURIComponent(firstVideoId)}?list=${encodeURIComponent(listId)}&rel=0`;
+  }
+  return `https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(listId)}&rel=0`;
+}
+
 function hashCode(value) {
   let hash = 0;
   for (let i = 0; i < value.length; i += 1) {
@@ -298,6 +318,7 @@ function createModalController() {
     const audioSrc = resolveAssetPath(item.audio_intro_url);
     const hasPlaylistUrl =
       typeof item.playlist_url === 'string' && item.playlist_url.startsWith('https://');
+    const embedUrl = buildEmbedUrl(item);
 
     body.innerHTML = `
       <div class="playlist-modal__hero">
@@ -346,6 +367,21 @@ function createModalController() {
           </div>
         </div>
       </div>
+
+      ${embedUrl
+        ? `<div class="playlist-modal__embed">
+            <iframe
+              src="${escHtml(embedUrl)}"
+              title="YouTube playlist player"
+              frameborder="0"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <p class="playlist-modal__embed-note">Some tracks may be unavailable for embedding. <a href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener">Open in YouTube Music</a> for the full playlist.</p>
+          </div>`
+        : ''}
 
       <div class="playlist-modal__details">
         ${
@@ -400,14 +436,23 @@ function createModalController() {
     if (!REDUCED_MOTION) {
       gsap.fromTo(
         dialog,
-        { autoAlpha: 0, y: 32, scale: 0.98 },
-        { autoAlpha: 1, y: 0, scale: 1, duration: 0.28, ease: 'power2.out', clearProps: 'opacity,transform' },
+        { autoAlpha: 0, y: 48, scale: 0.94 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.42, ease: 'power3.out', clearProps: 'opacity,transform' },
       );
       gsap.fromTo(
         root.querySelector('.playlist-modal__backdrop'),
         { autoAlpha: 0 },
-        { autoAlpha: 1, duration: 0.24, ease: 'power1.out', clearProps: 'opacity' },
+        { autoAlpha: 1, duration: 0.32, ease: 'power1.out', clearProps: 'opacity' },
       );
+      gsap.from(body.querySelectorAll('.playlist-modal__hero, .playlist-modal__embed, .playlist-modal__details'), {
+        y: 24,
+        autoAlpha: 0,
+        duration: 0.45,
+        stagger: 0.1,
+        delay: 0.12,
+        ease: 'power2.out',
+        clearProps: 'y,opacity,visibility',
+      });
     }
   }
 
@@ -484,6 +529,7 @@ function mountShowcase(items) {
   let activeIndex = Math.floor(Math.max(0, items.length - 1) / 2);
   let pointerStart = null;
   let wheelLock = false;
+  const vinylTweens = new Map();
 
   const context = gsap.context(() => {
     gsap.set(cards, {
@@ -568,6 +614,30 @@ function mountShowcase(items) {
     card.classList.toggle('is-active', absOffset === 0);
     card.classList.toggle('is-near', absOffset <= 1);
     card.setAttribute('aria-hidden', absOffset === 0 ? 'false' : 'true');
+
+    if (!REDUCED_MOTION) {
+      const vinyl = card.querySelector('.coverflow-card__vinyl');
+      if (vinyl) {
+        if (absOffset === 0) {
+          if (!vinylTweens.has(card)) {
+            const spin = gsap.to(vinyl, {
+              rotation: '+=360',
+              duration: 8,
+              repeat: -1,
+              ease: 'none',
+              transformOrigin: 'center center',
+            });
+            vinylTweens.set(card, spin);
+          }
+        } else {
+          const spin = vinylTweens.get(card);
+          if (spin) {
+            spin.kill();
+            vinylTweens.delete(card);
+          }
+        }
+      }
+    }
     card.style.zIndex = String(100 - absOffset);
 
     const button = card.querySelector('.coverflow-card__button');
@@ -696,14 +766,41 @@ function mountShowcase(items) {
 
   on(window, 'resize', syncLayout);
 
+  if (!REDUCED_MOTION) {
+    const visibleCards = cards.filter((_, i) => Math.abs(i - activeIndex) <= 2);
+    gsap.set(visibleCards, { autoAlpha: 0 });
+  }
+
   syncLayout();
 
   if (!REDUCED_MOTION) {
+    const sortedEntries = cards
+      .map((card, i) => ({ card, distance: Math.abs(i - activeIndex) }))
+      .filter(({ distance }) => distance <= 2)
+      .sort((a, b) => a.distance - b.distance);
+
+    sortedEntries.forEach(({ card, distance }, i) => {
+      const targetAlpha = distance === 0 ? 1 : distance === 1 ? 0.92 : 0.34;
+      gsap.fromTo(
+        card,
+        { autoAlpha: 0 },
+        {
+          autoAlpha: targetAlpha,
+          duration: 0.65,
+          delay: i * 0.1,
+          ease: 'power2.out',
+          overwrite: 'auto',
+          clearProps: 'opacity,visibility',
+        },
+      );
+    });
+
     gsap.from(playlistList.querySelectorAll('.coverflow__caption > *, .coverflow__nav'), {
       y: 18,
       autoAlpha: 0,
       duration: 0.7,
       stagger: 0.08,
+      delay: 0.4,
       ease: 'power2.out',
       clearProps: 'opacity,transform',
     });
@@ -711,10 +808,95 @@ function mountShowcase(items) {
 
   teardownShowcase = () => {
     cleanup.forEach((fn) => fn());
+    vinylTweens.forEach((spin) => spin.kill());
+    vinylTweens.clear();
     modal.destroy();
     context.revert();
     teardownShowcase = () => {};
   };
+}
+
+function initAmbientGlow() {
+  if (REDUCED_MOTION) return;
+
+  const glowTop = document.querySelector('.feed-glow--top');
+  const glowBottom = document.querySelector('.feed-glow--bottom');
+
+  if (glowTop) {
+    gsap.to(glowTop, {
+      x: 42,
+      y: 28,
+      scale: 1.14,
+      duration: 14,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    });
+  }
+
+  if (glowBottom) {
+    gsap.to(glowBottom, {
+      x: -38,
+      y: -22,
+      scale: 0.86,
+      duration: 18,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+      delay: 5,
+    });
+  }
+}
+
+function initHeroEntrance() {
+  const h1 = document.querySelector('.hero h1');
+  const lede = document.querySelector('.hero__lede');
+  const glowTop = document.querySelector('.feed-glow--top');
+  const glowBottom = document.querySelector('.feed-glow--bottom');
+
+  if (!REDUCED_MOTION && h1) {
+    const glows = [glowTop, glowBottom].filter(Boolean);
+
+    gsap.set(h1, { autoAlpha: 0, y: 28, clipPath: 'inset(0 0 100% 0)' });
+    if (lede) gsap.set(lede, { autoAlpha: 0, y: 20 });
+    if (glows.length) gsap.set(glows, { autoAlpha: 0, scale: 0.6 });
+
+    gsap
+      .timeline({ onComplete: initAmbientGlow })
+      .to(h1, {
+        autoAlpha: 1,
+        y: 0,
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 0.9,
+        ease: 'power3.out',
+        clearProps: 'clipPath,y,opacity,visibility',
+      })
+      .to(
+        lede,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.65,
+          ease: 'power2.out',
+          clearProps: 'y,opacity,visibility',
+        },
+        '-=0.52',
+      )
+      .to(
+        glows,
+        {
+          autoAlpha: 0.22,
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.18,
+          ease: 'power2.out',
+          clearProps: 'opacity,visibility',
+        },
+        '-=0.78',
+      );
+  } else {
+    initAmbientGlow();
+  }
 }
 
 function renderState({ eyebrow, title, description, error = false }) {
@@ -767,4 +949,5 @@ async function loadFeed() {
   }
 }
 
+initHeroEntrance();
 loadFeed();

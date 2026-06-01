@@ -1,6 +1,5 @@
-import './styles/index2.css';
+import './styles/index.css';
 import './styles/about-intro.css';
-import './styles/about-slides.css';
 import './styles/video-lightbox.css';
 import { ScrollSmoother, ScrollTrigger } from './animations/scroll-defaults.js';
 import { initHero } from './sections/hero.js';
@@ -8,11 +7,11 @@ import { initGallery } from './sections/gallery.js';
 import { initCredits } from './sections/credits.js';
 import { initAbout } from './sections/about.js';
 import { initAboutIntro } from './sections/about-intro.js';
-import { initAboutSlides } from './sections/about-slides.js';
 import { initFooterReveal } from './sections/footer-reveal.js';
 import { initCustomCursor } from './components/custom-cursor.js';
 import { runPreloader } from './components/preloader.js';
 import { initVideoLightbox } from './components/video-lightbox.js';
+import { initNav } from './sections/nav.js';
 
 let smoother;
 
@@ -33,8 +32,8 @@ function init() {
   const cleanupCredits = initCredits();
   const cleanupCursor = initCustomCursor();
   const cleanupAboutIntro = initAboutIntro();
-  const cleanupAboutSlides = initAboutSlides();
   const cleanupGallery = initGallery();
+  const cleanupNav = initNav();
   initAbout();
   const cleanupFooterReveal = initFooterReveal();
   const cleanupLightbox = initVideoLightbox();
@@ -68,15 +67,19 @@ function init() {
       if (typeof cleanupCredits === 'function') cleanupCredits();
       if (typeof cleanupCursor === 'function') cleanupCursor();
       if (typeof cleanupAboutIntro === 'function') cleanupAboutIntro();
-      if (typeof cleanupAboutSlides === 'function') cleanupAboutSlides();
       if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
       if (typeof cleanupLightbox === 'function') cleanupLightbox();
       if (cleanupGallery) cleanupGallery.revert();
       if (typeof cleanupHero === 'function') cleanupHero();
+      if (typeof cleanupNav === 'function') cleanupNav();
     },
     { once: true }
   );
 }
+
+// Dynamic copyright year
+const yearEl = document.getElementById('footer-year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Grid overlay toggle (Ctrl+G / Cmd+G)
 document.addEventListener('keydown', (e) => {

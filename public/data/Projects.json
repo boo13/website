@@ -5,7 +5,7 @@
       "title": "upNEXT News",
       "platform": "social",
       "year": "2026",
-      "role": "Creative Director",
+      "role": "Executive Producer",
       "description": null,
       "videoStandard": null,
       "videoVertical": null,
@@ -15,7 +15,8 @@
       "preview": "images/upNEXT_Examples_Mockup_01_web/upNEXT_Examples_Mockup_01_web_00001.jpg",
       "featured": true,
       "galleryOrder": 2,
-      "hoverVideo": "video/upnext_cover_11.20_explained.mp4"
+      "detailPage": true,
+      "hoverVideo": "video/upNEXT_Slideshow_12.16_TrumpsTechForce_1.webm"
     },
     {
       "id": "sitting-bull",
@@ -32,6 +33,7 @@
       "preview": "images/portfolio/sitting-bull.jpg",
       "featured": true,
       "galleryOrder": 3,
+      "detailPage": true,
       "networkLogo": "images/logos/History.png",
       "networkLogoAlt": "History Channel",
       "hoverVideo": "video/SittingBull_10sClip01.webm",
@@ -53,6 +55,7 @@
       "imdbLink": "https://www.imdb.com/title/tt33038128/",
       "featured": true,
       "galleryOrder": 1,
+      "detailPage": true,
       "gallerySlug": "wyatt-earp",
       "networkLogo": "images/logos/Netflix_white2.png",
       "networkLogoAlt": "Netflix",

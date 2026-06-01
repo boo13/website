@@ -35,7 +35,7 @@ SVG viewBox text scales proportionally with its container width, eliminating bre
 - In-flow subtitle: `<p class="hero-subtitle">...</p>` (~line 201)
 - Fixed subtitle: `<p id="hero-subtitle-fixed" ...>...</p>` (~line 156)
 
-**CSS (index2.css):**
+**CSS (index.css):**
 - `.hero-name` — `font-size: clamp(3rem, 8vw, 6rem)`, weight 300, ivypresto-display, opacity: 0
 - `.hero-name-fixed` — `font-size: clamp(1.25rem, 3.2vw, 2.25rem)`, white-space: nowrap
 - `.hero-subtitle` / `.hero-subtitle-fixed` — `clamp(0.875rem, 2vw, 1.125rem)`, uppercase, letter-spacing
@@ -56,7 +56,7 @@ SVG viewBox text scales proportionally with its container width, eliminating bre
 |---|---|---|
 | `src/animations/svg-text-reveal.js` | **Create** | SVG clip-path reveal animation + per-layer color trail |
 | `src/sections/hero.js` | **Modify** | Swap textMaskRiseWords for SVG reveal; adapt Flip.fit; update subtitle tracking |
-| `src/styles/index2.css` | **Modify** | Replace `.hero-name` font-size rules with SVG container styles; remove SplitText wrapper rules |
+| `src/styles/index.css` | **Modify** | Replace `.hero-name` font-size rules with SVG container styles; remove SplitText wrapper rules |
 | `index.html` | **Modify** | Replace `<h1>` text nodes with `<svg>` elements (both in-flow and fixed) |
 
 Files NOT modified:
@@ -195,7 +195,7 @@ git commit -m "refactor: replace hero text elements with SVG viewBox markup"
 
 ### Task 4: Update CSS for SVG hero text
 
-**Files:** `src/styles/index2.css`
+**Files:** `src/styles/index.css`
 
 - [x] **Step 1: Replace `.hero-name` font-size styles with SVG container styles**
 
@@ -384,7 +384,7 @@ The existing `@media (prefers-reduced-motion: reduce)` rules target `.hero-name`
 - [x] **Step 8: Commit CSS changes**
 
 ```bash
-git add src/styles/index2.css
+git add src/styles/index.css
 git commit -m "refactor: update hero CSS for SVG viewBox text, remove SplitText wrapper rules"
 ```
 
@@ -829,7 +829,7 @@ Open both pages side by side. The hero text sizing should match the SVG viewBox 
 
 ### Task 8: Final cleanup
 
-**Files:** `src/styles/index2.css` (if needed)
+**Files:** `src/styles/index.css` (if needed)
 
 - [x] **Step 1: Check for orphaned CSS rules**
 

@@ -88,8 +88,25 @@ export function initCredits() {
   let activeRow = null;
   let activeTween = null;
   let isDisposed = false;
+  let hoveredHeader = null;
+  const cleanupHandlers = [];
 
   const ctx = gsap.context(() => {});
+  section.dataset.caCurve ??= 'fade-only';
+
+  const fixedHeroName = document.getElementById('hero-name-fixed');
+  const topGradient = document.querySelector('.hero-top-transition-gradient');
+
+  const lightGradient = 'linear-gradient(180deg, oklch(1 0 0 / 0.55) 0%, oklch(1 0 0 / 0.3) 52%, oklch(1 0 0 / 0) 100%)';
+
+  // Toggle the fixed header gradient + hero name between light-bg and dark-bg modes.
+  function setHeroHeaderLight(onLight) {
+    if (topGradient) topGradient.style.background = onLight ? lightGradient : '';
+    if (fixedHeroName) {
+      fixedHeroName.style.color = onLight ? 'oklch(0.14 0 0)' : '';
+      fixedHeroName.style.textShadow = onLight ? 'none' : '';
+    }
+  }
 
   const darkVars = {
     '--credits-bg': 'oklch(0.14 0 0)',
@@ -106,11 +123,21 @@ export function initCredits() {
     '--credits-muted': 'oklch(0.14 0 0 / 0.5)',
   };
 
+  // Toggle hero-name between dark (over light credits bg) and default (over dark bg).
+  // Direct style.color to bypass CSS specificity; CSS transition on .hero-name-fixed animates it.
+  function setHeroNameOnLight(onLight) {
+    if (!fixedHeroName) return;
+    fixedHeroName.style.color = onLight ? 'oklch(0.14 0 0)' : '';
+  }
+
   // Adds a color inversion tween to `tl` at position `pos`.
   // Slower and in the same timeline as the row expansion so it feels coupled.
   function invertColors(toDark, tl, pos) {
     if (prefersReducedMotion) {
       section.classList.toggle('is-expanded', toDark);
+      // When row is expanded (toDark), credits bg goes dark → hero header stays dark.
+      // When row is closed (!toDark), credits bg returns to light → hero header goes light.
+      setHeroHeaderLight(!toDark);
       return;
     }
     const vars = { ...(toDark ? darkVars : lightVars), duration: 0.9, ease: 'power2.inOut' };
@@ -119,6 +146,7 @@ export function initCredits() {
     } else {
       gsap.to(section, vars);
     }
+    setHeroNameOnLight(!toDark);
   }
 
   // Grow the header title to display size; shrink it back when closing.
@@ -168,7 +196,7 @@ export function initCredits() {
 
       if (prefersReducedMotion) {
         details.style.height = '0';
-        ScrollTrigger.refresh();
+        gsap.delayedCall(0, () => ScrollTrigger.refresh());
         invertColors(false);
         titleEl.style.fontFamily = '';
         gsap.set(titleEl, { clearProps: 'fontSize' });
@@ -178,7 +206,7 @@ export function initCredits() {
         shrinkTitle(titleEl, closeTl, 0);
         closeTl.to(
           details,
-          { height: 0, duration: 0.4, ease: 'expo.inOut', onComplete: () => ScrollTrigger.refresh() },
+          { height: 0, duration: 0.4, ease: 'expo.inOut', onComplete: () => gsap.delayedCall(0, () => ScrollTrigger.refresh()) },
           0
         );
         activeTween = closeTl;
@@ -226,13 +254,15 @@ export function initCredits() {
       // Lazy-load image on first expand
       const img = details.querySelector('img[data-src]');
       if (img) {
+        gsap.set(img, { opacity: 0 });
+        img.onload = () => gsap.to(img, { opacity: 1, duration: 0.4, ease: 'power2.out' });
         img.src = img.dataset.src;
         delete img.dataset.src;
       }
 
       if (prefersReducedMotion) {
         details.style.height = 'auto';
-        ScrollTrigger.refresh();
+        gsap.delayedCall(0, () => ScrollTrigger.refresh());
       } else {
         tl.to(
           details,
@@ -242,10 +272,11 @@ export function initCredits() {
             ease: 'expo.out',
             onComplete() {
               details.style.overflow = 'visible';
-              ScrollTrigger.refresh();
+              gsap.delayedCall(0, () => ScrollTrigger.refresh());
               gsap.from(inner.children, {
                 opacity: 0,
                 y: 16,
+                filter: 'blur(4px)',
                 duration: 0.5,
                 ease: 'expo.out',
                 stagger: 0.07,
@@ -261,6 +292,55 @@ export function initCredits() {
     }
   }
 
+  // Hero-name color: dark when credits (light bg) is at the top of the viewport.
+  ctx.add(() => {
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top top',
+      end: 'bottom top',
+      onEnter() { if (!activeRow) setHeroNameOnLight(true); },
+      onLeave() { setHeroNameOnLight(false); },
+      onEnterBack() { if (!activeRow) setHeroNameOnLight(true); },
+      onLeaveBack() { setHeroNameOnLight(false); },
+      // onRefresh fires after recalculation — handles already-active state on load/refresh
+      onRefresh(self) {
+        if (!activeRow) setHeroNameOnLight(self.isActive);
+      },
+    });
+  });
+
+  function setHoveredHeader(nextHeader) {
+    if (hoveredHeader === nextHeader) return;
+
+    hoveredHeader = nextHeader;
+    const headers = list.querySelectorAll('.credit-row__header');
+    headers.forEach((headerEl) => {
+      headerEl.classList.toggle('is-hovered', headerEl === nextHeader);
+    });
+    list.classList.toggle('is-row-hovered', Boolean(nextHeader));
+  }
+
+  function clearHoveredHeader() {
+    setHoveredHeader(null);
+  }
+
+  const handleListPointerLeave = (event) => {
+    if (!event.relatedTarget || !list.contains(event.relatedTarget)) {
+      clearHoveredHeader();
+    }
+  };
+  const handleListFocusOut = (event) => {
+    if (!event.relatedTarget || !list.contains(event.relatedTarget)) {
+      clearHoveredHeader();
+    }
+  };
+  list.addEventListener('pointerleave', handleListPointerLeave);
+  list.addEventListener('focusout', handleListFocusOut);
+  cleanupHandlers.push(() => {
+    list.removeEventListener('pointerleave', handleListPointerLeave);
+    list.removeEventListener('focusout', handleListFocusOut);
+  });
+
   fetch('data/Projects.json')
     .then((response) => response.json())
     .then((data) => {
@@ -269,9 +349,19 @@ export function initCredits() {
       list.innerHTML = '';
       data.projects.forEach((project) => {
         const row = buildRow(project);
-        row.querySelector('.credit-row__header').addEventListener('click', () =>
-          handleRowClick(row)
-        );
+        const header = row.querySelector('.credit-row__header');
+        const handleClick = () => handleRowClick(row);
+        const handlePointerEnter = () => setHoveredHeader(header);
+        const handleFocus = () => setHoveredHeader(header);
+
+        header.addEventListener('click', handleClick);
+        header.addEventListener('pointerenter', handlePointerEnter);
+        header.addEventListener('focus', handleFocus);
+        cleanupHandlers.push(() => {
+          header.removeEventListener('click', handleClick);
+          header.removeEventListener('pointerenter', handlePointerEnter);
+          header.removeEventListener('focus', handleFocus);
+        });
         list.appendChild(row);
       });
 
@@ -281,6 +371,7 @@ export function initCredits() {
           gsap.from('.credit-row', {
             opacity: 0,
             y: 15,
+            filter: 'blur(4px)',
             duration: 0.6,
             ease: 'expo.out',
             stagger: 0.04,
@@ -302,6 +393,8 @@ export function initCredits() {
 
   return () => {
     isDisposed = true;
+    cleanupHandlers.forEach((cleanup) => cleanup());
+    list.classList.remove('is-row-hovered');
     ctx.revert();
   };
 }

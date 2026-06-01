@@ -21,7 +21,7 @@ export function initGallery() {
   const prefersReducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   ).matches;
-  // sync with @media (max-width: 1024px) in index2.css
+  // sync with @media (max-width: 1024px) in index.css
   let isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
 
   let currentIndex = 0;
@@ -47,7 +47,14 @@ export function initGallery() {
     );
     if (newIndex !== currentIndex) {
       currentIndex = newIndex;
-      if (progressCurrent) progressCurrent.textContent = newIndex;
+      if (progressCurrent) {
+        progressCurrent.textContent = newIndex;
+        gsap.fromTo(
+          progressCurrent,
+          { opacity: 0, y: -8 },
+          { opacity: 1, y: 0, duration: 0.2, ease: 'expo.out', overwrite: true }
+        );
+      }
       if (progressTotal) progressTotal.textContent = totalCards;
     }
   }
@@ -149,6 +156,12 @@ export function initGallery() {
 
   setupHoverCorners();
 
+  // Prevent detail page links from bubbling up to trigger the lightbox
+  cards.forEach((card) => {
+    const detailLink = card.querySelector('.card-detail-link');
+    if (detailLink) detailLink.addEventListener('click', (e) => e.stopPropagation());
+  });
+
   // --- Mobile / tablet / reduced-motion path ---
   if (prefersReducedMotion || isCompact) {
     // CSS handles all layout (flex-direction, widths, etc.) via @media (max-width: 1024px)
@@ -198,6 +211,9 @@ export function initGallery() {
     const scrollTween = gsap.to(track, {
       x: () => -scrollDistance,
       ease: 'none',
+      modifiers: {
+        x: gsap.utils.snap(1),
+      },
       scrollTrigger: {
         trigger: section,
         start: 'top top',

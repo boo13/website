@@ -41,6 +41,80 @@
 }
 
 /* =====================================================
+   PHONE MOCKUPS
+====================================================== */
+.about-intro__phones {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.about-intro__phones::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 22%;
+  background: linear-gradient(to top, var(--color-nearblack) 0%, transparent 100%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.about-intro__phone {
+  position: absolute;
+  opacity: 0;
+}
+
+.about-intro__phone-video {
+  position: absolute;
+  top: 1%;
+  left: 2%;
+  width: 96%;
+  height: 98%;
+  object-fit: cover;
+  border-radius: 14%;
+  z-index: 1;
+}
+
+.about-intro__phone-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 2;
+}
+
+.about-intro__phone--sm {
+  width: clamp(90px, 10vw, 200px);
+  aspect-ratio: 1 / 2.16;
+  box-shadow:
+    0 8px 24px oklch(0 0 0 / 0.55),
+    0 2px 6px oklch(0 0 0 / 0.3);
+}
+
+.about-intro__phone--lg {
+  width: clamp(160px, 18vw, 360px);
+  aspect-ratio: 1 / 2.16;
+  box-shadow:
+    0 12px 40px oklch(0 0 0 / 0.6),
+    0 4px 12px oklch(0 0 0 / 0.4);
+}
+
+/* Final resting positions (GSAP animates yPercent from 120 → 0) */
+.about-intro__phone--1 { left: 3%; bottom: 5%; }
+.about-intro__phone--2 { left: 14%; bottom: 20%; }
+.about-intro__phone--3 { left: 25%; bottom: 7%; }
+.about-intro__phone--4 { right: 5%; top: 15%; }
+
+@media (max-width: 768px) {
+  .about-intro__phone--sm { width: clamp(60px, 8vw, 120px); }
+  .about-intro__phone--lg { width: clamp(100px, 13vw, 200px); }
+}
+
+/* =====================================================
    TEXT CONTENT
 ====================================================== */
 .about-intro__content {
@@ -99,8 +173,8 @@
   display: flex;
   gap: 3rem;
   white-space: nowrap;
-  animation: about-intro-marquee 30s linear infinite;
   width: max-content;
+  will-change: transform;
 }
 
 .about-intro__marquee-item {
@@ -111,15 +185,6 @@
   text-transform: uppercase;
   letter-spacing: 0.15em;
   flex-shrink: 0;
-}
-
-@keyframes about-intro-marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 /* =====================================================
@@ -172,9 +237,5 @@
 @media (prefers-reduced-motion: reduce) {
   .about-intro__text {
     color: var(--color-offwhite);
-  }
-
-  .about-intro__marquee-track {
-    animation-play-state: paused;
   }
 }

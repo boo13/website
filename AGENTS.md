@@ -1,28 +1,40 @@
 # Project Overview
 This project is a video portfolio website using GSAP.
 
+<!-- override: ~/Git/AIHome/docs/global-rules/tools.md package-managers — this repo uses npm intentionally -->
 - **Tech Stack** - Vite 7.3.1, JavaScript, GSAP 3.14.2 (via npm with ScrollTrigger, CustomEase, Flip, ScrollSmoother)
-- **Deployed** to gh-pages as static files
+- **Hosting topology** — `www.randycounsman.com` is proxied by Cloudflare, but the current origin still appears to be GitHub Pages. This repo still deploys by merging `dev` into `gh-pages`.
 
 ## Key Commands
 - `npm run dev` — Vite server with HMR
 - `npm run lint` — ESLint on `src/` (run before commit; fix all errors before proceeding)
 - `npm run format` — Prettier on `src/`
 - `just video-publish FILE [--suffix S] [--out-dir DIR] ...` — Optimize video to WebM + MP4 and upload both to R2
+- `rclone ls r2-portfolio:portfolio-assets` — List all R2 files (rclone configured; use for audits and bulk deletes)
+- `rclone delete r2-portfolio:portfolio-assets/<key>` — Delete an R2 object; supports `--include` glob for bulk ops
 - `just visual-audit` — Capture timestamped visual audit across desktop, tablet, and phone sizes
 
 ## Git Workflow
 - **`dev`** — working branch. All LLM and day-to-day work happens here.
-- **`gh-pages`** — production. Deploys automatically on push. Only updated by merging `dev` into it.
+- **`gh-pages`** — current production origin branch. It is still the backing host behind the Cloudflare-proxied domain and is updated by merging `dev` into it.
 - ❌ DO NOT commit directly to `gh-pages`.
 - For risky/experimental work, branch off `dev` and merge back if it works.
 - Do not commit unless asked or the task is fully complete and verified.
 - One logical change per commit — don't bundle unrelated edits.
 
+## Deployment Reality
+- `www.randycounsman.com` currently resolves to Cloudflare IPs, so browsers hit Cloudflare first.
+- The live response still exposes GitHub Pages / Fastly headers (`x-github-request-id`, `x-served-by`, `x-fastly-request-id`, `via: 1.1 varnish`), which indicates the origin has not been fully moved off GitHub Pages.
+- Do not describe the site as "on Cloudflare Pages" unless the origin and deploy workflow have actually been migrated.
+
 ## Boundaries
 - ❌ DO NOT edit `index-legacy.html` or `src/main-index.js` unless explicitly asked (legacy archive)
 
-
+## Design System
+- **`DESIGN.md`** is the source of truth for all visual and motion design decisions on `index.html` and project pages (`projects/*/index.html`).
+- Consult DESIGN.md before making any design decision: colors, typography, spacing, animation timing, easing, layout, breakpoints, z-index.
+- If new work introduces a pattern not covered by DESIGN.md, propose an update to the document before (or alongside) implementing it.
+- If code and DESIGN.md conflict, flag it — don't silently follow either one.
 
 ## Project Structure
 - `index.html` is the main portfolio page. `index-legacy.html` is an archived/alternate version.
@@ -54,14 +66,14 @@ src/
   components/           # reusable DOM components (slider, responsive-video, video-lightbox, custom-cursor, preloader)
   styles/               # CSS per page, imported from JS entry points
     project.css         # shared styles for all project pages (BEM: .project-hero--video, .project-credits, .project-footer)
-    index2.css          # main portfolio page styles (used by index.html)
+    index.css           # main portfolio page styles (used by index.html)
     about-intro.css     # about section (index.html)
     about-slides.css    # about slides section (index.html)
     video-lightbox.css  # lightbox overlay (index.html)
     contact.css         # contact.html
     resume.css          # resume.html
     wyatt.css           # case_study_wyatt.html
-    index.css           # legacy index-legacy.html
+    index-legacy.css    # legacy index-legacy.html
   config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
   main.js               # entry for index.html — imports sections + calls init()
   main-project.js       # entry for ALL project pages — imports project sections
@@ -72,20 +84,15 @@ src/
 ```
 
 ## GSAP Conventions
+- Full motion design rules (easing palette, timing, scroll patterns, reusable animations) are in **DESIGN.md — Motion section**.
 - Use `gsap.context()` per section for clean setup/teardown — no custom lifecycle wrappers
 - Centralize `ScrollTrigger.defaults()` in one place to avoid pin conflicts
-- Lazy-init heavy timelines (image sequences) when section approaches viewport
+- Lazy-init heavy timelines when section approaches viewport
 - Keep animation code direct — don't abstract into config-driven timeline factories
 - GSAP is now free to use, do not warn of paid-only features
-- **Prefer GSAP over CSS animations** for anything that's part of a sequence or coordinates with other animations. Reserve CSS for hover/focus states and `prefers-reduced-motion` fallbacks.
 
 ## Website Sections
-1. **Hero** - Preloader then a looping montage video with text (hero-name and hero-subtitle)
-2. **About** - Intro blurb (about-intro), bio slides (about-slides), and shared wrapper (about)
-3. **Featured Work** - Scrolling gallery of video thumbnails; click opens lightbox
-4. **Credits** - Table listing additional work examples; cursor-follow shows preview and row-reveal animations
-5. **Clients** - Network/brand logo marquee and summary blurb
-6. **Footer** - Contact and location info; nav and social links
+See **DESIGN.md — Components → Section Quick-Reference** for detailed per-section specs (selectors, key classes, scroll behavior, pin distances, backgrounds) for both homepage and project page variants.
 
 ## Verification
 - ✅ Use `playwright-cli` terminal commands for browser verification in this repo. (Tell user to install if not available.)

@@ -1,7 +1,1388 @@
 {
-  "generated_at": "2026-03-21T18:27:55+00:00",
-  "count": 15,
+  "generated_at": "2026-04-19T21:37:04+00:00",
+  "count": 26,
   "items": [
+    {
+      "slug": "2026-04-19-notebooklm-cowpunk-pioneers-2026-04-19-180630",
+      "title": "NotebookLM: Cowpunk Pioneers 2026-04-19",
+      "source": "notebooklm",
+      "playlist_kind": "ai_curated",
+      "genre": "Cowpunk",
+      "description": "Originating in the late 1970s and early 1980s, cowpunk crashes the sloppy, anti-commercial attitude of punk rock into classic country, folk, and blues. This playlist digs into the twangy, high-tempo roots of the scene, showcasing bands that bridged the gap between blitzkrieg punk and honky-tonk.",
+      "quote": "The L.A. cowpunk bands like X tended to be as intentionally sloppy, against 'slick' production values, and anti-commercial as the punk genre they had 'morphed' from.",
+      "quote_source": "Don McLeese",
+      "cover_image": "ai-playlists/2026-04-19-notebooklm-cowpunk-pioneers-2026-04-19-180630.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": null,
+      "narration_text": null,
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Ek3uyfwnwF_il5cCJlRIjVc",
+      "track_count": 12,
+      "created_at": "2026-04-19T18:06:30+00:00",
+      "tracks": [
+        {
+          "artist": "The Gun Club",
+          "title": "Sex Beat"
+        },
+        {
+          "artist": "Social Distortion",
+          "title": "Prison Bound"
+        },
+        {
+          "artist": "The Long Ryders",
+          "title": "Looking for Lewis and Clark"
+        },
+        {
+          "artist": "Violent Femmes",
+          "title": "Country Death Song"
+        },
+        {
+          "artist": "The Blasters",
+          "title": "American Music"
+        },
+        {
+          "artist": "Meat Puppets",
+          "title": "Lake of Fire"
+        },
+        {
+          "artist": "Jason & The Scorchers",
+          "title": "White Lies"
+        },
+        {
+          "artist": "Rank and File",
+          "title": "Amanda Ruth"
+        },
+        {
+          "artist": "Mojo Nixon",
+          "title": "Elvis Is Everywhere"
+        },
+        {
+          "artist": "The Beat Farmers",
+          "title": "Happy Boy"
+        },
+        {
+          "artist": "Nine Pound Hammer",
+          "title": "Run Fat Boy Run"
+        },
+        {
+          "artist": "The Del-Lords",
+          "title": "Get Tough"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "The Gun Club",
+          "title": "Sex Beat"
+        },
+        {
+          "artist": "Social Distortion",
+          "title": "Prison Bound"
+        },
+        {
+          "artist": "The Long Ryders",
+          "title": "Looking for Lewis and Clark"
+        }
+      ]
+    },
+    {
+      "slug": "2026-04-13-notebooklm-cowpunk-kickoff-2026-04-13",
+      "title": "NotebookLM: Cowpunk Kickoff 2026-04-13",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Cowpunk",
+      "description": "Cowpunk is a subgenre that merges the energetic attitude and tempos of punk rock with traditional country, folk, and blues music. It originated in the late 1970s and early 1980s in the United Kingdom and Southern California as an authentic-sounding alternative to mainstream countrypolitan radio fare. The musicians in this scene often sported rural, working-class western wear and eventually paved the way for the alternative country and Americana movements.",
+      "quote": "personalizing country music and making it palatable for the MTV Generation",
+      "quote_source": "Robert Palmer, The New York Times",
+      "cover_image": "ai-playlists/2026-04-13-notebooklm-cowpunk-kickoff-2026-04-13.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-04-13-notebooklm-cowpunk-kickoff-2026-04-13.mp3",
+      "narration_text": "Today's playlist leans into Cowpunk. Cowpunk is a subgenre that merges the energetic attitude and tempos of punk rock with traditional country, folk, and blues music. It originated in the late 1970s and early 1980s in the United Kingdom and Southern California as an authentic-sounding alternative to mainstream countrypolitan radio fare. The musicians in t. It moves through essential stops from Social Distortion, The Gun Club, and The Long Ryders. As Robert Palmer, The New York Times put it, \"personalizing country music and making it palatable for the MTV Generation.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EkHpKebker7e8LU-ZhFKYlE",
+      "track_count": 23,
+      "created_at": "2026-04-13T07:05:00+00:00",
+      "tracks": [
+        {
+          "artist": "SocialDistortionVEVO",
+          "title": "Social Distortion - Story Of My Life",
+          "video_id": "oh8zcbC_Dcw"
+        },
+        {
+          "artist": "SocialDistortionVEVO",
+          "title": "Social Distortion - Ball And Chain",
+          "video_id": "_NWjehpGSO0"
+        },
+        {
+          "artist": "The Gun Club - Topic",
+          "title": "Mother of Earth (Remastered 2020)",
+          "video_id": "o927nBd1ilM"
+        },
+        {
+          "artist": "GasStationReceipts",
+          "title": "The Gun Club - The House on Highland Ave (Music Video)",
+          "video_id": "SIyuUUsUxrM"
+        },
+        {
+          "artist": "Cleveland Live Music",
+          "title": "Long Ryders - You're Gonna Miss Me - Stache's Columbus OH 4/2/84",
+          "video_id": "EQQkGQcGNfg"
+        },
+        {
+          "artist": "Fernando Vieira",
+          "title": "The Long Ryders - Still Get By",
+          "video_id": "6ZqgXhK8iVM"
+        },
+        {
+          "artist": "Dash Rip Rock - Topic",
+          "title": "True Drunk Love",
+          "video_id": "HhXmrmbmP2U"
+        },
+        {
+          "artist": "Dash Rip Rock - Topic",
+          "title": "Jolie",
+          "video_id": "Ik7Denp_7X0"
+        },
+        {
+          "artist": "Gretchen",
+          "title": "Violent Femmes  Add It Up, Concord Music Hall Chicago 7/12/16",
+          "video_id": "7-7TPqIJb9k"
+        },
+        {
+          "artist": "ViolentFemmesVEVO",
+          "title": "Violent Femmes - Blister In The Sun (Lyric Video)",
+          "video_id": "G89chAA4l8s"
+        },
+        {
+          "artist": "selinakyle",
+          "title": "Dave Alvin of The Blasters and Maria McKee",
+          "video_id": "uoGm3hKtKZ0"
+        },
+        {
+          "artist": "That SeventiesRockFan",
+          "title": "The Underlooked Bands - The Blasters!",
+          "video_id": "NqSpyEtm2_4"
+        },
+        {
+          "artist": "Radial by The Orchard",
+          "title": "Mojo Nixon - Elvis is Everywhere",
+          "video_id": "5DcTY9i-fx8"
+        },
+        {
+          "artist": "Mojo Nixon",
+          "title": "Mojo Nixon - OTIS  / Promotional Video",
+          "video_id": "NBAcxaZZL-U"
+        },
+        {
+          "artist": "MeatPuppetsVEVO",
+          "title": "Meat Puppets - Backwater",
+          "video_id": "oFD88EyZ80E"
+        },
+        {
+          "artist": "Andy Bullock",
+          "title": "Meat Puppets - Aurora Borealis 2",
+          "video_id": "MdyMogs76Pw"
+        },
+        {
+          "artist": "Country Music Chronicles",
+          "title": "Were The Beat Farmers Cowpunk? - Country Music Chronicles",
+          "video_id": "LsbcTp-DLkM"
+        },
+        {
+          "artist": "Atomic Video Jukebox",
+          "title": "Beat Farmers - Lucille (Music Video)",
+          "video_id": "PCN3eWUF2SU"
+        },
+        {
+          "artist": "Caffeine for Cowboys",
+          "title": "Rubber Rodeo - Who's On Top? [1981 Western New Wave]",
+          "video_id": "wA5QN74wuDk"
+        },
+        {
+          "artist": "Caffeine for Cowboys",
+          "title": "Rubber Rodeo - Woman Of Straw [1984 Western New Wave]",
+          "video_id": "jyldJ6al3mE"
+        },
+        {
+          "artist": "Rank and File - Topic",
+          "title": "Rank and File",
+          "video_id": "58yeglIjTPc"
+        },
+        {
+          "artist": "Rank and File - Topic",
+          "title": "The Conductor Wore Black",
+          "video_id": "oQgHyQc7_W4"
+        },
+        {
+          "artist": "Queenigma",
+          "title": "Jason and The Scorchers, \"Take Me Home, Country Roads\"",
+          "video_id": "3Qn87xi8eRM"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "SocialDistortionVEVO",
+          "title": "Social Distortion - Story Of My Life",
+          "video_id": "oh8zcbC_Dcw"
+        },
+        {
+          "artist": "SocialDistortionVEVO",
+          "title": "Social Distortion - Ball And Chain",
+          "video_id": "_NWjehpGSO0"
+        },
+        {
+          "artist": "The Gun Club - Topic",
+          "title": "Mother of Earth (Remastered 2020)",
+          "video_id": "o927nBd1ilM"
+        }
+      ]
+    },
+    {
+      "slug": "2026-04-12-notebooklm-zeuhl-celestial-forces-2026-04-12",
+      "title": "NotebookLM: Zeuhl Celestial Forces 2026-04-12",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Zeuhl",
+      "description": "Zeuhl is an experimental music genre blending jazz fusion, symphonic rock, and neoclassical elements that was pioneered in 1969 by the French band Magma. The style is heavily characterized by hypnotic, repetitive structures, pumping bass rhythms, and dramatic polyphonic choral movements. Often sung in the constructed language Kobaïan, the music is designed to evoke a visceral, spiritual, and celestial force.",
+      "quote": "about what you'd expect an alien rock opera to sound like: massed, chanted choral motifs, martial, repetitive percussion, sudden bursts of explosive improv and just as unexpected lapses into eerie, minimalist trance-rock.",
+      "quote_source": "Dominique Leone, writing for Pitchfork (cited in Zeuhl - Wikipedia)",
+      "cover_image": "ai-playlists/2026-04-12-notebooklm-zeuhl-celestial-forces-2026-04-12.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-04-12-notebooklm-zeuhl-celestial-forces-2026-04-12.mp3",
+      "narration_text": "Today's playlist leans into Zeuhl. Zeuhl is an experimental music genre blending jazz fusion, symphonic rock, and neoclassical elements that was pioneered in 1969 by the French band Magma. The style is heavily characterized by hypnotic, repetitive structures, pumping bass rhythms, and dramatic polyphonic choral movements. Often sung in the constructed l. It moves through essential stops from Magma, Happy Family, and Kōenji Hyakkei. As Dominique Leone, writing for Pitchfork (cited in Zeuhl - Wikipedia) put it, \"about what you'd expect an alien rock opera to sound like: massed, chanted choral motifs, martial, repetitive percussion, sudden bursts of explosive improv and just as unexpected lapses into eerie, minimalist trance-rock.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElmegDYNdiH4RPWC8f8rZSd",
+      "track_count": 16,
+      "created_at": "2026-04-12T07:02:12+00:00",
+      "tracks": [
+        {
+          "artist": "Magma - Topic",
+          "title": "De zeuhl ündazïr (2020 Remastered)",
+          "video_id": "_Q7MowLr3io"
+        },
+        {
+          "artist": "ministry76",
+          "title": "Magma - De Futura (high quality)",
+          "video_id": "a73XLkf43-s"
+        },
+        {
+          "artist": "Cuneiform Records",
+          "title": "Happy Family - Slide",
+          "video_id": "aF-XTKUSCic"
+        },
+        {
+          "artist": "PROGLand",
+          "title": "O hipnótico e visceral asiático zeuhl de Happy Family - Happy Family (1995): Lado Z | PROGLAND",
+          "video_id": "bIxR5fFv4UU"
+        },
+        {
+          "artist": "Grens Poimandres",
+          "title": "Kōenji Hyakkei - Avedumma",
+          "video_id": "rQ2d-S5nHL0"
+        },
+        {
+          "artist": "Kōenji Hyakkei - Topic",
+          "title": "Rattims Friezz",
+          "video_id": "1rMk8TFfJ2Q"
+        },
+        {
+          "artist": "joelom13",
+          "title": "Ruins - Skhanddraviza",
+          "video_id": "ysCeaED_6Eg"
+        },
+        {
+          "artist": "AI Curated Radio",
+          "title": "Ruins Trio - Avant Grade / Prog Rock / Zeuhl / Math Rock / Jazz Fusion / Experimental",
+          "video_id": "MD-gEE5U9F0"
+        },
+        {
+          "artist": "Prog Rock, Jazz And Etc.,",
+          "title": "[Prog F.A]#261. ZAO - Z=7L(1973,FRA)",
+          "video_id": "cdlrEQQm2mQ"
+        },
+        {
+          "artist": "Zaragon: JazzRockSoul Historian",
+          "title": "Song Review #854: Art Zoyd - \"La Ville\" (1980, Génération Sans Futur, chamber rock Zeuhl)",
+          "video_id": "ik2pk4xH8NE"
+        },
+        {
+          "artist": "Zaragon: JazzRockSoul Historian",
+          "title": "Song Review #207: Art Zoyd - \"Génération Sans Futur\" (1980 French Zeuhl/chamber-rock)",
+          "video_id": "WHEy_KflRvk"
+        },
+        {
+          "artist": "joelom13",
+          "title": "Dün - L'epice",
+          "video_id": "40k9OlG74OU"
+        },
+        {
+          "artist": "Mellovisions",
+          "title": "Eider Stellaire - Legende",
+          "video_id": "znGNBiw2Ggw"
+        },
+        {
+          "artist": "Musiques du lac oublié",
+          "title": "Eskaton – Le chant de la Terre ( 1979, Zeuhl )",
+          "video_id": "7ifUel8k330"
+        },
+        {
+          "artist": "arnoc605",
+          "title": "Eskaton - Eskaton (1980)",
+          "video_id": "YRrKHFxLRh4"
+        },
+        {
+          "artist": "Intellectual Exercise",
+          "title": "H. P. Lovecraft Inspired Music \"Shub-Niggurath\" Zeuhl, Avant-garde, Chamber Rock, RIO",
+          "video_id": "jIESZn1bfQI"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "Magma - Topic",
+          "title": "De zeuhl ündazïr (2020 Remastered)",
+          "video_id": "_Q7MowLr3io"
+        },
+        {
+          "artist": "ministry76",
+          "title": "Magma - De Futura (high quality)",
+          "video_id": "a73XLkf43-s"
+        },
+        {
+          "artist": "Cuneiform Records",
+          "title": "Happy Family - Slide",
+          "video_id": "aF-XTKUSCic"
+        }
+      ]
+    },
+    {
+      "slug": "2026-04-10-notebooklm-math-rock-essentials-2026-04-10",
+      "title": "NotebookLM: Math Rock Essentials 2026-04-10",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Math rock",
+      "description": "Math rock is a style of alternative and indie rock characterized by complex, atypical rhythmic structures, odd time signatures, and extended chords. The genre typically features smaller ensembles that prioritize intricate guitar playing, often treating the voice as just another instrument in the mix rather than the focal point. While it shares similarities with post-rock, math rock generally opts for a more tightly wound and 'rockier' approach to songwriting.",
+      "quote": "tinker with pop the way a born mathematician tinkers with numbers",
+      "quote_source": "The New York Times",
+      "cover_image": "ai-playlists/2026-04-10-notebooklm-math-rock-essentials-2026-04-10.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-04-10-notebooklm-math-rock-essentials-2026-04-10.mp3",
+      "narration_text": "Today's playlist leans into Math rock. Math rock is a style of alternative and indie rock characterized by complex, atypical rhythmic structures, odd time signatures, and extended chords. The genre typically features smaller ensembles that prioritize intricate guitar playing, often treating the voice as just another instrument in the mix rather than the foc. It moves through essential stops from Don Caballero, Hella, and Tiny Moving Parts. As The New York Times put it, \"tinker with pop the way a born mathematician tinkers with numbers.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElpcS2h6ucTUeQ2xA8zFs6U",
+      "track_count": 20,
+      "created_at": "2026-04-10T07:10:49+00:00",
+      "tracks": [
+        {
+          "artist": "dank hill",
+          "title": "Don Caballero - Waltor / Schuman Center 91 (1996) [Math Rock]",
+          "video_id": "0fzf7NfB1dw"
+        },
+        {
+          "artist": "Jose Alvarez",
+          "title": "Don Caballero - You Drink a Lot of Coffee For a Teenager",
+          "video_id": "Mtd-ZJdQihA"
+        },
+        {
+          "artist": "offcoast122",
+          "title": "Hella - Biblical Violence Live",
+          "video_id": "jdMDcG3zAEI"
+        },
+        {
+          "artist": "Kill Rock Stars",
+          "title": "Hella - Biblical Violence (from Hold Your Horse Is)",
+          "video_id": "Xq1_q2n2BNU"
+        },
+        {
+          "artist": "Steve Hazel (Let's Talk About Math Rock)",
+          "title": "7 Essential Tiny Moving Parts Riffs",
+          "video_id": "AUkEJ-mDuRY"
+        },
+        {
+          "artist": "Hopeless Records",
+          "title": "Tiny Moving Parts - Vertebrae (Official Music Video)",
+          "video_id": "Ato6-uUTRxA"
+        },
+        {
+          "artist": "Polyvinyl Records",
+          "title": "American Football - Never Meant [OFFICIAL MUSIC VIDEO]",
+          "video_id": "_NfnXdXpjL0"
+        },
+        {
+          "artist": "Polyvinyl Records",
+          "title": "American Football - My Instincts Are The Enemy [OFFICIAL MUSIC VIDEO]",
+          "video_id": "iCI1QXMumBo"
+        },
+        {
+          "artist": "Chavez",
+          "title": "Chavez - \"Break Up Your Band\" (Official Music Video)",
+          "video_id": "N7ad_rcoAZU"
+        },
+        {
+          "artist": "Chavez - Topic",
+          "title": "Break Up Your Band (2020 Remaster)",
+          "video_id": "B5DtJ8MFhTU"
+        },
+        {
+          "artist": "Elephant Gym - Topic",
+          "title": "春雨 Spring Rain",
+          "video_id": "Qr9lqCitYwg"
+        },
+        {
+          "artist": "Audiotree",
+          "title": "Elephant Gym - Finger | Audiotree Live",
+          "video_id": "bikIdnMf2gs"
+        },
+        {
+          "artist": "미러볼 뮤직 - Mirrorball Music",
+          "title": "[M/V] cotoba (코토바) - Odori",
+          "video_id": "9Yl77tNhVRA"
+        },
+        {
+          "artist": "온스테이지ONSTAGE",
+          "title": "[온스테이지2.0] cotoba(코토바) - 메론(melon)",
+          "video_id": "6UWWmERGy68"
+        },
+        {
+          "artist": "REP MIDWEST",
+          "title": "[10-12-19] DABDA 다브다 (Seoul Indie Math Rock) at CLUB FF",
+          "video_id": "jYQVjPh-9Us"
+        },
+        {
+          "artist": "Merge Records on YouTube",
+          "title": "Polvo - Tragic Carpet Ride",
+          "video_id": "8s9eLKJ-Trc"
+        },
+        {
+          "artist": "Merge Records on YouTube",
+          "title": "Polvo - Vibracobra",
+          "video_id": "d0T7c8j7Dy8"
+        },
+        {
+          "artist": "Numberphile",
+          "title": "Winning at Rock Paper Scissors - Numberphile",
+          "video_id": "rudzYPHuewc"
+        },
+        {
+          "artist": "Marc Evanstein / music․py",
+          "title": "There are Exactly 1½ Games of Rock Paper Scissors",
+          "video_id": "jxuQaM4TBIs"
+        },
+        {
+          "artist": "The Loud Family - Topic",
+          "title": "The Second Grade Applauds",
+          "video_id": "B3jySP-wOCI"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "dank hill",
+          "title": "Don Caballero - Waltor / Schuman Center 91 (1996) [Math Rock]",
+          "video_id": "0fzf7NfB1dw"
+        },
+        {
+          "artist": "Jose Alvarez",
+          "title": "Don Caballero - You Drink a Lot of Coffee For a Teenager",
+          "video_id": "Mtd-ZJdQihA"
+        },
+        {
+          "artist": "offcoast122",
+          "title": "Hella - Biblical Violence Live",
+          "video_id": "jdMDcG3zAEI"
+        }
+      ]
+    },
+    {
+      "slug": "2026-04-09-notebooklm-spectral-memories-2026-04-09",
+      "title": "NotebookLM: Spectral Memories 2026-04-09",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Hauntology",
+      "description": "Hauntology is an electronic music trend that evokes the cultural memory and aesthetics of the past, particularly drawing on British post-war cultural sources like public information films and library music. Artists frequently utilize sampling and the spectral sounds of decaying technology to construct an eerie nostalgia for a lost utopian future.",
+      "quote": "When the present has given up on the future, we must listen for the relics of the future in the unactivated potentials of the past.",
+      "quote_source": "Mark Fisher",
+      "cover_image": "ai-playlists/2026-04-09-notebooklm-spectral-memories-2026-04-09.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-04-09-notebooklm-spectral-memories-2026-04-09.mp3",
+      "narration_text": "Today's playlist leans into Hauntology. Hauntology is an electronic music trend that evokes the cultural memory and aesthetics of the past, particularly drawing on British post-war cultural sources like public information films and library music. Artists frequently utilize sampling and the spectral sounds of decaying technology to construct an eerie nostalgi. It moves through essential stops from The Caretaker, Burial, and Philip Jeck. As Mark Fisher put it, \"When the present has given up on the future, we must listen for the relics of the future in the unactivated potentials of the past.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElG1NmNn36jvlm44ETvMvNc",
+      "track_count": 20,
+      "created_at": "2026-04-09T07:02:28+00:00",
+      "tracks": [
+        {
+          "artist": "FalldRadio",
+          "title": "The Caretaker - \"Malign forces of the occult\" [audio]",
+          "video_id": "75JOZnsX4Ks"
+        },
+        {
+          "artist": "Dark Margaritaville",
+          "title": "Seinfeld Kramer The Caretaker Hauntology",
+          "video_id": "k7cumG70okc"
+        },
+        {
+          "artist": "JJP Philosophy",
+          "title": "Hauntology, Burial, and Mark Fisher: Ghosts of the past's future",
+          "video_id": "KNkvi107i0U"
+        },
+        {
+          "artist": "Resident Advisor",
+          "title": "Burial's Untrue: The making of a masterpiece",
+          "video_id": "Et5B-zfAIIo"
+        },
+        {
+          "artist": "Rapide Sintesi",
+          "title": "Philip Jeck - Il Suono dei Fantasmi",
+          "video_id": "PYCjezHhTGw"
+        },
+        {
+          "artist": "tasose",
+          "title": "Philip Jeck , Jacob Kirkegaard -- Soaked pt.6",
+          "video_id": "EjzufCq12lQ"
+        },
+        {
+          "artist": "Charlie Looker",
+          "title": "Ariel Pink, Transgression, and Critique",
+          "video_id": "UaWiTBhmVTg"
+        },
+        {
+          "artist": "MemeAnalysis",
+          "title": "The Haunted Aesthetics of Vaporwave",
+          "video_id": "x1aNG220qqA"
+        },
+        {
+          "artist": "Warp Records",
+          "title": "Broadcast and The Focus Group - #1 : Witch Cults",
+          "video_id": "OqINetENovg"
+        },
+        {
+          "artist": "Paul Weston",
+          "title": "Hauntological Reverie",
+          "video_id": "V_z9AO7xg1E"
+        },
+        {
+          "artist": "Nitrous McBread",
+          "title": "Belbury Poly And Spacedog - \"Quiet Industry\"",
+          "video_id": "Ano34MbTUFs"
+        },
+        {
+          "artist": "Jiří Špičák",
+          "title": "The Advisory Circle - Modern Through Movement (video)",
+          "video_id": "nGGeeDDfXps"
+        },
+        {
+          "artist": "The Advisory Circle - Topic",
+          "title": "Flight Capture",
+          "video_id": "ssUz4mNd8gs"
+        },
+        {
+          "artist": "Belbury Poly and Mordant Music - Topic",
+          "title": "Swingalong",
+          "video_id": "TV8nEBXrKzI"
+        },
+        {
+          "artist": "motorbikesintokyo",
+          "title": "The Soulless Party - The Man From the Ministry (Taken from Tales from the Black Meadow)",
+          "video_id": "5jvR371hYSk"
+        },
+        {
+          "artist": "Hauntology project",
+          "title": "Boards of Canada - Semena Mertvykh, performed by Hauntology project",
+          "video_id": "N2XavD0fdYU"
+        },
+        {
+          "artist": "Samuele Vassallo",
+          "title": "Boards of Canada - Olsen (Hauntology Tribute)",
+          "video_id": "Ak3Pbir7LVc"
+        },
+        {
+          "artist": "PortisheadVEVO",
+          "title": "Portishead - All Mine",
+          "video_id": "FvFY2Stxlzc"
+        },
+        {
+          "artist": "The RNYG Sound",
+          "title": "Radio Wound - Single | RNYG",
+          "video_id": "lsaC21Bvb3w"
+        },
+        {
+          "artist": "Featured Movie Library",
+          "title": "Adventure | Terrifying Hauntology: Deadly Monster Pursuits in the Unknown | Full Free HD English",
+          "video_id": "2r56F5Qk34A"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "FalldRadio",
+          "title": "The Caretaker - \"Malign forces of the occult\" [audio]",
+          "video_id": "75JOZnsX4Ks"
+        },
+        {
+          "artist": "Dark Margaritaville",
+          "title": "Seinfeld Kramer The Caretaker Hauntology",
+          "video_id": "k7cumG70okc"
+        },
+        {
+          "artist": "JJP Philosophy",
+          "title": "Hauntology, Burial, and Mark Fisher: Ghosts of the past's future",
+          "video_id": "KNkvi107i0U"
+        }
+      ]
+    },
+    {
+      "slug": "2026-04-08-notebooklm-cyber-metal-essentials-2026-04-08",
+      "title": "NotebookLM: Cyber Metal Essentials 2026-04-08",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Cyber metal",
+      "description": "Cyber metal is a subgenre of industrial metal that emerged in the late 1990s and early 2000s, combining extreme metal with the electronic rhythms of EBM and aggrotech. It eschews the purely mechanical sounds of early industrial music in favor of more melodic riffs, harsh vocals, and atmospheric synthesizer arrangements. The genre leans heavily into futuristic aesthetics and creates an aggressive, dystopian soundscape.",
+      "quote": "The Kovenant was the first band to develop cyber metal with some of its more well-known aspects: harsh vocals, extreme guitar melodies, and symphonic keyboards.",
+      "quote_source": "Industrial metal - Wikipedia",
+      "cover_image": "ai-playlists/2026-04-08-notebooklm-cyber-metal-essentials-2026-04-08.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-04-08-notebooklm-cyber-metal-essentials-2026-04-08.mp3",
+      "narration_text": "Today's playlist leans into Cyber metal. Cyber metal is a subgenre of industrial metal that emerged in the late 1990s and early 2000s, combining extreme metal with the electronic rhythms of EBM and aggrotech. It eschews the purely mechanical sounds of early industrial music in favor of more melodic riffs, harsh vocals, and atmospheric synthesizer arrangements. It moves through essential stops from Fear Factory, The Kovenant, and Deathstars. As Industrial metal - Wikipedia put it, \"The Kovenant was the first band to develop cyber metal with some of its more well-known aspects: harsh vocals, extreme guitar melodies, and symphonic keyboards.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EntHDIr1N3NfMcck5cynrKT",
+      "track_count": 21,
+      "created_at": "2026-04-08T07:02:55+00:00",
+      "tracks": [
+        {
+          "artist": "NeuroCatalyst",
+          "title": "Fear Factory - Cyberwaste (HD Official Video)",
+          "video_id": "clV9r-ZW3hM"
+        },
+        {
+          "artist": "MaYHeM1987666",
+          "title": "The Kovenant ~ Mirrors Paradise (Cyber-Industrial Metal)",
+          "video_id": "PjLvDTmEb98"
+        },
+        {
+          "artist": "The Kovenant - Topic",
+          "title": "Cybertrash",
+          "video_id": "bDMjKURsV0I"
+        },
+        {
+          "artist": "Nuclear Blast Records",
+          "title": "DEATHSTARS - Synthetic Generation (OFFICIAL MUSIC VIDEO)",
+          "video_id": "TlhbrEMX7mM"
+        },
+        {
+          "artist": "Nuclear Blast Records",
+          "title": "DEATHSTARS - Metal (OFFICIAL MUSIC VIDEO)",
+          "video_id": "R5-8JpdRQdk"
+        },
+        {
+          "artist": "Mnemic - Topic",
+          "title": "Blood Stained",
+          "video_id": "wrhrvL7PAY0"
+        },
+        {
+          "artist": "induztrialschmitz",
+          "title": "The best of Industrial [Cyber, Death, Groove] Metal (Part 1)",
+          "video_id": "wLZgJrKJ1kE"
+        },
+        {
+          "artist": "SybreedOfficial",
+          "title": "SYBREED - Hightech Versus Lowlife (OFFICIAL STUDIO VIDEO)",
+          "video_id": "HwGY2r7FPPw"
+        },
+        {
+          "artist": "Sybreed",
+          "title": "SYBREED - Bioactive [Re-Recorded Version] | OFFICIAL VIDEO",
+          "video_id": "y1xMG5RyYng"
+        },
+        {
+          "artist": "FIN: Finland Inspired Narratives",
+          "title": "Metal Kitchen. Industrial Metal. Turmion kätilöt and Meatballs",
+          "video_id": "sDXXM3W8o7k"
+        },
+        {
+          "artist": "morten mcpit",
+          "title": "Industrial Dance - Turmion Kätilöt - 4 Käskyä",
+          "video_id": "_9DdNfc8e1Y"
+        },
+        {
+          "artist": "ILLIDIANCE Modern Metal",
+          "title": "ILLIDIANCE (Cyber Metal) - {Draft Version 2} New Millennium Crushers HD",
+          "video_id": "r5RK4lO6lsg"
+        },
+        {
+          "artist": "Illidiance - Topic",
+          "title": "Cybernesis",
+          "video_id": "P16ZTYHvmUI"
+        },
+        {
+          "artist": "Cypecore",
+          "title": "CYPECORE - MAKE ME REAL (Official Video)",
+          "video_id": "15zYyU02BZ0"
+        },
+        {
+          "artist": "Cypecore",
+          "title": "CYPECORE - NEOTERIC GODS (Official Video)",
+          "video_id": "lSt9pzl4ND8"
+        },
+        {
+          "artist": "Elru",
+          "title": "Phedra - Mechina + lyrics",
+          "video_id": "DVgf3cNM-zc"
+        },
+        {
+          "artist": "Unexysted",
+          "title": "Mechina - Anathema (Lyric Video | Empyrean Compendium)",
+          "video_id": "g-TWI06NcvQ"
+        },
+        {
+          "artist": "Terrence Rockatansky",
+          "title": "Coup de cœur MÉTAL #20 - Nucleus (A Dark Halo)",
+          "video_id": "RvdL9NVMw6Q"
+        },
+        {
+          "artist": "A Dark Halo - Topic",
+          "title": "Dust and Ashes",
+          "video_id": "iouxj4kEgdI"
+        },
+        {
+          "artist": "Ron Älvestam",
+          "title": "Neurotech - The Cyber Waltz Lyric Video./ HD 1080p",
+          "video_id": "ldrVZnv5F-U"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "NeuroCatalyst",
+          "title": "Fear Factory - Cyberwaste (HD Official Video)",
+          "video_id": "clV9r-ZW3hM"
+        },
+        {
+          "artist": "MaYHeM1987666",
+          "title": "The Kovenant ~ Mirrors Paradise (Cyber-Industrial Metal)",
+          "video_id": "PjLvDTmEb98"
+        },
+        {
+          "artist": "The Kovenant - Topic",
+          "title": "Cybertrash",
+          "video_id": "bDMjKURsV0I"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-28-notebooklm-cowpunk-pioneers-2026-03-28",
+      "title": "NotebookLM: Cowpunk Pioneers 2026-03-28",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Cowpunk",
+      "description": "Emerging in the late 1970s and early 1980s, cowpunk is a lively subgenre that fuses the raw, rebellious energy of punk rock with the traditional sounds of country, folk, and blues. The music provided an edgy alternative to mainstream country by pairing twangy, high-tempo instrumentation with subversive or non-mainstream lyrical themes. Musicians in the scene typically embraced a rural, working-class aesthetic and ultimately laid the groundwork for the broader alternative country movement.",
+      "quote": "Personalizing country music and making it palatable for the MTV Generation.",
+      "quote_source": "Robert Palmer, The New York Times (1984)",
+      "cover_image": "ai-playlists/2026-03-28-notebooklm-cowpunk-pioneers-2026-03-28.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-03-28-notebooklm-cowpunk-pioneers-2026-03-28.mp3",
+      "narration_text": "Today's playlist leans into Cowpunk. Emerging in the late 1970s and early 1980s, cowpunk is a lively subgenre that fuses the raw, rebellious energy of punk rock with the traditional sounds of country, folk, and blues. The music provided an edgy alternative to mainstream country by pairing twangy, high-tempo instrumentation with subversive or non-mainstrea. It moves through essential stops from Social Distortion, The Gun Club, and The Long Ryders. As Robert Palmer, The New York Times (1984) put it, \"Personalizing country music and making it palatable for the MTV Generation.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Elb0nEjr0fn5R1BvxrAw4el",
+      "track_count": 19,
+      "created_at": "2026-03-28T07:02:20+00:00",
+      "tracks": [
+        {
+          "artist": "SocialDistortionVEVO",
+          "title": "Social Distortion - Story Of My Life",
+          "video_id": "oh8zcbC_Dcw"
+        },
+        {
+          "artist": "SocialDistortionVEVO",
+          "title": "Social Distortion - Ball And Chain",
+          "video_id": "_NWjehpGSO0"
+        },
+        {
+          "artist": "The Gun Club - Topic",
+          "title": "Mother of Earth (Remastered 2020)",
+          "video_id": "o927nBd1ilM"
+        },
+        {
+          "artist": "GasStationReceipts",
+          "title": "The Gun Club - The House on Highland Ave (Music Video)",
+          "video_id": "SIyuUUsUxrM"
+        },
+        {
+          "artist": "Cleveland Live Music",
+          "title": "Long Ryders - You're Gonna Miss Me - Stache's Columbus OH 4/2/84",
+          "video_id": "EQQkGQcGNfg"
+        },
+        {
+          "artist": "Prima Records",
+          "title": "The Long Ryders - Still Get By",
+          "video_id": "tCv6Ebx2ySM"
+        },
+        {
+          "artist": "Dash Rip Rock - Topic",
+          "title": "Desert Walk",
+          "video_id": "_CswP3pn5JI"
+        },
+        {
+          "artist": "Dash Rip Rock - Topic",
+          "title": "Pack Your Bags",
+          "video_id": "APfE2lck8lk"
+        },
+        {
+          "artist": "ViolentFemmesVEVO",
+          "title": "Violent Femmes - Blister In The Sun (Lyric Video)",
+          "video_id": "G89chAA4l8s"
+        },
+        {
+          "artist": "Gretchen",
+          "title": "Violent Femmes  Add It Up, Concord Music Hall Chicago 7/12/16",
+          "video_id": "7-7TPqIJb9k"
+        },
+        {
+          "artist": "TyLee",
+          "title": "The Blasters - Marie Marie [HD]",
+          "video_id": "PUpwoKCMBbI"
+        },
+        {
+          "artist": "That SeventiesRockFan",
+          "title": "The Underlooked Bands - The Blasters!",
+          "video_id": "NqSpyEtm2_4"
+        },
+        {
+          "artist": "MeatPuppetsVEVO",
+          "title": "Meat Puppets - Backwater",
+          "video_id": "oFD88EyZ80E"
+        },
+        {
+          "artist": "Meat Puppets - Topic",
+          "title": "Get On Down",
+          "video_id": "SsPmyVMhNik"
+        },
+        {
+          "artist": "Country Music Chronicles",
+          "title": "Were The Beat Farmers Cowpunk? - Country Music Chronicles",
+          "video_id": "LsbcTp-DLkM"
+        },
+        {
+          "artist": "Atomic Video Jukebox",
+          "title": "Beat Farmers - Lucille (Music Video)",
+          "video_id": "PCN3eWUF2SU"
+        },
+        {
+          "artist": "Queenigma",
+          "title": "Jason and The Scorchers, \"Take Me Home, Country Roads\"",
+          "video_id": "3Qn87xi8eRM"
+        },
+        {
+          "artist": "Arbor Video",
+          "title": "Jason & The Scorchers - White Lies",
+          "video_id": "51y8BtH1-6E"
+        },
+        {
+          "artist": "Acetate Records",
+          "title": "NINE POUND HAMMER \"Drunks, Babies & Fools\" (official music video)",
+          "video_id": "Qgo1oJPkr1A"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "SocialDistortionVEVO",
+          "title": "Social Distortion - Story Of My Life",
+          "video_id": "oh8zcbC_Dcw"
+        },
+        {
+          "artist": "SocialDistortionVEVO",
+          "title": "Social Distortion - Ball And Chain",
+          "video_id": "_NWjehpGSO0"
+        },
+        {
+          "artist": "The Gun Club - Topic",
+          "title": "Mother of Earth (Remastered 2020)",
+          "video_id": "o927nBd1ilM"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-27-nlm-celestial-zeuhl-2026-03-27",
+      "title": "NotebookLM: Celestial Zeuhl 2026-03-27",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Zeuhl",
+      "description": "Zeuhl is a unique hybrid of jazz fusion, symphonic rock, and neoclassical music that originated in France in the late 1960s. The genre is characterized by pumping bass guitars, sluggish drum kits, and polyphonic choral movements reminiscent of Carl Orff's work. Its name derives from the constructed language Kobaïan, translating approximately to 'celestial force'.",
+      "quote": "Zeuhl is also the sound which you can feel vibrating in your belly.",
+      "quote_source": "Christian Vander (quoted in \"Zeuhl - Wikipedia\")",
+      "cover_image": "ai-playlists/2026-03-27-nlm-celestial-zeuhl-2026-03-27.jpg",
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-03-27-nlm-celestial-zeuhl-2026-03-27.mp3",
+      "narration_text": "Today's playlist leans into Zeuhl. Zeuhl is a unique hybrid of jazz fusion, symphonic rock, and neoclassical music that originated in France in the late 1960s. The genre is characterized by pumping bass guitars, sluggish drum kits, and polyphonic choral movements reminiscent of Carl Orff's work. Its name derives from the constructed language Kobaïan, tr. It moves through essential stops from Magma, Happy Family, and Kōenji Hyakkei. As Christian Vander (quoted in \"Zeuhl - Wikipedia\") put it, \"Zeuhl is also the sound which you can feel vibrating in your belly.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-ElEPU6ziStiQbDqvnq8X-Et",
+      "track_count": 20,
+      "created_at": "2026-03-27T07:03:03+00:00",
+      "tracks": [
+        {
+          "artist": "Magma - Topic",
+          "title": "De zeuhl ündazïr (2020 Remastered)",
+          "video_id": "_Q7MowLr3io"
+        },
+        {
+          "artist": "ministry76",
+          "title": "Magma - De Futura (high quality)",
+          "video_id": "a73XLkf43-s"
+        },
+        {
+          "artist": "Cuneiform Records",
+          "title": "Happy Family - Rolling the Law Court",
+          "video_id": "wIYplT2Rwns"
+        },
+        {
+          "artist": "PROGLand",
+          "title": "O hipnótico e visceral asiático zeuhl de Happy Family - Happy Family (1995): Lado Z | PROGLAND",
+          "video_id": "bIxR5fFv4UU"
+        },
+        {
+          "artist": "Grens Poimandres",
+          "title": "Kōenji Hyakkei - Avedumma",
+          "video_id": "rQ2d-S5nHL0"
+        },
+        {
+          "artist": "Kōenji Hyakkei - Topic",
+          "title": "Fettim Paillu",
+          "video_id": "VaEIBgwi1NM"
+        },
+        {
+          "artist": "Ruins - Topic",
+          "title": "Skhanddraviza",
+          "video_id": "TVB1zLws-TA"
+        },
+        {
+          "artist": "joelom13",
+          "title": "Ruins - Mennevought",
+          "video_id": "aC_IPdZdGm8"
+        },
+        {
+          "artist": "Prog Rock, Jazz And Etc.,",
+          "title": "[Prog F.A]#261. ZAO - Z=7L(1973,FRA)",
+          "video_id": "cdlrEQQm2mQ"
+        },
+        {
+          "artist": "Zaragon: JazzRockSoul Historian",
+          "title": "Song Review #854: Art Zoyd - \"La Ville\" (1980, Génération Sans Futur, chamber rock Zeuhl)",
+          "video_id": "ik2pk4xH8NE"
+        },
+        {
+          "artist": "Zaragon: JazzRockSoul Historian",
+          "title": "Song Review #207: Art Zoyd - \"Génération Sans Futur\" (1980 French Zeuhl/chamber-rock)",
+          "video_id": "WHEy_KflRvk"
+        },
+        {
+          "artist": "joelom13",
+          "title": "Dün - L'epice",
+          "video_id": "40k9OlG74OU"
+        },
+        {
+          "artist": "RC Metanoia",
+          "title": "DUN - EROS 1981",
+          "video_id": "vTNKtqEZBQo"
+        },
+        {
+          "artist": "Musiques du lac oublié",
+          "title": "Eskaton – Le chant de la Terre ( 1979, Zeuhl )",
+          "video_id": "7ifUel8k330"
+        },
+        {
+          "artist": "arnoc605",
+          "title": "Eskaton - Eskaton (1980)",
+          "video_id": "YRrKHFxLRh4"
+        },
+        {
+          "artist": "Intellectual Exercise",
+          "title": "H. P. Lovecraft Inspired Music \"Shub-Niggurath\" Zeuhl, Avant-garde, Chamber Rock, RIO",
+          "video_id": "jIESZn1bfQI"
+        },
+        {
+          "artist": "Ivo Wilson",
+          "title": "Shub Niggurath - Yog Sothoth",
+          "video_id": "H7guhTjgJb4"
+        },
+        {
+          "artist": "Steve Ruotolo",
+          "title": "Phosphorescent Dream (closing section) - Univers Zero",
+          "video_id": "lwoestsRGXk"
+        },
+        {
+          "artist": "ISSEHN",
+          "title": "UNIVERS ZERO - Présage - 20 Septembre 2009",
+          "video_id": "mrklDvaqtYs"
+        },
+        {
+          "artist": "Endzeitstille",
+          "title": "Farben  -  Mutations (1988)",
+          "video_id": "znmhe6JCBGY"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "Magma - Topic",
+          "title": "De zeuhl ündazïr (2020 Remastered)",
+          "video_id": "_Q7MowLr3io"
+        },
+        {
+          "artist": "ministry76",
+          "title": "Magma - De Futura (high quality)",
+          "video_id": "a73XLkf43-s"
+        },
+        {
+          "artist": "Cuneiform Records",
+          "title": "Happy Family - Rolling the Law Court",
+          "video_id": "wIYplT2Rwns"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-26-nlm-blacktronika-pioneers-2026-03-26",
+      "title": "NotebookLM: Blacktronika Pioneers 2026-03-26",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Afrofuturist Electronic Music",
+      "description": "Afrofuturist electronic music honors the vital contributions of Black pioneers who established the foundational roots of modern dance and electronic music. Emerging from sociopolitical urgency and struggle, these artists utilized shared technologies like early drum machines and synthesizers to innovate entirely new sonic landscapes. Today, this rich heritage is being actively reclaimed to combat historical whitewashing and educate future generations of musicians.",
+      "quote": "true authentic electronic music all comes from an urgency and struggle as a form of expression.",
+      "quote_source": "King Britt, Organised Sound (Cambridge Core)",
+      "cover_image": null,
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-03-26-nlm-blacktronika-pioneers-2026-03-26.mp3",
+      "narration_text": "Today's playlist leans into Afrofuturist Electronic Music. Afrofuturist electronic music honors the vital contributions of Black pioneers who established the foundational roots of modern dance and electronic music. Emerging from sociopolitical urgency and struggle, these artists utilized shared technologies like early drum machines and synthesizers to innovate entirely new son. It moves through essential stops from King Britt, Juan Atkins, and Derrick May. As King Britt, Organised Sound (Cambridge Core) put it, \"true authentic electronic music all comes from an urgency and struggle as a form of expression.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-EnKqrPuEUGVeQuAKjIZvn0D",
+      "track_count": 19,
+      "created_at": "2026-03-26T07:02:24+00:00",
+      "tracks": [
+        {
+          "artist": "KingBrittArchives",
+          "title": "Moondance at MoMA PS1 (Trailer) curated by King Britt",
+          "video_id": "t_Jx7o3KBZE"
+        },
+        {
+          "artist": "King Britt",
+          "title": "BLACKTRONIKA : Afrofuturism in Electronic Music",
+          "video_id": "y7uesCb03B4"
+        },
+        {
+          "artist": "Kenny Florman",
+          "title": "Cybotron - Industrial Lies (  Music Video From 1983 )",
+          "video_id": "SNiQq4tlCYM"
+        },
+        {
+          "artist": "ohral_tv",
+          "title": "Cybotron - Clear - 1983",
+          "video_id": "YT4qqZHN8no"
+        },
+        {
+          "artist": "Voltage Labs",
+          "title": "The Origin and History of Techno | Voltage Labs",
+          "video_id": "lfdc1ifRsTk"
+        },
+        {
+          "artist": "Metrohm Records",
+          "title": "Derrick May @ ADE party - Amsterdam (2019)",
+          "video_id": "cuFE9wLKf0k"
+        },
+        {
+          "artist": "Craft Recordings",
+          "title": "Cybotron - Enter - Industrial Lies (Official Music Video)",
+          "video_id": "W6zF-dP6Gts"
+        },
+        {
+          "artist": "Boiler Room",
+          "title": "Frankie Knuckles | Boiler Room: NYC",
+          "video_id": "644UU55eyzk"
+        },
+        {
+          "artist": "Glitterbox",
+          "title": "Glitterbox Radio Show 199 Frankie Knuckles Special",
+          "video_id": "WOQzd82L0k0"
+        },
+        {
+          "artist": "WKAR",
+          "title": "Techno Futures: Detroit’s Afrofuturist Groove",
+          "video_id": "MswvmLnaaH4"
+        },
+        {
+          "artist": "MSUMuseum",
+          "title": "From Detroit to the Cosmos: Carl Craig on Techno and Afrofuturism",
+          "video_id": "xOS7olhM4eM"
+        },
+        {
+          "artist": "planetedetroit",
+          "title": "Waajeed - Obba",
+          "video_id": "eD_JPvfllD4"
+        },
+        {
+          "artist": "planetedetroit",
+          "title": "Waajeed - Frances",
+          "video_id": "esw1Roy0OlY"
+        },
+        {
+          "artist": "Roulette Intermedium",
+          "title": "DeForrest Brown, Jr.: Bombingham",
+          "video_id": "RV86zzxk7gs"
+        },
+        {
+          "artist": "SOFT CENTRE",
+          "title": "DeForrest Brown Jr.  'Spaceship Earth 2.0' at SOFT CENTRE : SUPERMODEL",
+          "video_id": "U3Um0YaPgbo"
+        },
+        {
+          "artist": "American Masters PBS",
+          "title": "Sun Ra's profound impact on Arkestra members | American Masters | PBS",
+          "video_id": "OwlmbwQHDUY"
+        },
+        {
+          "artist": "American Masters PBS",
+          "title": "Sun Ra: Do The Impossible | Official Trailer | American Masters | PBS",
+          "video_id": "RpZOcDPjV20"
+        },
+        {
+          "artist": "ElectroBassDub4",
+          "title": "Roni Size / Reprazent - New Forms Feat. Bahamadia",
+          "video_id": "w5WESA3ACc4"
+        },
+        {
+          "artist": "Boiler Room",
+          "title": "Roni Size b2b Patife | Boiler Room x Ballantine's True Music Studios: São Paulo",
+          "video_id": "xzj6ehxAsOA"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "KingBrittArchives",
+          "title": "Moondance at MoMA PS1 (Trailer) curated by King Britt",
+          "video_id": "t_Jx7o3KBZE"
+        },
+        {
+          "artist": "King Britt",
+          "title": "BLACKTRONIKA : Afrofuturism in Electronic Music",
+          "video_id": "y7uesCb03B4"
+        },
+        {
+          "artist": "Kenny Florman",
+          "title": "Cybotron - Industrial Lies (  Music Video From 1983 )",
+          "video_id": "SNiQq4tlCYM"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-25-nlm-detroit-techno-pioneers-2026-03-25",
+      "title": "NotebookLM: Detroit Techno Pioneers 2026-03-25",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Detroit techno",
+      "description": "Detroit techno emerged from post-riot urban struggles as a raw, authentic form of electronic expression [1]. It served as a powerful soundtrack for sociopolitical movements, including the rebuilding of the city and even the fall of the Berlin Wall [1]. Rooted in Black musical innovation, this subgenre heavily relied on community resource sharing of technology like Roland 909 drum machines [2-4].",
+      "quote": "The whole fact that Detroit techno was the soundtrack to the fall of the Berlin Wall, as well as the rebuilding of Detroit, speaks volumes and should be taught in all schools.",
+      "quote_source": "King Britt in Organised Sound [1]",
+      "cover_image": null,
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-03-25-nlm-detroit-techno-pioneers-2026-03-25.mp3",
+      "narration_text": "Today's playlist leans into Detroit techno. Detroit techno emerged from post-riot urban struggles as a raw, authentic form of electronic expression [1]. It served as a powerful soundtrack for sociopolitical movements, including the rebuilding of the city and even the fall of the Berlin Wall [1]. Rooted in Black musical innovation, this subgenre heavily relied on. It moves through essential stops from Juan Atkins, Derrick May, and Jeff Mills. As King Britt in Organised Sound [1] put it, \"The whole fact that Detroit techno was the soundtrack to the fall of the Berlin Wall, as well as the rebuilding of Detroit, speaks volumes and should be taught in all schools.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Emgeh7M2MmxYInKjDWJ--Z-",
+      "track_count": 15,
+      "created_at": "2026-03-25T07:03:55+00:00",
+      "tracks": [
+        {
+          "artist": "Boiler Room",
+          "title": "Juan Atkins Boiler Room Detroit DJ Set",
+          "video_id": "EeiSjr6MNFs"
+        },
+        {
+          "artist": "Jeeon",
+          "title": "Universal Techno Pt.1 - Juan Atkins & Derrick May",
+          "video_id": "RSX_r0u3uzE"
+        },
+        {
+          "artist": "Dreaming Festival",
+          "title": "DERRICK MAY Closing Set || DREAMING FESTIVAL 2025 - SIRIUS STAGE",
+          "video_id": "EQMX5oAqsbs"
+        },
+        {
+          "artist": "BreakbeatAesthetechs",
+          "title": "Derrick May - \"The True Rebels Always Walk Alone Anyway\"",
+          "video_id": "ecc-vQd3bEc"
+        },
+        {
+          "artist": "RolandChannel",
+          "title": "\"Somewhere in Detroit\": Underground Resistance, Submerge, Techno and the Detroit Way",
+          "video_id": "5ErxKvL_zzU"
+        },
+        {
+          "artist": "WDET 101.9 FM Detroit",
+          "title": "Detroit techno legend Carl Craig reflects on his career | Ann Delisi's Essential Music",
+          "video_id": "UMx3iLGuxb4"
+        },
+        {
+          "artist": "Aulart",
+          "title": "Carl Craig Masterclass | Music Production for Detroit Techno",
+          "video_id": "5Bk4opWki6c"
+        },
+        {
+          "artist": "DIRT TECH RECK",
+          "title": "Waajeed - Motor City Madness (Official Video)",
+          "video_id": "AMFU0wnBQ3g"
+        },
+        {
+          "artist": "DIRT TECH RECK",
+          "title": "Waajeed - Through It All EP - Behind the Scenes",
+          "video_id": "lQZnec7YZ7I"
+        },
+        {
+          "artist": "Houseum",
+          "title": "Inside Your Love (Swales' In Detroit Edit)",
+          "video_id": "DsG5Y1rfkPQ"
+        },
+        {
+          "artist": "Boiler Room",
+          "title": "Frankie Knuckles | Boiler Room: NYC",
+          "video_id": "644UU55eyzk"
+        },
+        {
+          "artist": "Tresor Berlin",
+          "title": "Talk on techno and art: Robert Hood, Arthur Jafa and DeForrest Brown Jr.",
+          "video_id": "FlxakRTbxkg"
+        },
+        {
+          "artist": "Dia Art Foundation",
+          "title": "Dia Talks – Carl Craig Sessions Launch Event with Carl Craig, DeForrest Brown Jr., and Kelly Kivland",
+          "video_id": "9dl7CTmyf6Y"
+        },
+        {
+          "artist": "REHAB_LDN",
+          "title": "Makin Moves x Rehab_Ldn pres. Ash Lauryn @ Brixton Jamm 08-03-25",
+          "video_id": "HNtnRHQ3G0o"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "Boiler Room",
+          "title": "Juan Atkins Boiler Room Detroit DJ Set",
+          "video_id": "EeiSjr6MNFs"
+        },
+        {
+          "artist": "Jeeon",
+          "title": "Universal Techno Pt.1 - Juan Atkins & Derrick May",
+          "video_id": "RSX_r0u3uzE"
+        },
+        {
+          "artist": "Dreaming Festival",
+          "title": "DERRICK MAY Closing Set || DREAMING FESTIVAL 2025 - SIRIUS STAGE",
+          "video_id": "EQMX5oAqsbs"
+        }
+      ]
+    },
+    {
+      "slug": "2026-03-24-nlm-rhythmic-reconstructions-2026-03-24",
+      "title": "NotebookLM: Rhythmic Reconstructions 2026-03-24",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
+      "genre": "Jazz-Flavoured Drum and Bass",
+      "description": "Emerging during the vibrant 1990s electronic scene, this subgenre infiltrated electronic-based music by actively returning to musical roots and reconstructing complex rhythmic patterns. Championed by prominent labels like Talking Loud and Giant Step, the style served as a dynamic bridge between traditional jazz foundations and modern club culture. It helped connect older listeners who loved jazz with a younger generation heavily invested in dance and electronic beats.",
+      "quote": "4hero and Roni Size both did jazz-flavoured drum and bass, returning to the roots and reconstructing the rhythmic patterns.",
+      "quote_source": "King Britt, interviewed in 'Organised Sound' (Cambridge Core)",
+      "cover_image": null,
+      "cover_video_url": null,
+      "audio_intro_url": "/audio/playlists/2026-03-24-nlm-rhythmic-reconstructions-2026-03-24.mp3",
+      "narration_text": "Today's playlist leans into Jazz-Flavoured Drum and Bass. Emerging during the vibrant 1990s electronic scene, this subgenre infiltrated electronic-based music by actively returning to musical roots and reconstructing complex rhythmic patterns. Championed by prominent labels like Talking Loud and Giant Step, the style served as a dynamic bridge between traditional jazz foundat. It moves through essential stops from 4hero, Roni Size, and DJ Cam. As King Britt, interviewed in 'Organised Sound' (Cambridge Core) put it, \"4hero and Roni Size both did jazz-flavoured drum and bass, returning to the roots and reconstructing the rhythmic patterns.\"",
+      "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-Emlg6MYqMOblirUsLVPnPsL",
+      "track_count": 18,
+      "created_at": "2026-03-24T07:02:03+00:00",
+      "tracks": [
+        {
+          "artist": "Release - Topic",
+          "title": "Jazz Flavour",
+          "video_id": "XkB-QFgTF60"
+        },
+        {
+          "artist": "TurntableTastemaker",
+          "title": "Shifty - Jellyhead",
+          "video_id": "MzK3-qgI2FM"
+        },
+        {
+          "artist": "RoniSizeReprazenVEVO",
+          "title": "Roni Size, Reprazent - Brown Paper Bag",
+          "video_id": "cwI0gbGEyuI"
+        },
+        {
+          "artist": "DaBlazingAsian",
+          "title": "Roni Size - It's A Jazz Thing",
+          "video_id": "aJMZsgDCl4o"
+        },
+        {
+          "artist": "Mr Fredericks.",
+          "title": "DJ Perception - Intelligent Drum & Bass (1996)",
+          "video_id": "WBWl3XIrPS8"
+        },
+        {
+          "artist": "郭隗_kakukai",
+          "title": "Urban Flavour - Modern Jazz Drum n Bass (1998)",
+          "video_id": "0YabWmDst_E"
+        },
+        {
+          "artist": "MilleLuciMilleSuoni",
+          "title": "Dynamic - Yeadon [Sylk 130 Mix]",
+          "video_id": "wRngOFbthfs"
+        },
+        {
+          "artist": "Choicest Cuts by Congo",
+          "title": "The Bluenotes - Taxin' Jazz",
+          "video_id": "IVN1KFZd1RA"
+        },
+        {
+          "artist": "Ivo Smolak",
+          "title": "Band Fail: Bass player hits singer and singer kicks back",
+          "video_id": "R2dnHVnvlhE"
+        },
+        {
+          "artist": "BD",
+          "title": "Dub FX 'Flow' feat. Mr Woodnote",
+          "video_id": "WhBoR_tgXCI"
+        },
+        {
+          "artist": "Muggo Tunes",
+          "title": "Swordfish   The Get On",
+          "video_id": "e4nZNtR5ru0"
+        },
+        {
+          "artist": "Zen Bromley",
+          "title": "Back To The Real World by The K-Creative",
+          "video_id": "G5bvDnYZHAY"
+        },
+        {
+          "artist": "Vikter Duplaix - Topic",
+          "title": "Sex Drive",
+          "video_id": "Cn1hfrG1yUU"
+        },
+        {
+          "artist": "Boiler Room",
+          "title": "Roni Size b2b Patife | Boiler Room x Ballantine's True Music Studios: São Paulo",
+          "video_id": "xzj6ehxAsOA"
+        },
+        {
+          "artist": "ElectroBassDub4",
+          "title": "Roni Size / Reprazent - New Forms Feat. Bahamadia",
+          "video_id": "w5WESA3ACc4"
+        },
+        {
+          "artist": "Cyphertech beats",
+          "title": "Bahamadia - Uknowhowwedu  | 1996 Jazz Rap Classic [Official Video | FHD Remaster + HQ Sound]",
+          "video_id": "veGmVnVzt4c"
+        },
+        {
+          "artist": "Kosmik Dstroyer",
+          "title": "Gilles Peterson - Worldwide Programme 1 (Acid Jazz, Downtempo, House, Drum & Bass, Future Jazz) 2000",
+          "video_id": "XalmEZYYSuY"
+        }
+      ],
+      "tracks_preview": [
+        {
+          "artist": "Release - Topic",
+          "title": "Jazz Flavour",
+          "video_id": "XkB-QFgTF60"
+        },
+        {
+          "artist": "TurntableTastemaker",
+          "title": "Shifty - Jellyhead",
+          "video_id": "MzK3-qgI2FM"
+        },
+        {
+          "artist": "RoniSizeReprazenVEVO",
+          "title": "Roni Size, Reprazent - Brown Paper Bag",
+          "video_id": "cwI0gbGEyuI"
+        }
+      ]
+    },
     {
       "slug": "2026-03-21-sonnet-in-full-bloom-2026-03-21",
       "title": "Sonnet: In Full Bloom 2026-03-21",
@@ -97,9 +1478,9 @@
     },
     {
       "slug": "2026-03-18-nlm-smoked-glass-pop-2026-03-18",
-      "title": "NLM: Smoked Glass Pop 2026-03-18",
+      "title": "NotebookLM: Smoked Glass Pop 2026-03-18",
       "source": "codex_fallback",
-      "playlist_kind": "daily_nlm",
+      "playlist_kind": "daily_notebooklm",
       "genre": "Smoked Glass Pop",
       "description": "Sophisti-pop is what happens when pop music grows expensive taste: velvet-smooth grooves, immaculate arrangements, and lyrics that sound like they’ve actually lived a little. It sits between new wave, soul, jazz-pop, and adult heartbreak, and when it hits, it feels glamorous, nocturnal, and devastating at the same time.",
       "quote": "Pop with smoked-glass windows, perfect tailoring, and a bruise under the cuff.",
@@ -202,9 +1583,9 @@
     },
     {
       "slug": "2026-03-17-nlm-acid-jazz-90s-crossover-2026-03-17",
-      "title": "NLM: Acid Jazz & 90s Crossover 2026-03-17",
-      "source": "nlm",
-      "playlist_kind": "daily_nlm",
+      "title": "NotebookLM: Acid Jazz & 90s Crossover 2026-03-17",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
       "genre": "Acid Jazz & 90s Crossover",
       "description": "Acid jazz is a UK hybrid of American soul music that incorporates 1970s influences with a distinct electronic twist [1]. It emerged strongly in the 1990s alongside hip hop, bridging older generations who loved jazz with younger crowds who loved electronic music [1, 2]. The genre frequently featured live bands performing alongside DJs, creating a crossover configuration that bubbled up from the underground to the mainstream [1, 3].",
       "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist [1].",
@@ -384,9 +1765,9 @@
     },
     {
       "slug": "2026-03-16-nlm-deep-focus-idm-2026-03-16",
-      "title": "NLM: Deep Focus IDM 2026-03-16",
-      "source": "nlm",
-      "playlist_kind": "daily_nlm",
+      "title": "NotebookLM: Deep Focus IDM 2026-03-16",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
       "genre": "Deep Focus IDM",
       "description": "This playlist harnesses the intricate rhythms and atmospheric synthesizers of IDM to maintain momentum and clarity during deep work sessions. Rooted in the electronic experimentation and vibrant scenes discussed by King Britt, these instrumental tracks provide an immersive, forward-moving soundscape. The music balances energetic drive with analytical structure to perfectly power your cognitive focus throughout a busy Monday. Requested as a focused Monday work playlist with no vocals.",
       "quote": "We cross examine with old sonic DNA.",
@@ -465,15 +1846,15 @@
     },
     {
       "slug": "2026-03-16-nlm-acid-jazz-essentials-2026-03-16",
-      "title": "NLM: Acid Jazz Essentials 2026-03-16",
-      "source": "nlm",
-      "playlist_kind": "daily_nlm",
+      "title": "NotebookLM: Acid Jazz Essentials 2026-03-16",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
       "genre": "Acid Jazz Essentials",
       "description": "Acid jazz emerged in the 1990s as a vibrant UK hybrid of American soul music that incorporated a new electronic twist [1]. The genre successfully bridged generations by bringing together older jazz enthusiasts and younger hip hop fans in a unique cultural crossover [2]. It frequently featured innovative live configurations, such as live bands performing alongside DJs, which helped change the landscape of club music [1].",
       "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States.",
       "quote_source": "King Britt in 'We Cross Examine with Old Sonic DNA' [1]",
       "cover_image": "ai-playlists/2026-03-16-nlm-acid-jazz-essentials-2026-03-16.jpg",
-      "cover_video_url": "ai-playlists/2026-03-16-nlm-acid-jazz-essentials-2026-03-16.mp4",
+      "cover_video_url": null,
       "audio_intro_url": "/audio/playlists/2026-03-16-nlm-acid-jazz-essentials-2026-03-16.mp3",
       "narration_text": "Today's playlist leans into Acid Jazz. Acid jazz emerged in the 1990s as a vibrant UK hybrid of American soul music that incorporated a new electronic twist [1]. The genre successfully bridged generations by bringing together older jazz enthusiasts and younger hip hop fans in a unique cultural crossover [2]. It frequently featured innovative live configurat. It moves through essential stops from Soul II Soul, Brand New Heavies, and Digable Planets. As King Britt in 'We Cross Examine with Old Sonic DNA' [1] put it, \"Acid jazz, the UK hybrid of American soul music, started to resonate here in the States.\"",
       "playlist_url": "https://music.youtube.com/playlist?list=PLYNkN2lRM-El2hIZI4xF_r26YAJaj_t7Z",
@@ -566,9 +1947,9 @@
     },
     {
       "slug": "2026-03-15-nlm-acid-jazz-90s-grooves-2026-03-15",
-      "title": "NLM: Acid Jazz & 90s Grooves 2026-03-15",
-      "source": "nlm",
-      "playlist_kind": "daily_nlm",
+      "title": "NotebookLM: Acid Jazz & 90s Grooves 2026-03-15",
+      "source": "notebooklm",
+      "playlist_kind": "daily_notebooklm",
       "genre": "Acid Jazz & 90s Grooves",
       "description": "Acid jazz emerged in the 1990s as a UK hybrid of American soul music that brought a new electronic twist to 1970s influences. The genre fostered crossover success by bridging generations, uniting older jazz enthusiasts with younger hip hop fans. It also pioneered new live configurations by seamlessly blending traditional live bands with DJs on stage.",
       "quote": "Acid jazz, the UK hybrid of American soul music, started to resonate here in the States... this sound was reminiscent of 1970s influences but with a new electronic twist.",
