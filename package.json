@@ -9,7 +9,8 @@
     "lint": "eslint src/",
     "format": "prettier --write src/",
     "setup-hooks": "sh scripts/setup-hooks.sh",
-    "postinstall": "sh scripts/setup-hooks.sh"
+    "postinstall": "sh scripts/setup-hooks.sh",
+    "design:lint": "design.md lint DESIGN.md"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,15 @@
   },
   "homepage": "https://github.com/boo13/website#readme",
   "devDependencies": {
+    "@google/design.md": "^0.1.1",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.0.0",
     "prettier": "^3.7.4",
     "vite": "^7.3.2"
+  },
+  "overrides": {
+    "postcss": ">=8.5.10"
   },
   "dependencies": {
     "glightbox": "^3.3.1",

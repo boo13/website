@@ -1,6 +1,7 @@
 # Project Overview
 This project is a video portfolio website using GSAP.
 
+<!-- override: ~/Git/AIHome/docs/global-rules/tools.md package-managers — this repo uses npm intentionally -->
 - **Tech Stack** - Vite 7.3.1, JavaScript, GSAP 3.14.2 (via npm with ScrollTrigger, CustomEase, Flip, ScrollSmoother)
 - **Hosting topology** — `www.randycounsman.com` is proxied by Cloudflare, but the current origin still appears to be GitHub Pages. This repo still deploys by merging `dev` into `gh-pages`.
 
@@ -83,7 +84,7 @@ src/
 ```
 
 ## GSAP Conventions
-- Full motion design rules (easing palette, timing, scroll patterns, reusable animations) are in **DESIGN.md sections 5–6**.
+- Full motion design rules (easing palette, timing, scroll patterns, reusable animations) are in **DESIGN.md — Motion section**.
 - Use `gsap.context()` per section for clean setup/teardown — no custom lifecycle wrappers
 - Centralize `ScrollTrigger.defaults()` in one place to avoid pin conflicts
 - Lazy-init heavy timelines when section approaches viewport
@@ -91,7 +92,7 @@ src/
 - GSAP is now free to use, do not warn of paid-only features
 
 ## Website Sections
-See **DESIGN.md section 9** for detailed per-section specs (selectors, key classes, scroll behavior, pin distances, backgrounds) for both homepage and project page variants.
+See **DESIGN.md — Components → Section Quick-Reference** for detailed per-section specs (selectors, key classes, scroll behavior, pin distances, backgrounds) for both homepage and project page variants.
 
 ## Verification
 - ✅ Use `playwright-cli` terminal commands for browser verification in this repo. (Tell user to install if not available.)
