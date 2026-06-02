@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yearly Media Log | Randy Counsman</title>
+    <meta
+      name="description"
+      content="A public yearly log of movies, TV series, books, and other media finished by Randy Counsman."
+    />
+    <link rel="icon" href="/favicon/favicon.ico" />
+    <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/gya6int.css" />
+  </head>
+  <body>
+    <div class="media-shell">
+      <header class="media-hero">
+        <p class="media-hero__kicker">Finished things</p>
+        <h1>Yearly media log</h1>
+        <p class="media-hero__lede">
+          Movies, series, books, and other public notes from the personal archive.
+        </p>
+      </header>
+
+      <main class="media-main">
+        <section id="media-state" class="media-state" aria-live="polite">
+          <div class="media-state__inner">
+            <p>Loading</p>
+            <h2>Reading the public media feed.</h2>
+          </div>
+        </section>
+
+        <section id="media-experience" class="media-experience" hidden>
+          <div class="media-controls" aria-label="Media log filters">
+            <div class="media-control-group" data-filter-group="year">
+              <p>Year</p>
+              <div id="year-filters" class="media-filter-row"></div>
+            </div>
+            <div class="media-control-group" data-filter-group="type">
+              <p>Type</p>
+              <div id="type-filters" class="media-filter-row"></div>
+            </div>
+          </div>
+
+          <div class="media-count" id="media-count"></div>
+          <section id="media-list" class="media-list" aria-live="polite"></section>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main-medialog.js"></script>
+  </body>
+</html>
