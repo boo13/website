@@ -231,7 +231,7 @@ code {
 .coverflow__nav {
   position: absolute;
   top: 50%;
-  z-index: 8;
+  z-index: 200;
   transform: translateY(-50%);
   width: 3rem;
   height: 3rem;
@@ -282,15 +282,15 @@ code {
 
 .coverflow__caption {
   display: grid;
-  justify-items: center;
+  justify-items: start;
   gap: 0.35rem;
   padding: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .coverflow__caption-title {
   margin: 0;
-  max-width: 12ch;
+  max-width: 24ch;
   font-family: var(--pl-display);
   font-size: clamp(1.8rem, 3.5vw, 2.9rem);
   font-weight: 300;
