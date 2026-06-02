@@ -717,9 +717,13 @@ body.show-grid .bg-columns {
   font-weight: 300;
   line-height: 1;
   color: var(--credits-muted);
+  opacity: 1;
+  filter: blur(0px);
   transition:
     color 0.3s ease,
-    transform 0.4s var(--ease-out-expo);
+    transform 0.4s var(--ease-out-expo),
+    opacity var(--credits-dim-duration) var(--credits-dim-ease),
+    filter var(--credits-dim-duration) var(--credits-dim-ease);
   display: inline-block;
 }
 
@@ -752,6 +756,7 @@ body.show-grid .bg-columns {
     filter var(--credits-dim-duration) var(--credits-dim-ease);
 }
 
+.credits-list.is-row-hovered .credit-row__header .credit-row__icon,
 .credits-list.is-row-hovered .credit-row__header .credit-row__title,
 .credits-list.is-row-hovered .credit-row__header .credit-row__platform,
 .credits-list.is-row-hovered .credit-row__header .credit-row__role {
@@ -759,6 +764,7 @@ body.show-grid .bg-columns {
   filter: blur(var(--credits-dim-blur));
 }
 
+.credits-list.is-row-hovered .credit-row__header.is-hovered .credit-row__icon,
 .credits-list.is-row-hovered .credit-row__header.is-hovered .credit-row__title,
 .credits-list.is-row-hovered .credit-row__header.is-hovered .credit-row__platform,
 .credits-list.is-row-hovered .credit-row__header.is-hovered .credit-row__role {
