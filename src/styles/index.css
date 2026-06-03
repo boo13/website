@@ -247,7 +247,7 @@ body.show-grid .bg-columns {
   opacity: 0;
 }
 
-.hero-name-fixed {
+.hero-name.hero-name-fixed {
   font-size: clamp(1.25rem, 3.2vw, 2.25rem);
   margin-bottom: 0;
   white-space: nowrap;
