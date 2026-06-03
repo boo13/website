@@ -146,7 +146,6 @@ export function initCredits() {
   }
 
   // Grow the header title to display size; shrink it back when closing.
-  // fontFamily must be swapped before calling so the display font scales up from small.
   function growTitle(titleEl, tl, pos) {
     const startPx = parseFloat(getComputedStyle(titleEl).fontSize);
     titleEl.dataset.baseSize = startPx;
@@ -162,8 +161,6 @@ export function initCredits() {
         duration: 0.35,
         ease: 'expo.inOut',
         onComplete() {
-          // Clear inline overrides so CSS resumes control
-          titleEl.style.fontFamily = '';
           titleEl.style.letterSpacing = '';
           titleEl.style.lineHeight = '';
           gsap.set(titleEl, { clearProps: 'fontSize' });
@@ -194,7 +191,6 @@ export function initCredits() {
         details.style.height = '0';
         gsap.delayedCall(0, () => ScrollTrigger.refresh());
         invertColors(false);
-        titleEl.style.fontFamily = '';
         gsap.set(titleEl, { clearProps: 'fontSize' });
       } else {
         const closeTl = gsap.timeline();
@@ -221,7 +217,6 @@ export function initCredits() {
 
         if (prefersReducedMotion) {
           prevDetails.style.height = '0';
-          prevTitleEl.style.fontFamily = '';
           gsap.set(prevTitleEl, { clearProps: 'fontSize' });
         } else {
           shrinkTitle(prevTitleEl, tl, 0);
@@ -240,8 +235,6 @@ export function initCredits() {
       details.setAttribute('aria-hidden', 'false');
 
       if (!prefersReducedMotion) {
-        // Swap font-family immediately so display font scales up from small
-        titleEl.style.fontFamily = 'ivypresto-display, Georgia, serif';
         titleEl.style.letterSpacing = '-0.02em';
         titleEl.style.lineHeight = '1';
         growTitle(titleEl, tl, activeRow ? 0.05 : 0);

@@ -733,6 +733,7 @@ body.show-grid .bg-columns {
 }
 
 .credit-row__title {
+  font-family: var(--ff-display);
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 400;
 }
