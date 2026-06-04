@@ -97,7 +97,10 @@ export function initCredits() {
   const fixedHeroName = document.getElementById('hero-name-fixed');
   const topGradient = document.querySelector('.hero-top-transition-gradient');
 
-  const lightGradient = 'linear-gradient(180deg, oklch(1 0 0 / 0.55) 0%, oklch(1 0 0 / 0.3) 52%, oklch(1 0 0 / 0) 100%)';
+  const lightGradient =
+    'linear-gradient(180deg, oklch(0.968 0.006 75 / 0.55) 0%, ' +
+    'oklch(0.968 0.006 75 / 0.3) 52%, ' +
+    'oklch(0.968 0.006 75 / 0) 100%)';
 
   // Toggle the fixed header gradient + hero name between light-bg and dark-bg modes.
   function setHeroHeaderLight(onLight) {
@@ -123,13 +126,6 @@ export function initCredits() {
     '--credits-muted': 'oklch(0.14 0 0 / 0.5)',
   };
 
-  // Toggle hero-name between dark (over light credits bg) and default (over dark bg).
-  // Direct style.color to bypass CSS specificity; CSS transition on .hero-name-fixed animates it.
-  function setHeroNameOnLight(onLight) {
-    if (!fixedHeroName) return;
-    fixedHeroName.style.color = onLight ? 'oklch(0.14 0 0)' : '';
-  }
-
   // Adds a color inversion tween to `tl` at position `pos`.
   // Slower and in the same timeline as the row expansion so it feels coupled.
   function invertColors(toDark, tl, pos) {
@@ -146,11 +142,10 @@ export function initCredits() {
     } else {
       gsap.to(section, vars);
     }
-    setHeroNameOnLight(!toDark);
+    setHeroHeaderLight(!toDark);
   }
 
   // Grow the header title to display size; shrink it back when closing.
-  // fontFamily must be swapped before calling so the display font scales up from small.
   function growTitle(titleEl, tl, pos) {
     const startPx = parseFloat(getComputedStyle(titleEl).fontSize);
     titleEl.dataset.baseSize = startPx;
@@ -166,8 +161,6 @@ export function initCredits() {
         duration: 0.35,
         ease: 'expo.inOut',
         onComplete() {
-          // Clear inline overrides so CSS resumes control
-          titleEl.style.fontFamily = '';
           titleEl.style.letterSpacing = '';
           titleEl.style.lineHeight = '';
           gsap.set(titleEl, { clearProps: 'fontSize' });
@@ -198,7 +191,6 @@ export function initCredits() {
         details.style.height = '0';
         gsap.delayedCall(0, () => ScrollTrigger.refresh());
         invertColors(false);
-        titleEl.style.fontFamily = '';
         gsap.set(titleEl, { clearProps: 'fontSize' });
       } else {
         const closeTl = gsap.timeline();
@@ -225,7 +217,6 @@ export function initCredits() {
 
         if (prefersReducedMotion) {
           prevDetails.style.height = '0';
-          prevTitleEl.style.fontFamily = '';
           gsap.set(prevTitleEl, { clearProps: 'fontSize' });
         } else {
           shrinkTitle(prevTitleEl, tl, 0);
@@ -244,8 +235,6 @@ export function initCredits() {
       details.setAttribute('aria-hidden', 'false');
 
       if (!prefersReducedMotion) {
-        // Swap font-family immediately so display font scales up from small
-        titleEl.style.fontFamily = 'ivypresto-display, Georgia, serif';
         titleEl.style.letterSpacing = '-0.02em';
         titleEl.style.lineHeight = '1';
         growTitle(titleEl, tl, activeRow ? 0.05 : 0);
@@ -292,19 +281,19 @@ export function initCredits() {
     }
   }
 
-  // Hero-name color: dark when credits (light bg) is at the top of the viewport.
+  // Hero header switches to the light-bg treatment while credits are pinned at top.
   ctx.add(() => {
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
       end: 'bottom top',
-      onEnter() { if (!activeRow) setHeroNameOnLight(true); },
-      onLeave() { setHeroNameOnLight(false); },
-      onEnterBack() { if (!activeRow) setHeroNameOnLight(true); },
-      onLeaveBack() { setHeroNameOnLight(false); },
+      onEnter() { if (!activeRow) setHeroHeaderLight(true); },
+      onLeave() { setHeroHeaderLight(false); },
+      onEnterBack() { if (!activeRow) setHeroHeaderLight(true); },
+      onLeaveBack() { setHeroHeaderLight(false); },
       // onRefresh fires after recalculation — handles already-active state on load/refresh
       onRefresh(self) {
-        if (!activeRow) setHeroNameOnLight(self.isActive);
+        if (!activeRow) setHeroHeaderLight(self.isActive);
       },
     });
   });

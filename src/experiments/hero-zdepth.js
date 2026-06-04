@@ -38,6 +38,7 @@ function init() {
   initSmooth();
 
   const { hero, video, content, gradient, topGradient } = getHeroEls();
+  const videoContainer = hero?.querySelector('.hero-video-container');
   const aboutStub = document.querySelector('.about-stub');
   if (!hero) return;
 
@@ -45,6 +46,9 @@ function init() {
 
   if (prefersReducedMotion) {
     if (topGradient) gsap.set(topGradient, { autoAlpha: 0.5 });
+    if (videoContainer) gsap.set(videoContainer, { autoAlpha: 0 });
+    if (content) gsap.set(content, { autoAlpha: 0 });
+    if (aboutStub) gsap.set(aboutStub, { autoAlpha: 1 });
     return;
   }
 
@@ -79,9 +83,9 @@ function init() {
       );
     }
 
-    // Phase 2 (0.3–0.7): hero section fades and darkens
+    // Phase 2 (0.3–0.7): video layer fades and darkens
     tl.to(
-      hero,
+      videoContainer,
       { opacity: 0, duration: 0.5, ease: 'power2.in' },
       0.3
     );
@@ -107,7 +111,9 @@ function init() {
       trigger: hero,
       start: 'top top',
       end: `+=${config.scrollDistance}`,
+      pin: true,
       scrub: config.scrubAmount,
+      anticipatePin: 1,
       animation: tl,
     });
   }, hero);
