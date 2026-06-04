@@ -653,6 +653,7 @@ body.show-grid .bg-columns {
   --credits-border: oklch(0.14 0 0 / 0.1);
   --credits-hover-bg: oklch(0.14 0 0 / 0.04);
   --credits-muted: oklch(0.14 0 0 / 0.5);
+  --credits-logo-invert: 0;
   /* Dim non-hovered rows (fixed values) */
   --credits-dim-blur: 0.7px;
   --credits-dim-opacity: 0.2;
@@ -748,6 +749,17 @@ body.show-grid .bg-columns {
   color: var(--credits-muted);
   text-transform: uppercase;
   letter-spacing: 0.07em;
+}
+
+.credit-row__platform--logo {
+  height: 0.95rem;
+  width: auto;
+  max-width: 8rem;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+  filter: brightness(0) invert(var(--credits-logo-invert, 0));
+  opacity: 0.85;
 }
 
 .credit-row__title,
@@ -1596,6 +1608,7 @@ body.show-grid .bg-columns {
     --credits-border: oklch(0.968 0.006 75 / 0.1);
     --credits-hover-bg: oklch(1 0 0 / 0.06);
     --credits-muted: oklch(0.968 0.006 75 / 0.6);
+    --credits-logo-invert: 1;
   }
 
   .marquee-track {
