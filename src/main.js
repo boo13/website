@@ -59,22 +59,21 @@ function init() {
       document.dispatchEvent(new CustomEvent('loadingComplete'));
     });
 
-  // Cleanup on page unload
-  window.addEventListener(
-    'pagehide',
-    () => {
-      if (smoother) smoother.kill();
-      if (typeof cleanupCredits === 'function') cleanupCredits();
-      if (typeof cleanupCursor === 'function') cleanupCursor();
-      if (typeof cleanupAboutIntro === 'function') cleanupAboutIntro();
-      if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
-      if (typeof cleanupLightbox === 'function') cleanupLightbox();
-      if (cleanupGallery) cleanupGallery.revert();
-      if (typeof cleanupHero === 'function') cleanupHero();
-      if (typeof cleanupNav === 'function') cleanupNav();
-    },
-    { once: true }
-  );
+  // Cleanup on page unload — but skip when the page is being put into the
+  // back/forward cache, so back navigation restores ScrollSmoother state and
+  // scroll position instantly without re-running the preloader.
+  window.addEventListener('pagehide', (event) => {
+    if (event.persisted) return;
+    if (smoother) smoother.kill();
+    if (typeof cleanupCredits === 'function') cleanupCredits();
+    if (typeof cleanupCursor === 'function') cleanupCursor();
+    if (typeof cleanupAboutIntro === 'function') cleanupAboutIntro();
+    if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
+    if (typeof cleanupLightbox === 'function') cleanupLightbox();
+    if (cleanupGallery) cleanupGallery.revert();
+    if (typeof cleanupHero === 'function') cleanupHero();
+    if (typeof cleanupNav === 'function') cleanupNav();
+  });
 }
 
 // Dynamic copyright year

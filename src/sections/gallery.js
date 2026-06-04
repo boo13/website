@@ -156,12 +156,6 @@ export function initGallery() {
 
   setupHoverCorners();
 
-  // Prevent detail page links from bubbling up to trigger the lightbox
-  cards.forEach((card) => {
-    const detailLink = card.querySelector('.card-detail-link');
-    if (detailLink) detailLink.addEventListener('click', (e) => e.stopPropagation());
-  });
-
   // --- Mobile / tablet / reduced-motion path ---
   if (prefersReducedMotion || isCompact) {
     // CSS handles all layout (flex-direction, widths, etc.) via @media (max-width: 1024px)
