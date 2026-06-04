@@ -11,6 +11,10 @@ export function initCustomCursor() {
   // Target sections
   const sections = document.querySelectorAll('.hero-section');
   if (!sections.length) return () => {};
+  const cursorRoots = [
+    ...sections,
+    ...document.querySelectorAll('.hero-social-fixed'),
+  ];
 
   // Create cursor elements (fixed position, not per-section)
   const dot = document.createElement('div');
@@ -79,11 +83,11 @@ export function initCustomCursor() {
   document.addEventListener('mousemove', handleMouseMove);
   window.addEventListener('scroll', handleScroll, { passive: true });
 
-  sections.forEach((section) => {
-    section.addEventListener('mouseenter', handleSectionEnter);
-    section.addEventListener('mouseleave', handleSectionLeave);
+  cursorRoots.forEach((root) => {
+    root.addEventListener('mouseenter', handleSectionEnter);
+    root.addEventListener('mouseleave', handleSectionLeave);
 
-    section.querySelectorAll('a, button').forEach((el) => {
+    root.querySelectorAll('a, button').forEach((el) => {
       el.addEventListener('mouseenter', handleInteractiveEnter);
       el.addEventListener('mouseleave', handleInteractiveLeave);
     });
@@ -93,10 +97,10 @@ export function initCustomCursor() {
   return () => {
     document.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('scroll', handleScroll);
-    sections.forEach((section) => {
-      section.removeEventListener('mouseenter', handleSectionEnter);
-      section.removeEventListener('mouseleave', handleSectionLeave);
-      section.querySelectorAll('a, button').forEach((el) => {
+    cursorRoots.forEach((root) => {
+      root.removeEventListener('mouseenter', handleSectionEnter);
+      root.removeEventListener('mouseleave', handleSectionLeave);
+      root.querySelectorAll('a, button').forEach((el) => {
         el.removeEventListener('mouseenter', handleInteractiveEnter);
         el.removeEventListener('mouseleave', handleInteractiveLeave);
       });

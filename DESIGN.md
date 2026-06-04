@@ -599,8 +599,8 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 - ScrollTrigger: `start: 'top top'`, `end: '+=45%'`, `scrub: true`
 - `scale: true` (CSS scaleX/Y, not width/height)
 - `#hero-subtitle-fixed` and `#hero-social-fixed` track title's bottom edge via Flip progress
-- Subtitle entrance: `autoAlpha: 0→1`, `1.2s expo.out`, `delay: 2.8s` after `loadingComplete`
-- Social entrance: `autoAlpha: 0→1`, `1.2s expo.out`, `delay: 3.1s` after `loadingComplete`
+- Subtitle entrance: `autoAlpha: 0→1`, `1.2s expo.out`, `delay: 2.35s` after `loadingComplete`
+- Social entrance: `autoAlpha: 0→1`, `1.2s expo.out`, `delay: 2.7s` after `loadingComplete`
 
 **Footer Reveal** (`src/sections/footer-reveal.js`):
 - `#site-footer`: `position: fixed`, `z-index: 0` (behind `#smooth-wrapper`)

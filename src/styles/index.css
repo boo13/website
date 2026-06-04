@@ -22,6 +22,11 @@
   /* Spacing */
   --section-padding: clamp(4rem, 10vh, 8rem);
   --container-padding: clamp(1.5rem, 5vw, 4rem);
+  --hero-social-hit-size: 44px;
+  --hero-social-icon-size: 20px;
+  --hero-social-grid-offset: calc(
+    (var(--hero-social-icon-size) - var(--hero-social-hit-size)) / 2
+  );
 
   /* Animation */
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
@@ -274,7 +279,8 @@ body.show-grid .bg-columns {
 .hero-social-fixed {
   position: fixed;
   z-index: 40;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: none;
   display: flex;
   gap: 1rem;
   opacity: 0;
@@ -368,6 +374,7 @@ body.show-grid .bg-columns {
 .hero-social {
   display: flex;
   gap: 1rem;
+  margin-left: var(--hero-social-grid-offset);
   opacity: 0;
   transform: translateY(20px);
 }
@@ -376,8 +383,8 @@ body.show-grid .bg-columns {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: var(--hero-social-hit-size);
+  height: var(--hero-social-hit-size);
   color: var(--color-offwhite);
   transition: transform 0.3s ease;
 }
@@ -388,8 +395,8 @@ body.show-grid .bg-columns {
 }
 
 .social-icon svg {
-  width: 20px;
-  height: 20px;
+  width: var(--hero-social-icon-size);
+  height: var(--hero-social-icon-size);
 }
 
 @keyframes heroFadeIn {
@@ -1497,6 +1504,7 @@ body.show-grid .bg-columns {
 
   :root {
     --container-padding: 1.25rem;
+    --hero-social-hit-size: 40px;
   }
 
   .hero-content {
@@ -1514,11 +1522,6 @@ body.show-grid .bg-columns {
 
   .hero-social {
     gap: 0.75rem;
-  }
-
-  .social-icon {
-    width: 40px;
-    height: 40px;
   }
 
   .gallery-card {

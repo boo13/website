@@ -25,6 +25,8 @@ const config = {
   blurMax: 8,
   nameFlipDuration: 0.5,
   nameFlipScrollDistance: '45%',
+  subtitleEntranceDelay: 2.35,
+  socialEntranceDelay: 2.7,
 };
 
 export function initHero() {
@@ -236,10 +238,10 @@ export function initHero() {
                 autoAlpha: 0,
               });
 
-              // Entrance animation — after title text-mask-rise completes (~1.6s from load)
+              // Entrance animation — overlaps the final title rise for a tighter reveal.
               subEntrance = gsap.to(fixedSubtitle, {
                 autoAlpha: 1,
-                delay: 2.8,
+                delay: config.subtitleEntranceDelay,
                 duration: 1.2,
                 ease: 'expo.out',
               });
@@ -269,7 +271,7 @@ export function initHero() {
               // Entrance animation — after subtitle starts
               socialEntrance = gsap.to(fixedSocial, {
                 autoAlpha: 1,
-                delay: 3.1,
+                delay: config.socialEntranceDelay,
                 duration: 1.2,
                 ease: 'expo.out',
               });
