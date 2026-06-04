@@ -479,6 +479,14 @@ body.show-grid .bg-columns {
   cursor: pointer;
 }
 
+.card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
 .card-media {
   position: absolute;
   inset: 0;
@@ -633,17 +641,6 @@ body.show-grid .bg-columns {
   opacity: 1;
 }
 
-.card-network {
-  display: block;
-  width: 8rem;
-  height: 24px;
-  object-fit: contain;
-  object-position: left center;
-  margin-bottom: 0.75rem;
-  opacity: 0.8;
-  filter: brightness(0) invert(1);
-}
-
 .card-title {
   font-family: var(--ff-display);
   font-size: clamp(1.5rem, 3vw, 2.5rem);
@@ -652,15 +649,14 @@ body.show-grid .bg-columns {
   margin-bottom: 0.5rem;
 }
 
-.card-role {
-  font-size: 0.875rem;
-  color: oklch(0.968 0.006 75 / 0.7);
-  margin-bottom: 0.25rem;
-}
-
-.card-year {
-  font-size: 0.75rem;
-  color: oklch(0.968 0.006 75 / 0.5);
+.card-network {
+  display: block;
+  width: 8rem;
+  height: 24px;
+  object-fit: contain;
+  object-position: left center;
+  opacity: 0.8;
+  filter: brightness(0) invert(1);
 }
 
 .gallery-progress {
