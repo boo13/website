@@ -634,10 +634,14 @@ body.show-grid .bg-columns {
 }
 
 .card-network {
+  display: block;
+  width: 8rem;
   height: 24px;
-  width: auto;
+  object-fit: contain;
+  object-position: left center;
   margin-bottom: 0.75rem;
   opacity: 0.8;
+  filter: brightness(0) invert(1);
 }
 
 .card-title {
@@ -694,6 +698,7 @@ body.show-grid .bg-columns {
   --credits-border: oklch(0.14 0 0 / 0.1);
   --credits-hover-bg: oklch(0.14 0 0 / 0.04);
   --credits-muted: oklch(0.14 0 0 / 0.5);
+  --credits-logo-filter: brightness(0) invert(0);
   /* Dim non-hovered rows (fixed values) */
   --credits-dim-blur: 0.7px;
   --credits-dim-opacity: 0.2;
@@ -717,6 +722,10 @@ body.show-grid .bg-columns {
   background: var(--credits-bg);
   color: var(--credits-text);
   will-change: background-color, color;
+}
+
+.credits-section.is-expanded {
+  --credits-logo-filter: brightness(0) invert(1);
 }
 
 .credits-section .section-title {
@@ -789,6 +798,35 @@ body.show-grid .bg-columns {
   color: var(--credits-muted);
   text-transform: uppercase;
   letter-spacing: 0.07em;
+}
+
+.credit-row__platform {
+  display: flex;
+  align-items: center;
+  min-height: 2.35rem;
+}
+
+.credit-row__platform-logo {
+  display: block;
+  width: 7.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+  object-position: left center;
+  opacity: 0.78;
+  filter: var(--credits-logo-filter);
+  transition:
+    filter 0.9s ease,
+    opacity var(--credits-dim-duration) var(--credits-dim-ease);
+}
+
+.credit-row__platform-logo--standard {
+  width: 6.5rem;
+  height: 2.15rem;
+}
+
+.credit-row__platform-logo--mark {
+  width: 3.35rem;
+  height: 2.35rem;
 }
 
 .credit-row__title,
@@ -1483,8 +1521,28 @@ body.show-grid .bg-columns {
     display: none;
   }
 
+  .credit-row__icon {
+    display: none;
+  }
+
   .credit-row__header {
-    grid-template-columns: 2rem 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0 1rem;
+  }
+
+  .credit-row__platform-logo {
+    width: 6.5rem;
+    height: 1.5rem;
+  }
+
+  .credit-row__platform-logo--standard {
+    width: 5.5rem;
+    height: 1.8rem;
+  }
+
+  .credit-row__platform-logo--mark {
+    width: 2.85rem;
+    height: 2rem;
   }
 
   .credit-row__details-inner {
@@ -1633,6 +1691,7 @@ body.show-grid .bg-columns {
     --credits-border: oklch(0.968 0.006 75 / 0.1);
     --credits-hover-bg: oklch(1 0 0 / 0.06);
     --credits-muted: oklch(0.968 0.006 75 / 0.6);
+    --credits-logo-filter: brightness(0) invert(1);
   }
 
   .marquee-track {

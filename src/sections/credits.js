@@ -10,6 +10,37 @@ const prefersReducedMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
 ).matches;
 
+const PLATFORM_LOGOS = {
+  cnn: { src: 'images/logos/CNN_logo_red.svg', alt: 'CNN', variant: 'standard' },
+  curiositystream: { src: 'images/logos/CuriosityStream_mono.svg', alt: 'CuriosityStream' },
+  discovery: { src: 'images/logos/Discovery.png', alt: 'Discovery' },
+  'fox nation': { src: 'images/logos/Fox_Nation_logo.svg', alt: 'Fox Nation', variant: 'mark' },
+  history: { src: 'images/logos/History.png', alt: 'History', variant: 'mark' },
+  'i.d.': { src: 'images/logos/ID_2020.svg', alt: 'Investigation Discovery', variant: 'standard' },
+  id: { src: 'images/logos/ID_2020.svg', alt: 'Investigation Discovery', variant: 'standard' },
+  'nat geo': { src: 'images/logos/NatGeoLogo_White.svg', alt: 'Nat Geo', variant: 'standard' },
+  netflix: { src: 'images/logos/Netflix_white2.png', alt: 'Netflix' },
+  pbs: { src: 'images/logos/pbs_logo_white.png', alt: 'PBS', variant: 'standard' },
+};
+
+function normalizePlatform(platform) {
+  return (platform || '').trim().toLowerCase();
+}
+
+function getPlatformLogo(project) {
+  const fallbackLogo = PLATFORM_LOGOS[normalizePlatform(project.platform)] || null;
+
+  if (project.networkLogo) {
+    return {
+      ...fallbackLogo,
+      src: project.networkLogo,
+      alt: project.networkLogoAlt || fallbackLogo?.alt || project.platform || '',
+    };
+  }
+
+  return fallbackLogo;
+}
+
 function buildRow(project) {
   const row = document.createElement('div');
   row.className = 'credit-row';
@@ -32,7 +63,23 @@ function buildRow(project) {
 
   const platform = document.createElement('span');
   platform.className = 'credit-row__platform';
-  platform.textContent = project.platform || '';
+  const logo = getPlatformLogo(project);
+  if (logo) {
+    platform.setAttribute('aria-label', logo.alt || project.platform || '');
+
+    const logoImg = document.createElement('img');
+    logoImg.className = 'credit-row__platform-logo';
+    if (logo.variant) {
+      logoImg.classList.add(`credit-row__platform-logo--${logo.variant}`);
+    }
+    logoImg.src = logo.src;
+    logoImg.alt = '';
+    logoImg.loading = 'lazy';
+    logoImg.decoding = 'async';
+    platform.appendChild(logoImg);
+  } else {
+    platform.textContent = project.platform || '';
+  }
 
   const role = document.createElement('span');
   role.className = 'credit-row__role';
@@ -129,8 +176,9 @@ export function initCredits() {
   // Adds a color inversion tween to `tl` at position `pos`.
   // Slower and in the same timeline as the row expansion so it feels coupled.
   function invertColors(toDark, tl, pos) {
+    section.classList.toggle('is-expanded', toDark);
+
     if (prefersReducedMotion) {
-      section.classList.toggle('is-expanded', toDark);
       // When row is expanded (toDark), credits bg goes dark → hero header stays dark.
       // When row is closed (!toDark), credits bg returns to light → hero header goes light.
       setHeroHeaderLight(!toDark);
