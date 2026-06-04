@@ -698,7 +698,7 @@ body.show-grid .bg-columns {
   --credits-border: oklch(0.14 0 0 / 0.1);
   --credits-hover-bg: oklch(0.14 0 0 / 0.04);
   --credits-muted: oklch(0.14 0 0 / 0.5);
-  --credits-logo-filter: brightness(0) invert(0);
+  --credits-logo-invert: 0;
   /* Dim non-hovered rows (fixed values) */
   --credits-dim-blur: 0.7px;
   --credits-dim-opacity: 0.2;
@@ -725,7 +725,7 @@ body.show-grid .bg-columns {
 }
 
 .credits-section.is-expanded {
-  --credits-logo-filter: brightness(0) invert(1);
+  --credits-logo-invert: 1;
 }
 
 .credits-section .section-title {
@@ -806,16 +806,17 @@ body.show-grid .bg-columns {
   min-height: 2.35rem;
 }
 
-.credit-row__platform-logo {
+/* Double class (0-2-0) beats the shared .credit-row__platform rule (0-1-0) below. */
+.credit-row__platform .credit-row__platform-logo {
   display: block;
   width: 7.75rem;
   height: 1.75rem;
   object-fit: contain;
   object-position: left center;
   opacity: 0.78;
-  filter: var(--credits-logo-filter);
+  filter: brightness(0) invert(var(--credits-logo-invert, 0)) blur(0px);
   transition:
-    filter 0.9s ease,
+    filter var(--credits-dim-duration) var(--credits-dim-ease),
     opacity var(--credits-dim-duration) var(--credits-dim-ease);
 }
 
@@ -827,6 +828,17 @@ body.show-grid .bg-columns {
 .credit-row__platform-logo--mark {
   width: 3.35rem;
   height: 2.35rem;
+}
+
+/* Dim state: preserve silhouette, add blur. Specificity must beat the hover-dim rule below. */
+.credits-list.is-row-hovered .credit-row__header .credit-row__platform .credit-row__platform-logo {
+  filter: brightness(0) invert(var(--credits-logo-invert, 0)) blur(var(--credits-dim-blur));
+}
+
+/* Active (hovered) row: restore full-opacity silhouette. */
+.credits-list.is-row-hovered .credit-row__header.is-hovered .credit-row__platform .credit-row__platform-logo {
+  opacity: 0.85;
+  filter: brightness(0) invert(var(--credits-logo-invert, 0)) blur(0px);
 }
 
 .credit-row__title,
@@ -1691,7 +1703,7 @@ body.show-grid .bg-columns {
     --credits-border: oklch(0.968 0.006 75 / 0.1);
     --credits-hover-bg: oklch(1 0 0 / 0.06);
     --credits-muted: oklch(0.968 0.006 75 / 0.6);
-    --credits-logo-filter: brightness(0) invert(1);
+    --credits-logo-invert: 1;
   }
 
   .marquee-track {

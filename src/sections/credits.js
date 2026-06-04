@@ -164,6 +164,7 @@ export function initCredits() {
     '--credits-border': 'oklch(0.968 0.006 75 / 0.1)',
     '--credits-hover-bg': 'oklch(1 0 0 / 0.06)',
     '--credits-muted': 'oklch(0.968 0.006 75 / 0.6)',
+    '--credits-logo-invert': 1,
   };
   const lightVars = {
     '--credits-bg': 'oklch(0.968 0.006 75)',
@@ -171,6 +172,7 @@ export function initCredits() {
     '--credits-border': 'oklch(0.14 0 0 / 0.1)',
     '--credits-hover-bg': 'oklch(0.14 0 0 / 0.04)',
     '--credits-muted': 'oklch(0.14 0 0 / 0.5)',
+    '--credits-logo-invert': 0,
   };
 
   // Adds a color inversion tween to `tl` at position `pos`.
@@ -193,7 +195,6 @@ export function initCredits() {
     setHeroHeaderLight(!toDark);
   }
 
-  // Grow the header title to display size; shrink it back when closing.
   function growTitle(titleEl, tl, pos) {
     const startPx = parseFloat(getComputedStyle(titleEl).fontSize);
     titleEl.dataset.baseSize = startPx;
@@ -275,7 +276,7 @@ export function initCredits() {
         invertColors(true, prefersReducedMotion ? null : tl, 0);
       }
 
-      // Expand new row — switch title to display font before growing
+      // Expand new row
       const details = row.querySelector('.credit-row__details');
       const inner = details.querySelector('.credit-row__details-inner');
       row.classList.add('is-active');
