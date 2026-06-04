@@ -503,15 +503,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .portal-scene--aperture-dual .portal-scene__about-inner::before {
-  inset: -42% -28%;
-  background:
-    radial-gradient(
-      circle at 47% 50%,
-      oklch(0 0 0 / 0.96) 0%,
-      oklch(0 0 0 / 0.86) 44%,
-      oklch(0 0 0 / 0.24) 66%,
-      oklch(0 0 0 / 0) 80%
-    );
+  content: none;
 }
 
 .portal-scene--aperture-dual .about-stub__headline,
@@ -521,8 +513,8 @@ a { color: inherit; text-decoration: none; }
 
 .aperture-video-shell {
   z-index: 6;
-  --aperture-hole: 0vmin;
-  --aperture-feather: 10vmin;
+  --aperture-hole: -1vmin;
+  --aperture-feather: 1vmin;
   -webkit-mask-image:
     radial-gradient(
       circle at 50% 52%,

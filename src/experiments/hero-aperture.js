@@ -59,8 +59,8 @@ function init() {
     });
   }
   gsap.set(videoShell, {
-    '--aperture-hole': '0vmin',
-    '--aperture-feather': '10vmin',
+    '--aperture-hole': '-1vmin',
+    '--aperture-feather': '1vmin',
     autoAlpha: 1,
   });
   gsap.set(video, { scale: 1.02, filter: 'blur(0px) saturate(1)' });
