@@ -751,15 +751,30 @@ body.show-grid .bg-columns {
   letter-spacing: 0.07em;
 }
 
-.credit-row__platform--logo {
+/* Double class (0-2-0) beats the shared .credit-row__platform rule (0-1-0) below. */
+.credit-row__platform.credit-row__platform--logo {
   height: 0.95rem;
   width: auto;
   max-width: 8rem;
   object-fit: contain;
   object-position: left center;
   display: block;
-  filter: brightness(0) invert(var(--credits-logo-invert, 0));
   opacity: 0.85;
+  filter: brightness(0) invert(var(--credits-logo-invert, 0)) blur(0px);
+  transition:
+    filter var(--credits-dim-duration) var(--credits-dim-ease),
+    opacity var(--credits-dim-duration) var(--credits-dim-ease);
+}
+
+/* Dim state: preserve silhouette, add blur. Specificity must beat the hover-dim rule below. */
+.credits-list.is-row-hovered .credit-row__header .credit-row__platform.credit-row__platform--logo {
+  filter: brightness(0) invert(var(--credits-logo-invert, 0)) blur(var(--credits-dim-blur));
+}
+
+/* Active (hovered) row: restore full-opacity silhouette. */
+.credits-list.is-row-hovered .credit-row__header.is-hovered .credit-row__platform.credit-row__platform--logo {
+  opacity: 0.85;
+  filter: brightness(0) invert(var(--credits-logo-invert, 0)) blur(0px);
 }
 
 .credit-row__title,
