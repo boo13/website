@@ -143,6 +143,8 @@ Defined on `:root` in `src/styles/index.css`:
 | `--color-nearblack` | `oklch(0.14 0 0)` | Primary background |
 | `--color-charcoal` | `oklch(0.2 0 0)` | Secondary dark background |
 | `--color-gray` | `oklch(0.51 0 0)` | Defined but unused on homepage |
+| `--color-accent-blue` | `oklch(0.804 0.146 220)` | Chromatic trail accent |
+| `--color-accent-red` | `oklch(0.656 0.235 13)` | Chromatic trail accent |
 
 ### Project Page Tokens
 
@@ -219,8 +221,8 @@ Two chromatic colors exist in the system. Both are homepage-only and used exclus
 
 | Color | Value | Uses |
 |-------|-------|------|
-| Blue | `oklch(0.804 0.146 220)` | Hero name color trail (screen blend), credits CA flash (text-shadow) |
-| Red | `oklch(0.656 0.235 13)` | Hero name color trail (screen blend), credits CA flash (text-shadow) |
+| Blue | `oklch(0.804 0.146 220)` | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow) |
+| Red | `oklch(0.656 0.235 13)` | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow) |
 
 ---
 
@@ -556,6 +558,7 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
   - Max opacity: `TRAIL_OPACITY` (0.85)
   - Spring-back: 0.5s `power2.out` when velocity drops below threshold
   - Suppressed during about-intro pin and gallery `.active` state
+- Hero social hover adapts the same blue/red chromatic colors as a brief SVG `drop-shadow` trail during a `translateY(-5px) → 2px → 0` nudge. No background hover wash.
 
 **Corner Brackets:**
 - Four `::before`/`::after` L-shaped pseudo-elements, 1px offwhite lines, 22×22px
