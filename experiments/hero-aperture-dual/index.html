@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hero Aperture — Experiments</title>
+  <title>Hero Aperture Dual Video — Experiments</title>
   <style>html, body { background: #0a0a0a; margin: 0; padding: 0; }</style>
   <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css">
   <link rel="stylesheet" href="https://use.typekit.net/gya6int.css">
@@ -12,20 +12,34 @@
 <body>
   <div class="exp-chrome">
     <a href="/experiments/" class="exp-back">&larr; Experiments</a>
-    <span class="exp-label">center aperture · blurred video edges · radial separation</span>
+    <span class="exp-label">dual video aperture · text fill · black center</span>
   </div>
 
   <div id="smooth-wrapper">
   <div id="smooth-content">
 
-    <section id="hero" class="portal-scene portal-scene--aperture">
+    <section id="hero" class="portal-scene portal-scene--aperture portal-scene--aperture-dual">
+      <div class="aperture-back-video-shell" aria-hidden="true">
+        <video
+          class="aperture-back-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          crossorigin
+          poster=""
+        >
+          <source src="https://media.randycounsman.com/video/Cowboy.War.10secReel.v01_1920x1080.webm" type="video/webm">
+        </video>
+      </div>
+
       <div class="portal-scene__about">
         <div class="portal-scene__about-inner">
           <span class="portal-scene__about-kicker" aria-hidden="true"></span>
           <p class="about-stub__label">About</p>
-          <h2 class="about-stub__headline" data-aperture-text-fill>Story, structure, and style for shows that need to cut through.</h2>
+          <h2 class="about-stub__headline" data-aperture-text-fill>Story, structure, and style through every layer of the cut.</h2>
           <p class="about-stub__body" data-aperture-text-fill>
-            The video never fully disappears here. It stays alive as a blurred perimeter while the center opens onto the About layer behind it.
+            A second work sample resolves beneath the aperture while the original montage stays alive as the blurred edge of the frame.
           </p>
         </div>
       </div>

@@ -442,11 +442,81 @@ a { color: inherit; text-decoration: none; }
   background:
     radial-gradient(
       circle at 48% 50%,
-      oklch(0.968 0.006 75 / 0.24) 0%,
-      oklch(0.14 0 0 / 0.92) 38%,
-      oklch(0.14 0 0 / 0.16) 64%,
-      oklch(0.14 0 0 / 0) 78%
+      oklch(0 0 0 / 0.9) 0%,
+      oklch(0 0 0 / 0.82) 38%,
+      oklch(0 0 0 / 0.28) 64%,
+      oklch(0 0 0 / 0) 78%
     );
+}
+
+.aperture-back-video-shell {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.aperture-back-video-shell::before,
+.aperture-back-video-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.aperture-back-video-shell::before {
+  z-index: 2;
+  background:
+    radial-gradient(
+      circle at 50% 52%,
+      oklch(0 0 0 / 0.92) 0%,
+      oklch(0 0 0 / 0.84) 34%,
+      oklch(0 0 0 / 0.36) 64%,
+      oklch(0 0 0 / 0.08) 100%
+    );
+}
+
+.aperture-back-video-shell::after {
+  z-index: 3;
+  background:
+    linear-gradient(
+      180deg,
+      oklch(0 0 0 / 0.5) 0%,
+      oklch(0 0 0 / 0.06) 42%,
+      oklch(0 0 0 / 0.74) 100%
+    );
+}
+
+.aperture-back-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 50% 52%;
+  will-change: transform, filter;
+}
+
+.portal-scene--aperture-dual .portal-scene__about {
+  z-index: 5;
+}
+
+.portal-scene--aperture-dual .portal-scene__about-inner::before {
+  inset: -42% -28%;
+  background:
+    radial-gradient(
+      circle at 47% 50%,
+      oklch(0 0 0 / 0.96) 0%,
+      oklch(0 0 0 / 0.86) 44%,
+      oklch(0 0 0 / 0.24) 66%,
+      oklch(0 0 0 / 0) 80%
+    );
+}
+
+.portal-scene--aperture-dual .about-stub__headline,
+.portal-scene--aperture-dual .about-stub__body {
+  text-shadow: 0 2px 24px oklch(0 0 0 / 0.78);
 }
 
 .aperture-video-shell {
