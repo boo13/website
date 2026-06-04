@@ -18,7 +18,22 @@ export function initProjectVideo() {
   const playBtn = section.querySelector('.project-hero__play-btn');
   const soundBtn = section.querySelector('.project-hero__sound-btn');
   const creditsBtn = section.querySelector('.project-hero__credits-btn');
+  const closeBtn = section.querySelector('.project-hero__close');
   const backBtn = document.querySelector('.project-footer__back-btn');
+
+  // Use history.back() when the visitor came from this site so the browser can
+  // restore the previous page from bfcache (preserves scroll + skips preloader).
+  // Falls through to the anchor's href="/" for direct/external visitors.
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      const cameFromSameOrigin =
+        document.referrer && document.referrer.startsWith(location.origin);
+      if (cameFromSameOrigin && history.length > 1) {
+        e.preventDefault();
+        history.back();
+      }
+    });
+  }
   const timelineFill = section.querySelector(
     '.project-hero__timeline-progress'
   );
