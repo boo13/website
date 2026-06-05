@@ -404,6 +404,40 @@ body.show-grid .bg-columns {
   }
 }
 
+.hero-social .social-icon.is-entering svg {
+  animation: socialIconChromaticEntrance 0.72s var(--ease-out-expo) forwards;
+}
+
+@keyframes socialIconChromaticEntrance {
+  0% {
+    transform: translateY(10px);
+    filter: drop-shadow(-4px 8px 0 var(--color-accent-blue))
+      drop-shadow(4px 4px 0 var(--color-accent-red));
+    opacity: 0;
+  }
+
+  35% {
+    transform: translateY(-4px);
+    filter: drop-shadow(-2px 5px 0 var(--color-accent-blue))
+      drop-shadow(2px 3px 0 var(--color-accent-red));
+    opacity: 0.9;
+  }
+
+  65% {
+    transform: translateY(2px);
+    filter: drop-shadow(-1px -2px 0 var(--color-accent-blue))
+      drop-shadow(1px 2px 0 var(--color-accent-red));
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 0 0 oklch(0.804 0.146 220 / 0))
+      drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0));
+    opacity: 1;
+  }
+}
+
 /* =====================================================
    SECTION 2: HORIZONTAL SCROLL GALLERY
    Vertical scroll triggers horizontal card movement
