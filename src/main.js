@@ -1,12 +1,11 @@
 import './styles/index.css';
-import './styles/about-intro.css';
+import './styles/hero-aperture-dual.css';
 import './styles/video-lightbox.css';
 import { ScrollSmoother, ScrollTrigger } from './animations/scroll-defaults.js';
-import { initHero } from './sections/hero.js';
+import { initHeroApertureDual } from './sections/hero-aperture-dual.js';
+import { initMarquee } from './sections/hero-aperture-marquee.js';
 import { initGallery } from './sections/gallery.js';
 import { initCredits } from './sections/credits.js';
-import { initAbout } from './sections/about.js';
-import { initAboutIntro } from './sections/about-intro.js';
 import { initFooterReveal } from './sections/footer-reveal.js';
 import { initCustomCursor } from './components/custom-cursor.js';
 import { runPreloader } from './components/preloader.js';
@@ -31,12 +30,11 @@ function init() {
   // Initialize sections (without hero animations yet)
   const cleanupCredits = initCredits();
   const cleanupCursor = initCustomCursor();
-  const cleanupAboutIntro = initAboutIntro();
   const cleanupGallery = initGallery();
   const cleanupNav = initNav();
-  initAbout();
   const cleanupFooterReveal = initFooterReveal();
   const cleanupLightbox = initVideoLightbox();
+  const cleanupMarquee = initMarquee();
 
   // Refresh once after all sections register their triggers.
   ScrollTrigger.refresh();
@@ -47,7 +45,7 @@ function init() {
   document.addEventListener(
     'loadingComplete',
     () => {
-      cleanupHero = initHero();
+      cleanupHero = initHeroApertureDual();
     },
     { once: true }
   );
@@ -67,7 +65,7 @@ function init() {
     if (smoother) smoother.kill();
     if (typeof cleanupCredits === 'function') cleanupCredits();
     if (typeof cleanupCursor === 'function') cleanupCursor();
-    if (typeof cleanupAboutIntro === 'function') cleanupAboutIntro();
+    if (typeof cleanupMarquee === 'function') cleanupMarquee();
     if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
     if (typeof cleanupLightbox === 'function') cleanupLightbox();
     if (cleanupGallery) cleanupGallery.revert();

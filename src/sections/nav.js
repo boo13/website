@@ -20,7 +20,7 @@ export function initNav() {
     ScrollTrigger.create({
       trigger: '#hero',
       start: 'top top',
-      end: () => `+=${window.innerHeight * 1.5}`,
+      end: () => `+=${window.innerHeight * 2.3}`,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         nav.classList.toggle('is-visible', self.progress > 0.5);
