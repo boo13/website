@@ -9,12 +9,9 @@ export function initCustomCursor() {
     return () => {};
 
   // Target sections
-  const sections = document.querySelectorAll('.hero-section');
+  const sections = document.querySelectorAll('.hero-section, .portal-scene');
   if (!sections.length) return () => {};
-  const cursorRoots = [
-    ...sections,
-    ...document.querySelectorAll('.hero-social-fixed'),
-  ];
+  const cursorRoots = [...sections];
 
   // Create cursor elements (fixed position, not per-section)
   const dot = document.createElement('div');

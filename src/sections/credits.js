@@ -11,34 +11,74 @@ const prefersReducedMotion = window.matchMedia(
 ).matches;
 
 const PLATFORM_LOGOS = {
-  cnn: { src: 'images/logos/CNN_logo_red.svg', alt: 'CNN', variant: 'standard' },
-  curiositystream: { src: 'images/logos/CuriosityStream_mono.svg', alt: 'CuriosityStream' },
+  cnn: {
+    src: 'images/logos/CNN_logo_red.svg',
+    alt: 'CNN',
+    variant: 'standard',
+  },
+  curiositystream: {
+    src: 'images/logos/CuriosityStream_mono.svg',
+    alt: 'CuriosityStream',
+  },
   discovery: { src: 'images/logos/Discovery.png', alt: 'Discovery' },
-  'fox nation': { src: 'images/logos/Fox_Nation_logo.svg', alt: 'Fox Nation', variant: 'mark' },
+  'fox nation': {
+    src: 'images/logos/Fox_Nation_logo.svg',
+    alt: 'Fox Nation',
+    variant: 'mark',
+  },
   history: { src: 'images/logos/History.png', alt: 'History', variant: 'mark' },
-  'i.d.': { src: 'images/logos/ID_2020.svg', alt: 'Investigation Discovery', variant: 'standard' },
-  id: { src: 'images/logos/ID_2020.svg', alt: 'Investigation Discovery', variant: 'standard' },
-  'nat geo': { src: 'images/logos/NatGeoLogo_White.svg', alt: 'Nat Geo', variant: 'standard' },
+  'i.d.': {
+    src: 'images/logos/ID_2020.svg',
+    alt: 'Investigation Discovery',
+    variant: 'standard',
+  },
+  id: {
+    src: 'images/logos/ID_2020.svg',
+    alt: 'Investigation Discovery',
+    variant: 'standard',
+  },
+  'nat geo': {
+    src: 'images/logos/NatGeoLogo_White.svg',
+    alt: 'Nat Geo',
+    variant: 'standard',
+  },
   netflix: { src: 'images/logos/Netflix_white2.png', alt: 'Netflix' },
-  pbs: { src: 'images/logos/pbs_logo_white.png', alt: 'PBS', variant: 'standard' },
+  pbs: {
+    src: 'images/logos/pbs_logo_white.png',
+    alt: 'PBS',
+    variant: 'standard',
+  },
 };
 
 function normalizePlatform(platform) {
   return (platform || '').trim().toLowerCase();
 }
 
+function publicAssetPath(path) {
+  if (!path) return '';
+  if (/^(https?:)?\/\//.test(path) || path.startsWith('/')) return path;
+  return `/${path}`;
+}
+
 function getPlatformLogo(project) {
-  const fallbackLogo = PLATFORM_LOGOS[normalizePlatform(project.platform)] || null;
+  const fallbackLogo =
+    PLATFORM_LOGOS[normalizePlatform(project.platform)] || null;
 
   if (project.networkLogo) {
     return {
       ...fallbackLogo,
-      src: project.networkLogo,
-      alt: project.networkLogoAlt || fallbackLogo?.alt || project.platform || '',
+      src: publicAssetPath(project.networkLogo),
+      alt:
+        project.networkLogoAlt || fallbackLogo?.alt || project.platform || '',
     };
   }
 
-  return fallbackLogo;
+  if (!fallbackLogo) return null;
+
+  return {
+    ...fallbackLogo,
+    src: publicAssetPath(fallbackLogo.src),
+  };
 }
 
 function buildRow(project) {
@@ -103,9 +143,9 @@ function buildRow(project) {
   const img = document.createElement('img');
   img.alt = project.title;
   if (project.preview) {
-    img.dataset.src = project.preview;
+    img.dataset.src = publicAssetPath(project.preview);
   } else if (project.poster) {
-    img.dataset.src = project.poster;
+    img.dataset.src = publicAssetPath(project.poster);
   }
   detailImage.appendChild(img);
 
@@ -151,7 +191,8 @@ export function initCredits() {
 
   // Toggle the fixed header gradient + hero name between light-bg and dark-bg modes.
   function setHeroHeaderLight(onLight) {
-    if (topGradient) topGradient.style.background = onLight ? lightGradient : '';
+    if (topGradient)
+      topGradient.style.background = onLight ? lightGradient : '';
     if (fixedHeroName) {
       fixedHeroName.style.color = onLight ? 'oklch(0.14 0 0)' : '';
       fixedHeroName.style.textShadow = onLight ? 'none' : '';
@@ -186,7 +227,11 @@ export function initCredits() {
       setHeroHeaderLight(!toDark);
       return;
     }
-    const vars = { ...(toDark ? darkVars : lightVars), duration: 0.9, ease: 'power2.inOut' };
+    const vars = {
+      ...(toDark ? darkVars : lightVars),
+      duration: 0.9,
+      ease: 'power2.inOut',
+    };
     if (tl) {
       tl.to(section, vars, pos ?? 0);
     } else {
@@ -198,11 +243,18 @@ export function initCredits() {
   function growTitle(titleEl, tl, pos) {
     const startPx = parseFloat(getComputedStyle(titleEl).fontSize);
     titleEl.dataset.baseSize = startPx;
-    tl.fromTo(titleEl, { fontSize: startPx }, { fontSize: '2.25rem', duration: 0.5, ease: 'expo.out' }, pos);
+    tl.fromTo(
+      titleEl,
+      { fontSize: startPx },
+      { fontSize: '2.25rem', duration: 0.5, ease: 'expo.out' },
+      pos
+    );
   }
 
   function shrinkTitle(titleEl, tl, pos) {
-    const basePx = parseFloat(titleEl.dataset.baseSize || getComputedStyle(titleEl).fontSize);
+    const basePx = parseFloat(
+      titleEl.dataset.baseSize || getComputedStyle(titleEl).fontSize
+    );
     tl.to(
       titleEl,
       {
@@ -231,7 +283,9 @@ export function initCredits() {
       // Toggle closed: shrink title + collapse height + return to light
       const details = row.querySelector('.credit-row__details');
       row.classList.remove('is-active');
-      row.querySelector('.credit-row__header').setAttribute('aria-expanded', 'false');
+      row
+        .querySelector('.credit-row__header')
+        .setAttribute('aria-expanded', 'false');
       details.setAttribute('aria-hidden', 'true');
       details.style.overflow = 'clip';
       activeRow = null;
@@ -247,7 +301,13 @@ export function initCredits() {
         shrinkTitle(titleEl, closeTl, 0);
         closeTl.to(
           details,
-          { height: 0, duration: 0.4, ease: 'expo.inOut', onComplete: () => gsap.delayedCall(0, () => ScrollTrigger.refresh()) },
+          {
+            height: 0,
+            duration: 0.4,
+            ease: 'expo.inOut',
+            onComplete: () =>
+              gsap.delayedCall(0, () => ScrollTrigger.refresh()),
+          },
           0
         );
         activeTween = closeTl;
@@ -260,7 +320,9 @@ export function initCredits() {
         const prevTitleEl = activeRow.querySelector('.credit-row__title');
         const prevDetails = activeRow.querySelector('.credit-row__details');
         activeRow.classList.remove('is-active');
-        activeRow.querySelector('.credit-row__header').setAttribute('aria-expanded', 'false');
+        activeRow
+          .querySelector('.credit-row__header')
+          .setAttribute('aria-expanded', 'false');
         prevDetails.setAttribute('aria-hidden', 'true');
         prevDetails.style.overflow = 'clip';
 
@@ -269,7 +331,11 @@ export function initCredits() {
           gsap.set(prevTitleEl, { clearProps: 'fontSize' });
         } else {
           shrinkTitle(prevTitleEl, tl, 0);
-          tl.to(prevDetails, { height: 0, duration: 0.3, ease: 'expo.inOut' }, 0);
+          tl.to(
+            prevDetails,
+            { height: 0, duration: 0.3, ease: 'expo.inOut' },
+            0
+          );
         }
       } else {
         // First expansion: invert to dark
@@ -280,7 +346,9 @@ export function initCredits() {
       const details = row.querySelector('.credit-row__details');
       const inner = details.querySelector('.credit-row__details-inner');
       row.classList.add('is-active');
-      row.querySelector('.credit-row__header').setAttribute('aria-expanded', 'true');
+      row
+        .querySelector('.credit-row__header')
+        .setAttribute('aria-expanded', 'true');
       details.setAttribute('aria-hidden', 'false');
 
       if (!prefersReducedMotion) {
@@ -293,13 +361,15 @@ export function initCredits() {
       const img = details.querySelector('img[data-src]');
       if (img) {
         gsap.set(img, { opacity: 0 });
-        img.onload = () => gsap.to(img, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+        img.onload = () =>
+          gsap.to(img, { opacity: 1, duration: 0.4, ease: 'power2.out' });
         img.src = img.dataset.src;
         delete img.dataset.src;
       }
 
       if (prefersReducedMotion) {
         details.style.height = 'auto';
+        details.style.overflow = 'visible';
         gsap.delayedCall(0, () => ScrollTrigger.refresh());
       } else {
         tl.to(
@@ -336,10 +406,18 @@ export function initCredits() {
       trigger: section,
       start: 'top top',
       end: 'bottom top',
-      onEnter() { if (!activeRow) setHeroHeaderLight(true); },
-      onLeave() { setHeroHeaderLight(false); },
-      onEnterBack() { if (!activeRow) setHeroHeaderLight(true); },
-      onLeaveBack() { setHeroHeaderLight(false); },
+      onEnter() {
+        if (!activeRow) setHeroHeaderLight(true);
+      },
+      onLeave() {
+        setHeroHeaderLight(false);
+      },
+      onEnterBack() {
+        if (!activeRow) setHeroHeaderLight(true);
+      },
+      onLeaveBack() {
+        setHeroHeaderLight(false);
+      },
       // onRefresh fires after recalculation — handles already-active state on load/refresh
       onRefresh(self) {
         if (!activeRow) setHeroHeaderLight(self.isActive);
@@ -379,7 +457,7 @@ export function initCredits() {
     list.removeEventListener('focusout', handleListFocusOut);
   });
 
-  fetch('data/Projects.json')
+  fetch('/data/Projects.json')
     .then((response) => response.json())
     .then((data) => {
       if (isDisposed) return;

@@ -1,0 +1,346 @@
+/* =====================================================
+   ABOUT STUB
+   Biographical copy revealed through the aperture transition
+====================================================== */
+.about-stub__label {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: oklch(0.968 0.006 75 / 0.4);
+  margin-bottom: 1.5rem;
+}
+
+.about-stub__headline {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--color-offwhite);
+  margin-bottom: 1.5rem;
+}
+
+.about-stub__body {
+  color: oklch(0.968 0.006 75 / 0.6);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+/* =====================================================
+   PINNED PORTAL SCENE — APERTURE DUAL
+====================================================== */
+.portal-scene {
+  --portal-shade: 0;
+  --aperture-hole: 0vmin;
+  --aperture-feather: 10vmin;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--color-nearblack);
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  isolation: isolate;
+  cursor: none;
+}
+
+.portal-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: radial-gradient(
+    circle at 50% 52%,
+    oklch(0 0 0 / 0) 0%,
+    oklch(0 0 0 / 0.18) 44%,
+    oklch(0 0 0 / 0.72) 100%
+  );
+  opacity: var(--portal-shade);
+  pointer-events: none;
+}
+
+.portal-scene__about {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--container-padding);
+  opacity: 0;
+  transform-origin: 50% 52%;
+  will-change: transform, opacity, filter;
+}
+
+.portal-scene__about-inner {
+  position: relative;
+  width: min(78vw, 920px);
+  max-width: 920px;
+  text-align: left;
+}
+
+.portal-scene__about-inner::before {
+  content: '';
+  position: absolute;
+  inset: -34% -24%;
+  z-index: -1;
+  background: radial-gradient(
+    circle at 42% 48%,
+    oklch(0.968 0.006 75 / 0.2) 0%,
+    oklch(0.14 0 0 / 0.78) 39%,
+    oklch(0.14 0 0 / 0) 70%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.portal-scene__about-kicker {
+  display: block;
+  width: 4.5rem;
+  height: 1px;
+  margin-bottom: 1.4rem;
+  background: oklch(0.968 0.006 75 / 0.44);
+}
+
+.portal-scene--aperture .portal-scene__about {
+  z-index: 3;
+}
+
+.portal-scene--aperture .portal-scene__about-inner::before {
+  inset: -46% -30%;
+  background: radial-gradient(
+    circle at 48% 50%,
+    oklch(0 0 0 / 0.9) 0%,
+    oklch(0 0 0 / 0.82) 38%,
+    oklch(0 0 0 / 0.28) 64%,
+    oklch(0 0 0 / 0) 78%
+  );
+}
+
+.aperture-back-video-shell {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.aperture-back-video-shell::before,
+.aperture-back-video-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.aperture-back-video-shell::before {
+  z-index: 2;
+  background: radial-gradient(
+    circle at 50% 52%,
+    oklch(0 0 0 / 0.92) 0%,
+    oklch(0 0 0 / 0.84) 34%,
+    oklch(0 0 0 / 0.36) 64%,
+    oklch(0 0 0 / 0.08) 100%
+  );
+}
+
+.aperture-back-video-shell::after {
+  z-index: 3;
+  background: linear-gradient(
+    180deg,
+    oklch(0 0 0 / 0.5) 0%,
+    oklch(0 0 0 / 0.06) 42%,
+    oklch(0 0 0 / 0.74) 100%
+  );
+}
+
+.aperture-back-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: 50% 52%;
+  will-change: transform, filter;
+}
+
+.portal-scene--aperture-dual .portal-scene__about {
+  z-index: 5;
+}
+
+.portal-scene--aperture-dual .portal-scene__about-inner::before {
+  content: '';
+  inset: -14% -8% -16%;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse at 42% 42%,
+    oklch(0 0 0 / 0.82) 0%,
+    oklch(0 0 0 / 0.72) 43%,
+    oklch(0 0 0 / 0.18) 78%,
+    oklch(0 0 0 / 0) 100%
+  );
+  filter: blur(14px);
+}
+
+.portal-scene--aperture-dual .about-stub__headline,
+.portal-scene--aperture-dual .about-stub__body {
+  text-shadow: 0 2px 24px oklch(0 0 0 / 0.78);
+}
+
+.portal-scene--aperture-dual .about-stub__body {
+  color: oklch(0.968 0.006 75 / 0.72);
+}
+
+.aperture-video-shell {
+  z-index: 6;
+  --aperture-hole: -1vmin;
+  --aperture-feather: 1vmin;
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 52%,
+    transparent var(--aperture-hole),
+    black calc(var(--aperture-hole) + var(--aperture-feather))
+  );
+  mask-image: radial-gradient(
+    circle at 50% 52%,
+    transparent var(--aperture-hole),
+    black calc(var(--aperture-hole) + var(--aperture-feather))
+  );
+  will-change:
+    filter,
+    opacity,
+    -webkit-mask-image,
+    mask-image;
+}
+
+.portal-scene--aperture .hero-video {
+  transform-origin: 50% 52%;
+  will-change: transform, filter;
+}
+
+.portal-scene--aperture .hero-content {
+  z-index: 10;
+}
+
+.aperture-edge-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  background: radial-gradient(
+    circle at 50% 52%,
+    oklch(0 0 0 / 0) 0%,
+    oklch(0 0 0 / 0) 38%,
+    oklch(0 0 0 / 0.48) 74%,
+    oklch(0 0 0 / 0.86) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .portal-scene__about {
+    justify-content: flex-start;
+  }
+
+  .portal-scene__about-inner {
+    width: 100%;
+  }
+
+  .portal-scene__about-inner::before {
+    inset: -28% -18%;
+  }
+
+  .portal-scene__about-kicker {
+    width: 3.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .portal-scene--aperture-dual .about-stub__headline {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+    line-height: 1.12;
+  }
+
+  .portal-scene--aperture-dual .about-stub__body {
+    font-size: 1rem;
+    line-height: 1.58;
+  }
+}
+
+/* =====================================================
+   MARQUEE — folded into bottom of the pinned hero scene
+====================================================== */
+.portal-scene--aperture-dual .about-intro__marquee {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  transform: translateX(-50%);
+  z-index: 6;
+  padding: 0;
+  width: min(78vw, 920px);
+  max-width: 920px;
+  overflow: hidden;
+  pointer-events: auto;
+  opacity: 0;
+  visibility: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.portal-scene--aperture-dual .about-intro__marquee-track {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+}
+
+.portal-scene--aperture-dual .about-intro__marquee-item {
+  font-family: var(--ff-body, 'Inter', sans-serif);
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  font-weight: 400;
+  color: oklch(0.968 0.006 75 / 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .portal-scene--aperture-dual .about-intro__marquee-track {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .portal-scene--aperture-dual .about-intro__marquee-track {
+    gap: 1.5rem;
+  }
+
+  .portal-scene--aperture-dual .about-intro__marquee-item {
+    font-size: 0.65rem;
+  }
+}
+
+/* =====================================================
+   REDUCED MOTION — disable smoother scroll transforms
+====================================================== */
+@media (prefers-reduced-motion: reduce) {
+  #smooth-wrapper {
+    position: static;
+    overflow: visible;
+    height: auto;
+  }
+
+  #smooth-content {
+    transform: none !important;
+  }
+}

@@ -1,16 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="hero-aperture-dual-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Randy Counsman - Nonfiction Video Development & Production</title>
+    <title>Hero Aperture Dual — Full Flow — Experiments</title>
     <meta
       name="description"
-      content="Randy Counsman is a video producer and Creative Director specializing in nonfiction content across television, streaming, news, and social."
+      content="Aperture dual hero with the rest of the production page below it for flow review."
     />
     <link rel="icon" href="/favicon/favicon.ico" />
 
-    <!-- Critical inline styles to prevent white flash -->
     <style>
       html,
       body {
@@ -19,7 +18,6 @@
         padding: 0;
       }
 
-      /* Preloader - ensures dark background immediately */
       .loading-overlay {
         position: fixed;
         inset: 0;
@@ -128,14 +126,22 @@
       }
     </style>
 
-    <!-- Typekit Fonts -->
     <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css" />
     <link rel="stylesheet" href="https://use.typekit.net/gya6int.css" />
-
-    <!-- Styles injected by Vite from src/main.js -->
+    <script
+      type="module"
+      src="/src/experiments/hero-aperture-dual-full.js"
+    ></script>
   </head>
   <body>
-    <h1 class="sr-only">Randy Counsman - Nonfiction Video Development and Production</h1>
+    <h1 class="sr-only">
+      Randy Counsman - Nonfiction Video Development and Production
+    </h1>
+
+    <div class="exp-chrome">
+      <a href="/experiments/" class="exp-back">&larr; Experiments</a>
+      <span class="exp-label">aperture dual · full page flow</span>
+    </div>
 
     <div class="bg-columns" aria-hidden="true">
       <div class="bg-columns-col"></div>
@@ -146,7 +152,6 @@
       <div class="bg-columns-col"></div>
     </div>
 
-    <!-- Loading overlay -->
     <div class="loading-overlay">
       <div class="preloader-wrapper">
         <div class="preloader-edges">
@@ -159,12 +164,6 @@
       </div>
     </div>
 
-    <!-- Fixed-position elements must stay outside ScrollSmoother wrapper -->
-    <div class="gallery-progress">
-      <span class="progress-current">1</span>
-      <span class="progress-divider">/</span>
-      <span class="progress-total">5</span>
-    </div>
     <div class="hero-fixed-name-container" aria-hidden="true">
       <div id="hero-name-fixed" class="hero-name hero-name-fixed">
         Randy Counsman
@@ -174,10 +173,10 @@
 
     <nav class="pill-nav" id="pill-nav" aria-label="Site navigation">
       <a href="#work" class="pill-nav__item" data-section="work">Work</a>
-      <a href="#credits" class="pill-nav__item" data-section="credits"
-        >Credits</a
-      >
-      <a href="contact.html" class="pill-nav__item">Contact</a>
+      <a href="#credits" class="pill-nav__item" data-section="credits">
+        Credits
+      </a>
+      <a href="/contact.html" class="pill-nav__item">Contact</a>
     </nav>
 
     <div id="smooth-wrapper">
@@ -194,14 +193,11 @@
               muted
               playsinline
               crossorigin
+              poster=""
             >
               <source
                 src="https://media.randycounsman.com/video/Cowboy.War.10secReel.v01_1920x1080.webm"
                 type="video/webm"
-              />
-              <source
-                src="https://media.randycounsman.com/video/Cowboy.War.10secReel.v01_1920x1080.mp4"
-                type="video/mp4"
               />
             </video>
           </div>
@@ -238,14 +234,11 @@
               muted
               playsinline
               crossorigin
+              poster=""
             >
               <source
                 src="https://media.randycounsman.com/video/LandingPageMontagev04.2.webm"
                 type="video/webm"
-              />
-              <source
-                src="https://media.randycounsman.com/video/LandingPageMontagev04.2.mp4"
-                type="video/mp4"
               />
             </video>
             <div class="hero-gradient"></div>
@@ -278,11 +271,6 @@
           </div>
         </section>
 
-        <!-- =====================================================
-         SECTION 2: FEATURED WORKS GALLERY
-         Horizontal scroll triggered by vertical scroll
-         Card size: ~60vw width, 70vh height
-    ====================================================== -->
         <section id="work" class="featured-work-section">
           <div class="gallery-container">
             <div class="gallery-track">
@@ -291,10 +279,6 @@
           </div>
         </section>
 
-        <!-- =====================================================
-         SECTION 3: ADDITIONAL CREDITS / PAST PROJECTS
-         Accordion
-    ====================================================== -->
         <section id="credits" class="credits-section">
           <div class="container">
             <h2 class="section-title">Past Projects</h2>
@@ -304,10 +288,6 @@
           </div>
         </section>
 
-        <!-- =====================================================
-         SECTION: CALL TO ACTION
-         Newsletter signup + contact link
-    ====================================================== -->
         <section id="cta" class="cta-section">
           <div class="container">
             <div class="cta-content">
@@ -343,7 +323,7 @@
 
               <hr class="cta-divider" />
 
-              <a href="contact.html" class="cta-contact-btn">
+              <a href="/contact.html" class="cta-contact-btn">
                 Get in Touch
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path
@@ -366,7 +346,6 @@
 
     <footer class="site-footer" id="site-footer">
       <div class="footer-inner">
-        <!-- Top: Tagline left + Nav right -->
         <div class="footer-top">
           <p class="footer-tagline">
             Got a project? Let's make<br />something together.
@@ -376,7 +355,7 @@
             <a href="#work" class="footer-nav-link">Work</a>
             <a href="#credits" class="footer-nav-link">Credits</a>
             <a
-              href="resume.html"
+              href="/resume.html"
               class="footer-nav-link footer-nav-link--external"
               >Resume
               <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
@@ -391,7 +370,6 @@
           </nav>
         </div>
 
-        <!-- Middle: 3-column grid with lines above -->
         <div class="footer-columns">
           <div class="footer-col">
             <span class="footer-col-label">Location</span>
@@ -399,7 +377,7 @@
           </div>
           <div class="footer-col">
             <span class="footer-col-label">Get in Touch</span>
-            <a href="contact.html" class="footer-col-link">Contact Form</a>
+            <a href="/contact.html" class="footer-col-link">Contact Form</a>
           </div>
           <div class="footer-col">
             <span class="footer-col-label">Socials</span>
@@ -420,13 +398,10 @@
           </div>
         </div>
 
-        <!-- Bottom: Copyright -->
         <p class="footer-copyright">
           &copy; Randy Counsman, <span id="footer-year">2026</span>
         </p>
       </div>
     </footer>
-
-    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

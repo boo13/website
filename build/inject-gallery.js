@@ -73,7 +73,7 @@ function renderGalleryCards(projects) {
         ? ` data-glightbox="type: video"` +
           ` data-title="${escAttr(p.title)}"` +
           ` data-description="${escAttr(p.role)}, ${escAttr(p.year)}"` +
-          ` data-href="${CDN_BASE}/${p.lightboxVideo}"`
+          ` data-href="${cdnAssetPath(p.lightboxVideo)}"`
         : '';
 
       const noVideoAttr = hasHoverVideo ? '' : ' data-no-video';
@@ -81,7 +81,7 @@ function renderGalleryCards(projects) {
       let videoHtml = '';
       if (hasHoverVideo) {
         const fallbackSource = p.hoverVideoFallback
-          ? `\n                            <source src="${CDN_BASE}/${p.hoverVideoFallback}" type="video/${ext(p.hoverVideoFallback)}">`
+          ? `\n                            <source src="${cdnAssetPath(p.hoverVideoFallback)}" type="video/${ext(p.hoverVideoFallback)}">`
           : '';
         videoHtml = `
                         <video
@@ -92,15 +92,17 @@ function renderGalleryCards(projects) {
                             crossorigin
                             preload="none"
                         >
-                            <source src="${CDN_BASE}/${p.hoverVideo}" type="video/${ext(p.hoverVideo)}">${fallbackSource}
+                            <source src="${cdnAssetPath(p.hoverVideo)}" type="video/${ext(p.hoverVideo)}">${fallbackSource}
                         </video>`;
       }
+
+      const previewSrc = publicAssetPath(p.preview || p.poster || '');
 
       const networkLogoHtml = hasNetworkLogo
         ? `
                         <img
                             class="card-network"
-                            src="${p.networkLogo}"
+                            src="${publicAssetPath(p.networkLogo)}"
                             alt="${escAttr(p.networkLogoAlt || '')}"
                         >`
         : '';
@@ -114,7 +116,7 @@ function renderGalleryCards(projects) {
                     <div class="card-media">
                         <img
                             class="card-thumbnail"
-                            src="${p.preview || p.poster || ''}"
+                            src="${previewSrc}"
                             alt="${escAttr(p.title)}"
                             loading="lazy"
                         >${videoHtml}
@@ -146,4 +148,16 @@ function escAttr(str) {
 
 function ext(path) {
   return path.split('.').pop() || 'webm';
+}
+
+function publicAssetPath(path) {
+  if (!path) return '';
+  if (/^(https?:)?\/\//.test(path) || path.startsWith('/')) return path;
+  return `/${path}`;
+}
+
+function cdnAssetPath(path) {
+  if (!path) return '';
+  if (/^(https?:)?\/\//.test(path)) return path;
+  return `${CDN_BASE}/${path.replace(/^\.?\//, '')}`;
 }
