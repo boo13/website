@@ -105,7 +105,7 @@ export function initHeroApertureDual() {
   gsap.set(aboutInner, { y: 40 });
   gsap.set(vignette, { autoAlpha: 0 });
   if (topGradient) gsap.set(topGradient, { autoAlpha: 0 });
-  if (fixedOverlays.length) gsap.set(fixedOverlays, { autoAlpha: 0 });
+  if (fixedOverlays.length) gsap.set(fixedOverlays, { autoAlpha: 0, filter: 'blur(10px)' });
   if (marquee) gsap.set(marquee, { autoAlpha: 0 });
 
   // Hero content hidden until textMaskRiseWords reveals it
@@ -233,12 +233,12 @@ export function initHeroApertureDual() {
       );
     }
 
-    // Fixed header name lands with the about copy reveal
+    // Fixed header name blurs in late — most of the about text is already visible
     if (fixedOverlays.length) {
       tl.to(
         fixedOverlays,
-        { autoAlpha: 1, duration: 0.32, ease: 'none' },
-        0.16
+        { autoAlpha: 1, filter: 'blur(0px)', duration: 0.32, ease: 'none' },
+        0.62
       );
     }
 
