@@ -1,5 +1,13 @@
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
+import ScrollSmoother from 'gsap/ScrollSmoother';
 import SplitText from 'gsap/SplitText';
+import { textMaskRiseWords } from '../animations/text-mask-rise.js';
+import {
+  TRAIL_K,
+  TRAIL_MAX_PX,
+  TRAIL_THRESH,
+  TRAIL_OPACITY,
+} from '../config.js';
 
 gsap.registerPlugin(SplitText);
 
@@ -22,7 +30,6 @@ function pauseDecorativeVideo(video) {
 function preserveSplitTextAccessibility(element, split) {
   const tag = element.tagName.toLowerCase();
   if (/^h[1-6]$/.test(tag)) return;
-
   element.removeAttribute('aria-label');
   [...split.words, ...split.chars].forEach((part) => {
     part.removeAttribute('aria-hidden');
@@ -39,6 +46,9 @@ export function initHeroApertureDual() {
   const videoShell = scene?.querySelector('.aperture-video-shell');
   const video = scene?.querySelector('.hero-video');
   const content = scene?.querySelector('.hero-content');
+  const heroName = content?.querySelector('.hero-name');
+  const heroSubtitle = content?.querySelector('.hero-subtitle');
+  const heroSocial = content?.querySelector('.hero-social');
   const about = scene?.querySelector('.portal-scene__about');
   const aboutInner = scene?.querySelector('.portal-scene__about-inner');
   const vignette = scene?.querySelector('.aperture-edge-vignette');
@@ -50,8 +60,7 @@ export function initHeroApertureDual() {
   const fixedName = document.getElementById('hero-name-fixed');
   const fixedOverlays = [fixedName].filter(Boolean);
   const marquee = scene.querySelector('.about-intro__marquee');
-
-  gsap.set('.hero-name', { autoAlpha: 1 });
+  const galleryEl = document.querySelector('.featured-work-section');
 
   const hasBackVideo = Boolean(backShell && backVideo);
   const finalHole = isMobile ? '64vmin' : '54vmin';
@@ -59,10 +68,11 @@ export function initHeroApertureDual() {
   const edgeOpacity = hasBackVideo ? 0.5 : 0.76;
   const finalShade = hasBackVideo ? 0.38 : 0.24;
 
+  // ─── Reduced motion ───────────────────────────────────────────────────────
   if (prefersReducedMotion) {
     pauseDecorativeVideo(backVideo);
     pauseDecorativeVideo(video);
-    gsap.set(content, { autoAlpha: 0 });
+    if (content) gsap.set(content, { autoAlpha: 0 });
     gsap.set(about, { autoAlpha: 1, scale: 1, filter: 'blur(0px)' });
     gsap.set(videoShell, {
       '--aperture-hole': finalHole,
@@ -73,25 +83,17 @@ export function initHeroApertureDual() {
       gsap.set(backShell, { autoAlpha: 0.72 });
       gsap.set(backVideo, { scale: 1.03, filter: 'blur(2px) saturate(1)' });
     }
-    if (fixedOverlays.length) {
-      gsap.set(fixedOverlays, { autoAlpha: 1 });
-    }
-    if (topGradient) {
-      gsap.set(topGradient, { autoAlpha: 0.85 });
-    }
-    if (marquee) {
-      gsap.set(marquee, { autoAlpha: 1 });
-    }
+    if (fixedOverlays.length) gsap.set(fixedOverlays, { autoAlpha: 1 });
+    if (topGradient) gsap.set(topGradient, { autoAlpha: 0.85 });
+    if (marquee) gsap.set(marquee, { autoAlpha: 1 });
     return () => {};
   }
 
+  // ─── Initial state ────────────────────────────────────────────────────────
   gsap.set(scene, { '--portal-shade': 0 });
   if (hasBackVideo) {
     gsap.set(backShell, { autoAlpha: 0 });
-    gsap.set(backVideo, {
-      scale: 1.22,
-      filter: 'blur(24px) saturate(0.62)',
-    });
+    gsap.set(backVideo, { scale: 1.22, filter: 'blur(24px) saturate(0.62)' });
   }
   gsap.set(videoShell, {
     '--aperture-hole': '-1vmin',
@@ -99,23 +101,23 @@ export function initHeroApertureDual() {
     autoAlpha: 1,
   });
   gsap.set(video, { scale: 1.02, filter: 'blur(0px) saturate(1)' });
-  gsap.set(about, {
-    autoAlpha: 0,
-    scale: 0.84,
-    filter: 'blur(14px)',
-  });
+  gsap.set(about, { autoAlpha: 0, scale: 0.84, filter: 'blur(14px)' });
   gsap.set(aboutInner, { y: 40 });
   gsap.set(vignette, { autoAlpha: 0 });
-  if (topGradient) {
-    gsap.set(topGradient, { autoAlpha: 0 });
-  }
-  if (fixedOverlays.length) {
-    gsap.set(fixedOverlays, { autoAlpha: 0 });
-  }
-  if (marquee) {
-    gsap.set(marquee, { autoAlpha: 0 });
-  }
+  if (topGradient) gsap.set(topGradient, { autoAlpha: 0 });
+  if (fixedOverlays.length) gsap.set(fixedOverlays, { autoAlpha: 0 });
+  if (marquee) gsap.set(marquee, { autoAlpha: 0 });
 
+  // Hero content hidden until textMaskRiseWords reveals it
+  if (heroSubtitle) gsap.set(heroSubtitle, { autoAlpha: 0, y: 20 });
+  if (heroSocial) gsap.set(heroSocial, { autoAlpha: 0, y: 20 });
+
+  // ─── Ticker state (velocity-driven chromatic trail) ───────────────────────
+  let tickerFn = null;
+  let springBackTween = null;
+  let cleanupMaskRise = () => {};
+
+  // ─── Scroll-driven aperture timeline ─────────────────────────────────────
   const ctx = gsap.context(() => {
     const textSplits = textFillEls.map((el) => {
       const split = SplitText.create(el, {
@@ -127,13 +129,11 @@ export function initHeroApertureDual() {
       return split;
     });
     const textChars = textSplits.flatMap((split) => split.chars);
-
-    if (textChars.length) {
-      gsap.set(textChars, { opacity: 0.15 });
-    }
+    if (textChars.length) gsap.set(textChars, { opacity: 0.15 });
 
     const tl = gsap.timeline({ paused: true });
 
+    // Hero content rack-focuses out first (text before video)
     if (content) {
       tl.to(
         content,
@@ -141,13 +141,14 @@ export function initHeroApertureDual() {
           autoAlpha: 0,
           y: -26,
           filter: 'blur(7px)',
-          duration: 0.28,
+          duration: 0.24,
           ease: 'none',
         },
         0
       );
     }
 
+    // Video rack-focus follows slightly after content
     if (video) {
       tl.to(
         video,
@@ -157,7 +158,7 @@ export function initHeroApertureDual() {
           duration: 1,
           ease: 'none',
         },
-        0
+        0.04
       );
     }
 
@@ -232,11 +233,12 @@ export function initHeroApertureDual() {
       );
     }
 
+    // Fixed header name lands with the about copy reveal
     if (fixedOverlays.length) {
       tl.to(
         fixedOverlays,
-        { autoAlpha: 1, duration: 0.28, ease: 'none' },
-        0.52
+        { autoAlpha: 1, duration: 0.32, ease: 'none' },
+        0.16
       );
     }
 
@@ -253,6 +255,7 @@ export function initHeroApertureDual() {
     }
 
     ScrollTrigger.create({
+      id: 'hero-aperture-pin',
       trigger: scene,
       start: 'top top',
       end: '+=230%',
@@ -263,5 +266,126 @@ export function initHeroApertureDual() {
     });
   }, scene);
 
-  return () => ctx.revert();
+  // ─── Phase A: entrance animations (load-driven) ───────────────────────────
+  if (heroName) {
+    cleanupMaskRise = textMaskRiseWords(heroName, {
+      delay: 0.3,
+      duration: 2.2,
+      stagger: 0.12,
+      yOffset: 30,
+      colorTrail: {
+        colors: ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'],
+        blendMode: 'screen',
+        staggerOffset: 0.15,
+      },
+      retainClones: true,
+      onComplete: (clones) => {
+        const allClones = clones.flat();
+        if (!allClones.length) return;
+
+        const numLayers = clones.length;
+        let isActive = false;
+        let isSpringBack = false;
+
+        tickerFn = function trailTicker() {
+          const apertureST = ScrollTrigger.getById('hero-aperture-pin');
+          const suppressed =
+            (apertureST?.isActive ?? false) ||
+            (galleryEl?.classList.contains('active') ?? false);
+
+          const vel = ScrollSmoother.get()?.getVelocity() ?? 0;
+          const absVel = Math.abs(vel);
+
+          if (!suppressed && absVel > TRAIL_THRESH) {
+            if (springBackTween) {
+              springBackTween.kill();
+              springBackTween = null;
+            }
+            isSpringBack = false;
+            isActive = true;
+            const baseYOff = gsap.utils.clamp(
+              -TRAIL_MAX_PX,
+              TRAIL_MAX_PX,
+              vel * -TRAIL_K
+            );
+            const baseOp = gsap.utils.mapRange(
+              TRAIL_THRESH,
+              TRAIL_THRESH * 6,
+              0,
+              TRAIL_OPACITY,
+              absVel
+            );
+            clones.forEach((layerClones, i) => {
+              const fraction = (i + 1) / numLayers;
+              gsap.set(layerClones, {
+                y: baseYOff * fraction,
+                opacity: Math.min(baseOp * fraction, TRAIL_OPACITY),
+              });
+            });
+          } else if (isActive && !isSpringBack) {
+            isSpringBack = true;
+            springBackTween = gsap.to(allClones, {
+              y: 0,
+              opacity: 0,
+              ease: 'power2.out',
+              duration: 0.5,
+              onComplete() {
+                isSpringBack = false;
+                isActive = false;
+                springBackTween = null;
+              },
+            });
+          }
+        };
+
+        gsap.ticker.add(tickerFn);
+      },
+    });
+  }
+
+  if (heroSubtitle) {
+    gsap.to(heroSubtitle, {
+      autoAlpha: 1,
+      y: 0,
+      delay: 2.35,
+      duration: 1.2,
+      ease: 'expo.out',
+    });
+  }
+
+  if (heroSocial) {
+    const icons = [...heroSocial.querySelectorAll('.social-icon')];
+    gsap.to(heroSocial, {
+      autoAlpha: 1,
+      y: 0,
+      delay: 2.7,
+      duration: 1.2,
+      ease: 'expo.out',
+      onComplete() {
+        icons.forEach((icon, i) => {
+          setTimeout(() => {
+            icon.classList.add('is-entering');
+            icon.addEventListener(
+              'animationend',
+              () => icon.classList.remove('is-entering'),
+              { once: true }
+            );
+          }, i * 80);
+        });
+      },
+    });
+  }
+
+  return function cleanup() {
+    if (tickerFn !== null) {
+      gsap.ticker.remove(tickerFn);
+      tickerFn = null;
+    }
+    if (springBackTween) {
+      springBackTween.kill();
+      springBackTween = null;
+    }
+    cleanupMaskRise();
+    ctx.revert();
+  };
 }
