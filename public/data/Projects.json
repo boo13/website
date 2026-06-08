@@ -157,7 +157,7 @@
     },
     {
       "id": "raging-bulls",
-      "title": "Raging Bulls",
+      "title": "Shark Week: Raging Bulls",
       "preview": "images/portfolio/shark-week.jpg",
       "platform": "Discovery",
       "year": "2021",
@@ -226,10 +226,10 @@
       "preview": "images/portfolio/washington.jpg"
     },
     {
-      "id": "shark-week",
-      "title": "Shark Week",
+      "id": "shark-week-shallows",
+      "title": "Shark Week: Jaws in the SHallows",
       "platform": "Discovery",
-      "year": "2020",
+      "year": "2023",
       "role": "Supervising Producer",
       "description": "Discovery's annual event delivering new shark documentaries, specials, and stunt programming each summer.",
       "videoStandard": null,
@@ -260,7 +260,7 @@
       "platform": "Discovery",
       "year": "2019",
       "role": "Co-Producer",
-      "description": "Scripted Shark Week feature recounting a yacht crew stranded at sea and hunted by tiger sharks after a storm.",
+      "description": "Shark Week's first scripted film, starring Josh Duhamel and Tyler Blackburn. Based on the harrowing true story of a ship crew stranded at sea and hunted by tiger sharks after an unexpected storm.",
       "videoStandard": "./video/Capsized.10secReel.v01_1920x1080.webm",
       "videoVertical": null,
       "poster": null,
@@ -417,7 +417,7 @@
     {
       "id": "the-seance",
       "title": "The S\u00e9ance",
-      "platform": "Short",
+      "platform": "A&E",
       "year": "2014",
       "role": "Producer",
       "description": "A short film exploring the supernatural and historical intrigue.",
@@ -537,7 +537,7 @@
     {
       "id": "secret-access-the-vatican",
       "title": "Secret Access: The Vatican",
-      "platform": "Travel",
+      "platform": "History",
       "year": "2011",
       "role": "Producer",
       "description": "Unprecedented access to the Vatican's most restricted areas and archives.",
@@ -565,7 +565,7 @@
     {
       "id": "jobsite",
       "title": "Jobsite",
-      "platform": "HGTV",
+      "platform": "History",
       "year": "2011",
       "role": "Producer",
       "description": "A look at the high-pressure world of large-scale construction and renovation projects.",
@@ -575,20 +575,6 @@
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2122384/",
       "preview": "images/portfolio/jobsite.jpg"
-    },
-    {
-      "id": "big-medicine",
-      "title": "Big Medicine",
-      "platform": "TLC",
-      "year": "2007\u20132008",
-      "role": "Producer",
-      "description": "Goes inside a bariatric surgery center to follow patients and their life-changing journeys.",
-      "videoStandard": null,
-      "videoVertical": null,
-      "poster": null,
-      "vimeoLink": null,
-      "imdbLink": "https://www.imdb.com/title/tt1035987/",
-      "preview": "images/portfolio/big-medicine.jpg"
     }
   ]
 }
