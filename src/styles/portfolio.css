@@ -1,0 +1,393 @@
+/**
+ * Portfolio archive page — /portfolio/
+ * Malvah-style project rows with elastic-banding thumbnail hover
+ */
+
+/* =====================================================
+   INHERIT DESIGN TOKENS
+   (duplicated from index.css :root so this page is
+   self-contained without importing the full homepage CSS)
+====================================================== */
+:root {
+  --color-offwhite: oklch(0.968 0.006 75);
+  --color-nearblack: oklch(0.14 0 0);
+  --color-charcoal: oklch(0.2 0 0);
+
+  --ff-display: 'ivypresto-display', Georgia, serif;
+  --ff-body: 'aktiv-grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+
+  --container-padding: clamp(1.5rem, 5vw, 4rem);
+  --grid-max-width: 1400px;
+  --grid-edge-offset: max(
+    var(--container-padding),
+    calc((100vw - var(--grid-max-width)) / 2 + var(--container-padding))
+  );
+
+  /* Portfolio-specific */
+  --shot-gap: 6px;
+  --row-padding: clamp(2.5rem, 6vh, 5rem);
+}
+
+/* =====================================================
+   RESET
+====================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--ff-body);
+  background: var(--color-nearblack);
+  color: var(--color-offwhite);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =====================================================
+   HEADER WORDMARK
+====================================================== */
+.portfolio-header {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + clamp(0.75rem, 2vh, 1.5rem));
+  left: var(--grid-edge-offset);
+  z-index: 40;
+}
+
+.portfolio-wordmark {
+  font-family: var(--ff-display);
+  font-size: clamp(1.25rem, 3.2vw, 2.25rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-offwhite);
+  text-shadow: 0 4px 30px oklch(0 0 0 / 0.5);
+  white-space: nowrap;
+  text-decoration: none;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.portfolio-wordmark:hover {
+  opacity: 0.75;
+}
+
+/* =====================================================
+   PAGE IDENTIFIER  (PORTFOLIO-0626)
+====================================================== */
+.portfolio-id {
+  font-family: var(--ff-body);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: oklch(0.968 0.006 75 / 0.85);
+  text-align: center;
+  padding-top: clamp(6rem, 18vh, 12rem);
+  padding-bottom: clamp(3rem, 8vh, 6rem);
+  padding-inline: var(--grid-edge-offset);
+  user-select: none;
+}
+
+/* =====================================================
+   PROJECT ROWS
+====================================================== */
+.portfolio-rows {
+  padding-bottom: clamp(4rem, 10vh, 8rem);
+}
+
+.portfolio-row {
+  padding-inline: var(--grid-edge-offset);
+  padding-block: var(--row-padding);
+  border-top: 1px solid oklch(0.968 0.006 75 / 0.08);
+}
+
+.portfolio-row:last-child {
+  border-bottom: 1px solid oklch(0.968 0.006 75 / 0.08);
+}
+
+/* Row header: title+pill left, tag right */
+.portfolio-row__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.portfolio-row__head-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.portfolio-row__title {
+  font-family: var(--ff-body);
+  font-size: clamp(0.75rem, 1.3vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--color-offwhite);
+  position: relative;
+  overflow: visible;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.portfolio-row__title-inner {
+  position: relative;
+  display: inline-block;
+}
+
+.portfolio-row__title-text {
+  position: relative;
+  z-index: 2;
+}
+
+.portfolio-row__tag {
+  font-family: var(--ff-body);
+  font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: oklch(0.968 0.006 75 / 0.4);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* "View" pill */
+.portfolio-view-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15em 0.55em;
+  border: 1px solid oklch(0.968 0.006 75 / 0.25);
+  border-radius: 2px;
+  font-family: var(--ff-body);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: oklch(0.968 0.006 75 / 0.55);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.portfolio-view-pill:hover {
+  border-color: oklch(0.968 0.006 75 / 0.7);
+  color: oklch(0.968 0.006 75 / 0.9);
+}
+
+/* =====================================================
+   THUMBNAIL FILMSTRIP
+====================================================== */
+.portfolio-row__strip {
+  display: flex;
+  gap: var(--shot-gap);
+  list-style: none;
+  align-items: flex-start;
+  height: clamp(5rem, 14vh, 11rem);
+}
+
+.portfolio-shot {
+  flex: 0 0 auto;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.portfolio-shot img {
+  display: block;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: top left;
+  filter: brightness(0.85);
+  transition: filter 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =====================================================
+   ELASTIC BANDING HOVER
+   JS animates .portfolio-shot widths so flex siblings reflow.
+====================================================== */
+@media (hover: hover) and (pointer: fine) {
+  .portfolio-row__strip.is-banding .portfolio-shot img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .portfolio-shot.is-hovered img {
+    filter: brightness(1);
+  }
+}
+
+/* =====================================================
+   CHROMATIC ABERRATION CLONES on titles
+====================================================== */
+.portfolio-ca-clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: blur(0.4px);
+  opacity: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  z-index: 1;
+}
+
+/* =====================================================
+   TOUCH / MOBILE FILMSTRIP
+====================================================== */
+@media (max-width: 768px) {
+  .portfolio-row__strip {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    /* Restore natural widths for scroll */
+    flex: none;
+  }
+
+  .portfolio-row__strip .portfolio-shot {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+}
+
+/* =====================================================
+   FOOTER
+====================================================== */
+.portfolio-footer {
+  padding-block: clamp(2rem, 5vh, 4rem);
+  padding-inline: var(--grid-edge-offset);
+  font-family: var(--ff-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: oklch(0.968 0.006 75 / 0.3);
+  border-top: 1px solid oklch(0.968 0.006 75 / 0.08);
+}
+
+/* =====================================================
+   TWEAKPANE container
+====================================================== */
+#tweakpane-mount {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 9999;
+}
+
+/* =====================================================
+   PASSWORD GATE
+====================================================== */
+.portfolio-gate__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-nearblack);
+}
+
+.portfolio-gate__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: min(320px, calc(100vw - 3rem));
+}
+
+.portfolio-gate__label {
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: oklch(0.968 0.006 75 / 0.4);
+}
+
+.portfolio-gate__input-row {
+  display: flex;
+  gap: 0;
+  border: 1px solid oklch(0.968 0.006 75 / 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.portfolio-gate__input-row:focus-within {
+  border-color: oklch(0.968 0.006 75 / 0.5);
+}
+
+.portfolio-gate__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--ff-body);
+  font-size: 0.875rem;
+  color: var(--color-offwhite);
+  caret-color: var(--color-offwhite);
+}
+
+.portfolio-gate__input::placeholder {
+  color: oklch(0.968 0.006 75 / 0.25);
+}
+
+.portfolio-gate__submit {
+  background: transparent;
+  border: none;
+  border-left: 1px solid oklch(0.968 0.006 75 / 0.2);
+  padding: 0 0.75rem;
+  color: oklch(0.968 0.006 75 / 0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.portfolio-gate__submit:hover {
+  color: var(--color-offwhite);
+}
+
+.portfolio-gate__submit:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.portfolio-gate__error {
+  font-family: var(--ff-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: oklch(0.65 0.18 25);
+  min-height: 1em;
+}
+
+@keyframes portfolio-gate-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+.portfolio-gate__input-row.is-shaking {
+  animation: portfolio-gate-shake 0.35s ease;
+}

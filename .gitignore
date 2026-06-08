@@ -199,3 +199,6 @@ tmp/
 # Git worktrees
 .worktrees/
 docs/unused-r2-files.md
+
+# Portfolio source data (plaintext, gitignored — commit encrypted blobs in public/data/portfolios/)
+portfolio-data/

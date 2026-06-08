@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { readdirSync, existsSync } from 'node:fs';
+import { readdirSync, existsSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'vite';
 import injectGallery from './build/inject-gallery.js';
 
@@ -15,6 +15,25 @@ function discoverProjects() {
         .map((d) => [
           `project-${d.name}`,
           resolve(import.meta.dirname, `projects/${d.name}/index.html`),
+        ]),
+    );
+  } catch {
+    return {};
+  }
+}
+
+// Auto-discover portfolio variant pages: portfolio/*/index.html
+function discoverPortfolio() {
+  try {
+    return Object.fromEntries(
+      readdirSync('portfolio', { withFileTypes: true })
+        .filter(
+          (d) =>
+            d.isDirectory() && existsSync(resolve('portfolio', d.name, 'index.html')),
+        )
+        .map((d) => [
+          `portfolio-${d.name}`,
+          resolve(import.meta.dirname, `portfolio/${d.name}/index.html`),
         ]),
     );
   } catch {
@@ -41,10 +60,36 @@ function discoverExperiments() {
   }
 }
 
+// Dev middleware: serves plaintext portfolio data so the gate fast-paths
+// without requiring a re-encrypt on every JSON edit.
+function portfolioDevServer() {
+  return {
+    name: 'portfolio-dev-data',
+    configureServer(server) {
+      server.middlewares.use('/data/portfolios/', (req, res, next) => {
+        const match = req.url.match(/^\/([a-z0-9-]+)\.enc\.json$/);
+        if (!match) return next();
+        const slug = match[1];
+        const dataPath = resolve(import.meta.dirname, `portfolio-data/${slug}.json`);
+        try {
+          const raw = readFileSync(dataPath, 'utf8');
+          const data = JSON.parse(raw);
+          const payload = JSON.stringify({ dev: true, projects: data.projects ?? [] });
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(payload);
+        } catch {
+          // No source file — serve a 404 the gate handles gracefully
+          next();
+        }
+      });
+    },
+  };
+}
+
 export default defineConfig({
   root: '.',
   publicDir: 'public',
-  plugins: [injectGallery()],
+  plugins: [injectGallery(), portfolioDevServer()],
   build: {
     outDir: 'dist',
     rollupOptions: {
@@ -58,6 +103,7 @@ export default defineConfig({
         sandbox: resolve(import.meta.dirname, 'sandbox.html'),
         wyatt: resolve(import.meta.dirname, 'case_study_wyatt.html'),
         experiments: resolve(import.meta.dirname, 'experiments/index.html'),
+        ...discoverPortfolio(),
         ...discoverProjects(),
         ...discoverExperiments(),
       },
