@@ -287,6 +287,7 @@
       "networkLogoAlt": "CNN",
       "hoverVideo": "video/Pope_clip_price_of_progress.webm",
       "hoverVideoFallback": "video/Pope_clip_price_of_progress.mp4",
+      "lightboxVideo": "video/Pope_ep3_trailer.mp4",
       "detailPage": true,
       "credits": [
         { "role": "Executive Producer / Director", "names": ["Randy Counsman"], "highlight": true },
