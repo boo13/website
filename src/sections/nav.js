@@ -27,28 +27,28 @@ export function initNav() {
       },
     });
 
-    // Active section: work
+    // Active section: featured
+    ScrollTrigger.create({
+      trigger: '#featured',
+      start: 'top 50%',
+      onEnter: () => setActive('featured'),
+      onLeaveBack: () => setActive(null),
+    });
+
+    // Active section: work (clears featured)
     ScrollTrigger.create({
       trigger: '#work',
       start: 'top 50%',
       onEnter: () => setActive('work'),
-      onLeaveBack: () => setActive(null),
+      onLeaveBack: () => setActive('featured'),
     });
 
-    // Active section: credits (clears work)
-    ScrollTrigger.create({
-      trigger: '#credits',
-      start: 'top 50%',
-      onEnter: () => setActive('credits'),
-      onLeaveBack: () => setActive('work'),
-    });
-
-    // Active section: cta / contact (clear credits)
+    // Active section: cta / contact (clear work)
     ScrollTrigger.create({
       trigger: '#cta',
       start: 'top 50%',
       onEnter: () => setActive(null),
-      onLeaveBack: () => setActive('credits'),
+      onLeaveBack: () => setActive('work'),
     });
   });
 
