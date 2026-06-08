@@ -26,11 +26,13 @@
 </head>
 <body data-project-id="sitting-bull">
 
-    <!-- SECTION 1: VIDEO HERO -->
+    <!-- =====================================================
+         SECTION 1: VIDEO HERO
+         Full-viewport video with overlay controls
+    ====================================================== -->
     <section class="project-hero--video">
         <div class="project-hero__player">
             <a class="project-hero__close" href="/">Close</a>
-            <div class="project-hero__scroll-text">scroll to view credits</div>
 
             <div class="project-hero__video-container">
                 <video
@@ -40,7 +42,7 @@
                     crossorigin
                     poster="/images/portfolio/sitting-bull.jpg"
                 >
-                    <source src="https://pub-722bb50dc4774406afca73534059fdd8.r2.dev/video/SittingBull_Teaser_Trailer.mp4" type="video/mp4">
+                    <source src="https://media.randycounsman.com/video/SittingBull_Teaser_Trailer.mp4" type="video/mp4">
                 </video>
 
                 <div class="project-hero__bottom">
@@ -67,22 +69,29 @@
         </div>
     </section>
 
-    <!-- SECTION 2: CREDITS -->
+    <!-- =====================================================
+         SECTION 2: CREDITS
+         Scroll-revealed credits panel
+    ====================================================== -->
     <section class="project-credits">
         <div class="project-credits__gradient"></div>
         <div class="project-credits__wrapper">
             <div class="project-credits__text">
+
+                <!-- Network logo -->
                 <div class="project-credits__network">
                     <img src="/images/logos/History.png" alt="History">
                 </div>
 
+                <!-- Title row -->
                 <div class="project-credits__header">
                     <div class="project-credits__title">Sitting Bull</div>
-                    <div class="project-credits__year">(2025–)</div>
+                    <div class="project-credits__year">(2025)</div>
                 </div>
 
                 <div class="project-credits__line"></div>
 
+                <!-- About -->
                 <div class="project-credits__about-section">
                     <div class="project-credits__subtitle">About</div>
                     <div class="project-credits__about">
@@ -92,11 +101,10 @@
 
                 <div class="project-credits__line"></div>
 
-                <!-- TODO: Add full credits list -->
+                <!-- Credits list -->
                 <div class="project-credits__detail-section">
-                    <div class="project-credits__subtitle">Credits</div>
                     <div class="project-credits__list">
-                        <div class="project-credits__item">
+                        <div class="project-credits__item project-credits__item--highlight">
                             <div class="project-credits__item-title">Co-Executive Producer / Writer</div>
                             <div class="project-credits__item-text">Randy Counsman</div>
                         </div>
@@ -115,8 +123,9 @@
             </div>
         </div>
 
+        <!-- Footer -->
         <footer class="project-footer">
-            <a class="project-footer__ticker" href="mailto:RandyCounsman@gmail.com">
+            <a class="project-footer__ticker" href="/contact.html">
                 <span class="project-footer__ticker-inner">get in touch today &nbsp;&mdash;&nbsp; get in touch today &nbsp;&mdash;&nbsp; get in touch today &nbsp;&mdash;&nbsp; get in touch today &nbsp;&mdash;&nbsp;</span>
             </a>
             <button class="project-footer__back-btn">back to video</button>

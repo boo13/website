@@ -118,7 +118,7 @@ The site is a cinematic portfolio — a title sequence and reel, not a SaaS land
 - **Motion-first.** GSAP drives major transitions. CSS handles hover states and always-running loops.
 - **Typography-led.** Large serif statements, restrained sans utility text. No decorative illustration.
 
-**Homepage structure:** Hero → About Intro → Featured Work → Credits → CTA → Footer
+**Homepage structure:** Hero → About Intro → Featured → Work → CTA → Footer
 
 **Project page variants:**
 - *Video Hero:* Project video → Credits → Footer
@@ -189,9 +189,9 @@ Text hierarchy on dark backgrounds is built from a single base color at varying 
 | 0.25 | Timeline rail background |
 | 0.15 | Footer border |
 
-### Credits Color Inversion (Homepage Only)
+### Work Color Inversion (Homepage Only)
 
-The credits section is the only homepage section that inverts to a light background. It uses scoped custom properties on `.credits-section`:
+The Work section is the only homepage section that inverts to a light background. It uses scoped custom properties on `.credits-section`:
 
 **Light state (default):**
 
@@ -299,7 +299,7 @@ Fixed px values with breakpoint tiers. The one exception is the case study hero 
 
 `.container` class: `max-width: var(--grid-max-width)`, `margin: 0 auto`, `padding: 0 var(--container-padding)`.
 
-Credits and footer use CSS subgrid on desktop (≥1025px) for deep column alignment. The subgrid chain: `.credits-section .container` → `.credits-list` → `.credit-row` → `.credit-row__header`.
+Work and footer use CSS subgrid on desktop (≥1025px) for deep column alignment. The subgrid chain: `.credits-section .container` → `.credits-list` → `.credit-row` → `.credit-row__header`.
 
 Debug grid overlay: `.bg-columns` (6 column divs), toggled via `Ctrl/Cmd+G` (adds `body.show-grid`).
 
@@ -324,7 +324,7 @@ Neither page type uses a strict mathematical spacing scale. Use `--section-paddi
 
 **Homepage:**
 
-| Breakpoint | Grid | Gallery | Credits | Footer |
+| Breakpoint | Grid | Featured | Work | Footer |
 |-----------|------|---------|---------|--------|
 | ≥1025px | 6-col, subgrid | Horizontal scroll, pinned, progress visible | Subgrid, role column visible | Subgrid, 3-col |
 | ≤1024px | 6-col | Vertical stack, `aspect-ratio: 4/3`, progress hidden | — | — |
@@ -382,7 +382,7 @@ Desktop only (`hover: hover` media query):
 - Mobile: vertical ScrollTrigger, `start: 'top 80%'`, `end: 'bottom 20%'`
 - Cards get `.is-playing` class while video is active
 
-### Credits Accordion (Homepage)
+### Work Accordion (Homepage)
 
 - Single row open at a time
 - On expand: font swaps to display serif, `fontSize` tweens to `2.25rem` (`0.5s expo.out`), height `0→auto` (`0.5s expo.out`), children stagger `opacity 0, y 16` → visible
@@ -424,12 +424,12 @@ CSS-only `@keyframes project-ticker-scroll`, 12s linear infinite horizontal scro
 - Key classes: `.about-intro__dot-bg`, `.about-intro__content`, `.about-intro__text`, `.about-intro__marquee`, `.about-intro__marquee-track`
 - Scroll behavior: char-level opacity fill (0.15→1) across pinned section. Marquee loops via CSS.
 
-**Featured Work** — `section#work.featured-work-section` | `src/sections/gallery.js`
+**Featured** — `section#featured.featured-work-section` | `src/sections/gallery.js`
 - Pin: trackWidth (desktop) or none (≤1024px) | Scrub: 1 | BG: `--color-nearblack`
 - Key classes: `.gallery-container`, `.gallery-track`, `.gallery-card`, `.card-media`, `.card-thumbnail`, `.card-video`, `.card-content`, `.card-title`, `.gallery-progress`
 - Desktop: horizontal scroll. Mobile: vertical stack. Section gains `.active` while pinned.
 
-**Credits** — `section#credits.credits-section` | `src/sections/credits.js`
+**Work** — `section#work.credits-section` | `src/sections/credits.js`
 - No pin | BG: light (`--color-offwhite`) inverting to dark when rows open
 - Key classes: `.credits-list`, `.credit-row`, `.credit-row__header`, `.credit-row__details-inner`
 - Dynamically built from `public/data/Projects.json`. Images lazy-load on first expand.
