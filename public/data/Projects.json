@@ -16,7 +16,6 @@
       "networkLogo": "images/upnext-news/upNEXT_logo_white.svg",
       "networkLogoAlt": "upNEXT News",
       "featured": true,
-      "galleryOrder": null,
       "detailPage": true,
       "hoverVideo": "video/upNEXT_Slideshow_12.16_TrumpsTechForce_1.webm",
       "hoverVideoFallback": "video/upNEXT_Slideshow_12.16_TrumpsTechForce_1.mp4"
