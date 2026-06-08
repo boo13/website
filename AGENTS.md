@@ -13,6 +13,7 @@ This project is a video portfolio website using GSAP.
 - `rclone ls r2-portfolio:portfolio-assets` — List all R2 files (rclone configured; use for audits and bulk deletes)
 - `rclone delete r2-portfolio:portfolio-assets/<key>` — Delete an R2 object; supports `--include` glob for bulk ops
 - `just visual-audit` — Capture timestamped visual audit across desktop, tablet, and phone sizes
+- `just ship-worktree BRANCH` — Merge a worktree branch into gh-pages, push, then remove the worktree and delete the branch
 
 ## Git Workflow
 - **`dev`** — working branch. All LLM and day-to-day work happens here.

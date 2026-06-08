@@ -2,6 +2,46 @@
 deploy:
     git checkout gh-pages && git merge dev && git push && git checkout dev
 
+# Merge a feature-branch worktree into gh-pages, push, then remove the worktree and branch.
+# Run from any worktree of this repo. Branch must already have its changes committed.
+# Example: just ship-worktree pumice-dune
+ship-worktree branch:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    branch="{{ branch }}"
+
+    if ! git show-ref --verify --quiet "refs/heads/$branch"; then
+        echo "Error: branch '$branch' does not exist"
+        exit 1
+    fi
+
+    # cd to the main worktree so we don't yank our own cwd when removing a worktree we're standing in.
+    main_worktree=$(git worktree list | head -n 1 | awk '{print $1}')
+    cd "$main_worktree"
+
+    # Resolve the worktree path for the branch being shipped (if any).
+    worktree_path=$(git worktree list --porcelain | awk -v b="refs/heads/$branch" '
+        /^worktree / {path=$2}
+        $0 == "branch " b {print path; exit}
+    ')
+
+    echo "Merging '$branch' into gh-pages..."
+    git checkout gh-pages
+    git merge "$branch" --no-ff -m "Merge branch '$branch' into gh-pages"
+    git push origin gh-pages
+    git checkout dev
+
+    if [ -n "$worktree_path" ]; then
+        echo "Removing worktree at $worktree_path..."
+        git worktree remove "$worktree_path"
+    fi
+
+    echo "Deleting branch '$branch'..."
+    git branch -D "$branch"
+
+    echo "Done."
+
 # Optimize a video into WebM + MP4, then upload both to R2
 # Example: just video-publish public/video/clip.mov --suffix 360p
 video-publish file *ARGS:
