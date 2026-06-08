@@ -211,6 +211,12 @@
     mask-image;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .portal-scene--aperture .hero-video {
+    transform: scale(1.02);
+  }
+}
+
 .portal-scene--aperture .hero-video {
   transform-origin: 50% 52%;
   will-change: transform, filter;
