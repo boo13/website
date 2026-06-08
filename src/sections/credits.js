@@ -22,7 +22,7 @@ const PLATFORM_LOGOS = {
   },
   discovery: { src: 'images/logos/Discovery.png', alt: 'Discovery' },
   'fox nation': {
-    src: 'images/logos/Fox_Nation_logo.svg',
+    src: 'images/logos/Fox_logo.svg',
     alt: 'Fox Nation',
     variant: 'mark',
   },
@@ -52,7 +52,12 @@ const PLATFORM_LOGOS = {
   amc: { src: 'images/logos/AMC_logo.svg', alt: 'AMC', variant: 'standard' },
   cmt: { src: 'images/logos/CMT_logo1.svg', alt: 'CMT', variant: 'standard' },
   hgtv: { src: 'images/logos/HGTV_logo.svg', alt: 'HGTV', variant: 'standard' },
-  tlc: { src: 'images/logos/TLC_logo.svg', alt: 'TLC', variant: 'standard' },
+  tlc: {
+    src: 'images/logos/TLC_logo_mono.svg',
+    alt: 'TLC',
+    variant: 'standard',
+    preserveContrast: true,
+  },
 };
 
 function normalizePlatform(platform) {
@@ -116,6 +121,9 @@ function buildRow(project) {
     logoImg.className = 'credit-row__platform-logo';
     if (logo.variant) {
       logoImg.classList.add(`credit-row__platform-logo--${logo.variant}`);
+    }
+    if (logo.preserveContrast) {
+      logoImg.classList.add('credit-row__platform-logo--preserve-contrast');
     }
     logoImg.src = logo.src;
     logoImg.alt = '';

@@ -273,7 +273,7 @@
       "preview": "images/portfolio/Pope.jpg",
       "platform": "CNN",
       "year": "2018",
-      "role": "Writer",
+      "role": "Executive Producer / Director",
       "description": "Six-part CNN docuseries exploring how the papacy amassed influence from the early church through the modern Vatican.",
       "videoStandard": null,
       "videoVertical": null,
@@ -286,7 +286,14 @@
       "networkLogo": "images/logos/CNN_logo_red.svg",
       "networkLogoAlt": "CNN",
       "hoverVideo": "video/Pope_clip_price_of_progress.webm",
-      "hoverVideoFallback": "video/Pope_clip_price_of_progress.mp4"
+      "hoverVideoFallback": "video/Pope_clip_price_of_progress.mp4",
+      "detailPage": true,
+      "credits": [
+        { "role": "Executive Producer / Director", "names": ["Randy Counsman"], "highlight": true },
+        { "role": "Narrator", "names": ["Liam Neeson"] },
+        { "role": "Executive Producers", "names": ["Jon Hirsch", "Nancy Glass", "Amy Entelis", "Lizzie Fox"] },
+        { "role": "Production", "names": ["Glass Entertainment Group", "Rearrange TV"] }
+      ]
     },
     {
       "id": "the-american-west",
@@ -434,7 +441,7 @@
       "preview": "images/portfolio/MWBA.jpg",
       "platform": "History",
       "year": "2012",
-      "role": "Writer",
+      "role": "Writer / Producer",
       "description": "Docudrama chronicling Vanderbilt, Rockefeller, Carnegie, Morgan, and Ford as they industrialize and modernize the nation.",
       "videoStandard": null,
       "videoVertical": null,
@@ -443,12 +450,20 @@
       "imdbLink": "https://www.imdb.com/title/tt2167393/",
       "featured": true,
       "galleryOrder": 3,
-      "gallerySlug": "mwba",
+      "gallerySlug": "men-who-built-america",
       "networkLogo": "images/logos/History.png",
       "networkLogoAlt": "History",
       "hoverVideo": "video/MWBA_Protest_CraneShot.webm",
       "hoverVideoFallback": "video/MWBA_Protest_CraneShot.mp4",
-      "lightboxVideo": "video/MWBA_Trailer_%28360p%29.mp4"
+      "lightboxVideo": "video/MWBA_Trailer_%28360p%29.mp4",
+      "detailPage": true,
+      "credits": [
+        { "role": "Writer / Producer", "names": ["Randy Counsman"], "highlight": true },
+        { "role": "Narrator", "names": ["Campbell Scott"] },
+        { "role": "Directors", "names": ["Patrick Reams", "Ruán Magan"] },
+        { "role": "Created by", "names": ["Stephen David Entertainment"] },
+        { "role": "Writers", "names": ["Stephen David", "Patrick Reams", "David C. White", "Alec Michod", "Ed Fields", "John Fahy", "Keith Palmer"] }
+      ]
     },
     {
       "id": "commander-in-chief-inside-the-oval-office",

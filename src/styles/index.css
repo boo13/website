@@ -829,6 +829,10 @@ body.show-grid .bg-columns {
   height: 2.35rem;
 }
 
+.credit-row__platform .credit-row__platform-logo--preserve-contrast {
+  filter: invert(var(--credits-logo-invert, 0)) blur(0px);
+}
+
 /* Dim state: preserve silhouette, add blur. Specificity must beat the hover-dim rule below. */
 .credits-list.is-row-hovered
   .credit-row__header
@@ -838,6 +842,13 @@ body.show-grid .bg-columns {
     blur(var(--credits-dim-blur));
 }
 
+.credits-list.is-row-hovered
+  .credit-row__header
+  .credit-row__platform
+  .credit-row__platform-logo--preserve-contrast {
+  filter: invert(var(--credits-logo-invert, 0)) blur(var(--credits-dim-blur));
+}
+
 /* Active (hovered) row: restore full-opacity silhouette. */
 .credits-list.is-row-hovered
   .credit-row__header.is-hovered
@@ -845,6 +856,13 @@ body.show-grid .bg-columns {
   .credit-row__platform-logo {
   opacity: 0.85;
   filter: brightness(0) invert(var(--credits-logo-invert, 0)) blur(0px);
+}
+
+.credits-list.is-row-hovered
+  .credit-row__header.is-hovered
+  .credit-row__platform
+  .credit-row__platform-logo--preserve-contrast {
+  filter: invert(var(--credits-logo-invert, 0)) blur(0px);
 }
 
 .credit-row__title,
