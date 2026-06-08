@@ -32,6 +32,24 @@ cover-gen *ARGS:
 project-scaffold id:
     node scripts/scaffold-project.mjs {{ id }}
 
+# Scaffold a new password-protected portfolio variant
+portfolio-scaffold slug:
+    node scripts/scaffold-portfolio.mjs {{ slug }}
+
+# Encrypt a portfolio data file for deployment (reads .env for password)
+portfolio-encrypt slug:
+    node scripts/encrypt-portfolio.mjs {{ slug }}
+
+# Encrypt all portfolio variants (reads .env for each password)
+portfolio-encrypt-all:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for f in portfolio-data/*.json; do
+      slug="$(basename "$f" .json)"
+      echo "Encrypting $slug..."
+      node scripts/encrypt-portfolio.mjs "$slug"
+    done
+
 # Run a full visual audit across desktop, tablet, and phone sizes
 visual-audit:
     #!/usr/bin/env bash
