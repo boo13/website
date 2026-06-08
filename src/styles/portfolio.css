@@ -27,7 +27,8 @@
   );
 
   /* Portfolio-specific */
-  --shot-gap: 6px;
+  --shot-gap: 18px;
+  --edge-pan-zone: clamp(3rem, 9vw, 10rem);
   --row-padding: clamp(2.5rem, 6vh, 5rem);
 }
 
@@ -82,26 +83,110 @@ body {
 }
 
 /* =====================================================
-   PAGE IDENTIFIER  (PORTFOLIO-0626)
+   HEADER GRADIENT — fades content scrolling under fixed nav
 ====================================================== */
-.portfolio-id {
-  font-family: var(--ff-body);
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: oklch(0.968 0.006 75 / 0.85);
-  text-align: center;
-  padding-top: clamp(6rem, 18vh, 12rem);
-  padding-bottom: clamp(3rem, 8vh, 6rem);
-  padding-inline: var(--grid-edge-offset);
-  user-select: none;
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(7rem, 20vh, 12rem);
+  background: linear-gradient(to bottom, var(--color-nearblack) 30%, oklch(0.14 0 0 / 0));
+  z-index: 38;
+  pointer-events: none;
 }
 
 /* =====================================================
-   PROJECT ROWS
+   SECTION INDEX — pinned nav beneath wordmark
+====================================================== */
+.portfolio-section-index {
+  position: fixed;
+  top: calc(
+    env(safe-area-inset-top, 0px)
+    + clamp(0.75rem, 2vh, 1.5rem)
+    + clamp(1.25rem, 3.2vw, 2.25rem)
+    + clamp(0.4rem, 1vh, 0.75rem)
+  );
+  left: var(--grid-edge-offset);
+  z-index: 39;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.55rem, 1.2vw, 0.9rem);
+}
+
+.portfolio-section-index__title {
+  font-family: var(--ff-body);
+  font-size: clamp(0.6rem, 0.85vw, 0.75rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: oklch(0.968 0.006 75 / 0.22);
+  text-decoration: none;
+  user-select: none;
+  margin-right: clamp(0.25rem, 0.6vw, 0.5rem);
+  transition: color 600ms var(--ease-out-expo);
+}
+
+.portfolio-section-index__title:hover {
+  color: oklch(0.968 0.006 75 / 0.45);
+}
+
+.portfolio-section-index__link {
+  font-family: var(--ff-body);
+  font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+  color: oklch(0.968 0.006 75 / 0.4);
+  text-decoration: none;
+  transition: color 600ms var(--ease-out-expo);
+}
+
+.portfolio-section-index__link::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 600ms var(--ease-out-expo);
+}
+
+.portfolio-section-index__link.is-active {
+  color: oklch(0.968 0.006 75 / 0.88);
+}
+
+.portfolio-section-index__link.is-active::after {
+  transform: scaleX(1);
+}
+
+.portfolio-section-index__link:hover:not(.is-active) {
+  color: oklch(0.968 0.006 75 / 0.65);
+}
+
+/* =====================================================
+   PORTFOLIO SECTIONS + PROJECT ROWS
 ====================================================== */
 .portfolio-rows {
+  padding-top: clamp(4rem, 11vh, 7rem);
   padding-bottom: clamp(4rem, 10vh, 8rem);
+}
+
+.portfolio-section {
+  border-top: 1px solid oklch(0.968 0.006 75 / 0.08);
+  scroll-margin-top: calc(
+    env(safe-area-inset-top, 0px)
+    + clamp(0.75rem, 2vh, 1.5rem)
+    + clamp(1.25rem, 3.2vw, 2.25rem)
+    + clamp(0.4rem, 1vh, 0.75rem)
+    + 2.5rem
+  );
+}
+
+.portfolio-section .portfolio-row:first-of-type {
+  border-top: none;
 }
 
 .portfolio-row {
@@ -190,12 +275,31 @@ body {
 /* =====================================================
    THUMBNAIL FILMSTRIP
 ====================================================== */
+.portfolio-row__strip-frame {
+  position: relative;
+  width: 100%;
+}
+
+.portfolio-row__strip-viewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.portfolio-row__strip-viewport::-webkit-scrollbar {
+  display: none;
+}
+
 .portfolio-row__strip {
   display: flex;
   gap: var(--shot-gap);
   list-style: none;
   align-items: flex-start;
   height: clamp(5rem, 14vh, 11rem);
+  min-width: 100%;
+  width: max-content;
 }
 
 .portfolio-shot {
@@ -218,11 +322,33 @@ body {
   user-select: none;
 }
 
+.portfolio-row__edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  width: var(--edge-pan-zone);
+  pointer-events: none;
+}
+
+.portfolio-row__edge--left {
+  left: 0;
+}
+
+.portfolio-row__edge--right {
+  right: 0;
+}
+
 /* =====================================================
    ELASTIC BANDING HOVER
    JS animates .portfolio-shot widths so flex siblings reflow.
 ====================================================== */
 @media (hover: hover) and (pointer: fine) {
+  .portfolio-row__edge {
+    cursor: ew-resize;
+    pointer-events: auto;
+  }
+
   .portfolio-row__strip.is-banding .portfolio-shot img {
     width: 100%;
     height: 100%;
@@ -255,14 +381,22 @@ body {
 /* =====================================================
    TOUCH / MOBILE FILMSTRIP
 ====================================================== */
-@media (max-width: 768px) {
-  .portfolio-row__strip {
+@media (max-width: 600px) {
+  .portfolio-section-index {
     overflow-x: auto;
+    scrollbar-width: none;
+    padding-right: var(--grid-edge-offset);
+  }
+
+  .portfolio-section-index::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-row__strip-viewport {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: 10px;
-    /* Restore natural widths for scroll */
-    flex: none;
   }
 
   .portfolio-row__strip .portfolio-shot {
@@ -270,6 +404,7 @@ body {
     scroll-snap-align: start;
   }
 }
+
 
 /* =====================================================
    FOOTER

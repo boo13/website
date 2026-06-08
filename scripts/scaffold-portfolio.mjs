@@ -33,8 +33,6 @@ if (existsSync(htmlPath)) {
 }
 
 const envKey = `PORTFOLIO_${slug.toUpperCase().replace(/-/g, '_')}_PASSWORD`;
-const label = `(PORTFOLIO-${slug.toUpperCase()})`;
-
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,8 +57,14 @@ const html = `<!DOCTYPE html>
     <a href="/" class="portfolio-wordmark">Randy Counsman</a>
   </div>
 
-  <!-- Page identifier -->
-  <p class="portfolio-id" aria-hidden="true">${label}</p>
+  <!-- Section index -->
+  <nav class="portfolio-section-index" aria-label="Portfolio sections">
+    <a class="portfolio-section-index__title" href="#">Portfolio</a>
+    <a class="portfolio-section-index__link" href="#portfolio-short-form" data-section-link="short-form">short-form</a>
+    <a class="portfolio-section-index__link" href="#portfolio-long-form" data-section-link="long-form">long-form</a>
+    <a class="portfolio-section-index__link" href="#portfolio-pitch-decks" data-section-link="pitch-decks">decks</a>
+    <a class="portfolio-section-index__link" href="#portfolio-websites" data-section-link="websites">web</a>
+  </nav>
 
   <!-- Gate overlay — rendered by JS, removed on unlock -->
   <div id="portfolio-gate"></div>
