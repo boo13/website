@@ -62,6 +62,31 @@ function discoverExperiments() {
 
 // Dev middleware: serves plaintext portfolio data so the gate fast-paths
 // without requiring a re-encrypt on every JSON edit.
+function portfolioCleanUrlRedirect() {
+  const redirect = (req, res, next) => {
+    const [pathname, query = ''] = (req.url ?? '').split('?');
+    const match = pathname.match(/^\/portfolio\/([a-z0-9-]+)$/);
+    if (!match) return next();
+
+    const indexPath = resolve(import.meta.dirname, `portfolio/${match[1]}/index.html`);
+    if (!existsSync(indexPath)) return next();
+
+    res.statusCode = 308;
+    res.setHeader('Location', `${pathname}/${query ? `?${query}` : ''}`);
+    res.end();
+  };
+
+  return {
+    name: 'portfolio-clean-url-redirect',
+    configureServer(server) {
+      server.middlewares.use(redirect);
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(redirect);
+    },
+  };
+}
+
 function portfolioDevServer() {
   return {
     name: 'portfolio-dev-data',
@@ -89,7 +114,7 @@ function portfolioDevServer() {
 export default defineConfig({
   root: '.',
   publicDir: 'public',
-  plugins: [injectGallery(), portfolioDevServer()],
+  plugins: [injectGallery(), portfolioCleanUrlRedirect(), portfolioDevServer()],
   build: {
     outDir: 'dist',
     rollupOptions: {

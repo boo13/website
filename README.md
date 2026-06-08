@@ -59,6 +59,69 @@ Other commands:
 - `npm run lint` — run ESLint on `src/`
 - `npm run format` — run Prettier on `src/`
 
+## Password-protected portfolio variants
+
+Portfolio variants live under `portfolio/<slug>/`. For example, the June 2026 portfolio shell is `portfolio/0626/index.html`, and the page sets its data slug with:
+
+```html
+<body data-portfolio-slug="0626">
+```
+
+At runtime, the password gate fetches `/data/portfolios/<slug>.enc.json`. For `0626`, the committed production payload is:
+
+```text
+public/data/portfolios/0626.enc.json
+```
+
+Do not hand-edit that encrypted file. Edit the plaintext source file instead:
+
+```text
+portfolio-data/0626.json
+```
+
+`portfolio-data/` is gitignored intentionally. Keep plaintext client-specific portfolio data and real passwords out of git. The encrypted JSON is committed so the static site can serve it, but this is client-side encryption: anyone can download the ciphertext and attempt an offline password attack. Use a strong password, and do not treat this as a secure vault for material that cannot be publicly exposed under any circumstance.
+
+Portfolio data uses this shape:
+
+```json
+{
+  "projects": [
+    {
+      "id": "my-project",
+      "title": "My Project",
+      "portfolioSection": "short-form",
+      "tag": "Producer / Editor",
+      "videoUrl": "https://example.com/video.mp4",
+      "liveUrl": "https://example.com",
+      "screenshots": [
+        "images/portfolio/my-project-01.jpg",
+        "images/portfolio/my-project-02.jpg"
+      ]
+    }
+  ]
+}
+```
+
+Common fields:
+
+- `title` — row title
+- `tag` — small right-side label
+- `portfolioSection` — section placement; use `short-form`, `long-form`, `pitch decks`, or `websites`
+- `screenshots` — image strip paths relative to `public/`
+- `videoUrl` — makes the `View` pill open a video lightbox
+- `liveUrl` — makes the `View ↗` pill open an external page
+
+To add or change entries:
+
+```sh
+mkdir -p portfolio-data
+# edit portfolio-data/0626.json
+just portfolio-encrypt 0626
+npm run build
+```
+
+Encryption reads `PORTFOLIO_<SLUG>_PASSWORD` from `.env`; for `0626`, set `PORTFOLIO_0626_PASSWORD=...`. During local development, Vite serves `portfolio-data/<slug>.json` directly and any non-empty password unlocks the gate. If edits do not appear after unlocking once, clear session storage or close and reopen the tab because unlocked data is cached in `sessionStorage`.
+
 ## How the animations work
 
 Each section on the main page (index.html) exports an `init` function that sets up its GSAP animations inside a `gsap.context()` scoped to that section's DOM element. The entry point (`src/main.js`) calls each init function on page load.
