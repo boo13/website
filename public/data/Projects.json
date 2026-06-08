@@ -16,7 +16,8 @@
       "featured": true,
       "galleryOrder": 2,
       "detailPage": true,
-      "hoverVideo": "video/upNEXT_Slideshow_12.16_TrumpsTechForce_1.webm"
+      "hoverVideo": "video/upNEXT_Slideshow_12.16_TrumpsTechForce_1.webm",
+      "hoverVideoFallback": "video/upNEXT_Slideshow_12.16_TrumpsTechForce_1.mp4"
     },
     {
       "id": "sitting-bull",
@@ -48,7 +49,7 @@
       "year": "2024",
       "role": "Co-Executive Producer",
       "description": "Docudrama retelling the feud between Wyatt Earp and Ike Clanton with cinematic reenactments and expert commentary.",
-      "videoStandard": "./video/Cowboy.War.10secReel.v01_1920x1080.webm",
+      "videoStandard": "./video/Cowboy.War.10secReel.v01_1920x1004.webm",
       "videoVertical": "./video/Cowboy.War.10secReel.v01_9x16.webm",
       "poster": null,
       "vimeoLink": null,
@@ -59,8 +60,9 @@
       "gallerySlug": "wyatt-earp",
       "networkLogo": "images/logos/Netflix_white2.png",
       "networkLogoAlt": "Netflix",
-      "hoverVideo": "video/Cowboy.War.10secReel.v01_1920x1080.webm",
-      "lightboxVideo": "video/Cowboy.War.10secReel.v01_1920x1080.webm",
+      "hoverVideo": "video/Cowboy.War.10secReel.v01_1920x1004.webm",
+      "hoverVideoFallback": "video/Cowboy.War.10secReel.v01_1920x1004.mp4",
+      "lightboxVideo": "video/Cowboy.War.10secReel.v01_1920x1004.mp4",
       "credits": [
         { "role": "Co-Executive Producer", "names": ["Randy Counsman"], "highlight": true },
         { "role": "Narrator", "names": ["Ed Harris"] },
