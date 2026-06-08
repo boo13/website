@@ -48,6 +48,11 @@ const PLATFORM_LOGOS = {
     alt: 'PBS',
     variant: 'standard',
   },
+  'a&e': { src: 'images/logos/A&E_logo.svg', alt: 'A&E', variant: 'standard' },
+  amc: { src: 'images/logos/AMC_logo.svg', alt: 'AMC', variant: 'standard' },
+  cmt: { src: 'images/logos/CMT_logo1.svg', alt: 'CMT', variant: 'standard' },
+  hgtv: { src: 'images/logos/HGTV_logo.svg', alt: 'HGTV', variant: 'standard' },
+  tlc: { src: 'images/logos/TLC_logo.svg', alt: 'TLC', variant: 'standard' },
 };
 
 function normalizePlatform(platform) {

@@ -16,6 +16,7 @@ const STORAGE_KEY = 'portfolio-hover-config';
 const CA_BLUE = 'oklch(0.804 0.146 220)';
 const CA_RED = 'oklch(0.656 0.235 13)';
 const EDGE_PAN_SPEED = 360;
+const HOVER_PAN_INSET = 24;
 const PORTFOLIO_SECTIONS = [
   {
     id: 'short-form',
@@ -203,6 +204,37 @@ function setExplicitRestSizes(measurements) {
   });
 }
 
+function panScrollerToFitHover(scroller, hoveredShot, scaledWidth, cfg) {
+  if (!scroller || !hoveredShot || !(scaledWidth > 0)) return;
+
+  const shotLeft = hoveredShot.offsetLeft;
+  const scaledRight = shotLeft + scaledWidth;
+  const viewportWidth = scroller.clientWidth;
+  const currentScrollLeft = scroller.scrollLeft;
+  const viewportRight = currentScrollLeft + viewportWidth;
+
+  let target = currentScrollLeft;
+  if (scaledRight > viewportRight - HOVER_PAN_INSET) {
+    target = scaledRight - viewportWidth + HOVER_PAN_INSET;
+  } else if (shotLeft < currentScrollLeft + HOVER_PAN_INSET) {
+    target = shotLeft - HOVER_PAN_INSET;
+  }
+  target = Math.max(0, target);
+
+  if (Math.abs(target - currentScrollLeft) < 1) return;
+
+  scroller._portfolioBandingScrollTween?.kill();
+  scroller._portfolioBandingScrollTween = gsap.to(scroller, {
+    scrollLeft: target,
+    duration: cfg.duration,
+    ease: cfg.ease,
+    overwrite: 'auto',
+    onComplete: () => {
+      scroller._portfolioBandingScrollTween = null;
+    },
+  });
+}
+
 function applyBanding(strip, hoveredShot, cfg) {
   strip._portfolioBaseHeight ||=
     strip.getBoundingClientRect().height || strip.offsetHeight;
@@ -245,7 +277,12 @@ function applyBanding(strip, hoveredShot, cfg) {
   });
 
   if (scroller) {
-    refreshFramePan(scroller);
+    stopEdgePan(scroller);
+    const hoveredMeasurement = measurements.find((m) => m.shot === hoveredShot);
+    const hoveredScaledWidth = hoveredMeasurement
+      ? hoveredMeasurement.width * cfg.hoverScale
+      : 0;
+    panScrollerToFitHover(scroller, hoveredShot, hoveredScaledWidth, cfg);
     scheduleFramePanRefresh(scroller, cfg.duration);
   }
 }
