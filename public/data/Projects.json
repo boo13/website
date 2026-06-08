@@ -281,7 +281,9 @@
       "galleryOrder": 5,
       "gallerySlug": "pope",
       "networkLogo": "images/logos/CNN_logo_red.svg",
-      "networkLogoAlt": "CNN"
+      "networkLogoAlt": "CNN",
+      "hoverVideo": "video/Pope_clip_price_of_progress.webm",
+      "hoverVideoFallback": "video/Pope_clip_price_of_progress.mp4"
     },
     {
       "id": "hamilton-building-america",
