@@ -14,8 +14,6 @@ const DEFAULT_CONFIG = {
 };
 
 const STORAGE_KEY = 'portfolio-hover-config';
-const CA_BLUE = 'oklch(0.804 0.146 220)';
-const CA_RED = 'oklch(0.656 0.235 13)';
 const EDGE_PAN_SPEED = 360;
 const HOVER_PAN_INSET = 24;
 const PORTFOLIO_SECTIONS = [
@@ -114,58 +112,6 @@ const SECTIONS_BY_ID = new Map(
   PORTFOLIO_SECTIONS.map((section) => [section.id, section])
 );
 
-// ─── CA clone helpers ──────────────────────────────────────────────────────
-
-function buildCAClones(titleInner) {
-  if (titleInner._caClones) return titleInner._caClones;
-
-  const clones = [CA_BLUE, CA_RED].map((color) => {
-    const clone = document.createElement('span');
-    clone.className = 'portfolio-ca-clone';
-    clone.style.color = color;
-    clone.textContent = titleInner.dataset.text;
-    titleInner.appendChild(clone);
-    return clone;
-  });
-
-  titleInner._caClones = clones;
-  return clones;
-}
-
-function animateCAIn(titleInner) {
-  const clones = buildCAClones(titleInner);
-  clones.forEach((clone, i) => {
-    gsap.killTweensOf(clone);
-    gsap.fromTo(
-      clone,
-      { opacity: 0, x: 0, y: 0 },
-      {
-        opacity: 0.85,
-        x: i === 0 ? -2 : 2,
-        y: i === 0 ? -2 : 2,
-        duration: 0.4,
-        delay: i * 0.06,
-        ease: 'expo.out',
-        overwrite: true,
-      }
-    );
-  });
-}
-
-function animateCAOut(titleInner) {
-  if (!titleInner._caClones) return;
-  titleInner._caClones.forEach((clone) => {
-    gsap.killTweensOf(clone);
-    gsap.to(clone, {
-      opacity: 0,
-      x: 0,
-      y: 0,
-      duration: 0.5,
-      ease: 'power2.out',
-      overwrite: true,
-    });
-  });
-}
 
 // ─── Proportional elastic banding ──────────────────────────────────────────
 
@@ -457,28 +403,6 @@ function wireStrip(strip, getCfg, canHover) {
       clearBanding(strip, cfg);
     });
   });
-}
-
-// ─── Wire CA on a title ────────────────────────────────────────────────────
-
-function wireTitleCA(titleEl, canHover) {
-  if (!canHover) return;
-
-  const inner = document.createElement('span');
-  inner.className = 'portfolio-row__title-inner';
-  inner.dataset.text = titleEl.textContent;
-
-  // Visible text span (sits on top of clones)
-  const textSpan = document.createElement('span');
-  textSpan.className = 'portfolio-row__title-text';
-  textSpan.textContent = titleEl.textContent;
-
-  titleEl.textContent = '';
-  inner.appendChild(textSpan);
-  titleEl.appendChild(inner);
-
-  titleEl.addEventListener('mouseenter', () => animateCAIn(inner));
-  titleEl.addEventListener('mouseleave', () => animateCAOut(inner));
 }
 
 // ─── Render rows from data ─────────────────────────────────────────────────
@@ -799,12 +723,25 @@ export async function initPortfolioRows(data) {
     wireFramePan(frame, canHover);
   });
 
+  if (canHover) {
+    container.querySelectorAll('.portfolio-row').forEach((row) => {
+      row.addEventListener('mouseenter', () => {
+        container.classList.add('is-row-hovered');
+        row.classList.add('is-hovered');
+      });
+      row.addEventListener('mouseleave', () => {
+        row.classList.remove('is-hovered');
+        if (!container.querySelector('.portfolio-row.is-hovered')) {
+          container.classList.remove('is-row-hovered');
+        }
+      });
+    });
+  }
+
   mm.add('(prefers-reduced-motion: no-preference)', () => {
     container.querySelectorAll('.portfolio-row').forEach((row) => {
       const strip = row.querySelector('.portfolio-row__strip');
-      const title = row.querySelector('.portfolio-row__title');
       if (strip) wireStrip(strip, () => cfg, canHover);
-      if (title) wireTitleCA(title, canHover);
     });
 
     container.querySelectorAll('.portfolio-row__strip').forEach((strip) => {

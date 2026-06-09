@@ -225,16 +225,7 @@ body::before {
   overflow: visible;
   white-space: nowrap;
   cursor: default;
-}
-
-.portfolio-row__title-inner {
-  position: relative;
-  display: inline-block;
-}
-
-.portfolio-row__title-text {
-  position: relative;
-  z-index: 2;
+  transition: opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .portfolio-row__tag {
@@ -360,22 +351,37 @@ body::before {
 }
 
 /* =====================================================
-   CHROMATIC ABERRATION CLONES on titles
+   CHROMATIC ABERRATION on titles (text-shadow, CSS-only)
 ====================================================== */
-.portfolio-ca-clone {
-  position: absolute;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  pointer-events: none;
-  mix-blend-mode: screen;
-  filter: blur(0.4px);
-  opacity: 0;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  letter-spacing: inherit;
-  z-index: 1;
+@keyframes portfolio-ca-fade {
+  from {
+    text-shadow:
+      -2px 0 2px color-mix(in oklch, oklch(0.804 0.146 220), transparent 10%),
+      2px 0 2px color-mix(in oklch, oklch(0.656 0.235 13), transparent 10%);
+  }
+  to {
+    text-shadow:
+      -2px 0 2px transparent,
+      2px 0 2px transparent;
+  }
+}
+
+.portfolio-rows.is-row-hovered .portfolio-row__title {
+  opacity: 0.2;
+}
+
+.portfolio-rows.is-row-hovered .portfolio-row.is-hovered .portfolio-row__title {
+  opacity: 1;
+  animation: portfolio-ca-fade 1500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-rows.is-row-hovered .portfolio-row__title,
+  .portfolio-rows.is-row-hovered .portfolio-row.is-hovered .portfolio-row__title {
+    animation: none;
+    text-shadow: none;
+    opacity: 1;
+  }
 }
 
 /* =====================================================
