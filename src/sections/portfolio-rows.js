@@ -2,6 +2,7 @@ import { gsap } from 'gsap';
 import GLightbox from 'glightbox';
 import 'glightbox/dist/css/glightbox.min.css';
 import { escHtml, escAttr } from '../utils/escape.js';
+import { CDN_BASE } from '../config.js';
 
 // ─── Default Tweakpane config ──────────────────────────────────────────────
 const DEFAULT_CONFIG = {
@@ -523,8 +524,8 @@ function inferProjectSection(project) {
   );
   if (textSection) return textSection;
 
-  if (project.liveUrl && !project.videoUrl) return 'websites';
-  if (project.videoUrl) return 'long-form';
+  if (project.liveUrl && !project.lightboxVideo) return 'websites';
+  if (project.lightboxVideo) return 'long-form';
   return 'long-form';
 }
 
@@ -544,12 +545,13 @@ function groupProjectsBySection(projects) {
 }
 
 function renderViewPill(p) {
-  if (p.videoUrl) {
+  if (p.lightboxVideo) {
+    const videoUrl = `${CDN_BASE}/${p.lightboxVideo.replace(/^\.?\//, '')}`;
     return `<a
       class="portfolio-view-pill glightbox-portfolio"
       data-gallery="portfolio-${escAttr(p.id)}"
-      data-glightbox="type: video; source: ${escAttr(p.videoUrl)};"
-      href="${escAttr(p.videoUrl)}"
+      data-glightbox="type: video; source: ${escAttr(videoUrl)};"
+      href="${escAttr(videoUrl)}"
       aria-label="View ${escAttr(p.title)}"
     >View</a>`;
   }
