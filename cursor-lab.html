@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cursor Lab — viewfinder cursor exploration</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --offwhite: #f0f2f1;
+        --bg: #0b0b0c;
+        --muted: rgba(240, 242, 241, 0.55);
+        --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--offwhite);
+        font-family: 'IBM Plex Mono', monospace;
+        min-height: 100%;
+      }
+      /* Hide native cursor across the stage so only the custom one shows */
+      body.lab-active,
+      body.lab-active a,
+      body.lab-active button {
+        cursor: none;
+      }
+
+      header {
+        padding: 32px 40px 8px;
+      }
+      header h1 {
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        margin: 0 0 4px;
+        text-transform: uppercase;
+      }
+      header p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--muted);
+        max-width: 60ch;
+        line-height: 1.5;
+      }
+
+      /* ---- Control panel ---- */
+      .controls {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        z-index: 50;
+        background: rgba(20, 20, 22, 0.9);
+        border: 1px solid rgba(240, 242, 241, 0.15);
+        padding: 16px;
+        display: grid;
+        gap: 14px;
+        width: 230px;
+        backdrop-filter: blur(6px);
+      }
+      .controls fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 6px;
+      }
+      .controls legend {
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 0;
+        margin-bottom: 4px;
+      }
+      .controls label {
+        font-size: 0.78rem;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        cursor: pointer;
+      }
+      .controls input {
+        accent-color: var(--offwhite);
+      }
+
+      /* ---- Stage layout ---- */
+      main {
+        padding: 48px 40px 120px;
+        display: grid;
+        gap: 64px;
+        max-width: 1100px;
+      }
+      section h2 {
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 20px;
+        border-bottom: 1px solid rgba(240, 242, 241, 0.12);
+        padding-bottom: 8px;
+      }
+
+      /* Text links row */
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        font-size: 1.4rem;
+      }
+      .links a {
+        color: var(--offwhite);
+        text-decoration: none;
+        position: relative;
+      }
+      .lab-btn {
+        font-family: inherit;
+        font-size: 0.9rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--offwhite);
+        background: transparent;
+        border: 1px solid var(--offwhite);
+        padding: 14px 28px;
+      }
+
+      /* Gallery-card-like tiles (16:9), echoing the real cards */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+      }
+      .card {
+        aspect-ratio: 16 / 9;
+        background: linear-gradient(135deg, #1a1a1e, #101012);
+        border: 1px solid rgba(240, 242, 241, 0.1);
+        display: flex;
+        align-items: flex-end;
+        padding: 18px;
+        font-size: 1.1rem;
+        position: relative;
+      }
+
+      /* =========================================================
+         CUSTOM CURSOR ELEMENTS
+         ========================================================= */
+      .lab-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 10px;
+        margin: -5px 0 0 -5px;
+        background: var(--offwhite);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0;
+      }
+
+      /* The frame: a 16:9 box. In bracket mode only the corners show.
+         In outline mode a full 1px border shows. */
+      .lab-frame {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 64px;
+        height: 36px; /* 16:9 */
+        margin: -18px 0 0 -32px;
+        pointer-events: none;
+        z-index: 9998;
+        opacity: 0;
+      }
+      .lab-frame.is-outline {
+        border: 1px solid var(--offwhite);
+      }
+
+      /* Corner brackets — 1px L-shapes, same recipe as preloader/cards */
+      .lab-corner {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+      }
+      .lab-corner::before,
+      .lab-corner::after {
+        content: '';
+        position: absolute;
+        background: var(--offwhite);
+      }
+      .lab-corner::before {
+        width: 100%;
+        height: 1px;
+      }
+      .lab-corner::after {
+        width: 1px;
+        height: 100%;
+      }
+      .lab-corner-lt {
+        top: 0;
+        left: 0;
+      }
+      .lab-corner-lt::before,
+      .lab-corner-lt::after {
+        top: 0;
+        left: 0;
+      }
+      .lab-corner-rt {
+        top: 0;
+        right: 0;
+      }
+      .lab-corner-rt::before {
+        top: 0;
+        right: 0;
+      }
+      .lab-corner-rt::after {
+        top: 0;
+        right: 0;
+      }
+      .lab-corner-lb {
+        bottom: 0;
+        left: 0;
+      }
+      .lab-corner-lb::before {
+        bottom: 0;
+        left: 0;
+      }
+      .lab-corner-lb::after {
+        bottom: 0;
+        left: 0;
+      }
+      .lab-corner-rb {
+        bottom: 0;
+        right: 0;
+      }
+      .lab-corner-rb::before {
+        bottom: 0;
+        right: 0;
+      }
+      .lab-corner-rb::after {
+        bottom: 0;
+        right: 0;
+      }
+      /* Outline mode hides the bracket corners */
+      .lab-frame.is-outline .lab-corner {
+        display: none;
+      }
+
+      .lab-time {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        letter-spacing: 0.05em;
+        color: var(--offwhite);
+      }
+      .lab-frame.has-time .lab-time {
+        display: flex;
+      }
+      .lab-frame.has-time + .lab-dot,
+      body.form-frame-time .lab-dot {
+        opacity: 0 !important;
+      }
+    </style>
+  </head>
+  <body class="lab-active form-frame-dot hover-expand">
+    <div class="controls">
+      <fieldset>
+        <legend>Cursor form</legend>
+        <label
+          ><input type="radio" name="form" value="frame-dot" checked />
+          1 · Bracket frame + dot</label
+        >
+        <label
+          ><input type="radio" name="form" value="outline" /> 2 · Full 1px
+          outline</label
+        >
+        <label
+          ><input type="radio" name="form" value="frame-time" /> 3 · Frame +
+          timecode</label
+        >
+      </fieldset>
+      <fieldset>
+        <legend>Hover behavior</legend>
+        <label
+          ><input type="radio" name="hover" value="expand" checked /> A ·
+          Corners expand</label
+        >
+        <label
+          ><input type="radio" name="hover" value="snap" /> B · Snap-frame
+          target</label
+        >
+        <label
+          ><input type="radio" name="hover" value="scale" /> C ·
+          Scale-up</label
+        >
+      </fieldset>
+    </div>
+
+    <header>
+      <h1>Cursor Lab</h1>
+      <p>
+        Move the mouse around. Toggle the two forks top-right. Hover the links,
+        the button, and the 16:9 tiles to feel each hover behavior. Frame trails
+        the dot at a slower rate (0.7s vs 0.3s), echoing the dot/ring trailing
+        of the current cursor.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Text links</h2>
+        <div class="links">
+          <a href="#" data-target>Work</a>
+          <a href="#" data-target>About</a>
+          <a href="#" data-target>Contact</a>
+          <a href="#" data-target>Reel ↗</a>
+        </div>
+      </section>
+
+      <section>
+        <h2>Button</h2>
+        <button class="lab-btn" data-target>View project</button>
+      </section>
+
+      <section>
+        <h2>Gallery tiles (16:9)</h2>
+        <div class="cards">
+          <div class="card" data-target>Wyatt Earp</div>
+          <div class="card" data-target>Project Two</div>
+          <div class="card" data-target>Project Three</div>
+          <div class="card" data-target>Project Four</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- cursor nodes -->
+    <div class="lab-frame">
+      <span class="lab-corner lab-corner-lt"></span>
+      <span class="lab-corner lab-corner-rt"></span>
+      <span class="lab-corner lab-corner-lb"></span>
+      <span class="lab-corner lab-corner-rb"></span>
+      <span class="lab-time">00:06:00</span>
+    </div>
+    <div class="lab-dot"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+      const dot = document.querySelector('.lab-dot');
+      const frame = document.querySelector('.lab-frame');
+      const corners = {
+        lt: frame.querySelector('.lab-corner-lt'),
+        rt: frame.querySelector('.lab-corner-rt'),
+        lb: frame.querySelector('.lab-corner-lb'),
+        rb: frame.querySelector('.lab-corner-rb'),
+      };
+      const timeEl = frame.querySelector('.lab-time');
+
+      let form = 'frame-dot';
+      let hover = 'expand';
+      let framing = false; // true while snap-framing a target
+
+      // Base frame size (at rest)
+      const BASE_W = 64;
+      const BASE_H = 36;
+
+      const dotX = gsap.quickTo(dot, 'x', { duration: 0.3, ease: 'power2.out' });
+      const dotY = gsap.quickTo(dot, 'y', { duration: 0.3, ease: 'power2.out' });
+      const frameX = gsap.quickTo(frame, 'x', {
+        duration: 0.7,
+        ease: 'power2.out',
+      });
+      const frameY = gsap.quickTo(frame, 'y', {
+        duration: 0.7,
+        ease: 'power2.out',
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        gsap.to([dot, frame], { opacity: 1, duration: 0.3, overwrite: 'auto' });
+        dotX(e.clientX);
+        dotY(e.clientY);
+        if (!framing) {
+          frameX(e.clientX);
+          frameY(e.clientY);
+        }
+      });
+
+      // ---- Countdown timecode (form 3) ----
+      const FPS = 24;
+      let frames = 6 * FPS;
+      setInterval(() => {
+        frames = frames > 0 ? frames - 1 : 6 * FPS;
+        const s = Math.floor(frames / FPS) % 60;
+        const f = frames % FPS;
+        timeEl.textContent = `00:${String(s).padStart(2, '0')}:${String(f).padStart(2, '0')}`;
+      }, 1000 / FPS);
+
+      // ---- Form switching ----
+      function applyForm(value) {
+        form = value;
+        framing = false;
+        document.body.className = `lab-active form-${value} hover-${hover}`;
+        frame.classList.toggle('is-outline', value === 'outline');
+        frame.classList.toggle('has-time', value === 'frame-time');
+        resetCursor();
+      }
+
+      // ---- Hover handlers ----
+      function resetCursor() {
+        gsap.to(dot, { scale: 1, duration: 0.3, overwrite: 'auto' });
+        gsap.to(frame, {
+          scale: 1,
+          width: BASE_W,
+          height: BASE_H,
+          marginLeft: -BASE_W / 2,
+          marginTop: -BASE_H / 2,
+          duration: 0.4,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+        Object.values(corners).forEach((c) =>
+          gsap.to(c, { x: 0, y: 0, duration: 0.45, ease: 'power2.out', overwrite: 'auto' })
+        );
+      }
+
+      function onEnter(e) {
+        const el = e.currentTarget;
+        if (hover === 'expand') {
+          gsap.to(dot, { scale: 0, duration: 0.3, overwrite: 'auto' });
+          const d = 8;
+          gsap.to(corners.lt, { x: -d, y: -d, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+          gsap.to(corners.rt, { x: d, y: -d, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+          gsap.to(corners.lb, { x: -d, y: d, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+          gsap.to(corners.rb, { x: d, y: d, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+        } else if (hover === 'scale') {
+          gsap.to(dot, { scale: 0, duration: 0.3, overwrite: 'auto' });
+          gsap.to(frame, { scale: 1.7, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
+        } else if (hover === 'snap') {
+          framing = true;
+          gsap.to(dot, { scale: 0, duration: 0.2, overwrite: 'auto' });
+          const r = el.getBoundingClientRect();
+          const pad = 10;
+          gsap.to(frame, {
+            x: r.left + r.width / 2,
+            y: r.top + r.height / 2,
+            width: r.width + pad * 2,
+            height: r.height + pad * 2,
+            marginLeft: -(r.width + pad * 2) / 2,
+            marginTop: -(r.height + pad * 2) / 2,
+            duration: 0.45,
+            ease: 'power3.out',
+            overwrite: 'auto',
+          });
+        }
+      }
+
+      function onLeave() {
+        framing = false;
+        resetCursor();
+      }
+
+      document.querySelectorAll('[data-target]').forEach((el) => {
+        el.addEventListener('mouseenter', onEnter);
+        el.addEventListener('mouseleave', onLeave);
+      });
+
+      // ---- Wire controls ----
+      document.querySelectorAll('input[name="form"]').forEach((r) =>
+        r.addEventListener('change', (e) => applyForm(e.target.value))
+      );
+      document.querySelectorAll('input[name="hover"]').forEach((r) =>
+        r.addEventListener('change', (e) => {
+          hover = e.target.value;
+          document.body.className = `lab-active form-${form} hover-${hover}`;
+          resetCursor();
+        })
+      );
+
+      applyForm('frame-dot');
+    </script>
+  </body>
+</html>
