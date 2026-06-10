@@ -126,7 +126,7 @@ export default defineConfig({
         contact: resolve(import.meta.dirname, 'contact.html'),
         resume: resolve(import.meta.dirname, 'resume.html'),
         sandbox: resolve(import.meta.dirname, 'sandbox.html'),
-        wyatt: resolve(import.meta.dirname, 'case_study_wyatt.html'),
+        wyatt: resolve(import.meta.dirname, 'case-study-wyatt.html'),
         experiments: resolve(import.meta.dirname, 'experiments/index.html'),
         ...discoverPortfolio(),
         ...discoverProjects(),

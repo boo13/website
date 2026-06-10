@@ -51,7 +51,7 @@ Root HTML pages and entry files:
 - index-legacy.html -> src/main-index.js
 - contact.html -> src/main-contact.js
 - resume.html -> src/main-resume.js
-- case_study_wyatt.html -> src/main-wyatt.js
+- case-study-wyatt.html -> src/main-wyatt.js
 - sandbox.html -> no page-specific JS entry
 
 projects/                           # project detail pages (auto-discovered by Vite)
@@ -73,7 +73,7 @@ src/
     video-lightbox.css  # lightbox overlay (index.html)
     contact.css         # contact.html
     resume.css          # resume.html
-    wyatt.css           # case_study_wyatt.html
+    wyatt.css           # case-study-wyatt.html
     index-legacy.css    # legacy index-legacy.html
   config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
   main.js               # entry for index.html — imports sections + calls init()
@@ -81,7 +81,7 @@ src/
   main-index.js         # entry for index-legacy.html (Slider + ResponsiveVideo)
   main-contact.js       # entry for contact.html (form handler)
   main-resume.js        # entry for resume.html (page-specific layout tweaks)
-  main-wyatt.js         # entry for case_study_wyatt.html (featured-work effects)
+  main-wyatt.js         # entry for case-study-wyatt.html (featured-work effects)
 ```
 
 ## GSAP Conventions
