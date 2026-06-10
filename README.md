@@ -7,7 +7,6 @@ Portfolio site for Randy Counsman, a nonfiction video producer. The site is heav
 The site is a multi-page static site. Each HTML file lives at the repo root:
 
 - **index.html** — The primary portfolio page. Hero zoom, parallax rack-focus, horizontal scroll gallery, credits table, and stats section.
-- **index-legacy.html** — Archived legacy version with a full-screen video and image slider.
 - **contact.html** — Contact form powered by Formspree.
 - **resume.html** — Printable resume layout built to match the site's typography.
 - **sandbox.html** — A GSAP demo playground for text animation timing/easing experiments.
@@ -19,7 +18,6 @@ The site uses [Vite](https://vite.dev/) for bundling and [GSAP](https://gsap.com
 ```
 src/
   main.js                 # index.html entry — imports all scroll sections
-  main-index.js           # index-legacy.html entry — Slider + ResponsiveVideo
   main-contact.js         # contact.html entry — form handler
   main-resume.js          # resume.html entry — typography + layout tweaks
   sections/               # one file per scroll section (hero, featured-work, gallery, credits, about)

@@ -120,7 +120,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
-        legacy: resolve(import.meta.dirname, 'index-legacy.html'),
         aiplaylists: resolve(import.meta.dirname, 'aiplaylists.html'),
         medialog: resolve(import.meta.dirname, 'medialog.html'),
         contact: resolve(import.meta.dirname, 'contact.html'),
