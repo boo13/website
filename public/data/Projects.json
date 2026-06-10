@@ -32,7 +32,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt18382254/",
-      "preview": "images/portfolio/sitting-bull.jpg",
+      "preview": "images/portfolio/sitting-bull/poster.large.webp",
       "featured": true,
       "galleryOrder": 2,
       "detailPage": true,
@@ -45,7 +45,7 @@
     {
       "id": "wyatt-earp-and-the-cowboy-war",
       "title": "Wyatt Earp and the Cowboy War",
-      "preview": "images/portfolio/WyattEarp.jpg",
+      "preview": "images/portfolio/wyatt-earp/poster.large.webp",
       "platform": "Netflix",
       "year": "2024",
       "role": "Co-Executive Producer",
@@ -83,7 +83,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt32987087/",
-      "preview": "images/portfolio/george-rise-of-a-revolutionary.jpg"
+      "preview": "images/portfolio/george-rise-of-a-revolutionary/poster.large.webp"
     },
     {
       "id": "american-dynasty",
@@ -97,7 +97,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt21066272/",
-      "preview": "images/portfolio/american-dynasty.jpg"
+      "preview": "images/portfolio/american-dynasty/poster.large.webp"
     },
     {
       "id": "liberty-or-death-boston-tea-party",
@@ -111,7 +111,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt29920137/",
-      "preview": "images/portfolio/liberty-or-death-boston-tea-party.jpg"
+      "preview": "images/portfolio/liberty-or-death-boston-tea-party/poster.large.webp"
     },
     {
       "id": "titans-the-rise-of-hollywood",
@@ -125,7 +125,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt22245664/",
-      "preview": "images/portfolio/titans-the-rise-of-hollywood.jpg"
+      "preview": "images/portfolio/titans-the-rise-of-hollywood/poster.large.webp"
     },
     {
       "id": "titans-the-rise-of-wall-street",
@@ -139,7 +139,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt18278410/",
-      "preview": "images/portfolio/titans-the-rise-of-wall-street.jpg"
+      "preview": "images/portfolio/titans-the-rise-of-wall-street/poster.large.webp"
     },
     {
       "id": "beyond-the-spotlight",
@@ -153,12 +153,12 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt14417270/",
-      "preview": "images/portfolio/beyond-the-spotlight.jpg"
+      "preview": "images/portfolio/beyond-the-spotlight/poster.large.webp"
     },
     {
       "id": "raging-bulls",
       "title": "Shark Week: Raging Bulls",
-      "preview": "images/portfolio/shark-week.jpg",
+      "preview": "images/portfolio/shark-week/poster.large.webp",
       "platform": "Discovery",
       "year": "2021",
       "role": "Supervising Producer",
@@ -181,7 +181,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt14574154/",
-      "preview": "images/portfolio/human-the-world-within.jpg"
+      "preview": "images/portfolio/human-the-world-within/poster.large.webp"
     },
     {
       "id": "the-titans-that-built-america",
@@ -209,7 +209,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt13255112/",
-      "preview": "images/portfolio/holiday-home-makeover-with-mr-christmas.jpg"
+      "preview": "images/portfolio/holiday-home-makeover-with-mr-christmas/poster.large.webp"
     },
     {
       "id": "washington",
@@ -223,7 +223,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt10098580/",
-      "preview": "images/portfolio/washington.jpg"
+      "preview": "images/portfolio/washington/poster.large.webp"
     },
     {
       "id": "shark-week-shallows",
@@ -237,7 +237,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt1146333/",
-      "preview": "images/portfolio/shark-week.jpg"
+      "preview": "images/portfolio/shark-week/poster.large.webp"
     },
     {
       "id": "the-interrogator",
@@ -251,7 +251,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt11018358/",
-      "preview": "images/portfolio/the-interrogator.jpg"
+      "preview": "images/portfolio/the-interrogator/poster.large.webp"
     },
     {
       "id": "capsized-blood-in-the-water",
@@ -270,7 +270,7 @@
     {
       "id": "pope-the-most-powerful-man-in-history",
       "title": "Pope: The Most Powerful Man in History",
-      "preview": "images/portfolio/Pope.jpg",
+      "preview": "images/portfolio/pope/poster.large.webp",
       "platform": "CNN",
       "year": "2018",
       "role": "Executive Producer / Director",
@@ -336,7 +336,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt7069502/",
-      "preview": "images/portfolio/hamilton-building-america.jpg"
+      "preview": "images/portfolio/hamilton-building-america/poster.large.webp"
     },
     {
       "id": "sons-of-liberty",
@@ -350,7 +350,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt3762634/",
-      "preview": "images/portfolio/sons-of-liberty.jpg"
+      "preview": "images/portfolio/sons-of-liberty/poster.large.webp"
     },
     {
       "id": "the-making-of-the-mob",
@@ -364,7 +364,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt4382100/",
-      "preview": "images/portfolio/the-making-of-the-mob.jpg"
+      "preview": "images/portfolio/the-making-of-the-mob/poster.large.webp"
     },
     {
       "id": "american-genius",
@@ -439,7 +439,7 @@
     {
       "id": "the-men-who-built-america",
       "title": "The Men Who Built America",
-      "preview": "images/portfolio/MWBA.jpg",
+      "preview": "images/portfolio/men-who-built-america/poster.large.webp",
       "platform": "History",
       "year": "2012",
       "role": "Writer / Producer",
@@ -492,7 +492,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2179099/",
-      "preview": "images/portfolio/inside-the-nsa.jpg"
+      "preview": "images/portfolio/inside-the-nsa/poster.large.webp"
     },
     {
       "id": "redrum",
@@ -506,7 +506,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2568868/",
-      "preview": "images/portfolio/redrum.jpg"
+      "preview": "images/portfolio/redrum/poster.large.webp"
     },
     {
       "id": "travel-testers",
