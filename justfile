@@ -90,6 +90,12 @@ portfolio-encrypt-all:
       node scripts/encrypt-portfolio.mjs "$slug"
     done
 
+# Generate .thumb.webp + .large.webp derivatives for portfolio images and delete originals
+# Example: just images-optimize
+#          just images-optimize public/images/portfolio/pitch-vin-diesel
+images-optimize *ARGS:
+    node scripts/optimize-portfolio-images.mjs {{ ARGS }}
+
 # Run a full visual audit across desktop, tablet, and phone sizes
 visual-audit:
     #!/usr/bin/env bash

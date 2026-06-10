@@ -9,21 +9,62 @@ export function initNav() {
   const nav = document.getElementById('pill-nav');
   if (!nav) return () => {};
 
-  function setActive(id) {
-    nav.querySelectorAll('.pill-nav__item[data-section]').forEach((item) => {
-      item.classList.toggle('is-active', item.dataset.section === id);
+  const cleanupHandlers = [];
+  const indicator = document.createElement('span');
+  indicator.className = 'pill-nav__indicator';
+  indicator.setAttribute('aria-hidden', 'true');
+  nav.appendChild(indicator);
+
+  function moveIndicator(activeItem) {
+    if (!activeItem) {
+      gsap.to(indicator, {
+        autoAlpha: 0,
+        duration: 0.2,
+        ease: 'expo.out',
+        overwrite: true,
+      });
+      return;
+    }
+
+    const navRect = nav.getBoundingClientRect();
+    const itemRect = activeItem.getBoundingClientRect();
+    gsap.to(indicator, {
+      x: itemRect.left - navRect.left,
+      width: itemRect.width,
+      autoAlpha: 1,
+      duration: 0.4,
+      ease: 'expo.out',
+      overwrite: true,
     });
   }
 
+  function setActive(id) {
+    let activeItem = null;
+    nav.querySelectorAll('.pill-nav__item[data-section]').forEach((item) => {
+      const isActive = item.dataset.section === id;
+      item.classList.toggle('is-active', isActive);
+      if (isActive) activeItem = item;
+    });
+    moveIndicator(activeItem);
+  }
+
   const ctx = gsap.context(() => {
-    // Show nav once user is ~50% through the hero scroll-away
+    gsap.set(nav, { autoAlpha: 0 });
+
+    // Fade nav in across a band of hero progress instead of flipping at one threshold.
     ScrollTrigger.create({
       trigger: '#hero',
       start: 'top top',
       end: () => `+=${window.innerHeight * 2.3}`,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
-        nav.classList.toggle('is-visible', self.progress > 0.5);
+        const opacity = gsap.utils.clamp(
+          0,
+          1,
+          gsap.utils.mapRange(0.42, 0.68, 0, 1, self.progress)
+        );
+        gsap.set(nav, { autoAlpha: opacity });
+        nav.style.pointerEvents = opacity > 0.2 ? 'auto' : 'none';
       },
     });
 
@@ -71,5 +112,17 @@ export function initNav() {
     });
   });
 
-  return () => ctx.revert();
+  const handleResize = () =>
+    moveIndicator(nav.querySelector('.pill-nav__item.is-active'));
+  window.addEventListener('resize', handleResize);
+  cleanupHandlers.push(() =>
+    window.removeEventListener('resize', handleResize)
+  );
+
+  return () => {
+    cleanupHandlers.forEach((cleanup) => cleanup());
+    indicator.remove();
+    nav.style.pointerEvents = '';
+    ctx.revert();
+  };
 }

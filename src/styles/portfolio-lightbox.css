@@ -1,0 +1,86 @@
+/* =====================================================
+   PORTFOLIO IMAGE LIGHTBOX
+   GLightbox theme — cinema-grade dark aesthetic.
+   Uses !important on background/color to win over
+   glightbox.min.css which loads after this file.
+====================================================== */
+
+/* ── Backdrop ─────────────────────────────────────── */
+.glightbox-container .goverlay {
+  background: rgba(2, 2, 2, 0.96) !important;
+}
+
+/* ── Image sizing ─────────────────────────────────── */
+.glightbox-container .gslide-image img {
+  max-width: 92vw;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
+/* ── Description bar: kill the white, float as text ─ */
+.glightbox-clean .gslide-description {
+  background: transparent !important;
+}
+
+.glightbox-clean .gdesc-inner {
+  padding: 10px 2px 0 !important;
+}
+
+.glightbox-clean .gslide-title {
+  font-family: var(--ff-body, 'acumin-pro-condensed', sans-serif) !important;
+  font-size: 0.6rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: oklch(0.968 0.006 75 / 0.38) !important;
+  text-align: left !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
+/* hide the long-form desc if ever present */
+.glightbox-clean .gslide-desc {
+  display: none !important;
+}
+
+/* ── Navigation arrows ────────────────────────────── */
+.glightbox-clean .gnext,
+.glightbox-clean .gprev {
+  background: transparent !important;
+  width: 44px;
+  height: 44px;
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.glightbox-clean .gnext:hover,
+.glightbox-clean .gprev:hover {
+  background: transparent !important;
+  opacity: 1;
+}
+
+.glightbox-clean .gnext path,
+.glightbox-clean .gprev path {
+  fill: oklch(0.968 0.006 75) !important;
+}
+
+/* ── Close button ─────────────────────────────────── */
+.glightbox-clean .gclose {
+  background: transparent !important;
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+.glightbox-clean .gclose:hover {
+  background: transparent !important;
+  opacity: 1;
+}
+
+.glightbox-clean .gclose path {
+  fill: oklch(0.968 0.006 75) !important;
+}
+
+/* ── Drop the box-shadow on the image itself ─────── */
+.glightbox-clean .gslide-media {
+  box-shadow: none !important;
+}

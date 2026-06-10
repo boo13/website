@@ -3,51 +3,175 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Contact - Randy Counsman</title>
+    <meta
+      name="description"
+      content="Contact Randy Counsman for nonfiction video development, production, and creative leadership."
+    />
+    <link rel="icon" href="/favicon/favicon.ico" />
+    <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/gya6int.css" />
     <!-- Styles injected by Vite from src/main-contact.js -->
   </head>
   <body>
-    <form
-      id="fs-frm"
-      name="simple-contact-form"
-      accept-charset="utf-8"
-      action="https://formspree.io/f/xyzyzvyn"
-      method="post"
-    >
-      <fieldset id="fs-frm-inputs">
-        <input
-          type="text"
-          name="name"
-          id="full-name"
-          placeholder="Your Name"
-          required=""
+    <a class="skip-link" href="#fs-frm">Skip to contact form</a>
+
+    <div class="contact-background" aria-hidden="true">
+      <video
+        class="contact-background__video"
+        autoplay
+        loop
+        muted
+        playsinline
+        poster="/images/landing-poster.jpg"
+        crossorigin
+      >
+        <source
+          src="https://media.randycounsman.com/video/LandingPageMontagev04.2.webm"
+          type="video/webm"
         />
-        <!-- <label for="email-address">Email Address</label> -->
-        <input
-          type="email"
-          name="_replyto"
-          id="email-address"
-          placeholder="Your Email"
-          required=""
+        <source
+          src="https://media.randycounsman.com/video/LandingPageMontagev04.2.mp4"
+          type="video/mp4"
         />
-        <!-- <label for="message">Message</label> -->
-        <textarea
-          rows="5"
-          name="message"
-          id="message"
-          placeholder="Anything you want to say..."
-          required=""
-        ></textarea>
-        <input
-          type="hidden"
-          name="_subject"
-          id="email-subject"
-          value="Contact Form Submission"
-        />
-      </fieldset>
-      <input id="fs-frm-submit" type="submit" value="Submit" />
-      <p id="fs-frm-status"></p>
-    </form>
+      </video>
+      <div class="contact-background__shade"></div>
+      <div class="contact-background__grain"></div>
+    </div>
+
+    <header class="contact-header">
+      <a href="/" class="contact-wordmark">Randy Counsman</a>
+      <nav class="contact-nav" aria-label="Site navigation">
+        <a href="/">Home</a>
+        <a href="/#featured">Featured</a>
+        <a href="/#work">Work</a>
+        <a href="/resume.html">Resume</a>
+      </nav>
+    </header>
+
+    <main class="contact-shell">
+      <section class="contact-intro" aria-labelledby="contact-title">
+        <p class="contact-kicker contact-reveal contact-reveal--1">Contact</p>
+        <h1 id="contact-title" class="contact-title contact-reveal contact-reveal--2">
+          Let's make something together.
+        </h1>
+        <p class="contact-deck contact-reveal contact-reveal--3">
+          For documentary series, unscripted development, branded nonfiction,
+          or production leadership, send a note with the shape of the project.
+        </p>
+
+        <div class="contact-details contact-reveal contact-reveal--4">
+          <div class="contact-detail">
+            <span class="contact-detail__label">Based in</span>
+            <span class="contact-detail__value">New York, NY</span>
+          </div>
+          <div class="contact-detail">
+            <span class="contact-detail__label">Direct</span>
+            <a class="contact-detail__value" href="mailto:RandyCounsman@gmail.com"
+              >RandyCounsman@gmail.com</a
+            >
+          </div>
+          <div class="contact-detail contact-detail--links">
+            <span class="contact-detail__label">Elsewhere</span>
+            <span class="contact-detail__links">
+              <a href="https://www.linkedin.com/in/randycounsman/" target="_blank" rel="noopener"
+                >LinkedIn</a
+              >
+              <a href="https://vimeo.com/randycounsman" target="_blank" rel="noopener"
+                >Vimeo</a
+              >
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-panel" aria-label="Contact form">
+        <form
+          id="fs-frm"
+          class="contact-form"
+          name="simple-contact-form"
+          accept-charset="utf-8"
+          action="https://formspree.io/f/xyzyzvyn"
+          method="post"
+        >
+          <fieldset id="fs-frm-inputs">
+            <legend>Project brief</legend>
+
+            <div class="contact-field">
+              <label for="full-name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="full-name"
+                placeholder="Your name"
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="contact-field">
+              <label for="email-address">Email</label>
+              <input
+                type="email"
+                name="_replyto"
+                id="email-address"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="contact-field">
+              <label for="project-context">Project / company</label>
+              <input
+                type="text"
+                name="project"
+                id="project-context"
+                placeholder="Series, studio, brand, or team"
+                autocomplete="organization"
+              />
+            </div>
+
+            <div class="contact-field">
+              <label for="message">Message</label>
+              <textarea
+                rows="6"
+                name="message"
+                id="message"
+                placeholder="What are you making, and where do you need help?"
+                required
+              ></textarea>
+            </div>
+
+            <input
+              type="hidden"
+              name="_subject"
+              id="email-subject"
+              value="Contact Form Submission"
+            />
+          </fieldset>
+
+          <button id="fs-frm-submit" class="contact-submit" type="submit">
+            <span data-submit-label>Send note</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M3 13L13 3M13 3H5M13 3V11"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <p id="fs-frm-status" class="contact-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="contact-footer">
+      <p>&copy; Randy Counsman, <span id="contact-year">2026</span></p>
+      <a href="/">Return home</a>
+    </footer>
+
     <script type="module" src="/src/main-contact.js"></script>
   </body>
 </html>

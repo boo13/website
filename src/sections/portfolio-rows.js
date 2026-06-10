@@ -411,6 +411,14 @@ function encodeSrc(src) {
   return '/' + src.split('/').map(encodeURIComponent).join('/');
 }
 
+function thumbSrc(src) {
+  return encodeSrc(src.replace(/\.(jpe?g|png)$/i, '.thumb.webp'));
+}
+
+function largeSrc(src) {
+  return encodeSrc(src.replace(/\.(jpe?g|png)$/i, '.large.webp'));
+}
+
 function normalizeSectionText(value) {
   return String(value || '')
     .toLowerCase()
@@ -469,13 +477,16 @@ function groupProjectsBySection(projects) {
 }
 
 function renderViewPill(p) {
-  if (p.lightboxVideo) {
-    const videoUrl = `${CDN_BASE}/${p.lightboxVideo.replace(/^\.?\//, '')}`;
+  const videoSrc = p.lightboxVideo
+    ? `${CDN_BASE}/${p.lightboxVideo.replace(/^\.?\//, '')}`
+    : p.videoUrl || null;
+
+  if (videoSrc) {
     return `<a
       class="portfolio-view-pill glightbox-portfolio"
       data-gallery="portfolio-${escAttr(p.id)}"
-      data-glightbox="type: video; source: ${escAttr(videoUrl)};"
-      href="${escAttr(videoUrl)}"
+      data-glightbox="type: video; source: ${escAttr(videoSrc)};"
+      href="${escAttr(videoSrc)}"
       aria-label="View ${escAttr(p.title)}"
     >View</a>`;
   }
@@ -508,7 +519,13 @@ function renderProjectRow(p) {
               .map(
                 (src) => `
               <li class="portfolio-shot">
-                <img src="${encodeSrc(src)}" alt="" loading="lazy" draggable="false">
+                <a class="glightbox-portfolio-img"
+                   data-gallery="portfolio-img-${escAttr(p.id)}"
+                   data-glightbox="type: image; title: ${escAttr(p.title)}"
+                   href="${largeSrc(src)}"
+                   aria-label="View screenshot from ${escAttr(p.title)}">
+                  <img src="${thumbSrc(src)}" alt="" loading="lazy" draggable="false">
+                </a>
               </li>`
               )
               .join('')}
@@ -536,21 +553,36 @@ function renderRows(container, projects) {
 // ─── GLightbox init ────────────────────────────────────────────────────────
 
 function initLightbox() {
-  const triggers = document.querySelectorAll('.glightbox-portfolio');
-  if (!triggers.length) return;
+  if (document.querySelector('.glightbox-portfolio')) {
+    GLightbox({
+      selector: '.glightbox-portfolio',
+      touchNavigation: true,
+      loop: false,
+      autoplayVideos: true,
+      closeButton: true,
+      closeOnOutsideClick: true,
+      keyboardNavigation: true,
+      videosWidth: '90vw',
+      openEffect: 'fade',
+      closeEffect: 'fade',
+    });
+  }
 
-  GLightbox({
-    selector: '.glightbox-portfolio',
-    touchNavigation: true,
-    loop: false,
-    autoplayVideos: true,
-    closeButton: true,
-    closeOnOutsideClick: true,
-    keyboardNavigation: true,
-    videosWidth: '90vw',
-    openEffect: 'fade',
-    closeEffect: 'fade',
-  });
+  if (document.querySelector('.glightbox-portfolio-img')) {
+    GLightbox({
+      selector: '.glightbox-portfolio-img',
+      touchNavigation: true,
+      loop: false,
+      closeButton: true,
+      closeOnOutsideClick: true,
+      keyboardNavigation: true,
+      preload: false,
+      openEffect: 'fade',
+      closeEffect: 'fade',
+      slideEffect: 'slide',
+      moreLength: 0,
+    });
+  }
 }
 
 // ─── Tweakpane integration ─────────────────────────────────────────────────

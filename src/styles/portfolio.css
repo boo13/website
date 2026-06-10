@@ -298,7 +298,15 @@ body::before {
   height: 100%;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
+  cursor: zoom-in;
+}
+
+.portfolio-shot > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  cursor: zoom-in;
 }
 
 .portfolio-shot img {

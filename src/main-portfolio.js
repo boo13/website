@@ -1,4 +1,5 @@
 import './styles/portfolio.css';
+import './styles/portfolio-lightbox.css';
 import { initPortfolioGate } from './sections/portfolio-gate.js';
 import { initPortfolioRows } from './sections/portfolio-rows.js';
 

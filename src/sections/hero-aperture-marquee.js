@@ -14,6 +14,8 @@ export function initMarquee() {
   ).matches;
   if (prefersReducedMotion) return () => {};
 
+  let removeHoverListeners = () => {};
+
   const ctx = gsap.context(() => {
     Array.from(track.children).forEach((item) =>
       track.appendChild(item.cloneNode(true))
@@ -28,9 +30,30 @@ export function initMarquee() {
     });
 
     const marqueeEl = scope.querySelector('.about-intro__marquee');
+    let isHovering = false;
     if (marqueeEl) {
-      marqueeEl.addEventListener('mouseenter', () => marqueeTween.pause());
-      marqueeEl.addEventListener('mouseleave', () => marqueeTween.resume());
+      const rampTimeScale = (timeScale, duration) => {
+        gsap.to(marqueeTween, {
+          timeScale,
+          duration,
+          ease: 'power2.out',
+          overwrite: true,
+        });
+      };
+      const handleMouseEnter = () => {
+        isHovering = true;
+        rampTimeScale(0, 0.4);
+      };
+      const handleMouseLeave = () => {
+        isHovering = false;
+        rampTimeScale(1, 0.6);
+      };
+      marqueeEl.addEventListener('mouseenter', handleMouseEnter);
+      marqueeEl.addEventListener('mouseleave', handleMouseLeave);
+      removeHoverListeners = () => {
+        marqueeEl.removeEventListener('mouseenter', handleMouseEnter);
+        marqueeEl.removeEventListener('mouseleave', handleMouseLeave);
+      };
     }
 
     ScrollTrigger.create({
@@ -38,6 +61,7 @@ export function initMarquee() {
       start: 'top bottom',
       end: 'bottom top',
       onUpdate: () => {
+        if (isHovering) return;
         const v = Math.abs(ScrollSmoother.get()?.getVelocity() ?? 0);
         gsap.to(marqueeTween, {
           timeScale: v > 50 ? Math.min(4, 1 + v / 800) : 1,
@@ -49,5 +73,8 @@ export function initMarquee() {
     });
   }, scope);
 
-  return () => ctx.revert();
+  return () => {
+    removeHoverListeners();
+    ctx.revert();
+  };
 }

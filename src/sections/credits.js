@@ -109,7 +109,10 @@ function buildRow(project) {
 
   const title = document.createElement('span');
   title.className = 'credit-row__title';
-  title.textContent = project.title;
+  const titleText = document.createElement('span');
+  titleText.className = 'credit-row__title-text';
+  titleText.textContent = project.title;
+  title.appendChild(titleText);
 
   const platform = document.createElement('span');
   platform.className = 'credit-row__platform';
@@ -196,6 +199,7 @@ export function initCredits() {
 
   const fixedHeroName = document.getElementById('hero-name-fixed');
   const topGradient = document.querySelector('.hero-top-transition-gradient');
+  const pillNav = document.getElementById('pill-nav');
 
   const lightGradient =
     'linear-gradient(180deg, oklch(0.968 0.006 75 / 0.55) 0%, ' +
@@ -206,6 +210,7 @@ export function initCredits() {
   function setHeroHeaderLight(onLight) {
     if (topGradient)
       topGradient.style.background = onLight ? lightGradient : '';
+    pillNav?.classList.toggle('is-on-light', onLight);
     if (fixedHeroName) {
       fixedHeroName.style.color = onLight ? 'oklch(0.14 0 0)' : '';
       fixedHeroName.style.textShadow = onLight ? 'none' : '';
@@ -253,35 +258,138 @@ export function initCredits() {
     setHeroHeaderLight(!toDark);
   }
 
+  function getTitleText(titleEl) {
+    return titleEl?.querySelector('.credit-row__title-text') || titleEl;
+  }
+
   function growTitle(titleEl, tl, pos) {
+    const titleText = getTitleText(titleEl);
     const startPx = parseFloat(getComputedStyle(titleEl).fontSize);
-    titleEl.dataset.baseSize = startPx;
+    const targetPx =
+      parseFloat(getComputedStyle(document.documentElement).fontSize) * 2.25;
+    const targetScale = startPx ? targetPx / startPx : 1;
     tl.fromTo(
-      titleEl,
-      { fontSize: startPx },
-      { fontSize: '2.25rem', duration: 0.5, ease: 'expo.out' },
+      titleText,
+      { scale: 1 },
+      { scale: targetScale, duration: 0.5, ease: 'expo.out' },
       pos
     );
   }
 
   function shrinkTitle(titleEl, tl, pos) {
-    const basePx = parseFloat(
-      titleEl.dataset.baseSize || getComputedStyle(titleEl).fontSize
-    );
+    const titleText = getTitleText(titleEl);
     tl.to(
-      titleEl,
+      titleText,
       {
-        fontSize: basePx,
+        scale: 1,
         duration: 0.35,
         ease: 'expo.inOut',
         onComplete() {
           titleEl.style.letterSpacing = '';
           titleEl.style.lineHeight = '';
-          gsap.set(titleEl, { clearProps: 'fontSize' });
+          gsap.set(titleText, { clearProps: 'transform' });
         },
       },
       pos
     );
+  }
+
+  function resetTitle(titleEl) {
+    const titleText = getTitleText(titleEl);
+    titleEl.style.letterSpacing = '';
+    titleEl.style.lineHeight = '';
+    gsap.set(titleText, { clearProps: 'transform' });
+  }
+
+  function playCreditChromaticFlash(headerEl) {
+    if (prefersReducedMotion || !headerEl) return;
+    const titleEl = headerEl.querySelector('.credit-row__title');
+    if (!titleEl) return;
+
+    const styles = getComputedStyle(section);
+    const offset =
+      styles.getPropertyValue('--credits-ca-offset').trim() || '2px';
+    const negOffset =
+      styles.getPropertyValue('--credits-ca-neg-offset').trim() || '-2px';
+    const blur = styles.getPropertyValue('--credits-ca-blur').trim() || '2px';
+    const halfOffset =
+      styles.getPropertyValue('--credits-ca-half-offset').trim() || '1px';
+    const negHalfOffset =
+      styles.getPropertyValue('--credits-ca-neg-half-offset').trim() || '-1px';
+    const doubleBlur =
+      styles.getPropertyValue('--credits-ca-double-blur').trim() || '4px';
+    const durationValue =
+      styles.getPropertyValue('--credits-ca-duration').trim() || '560ms';
+    const flashDuration = durationValue.endsWith('ms')
+      ? parseFloat(durationValue) / 1000
+      : parseFloat(durationValue) || 0.56;
+    const transparentPct =
+      styles.getPropertyValue('--credits-ca-transparent-pct').trim() || '10%';
+    const bloomTransparentPct =
+      styles.getPropertyValue('--credits-ca-transparent-bloom-pct').trim() ||
+      '46%';
+    const clearVars = {
+      '--credit-ca-offset': '0px',
+      '--credit-ca-neg-offset': '0px',
+      '--credit-ca-blur': '0px',
+      '--credit-ca-transparent-pct': '100%',
+    };
+    const fullVars = {
+      '--credit-ca-offset': offset,
+      '--credit-ca-neg-offset': negOffset,
+      '--credit-ca-blur': blur,
+      '--credit-ca-transparent-pct': transparentPct,
+    };
+    const bloomVars = {
+      '--credit-ca-offset': halfOffset,
+      '--credit-ca-neg-offset': negHalfOffset,
+      '--credit-ca-blur': doubleBlur,
+      '--credit-ca-transparent-pct': bloomTransparentPct,
+    };
+    const rampDuration = Math.min(0.18, flashDuration * 0.2);
+    const fadeDuration = Math.max(0.5, flashDuration - rampDuration);
+
+    gsap.killTweensOf(titleEl);
+    if (section.dataset.caCurve === 'bloom') {
+      gsap.to(titleEl, {
+        ...fullVars,
+        duration: rampDuration,
+        ease: 'expo.out',
+        overwrite: true,
+        onComplete() {
+          gsap.to(titleEl, {
+            ...bloomVars,
+            duration: fadeDuration * 0.32,
+            ease: 'power2.out',
+            overwrite: true,
+            onComplete() {
+              gsap.to(titleEl, {
+                ...clearVars,
+                duration: fadeDuration * 0.68,
+                ease: 'expo.out',
+                overwrite: true,
+              });
+            },
+          });
+        },
+      });
+      return;
+    }
+
+    gsap.to(titleEl, {
+      ...fullVars,
+      duration: rampDuration,
+      ease: 'expo.out',
+      overwrite: true,
+      onComplete() {
+        gsap.to(titleEl, {
+          ...clearVars,
+          duration: fadeDuration,
+          ease: 'expo.out',
+          overwrite: true,
+        });
+      },
+    });
   }
 
   function handleRowClick(row) {
@@ -307,7 +415,7 @@ export function initCredits() {
         details.style.height = '0';
         gsap.delayedCall(0, () => ScrollTrigger.refresh());
         invertColors(false);
-        gsap.set(titleEl, { clearProps: 'fontSize' });
+        resetTitle(titleEl);
       } else {
         const closeTl = gsap.timeline();
         invertColors(false, closeTl, 0);
@@ -341,7 +449,7 @@ export function initCredits() {
 
         if (prefersReducedMotion) {
           prevDetails.style.height = '0';
-          gsap.set(prevTitleEl, { clearProps: 'fontSize' });
+          resetTitle(prevTitleEl);
         } else {
           shrinkTitle(prevTitleEl, tl, 0);
           tl.to(
@@ -447,6 +555,7 @@ export function initCredits() {
       headerEl.classList.toggle('is-hovered', headerEl === nextHeader);
     });
     list.classList.toggle('is-row-hovered', Boolean(nextHeader));
+    playCreditChromaticFlash(nextHeader);
   }
 
   function clearHoveredHeader() {
@@ -524,6 +633,7 @@ export function initCredits() {
     isDisposed = true;
     cleanupHandlers.forEach((cleanup) => cleanup());
     list.classList.remove('is-row-hovered');
+    pillNav?.classList.remove('is-on-light');
     ctx.revert();
   };
 }
