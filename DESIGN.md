@@ -349,8 +349,8 @@ Neither page type uses a strict mathematical spacing scale. Use `--section-paddi
 | Layer | Selector | z-index | Notes |
 |-------|----------|---------|-------|
 | Preloader | `.loading-overlay` | 10000 | Removed from DOM after exit |
-| Cursor dot | `.custom-cursor-dot` | 10000 | `gsap.quickTo` positioned |
-| Cursor ring | `.custom-cursor-ring` | 10000 | `gsap.quickTo` positioned, trails dot |
+| Cursor dot | `.custom-cursor-dot` | 10000 | `gsap.quickTo` positioned, `mix-blend-mode: difference` |
+| Cursor frame | `.custom-cursor-frame` | 9999 | 16:9 bracket frame, trails dot; expands or snaps to `[data-cursor-snap]` targets |
 | Hero name (header) | `.hero-fixed-name-container > #hero-name-fixed` | 40 | Flip-animated between hero and fixed positions |
 | Hero subtitle (fixed) | `#hero-subtitle-fixed` | 40 | Tracks title bottom edge, fades on scroll |
 | Hero social (fixed) | `#hero-social-fixed` | 40 | Tracks title bottom edge, fades on scroll |
@@ -587,11 +587,17 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 - After exit: `.loading-overlay` removed from DOM, `'loadingComplete'` event dispatched → hero init begins
 
 **Custom Cursor** (`src/components/custom-cursor.js`):
-- `.custom-cursor-dot` (10px filled) + `.custom-cursor-ring` (30px outline), both `position: fixed`, z-index 10000
-- `gsap.quickTo`: dot x/y `0.3s power2.out`, ring x/y `0.7s power2.out` (trailing effect)
-- Hero section only. Skip on touch devices and `prefers-reduced-motion`.
-- Link/button hover: dot `scale→0`, ring `scale→2` (0.3s); mouseleave: both `scale→1`
-- Scroll: ring nudged `delta * 1.2` clamped ±5px, returns after 80ms
+- Viewfinder cursor: `.custom-cursor-dot` (small filled dot) + `.custom-cursor-frame` (16:9 box, base 40×22) with four `.custom-cursor-corner` L-bracket children. Both `position: fixed`, `mix-blend-mode: difference`.
+- `gsap.quickTo`: dot x/y `0.3s power2.out`, frame x/y `0.7s power2.out` (trailing effect)
+- `index.html` only (initialized in `main.js`). Skip on touch devices and `prefers-reduced-motion`.
+- **Two hover behaviors**, selected per element:
+  - **Expand** (default for inline `a`, `button`): dot `scale→0`; corners translate outward 5px (`0.5s power2.out`). Mouseleave resets corners to 0 and dot to 1.
+  - **Snap-frame** (opt-in via `data-cursor-snap`): dot `scale→0` (0.2s); frame resizes + repositions to wrap the target's `getBoundingClientRect` + 10px pad, `0.45s power3.out`. A `framing` flag gates the `quickTo` follow so the frame stays locked to the target. Mouseleave resets frame to base 40×22 (`0.4s power2.out`).
+- **`data-cursor-snap` convention**: add the attribute to any element that should snap. Use it for well-bounded targets with a pleasing aspect ratio (buttons, gallery cards). Avoid it on tiny inline text links (use expand) and on full-width rows (a wrapped full-width row reads as a letterbox bar — snap an inner element like a title instead).
+  - Currently applied: `.cta-contact-btn`, `.newsletter-submit` (index.html), and `.gallery-card` (injected by `build/inject-gallery.js`).
+  - Gallery cards add `.is-cursor-snapping` while wrapped; CSS hides the card's own `.gallery-card-corner` to avoid a doubled frame.
+- Scroll: frame nudged `delta * 1.2` clamped ±5px, returns after 80ms (skipped while `framing`).
+- **On-light gotcha**: the off-white frame + `mix-blend-mode: difference` reads well on dark and mid-tone backgrounds, but goes low-contrast on near-white surfaces (e.g. the inverted/expanded credits panel). Resolve per-section before snapping content over light backgrounds (see `cursor-lab.html` for on-light variant experiments).
 
 **Hero Z-Depth** (`src/sections/hero.js`):
 - ScrollTrigger: `start: 'top top'`, `end: '+=150%'`, `scrub: 1.5`

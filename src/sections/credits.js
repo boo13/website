@@ -110,6 +110,7 @@ function buildRow(project) {
   const title = document.createElement('span');
   title.className = 'credit-row__title';
   title.textContent = project.title;
+  title.setAttribute('data-cursor-snap', '');
 
   const platform = document.createElement('span');
   platform.className = 'credit-row__platform';
