@@ -274,23 +274,15 @@ textarea {
 }
 
 .contact-title {
-  max-width: 11ch;
+  max-width: 12ch;
   margin: 0;
   font-family: var(--ff-display);
-  font-size: clamp(3.2rem, 8vw, 8.25rem);
+  font-size: clamp(2.75rem, 5.6vw, 5.25rem);
   font-weight: 300;
-  line-height: 0.95;
+  line-height: 1;
   color: var(--color-offwhite);
   text-wrap: balance;
   text-shadow: 0 8px 45px oklch(0 0 0 / 0.52);
-}
-
-.contact-deck {
-  max-width: 36rem;
-  margin: clamp(1.5rem, 4vh, 2.5rem) 0 0;
-  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
-  line-height: 1.55;
-  color: oklch(0.968 0.006 75 / 0.72);
 }
 
 .contact-details {
@@ -298,7 +290,7 @@ textarea {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
   max-width: 36rem;
-  margin-top: clamp(2.5rem, 6vh, 4.5rem);
+  margin-top: clamp(2rem, 5vh, 3.5rem);
   border-top: 1px solid oklch(0.968 0.006 75 / 0.2);
 }
 
@@ -592,7 +584,7 @@ textarea {
 
   .contact-title {
     max-width: 12ch;
-    font-size: clamp(3.1rem, 12vw, 6.5rem);
+    font-size: clamp(2.65rem, 9vw, 4.75rem);
   }
 
   .contact-panel {
@@ -677,11 +669,7 @@ textarea {
   }
 
   .contact-title {
-    font-size: clamp(3rem, 18vw, 4.65rem);
-  }
-
-  .contact-deck {
-    font-size: 1rem;
+    font-size: clamp(2.45rem, 12vw, 3.25rem);
   }
 
   .contact-submit {
