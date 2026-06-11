@@ -132,20 +132,22 @@ const SECTIONS_BY_ID = new Map(
 // ─── Proportional elastic banding ──────────────────────────────────────────
 
 function getShotDimensions(shot, stripHeight) {
-  const img = shot.querySelector('img');
-  if (img?.naturalWidth && img?.naturalHeight && stripHeight) {
+  const media = shot.querySelector('img, video');
+  const intrinsicWidth = media?.naturalWidth || media?.videoWidth;
+  const intrinsicHeight = media?.naturalHeight || media?.videoHeight;
+  if (intrinsicWidth && intrinsicHeight && stripHeight) {
     return {
-      width: (img.naturalWidth / img.naturalHeight) * stripHeight,
+      width: (intrinsicWidth / intrinsicHeight) * stripHeight,
       height: stripHeight,
     };
   }
 
   const shotRect = shot.getBoundingClientRect();
-  const imgRect = img?.getBoundingClientRect();
+  const mediaRect = media?.getBoundingClientRect();
 
   return {
-    width: shotRect.width || imgRect?.width || 0,
-    height: shotRect.height || imgRect?.height || stripHeight || 0,
+    width: shotRect.width || mediaRect?.width || 0,
+    height: shotRect.height || mediaRect?.height || stripHeight || 0,
   };
 }
 
@@ -391,6 +393,12 @@ function wireFramePan(frame, canHover) {
     img.addEventListener('error', refresh, { once: true });
   });
 
+  strip.querySelectorAll('video').forEach((video) => {
+    if (video.readyState >= 1) return;
+    video.addEventListener('loadedmetadata', refresh, { once: true });
+    video.addEventListener('error', refresh, { once: true });
+  });
+
   scheduleFramePanRefresh(scroller);
 
   if (!canHover) return;
@@ -438,12 +446,45 @@ function encodeSrc(src) {
   return '/' + src.split('/').map(encodeURIComponent).join('/');
 }
 
+const VIDEO_EXT_RE = /\.(mp4|webm|mov)$/i;
+
+function isVideoSrc(src) {
+  return typeof src === 'string' && VIDEO_EXT_RE.test(src);
+}
+
 function thumbSrc(src) {
   return encodeSrc(src.replace(/\.(jpe?g|png)$/i, '.thumb.webp'));
 }
 
 function largeSrc(src) {
   return encodeSrc(src.replace(/\.(jpe?g|png)$/i, '.large.webp'));
+}
+
+function resolveVideoUrl(src) {
+  const source = String(src || '');
+  if (/^https?:\/\//.test(source)) return source;
+
+  const cleanSource = source.replace(/^\.?\//, '');
+  if (cleanSource.startsWith('images/')) return encodeSrc(cleanSource);
+  return `${CDN_BASE}/${cleanSource}`;
+}
+
+function renderShotMedia(src, p) {
+  if (isVideoSrc(src)) {
+    const mp4 = encodeSrc(src.replace(VIDEO_EXT_RE, '.mp4'));
+    const webm = encodeSrc(src.replace(VIDEO_EXT_RE, '.webm'));
+    return `<video muted autoplay loop playsinline preload="auto" disableremoteplayback>
+      <source src="${webm}" type="video/webm">
+      <source src="${mp4}" type="video/mp4">
+    </video>`;
+  }
+  return `<a class="glightbox-portfolio-img"
+       data-gallery="portfolio-img-${escAttr(p.id)}"
+       data-glightbox="type: image; title: ${escAttr(p.title)}"
+       href="${largeSrc(src)}"
+       aria-label="View screenshot from ${escAttr(p.title)}">
+      <img src="${thumbSrc(src)}" alt="" loading="lazy" draggable="false">
+    </a>`;
 }
 
 function normalizeSectionText(value) {
@@ -531,28 +572,30 @@ function groupProjectsBySection(projects, sectionIds) {
 
 function renderViewPill(p) {
   const videoSource = p.lightboxVideo || p.videoUrl;
+  const pills = [];
+
   if (videoSource) {
-    const videoUrl = /^https?:\/\//.test(videoSource)
-      ? videoSource
-      : `${CDN_BASE}/${videoSource.replace(/^\.?\//, '')}`;
-    return `<a
+    const videoUrl = resolveVideoUrl(videoSource);
+    pills.push(`<a
       class="portfolio-view-pill glightbox-portfolio"
       data-gallery="portfolio-${escAttr(p.id)}"
       data-type="video"
       href="${escAttr(videoUrl)}"
       aria-label="View ${escAttr(p.title)}"
-    >View</a>`;
+    >${p.liveUrl ? 'Motion' : 'View'}</a>`);
   }
+
   if (p.liveUrl) {
-    return `<a
+    pills.push(`<a
       class="portfolio-view-pill"
       href="${escAttr(p.liveUrl)}"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Visit ${escAttr(p.title)}"
-    >View ↗</a>`;
+    >${videoSource ? 'Site ↗' : 'View ↗'}</a>`);
   }
-  return '';
+
+  return pills.join('');
 }
 
 function renderProjectRow(p) {
@@ -566,13 +609,7 @@ function renderProjectRow(p) {
               .map(
                 (src) => `
               <li class="portfolio-shot">
-                <a class="glightbox-portfolio-img"
-                   data-gallery="portfolio-img-${escAttr(p.id)}"
-                   data-glightbox="type: image; title: ${escAttr(p.title)}"
-                   href="${largeSrc(src)}"
-                   aria-label="View screenshot from ${escAttr(p.title)}">
-                  <img src="${thumbSrc(src)}" alt="" loading="lazy" draggable="false">
-                </a>
+                ${renderShotMedia(src, p)}
               </li>`
               )
               .join('')}
