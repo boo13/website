@@ -139,7 +139,8 @@ export function initPortfolioGate({ slug, onUnlock }) {
       let data;
       if (payload.dev === true) {
         // Dev middleware fast-path: any non-empty password unlocks
-        data = { projects: payload.projects };
+        data = { ...payload, projects: payload.projects ?? [] };
+        delete data.dev;
       } else {
         data = await decrypt(payload, password);
       }

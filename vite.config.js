@@ -99,7 +99,7 @@ function portfolioDevServer() {
         try {
           const raw = readFileSync(dataPath, 'utf8');
           const data = JSON.parse(raw);
-          const payload = JSON.stringify({ dev: true, projects: data.projects ?? [] });
+          const payload = JSON.stringify({ ...data, dev: true, projects: data.projects ?? [] });
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(payload);
         } catch {

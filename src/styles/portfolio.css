@@ -201,6 +201,10 @@ body::before {
   border-bottom: 1px solid oklch(0.968 0.006 75 / 0.08);
 }
 
+.portfolio-row--no-shots .portfolio-row__head {
+  margin-bottom: 0;
+}
+
 /* Row header: title+pill left, tag right */
 .portfolio-row__head {
   display: flex;
