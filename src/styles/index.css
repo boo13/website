@@ -134,10 +134,10 @@ body.show-grid .bg-columns {
    Pinned aperture scene (styles in hero-aperture-dual.css)
 ====================================================== */
 /* Custom cursor — viewfinder (dot + 16:9 bracket frame) */
-body,
-body a,
-body button,
-body .gallery-card {
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button,
+body.has-custom-cursor .gallery-card {
   cursor: none;
 }
 
@@ -192,10 +192,22 @@ body .gallery-card {
   height: 100%;
 }
 
-.custom-cursor-corner-lt { top: 0; left: 0; }
-.custom-cursor-corner-rt { top: 0; right: 0; }
-.custom-cursor-corner-lb { bottom: 0; left: 0; }
-.custom-cursor-corner-rb { bottom: 0; right: 0; }
+.custom-cursor-corner-lt {
+  top: 0;
+  left: 0;
+}
+.custom-cursor-corner-rt {
+  top: 0;
+  right: 0;
+}
+.custom-cursor-corner-lb {
+  bottom: 0;
+  left: 0;
+}
+.custom-cursor-corner-rb {
+  bottom: 0;
+  right: 0;
+}
 
 .custom-cursor-corner-lb::before,
 .custom-cursor-corner-lb::after,

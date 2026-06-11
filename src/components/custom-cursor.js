@@ -5,6 +5,8 @@ export function initCustomCursor() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches)
     return () => {};
 
+  document.body.classList.add('has-custom-cursor');
+
   const dot = document.createElement('div');
   dot.className = 'custom-cursor-dot';
 
@@ -258,6 +260,7 @@ export function initCustomCursor() {
   document.addEventListener('mouseout', handleMouseOut);
 
   return () => {
+    document.body.classList.remove('has-custom-cursor');
     document.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('scroll', handleScroll);
     document.removeEventListener('mouseover', handleMouseOver);
