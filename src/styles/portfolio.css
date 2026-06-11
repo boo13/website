@@ -305,7 +305,8 @@ body::before {
   cursor: pointer;
 }
 
-.portfolio-shot img {
+.portfolio-shot img,
+.portfolio-shot video {
   display: block;
   height: 100%;
   width: auto;
@@ -344,12 +345,14 @@ body::before {
     pointer-events: auto;
   }
 
-  .portfolio-row__strip.is-banding .portfolio-shot img {
+  .portfolio-row__strip.is-banding .portfolio-shot img,
+  .portfolio-row__strip.is-banding .portfolio-shot video {
     width: 100%;
     height: 100%;
   }
 
-  .portfolio-shot.is-hovered img {
+  .portfolio-shot.is-hovered img,
+  .portfolio-shot.is-hovered video {
     filter: brightness(1);
   }
 }

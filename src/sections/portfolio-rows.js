@@ -132,20 +132,22 @@ const SECTIONS_BY_ID = new Map(
 // ─── Proportional elastic banding ──────────────────────────────────────────
 
 function getShotDimensions(shot, stripHeight) {
-  const img = shot.querySelector('img');
-  if (img?.naturalWidth && img?.naturalHeight && stripHeight) {
+  const media = shot.querySelector('img, video');
+  const intrinsicWidth = media?.naturalWidth || media?.videoWidth;
+  const intrinsicHeight = media?.naturalHeight || media?.videoHeight;
+  if (intrinsicWidth && intrinsicHeight && stripHeight) {
     return {
-      width: (img.naturalWidth / img.naturalHeight) * stripHeight,
+      width: (intrinsicWidth / intrinsicHeight) * stripHeight,
       height: stripHeight,
     };
   }
 
   const shotRect = shot.getBoundingClientRect();
-  const imgRect = img?.getBoundingClientRect();
+  const mediaRect = media?.getBoundingClientRect();
 
   return {
-    width: shotRect.width || imgRect?.width || 0,
-    height: shotRect.height || imgRect?.height || stripHeight || 0,
+    width: shotRect.width || mediaRect?.width || 0,
+    height: shotRect.height || mediaRect?.height || stripHeight || 0,
   };
 }
 
@@ -384,6 +386,12 @@ function wireFramePan(frame, canHover) {
     img.addEventListener('error', refresh, { once: true });
   });
 
+  strip.querySelectorAll('video').forEach((video) => {
+    if (video.readyState >= 1) return;
+    video.addEventListener('loadedmetadata', refresh, { once: true });
+    video.addEventListener('error', refresh, { once: true });
+  });
+
   scheduleFramePanRefresh(scroller);
 
   if (!canHover) return;
@@ -425,6 +433,24 @@ function wireStrip(strip, getCfg, canHover) {
 
 function encodeSrc(src) {
   return '/' + src.split('/').map(encodeURIComponent).join('/');
+}
+
+const VIDEO_EXT_RE = /\.(mp4|webm|mov)$/i;
+
+function isVideoSrc(src) {
+  return typeof src === 'string' && VIDEO_EXT_RE.test(src);
+}
+
+function renderShotMedia(src) {
+  if (!isVideoSrc(src)) {
+    return `<img src="${encodeSrc(src)}" alt="" loading="lazy" draggable="false">`;
+  }
+  const mp4 = encodeSrc(src.replace(VIDEO_EXT_RE, '.mp4'));
+  const webm = encodeSrc(src.replace(VIDEO_EXT_RE, '.webm'));
+  return `<video muted autoplay loop playsinline preload="auto" disableremoteplayback>
+    <source src="${webm}" type="video/webm">
+    <source src="${mp4}" type="video/mp4">
+  </video>`;
 }
 
 function resolveVideoUrl(src) {
@@ -558,7 +584,7 @@ function renderProjectRow(p) {
               .map(
                 (src) => `
               <li class="portfolio-shot">
-                <img src="${encodeSrc(src)}" alt="" loading="lazy" draggable="false">
+                ${renderShotMedia(src)}
               </li>`
               )
               .join('')}
