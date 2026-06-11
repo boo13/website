@@ -1346,6 +1346,8 @@ body.has-custom-cursor .gallery-card {
 }
 
 .footer-nav-link {
+  align-self: flex-start;
+  width: fit-content;
   font-size: 1rem;
   font-weight: 500;
   transition: opacity 0.2s ease;
@@ -1397,6 +1399,7 @@ body.has-custom-cursor .gallery-card {
 
 .footer-col-link {
   display: block;
+  width: fit-content;
   font-size: 0.9375rem;
   line-height: 1.8;
   transition: opacity 0.2s ease;
