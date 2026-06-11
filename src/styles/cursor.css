@@ -1,0 +1,79 @@
+/* Custom cursor — viewfinder (dot + 16:9 bracket frame) */
+body,
+body a,
+body button,
+body .gallery-card {
+  cursor: none;
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  top: -3px;
+  left: -3px;
+  width: 5px;
+  height: 5px;
+  background-color: var(--color-offwhite);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor-frame {
+  position: fixed;
+  top: -11px;
+  left: -20px;
+  width: 40px;
+  height: 22px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+}
+
+.custom-cursor-corner::before,
+.custom-cursor-corner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--color-offwhite);
+}
+
+.custom-cursor-corner::before {
+  width: 100%;
+  height: 1px;
+}
+
+.custom-cursor-corner::after {
+  width: 1px;
+  height: 100%;
+}
+
+.custom-cursor-corner-lt { top: 0; left: 0; }
+.custom-cursor-corner-rt { top: 0; right: 0; }
+.custom-cursor-corner-lb { bottom: 0; left: 0; }
+.custom-cursor-corner-rb { bottom: 0; right: 0; }
+
+.custom-cursor-corner-lb::before,
+.custom-cursor-corner-lb::after,
+.custom-cursor-corner-rb::before,
+.custom-cursor-corner-rb::after {
+  top: auto;
+  bottom: 0;
+}
+
+.custom-cursor-corner-rt::before,
+.custom-cursor-corner-rt::after,
+.custom-cursor-corner-rb::before,
+.custom-cursor-corner-rb::after {
+  left: auto;
+  right: 0;
+}
