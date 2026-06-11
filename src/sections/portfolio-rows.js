@@ -24,7 +24,6 @@ const PORTFOLIO_SECTIONS = [
       'short-form',
       'short form',
       'shortform',
-      'social',
       'vertical',
       'promo',
       'promos',
@@ -38,6 +37,23 @@ const PORTFOLIO_SECTIONS = [
       'youtube shorts',
       'tiktok',
       'instagram',
+    ],
+  },
+  {
+    id: 'social',
+    label: 'social',
+    aliases: [
+      'social',
+      'social design',
+      'cover',
+      'covers',
+      'cover design',
+      'carousel',
+      'carousels',
+      'explained',
+      'instagram',
+      'tiktok',
+      'youtube shorts',
     ],
   },
   {
@@ -105,13 +121,13 @@ const SECTION_FIELDS = [
 const SECTION_MATCH_PRIORITY = [
   'pitch-decks',
   'websites',
+  'social',
   'short-form',
   'long-form',
 ];
 const SECTIONS_BY_ID = new Map(
   PORTFOLIO_SECTIONS.map((section) => [section.id, section])
 );
-
 
 // ─── Proportional elastic banding ──────────────────────────────────────────
 
@@ -431,6 +447,32 @@ function matchSection(value) {
   );
 }
 
+function normalizeSectionId(value) {
+  const text = normalizeSectionText(value);
+  const directId = text.replace(/\s+/g, '-');
+  if (SECTIONS_BY_ID.has(directId)) return directId;
+  return matchSection(value);
+}
+
+function resolvePortfolioSections(sectionIds) {
+  if (!Array.isArray(sectionIds) || sectionIds.length === 0) {
+    return PORTFOLIO_SECTIONS;
+  }
+
+  const seen = new Set();
+  const sections = sectionIds
+    .map(normalizeSectionId)
+    .filter((id) => {
+      if (!id || seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    })
+    .map((id) => SECTIONS_BY_ID.get(id))
+    .filter(Boolean);
+
+  return sections.length ? sections : PORTFOLIO_SECTIONS;
+}
+
 function inferProjectSection(project) {
   for (const field of SECTION_FIELDS) {
     const section = matchSection(project[field]);
@@ -453,8 +495,8 @@ function inferProjectSection(project) {
   return 'long-form';
 }
 
-function groupProjectsBySection(projects) {
-  const groups = PORTFOLIO_SECTIONS.map((section) => ({
+function groupProjectsBySection(projects, sectionIds) {
+  const groups = resolvePortfolioSections(sectionIds).map((section) => ({
     ...section,
     projects: [],
   }));
@@ -465,16 +507,19 @@ function groupProjectsBySection(projects) {
     groupsById.get(sectionId)?.projects.push(project);
   });
 
-  return groups;
+  return groups.filter((group) => group.projects.length > 0);
 }
 
 function renderViewPill(p) {
-  if (p.lightboxVideo) {
-    const videoUrl = `${CDN_BASE}/${p.lightboxVideo.replace(/^\.?\//, '')}`;
+  const videoSource = p.lightboxVideo || p.videoUrl;
+  if (videoSource) {
+    const videoUrl = /^https?:\/\//.test(videoSource)
+      ? videoSource
+      : `${CDN_BASE}/${videoSource.replace(/^\.?\//, '')}`;
     return `<a
       class="portfolio-view-pill glightbox-portfolio"
       data-gallery="portfolio-${escAttr(p.id)}"
-      data-glightbox="type: video; source: ${escAttr(videoUrl)};"
+      data-type="video"
       href="${escAttr(videoUrl)}"
       aria-label="View ${escAttr(p.title)}"
     >View</a>`;
@@ -492,19 +537,13 @@ function renderViewPill(p) {
 }
 
 function renderProjectRow(p) {
-  return `
-    <section class="portfolio-row" data-project="${escAttr(p.id)}">
-      <header class="portfolio-row__head">
-        <div class="portfolio-row__head-left">
-          <h3 class="portfolio-row__title">${escHtml(p.title)}</h3>
-          ${renderViewPill(p)}
-        </div>
-        <span class="portfolio-row__tag">${escHtml(p.tag || '')}</span>
-      </header>
+  const screenshots = p.screenshots ?? [];
+  const shotsMarkup = screenshots.length
+    ? `
       <div class="portfolio-row__strip-frame">
         <div class="portfolio-row__strip-viewport">
           <ul class="portfolio-row__strip">
-            ${(p.screenshots ?? [])
+            ${screenshots
               .map(
                 (src) => `
               <li class="portfolio-shot">
@@ -516,7 +555,19 @@ function renderProjectRow(p) {
         </div>
         <span class="portfolio-row__edge portfolio-row__edge--left" aria-hidden="true"></span>
         <span class="portfolio-row__edge portfolio-row__edge--right" aria-hidden="true"></span>
-      </div>
+      </div>`
+    : '';
+
+  return `
+    <section class="portfolio-row${screenshots.length ? '' : ' portfolio-row--no-shots'}" data-project="${escAttr(p.id)}">
+      <header class="portfolio-row__head">
+        <div class="portfolio-row__head-left">
+          <h3 class="portfolio-row__title">${escHtml(p.title)}</h3>
+          ${renderViewPill(p)}
+        </div>
+        <span class="portfolio-row__tag">${escHtml(p.tag || '')}</span>
+      </header>
+      ${shotsMarkup}
     </section>`;
 }
 
@@ -527,8 +578,8 @@ function renderSection(section) {
     </section>`;
 }
 
-function renderRows(container, projects) {
-  container.innerHTML = groupProjectsBySection(projects)
+function renderRows(container, projects, sectionIds) {
+  container.innerHTML = groupProjectsBySection(projects, sectionIds)
     .map(renderSection)
     .join('');
 }
@@ -614,10 +665,17 @@ function wireScrollSpy() {
   const sections = [
     ...document.querySelectorAll('.portfolio-section[id^="portfolio-"]'),
   ];
-  if (!sections.length) return;
+  const sectionIds = new Set(
+    sections.map((section) => section.dataset.section).filter(Boolean)
+  );
+  navLinks.forEach((link) => {
+    link.hidden = !sectionIds.has(link.dataset.sectionLink);
+  });
+  const activeNavLinks = navLinks.filter((link) => !link.hidden);
+  if (!sections.length || !activeNavLinks.length) return;
 
   function setActive(id) {
-    navLinks.forEach((link) => {
+    activeNavLinks.forEach((link) => {
       link.classList.toggle('is-active', link.dataset.sectionLink === id);
     });
   }
@@ -665,7 +723,7 @@ function wireScrollSpy() {
     });
   }
 
-  navLinks.forEach((link) => {
+  activeNavLinks.forEach((link) => {
     link.addEventListener('click', (e) => {
       const id = link.dataset.sectionLink;
       const target = document.getElementById(`portfolio-${id}`);
@@ -694,8 +752,9 @@ export async function initPortfolioRows(data) {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   const projects = data.projects ?? [];
+  const sectionIds = data.sections ?? data.portfolioSections;
 
-  renderRows(container, projects);
+  renderRows(container, projects, sectionIds);
   wireScrollSpy();
   initLightbox();
 
