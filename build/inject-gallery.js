@@ -112,7 +112,7 @@ function renderGalleryCards(projects) {
                     <a class="card-link" href="${detailUrl}" aria-label="${escAttr(p.title)}"></a>`
         : '';
 
-      return `                <article class="${classes}" data-project="${escAttr(slug)}"${glightboxAttrs}${noVideoAttr}>${cardLinkHtml}
+      return `                <article class="${classes}" data-project="${escAttr(slug)}" data-cursor-snap${glightboxAttrs}${noVideoAttr}>${cardLinkHtml}
                     <div class="card-media">
                         <img
                             class="card-thumbnail"

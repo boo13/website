@@ -2,7 +2,9 @@ import './styles/medialog.css';
 import { gsap } from 'gsap';
 
 const FEED_URL = '/data/media-log.json';
-const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const REDUCED_MOTION = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
 
 const TYPE_LABELS = {
   movie: 'Movies',
@@ -51,7 +53,9 @@ function itemTypeLabel(type) {
 }
 
 function uniqueYears(items) {
-  return [...new Set(items.map((item) => Number(item.year)).filter(Boolean))].sort((a, b) => b - a);
+  return [
+    ...new Set(items.map((item) => Number(item.year)).filter(Boolean)),
+  ].sort((a, b) => b - a);
 }
 
 function uniqueTypes(items) {
@@ -113,33 +117,44 @@ function renderFilters(items) {
   const types = uniqueTypes(items);
 
   yearFilters.innerHTML = [
-    buttonMarkup({ label: 'All', value: 'all', active: state.year === 'all', group: 'year' }),
+    buttonMarkup({
+      label: 'All',
+      value: 'all',
+      active: state.year === 'all',
+      group: 'year',
+    }),
     ...years.map((year) =>
       buttonMarkup({
         label: String(year),
         value: String(year),
         active: state.year === String(year),
         group: 'year',
-      }),
+      })
     ),
   ].join('');
 
   typeFilters.innerHTML = [
-    buttonMarkup({ label: 'All', value: 'all', active: state.type === 'all', group: 'type' }),
+    buttonMarkup({
+      label: 'All',
+      value: 'all',
+      active: state.type === 'all',
+      group: 'type',
+    }),
     ...types.map((type) =>
       buttonMarkup({
         label: itemTypeLabel(type),
         value: type,
         active: state.type === type,
         group: 'type',
-      }),
+      })
     ),
   ].join('');
 }
 
 function filteredItems() {
   return state.items.filter((item) => {
-    const yearMatches = state.year === 'all' || String(item.year) === state.year;
+    const yearMatches =
+      state.year === 'all' || String(item.year) === state.year;
     const typeMatches = state.type === 'all' || item.type === state.type;
     return yearMatches && typeMatches;
   });
@@ -164,7 +179,9 @@ function createPoster(item) {
 function createItemMarkup(item, index) {
   const creators = creatorText(item);
   const review = String(item.review || '').trim();
-  const meta = [itemTypeLabel(item.type), yearText(item), creators].filter(Boolean).join(' / ');
+  const meta = [itemTypeLabel(item.type), yearText(item), creators]
+    .filter(Boolean)
+    .join(' / ');
   const link = item.canonical_url
     ? `<a class="media-item__link" href="${escHtml(item.canonical_url)}" target="_blank" rel="noopener">Reference</a>`
     : '';
@@ -200,7 +217,7 @@ function animateItems() {
       stagger: 0.055,
       ease: 'power2.out',
       clearProps: 'opacity,visibility,transform',
-    },
+    }
   );
 }
 
@@ -219,7 +236,9 @@ function renderItems() {
     return;
   }
 
-  mediaList.innerHTML = items.map((item, index) => createItemMarkup(item, index)).join('');
+  mediaList.innerHTML = items
+    .map((item, index) => createItemMarkup(item, index))
+    .join('');
 
   for (const image of mediaList.querySelectorAll('img')) {
     image.addEventListener(
@@ -230,7 +249,7 @@ function renderItems() {
         poster.classList.add('media-item__poster--fallback');
         poster.innerHTML = `<span>${escHtml(initials(poster.closest('.media-item')?.querySelector('h2')?.textContent))}</span>`;
       },
-      { once: true },
+      { once: true }
     );
   }
 
@@ -239,7 +258,10 @@ function renderItems() {
 
 function bindFilters() {
   mediaExperience.addEventListener('click', (event) => {
-    const button = event.target instanceof HTMLElement ? event.target.closest('.media-filter') : null;
+    const button =
+      event.target instanceof HTMLElement
+        ? event.target.closest('.media-filter')
+        : null;
     if (!(button instanceof HTMLButtonElement)) return;
 
     const group = button.dataset.filterGroup;
@@ -266,7 +288,7 @@ function revealExperience() {
       stagger: 0.08,
       ease: 'power2.out',
       clearProps: 'opacity,visibility,transform',
-    },
+    }
   );
 }
 
@@ -282,14 +304,17 @@ function initHero() {
       stagger: 0.08,
       ease: 'power3.out',
       clearProps: 'opacity,visibility,transform',
-    },
+    }
   );
 }
 
 async function loadFeed() {
   try {
-    const response = await fetch(FEED_URL, { headers: { Accept: 'application/json' } });
-    if (!response.ok) throw new Error(`Feed request failed with ${response.status}`);
+    const response = await fetch(FEED_URL, {
+      headers: { Accept: 'application/json' },
+    });
+    if (!response.ok)
+      throw new Error(`Feed request failed with ${response.status}`);
     const payload = await response.json();
     const items = Array.isArray(payload)
       ? payload
@@ -317,7 +342,8 @@ async function loadFeed() {
     renderState({
       eyebrow: 'Feed error',
       title: 'The media log could not be loaded.',
-      description: 'The page expects /data/media-log.json to be present and valid JSON.',
+      description:
+        'The page expects /data/media-log.json to be present and valid JSON.',
       error: true,
     });
   }

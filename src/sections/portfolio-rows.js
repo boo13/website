@@ -112,7 +112,6 @@ const SECTIONS_BY_ID = new Map(
   PORTFOLIO_SECTIONS.map((section) => [section.id, section])
 );
 
-
 // ─── Proportional elastic banding ──────────────────────────────────────────
 
 function getShotDimensions(shot, stripHeight) {
@@ -349,11 +348,18 @@ function wireFramePan(frame, canHover) {
   function updateEdgeState() {
     const maxScroll = getFrameMaxScroll(scroller);
     const isBanding = strip.classList.contains('is-banding');
-    if (leftEdge) leftEdge.style.pointerEvents = (isBanding || scroller.scrollLeft < 1) ? 'none' : '';
-    if (rightEdge) rightEdge.style.pointerEvents = (isBanding || scroller.scrollLeft >= maxScroll - 1) ? 'none' : '';
+    if (leftEdge)
+      leftEdge.style.pointerEvents =
+        isBanding || scroller.scrollLeft < 1 ? 'none' : '';
+    if (rightEdge)
+      rightEdge.style.pointerEvents =
+        isBanding || scroller.scrollLeft >= maxScroll - 1 ? 'none' : '';
   }
 
-  const refresh = () => { refreshFramePan(scroller); updateEdgeState(); };
+  const refresh = () => {
+    refreshFramePan(scroller);
+    updateEdgeState();
+  };
   const resizeObserver =
     typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(refresh);
 
@@ -379,8 +385,12 @@ function wireFramePan(frame, canHover) {
     attributeFilter: ['class'],
   });
 
-  leftEdge?.addEventListener('mouseenter', () => startEdgePan(scroller, 'left'));
-  rightEdge?.addEventListener('mouseenter', () => startEdgePan(scroller, 'right'));
+  leftEdge?.addEventListener('mouseenter', () =>
+    startEdgePan(scroller, 'left')
+  );
+  rightEdge?.addEventListener('mouseenter', () =>
+    startEdgePan(scroller, 'right')
+  );
   frame.querySelectorAll('.portfolio-row__edge').forEach((edge) => {
     edge.addEventListener('mouseleave', () => stopEdgePan(scroller));
   });
@@ -638,9 +648,7 @@ async function mountTweakpane(cfg, onUpdate) {
 // ─── Scroll-spy + smooth nav ───────────────────────────────────────────────
 
 function wireScrollSpy() {
-  const navLinks = [
-    ...document.querySelectorAll('[data-section-link]'),
-  ];
+  const navLinks = [...document.querySelectorAll('[data-section-link]')];
   if (!navLinks.length) return;
 
   const sections = [
@@ -692,7 +700,10 @@ function wireScrollSpy() {
   if (titleLink) {
     titleLink.addEventListener('click', (e) => {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      });
       history.replaceState(null, '', window.location.pathname);
     });
   }

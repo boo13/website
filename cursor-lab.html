@@ -149,6 +149,51 @@
         position: relative;
       }
 
+      /* ---- Credits prototype (accordion-like rows) ---- */
+      .lab-credits {
+        --c-bg: var(--bg);
+        --c-text: var(--offwhite);
+        --c-border: rgba(240, 242, 241, 0.12);
+        background: var(--c-bg);
+        color: var(--c-text);
+        transition:
+          background 0.5s var(--ease-out-expo),
+          color 0.5s var(--ease-out-expo);
+        padding: 8px 0;
+      }
+      /* Inverted (expanded) state — light bg, dark text, like the live section */
+      .lab-credits.is-inverted {
+        --c-bg: var(--offwhite);
+        --c-text: #0b0b0c;
+        --c-border: rgba(11, 11, 12, 0.14);
+      }
+      .lab-credit-row {
+        display: grid;
+        grid-template-columns: 1.5rem 1fr 8rem 10rem;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 8px;
+        border-bottom: 1px solid var(--c-border);
+        position: relative;
+      }
+      .lab-credit-icon {
+        font-weight: 300;
+        color: var(--c-text);
+        opacity: 0.55;
+      }
+      .lab-credit-title {
+        font-size: 1.2rem;
+        justify-self: start;
+        width: fit-content;
+      }
+      .lab-credit-platform,
+      .lab-credit-role {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        opacity: 0.6;
+      }
+
       /* =========================================================
          CUSTOM CURSOR ELEMENTS
          ========================================================= */
@@ -164,6 +209,31 @@
         pointer-events: none;
         z-index: 9999;
         opacity: 0;
+        mix-blend-mode: difference; /* match production dot */
+      }
+
+      /* ---- Cursor-on-light experiments (Phase 4 follow-up) ----
+         The off-white cursor + mix-blend difference goes near-invisible on the
+         light inverted credits panel. These body-class variants test fixes when
+         the cursor is over a light region (toggled by JS when hovering credits). */
+
+      /* Variant B: solid dark cursor, no blend (crisp on light). */
+      body.cursor-light-b .lab-frame,
+      body.cursor-light-b .lab-dot {
+        mix-blend-mode: normal;
+      }
+      body.cursor-light-b .lab-dot {
+        background: #0b0b0c;
+      }
+      body.cursor-light-b .lab-corner::before,
+      body.cursor-light-b .lab-corner::after {
+        background: #0b0b0c;
+      }
+
+      /* Variant C: alternate blend (exclusion) instead of difference. */
+      body.cursor-light-c .lab-frame,
+      body.cursor-light-c .lab-dot {
+        mix-blend-mode: exclusion;
       }
 
       /* The frame: a 16:9 box. In bracket mode only the corners show.
@@ -178,6 +248,7 @@
         pointer-events: none;
         z-index: 9998;
         opacity: 0;
+        mix-blend-mode: difference; /* match production cursor — visible on light + dark */
       }
       .lab-frame.is-outline {
         border: 1px solid var(--offwhite);
@@ -272,7 +343,7 @@
       }
     </style>
   </head>
-  <body class="lab-active form-frame-dot hover-expand">
+  <body class="lab-active form-frame-dot hover-snap">
     <div class="controls">
       <fieldset>
         <legend>Cursor form</legend>
@@ -292,11 +363,11 @@
       <fieldset>
         <legend>Hover behavior</legend>
         <label
-          ><input type="radio" name="hover" value="expand" checked /> A ·
+          ><input type="radio" name="hover" value="expand" /> A ·
           Corners expand</label
         >
         <label
-          ><input type="radio" name="hover" value="snap" /> B · Snap-frame
+          ><input type="radio" name="hover" value="snap" checked /> B · Snap-frame
           target</label
         >
         <label
@@ -341,6 +412,47 @@
           <div class="card" data-target>Project Four</div>
         </div>
       </section>
+
+      <section>
+        <h2>
+          Credits rows (accordion)
+          <button class="lab-btn" id="invert-toggle" style="margin-left: 16px; padding: 6px 14px; font-size: 0.7rem;">
+            Toggle inverted bg
+          </button>
+          <button class="lab-btn" id="target-toggle" style="margin-left: 8px; padding: 6px 14px; font-size: 0.7rem;">
+            Target: <span id="target-mode-label">title</span>
+          </button>
+          <button class="lab-btn" id="lightmode-toggle" style="margin-left: 8px; padding: 6px 14px; font-size: 0.7rem;">
+            On-light: <span id="lightmode-label">A difference</span>
+          </button>
+        </h2>
+        <p style="font-size: 0.78rem; color: var(--muted); max-width: 60ch; line-height: 1.5;">
+          "Target: title" wraps just the title text (tasteful viewfinder).
+          "Target: row" wraps the full-width row (letterbox bar). Toggle the
+          background to confirm frame visibility on light + dark
+          (mix-blend-mode: difference).
+        </p>
+        <div class="lab-credits" id="lab-credits">
+          <div class="lab-credit-row">
+            <span class="lab-credit-icon">+</span>
+            <span class="lab-credit-title">Wyatt Earp and the Cowboy War</span>
+            <span class="lab-credit-platform">Netflix</span>
+            <span class="lab-credit-role">Dev &amp; Production</span>
+          </div>
+          <div class="lab-credit-row">
+            <span class="lab-credit-icon">+</span>
+            <span class="lab-credit-title">Sitting Bull</span>
+            <span class="lab-credit-platform">History</span>
+            <span class="lab-credit-role">Showrunner</span>
+          </div>
+          <div class="lab-credit-row">
+            <span class="lab-credit-icon">+</span>
+            <span class="lab-credit-title">Crystal Echoes</span>
+            <span class="lab-credit-platform">Paramount+</span>
+            <span class="lab-credit-role">EP</span>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- cursor nodes -->
@@ -366,7 +478,7 @@
       const timeEl = frame.querySelector('.lab-time');
 
       let form = 'frame-dot';
-      let hover = 'expand';
+      let hover = 'snap';
       let framing = false; // true while snap-framing a target
 
       // Base frame size (at rest)
@@ -486,6 +598,63 @@
       );
 
       applyForm('frame-dot');
+
+      // ---- Credits inversion toggle (prototype) ----
+      const invertToggle = document.getElementById('invert-toggle');
+      const labCredits = document.getElementById('lab-credits');
+      if (invertToggle && labCredits) {
+        invertToggle.addEventListener('click', () =>
+          labCredits.classList.toggle('is-inverted')
+        );
+      }
+
+      // ---- Credits target-mode toggle: title (inner span) vs row (full width) ----
+      const targetToggle = document.getElementById('target-toggle');
+      const targetModeLabel = document.getElementById('target-mode-label');
+      let creditTargetMode = 'title';
+      function bindCreditTargets() {
+        labCredits.querySelectorAll('.lab-credit-row').forEach((row) => {
+          const sel = creditTargetMode === 'title' ? row.querySelector('.lab-credit-title') : row;
+          row.querySelectorAll('[data-target]').forEach((el) => {
+            el.removeAttribute('data-target');
+            el.removeEventListener('mouseenter', onEnter);
+            el.removeEventListener('mouseleave', onLeave);
+          });
+          row.removeAttribute('data-target');
+          row.removeEventListener('mouseenter', onEnter);
+          row.removeEventListener('mouseleave', onLeave);
+          sel.setAttribute('data-target', '');
+          sel.addEventListener('mouseenter', onEnter);
+          sel.addEventListener('mouseleave', onLeave);
+        });
+      }
+      if (targetToggle && labCredits) {
+        bindCreditTargets();
+        targetToggle.addEventListener('click', () => {
+          creditTargetMode = creditTargetMode === 'title' ? 'row' : 'title';
+          targetModeLabel.textContent = creditTargetMode;
+          bindCreditTargets();
+        });
+      }
+
+      // ---- Cursor-on-light variant cycle: A difference -> B solid-dark -> C exclusion ----
+      const lightToggle = document.getElementById('lightmode-toggle');
+      const lightLabel = document.getElementById('lightmode-label');
+      const lightModes = [
+        { cls: '', label: 'A difference' },
+        { cls: 'cursor-light-b', label: 'B solid-dark' },
+        { cls: 'cursor-light-c', label: 'C exclusion' },
+      ];
+      let lightIdx = 0;
+      if (lightToggle) {
+        lightToggle.addEventListener('click', () => {
+          document.body.classList.remove('cursor-light-b', 'cursor-light-c');
+          lightIdx = (lightIdx + 1) % lightModes.length;
+          const m = lightModes[lightIdx];
+          if (m.cls) document.body.classList.add(m.cls);
+          lightLabel.textContent = m.label;
+        });
+      }
     </script>
   </body>
 </html>

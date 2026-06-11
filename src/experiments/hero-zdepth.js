@@ -78,7 +78,12 @@ function init() {
     if (content) {
       tl.to(
         content,
-        { filter: `blur(${rackFocus.fgBlurEnd}px)`, opacity: 0, duration: 0.5, ease: 'power1.in' },
+        {
+          filter: `blur(${rackFocus.fgBlurEnd}px)`,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power1.in',
+        },
         0
       );
     }

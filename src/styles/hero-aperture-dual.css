@@ -40,6 +40,9 @@
   perspective: 1200px;
   transform-style: preserve-3d;
   isolation: isolate;
+}
+
+body.has-custom-cursor .portal-scene {
   cursor: none;
 }
 

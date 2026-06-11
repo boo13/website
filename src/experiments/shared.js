@@ -1,4 +1,8 @@
-import { gsap, ScrollTrigger, ScrollSmoother } from '../animations/scroll-defaults.js';
+import {
+  gsap,
+  ScrollTrigger,
+  ScrollSmoother,
+} from '../animations/scroll-defaults.js';
 
 export { gsap, ScrollTrigger };
 
