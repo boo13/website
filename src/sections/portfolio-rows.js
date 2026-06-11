@@ -427,6 +427,15 @@ function encodeSrc(src) {
   return '/' + src.split('/').map(encodeURIComponent).join('/');
 }
 
+function resolveVideoUrl(src) {
+  const source = String(src || '');
+  if (/^https?:\/\//.test(source)) return source;
+
+  const cleanSource = source.replace(/^\.?\//, '');
+  if (cleanSource.startsWith('images/')) return encodeSrc(cleanSource);
+  return `${CDN_BASE}/${cleanSource}`;
+}
+
 function normalizeSectionText(value) {
   return String(value || '')
     .toLowerCase()
@@ -512,28 +521,30 @@ function groupProjectsBySection(projects, sectionIds) {
 
 function renderViewPill(p) {
   const videoSource = p.lightboxVideo || p.videoUrl;
+  const pills = [];
+
   if (videoSource) {
-    const videoUrl = /^https?:\/\//.test(videoSource)
-      ? videoSource
-      : `${CDN_BASE}/${videoSource.replace(/^\.?\//, '')}`;
-    return `<a
+    const videoUrl = resolveVideoUrl(videoSource);
+    pills.push(`<a
       class="portfolio-view-pill glightbox-portfolio"
       data-gallery="portfolio-${escAttr(p.id)}"
       data-type="video"
       href="${escAttr(videoUrl)}"
       aria-label="View ${escAttr(p.title)}"
-    >View</a>`;
+    >${p.liveUrl ? 'Motion' : 'View'}</a>`);
   }
+
   if (p.liveUrl) {
-    return `<a
+    pills.push(`<a
       class="portfolio-view-pill"
       href="${escAttr(p.liveUrl)}"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Visit ${escAttr(p.title)}"
-    >View ↗</a>`;
+    >${videoSource ? 'Site ↗' : 'View ↗'}</a>`);
   }
-  return '';
+
+  return pills.join('');
 }
 
 function renderProjectRow(p) {
