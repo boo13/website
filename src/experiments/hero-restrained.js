@@ -33,18 +33,34 @@ function init() {
 
     const tl = gsap.timeline({ paused: true });
 
-    tl.to(hero, { scale: config.zoomScale, opacity: 0, duration: 1, ease: 'none' }, 0);
+    tl.to(
+      hero,
+      { scale: config.zoomScale, opacity: 0, duration: 1, ease: 'none' },
+      0
+    );
 
     if (video) {
-      tl.to(video, { filter: `blur(${config.blurMax}px)`, duration: 0.8, ease: 'none' }, 0);
+      tl.to(
+        video,
+        { filter: `blur(${config.blurMax}px)`, duration: 0.8, ease: 'none' },
+        0
+      );
     }
 
     if (content) {
-      tl.to(content, { opacity: 0, y: -50, duration: 0.5, ease: 'power2.in' }, 0);
+      tl.to(
+        content,
+        { opacity: 0, y: -50, duration: 0.5, ease: 'power2.in' },
+        0
+      );
     }
 
     if (gradient) {
-      tl.to(gradient, { background: 'oklch(0 0 0 / 0.9)', duration: 0.7, ease: 'none' }, 0);
+      tl.to(
+        gradient,
+        { background: 'oklch(0 0 0 / 0.9)', duration: 0.7, ease: 'none' },
+        0
+      );
     }
 
     if (topGradient) {

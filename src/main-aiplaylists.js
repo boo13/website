@@ -3,7 +3,9 @@ import { gsap } from 'gsap';
 import { CDN_BASE } from './config.js';
 
 const FEED_URL = '/data/ai-playlists.json';
-const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const REDUCED_MOTION = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), audio[controls], [tabindex]:not([tabindex="-1"])';
 
@@ -121,7 +123,8 @@ function resolveAssetPath(value) {
 
 function getTracks(item) {
   if (Array.isArray(item.tracks) && item.tracks.length) return item.tracks;
-  if (Array.isArray(item.tracks_preview) && item.tracks_preview.length) return item.tracks_preview;
+  if (Array.isArray(item.tracks_preview) && item.tracks_preview.length)
+    return item.tracks_preview;
   return [];
 }
 
@@ -177,7 +180,9 @@ function buildTrackMarkup(item) {
 
 function createPlaylistCard(item, index) {
   const cleanTitle = stripSourcePrefix(item.title);
-  const coverStyle = coverBackground(item.title || cleanTitle || `playlist-${index}`);
+  const coverStyle = coverBackground(
+    item.title || cleanTitle || `playlist-${index}`
+  );
   const coverSrc = resolveAssetPath(item.cover_image);
   const coverVideoSrc = resolveAssetPath(item.cover_video_url);
   const meta = [labelForKind(item.playlist_kind), labelForSource(item.source)]
@@ -259,9 +264,9 @@ function createModalController() {
   function trapFocus(event) {
     if (event.key !== 'Tab') return;
 
-    const focusable = Array.from(dialog.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
-      (element) => !element.hasAttribute('disabled'),
-    );
+    const focusable = Array.from(
+      dialog.querySelectorAll(FOCUSABLE_SELECTOR)
+    ).filter((element) => !element.hasAttribute('disabled'));
 
     if (!focusable.length) {
       event.preventDefault();
@@ -310,14 +315,16 @@ function createModalController() {
   }
 
   function open(item, trigger) {
-    lastFocusedElement = trigger instanceof HTMLElement ? trigger : document.activeElement;
+    lastFocusedElement =
+      trigger instanceof HTMLElement ? trigger : document.activeElement;
 
     const cleanTitle = stripSourcePrefix(item.title);
     const coverSrc = resolveAssetPath(item.cover_image);
     const coverVideoSrc = resolveAssetPath(item.cover_video_url);
     const audioSrc = resolveAssetPath(item.audio_intro_url);
     const hasPlaylistUrl =
-      typeof item.playlist_url === 'string' && item.playlist_url.startsWith('https://');
+      typeof item.playlist_url === 'string' &&
+      item.playlist_url.startsWith('https://');
     const embedUrl = buildEmbedUrl(item);
 
     body.innerHTML = `
@@ -368,8 +375,9 @@ function createModalController() {
         </div>
       </div>
 
-      ${embedUrl
-        ? `<div class="playlist-modal__embed">
+      ${
+        embedUrl
+          ? `<div class="playlist-modal__embed">
             <iframe
               src="${escHtml(embedUrl)}"
               title="YouTube playlist player"
@@ -381,7 +389,8 @@ function createModalController() {
             ></iframe>
             <p class="playlist-modal__embed-note">Some tracks may be unavailable for embedding. <a href="${escHtml(item.playlist_url)}" target="_blank" rel="noopener">Open in YouTube Music</a> for the full playlist.</p>
           </div>`
-        : ''}
+          : ''
+      }
 
       <div class="playlist-modal__details">
         ${
@@ -406,13 +415,15 @@ function createModalController() {
       </div>
     `;
 
-    for (const media of body.querySelectorAll('.playlist-modal__cover-image, .playlist-modal__cover-video')) {
+    for (const media of body.querySelectorAll(
+      '.playlist-modal__cover-image, .playlist-modal__cover-video'
+    )) {
       media.addEventListener(
         'error',
         () => {
           media.remove();
         },
-        { once: true },
+        { once: true }
       );
     }
 
@@ -437,27 +448,47 @@ function createModalController() {
       gsap.fromTo(
         dialog,
         { autoAlpha: 0, y: 48, scale: 0.94 },
-        { autoAlpha: 1, y: 0, scale: 1, duration: 0.42, ease: 'power3.out', clearProps: 'opacity,transform' },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.42,
+          ease: 'power3.out',
+          clearProps: 'opacity,transform',
+        }
       );
       gsap.fromTo(
         root.querySelector('.playlist-modal__backdrop'),
         { autoAlpha: 0 },
-        { autoAlpha: 1, duration: 0.32, ease: 'power1.out', clearProps: 'opacity' },
+        {
+          autoAlpha: 1,
+          duration: 0.32,
+          ease: 'power1.out',
+          clearProps: 'opacity',
+        }
       );
-      gsap.from(body.querySelectorAll('.playlist-modal__hero, .playlist-modal__embed, .playlist-modal__details'), {
-        y: 24,
-        autoAlpha: 0,
-        duration: 0.45,
-        stagger: 0.1,
-        delay: 0.12,
-        ease: 'power2.out',
-        clearProps: 'y,opacity,visibility',
-      });
+      gsap.from(
+        body.querySelectorAll(
+          '.playlist-modal__hero, .playlist-modal__embed, .playlist-modal__details'
+        ),
+        {
+          y: 24,
+          autoAlpha: 0,
+          duration: 0.45,
+          stagger: 0.1,
+          delay: 0.12,
+          ease: 'power2.out',
+          clearProps: 'y,opacity,visibility',
+        }
+      );
     }
   }
 
   root.addEventListener('click', (event) => {
-    if (event.target instanceof HTMLElement && event.target.closest('[data-modal-close]')) {
+    if (
+      event.target instanceof HTMLElement &&
+      event.target.closest('[data-modal-close]')
+    ) {
       close();
     }
   });
@@ -499,13 +530,15 @@ function renderShowcase(items) {
     </section>
   `;
 
-  for (const media of playlistList.querySelectorAll('.coverflow-card__cover-image, .coverflow-card__cover-video')) {
+  for (const media of playlistList.querySelectorAll(
+    '.coverflow-card__cover-image, .coverflow-card__cover-video'
+  )) {
     media.addEventListener(
       'error',
       () => {
         media.remove();
       },
-      { once: true },
+      { once: true }
     );
   }
 
@@ -520,7 +553,14 @@ function mountShowcase(items) {
   const title = playlistList.querySelector('#coverflow-title');
   const counter = playlistList.querySelector('#coverflow-counter');
 
-  if (!cards.length || !viewport || !prevButton || !nextButton || !title || !counter) {
+  if (
+    !cards.length ||
+    !viewport ||
+    !prevButton ||
+    !nextButton ||
+    !title ||
+    !counter
+  ) {
     return;
   }
 
@@ -647,7 +687,7 @@ function mountShowcase(items) {
         'aria-label',
         absOffset === 0
           ? `Open ${stripSourcePrefix(items[Number(card.dataset.index)].title)}`
-          : `Focus ${stripSourcePrefix(items[Number(card.dataset.index)].title)}`,
+          : `Focus ${stripSourcePrefix(items[Number(card.dataset.index)].title)}`
       );
     }
 
@@ -702,7 +742,10 @@ function mountShowcase(items) {
 
   on(window, 'keydown', (event) => {
     const target = event.target;
-    if (target instanceof HTMLElement && target.closest('.playlist-modal, input, textarea, select, audio')) {
+    if (
+      target instanceof HTMLElement &&
+      target.closest('.playlist-modal, input, textarea, select, audio')
+    ) {
       return;
     }
 
@@ -719,7 +762,9 @@ function mountShowcase(items) {
     }
 
     if (event.key === 'Enter' || event.key === ' ') {
-      const activeCardButton = cards[activeIndex]?.querySelector('.coverflow-card__button');
+      const activeCardButton = cards[activeIndex]?.querySelector(
+        '.coverflow-card__button'
+      );
       if (document.activeElement === activeCardButton) {
         event.preventDefault();
         openActive(document.activeElement);
@@ -739,7 +784,8 @@ function mountShowcase(items) {
     const deltaY = event.clientY - pointerStart.y;
     pointerStart = null;
 
-    if (Math.abs(deltaX) < 40 || Math.abs(deltaX) < Math.abs(deltaY) * 1.1) return;
+    if (Math.abs(deltaX) < 40 || Math.abs(deltaX) < Math.abs(deltaY) * 1.1)
+      return;
     if (deltaX < 0) setActive(activeIndex + 1);
     if (deltaX > 0) setActive(activeIndex - 1);
   });
@@ -748,21 +794,27 @@ function mountShowcase(items) {
     pointerStart = null;
   });
 
-  on(viewport, 'wheel', (event) => {
-    if (wheelLock) return;
+  on(
+    viewport,
+    'wheel',
+    (event) => {
+      if (wheelLock) return;
 
-    const horizontalIntent = Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey;
-    if (!horizontalIntent) return;
+      const horizontalIntent =
+        Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey;
+      if (!horizontalIntent) return;
 
-    event.preventDefault();
-    wheelLock = true;
-    window.setTimeout(() => {
-      wheelLock = false;
-    }, 220);
+      event.preventDefault();
+      wheelLock = true;
+      window.setTimeout(() => {
+        wheelLock = false;
+      }, 220);
 
-    if (event.deltaX > 8 || event.deltaY > 8) setActive(activeIndex + 1);
-    if (event.deltaX < -8 || event.deltaY < -8) setActive(activeIndex - 1);
-  }, { passive: false });
+      if (event.deltaX > 8 || event.deltaY > 8) setActive(activeIndex + 1);
+      if (event.deltaX < -8 || event.deltaY < -8) setActive(activeIndex - 1);
+    },
+    { passive: false }
+  );
 
   on(window, 'resize', syncLayout);
 
@@ -791,19 +843,22 @@ function mountShowcase(items) {
           ease: 'power2.out',
           overwrite: 'auto',
           clearProps: 'opacity,visibility',
-        },
+        }
       );
     });
 
-    gsap.from(playlistList.querySelectorAll('.coverflow__caption > *, .coverflow__nav'), {
-      y: 18,
-      autoAlpha: 0,
-      duration: 0.7,
-      stagger: 0.08,
-      delay: 0.4,
-      ease: 'power2.out',
-      clearProps: 'opacity,transform',
-    });
+    gsap.from(
+      playlistList.querySelectorAll('.coverflow__caption > *, .coverflow__nav'),
+      {
+        y: 18,
+        autoAlpha: 0,
+        duration: 0.7,
+        stagger: 0.08,
+        delay: 0.4,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform',
+      }
+    );
   }
 
   teardownShowcase = () => {
@@ -880,7 +935,7 @@ function initHeroEntrance() {
           ease: 'power2.out',
           clearProps: 'y,opacity,visibility',
         },
-        '-=0.52',
+        '-=0.52'
       )
       .to(
         glows,
@@ -892,7 +947,7 @@ function initHeroEntrance() {
           ease: 'power2.out',
           clearProps: 'opacity,visibility',
         },
-        '-=0.78',
+        '-=0.78'
       );
   } else {
     initAmbientGlow();
@@ -914,8 +969,11 @@ function renderState({ eyebrow, title, description, error = false }) {
 
 async function loadFeed() {
   try {
-    const response = await fetch(FEED_URL, { headers: { Accept: 'application/json' } });
-    if (!response.ok) throw new Error(`Feed request failed with ${response.status}`);
+    const response = await fetch(FEED_URL, {
+      headers: { Accept: 'application/json' },
+    });
+    if (!response.ok)
+      throw new Error(`Feed request failed with ${response.status}`);
 
     const payload = await response.json();
     const items = Array.isArray(payload)
@@ -930,7 +988,8 @@ async function loadFeed() {
       renderState({
         eyebrow: 'Empty feed',
         title: 'No public playlists yet.',
-        description: 'The feed is wired correctly but contains no public-ready entries.',
+        description:
+          'The feed is wired correctly but contains no public-ready entries.',
       });
       return;
     }

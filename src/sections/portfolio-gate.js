@@ -39,7 +39,7 @@ async function decrypt(encJson, password) {
     enc.encode(password),
     'PBKDF2',
     false,
-    ['deriveKey'],
+    ['deriveKey']
   );
 
   const aesKey = await subtle.deriveKey(
@@ -47,10 +47,14 @@ async function decrypt(encJson, password) {
     baseKey,
     { name: 'AES-GCM', length: 256 },
     false,
-    ['decrypt'],
+    ['decrypt']
   );
 
-  const plaintext = await subtle.decrypt({ name: 'AES-GCM', iv }, aesKey, ciphertext);
+  const plaintext = await subtle.decrypt(
+    { name: 'AES-GCM', iv },
+    aesKey,
+    ciphertext
+  );
   return JSON.parse(new TextDecoder().decode(plaintext));
 }
 
