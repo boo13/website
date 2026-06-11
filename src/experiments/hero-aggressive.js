@@ -57,7 +57,11 @@ function init() {
     if (video) {
       tl.to(
         video,
-        { filter: `blur(${config.blurMax}px)`, duration: 0.7, ease: 'power2.in' },
+        {
+          filter: `blur(${config.blurMax}px)`,
+          duration: 0.7,
+          ease: 'power2.in',
+        },
         0
       );
     }

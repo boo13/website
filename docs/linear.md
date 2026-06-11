@@ -23,4 +23,3 @@ Each issue must include:
 
 ## Repo-Specific Notes
 - Follow `AGENTS.md` (commands, boundaries, verification expectations).
-- For this repo: avoid editing `index-legacy.html` or `src/main-index.js` unless you are explicitly working on legacy behavior.

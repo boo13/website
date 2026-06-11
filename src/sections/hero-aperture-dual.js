@@ -105,7 +105,8 @@ export function initHeroApertureDual() {
   gsap.set(aboutInner, { y: 40 });
   gsap.set(vignette, { autoAlpha: 0 });
   if (topGradient) gsap.set(topGradient, { autoAlpha: 0 });
-  if (fixedOverlays.length) gsap.set(fixedOverlays, { autoAlpha: 0, filter: 'blur(10px)' });
+  if (fixedOverlays.length)
+    gsap.set(fixedOverlays, { autoAlpha: 0, filter: 'blur(10px)' });
   if (marquee) gsap.set(marquee, { autoAlpha: 0 });
 
   // Hero content hidden until textMaskRiseWords reveals it
@@ -115,7 +116,128 @@ export function initHeroApertureDual() {
   // ─── Ticker state (velocity-driven chromatic trail) ───────────────────────
   let tickerFn = null;
   let springBackTween = null;
+  let heroChromeTl = null;
+  let heroChromePlayed = false;
+  const cleanupSocialHover = [];
   let cleanupMaskRise = () => {};
+
+  function animateSocialIcon(svg) {
+    gsap.killTweensOf(svg);
+    gsap
+      .timeline({ defaults: { overwrite: true } })
+      .to(svg, {
+        y: -5,
+        opacity: 0.96,
+        filter:
+          'drop-shadow(-2px 4px 2px oklch(0.804 0.146 220 / 0.9)) ' +
+          'drop-shadow(2px 2px 2px oklch(0.656 0.235 13 / 0.9))',
+        duration: 0.14,
+        ease: 'expo.out',
+      })
+      .to(svg, {
+        y: 2,
+        filter:
+          'drop-shadow(-1px -2px 2px oklch(0.804 0.146 220 / 0.66)) ' +
+          'drop-shadow(1px 3px 2px oklch(0.656 0.235 13 / 0.66))',
+        duration: 0.16,
+        ease: 'power2.out',
+      })
+      .to(svg, {
+        y: 0,
+        opacity: 1,
+        filter:
+          'drop-shadow(0 0 0 oklch(0.804 0.146 220 / 0)) ' +
+          'drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0))',
+        duration: 0.48,
+        ease: 'expo.out',
+        clearProps: 'transform,opacity,filter',
+      });
+  }
+
+  if (heroSocial) {
+    const playSocialHover = (icon) => {
+      const svg = icon.querySelector('svg');
+      if (!svg) return;
+      animateSocialIcon(svg);
+    };
+    const handleSocialMouseOver = (event) => {
+      const icon = event.target.closest('.social-icon');
+      if (!icon || !heroSocial.contains(icon)) return;
+      if (icon.contains(event.relatedTarget)) return;
+      playSocialHover(icon);
+    };
+    const handleSocialFocusIn = (event) => {
+      const icon = event.target.closest('.social-icon');
+      if (!icon || !heroSocial.contains(icon)) return;
+      playSocialHover(icon);
+    };
+    heroSocial.addEventListener('mouseover', handleSocialMouseOver);
+    heroSocial.addEventListener('focusin', handleSocialFocusIn);
+    cleanupSocialHover.push(() => {
+      heroSocial.removeEventListener('mouseover', handleSocialMouseOver);
+      heroSocial.removeEventListener('focusin', handleSocialFocusIn);
+      heroSocial.querySelectorAll('.social-icon svg').forEach((svg) => {
+        gsap.killTweensOf(svg);
+      });
+    });
+  }
+
+  function playHeroChromeEntrance() {
+    if (heroChromePlayed) return;
+    heroChromePlayed = true;
+
+    heroChromeTl = gsap.timeline();
+    if (heroSubtitle) {
+      heroChromeTl.to(
+        heroSubtitle,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'expo.out',
+        },
+        0
+      );
+    }
+
+    if (heroSocial) {
+      const icons = [...heroSocial.querySelectorAll('.social-icon svg')];
+      heroChromeTl.to(
+        heroSocial,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'expo.out',
+        },
+        heroSubtitle ? 0.18 : 0
+      );
+      if (icons.length) {
+        heroChromeTl.fromTo(
+          icons,
+          {
+            y: 10,
+            opacity: 0,
+            filter:
+              'drop-shadow(-4px 8px 0 oklch(0.804 0.146 220)) ' +
+              'drop-shadow(4px 4px 0 oklch(0.656 0.235 13))',
+          },
+          {
+            y: 0,
+            opacity: 1,
+            filter:
+              'drop-shadow(0 0 0 oklch(0.804 0.146 220 / 0)) ' +
+              'drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0))',
+            duration: 0.72,
+            ease: 'expo.out',
+            stagger: 0.08,
+            clearProps: 'opacity,transform,filter',
+          },
+          heroSubtitle ? 0.42 : 0.18
+        );
+      }
+    }
+  }
 
   // ─── Scroll-driven aperture timeline ─────────────────────────────────────
   const ctx = gsap.context(() => {
@@ -141,7 +263,7 @@ export function initHeroApertureDual() {
           autoAlpha: 0,
           y: -26,
           filter: 'blur(7px)',
-          duration: 0.24,
+          duration: 0.44,
           ease: 'none',
         },
         0
@@ -281,6 +403,7 @@ export function initHeroApertureDual() {
       retainClones: true,
       onComplete: (clones) => {
         const allClones = clones.flat();
+        playHeroChromeEntrance();
         if (!allClones.length) return;
 
         const numLayers = clones.length;
@@ -343,38 +466,7 @@ export function initHeroApertureDual() {
     });
   }
 
-  if (heroSubtitle) {
-    gsap.to(heroSubtitle, {
-      autoAlpha: 1,
-      y: 0,
-      delay: 2.35,
-      duration: 1.2,
-      ease: 'expo.out',
-    });
-  }
-
-  if (heroSocial) {
-    const icons = [...heroSocial.querySelectorAll('.social-icon')];
-    gsap.to(heroSocial, {
-      autoAlpha: 1,
-      y: 0,
-      delay: 2.7,
-      duration: 1.2,
-      ease: 'expo.out',
-      onComplete() {
-        icons.forEach((icon, i) => {
-          setTimeout(() => {
-            icon.classList.add('is-entering');
-            icon.addEventListener(
-              'animationend',
-              () => icon.classList.remove('is-entering'),
-              { once: true }
-            );
-          }, i * 80);
-        });
-      },
-    });
-  }
+  if (!heroName) playHeroChromeEntrance();
 
   return function cleanup() {
     if (tickerFn !== null) {
@@ -385,6 +477,9 @@ export function initHeroApertureDual() {
       springBackTween.kill();
       springBackTween = null;
     }
+    heroChromeTl?.kill();
+    heroChromeTl = null;
+    cleanupSocialHover.forEach((cleanup) => cleanup());
     cleanupMaskRise();
     ctx.revert();
   };

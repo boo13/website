@@ -14,7 +14,8 @@
   --color-charcoal: oklch(0.2 0 0);
 
   --ff-display: 'ivypresto-display', Georgia, serif;
-  --ff-body: 'aktiv-grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ff-body:
+    'aktiv-grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
@@ -35,7 +36,9 @@
 /* =====================================================
    RESET
 ====================================================== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -92,7 +95,11 @@ body::before {
   left: 0;
   right: 0;
   height: clamp(7rem, 20vh, 12rem);
-  background: linear-gradient(to bottom, var(--color-nearblack) 30%, oklch(0.14 0 0 / 0));
+  background: linear-gradient(
+    to bottom,
+    var(--color-nearblack) 30%,
+    oklch(0.14 0 0 / 0)
+  );
   z-index: 38;
   pointer-events: none;
 }
@@ -103,10 +110,8 @@ body::before {
 .portfolio-section-index {
   position: fixed;
   top: calc(
-    env(safe-area-inset-top, 0px)
-    + clamp(0.75rem, 2vh, 1.5rem)
-    + clamp(1.25rem, 3.2vw, 2.25rem)
-    + clamp(0.4rem, 1vh, 0.75rem)
+    env(safe-area-inset-top, 0px) + clamp(0.75rem, 2vh, 1.5rem) +
+      clamp(1.25rem, 3.2vw, 2.25rem) + clamp(0.4rem, 1vh, 0.75rem)
   );
   left: var(--grid-edge-offset);
   z-index: 39;
@@ -177,11 +182,8 @@ body::before {
 .portfolio-section {
   border-top: 1px solid oklch(0.968 0.006 75 / 0.08);
   scroll-margin-top: calc(
-    env(safe-area-inset-top, 0px)
-    + clamp(0.75rem, 2vh, 1.5rem)
-    + clamp(1.25rem, 3.2vw, 2.25rem)
-    + clamp(0.4rem, 1vh, 0.75rem)
-    + 2.5rem
+    env(safe-area-inset-top, 0px) + clamp(0.75rem, 2vh, 1.5rem) +
+      clamp(1.25rem, 3.2vw, 2.25rem) + clamp(0.4rem, 1vh, 0.75rem) + 2.5rem
   );
 }
 
@@ -258,7 +260,9 @@ body::before {
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
   cursor: pointer;
 }
 
@@ -302,7 +306,15 @@ body::before {
   height: 100%;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
+  cursor: zoom-in;
+}
+
+.portfolio-shot > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  cursor: zoom-in;
 }
 
 .portfolio-shot img,
@@ -384,7 +396,9 @@ body::before {
 
 @media (prefers-reduced-motion: reduce) {
   .portfolio-rows.is-row-hovered .portfolio-row__title,
-  .portfolio-rows.is-row-hovered .portfolio-row.is-hovered .portfolio-row__title {
+  .portfolio-rows.is-row-hovered
+    .portfolio-row.is-hovered
+    .portfolio-row__title {
     animation: none;
     text-shadow: none;
     opacity: 1;
@@ -432,7 +446,6 @@ body::before {
     scroll-snap-align: start;
   }
 }
-
 
 /* =====================================================
    FOOTER
@@ -544,11 +557,22 @@ body::before {
 }
 
 @keyframes portfolio-gate-shake {
-  0%, 100% { transform: translateX(0); }
-  20%       { transform: translateX(-6px); }
-  40%       { transform: translateX(6px); }
-  60%       { transform: translateX(-4px); }
-  80%       { transform: translateX(4px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
 }
 
 .portfolio-gate__input-row.is-shaking {

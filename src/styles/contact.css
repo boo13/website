@@ -51,9 +51,13 @@ body::before {
     linear-gradient(90deg, oklch(0.968 0.006 75 / 0.035) 1px, transparent 1px);
   background-position: center;
   background-size:
-    calc((min(100vw, var(--grid-max-width)) - (var(--container-padding) * 2)) / 6)
+    calc(
+        (min(100vw, var(--grid-max-width)) - (var(--container-padding) * 2)) / 6
+      )
       100%,
-    calc((min(100vw, var(--grid-max-width)) - (var(--container-padding) * 2)) / 6)
+    calc(
+        (min(100vw, var(--grid-max-width)) - (var(--container-padding) * 2)) / 6
+      )
       100%;
   opacity: 0.45;
   pointer-events: none;
@@ -254,8 +258,7 @@ textarea {
   max-width: var(--grid-max-width);
   min-height: 100vh;
   margin: 0 auto;
-  padding:
-    clamp(8rem, 18vh, 13rem) var(--container-padding)
+  padding: clamp(8rem, 18vh, 13rem) var(--container-padding)
     clamp(5rem, 12vh, 8rem);
 }
 

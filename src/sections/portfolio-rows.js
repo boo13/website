@@ -367,11 +367,18 @@ function wireFramePan(frame, canHover) {
   function updateEdgeState() {
     const maxScroll = getFrameMaxScroll(scroller);
     const isBanding = strip.classList.contains('is-banding');
-    if (leftEdge) leftEdge.style.pointerEvents = (isBanding || scroller.scrollLeft < 1) ? 'none' : '';
-    if (rightEdge) rightEdge.style.pointerEvents = (isBanding || scroller.scrollLeft >= maxScroll - 1) ? 'none' : '';
+    if (leftEdge)
+      leftEdge.style.pointerEvents =
+        isBanding || scroller.scrollLeft < 1 ? 'none' : '';
+    if (rightEdge)
+      rightEdge.style.pointerEvents =
+        isBanding || scroller.scrollLeft >= maxScroll - 1 ? 'none' : '';
   }
 
-  const refresh = () => { refreshFramePan(scroller); updateEdgeState(); };
+  const refresh = () => {
+    refreshFramePan(scroller);
+    updateEdgeState();
+  };
   const resizeObserver =
     typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(refresh);
 
@@ -403,8 +410,12 @@ function wireFramePan(frame, canHover) {
     attributeFilter: ['class'],
   });
 
-  leftEdge?.addEventListener('mouseenter', () => startEdgePan(scroller, 'left'));
-  rightEdge?.addEventListener('mouseenter', () => startEdgePan(scroller, 'right'));
+  leftEdge?.addEventListener('mouseenter', () =>
+    startEdgePan(scroller, 'left')
+  );
+  rightEdge?.addEventListener('mouseenter', () =>
+    startEdgePan(scroller, 'right')
+  );
   frame.querySelectorAll('.portfolio-row__edge').forEach((edge) => {
     edge.addEventListener('mouseleave', () => stopEdgePan(scroller));
   });
@@ -441,16 +452,12 @@ function isVideoSrc(src) {
   return typeof src === 'string' && VIDEO_EXT_RE.test(src);
 }
 
-function renderShotMedia(src) {
-  if (!isVideoSrc(src)) {
-    return `<img src="${encodeSrc(src)}" alt="" loading="lazy" draggable="false">`;
-  }
-  const mp4 = encodeSrc(src.replace(VIDEO_EXT_RE, '.mp4'));
-  const webm = encodeSrc(src.replace(VIDEO_EXT_RE, '.webm'));
-  return `<video muted autoplay loop playsinline preload="auto" disableremoteplayback>
-    <source src="${webm}" type="video/webm">
-    <source src="${mp4}" type="video/mp4">
-  </video>`;
+function thumbSrc(src) {
+  return encodeSrc(src.replace(/\.(jpe?g|png)$/i, '.thumb.webp'));
+}
+
+function largeSrc(src) {
+  return encodeSrc(src.replace(/\.(jpe?g|png)$/i, '.large.webp'));
 }
 
 function resolveVideoUrl(src) {
@@ -460,6 +467,24 @@ function resolveVideoUrl(src) {
   const cleanSource = source.replace(/^\.?\//, '');
   if (cleanSource.startsWith('images/')) return encodeSrc(cleanSource);
   return `${CDN_BASE}/${cleanSource}`;
+}
+
+function renderShotMedia(src, p) {
+  if (isVideoSrc(src)) {
+    const mp4 = encodeSrc(src.replace(VIDEO_EXT_RE, '.mp4'));
+    const webm = encodeSrc(src.replace(VIDEO_EXT_RE, '.webm'));
+    return `<video muted autoplay loop playsinline preload="auto" disableremoteplayback>
+      <source src="${webm}" type="video/webm">
+      <source src="${mp4}" type="video/mp4">
+    </video>`;
+  }
+  return `<a class="glightbox-portfolio-img"
+       data-gallery="portfolio-img-${escAttr(p.id)}"
+       data-glightbox="type: image; title: ${escAttr(p.title)}"
+       href="${largeSrc(src)}"
+       aria-label="View screenshot from ${escAttr(p.title)}">
+      <img src="${thumbSrc(src)}" alt="" loading="lazy" draggable="false">
+    </a>`;
 }
 
 function normalizeSectionText(value) {
@@ -584,7 +609,7 @@ function renderProjectRow(p) {
               .map(
                 (src) => `
               <li class="portfolio-shot">
-                ${renderShotMedia(src)}
+                ${renderShotMedia(src, p)}
               </li>`
               )
               .join('')}
@@ -624,21 +649,36 @@ function renderRows(container, projects, sectionIds) {
 // ─── GLightbox init ────────────────────────────────────────────────────────
 
 function initLightbox() {
-  const triggers = document.querySelectorAll('.glightbox-portfolio');
-  if (!triggers.length) return;
+  if (document.querySelector('.glightbox-portfolio')) {
+    GLightbox({
+      selector: '.glightbox-portfolio',
+      touchNavigation: true,
+      loop: false,
+      autoplayVideos: true,
+      closeButton: true,
+      closeOnOutsideClick: true,
+      keyboardNavigation: true,
+      videosWidth: '90vw',
+      openEffect: 'fade',
+      closeEffect: 'fade',
+    });
+  }
 
-  GLightbox({
-    selector: '.glightbox-portfolio',
-    touchNavigation: true,
-    loop: false,
-    autoplayVideos: true,
-    closeButton: true,
-    closeOnOutsideClick: true,
-    keyboardNavigation: true,
-    videosWidth: '90vw',
-    openEffect: 'fade',
-    closeEffect: 'fade',
-  });
+  if (document.querySelector('.glightbox-portfolio-img')) {
+    GLightbox({
+      selector: '.glightbox-portfolio-img',
+      touchNavigation: true,
+      loop: false,
+      closeButton: true,
+      closeOnOutsideClick: true,
+      keyboardNavigation: true,
+      preload: false,
+      openEffect: 'fade',
+      closeEffect: 'fade',
+      slideEffect: 'slide',
+      moreLength: 0,
+    });
+  }
 }
 
 // ─── Tweakpane integration ─────────────────────────────────────────────────
@@ -694,9 +734,7 @@ async function mountTweakpane(cfg, onUpdate) {
 // ─── Scroll-spy + smooth nav ───────────────────────────────────────────────
 
 function wireScrollSpy() {
-  const navLinks = [
-    ...document.querySelectorAll('[data-section-link]'),
-  ];
+  const navLinks = [...document.querySelectorAll('[data-section-link]')];
   if (!navLinks.length) return;
 
   const sections = [
@@ -755,7 +793,10 @@ function wireScrollSpy() {
   if (titleLink) {
     titleLink.addEventListener('click', (e) => {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      });
       history.replaceState(null, '', window.location.pathname);
     });
   }

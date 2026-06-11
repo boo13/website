@@ -6,6 +6,8 @@
 /* Dark backdrop */
 .glight-container .goverlay {
   background: oklch(0.14 0 0 / 0.95) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(0.8);
+  backdrop-filter: blur(12px) saturate(0.8);
 }
 
 /* Close button styling */

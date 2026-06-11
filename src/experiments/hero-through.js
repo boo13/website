@@ -72,7 +72,13 @@ function init() {
     if (depthLines) {
       tl.to(
         depthLines,
-        { autoAlpha: 0.48, scale: 1.22, rotate: 0, duration: 0.42, ease: 'none' },
+        {
+          autoAlpha: 0.48,
+          scale: 1.22,
+          rotate: 0,
+          duration: 0.42,
+          ease: 'none',
+        },
         0.04
       ).to(
         depthLines,
@@ -81,11 +87,7 @@ function init() {
       );
     }
 
-    tl.to(
-      scene,
-      { '--portal-shade': 0.74, duration: 0.62, ease: 'none' },
-      0.08
-    )
+    tl.to(scene, { '--portal-shade': 0.74, duration: 0.62, ease: 'none' }, 0.08)
       .to(
         hero,
         {
@@ -110,7 +112,11 @@ function init() {
         0.18
       )
       .to(aboutInner, { y: 0, duration: 0.76, ease: 'none' }, 0.18)
-      .to(scene, { '--portal-shade': 0.28, duration: 0.38, ease: 'none' }, 0.68);
+      .to(
+        scene,
+        { '--portal-shade': 0.28, duration: 0.38, ease: 'none' },
+        0.68
+      );
 
     ScrollTrigger.create({
       trigger: scene,

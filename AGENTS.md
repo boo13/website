@@ -28,9 +28,6 @@ This project is a video portfolio website using GSAP.
 - The live response still exposes GitHub Pages / Fastly headers (`x-github-request-id`, `x-served-by`, `x-fastly-request-id`, `via: 1.1 varnish`), which indicates the origin has not been fully moved off GitHub Pages.
 - Do not describe the site as "on Cloudflare Pages" unless the origin and deploy workflow have actually been migrated.
 
-## Boundaries
-- ❌ DO NOT edit `index-legacy.html` or `src/main-index.js` unless explicitly asked (legacy archive)
-
 ## Design System
 - **`DESIGN.md`** is the source of truth for all visual and motion design decisions on `index.html` and project pages (`projects/*/index.html`).
 - Consult DESIGN.md before making any design decision: colors, typography, spacing, animation timing, easing, layout, breakpoints, z-index.
@@ -38,7 +35,7 @@ This project is a video portfolio website using GSAP.
 - If code and DESIGN.md conflict, flag it — don't silently follow either one.
 
 ## Project Structure
-- `index.html` is the main portfolio page. `index-legacy.html` is an archived/alternate version.
+- `index.html` is the main portfolio page.
 - Primary UI code is organized by **section**, not file type. Shared utilities are grouped by type (`animations/`, `components/`, `styles/`).
 - Each section exports an `initSectionName()` function called from `main.js`.
 - Static assets live in `public/` (data, images, favicon, CNAME) — Vite copies them as-is to the build output. HTML files stay at the repo root.
@@ -48,10 +45,9 @@ This project is a video portfolio website using GSAP.
 ```
 Root HTML pages and entry files:
 - index.html -> src/main.js
-- index-legacy.html -> src/main-index.js
 - contact.html -> src/main-contact.js
 - resume.html -> src/main-resume.js
-- case_study_wyatt.html -> src/main-wyatt.js
+- case-study-wyatt.html -> src/main-wyatt.js
 - sandbox.html -> no page-specific JS entry
 
 projects/                           # project detail pages (auto-discovered by Vite)
@@ -73,15 +69,13 @@ src/
     video-lightbox.css  # lightbox overlay (index.html)
     contact.css         # contact.html
     resume.css          # resume.html
-    wyatt.css           # case_study_wyatt.html
-    index-legacy.css    # legacy index-legacy.html
+    wyatt.css           # case-study-wyatt.html
   config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
   main.js               # entry for index.html — imports sections + calls init()
   main-project.js       # entry for ALL project pages — imports project sections
-  main-index.js         # entry for index-legacy.html (Slider + ResponsiveVideo)
   main-contact.js       # entry for contact.html (form handler)
   main-resume.js        # entry for resume.html (page-specific layout tweaks)
-  main-wyatt.js         # entry for case_study_wyatt.html (featured-work effects)
+  main-wyatt.js         # entry for case-study-wyatt.html (featured-work effects)
 ```
 
 ## GSAP Conventions

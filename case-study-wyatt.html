@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyatt Earp and The Cowboy War - Randy Counsman</title>
+    <meta name="description" content="Netflix docudrama series Wyatt Earp and The Cowboy War - produced by Randy Counsman">
+
+    <!-- Critical inline styles to prevent white flash -->
+    <style>
+      html, body {
+        background: #0a0a0a;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <!-- Typekit Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css">
+
+    <!-- Styles injected by Vite from src/main-wyatt.js -->
+</head>
+<body>
+    <!-- Back navigation -->
+    <nav style="position: fixed; top: 2rem; left: 2rem; z-index: 100;">
+        <a href="/" style="color: rgba(247, 244, 240, 0.7); font-size: 0.875rem; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="transform: rotate(180deg);">
+                <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Back to Portfolio
+        </a>
+    </nav>
+
+    <!-- Wyatt Earp Parallax Section -->
+    <section id="wyatt-earp" class="parallax-section">
+        <div class="parallax-container">
+            <!-- Background layer (town) -->
+            <img
+                class="parallax-layer parallax-bg"
+                src="images/portfolio/wyatt-earp/wyatt-layer-1.png"
+                alt="Wyatt Earp background"
+                loading="lazy"
+            >
+            <div class="parallax-fade parallax-bg-fade"></div>
+
+            <!-- Text content layer -->
+            <div class="parallax-text">
+                <img
+                    class="network-logo"
+                    src="images/logos/Netflix_white.png"
+                    alt="Netflix"
+                >
+                <h2 class="project-title">Wyatt Earp and The Cowboy War</h2>
+                <div class="quotes">
+                    <blockquote class="quote">
+                        "Guns, grits, and global politics"
+                        <cite>— Wall Street Journal</cite>
+                    </blockquote>
+                    <blockquote class="quote">
+                        "A cracking good yarn"
+                        <cite>— The Spectator</cite>
+                    </blockquote>
+                    <blockquote class="quote">
+                        "Well-written and well-acted... Stream it!"
+                        <cite>— Decider</cite>
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Foreground layer (Wyatt) -->
+            <img
+                class="parallax-layer parallax-fg"
+                src="images/portfolio/wyatt-earp/wyatt-layer-2.png"
+                alt="Wyatt Earp foreground"
+                loading="lazy"
+            >
+            <div class="parallax-fade parallax-fg-fade"></div>
+        </div>
+    </section>
+
+    <script type="module" src="/src/main-wyatt.js"></script>
+</body>
+</html>

@@ -190,6 +190,9 @@ public/video/
 # Screenshots folder used for visual testing
 screenshots/
 
+# Design reference artboards (local scratch, not shipped)
+ref/
+
 # Architecture overview from Amp
 docs/AmpOverview/
 

@@ -36,7 +36,14 @@ function initCaseHero(ctx) {
       gsap.fromTo(
         overlay.children,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1.4, delay: 0.3, ease: 'power3.out', stagger: 0.15 }
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.4,
+          delay: 0.3,
+          ease: 'power3.out',
+          stagger: 0.15,
+        }
       );
     });
   }

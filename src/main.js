@@ -46,6 +46,8 @@ function init() {
     'loadingComplete',
     () => {
       cleanupHero = initHeroApertureDual();
+      // The hero pin is registered after the preloader, so section triggers need final offsets.
+      ScrollTrigger.refresh();
     },
     { once: true }
   );
