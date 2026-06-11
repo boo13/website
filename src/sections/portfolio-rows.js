@@ -495,7 +495,7 @@ function renderViewPill(p) {
     return `<a
       class="portfolio-view-pill glightbox-portfolio"
       data-gallery="portfolio-${escAttr(p.id)}"
-      data-glightbox="type: video; source: ${escAttr(videoSrc)};"
+      data-type="video"
       href="${escAttr(videoSrc)}"
       aria-label="View ${escAttr(p.title)}"
     >View</a>`;
