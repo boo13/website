@@ -52,21 +52,54 @@
     <main class="contact-shell">
       <section class="contact-intro" aria-labelledby="contact-title">
         <p class="contact-kicker contact-reveal contact-reveal--1">Contact</p>
-        <h1 id="contact-title" class="contact-title contact-reveal contact-reveal--2">
-          Let's make something together.
+        <h1
+          id="contact-title"
+          class="contact-title contact-glitch-text contact-reveal contact-reveal--2"
+          data-contact-glitch
+          data-text="Let's make something together."
+        >
+          <span class="contact-glitch-text__text">Let's make something together.</span>
+          <span
+            class="contact-glitch-text__trail"
+            aria-hidden="true"
+            data-text="Let's make something together."
+          ></span>
         </h1>
 
         <div class="contact-details contact-reveal contact-reveal--3">
           <div class="contact-detail">
             <span class="contact-detail__label">Based in</span>
-            <span class="contact-detail__value">New York, NY</span>
+            <span
+              class="contact-detail__value contact-glitch-text contact-glitch-text--detail"
+              data-contact-glitch
+              data-text="New York, NY"
+            >
+              <span class="contact-glitch-text__text">New York, NY</span>
+              <span
+                class="contact-glitch-text__trail"
+                aria-hidden="true"
+                data-text="New York, NY"
+              ></span>
+            </span>
           </div>
           <div class="contact-detail">
             <span class="contact-detail__label">Elsewhere</span>
             <span class="contact-detail__links">
-              <a href="https://www.linkedin.com/in/randycounsman/" target="_blank" rel="noopener"
-                >LinkedIn</a
+              <a
+                class="contact-glitch-text contact-glitch-text--detail"
+                href="https://www.linkedin.com/in/randycounsman/"
+                target="_blank"
+                rel="noopener"
+                data-contact-glitch
+                data-text="LinkedIn"
               >
+                <span class="contact-glitch-text__text">LinkedIn</span>
+                <span
+                  class="contact-glitch-text__trail"
+                  aria-hidden="true"
+                  data-text="LinkedIn"
+                ></span>
+              </a>
             </span>
           </div>
         </div>
