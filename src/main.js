@@ -1,3 +1,4 @@
+import './styles/cursor.css';
 import './styles/index.css';
 import './styles/hero-aperture-dual.css';
 import './styles/video-lightbox.css';
