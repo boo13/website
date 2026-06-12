@@ -270,6 +270,9 @@ function clearBanding(strip, cfg) {
     onComplete: () => {
       strip.classList.remove('is-banding');
       gsap.set(strip, { clearProps: 'height' });
+      if (strip._portraitStripHeight) {
+        gsap.set(strip, { height: strip._portraitStripHeight });
+      }
       gsap.set(shots, { clearProps: 'width,height,zIndex' });
       strip._portfolioBaseHeight = null;
       strip._portfolioResetTween = null;
@@ -422,6 +425,93 @@ function wireFramePan(frame, canHover) {
   frame.addEventListener('mouseleave', () => stopEdgePan(scroller));
 }
 
+// ─── Portrait shot sizing ──────────────────────────────────────────────────
+
+function applyPortraitSizes(strip) {
+  // Skip if a hover animation is in flight — clearBanding will re-apply _portraitStripHeight
+  if (strip.classList.contains('is-banding')) return;
+
+  // Re-read the CSS height each call so resize is reflected
+  gsap.set(strip, { clearProps: 'height' });
+  const cssStripHeight =
+    parseFloat(getComputedStyle(strip).height) || strip.offsetHeight;
+  strip._cssStripHeight = cssStripHeight;
+  if (!cssStripHeight) return;
+
+  const shots = [...strip.querySelectorAll('.portfolio-shot')];
+  const dims = shots.map((shot) => {
+    const media = shot.querySelector('img, video');
+    const w = media?.naturalWidth || media?.videoWidth || 0;
+    const h = media?.naturalHeight || media?.videoHeight || 0;
+    return { w, h };
+  });
+
+  const hasPortrait = dims.some(({ w, h }) => w > 0 && h > 0 && h > w);
+  if (!hasPortrait) return;
+
+  const landscapeWidths = dims
+    .filter(({ w, h }) => w > 0 && h > 0 && w >= h)
+    .map(({ w, h }) => (w / h) * cssStripHeight);
+
+  // No landscape reference → fall back to 16:9-equivalent width
+  const targetHeight = landscapeWidths.length
+    ? landscapeWidths.reduce((a, b) => a + b, 0) / landscapeWidths.length
+    : cssStripHeight * (16 / 9);
+
+  strip._portraitStripHeight = targetHeight;
+  strip._portfolioBaseHeight = null;
+  gsap.set(strip, { height: targetHeight });
+
+  const scroller = strip.closest('.portfolio-row__strip-viewport');
+  if (scroller) refreshFramePan(scroller);
+}
+
+function wirePortraitSizes(strip) {
+  const mediaEls = [...strip.querySelectorAll('img, video')];
+  if (!mediaEls.length) return;
+
+  let remaining = mediaEls.length;
+
+  function checkDone() {
+    remaining--;
+    if (remaining <= 0) applyPortraitSizes(strip);
+  }
+
+  mediaEls.forEach((el) => {
+    const isVideo = el.tagName === 'VIDEO';
+    // complete===true covers both success and already-failed images; readyState>=1 for video
+    const ready = isVideo ? el.readyState >= 1 : el.complete;
+    if (ready) {
+      checkDone();
+    } else {
+      // settled flag prevents double-decrement if both events fire for one element
+      // (e.g. video fires loadedmetadata then later errors mid-decode)
+      let settled = false;
+      const settle = () => {
+        if (settled) return;
+        settled = true;
+        checkDone();
+      };
+      el.addEventListener(isVideo ? 'loadedmetadata' : 'load', settle, {
+        once: true,
+      });
+      el.addEventListener('error', settle, { once: true });
+    }
+  });
+
+  // Re-apply when viewport resizes — CSS strip height is responsive (clamp with 14vh).
+  // Uses window resize rather than ResizeObserver to avoid triggering on GSAP height tweens.
+  let resizeTimer;
+  window.addEventListener(
+    'resize',
+    () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => applyPortraitSizes(strip), 150);
+    },
+    { passive: true }
+  );
+}
+
 // ─── Wire a single strip ───────────────────────────────────────────────────
 
 function wireStrip(strip, getCfg, canHover) {
@@ -469,14 +559,23 @@ function resolveVideoUrl(src) {
   return `${CDN_BASE}/${cleanSource}`;
 }
 
-function renderShotMedia(src, p) {
+function renderShotMedia(src, p, clickLightboxVideo = null) {
   if (isVideoSrc(src)) {
     const mp4 = encodeSrc(src.replace(VIDEO_EXT_RE, '.mp4'));
     const webm = encodeSrc(src.replace(VIDEO_EXT_RE, '.webm'));
-    return `<video muted autoplay loop playsinline preload="auto" disableremoteplayback>
+    const videoEl = `<video muted autoplay loop playsinline preload="auto" disableremoteplayback>
       <source src="${webm}" type="video/webm">
       <source src="${mp4}" type="video/mp4">
     </video>`;
+    if (clickLightboxVideo) {
+      const lightboxUrl = resolveVideoUrl(clickLightboxVideo);
+      return `<a class="glightbox-portfolio"
+           data-gallery="portfolio-${escAttr(p.id)}"
+           data-type="video"
+           href="${escAttr(lightboxUrl)}"
+           aria-label="Watch ${escAttr(p.title)}">${videoEl}</a>`;
+    }
+    return videoEl;
   }
   return `<a class="glightbox-portfolio-img"
        data-gallery="portfolio-img-${escAttr(p.id)}"
@@ -581,8 +680,8 @@ function renderViewPill(p) {
       data-gallery="portfolio-${escAttr(p.id)}"
       data-type="video"
       href="${escAttr(videoUrl)}"
-      aria-label="View ${escAttr(p.title)}"
-    >${p.liveUrl ? 'Motion' : 'View'}</a>`);
+      aria-label="Watch ${escAttr(p.title)}"
+    >${p.liveUrl ? 'Motion' : 'Watch'}</a>`);
   }
 
   if (p.liveUrl) {
@@ -607,9 +706,9 @@ function renderProjectRow(p) {
           <ul class="portfolio-row__strip">
             ${screenshots
               .map(
-                (src) => `
+                (src, i) => `
               <li class="portfolio-shot">
-                ${renderShotMedia(src, p)}
+                ${renderShotMedia(src, p, i === 0 ? p.firstShotLightboxVideo ?? null : null)}
               </li>`
               )
               .join('')}
@@ -858,6 +957,10 @@ export async function initPortfolioRows(data) {
 
   container.querySelectorAll('.portfolio-row__strip-frame').forEach((frame) => {
     wireFramePan(frame, canHover);
+  });
+
+  container.querySelectorAll('.portfolio-row__strip').forEach((strip) => {
+    wirePortraitSizes(strip);
   });
 
   if (canHover) {
