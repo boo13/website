@@ -11,6 +11,15 @@ import {
 
 gsap.registerPlugin(SplitText);
 
+// Per-layer opacity caps for the hero name color trail (blue, red, cyan, yellow) —
+// outer spectral hues stay fainter than the inner pair.
+const TRAIL_LAYER_OPACITY = [
+  TRAIL_OPACITY,
+  TRAIL_OPACITY,
+  TRAIL_OPACITY * 0.65,
+  TRAIL_OPACITY * 0.65,
+];
+
 const isMobile = window.innerWidth < 768;
 const prefersReducedMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
@@ -128,9 +137,12 @@ export function initHeroApertureDual() {
       .to(svg, {
         y: -5,
         opacity: 0.96,
+        // Chained drop-shadows compound: cyan/yellow halo the blue/red fringe
         filter:
           'drop-shadow(-2px 4px 2px oklch(0.804 0.146 220 / 0.9)) ' +
-          'drop-shadow(2px 2px 2px oklch(0.656 0.235 13 / 0.9))',
+          'drop-shadow(2px 2px 2px oklch(0.656 0.235 13 / 0.9)) ' +
+          'drop-shadow(-3px 6px 3px oklch(0.86 0.15 195 / 0.5)) ' +
+          'drop-shadow(3px 3px 3px oklch(0.85 0.17 85 / 0.5))',
         duration: 0.14,
         ease: 'expo.out',
       })
@@ -138,16 +150,21 @@ export function initHeroApertureDual() {
         y: 2,
         filter:
           'drop-shadow(-1px -2px 2px oklch(0.804 0.146 220 / 0.66)) ' +
-          'drop-shadow(1px 3px 2px oklch(0.656 0.235 13 / 0.66))',
+          'drop-shadow(1px 3px 2px oklch(0.656 0.235 13 / 0.66)) ' +
+          'drop-shadow(-2px -3px 3px oklch(0.86 0.15 195 / 0.35)) ' +
+          'drop-shadow(2px 4px 3px oklch(0.85 0.17 85 / 0.35))',
         duration: 0.16,
         ease: 'power2.out',
       })
       .to(svg, {
         y: 0,
         opacity: 1,
+        // Must stay four shadows — GSAP only interpolates matching filter structures
         filter:
           'drop-shadow(0 0 0 oklch(0.804 0.146 220 / 0)) ' +
-          'drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0))',
+          'drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0)) ' +
+          'drop-shadow(0 0 0 oklch(0.86 0.15 195 / 0)) ' +
+          'drop-shadow(0 0 0 oklch(0.85 0.17 85 / 0))',
         duration: 0.48,
         ease: 'expo.out',
         clearProps: 'transform,opacity,filter',
@@ -396,9 +413,16 @@ export function initHeroApertureDual() {
       stagger: 0.12,
       yOffset: 30,
       colorTrail: {
-        colors: ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'],
+        // Inner blue/red hug the glyphs; outer cyan/yellow trail further, fainter
+        colors: [
+          'oklch(0.804 0.146 220)',
+          'oklch(0.656 0.235 13)',
+          'oklch(0.86 0.15 195)',
+          'oklch(0.85 0.17 85)',
+        ],
+        opacities: TRAIL_LAYER_OPACITY,
         blendMode: 'screen',
-        staggerOffset: 0.15,
+        staggerOffset: 0.1,
       },
       retainClones: true,
       onComplete: (clones) => {
@@ -440,9 +464,10 @@ export function initHeroApertureDual() {
             );
             clones.forEach((layerClones, i) => {
               const fraction = (i + 1) / numLayers;
+              const layerMax = TRAIL_LAYER_OPACITY[i] ?? TRAIL_OPACITY;
               gsap.set(layerClones, {
                 y: baseYOff * fraction,
-                opacity: Math.min(baseOp * fraction, TRAIL_OPACITY),
+                opacity: Math.min(baseOp * fraction, layerMax),
               });
             });
           } else if (isActive && !isSpringBack) {

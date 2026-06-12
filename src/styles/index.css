@@ -667,6 +667,12 @@ body.show-grid .bg-columns {
   --credits-ca-duration: 1500ms;
   --credits-ca-blue: oklch(0.804 0.146 220);
   --credits-ca-red: oklch(0.656 0.235 13);
+  /* Outer spectral layer — lighter hues at larger diagonal offset, more blur, lower alpha */
+  --credits-ca-cyan: oklch(0.86 0.15 195);
+  --credits-ca-yellow: oklch(0.85 0.17 85);
+  --credits-ca-offset-2: 3px;
+  --credits-ca-y-2: 1px;
+  --credits-ca-blur-2: 3px;
   /* Precomputed to avoid typed calc() — Firefox/older Safari don't support multiplying px vars */
   --credits-ca-neg-offset: -2px;
   --credits-ca-transparent-pct: 10%;
@@ -674,6 +680,13 @@ body.show-grid .bg-columns {
   --credits-ca-neg-half-offset: -1px;
   --credits-ca-double-blur: 4px;
   --credits-ca-transparent-bloom-pct: 46%;
+  --credits-ca-neg-offset-2: -3px;
+  --credits-ca-neg-y-2: -1px;
+  --credits-ca-transparent-pct-2: 40%;
+  --credits-ca-half-offset-2: 1.5px;
+  --credits-ca-neg-half-offset-2: -1.5px;
+  --credits-ca-double-blur-2: 6px;
+  --credits-ca-transparent-bloom-pct-2: 70%;
   position: relative;
   padding: var(--section-padding) 0;
   background: var(--credits-bg);
@@ -747,12 +760,19 @@ body.show-grid .bg-columns {
   --credit-ca-neg-offset: 0px;
   --credit-ca-blur: 0px;
   --credit-ca-transparent-pct: 100%;
+  --credit-ca-offset-2: 0px;
+  --credit-ca-neg-offset-2: 0px;
+  --credit-ca-y-2: 0px;
+  --credit-ca-neg-y-2: 0px;
+  --credit-ca-blur-2: 0px;
+  --credit-ca-transparent-pct-2: 100%;
   font-family: var(--ff-display);
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 400;
   /* Shrink-wrap so the cursor viewfinder snaps tightly to the title, not the full 1fr track. */
   justify-self: start;
   width: fit-content;
+  /* Primaries first (paint on top); outer cyan/yellow layers carry the diagonal */
   text-shadow:
     var(--credit-ca-neg-offset) 0 var(--credit-ca-blur)
       color-mix(
@@ -765,6 +785,19 @@ body.show-grid .bg-columns {
         in oklch,
         var(--credits-ca-red),
         transparent var(--credit-ca-transparent-pct)
+      ),
+    var(--credit-ca-neg-offset-2) var(--credit-ca-neg-y-2)
+      var(--credit-ca-blur-2)
+      color-mix(
+        in oklch,
+        var(--credits-ca-cyan),
+        transparent var(--credit-ca-transparent-pct-2)
+      ),
+    var(--credit-ca-offset-2) var(--credit-ca-y-2) var(--credit-ca-blur-2)
+      color-mix(
+        in oklch,
+        var(--credits-ca-yellow),
+        transparent var(--credit-ca-transparent-pct-2)
       );
 }
 

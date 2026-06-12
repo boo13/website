@@ -217,12 +217,16 @@ Transition: 0.9s `power2.inOut` on the CSS custom properties via GSAP. The fixed
 
 ### Chromatic Accents
 
-Two chromatic colors exist in the system. Both are homepage-only and used exclusively for the patterns listed below. Do not use them for text, backgrounds, or any other purpose.
+Four chromatic colors exist in the system, working as two spectral pairs. All are homepage-only and used exclusively for the patterns listed below. Do not use them for text, backgrounds, or any other purpose.
 
-| Color | Value | Uses |
-|-------|-------|------|
-| Blue | `oklch(0.804 0.146 220)` | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow) |
-| Red | `oklch(0.656 0.235 13)` | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow) |
+| Color | Value | Role | Uses |
+|-------|-------|------|------|
+| Blue | `oklch(0.804 0.146 220)` | Inner cool | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow), portfolio CA flash |
+| Red | `oklch(0.656 0.235 13)` | Inner warm | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow), portfolio CA flash |
+| Cyan | `oklch(0.86 0.15 195)` | Outer cool | Outer spectral layer of the same four patterns |
+| Yellow | `oklch(0.85 0.17 85)` | Outer warm | Outer spectral layer of the same four patterns |
+
+**Spectral pairing rule** (lens-dispersion look): the saturated inner hue (blue/red) hugs the glyph edge at the primary offset; the lighter outer hue (cyan/yellow) sits beyond it at ~1.5× offset, ~1.5× blur, and roughly half the alpha. Outer layers carry a diagonal — cool drifts up-left (`-3px -1px`), warm down-right (`3px 1px`) — while inner layers keep their original geometry. In stacked `text-shadow`s, inner layers are listed first so they paint on top.
 
 ---
 
@@ -386,7 +390,7 @@ Desktop only (`hover: hover` media query):
 
 - Single row open at a time
 - On expand: font swaps to display serif, `fontSize` tweens to `2.25rem` (`0.5s expo.out`), height `0→auto` (`0.5s expo.out`), children stagger `opacity 0, y 16` → visible
-- Hover: CA flash — `credits-ca-flash` keyframe, blue/red text-shadow offsets, `0.5s var(--ease-out-expo)`
+- Hover: CA flash — four-layer text-shadow (blue/red horizontal inner, cyan/yellow diagonal outer per the spectral pairing rule), `0.5s var(--ease-out-expo)`
 - Plus icon rotates 45° on `.is-active`
 
 ### Lightbox (Homepage)
@@ -549,16 +553,16 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 - Case study trigger: `start: 'top 75%'`, `once: true`
 
 **Color Trail** (`src/animations/color-trail.js` + scroll-velocity in `hero.js`):
-- Two screen-blended clones per word: blue + red OKLCH
+- Four screen-blended clones per word in spectral order: blue, red, cyan, yellow OKLCH — later layers lag/offset further, so the lighter outer hues trail beyond the inner pair
 - `mix-blend-mode: screen`, `filter: blur(0.4px)`, `pointer-events: none`
-- Static (entrance): each color layer delayed by `staggerOffset` (0.15s per layer), fades out at 75% of main duration via `power2.in`
+- Static (entrance): each color layer delayed by `staggerOffset` (0.1s per layer), fades out at 75% of main duration via `power2.in`. Per-layer peak opacity via `colorTrail.opacities`: inner layers 0.85, outer layers 0.85 × 0.65
 - Velocity-driven: reads `ScrollSmoother.getVelocity()` per GSAP tick
   - Activates above `TRAIL_THRESH` (30 px/s)
-  - Y offset: `velocity * -TRAIL_K` (0.03), clamped ±`TRAIL_MAX_PX` (5px)
-  - Max opacity: `TRAIL_OPACITY` (0.85)
+  - Y offset: `velocity * -TRAIL_K` (0.03), clamped ±`TRAIL_MAX_PX` (5px), scaled per layer by `(i+1)/numLayers`
+  - Max opacity: `TRAIL_OPACITY` (0.85) for inner layers, × 0.65 for outer layers (`TRAIL_LAYER_OPACITY`)
   - Spring-back: 0.5s `power2.out` when velocity drops below threshold
   - Suppressed during about-intro pin and gallery `.active` state
-- Hero social hover adapts the same blue/red chromatic colors as a brief SVG `drop-shadow` trail during a `translateY(-5px) → 2px → 0` nudge. No background hover wash.
+- Hero social hover adapts the same chromatic palette as four chained SVG `drop-shadow`s (blue/red inner, cyan/yellow halo per the spectral pairing rule) during a `translateY(-5px) → 2px → 0` nudge. No background hover wash.
 
 **Corner Brackets:**
 - Four `::before`/`::after` L-shaped pseudo-elements, 1px offwhite lines, 22×22px

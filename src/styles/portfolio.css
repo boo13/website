@@ -372,16 +372,21 @@ body::before {
 /* =====================================================
    CHROMATIC ABERRATION on titles (text-shadow, CSS-only)
 ====================================================== */
+/* Primaries first (paint on top); outer cyan/yellow layers carry the diagonal */
 @keyframes portfolio-ca-fade {
   from {
     text-shadow:
       -2px 0 2px color-mix(in oklch, oklch(0.804 0.146 220), transparent 10%),
-      2px 0 2px color-mix(in oklch, oklch(0.656 0.235 13), transparent 10%);
+      2px 0 2px color-mix(in oklch, oklch(0.656 0.235 13), transparent 10%),
+      -3px -1px 3px color-mix(in oklch, oklch(0.86 0.15 195), transparent 40%),
+      3px 1px 3px color-mix(in oklch, oklch(0.85 0.17 85), transparent 40%);
   }
   to {
     text-shadow:
       -2px 0 2px transparent,
-      2px 0 2px transparent;
+      2px 0 2px transparent,
+      -3px -1px 3px transparent,
+      3px 1px 3px transparent;
   }
 }
 

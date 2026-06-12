@@ -329,23 +329,63 @@ export function initCredits() {
     const bloomTransparentPct =
       styles.getPropertyValue('--credits-ca-transparent-bloom-pct').trim() ||
       '46%';
+    // Outer spectral layer (cyan/yellow, diagonal offsets)
+    const offset2 =
+      styles.getPropertyValue('--credits-ca-offset-2').trim() || '3px';
+    const negOffset2 =
+      styles.getPropertyValue('--credits-ca-neg-offset-2').trim() || '-3px';
+    const y2 = styles.getPropertyValue('--credits-ca-y-2').trim() || '1px';
+    const negY2 =
+      styles.getPropertyValue('--credits-ca-neg-y-2').trim() || '-1px';
+    const blur2 =
+      styles.getPropertyValue('--credits-ca-blur-2').trim() || '3px';
+    const halfOffset2 =
+      styles.getPropertyValue('--credits-ca-half-offset-2').trim() || '1.5px';
+    const negHalfOffset2 =
+      styles.getPropertyValue('--credits-ca-neg-half-offset-2').trim() ||
+      '-1.5px';
+    const doubleBlur2 =
+      styles.getPropertyValue('--credits-ca-double-blur-2').trim() || '6px';
+    const transparentPct2 =
+      styles.getPropertyValue('--credits-ca-transparent-pct-2').trim() || '40%';
+    const bloomTransparentPct2 =
+      styles.getPropertyValue('--credits-ca-transparent-bloom-pct-2').trim() ||
+      '70%';
     const clearVars = {
       '--credit-ca-offset': '0px',
       '--credit-ca-neg-offset': '0px',
       '--credit-ca-blur': '0px',
       '--credit-ca-transparent-pct': '100%',
+      '--credit-ca-offset-2': '0px',
+      '--credit-ca-neg-offset-2': '0px',
+      '--credit-ca-y-2': '0px',
+      '--credit-ca-neg-y-2': '0px',
+      '--credit-ca-blur-2': '0px',
+      '--credit-ca-transparent-pct-2': '100%',
     };
     const fullVars = {
       '--credit-ca-offset': offset,
       '--credit-ca-neg-offset': negOffset,
       '--credit-ca-blur': blur,
       '--credit-ca-transparent-pct': transparentPct,
+      '--credit-ca-offset-2': offset2,
+      '--credit-ca-neg-offset-2': negOffset2,
+      '--credit-ca-y-2': y2,
+      '--credit-ca-neg-y-2': negY2,
+      '--credit-ca-blur-2': blur2,
+      '--credit-ca-transparent-pct-2': transparentPct2,
     };
     const bloomVars = {
       '--credit-ca-offset': halfOffset,
       '--credit-ca-neg-offset': negHalfOffset,
       '--credit-ca-blur': doubleBlur,
       '--credit-ca-transparent-pct': bloomTransparentPct,
+      '--credit-ca-offset-2': halfOffset2,
+      '--credit-ca-neg-offset-2': negHalfOffset2,
+      '--credit-ca-y-2': y2,
+      '--credit-ca-neg-y-2': negY2,
+      '--credit-ca-blur-2': doubleBlur2,
+      '--credit-ca-transparent-pct-2': bloomTransparentPct2,
     };
     const rampDuration = Math.min(0.18, flashDuration * 0.2);
     const fadeDuration = Math.max(0.5, flashDuration - rampDuration);
