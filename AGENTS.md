@@ -2,18 +2,24 @@
 This project is a video portfolio website using GSAP.
 
 <!-- override: ~/Git/AIHome/docs/global-rules/tools.md package-managers — this repo uses npm intentionally -->
-- **Tech Stack** - Vite 7.3.1, JavaScript, GSAP 3.14.2 (via npm with ScrollTrigger, CustomEase, Flip, ScrollSmoother)
+- **Tech Stack** - Vite 7.3.1, JavaScript, GSAP 3.14.2 (via npm with ScrollTrigger, CustomEase, Flip, ScrollSmoother), GLightbox 3.3.1
 - **Hosting topology** — `www.randycounsman.com` is proxied by Cloudflare, but the current origin still appears to be GitHub Pages. This repo still deploys by merging `dev` into `gh-pages`.
 
 ## Key Commands
 - `npm run dev` — Vite server with HMR
+- `npm run build` — production build
 - `npm run lint` — ESLint on `src/` (run before commit; fix all errors before proceeding)
 - `npm run format` — Prettier on `src/`
+- `just deploy` — merge `dev` → `gh-pages`, push, return to `dev`
+- `just ship-worktree BRANCH` — Merge a worktree branch into gh-pages, push, then remove the worktree and delete the branch
 - `just video-publish FILE [--suffix S] [--out-dir DIR] ...` — Optimize video to WebM + MP4 and upload both to R2
+- `just images-optimize` — Resize/compress portfolio images in `public/images/portfolio/`
+- `just cover-gen` — Generate playlist cover images
+- `just portfolio-scaffold SLUG` — Scaffold a new gated portfolio from `Projects.json`
+- `just portfolio-encrypt SLUG` — Encrypt a single gated portfolio; `just portfolio-encrypt-all` for all
 - `rclone ls r2-portfolio:portfolio-assets` — List all R2 files (rclone configured; use for audits and bulk deletes)
 - `rclone delete r2-portfolio:portfolio-assets/<key>` — Delete an R2 object; supports `--include` glob for bulk ops
 - `just visual-audit` — Capture timestamped visual audit across desktop, tablet, and phone sizes
-- `just ship-worktree BRANCH` — Merge a worktree branch into gh-pages, push, then remove the worktree and delete the branch
 
 ## Git Workflow
 - **`dev`** — working branch. All LLM and day-to-day work happens here.
@@ -44,28 +50,39 @@ This project is a video portfolio website using GSAP.
 
 ```
 Root HTML pages and entry files:
-- index.html -> src/main.js
-- contact.html -> src/main-contact.js
-- resume.html -> src/main-resume.js
-- case-study-wyatt.html -> src/main-wyatt.js
-- sandbox.html -> no page-specific JS entry
+- index.html             → src/main.js
+- contact.html           → src/main-contact.js
+- resume.html            → src/main-resume.js
+- case-study-wyatt.html  → src/main-wyatt.js
+- aiplaylists.html       → src/main-aiplaylists.js
+- medialog.html          → src/main-medialog.js
+- cursor-lab.html / sandbox.html / styleguide.html → src/main-experiments.js (dev/lab pages)
 
 projects/                           # project detail pages (auto-discovered by Vite)
   wyatt-earp/index.html             # → /projects/wyatt-earp/
   [project-name]/index.html         # add new projects by creating a folder
 
 src/
-  sections/             # one file per scroll section (hero, gallery, credits, about, about-intro, about-slides, footer-reveal, featured-work)
+  sections/             # one file per scroll section:
+                        #   gallery, credits, featured-work, footer-reveal, nav
+                        #   hero-aperture-dual, hero-aperture-marquee
+                        #   portfolio-gate, portfolio-rows, project-case-study
     project-video.js    # video hero for project pages (.project-hero--video)
     project-credits.js  # credits section for project pages (.project-credits)
     project-footer.js   # footer for project pages (.project-footer)
   animations/           # shared animation utilities (scroll-defaults.js registers GSAP plugins)
   components/           # reusable DOM components (slider, responsive-video, video-lightbox, custom-cursor, preloader)
+  experiments/          # hero variant explorations and lab harness (tweak.js, shared.js)
+  utils/                # small shared helpers
   styles/               # CSS per page, imported from JS entry points
-    project.css         # shared styles for all project pages (BEM: .project-hero--video, .project-credits, .project-footer)
     index.css           # main portfolio page styles (used by index.html)
-    about-intro.css     # about section (index.html)
-    about-slides.css    # about slides section (index.html)
+    project.css         # shared styles for all project pages (BEM: .project-hero--video, .project-credits, .project-footer)
+    portfolio.css       # gated portfolio pages
+    portfolio-lightbox.css  # lightbox for gated portfolios
+    hero-aperture-dual.css  # aperture hero variant
+    aiplaylists.css     # aiplaylists.html
+    medialog.css        # medialog.html
+    case-study.css      # case study shared styles
     video-lightbox.css  # lightbox overlay (index.html)
     contact.css         # contact.html
     resume.css          # resume.html
@@ -73,9 +90,13 @@ src/
   config.js             # shared breakpoints, timing values, CDN_BASE for R2 video URLs
   main.js               # entry for index.html — imports sections + calls init()
   main-project.js       # entry for ALL project pages — imports project sections
+  main-portfolio.js     # entry for gated portfolio pages
   main-contact.js       # entry for contact.html (form handler)
   main-resume.js        # entry for resume.html (page-specific layout tweaks)
   main-wyatt.js         # entry for case-study-wyatt.html (featured-work effects)
+  main-aiplaylists.js   # entry for aiplaylists.html
+  main-medialog.js      # entry for medialog.html
+  main-experiments.js   # entry for lab/dev pages (cursor-lab, sandbox, styleguide)
 ```
 
 ## GSAP Conventions
@@ -117,6 +138,12 @@ See **DESIGN.md — Components → Section Quick-Reference** for detailed per-se
 
 ## Further Documentation
 - **Video**: Read `docs/Video.md` when adding, uploading, or converting videos
+
+## Private Portfolios (Gated)
+
+Password-gated portfolio variants for specific clients. Entry point: `src/main-portfolio.js`; gate logic: `src/sections/portfolio-gate.js`; styles: `portfolio.css` / `portfolio-lightbox.css`. Source assets are plain HTML/CSS; `scripts/encrypt-portfolio.mjs` encrypts them in-place before deploy.
+
+Workflow: `just portfolio-scaffold SLUG` → edit generated files → `just portfolio-encrypt SLUG` (or `just portfolio-encrypt-all`). Projects.json holds portfolio metadata.
 
 ## Agent Content Management
 
