@@ -564,6 +564,11 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
   - Suppressed during about-intro pin and gallery `.active` state
 - Hero social hover adapts the same chromatic palette as four chained SVG `drop-shadow`s (blue/red inner, cyan/yellow halo per the spectral pairing rule) during a `translateY(-5px) → 2px → 0` nudge. No background hover wash.
 
+**Hero Name Grain:**
+- Subtle print-like noise in the hero name glyph fill: feTurbulence data-URI (`baseFrequency 0.82, numOctaves 4, stitchTiles`, rect `opacity 0.07`) multiplied over `--color-offwhite`, clipped via `background-clip: text` on `.word` elements (trail clones and `.hero-name-fixed` excluded)
+- Effective intensity ~7%, matching the about-intro dot-grid precedent
+- Reduced-motion: SplitText never runs, so no `.word` elements exist and the name renders un-grained — intentional graceful degradation
+
 **Corner Brackets:**
 - Four `::before`/`::after` L-shaped pseudo-elements, 1px offwhite lines, 22×22px
 - Hover: translate outward 12px, `0.5s var(--ease-out-expo)`
