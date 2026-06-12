@@ -12,7 +12,7 @@ body.has-custom-cursor .gallery-card {
   left: -3px;
   width: 5px;
   height: 5px;
-  background-color: var(--color-offwhite);
+  background-color: var(--color-offwhite, oklch(0.968 0.006 75));
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
@@ -44,7 +44,7 @@ body.has-custom-cursor .gallery-card {
   position: absolute;
   top: 0;
   left: 0;
-  background: var(--color-offwhite);
+  background: var(--color-offwhite, oklch(0.968 0.006 75));
 }
 
 .custom-cursor-corner::before {
