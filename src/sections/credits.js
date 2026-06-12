@@ -268,26 +268,30 @@ export function initCredits() {
     const startPx = parseFloat(getComputedStyle(titleEl).fontSize);
     const targetPx =
       parseFloat(getComputedStyle(document.documentElement).fontSize) * 2.25;
-    const targetScale = startPx ? targetPx / startPx : 1;
+    if (startPx) titleEl.dataset.collapsedFontSize = `${startPx}px`;
+    gsap.set(titleText, { clearProps: 'transform' });
     tl.fromTo(
-      titleText,
-      { scale: 1 },
-      { scale: targetScale, duration: 0.5, ease: 'expo.out' },
+      titleEl,
+      { fontSize: `${startPx}px` },
+      { fontSize: `${targetPx}px`, duration: 0.5, ease: 'expo.out' },
       pos
     );
   }
 
   function shrinkTitle(titleEl, tl, pos) {
     const titleText = getTitleText(titleEl);
+    const collapsedFontSize = titleEl.dataset.collapsedFontSize;
     tl.to(
-      titleText,
+      titleEl,
       {
-        scale: 1,
+        ...(collapsedFontSize ? { fontSize: collapsedFontSize } : {}),
         duration: 0.35,
         ease: 'expo.inOut',
         onComplete() {
+          titleEl.style.fontSize = '';
           titleEl.style.letterSpacing = '';
           titleEl.style.lineHeight = '';
+          delete titleEl.dataset.collapsedFontSize;
           gsap.set(titleText, { clearProps: 'transform' });
         },
       },
@@ -297,8 +301,10 @@ export function initCredits() {
 
   function resetTitle(titleEl) {
     const titleText = getTitleText(titleEl);
+    titleEl.style.fontSize = '';
     titleEl.style.letterSpacing = '';
     titleEl.style.lineHeight = '';
+    delete titleEl.dataset.collapsedFontSize;
     gsap.set(titleText, { clearProps: 'transform' });
   }
 

@@ -74,6 +74,17 @@ export function initCustomCursor() {
     };
   }
 
+  function setFrameToSnapTarget(duration = 0) {
+    if (!snappedEl) return;
+    const { x, y, w, h } = snapFrameToEl(snappedEl);
+    const vars = { x, y, width: w, height: h, overwrite: 'auto' };
+    if (duration > 0) {
+      gsap.to(frame, { ...vars, duration, ease: 'power2.out' });
+    } else {
+      gsap.set(frame, vars);
+    }
+  }
+
   let lastScrollY = window.scrollY;
   let scrollReturnTimer;
   function handleScroll() {
@@ -81,8 +92,7 @@ export function initCustomCursor() {
     // each scroll tick. Without this, position:fixed leaves the frame parked
     // at its initial screen coords while the target moves with the page.
     if (framing && snappedEl) {
-      const { x, y } = snapFrameToEl(snappedEl);
-      gsap.set(frame, { x, y });
+      setFrameToSnapTarget();
       lastScrollY = window.scrollY;
       return;
     }
@@ -141,10 +151,17 @@ export function initCustomCursor() {
   }
 
   let snappedEl = null;
+  let snappedResizeObserver = null;
+
+  function stopObservingSnapTarget() {
+    snappedResizeObserver?.disconnect();
+    snappedResizeObserver = null;
+  }
 
   function snapToTarget(e) {
     const el = e.currentTarget;
     framing = true;
+    stopObservingSnapTarget();
     snappedEl = el;
     el.classList.add('is-cursor-snapping');
     gsap.to(dot, { scale: 0, duration: 0.2, overwrite: 'auto' });
@@ -159,10 +176,17 @@ export function initCustomCursor() {
       ease: 'power3.out',
       overwrite: 'auto',
     });
+    if ('ResizeObserver' in window) {
+      snappedResizeObserver = new ResizeObserver(() => {
+        if (framing && snappedEl === el) setFrameToSnapTarget(0.08);
+      });
+      snappedResizeObserver.observe(el);
+    }
   }
 
   function resetFrame() {
     framing = false;
+    stopObservingSnapTarget();
     if (snappedEl) {
       snappedEl.classList.remove('is-cursor-snapping');
       snappedEl = null;
