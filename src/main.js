@@ -1,6 +1,7 @@
 import './styles/cursor.css';
 import './styles/index.css';
 import './styles/hero-aperture-dual.css';
+import './styles/glitch-text.css';
 import './styles/video-lightbox.css';
 import { ScrollSmoother, ScrollTrigger } from './animations/scroll-defaults.js';
 import { initHeroApertureDual } from './sections/hero-aperture-dual.js';

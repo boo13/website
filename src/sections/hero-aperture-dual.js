@@ -2,6 +2,7 @@ import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
 import ScrollSmoother from 'gsap/ScrollSmoother';
 import SplitText from 'gsap/SplitText';
 import { textMaskRiseWords } from '../animations/text-mask-rise.js';
+import { initGlitchText } from '../components/glitch-text.js';
 import {
   TRAIL_K,
   TRAIL_MAX_PX,
@@ -118,6 +119,7 @@ export function initHeroApertureDual() {
   let springBackTween = null;
   let heroChromeTl = null;
   let heroChromePlayed = false;
+  let cleanupGlitch = () => {};
   const cleanupSocialHover = [];
   let cleanupMaskRise = () => {};
 
@@ -185,6 +187,8 @@ export function initHeroApertureDual() {
   function playHeroChromeEntrance() {
     if (heroChromePlayed) return;
     heroChromePlayed = true;
+
+    cleanupGlitch = initGlitchText(scene);
 
     heroChromeTl = gsap.timeline();
     if (heroSubtitle) {
@@ -479,6 +483,7 @@ export function initHeroApertureDual() {
     }
     heroChromeTl?.kill();
     heroChromeTl = null;
+    cleanupGlitch();
     cleanupSocialHover.forEach((cleanup) => cleanup());
     cleanupMaskRise();
     ctx.revert();

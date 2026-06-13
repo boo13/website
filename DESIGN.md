@@ -221,8 +221,10 @@ Two chromatic colors exist in the system. Both are homepage-only and used exclus
 
 | Color | Value | Uses |
 |-------|-------|------|
-| Blue | `oklch(0.804 0.146 220)` | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow) |
-| Red | `oklch(0.656 0.235 13)` | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow) |
+| Blue | `oklch(0.804 0.146 220)` | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow), hero name pointer glitch (RGB-split ghost + trail), hero subtitle pointer glitch |
+| Red | `oklch(0.656 0.235 13)` | Hero name color trail (screen blend), hero social hover trail, credits CA flash (text-shadow), hero name pointer glitch (RGB-split ghost + trail), hero subtitle pointer glitch |
+
+**Hero glitch** — pointer-driven RGB-split / scanline effect on `.hero-name-glitch` (overlay) and `.hero-subtitle`. Implemented via shared `glitch-text` component (`src/components/glitch-text.js` / `src/styles/glitch-text.css`). Gated to `(pointer: fine)` devices only; fully suppressed under `prefers-reduced-motion`. Arms after the hero entrance completes.
 
 ---
 
