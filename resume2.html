@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Randy Counsman — Resume</title>
+<link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#3FA9F0;
+    --blue-soft:#6FC0F5;
+    --ink:#ECEEF1;
+    --ink-soft:#C2C8D0;
+    --muted:#8B95A1;
+    --rule:#2a3946;
+    --paper:#141B22;
+    --canvas:#0B0F14;
+    --serif:"Newsreader", Georgia, "Times New Roman", serif;
+    --sans:"Archivo", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{ margin:0; padding:0; }
+
+  body{
+    background:var(--canvas);
+    font-family:var(--serif);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    padding:40px 16px;
+  }
+
+  .page{
+    width:816px;
+    min-height:1056px;
+    margin:0 auto 40px;
+    background:var(--paper);
+    padding:68px 72px 60px;
+    border-radius:3px;
+    box-shadow:0 2px 30px rgba(0,0,0,0.45);
+    border:1px solid #1e2832;
+    position:relative;
+  }
+
+  /* ---------- Masthead ---------- */
+  .name{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:62px;
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    color:var(--blue);
+    margin:0;
+  }
+  .tagline{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:21px;
+    letter-spacing:0.005em;
+    color:var(--blue);
+    margin:9px 0 0;
+  }
+  .contact{
+    font-family:var(--sans);
+    font-weight:500;
+    font-size:12.5px;
+    letter-spacing:0.06em;
+    color:var(--blue-soft);
+    margin:11px 0 0;
+    text-transform:uppercase;
+  }
+  .contact a{ color:inherit; text-decoration:none; }
+
+  /* ---------- Summary ---------- */
+  .summary{
+    font-size:15px;
+    line-height:1.5;
+    color:var(--ink-soft);
+    margin:22px 0 0;
+    max-width:62ch;
+  }
+  .summary b{ color:#fff; font-weight:600; }
+
+  .highlights{
+    list-style:none;
+    margin:13px 0 0;
+    padding:0;
+  }
+  .highlights li{
+    position:relative;
+    padding-left:22px;
+    font-size:14px;
+    line-height:1.45;
+    color:var(--muted);
+    margin:4px 0;
+  }
+  .highlights li::before{
+    content:"";
+    position:absolute;
+    left:6px; top:0.62em;
+    width:4px; height:4px;
+    border-radius:50%;
+    background:var(--blue-soft);
+  }
+
+  /* ---------- Section labels ---------- */
+  .section-label{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:11.5px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin:30px 0 6px;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--rule);
+  }
+
+  /* ---------- Experience ---------- */
+  .job{ margin-top:15px; }
+  .job:first-of-type{ margin-top:9px; }
+
+  .job-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .job-title{
+    font-family:var(--sans);
+    font-size:13px;
+    line-height:1.3;
+    margin:0;
+    font-weight:500;
+    white-space:nowrap;
+  }
+  .job-role{
+    color:var(--blue-soft);
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    font-weight:500;
+    font-size:11.5px;
+  }
+  .job-company{
+    color:var(--blue);
+    font-weight:700;
+    font-size:13.5px;
+  }
+  .job-dates{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:13px;
+    color:var(--blue-soft);
+    white-space:nowrap;
+    flex:none;
+  }
+
+  .bullets{
+    list-style:none;
+    margin:7px 0 0;
+    padding:0;
+  }
+  .bullets li{
+    position:relative;
+    padding-left:22px;
+    font-size:13.5px;
+    line-height:1.46;
+    color:var(--ink-soft);
+    margin:3px 0;
+  }
+  .bullets li::before{
+    content:"";
+    position:absolute;
+    left:7px; top:0.6em;
+    width:3.5px; height:3.5px;
+    border-radius:50%;
+    background:#5b6672;
+  }
+  .bullets em{ font-style:italic; }
+  .bullets b{ font-weight:600; color:#fff; }
+
+  /* ---------- Skills / Education inline rows ---------- */
+  .meta-row{
+    display:flex;
+    gap:16px;
+    align-items:baseline;
+    font-size:13.5px;
+    line-height:1.5;
+    margin-top:9px;
+    color:var(--ink-soft);
+  }
+  .meta-label{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:11.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--blue);
+    flex:none;
+    width:96px;
+    padding-top:1px;
+  }
+  .meta-row .sep{ color:#3c4a57; padding:0 3px; }
+
+  /* ---------- Page 2: Credits ---------- */
+  .credits-intro{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:21px;
+    color:var(--blue);
+    margin:9px 0 0;
+  }
+  .credits{
+    margin-top:24px;
+  }
+  .credit{
+    display:grid;
+    grid-template-columns:1fr 1fr 0.62fr;
+    gap:10px 18px;
+    align-items:baseline;
+    padding:9px 0;
+    border-bottom:1px solid #1e2832;
+  }
+  .credit:last-child{ border-bottom:none; }
+  .credit-title{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:14.5px;
+    color:#fff;
+    line-height:1.25;
+  }
+  .credit-note{
+    display:block;
+    font-style:italic;
+    font-weight:400;
+    font-size:11.5px;
+    color:var(--muted);
+    margin-top:1px;
+  }
+  .credit-role{
+    font-family:var(--sans);
+    font-size:13px;
+    color:var(--ink-soft);
+    font-weight:400;
+  }
+  .credit-net{
+    font-family:var(--sans);
+    font-size:13px;
+    color:var(--muted);
+    font-weight:400;
+  }
+  .credit-award{
+    display:block;
+    font-family:var(--sans);
+    font-size:11.5px;
+    color:var(--blue-soft);
+    font-weight:500;
+    margin-top:2px;
+  }
+  .credits-foot{
+    margin-top:18px;
+    padding-top:14px;
+    border-top:2px solid var(--blue);
+    font-family:var(--sans);
+    font-size:12.5px;
+    color:var(--ink-soft);
+    font-weight:500;
+  }
+  .credits-foot a{ color:var(--blue); }
+
+  /* ---------- Print ---------- */
+  @media print{
+    @page{ margin:0.55in 0.6in; }
+    html,body{ background:var(--paper); padding:0; }
+    .page{
+      width:auto;
+      min-height:0;
+      margin:0;
+      padding:0;
+      border-radius:0;
+      box-shadow:none;
+      border:none;
+    }
+    .page + .page{ break-before:page; }
+    .job, .credit, .meta-row, li{ break-inside:avoid; }
+    .section-label{ break-after:avoid; }
+    .job-head{ break-after:avoid; }
+    *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — RESUME ============ -->
+<main class="page" data-screen-label="Resume">
+
+  <header>
+    <h1 class="name">Randy Counsman</h1>
+    <p class="tagline">Nonfiction series development and production</p>
+    <p class="contact">
+      <a href="mailto:RandyCounsman@gmail.com">RandyCounsman@gmail.com</a>
+      &nbsp;|&nbsp; (646) 429-2271 &nbsp;|&nbsp; New York, NY
+    </p>
+  </header>
+
+  <p class="summary">
+    <b>Hands-on executive producer and head of development with a track record of building businesses by setting strategy, building slates, and generating sales.</b>
+    Seventeen years of consistently creating, developing, selling, and producing popular nonfiction series for all the major outlets, from YouTube to Netflix.
+  </p>
+
+  <ul class="highlights">
+    <li>Created and sold dozens of popular and award-winning series</li>
+    <li>Produced collaborations with A-list talent and brands</li>
+    <li>Developed and produced multiple Netflix Top 10 series</li>
+  </ul>
+
+  <h2 class="section-label">Experience</h2>
+
+  <section class="job">
+    <div class="job-head">
+      <h3 class="job-title"><span class="job-role">Executive Producer, Video &amp; Audio</span> &nbsp;<span class="job-company">upNEXT News</span></h3>
+      <span class="job-dates">2025–2026</span>
+    </div>
+    <ul class="bullets">
+      <li>Led production of videos, podcasts, and social graphics (40+/week) for the digital news brand</li>
+      <li>Built internal systems and tools that reduced content creation times for all formats (up to 90%)</li>
+    </ul>
+  </section>
+
+  <section class="job">
+    <div class="job-head">
+      <h3 class="job-title"><span class="job-role">Head of Development</span> &nbsp;<span class="job-company">Stephen David Entertainment</span></h3>
+      <span class="job-dates">2018–2025</span>
+    </div>
+    <ul class="bullets">
+      <li>Led a development team and generated sales at Netflix, History, Discovery, PBS, and more</li>
+      <li>Produced projects with major brands, including FedEx, NASCAR, Texas Monthly, and Hilton</li>
+      <li>Sourced and secured sellable stories, including for Discovery's first scripted Shark Week film</li>
+      <li>Developed and produced a global Top 3 series for Netflix (<em>Wyatt Earp &amp; The Cowboy War</em>)</li>
+      <li>Created a low-cost interview series that secured top celebrities, such as MrBeast (21m views)</li>
+    </ul>
+  </section>
+
+  <section class="job">
+    <div class="job-head">
+      <h3 class="job-title"><span class="job-role">Executive Producer</span> &nbsp;<span class="job-company">NBC News / Peacock Productions</span></h3>
+      <span class="job-dates">2016–2018</span>
+    </div>
+    <ul class="bullets">
+      <li>Led a project to revitalize the dev slate—directly resulted in sales (e.g. <em>Hamilton: Building America</em>)</li>
+      <li>Worked across departments to generate new pitches from existing talent and IP</li>
+    </ul>
+  </section>
+
+  <section class="job">
+    <div class="job-head">
+      <h3 class="job-title"><span class="job-role">Executive Producer / Founder</span> &nbsp;<span class="job-company">Rearrange Media</span></h3>
+      <span class="job-dates">2014–2016</span>
+    </div>
+    <ul class="bullets">
+      <li>Formed production shingle in partnership with Glass Entertainment Group</li>
+      <li>Led a team of over 40 people, managed budgets, and oversaw all business affairs</li>
+      <li>Secured a first-look deal with CNN, then converted it into the critically acclaimed series <em>Pope: The Most Powerful Man in History</em> ($4.5 million budget)</li>
+    </ul>
+  </section>
+
+  <section class="job">
+    <div class="job-head">
+      <h3 class="job-title"><span class="job-role">VP of Development</span> &nbsp;<span class="job-company">Stephen David Entertainment</span></h3>
+      <span class="job-dates">2009–2014</span>
+    </div>
+    <ul class="bullets">
+      <li>First employee, worked directly with founder to define the company's strategy</li>
+      <li>Generated sales that turned the startup into one of Realscreen's "Global Top 100 Production Companies" (then acquired by Banijay Group in an eight-figure deal)</li>
+      <li>Developed and oversaw the creation of the company's first breakout hit, <em>The Men Who Built America</em>, which won two Emmys and established History's "That Built" franchise (12+ series)</li>
+      <li>Repeated the success by developing, selling, and producing over a dozen series</li>
+    </ul>
+  </section>
+
+  <section class="job">
+    <div class="job-head">
+      <h3 class="job-title"><span class="job-role">Director of Development</span> &nbsp;<span class="job-company">The Idea Factory</span></h3>
+      <span class="job-dates">2008–2009</span>
+    </div>
+    <ul class="bullets">
+      <li>Developed and sold a series that laid the foundation for Stephen David Entertainment</li>
+    </ul>
+  </section>
+
+  <h2 class="section-label">Skills &amp; Education</h2>
+  <div class="meta-row">
+    <span class="meta-label">Skills</span>
+    <span>Adobe Creative Suite <span class="sep">|</span> Avid <span class="sep">|</span> Video Production <span class="sep">|</span> Canva <span class="sep">|</span> Descript <span class="sep">|</span> AI Tools <span class="sep">|</span> Motion Design</span>
+  </div>
+  <div class="meta-row">
+    <span class="meta-label">Education</span>
+    <span>New York University (Dramatic Writing) <span class="sep">|</span> Syracuse University (Communications Design)</span>
+  </div>
+
+</main>
+
+<!-- ============ PAGE 2 — CREDITS ============ -->
+<main class="page" data-screen-label="Production Credits">
+
+  <header>
+    <h1 class="name">Randy Counsman</h1>
+    <p class="credits-intro">Selected production credits</p>
+  </header>
+
+  <div class="credits">
+
+    <div class="credit">
+      <div class="credit-title">Undisclosed<span class="credit-note">Executive Produced by Rabia Chaudry</span></div>
+      <div class="credit-role">Consultant (Audience Growth)</div>
+      <div class="credit-net">Podcast</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Sitting Bull<span class="credit-note">Executive Produced by Leonardo DiCaprio</span></div>
+      <div class="credit-role">Co-Executive Producer</div>
+      <div class="credit-net">History</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Wyatt Earp &amp; The Cowboy War</div>
+      <div class="credit-role">Co-Executive Producer</div>
+      <div class="credit-net">Netflix</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Jaws in the Shallows</div>
+      <div class="credit-role">Supervising Producer</div>
+      <div class="credit-net">Discovery</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">The Titans That Built America</div>
+      <div class="credit-role">Co-Executive Producer</div>
+      <div class="credit-net">History</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">American Dynasty<span class="credit-note">Seasons 1 &amp; 2</span></div>
+      <div class="credit-role">Supervising Producer</div>
+      <div class="credit-net">Fox Nation</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Raging Bulls</div>
+      <div class="credit-role">Supervising Producer</div>
+      <div class="credit-net">Discovery</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">The Interrogator</div>
+      <div class="credit-role">Supervising Producer</div>
+      <div class="credit-net">I.D.</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Human: The World Within</div>
+      <div class="credit-role">Supervising Producer</div>
+      <div class="credit-net">Netflix / PBS</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Holiday Home Makeover with Mr. Christmas</div>
+      <div class="credit-role">Supervising Producer</div>
+      <div class="credit-net">Netflix</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Capsized: Blood in the Water<span class="credit-note">First scripted Shark Week film, starring Josh Duhamel</span></div>
+      <div class="credit-role">Supervising Producer</div>
+      <div class="credit-net">Discovery</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Titans: The Rise of Wall Street</div>
+      <div class="credit-role">Supervising Producer</div>
+      <div class="credit-net">Curiosity</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Washington</div>
+      <div class="credit-role">Writer</div>
+      <div class="credit-net">History</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Pope: The Most Powerful Man in History</div>
+      <div class="credit-role">Executive Producer / Writer / Director</div>
+      <div class="credit-net">CNN</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Hamilton: Building America</div>
+      <div class="credit-role">Executive Producer / Writer / Director</div>
+      <div class="credit-net">History</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Gold Fever</div>
+      <div class="credit-role">Writer / Producer</div>
+      <div class="credit-net">Discovery</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">The American West<span class="credit-note">Executive Produced by Robert Redford</span></div>
+      <div class="credit-role">Writer / Producer</div>
+      <div class="credit-net">AMC</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Redrum<span class="credit-note">Seasons 1 &amp; 2</span></div>
+      <div class="credit-role">Co-Executive Producer</div>
+      <div class="credit-net">I.D.</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">Sons of Liberty<span class="credit-note">Starring Dean Norris &amp; Ben Barnes</span></div>
+      <div class="credit-role">Writer / Producer</div>
+      <div class="credit-net">History</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">The World Wars<span class="credit-award">+ Primetime Emmy nomination</span></div>
+      <div class="credit-role">Writer / Producer</div>
+      <div class="credit-net">History</div>
+    </div>
+
+    <div class="credit">
+      <div class="credit-title">The Men Who Built America<span class="credit-award">+ 2× Primetime Emmy nominations</span></div>
+      <div class="credit-role">Writer / Producer</div>
+      <div class="credit-net">History</div>
+    </div>
+
+  </div>
+
+  <p class="credits-foot">* More complete list of credits on <a href="https://www.imdb.com/name/nm3798462/">IMDb</a></p>
+
+</main>
+
+</body>
+</html>

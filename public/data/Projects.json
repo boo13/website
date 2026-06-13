@@ -32,7 +32,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt18382254/",
-      "preview": "images/portfolio/sitting-bull/poster.large.webp",
+      "preview": "images/shows/SittingBull_TitleCard.webp",
       "featured": true,
       "galleryOrder": 2,
       "detailPage": true,
@@ -65,10 +65,31 @@
       "hoverVideoFallback": "video/Cowboy.War.10secReel.v01_1920x1004.mp4",
       "lightboxVideo": "video/Cowboy.War.10secReel.v01_1920x1004.mp4",
       "credits": [
-        { "role": "Co-Executive Producer", "names": ["Randy Counsman"], "highlight": true },
-        { "role": "Narrator", "names": ["Ed Harris"] },
-        { "role": "Director", "names": ["Patrick Reams"] },
-        { "role": "Writer", "names": ["Stephen David"] }
+        {
+          "role": "Co-Executive Producer",
+          "names": [
+            "Randy Counsman"
+          ],
+          "highlight": true
+        },
+        {
+          "role": "Narrator",
+          "names": [
+            "Ed Harris"
+          ]
+        },
+        {
+          "role": "Director",
+          "names": [
+            "Patrick Reams"
+          ]
+        },
+        {
+          "role": "Writer",
+          "names": [
+            "Stephen David"
+          ]
+        }
       ]
     },
     {
@@ -83,13 +104,13 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt32987087/",
-      "preview": "images/portfolio/george-rise-of-a-revolutionary/poster.large.webp"
+      "preview": "images/shows/George_TitleCard.webp"
     },
     {
       "id": "american-dynasty",
       "title": "American Dynasty",
       "platform": "Fox Nation",
-      "year": "2022\u20132023",
+      "year": "2022–2023",
       "role": "Supervising Producer",
       "description": "This docuseries chronicles the rise and legacy of America's most powerful family empires, including the Rockefellers, Vanderbilts, and Kennedys. Through expert commentary and dramatic reenactments, the program examines how these aristocratic lineages secured massive fortunes and influenced the trajectory of American industry and politics. Each episode focuses on the internal conflicts and strategic decisions that defined these families across multiple generations.",
       "videoStandard": null,
@@ -97,7 +118,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt21066272/",
-      "preview": "images/portfolio/american-dynasty/poster.large.webp"
+      "preview": "images/shows/AmericanDynasty_TitleCard.webp"
     },
     {
       "id": "liberty-or-death-boston-tea-party",
@@ -111,7 +132,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt29920137/",
-      "preview": "images/portfolio/liberty-or-death-boston-tea-party/poster.large.webp"
+      "preview": "images/shows/LibertyOrDeath_TitleCard.webp"
     },
     {
       "id": "titans-the-rise-of-hollywood",
@@ -125,7 +146,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt22245664/",
-      "preview": "images/portfolio/titans-the-rise-of-hollywood/poster.large.webp"
+      "preview": "images/shows/TitansHollywood_TitleCard.webp"
     },
     {
       "id": "titans-the-rise-of-wall-street",
@@ -139,13 +160,13 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt18278410/",
-      "preview": "images/portfolio/titans-the-rise-of-wall-street/poster.large.webp"
+      "preview": "images/shows/TitansWallStreet_TitleCard.webp"
     },
     {
       "id": "beyond-the-spotlight",
       "title": "Beyond the Spotlight",
       "platform": "CuriosityStream",
-      "year": "2020\u20132021",
+      "year": "2020–2021",
       "role": "Supervising Producer",
       "description": "Executive produced by Leonardo DiCaprio, this biographical series profiles high-profile icons through the lens of their private philanthropic missions and personal passions. Each episode follows a single subject — such as Samuel L. Jackson or Kristen Bell — as they navigate global social issues away from their public-facing entertainment careers.",
       "videoStandard": "./video/Beyond.the.Spotlight.10secReel.v01_1920x1080.webm",
@@ -153,12 +174,12 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt14417270/",
-      "preview": "images/portfolio/beyond-the-spotlight/poster.large.webp"
+      "preview": null
     },
     {
       "id": "raging-bulls",
       "title": "Shark Week: Raging Bulls",
-      "preview": "images/portfolio/shark-week/poster.large.webp",
+      "preview": "images/shows/SharkWeek_TitleCard.webp",
       "platform": "Discovery",
       "year": "2021",
       "role": "Supervising Producer",
@@ -181,7 +202,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt14574154/",
-      "preview": "images/portfolio/human-the-world-within/poster.large.webp"
+      "preview": "images/shows/HumanWorldWithin_TitleCard.webp"
     },
     {
       "id": "the-titans-that-built-america",
@@ -209,7 +230,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt13255112/",
-      "preview": "images/portfolio/holiday-home-makeover-with-mr-christmas/poster.large.webp"
+      "preview": "images/shows/HolidayHomeMakeover_TitleCard.webp"
     },
     {
       "id": "washington",
@@ -223,7 +244,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt10098580/",
-      "preview": "images/portfolio/washington/poster.large.webp"
+      "preview": "images/shows/Washington_TitleCard.webp"
     },
     {
       "id": "shark-week-shallows",
@@ -237,13 +258,13 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt1146333/",
-      "preview": "images/portfolio/shark-week/poster.large.webp"
+      "preview": "images/shows/SharkWeek_TitleCard.webp"
     },
     {
       "id": "the-interrogator",
       "title": "The Interrogator",
       "platform": "I.D.",
-      "year": "2019\u20132020",
+      "year": "2019–2020",
       "role": "Producer",
       "description": "This Investigation Discovery docuseries follows Houston Homicide Detective Fil Waters as he recounts his most high-profile murder investigations. Each of the six episodes utilizes original interrogation room footage and dramatic recreations to showcase Waters' strategic psychological approach to eliciting confessions.",
       "videoStandard": null,
@@ -251,7 +272,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt11018358/",
-      "preview": "images/portfolio/the-interrogator/poster.large.webp"
+      "preview": "images/shows/TheInterrogator_TitleCard.webp"
     },
     {
       "id": "capsized-blood-in-the-water",
@@ -290,10 +311,35 @@
       "lightboxVideo": "video/Pope_ep3_trailer.mp4",
       "detailPage": true,
       "credits": [
-        { "role": "Executive Producer / Director", "names": ["Randy Counsman"], "highlight": true },
-        { "role": "Narrator", "names": ["Liam Neeson"] },
-        { "role": "Executive Producers", "names": ["Jon Hirsch", "Nancy Glass", "Amy Entelis", "Lizzie Fox"] },
-        { "role": "Production", "names": ["Glass Entertainment Group", "Rearrange TV"] }
+        {
+          "role": "Executive Producer / Director",
+          "names": [
+            "Randy Counsman"
+          ],
+          "highlight": true
+        },
+        {
+          "role": "Narrator",
+          "names": [
+            "Liam Neeson"
+          ]
+        },
+        {
+          "role": "Executive Producers",
+          "names": [
+            "Jon Hirsch",
+            "Nancy Glass",
+            "Amy Entelis",
+            "Lizzie Fox"
+          ]
+        },
+        {
+          "role": "Production",
+          "names": [
+            "Glass Entertainment Group",
+            "Rearrange TV"
+          ]
+        }
       ]
     },
     {
@@ -308,7 +354,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt5312380/",
-      "preview": "images/portfolio/the-american-west.jpg"
+      "preview": "images/shows/TheAmericanWest_TitleCard.webp"
     },
     {
       "id": "nascar-the-rise-of-american-speed",
@@ -322,7 +368,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt5735158/",
-      "preview": "images/portfolio/nascar-the-rise-of-american-speed.jpg"
+      "preview": "images/shows/NASCAR_TitleCard.webp"
     },
     {
       "id": "hamilton-building-america",
@@ -336,7 +382,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt7069502/",
-      "preview": "images/portfolio/hamilton-building-america/poster.large.webp"
+      "preview": "images/shows/HamiltonBuildingAmerica_TitleCard.webp"
     },
     {
       "id": "sons-of-liberty",
@@ -356,7 +402,7 @@
       "id": "the-making-of-the-mob",
       "title": "The Making of the Mob",
       "platform": "AMC",
-      "year": "2015\u20132016",
+      "year": "2015–2016",
       "role": "Producer",
       "description": "Narrated by Ray Liotta, this docuseries chronicles the rise of organized crime in America through the lives of figures like Lucky Luciano and Al Capone. The series blends cinematic reenactments with archival footage and interviews from historians and former law enforcement officers. Each season focuses on a specific criminal era, beginning with the emergence of the Five Families in New York City.",
       "videoStandard": null,
@@ -378,7 +424,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt4506894/",
-      "preview": "images/portfolio/american-genius.jpg"
+      "preview": null
     },
     {
       "id": "the-world-wars",
@@ -398,7 +444,7 @@
       "id": "extreme-cheapskates",
       "title": "Extreme Cheapskates",
       "platform": "TLC",
-      "year": "2012\u20132014",
+      "year": "2012–2014",
       "role": "Producer",
       "description": "This TLC reality series documents individuals who employ extreme and often unhygienic tactics — such as dumpster diving for food and reusing dental floss — to minimize their living expenses. The program ran for three seasons and features a mix of everyday misers and \"frugal millionaires\" practicing radical financial austerity.",
       "videoStandard": null,
@@ -406,7 +452,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2396181/",
-      "preview": "images/portfolio/extreme-cheapskates.jpg"
+      "preview": null
     },
     {
       "id": "gold-fever",
@@ -420,11 +466,11 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt3309600/",
-      "preview": "images/portfolio/gold-fever.jpg"
+      "preview": null
     },
     {
       "id": "the-seance",
-      "title": "The S\u00e9ance",
+      "title": "The Séance",
       "platform": "A&E",
       "year": "2014",
       "role": "Producer",
@@ -434,7 +480,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt3640242/",
-      "preview": "images/portfolio/the-seance.jpg"
+      "preview": null
     },
     {
       "id": "the-men-who-built-america",
@@ -459,11 +505,44 @@
       "lightboxVideo": "video/MWBA_Trailer_%28360p%29.mp4",
       "detailPage": true,
       "credits": [
-        { "role": "Writer / Producer", "names": ["Randy Counsman"], "highlight": true },
-        { "role": "Narrator", "names": ["Campbell Scott"] },
-        { "role": "Directors", "names": ["Patrick Reams", "Ruán Magan"] },
-        { "role": "Created by", "names": ["Stephen David Entertainment"] },
-        { "role": "Writers", "names": ["Stephen David", "Patrick Reams", "David C. White", "Alec Michod", "Ed Fields", "John Fahy", "Keith Palmer"] }
+        {
+          "role": "Writer / Producer",
+          "names": [
+            "Randy Counsman"
+          ],
+          "highlight": true
+        },
+        {
+          "role": "Narrator",
+          "names": [
+            "Campbell Scott"
+          ]
+        },
+        {
+          "role": "Directors",
+          "names": [
+            "Patrick Reams",
+            "Ruán Magan"
+          ]
+        },
+        {
+          "role": "Created by",
+          "names": [
+            "Stephen David Entertainment"
+          ]
+        },
+        {
+          "role": "Writers",
+          "names": [
+            "Stephen David",
+            "Patrick Reams",
+            "David C. White",
+            "Alec Michod",
+            "Ed Fields",
+            "John Fahy",
+            "Keith Palmer"
+          ]
+        }
       ]
     },
     {
@@ -478,7 +557,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2401831/",
-      "preview": "images/portfolio/commander-in-chief.jpg"
+      "preview": null
     },
     {
       "id": "inside-the-nsa",
@@ -492,13 +571,13 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2179099/",
-      "preview": "images/portfolio/inside-the-nsa/poster.large.webp"
+      "preview": null
     },
     {
       "id": "redrum",
       "title": "Redrum",
       "platform": "I.D.",
-      "year": "2013\u20132015",
+      "year": "2013–2015",
       "role": "Co-Executive Producer",
       "description": "This Investigation Discovery true-crime series utilizes a reverse-chronological narrative structure to deconstruct homicide investigations. Each episode begins at the scene of the crime and moves backward in time to reveal the events, relationships, and hidden motives that led to the murder. The storytelling format emphasizes the investigation process, showing how detectives separate false leads from the eventual truth.",
       "videoStandard": null,
@@ -506,7 +585,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2568868/",
-      "preview": "images/portfolio/redrum/poster.large.webp"
+      "preview": null
     },
     {
       "id": "travel-testers",
@@ -520,7 +599,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2106198/",
-      "preview": "images/portfolio/travel-testers.jpg"
+      "preview": null
     },
     {
       "id": "heavily-ever-after",
@@ -534,7 +613,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt1883183/",
-      "preview": "images/portfolio/heavily-ever-after.jpg"
+      "preview": null
     },
     {
       "id": "holiday-inc",
@@ -548,7 +627,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2122396/",
-      "preview": "images/portfolio/holiday-inc.jpg"
+      "preview": null
     },
     {
       "id": "secret-access-the-vatican",
@@ -562,7 +641,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt1954245/",
-      "preview": "images/portfolio/secret-access-the-vatican.jpg"
+      "preview": "images/shows/SecretVatican_TitleCard.webp"
     },
     {
       "id": "ton-of-love",
@@ -576,7 +655,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2122416/",
-      "preview": "images/portfolio/ton-of-love.jpg"
+      "preview": null
     },
     {
       "id": "jobsite",
@@ -590,7 +669,7 @@
       "poster": null,
       "vimeoLink": null,
       "imdbLink": "https://www.imdb.com/title/tt2122384/",
-      "preview": "images/portfolio/jobsite.jpg"
+      "preview": null
     }
   ]
 }
