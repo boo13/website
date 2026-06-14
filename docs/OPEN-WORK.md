@@ -9,7 +9,7 @@
 | # | Thread | Linear | Source doc | Real status | Recommended order |
 |---|--------|--------|-----------|-------------|-------------------|
 | 1 | Homepage IA fixes | [BOO-147](https://linear.app/boo13/issue/BOO-147) | `index-html-revised-plan.md` | **Open — 0% shipped** | 1st (highest value, newest) |
-| 2 | Credit title cards | [BOO-149](https://linear.app/boo13/issue/BOO-149) | `poster-todo.md` | **Open — 6 cards needed** | 2nd (small, parallelizable) |
+| 2 | Credit title cards | [BOO-149](https://linear.app/boo13/issue/BOO-149) | `poster-todo.md` | **Open — 10 missing, 3 placeholders** | 2nd (small, parallelizable) |
 | 3 | Index performance rebuild (remainder) | [BOO-148](https://linear.app/boo13/issue/BOO-148) | `plans/2026-04-05-Index-Rebuild.md` | **Partial** | 3rd |
 | 4 | Cloudflare Pages origin migration | [BOO-135](https://linear.app/boo13/issue/BOO-135) | `plans/2026-04-08-...cloudflare-pages-plan.md` | **Open — not started** | 4th (decide go/kill) |
 | 5 | Linear task workflow | — (killed) | `plans/2026-04-07-...linear-task-workflow-plan.md` | **Killed — superseded** | n/a |
@@ -35,10 +35,10 @@ Verified against code:
 Next steps (in plan's own order): designed hero fallback → curate featured + add headings + archive toggle → elevate About beat + nav button → reconcile DESIGN.md.
 
 ## 2. Credit title cards — `poster-todo.md`
-**6 shows need a 16:9 title card** (1280×720, → `public/images/shows/<Name>_TitleCard.webp`, update `preview` in `Projects.json`).
+**10 shows need any assigned preview; 3 more have vertical placeholder posters that should become 16:9 title cards** (1280×720, → `public/images/shows/<Name>_TitleCard.webp`, update `preview` in `Projects.json`).
 
-- No image at all: **The Séance** (`the-seance`), **Travel Testers** (`travel-testers`).
-- Low-res 4:3 placeholders to replace: **Inside the NSA**, **Heavily Ever After**, **Holiday Inc**, **Ton of Love**.
+- Text-only rows: **American Genius**, **Extreme Cheapskates**, **Gold Fever**, **The Séance**, **Commander in Chief: Inside the Oval Office**, **Travel Testers**, **Heavily Ever After**, **Holiday Inc**, **Ton of Love**, **Jobsite**.
+- Vertical placeholders to replace: **Beyond the Spotlight**, **Inside the NSA**, **Redrum**.
 
 Independent of everything else — can be knocked out in any spare session.
 

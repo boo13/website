@@ -915,6 +915,10 @@ body.show-grid .bg-columns {
   padding: 0.5rem 0 3.5rem;
 }
 
+.credit-row__details-inner--text-only {
+  grid-template-columns: minmax(0, 56rem);
+}
+
 .credit-row__detail-image {
   aspect-ratio: 16 / 10;
   overflow: hidden;

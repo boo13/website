@@ -155,16 +155,18 @@ function buildRow(project) {
   const inner = document.createElement('div');
   inner.className = 'credit-row__details-inner';
 
-  const detailImage = document.createElement('div');
-  detailImage.className = 'credit-row__detail-image';
-  const img = document.createElement('img');
-  img.alt = project.title;
-  if (project.preview) {
-    img.dataset.src = publicAssetPath(project.preview);
-  } else if (project.poster) {
-    img.dataset.src = publicAssetPath(project.poster);
+  const imagePath = project.preview || project.poster;
+  if (imagePath) {
+    const detailImage = document.createElement('div');
+    detailImage.className = 'credit-row__detail-image';
+    const img = document.createElement('img');
+    img.alt = project.title;
+    img.dataset.src = publicAssetPath(imagePath);
+    detailImage.appendChild(img);
+    inner.appendChild(detailImage);
+  } else {
+    inner.classList.add('credit-row__details-inner--text-only');
   }
-  detailImage.appendChild(img);
 
   const detailDesc = document.createElement('p');
   detailDesc.className = 'credit-row__detail-desc';
@@ -174,7 +176,6 @@ function buildRow(project) {
     detailDesc.style.display = 'none';
   }
 
-  inner.appendChild(detailImage);
   inner.appendChild(detailDesc);
   details.appendChild(inner);
 
@@ -488,9 +489,15 @@ export function initCredits() {
       // Lazy-load image on first expand
       const img = details.querySelector('img[data-src]');
       if (img) {
+        const imageWrap = img.closest('.credit-row__detail-image');
         gsap.set(img, { opacity: 0 });
         img.onload = () =>
           gsap.to(img, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+        img.onerror = () => {
+          imageWrap?.remove();
+          inner.classList.add('credit-row__details-inner--text-only');
+          gsap.delayedCall(0, () => ScrollTrigger.refresh());
+        };
         img.src = img.dataset.src;
         delete img.dataset.src;
       }
