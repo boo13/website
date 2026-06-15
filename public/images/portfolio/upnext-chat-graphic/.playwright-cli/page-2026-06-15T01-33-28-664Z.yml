@@ -1,0 +1,73 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "Close" [ref=e3]:
+      - /url: /
+    - img "upNEXT News — key art" [ref=e5]
+    - generic [ref=e6]:
+      - heading "upNEXT News" [level=1] [ref=e7]
+      - generic [ref=e8]:
+        - generic [ref=e9]: Social
+        - generic [ref=e10]: "2026"
+  - paragraph [ref=e13]: A social-first news brand built for the next generation of informed audiences. Curated stories delivered through bold visuals and concise editorial voice.
+  - generic [ref=e15]:
+    - img "upNEXT News example" [ref=e17]
+    - img "upNEXT News example" [ref=e19]
+  - img "upNEXT News editorial layout" [ref=e22]
+  - generic [ref=e24]:
+    - img "upNEXT News content example" [ref=e26]
+    - img "upNEXT News content example" [ref=e28]
+    - img "upNEXT News content example" [ref=e30]
+  - generic [ref=e32]:
+    - img "upNEXT News feature" [ref=e34]
+    - img "upNEXT News detail" [ref=e36]
+  - generic [ref=e37]:
+    - generic "Chat Graphic animation" [ref=e38]
+    - generic [ref=e40]:
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+      - img "upNEXT Chat Graphic"
+  - img "upNEXT News closing image" [ref=e43]
+  - generic [ref=e44]:
+    - generic [ref=e45]:
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]: upNEXT News
+          - generic [ref=e49]: (2026)
+        - generic [ref=e51]:
+          - generic [ref=e52]: About
+          - generic [ref=e53]: A social-first news brand built for the next generation of informed audiences. Curated stories delivered through bold visuals and concise editorial voice.
+        - generic [ref=e55]:
+          - generic [ref=e56]: Credits
+          - generic [ref=e58]:
+            - generic [ref=e59]: Creative Director
+            - generic [ref=e60]: Randy Counsman
+      - img "upNEXT News poster" [ref=e63]
+    - generic [ref=e64]:
+      - link "get in touch today — get in touch today — get in touch today — get in touch today —" [ref=e65]:
+        - /url: mailto:RandyCounsman@gmail.com
+        - generic [ref=e66]: get in touch today — get in touch today — get in touch today — get in touch today —
+      - button "back to top" [ref=e67]
+      - generic [ref=e68]:
+        - link "Li" [ref=e69]:
+          - /url: https://www.linkedin.com/in/randycounsman/
+        - link "Vi" [ref=e70]:
+          - /url: https://vimeo.com/randycounsman
+        - generic [ref=e71]: © 2026

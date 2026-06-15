@@ -194,6 +194,61 @@
   opacity: 0;
 }
 
+/* --- Chat Graphic (animated frame sequence + send strip) --- */
+.case-study__chat-graphic {
+  padding: clamp(4rem, 8vh, 6rem) 0;
+  margin-bottom: 8px;
+}
+
+.case-study__chat-frames {
+  position: relative;
+  width: 400px;
+  max-width: calc(100vw - 80px);
+  aspect-ratio: 4 / 5;
+  margin: 0 auto 48px;
+}
+
+.case-study__chat-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.case-study__send-strip {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 40px;
+  cursor: grab;
+}
+
+.case-study__send-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.case-study__send-strip.is-dragging {
+  cursor: grabbing;
+}
+
+.case-study__send-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: max-content;
+}
+
+.case-study__send-item {
+  height: 260px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+  opacity: 0;
+}
+
 /* --- Closing Image (70vh, fade to credits) --- */
 .case-study__closing {
   position: relative;
@@ -231,6 +286,10 @@
   .case-study__asymmetric {
     padding: 0 24px;
   }
+
+  .case-study__send-strip {
+    padding: 0 24px;
+  }
 }
 
 /* ============================================================
@@ -258,6 +317,18 @@
   .case-study__triptych,
   .case-study__asymmetric {
     padding: 0 16px;
+  }
+
+  .case-study__chat-frames {
+    max-width: calc(100vw - 32px);
+  }
+
+  .case-study__send-strip {
+    padding: 0 16px;
+  }
+
+  .case-study__send-item {
+    height: 180px;
   }
 
   .case-study__pair-grid {
@@ -299,5 +370,9 @@
 
   .case-study__triptych-item img {
     clip-path: none;
+  }
+
+  .case-study__send-item {
+    opacity: 1;
   }
 }

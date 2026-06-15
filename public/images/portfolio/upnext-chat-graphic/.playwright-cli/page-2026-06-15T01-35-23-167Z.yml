@@ -1,0 +1,455 @@
+- generic [active] [ref=e1]:
+  - heading "Randy Counsman - Nonfiction Video Development and Production" [level=1] [ref=e2]
+  - generic [ref=e6]: 00:06:00
+  - navigation "Site navigation" [ref=e11]:
+    - link "Featured" [ref=e12]:
+      - /url: "#featured"
+    - link "Work" [ref=e13]:
+      - /url: "#work"
+    - link "Contact" [ref=e14]:
+      - /url: contact.html
+  - generic [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e19]:
+        - paragraph [ref=e21]: About
+        - heading "A creative leader in nonfiction video..." [level=2] [ref=e22]
+        - paragraph [ref=e23]: Randy is a hands-on executive producer and head of development with a track record of building businesses by setting strategy, building slates, and generating sales. He creates, develops, and produces popular nonfiction series for all the major outlets, from YouTube to Netflix.
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]: Randy Counsman
+          - generic [ref=e29]:
+            - text: Randy Counsman
+            - generic: Randy Counsman
+            - text: Randy Counsman
+        - paragraph [ref=e30]:
+          - text: Nonfiction Video Development & Production
+          - generic [ref=e31]: Nonfiction Video Development & Production
+          - generic: Nonfiction Video Development & Production
+          - text: Nonfiction Video Development & Production
+        - generic [ref=e32]:
+          - link "LinkedIn" [ref=e33]:
+            - /url: https://www.linkedin.com/in/randycounsman/
+            - img [ref=e34]
+          - link "Vimeo" [ref=e36]:
+            - /url: https://vimeo.com/randycounsman
+            - img [ref=e37]
+          - link "Email" [ref=e39]:
+            - /url: contact.html
+            - img [ref=e40]
+    - generic [ref=e44]:
+      - article [ref=e45]:
+        - link "Wyatt Earp and the Cowboy War" [ref=e46]:
+          - /url: /projects/wyatt-earp/
+        - img "Wyatt Earp and the Cowboy War" [ref=e48]
+        - generic [ref=e50]:
+          - heading "Wyatt Earp and the Cowboy War" [level=3] [ref=e51]
+          - img "Netflix" [ref=e52]
+      - article [ref=e53]:
+        - link "Sitting Bull" [ref=e54]:
+          - /url: /projects/sitting-bull/
+        - img "Sitting Bull" [ref=e56]
+        - generic [ref=e58]:
+          - heading "Sitting Bull" [level=3] [ref=e59]
+          - img "History" [ref=e60]
+      - article [ref=e61]:
+        - link "The Men Who Built America" [ref=e62]:
+          - /url: /projects/men-who-built-america/
+        - img "The Men Who Built America" [ref=e64]
+        - generic [ref=e66]:
+          - heading "The Men Who Built America" [level=3] [ref=e67]
+          - img "History" [ref=e68]
+      - article [ref=e69]:
+        - 'link "Pope: The Most Powerful Man in History" [ref=e70]':
+          - /url: /projects/pope/
+        - 'img "Pope: The Most Powerful Man in History" [ref=e72]'
+        - generic [ref=e74]:
+          - 'heading "Pope: The Most Powerful Man in History" [level=3] [ref=e75]'
+          - img "CNN" [ref=e76]
+    - list [ref=e79]:
+      - listitem [ref=e80]:
+        - button "upNEXT News upNEXT News Executive Producer" [ref=e81]:
+          - generic [ref=e82]: +
+          - generic [ref=e84]: upNEXT News
+          - generic "upNEXT News" [ref=e85]
+          - generic [ref=e86]: Executive Producer
+        - generic [ref=e87]:
+          - img [ref=e89]
+          - paragraph [ref=e90]: Digital-first news and intelligence platform targeting the intersection of policy, power, and technology across AI, energy, defense, and capital markets. Built for policy insiders, rising executives, and founders who need to decode what's moving markets and shaping the next room.
+      - listitem [ref=e91]:
+        - button "Sitting Bull History Co-Executive Producer / Writer" [ref=e92]:
+          - generic [ref=e93]: +
+          - generic [ref=e95]: Sitting Bull
+          - generic "History" [ref=e96]
+          - generic [ref=e97]: Co-Executive Producer / Writer
+        - generic [ref=e98]:
+          - img [ref=e100]
+          - paragraph [ref=e101]: Produced as part of the "History Honors 250" initiative, this two-part, four-hour documentary event chronicles the life of Hunkpapa Lakota leader Sitting Bull. Featuring Michael Spears as Sitting Bull and narrated by Mo Brings Plenty, the production emphasizes authentic Native perspectives through high-end scripted sequences and expert commentary. It covers pivotal historical milestones including the Battle of the Little Bighorn, his time in Buffalo Bill's Wild West show, and the tragic events surrounding the Ghost Dance movement. The docuseries premiered on The History Channel in May 2025 as a centerpiece of the network's national anniversary programming.
+      - listitem [ref=e102]:
+        - button "Wyatt Earp and the Cowboy War Netflix Co-Executive Producer" [ref=e103]:
+          - generic [ref=e104]: +
+          - generic [ref=e106]: Wyatt Earp and the Cowboy War
+          - generic "Netflix" [ref=e107]
+          - generic [ref=e108]: Co-Executive Producer
+        - generic [ref=e109]:
+          - img [ref=e111]
+          - paragraph [ref=e112]: This six-episode Netflix docudrama, narrated by Ed Harris, provides a gritty reimagining of the legendary feud between Wyatt Earp and Ike Clanton's organized criminal gang. The series blends cinematic reenactments with historical analysis to detail the 1881 gunfight at the O.K. Corral and Wyatt's subsequent "Vendetta Ride." Beyond the local conflict, it examines how the violence escalated into a national crisis that eventually required intervention from President Chester A. Arthur and financier J.P. Morgan. The production received critical praise for its high visual standard and for placing the well-known Western mythos into a broader international and political context.
+      - listitem [ref=e113]:
+        - 'button "George: Rise of a Revolutionary Fox Nation Supervising Producer" [ref=e114]':
+          - generic [ref=e115]: +
+          - generic [ref=e117]: "George: Rise of a Revolutionary"
+          - generic "Fox Nation" [ref=e118]
+          - generic [ref=e119]: Supervising Producer
+        - generic [ref=e120]:
+          - img [ref=e122]
+          - paragraph [ref=e123]: Hosted and executive produced by Kelsey Grammer, this four-part Fox Nation series follows the early military career of George Washington within the Virginia Militia. It depicts his transformation from a headstrong young officer seeking British favor on the frontier into a primary architect of the American resistance against the Crown.
+      - listitem [ref=e124]:
+        - button "American Dynasty Fox Nation Supervising Producer" [ref=e125]:
+          - generic [ref=e126]: +
+          - generic [ref=e128]: American Dynasty
+          - generic "Fox Nation" [ref=e129]
+          - generic [ref=e130]: Supervising Producer
+        - generic [ref=e131]:
+          - img [ref=e133]
+          - paragraph [ref=e134]: This docuseries chronicles the rise and legacy of America's most powerful family empires, including the Rockefellers, Vanderbilts, and Kennedys. Through expert commentary and dramatic reenactments, the program examines how these aristocratic lineages secured massive fortunes and influenced the trajectory of American industry and politics. Each episode focuses on the internal conflicts and strategic decisions that defined these families across multiple generations.
+      - listitem [ref=e135]:
+        - 'button "Liberty or Death: Boston Tea Party Fox Nation Supervising Producer" [ref=e136]':
+          - generic [ref=e137]: +
+          - generic [ref=e139]: "Liberty or Death: Boston Tea Party"
+          - generic "Fox Nation" [ref=e140]
+          - generic [ref=e141]: Supervising Producer
+        - generic [ref=e142]:
+          - img [ref=e144]
+          - paragraph [ref=e145]: This four-part historical docudrama, hosted and executive produced by Rob Lowe, commemorates the 250th anniversary of the Boston Tea Party. The series utilizes dramatic reenactments to chronicle the maneuvers of Samuel Adams and the Sons of Liberty as they orchestrated the 1773 protest against British taxation.
+      - listitem [ref=e146]:
+        - 'button "Titans: The Rise of Hollywood CuriosityStream Supervising Producer" [ref=e147]':
+          - generic [ref=e148]: +
+          - generic [ref=e150]: "Titans: The Rise of Hollywood"
+          - generic "CuriosityStream" [ref=e151]
+          - generic [ref=e152]: Supervising Producer
+        - generic [ref=e153]:
+          - img [ref=e155]
+          - paragraph [ref=e156]: Narrated from the perspective of Paramount Pictures founder Adolph Zukor, this six-part docudrama follows the immigrant-led origins of the American film industry. The series tracks the fierce rivalries between founding moguls — including Carl Laemmle and William Fox — as they transitioned from the "Edison Trust" era to the establishment of the modern studio system.
+      - listitem [ref=e157]:
+        - 'button "Titans: The Rise of Wall Street CuriosityStream Supervising Producer" [ref=e158]':
+          - generic [ref=e159]: +
+          - generic [ref=e161]: "Titans: The Rise of Wall Street"
+          - generic "CuriosityStream" [ref=e162]
+          - generic [ref=e163]: Supervising Producer
+        - generic [ref=e164]:
+          - img [ref=e166]
+          - paragraph [ref=e167]: This eight-part series maps 150 years of American financial history, beginning with J.P. Morgan's consolidation of power during the Civil War. The narrative traces the evolution of Wall Street through the 1929 stock market crash and the regulatory battles of the New Deal, concluding with the high-stakes junk bond scandals of the 1980s. It features the founding stories of institutional giants like Goldman Sachs and Merrill Lynch.
+      - listitem [ref=e168]:
+        - button "Beyond the Spotlight CuriosityStream Supervising Producer" [ref=e169]:
+          - generic [ref=e170]: +
+          - generic [ref=e172]: Beyond the Spotlight
+          - generic "CuriosityStream" [ref=e173]
+          - generic [ref=e174]: Supervising Producer
+        - generic [ref=e175]:
+          - img [ref=e177]
+          - paragraph [ref=e178]: Executive produced by Leonardo DiCaprio, this biographical series profiles high-profile icons through the lens of their private philanthropic missions and personal passions. Each episode follows a single subject — such as Samuel L. Jackson or Kristen Bell — as they navigate global social issues away from their public-facing entertainment careers.
+      - listitem [ref=e179]:
+        - 'button "Shark Week: Raging Bulls Discovery Supervising Producer" [ref=e180]':
+          - generic [ref=e181]: +
+          - generic [ref=e183]: "Shark Week: Raging Bulls"
+          - generic "Discovery" [ref=e184]
+          - generic [ref=e185]: Supervising Producer
+        - generic [ref=e186]:
+          - img [ref=e188]
+          - paragraph [ref=e189]: Shark Week special investigating why Australia's bull sharks have become more aggressive toward humans.
+      - listitem [ref=e190]:
+        - 'button "Human: The World Within PBS Supervising Producer" [ref=e191]':
+          - generic [ref=e192]: +
+          - generic [ref=e194]: "Human: The World Within"
+          - generic "PBS" [ref=e195]
+          - generic [ref=e196]: Supervising Producer
+        - generic [ref=e197]:
+          - img [ref=e199]
+          - paragraph [ref=e200]: This six-part PBS science docuseries connects human biological systems to the personal stories of individuals around the globe. Narrated by Radiolab creator Jad Abumrad, the series uses a "micro-to-macro" approach to visualize internal processes through advanced graphics and scientific research. Each episode focuses on a specific bodily system — nervous, circulatory, immune — to illustrate how they power human survival and passion.
+      - listitem [ref=e201]:
+        - button "The Titans That Built America History Co-Executive Producer" [ref=e202]:
+          - generic [ref=e203]: +
+          - generic [ref=e205]: The Titans That Built America
+          - generic "History" [ref=e206]
+          - generic [ref=e207]: Co-Executive Producer
+        - generic [ref=e208]:
+          - img [ref=e210]
+          - paragraph [ref=e211]: A sequel to The Men Who Built America, this three-part miniseries chronicles the rise of a new generation of industrial icons including William Boeing, Walter Chrysler, and Henry Ford. The docudrama follows these figures as they navigate the Great Depression and eventually cooperate with the government to transform industry for World War II mobilization. Executive produced by Leonardo DiCaprio, the series highlights the fierce rivalries that birthed the modern aviation and automotive sectors.
+      - listitem [ref=e212]:
+        - button "Holiday Home Makeover with Mr. Christmas Netflix Supervising Producer" [ref=e213]:
+          - generic [ref=e214]: +
+          - generic [ref=e216]: Holiday Home Makeover with Mr. Christmas
+          - generic "Netflix" [ref=e217]
+          - generic [ref=e218]: Supervising Producer
+        - generic [ref=e219]:
+          - img [ref=e221]
+          - paragraph [ref=e222]: Interior designer Benjamin Bradley, known as "Mr. Christmas," transforms homes and community spaces for the holiday season in this Netflix reality series. The show highlights Bradley's use of his extensive personal collection of vintage ornaments and decor to help families honor specific holiday traditions.
+      - listitem [ref=e223]:
+        - button "Washington History Writer" [ref=e224]:
+          - generic [ref=e225]: +
+          - generic [ref=e227]: Washington
+          - generic "History" [ref=e228]
+          - generic [ref=e229]: Writer
+        - generic [ref=e230]:
+          - img [ref=e232]
+          - paragraph [ref=e233]: This three-part docudrama traces George Washington's evolution from an ambitious young soldier to the first U.S. President. Narrated by Jeff Daniels and executive produced by historian Doris Kearns Goodwin, the series combines scripted dramatizations with interviews from figures like Bill Clinton and Colin Powell. The narrative focuses on Washington's military resilience during the Revolutionary War and his unprecedented decision to voluntarily relinquish power.
+      - listitem [ref=e234]:
+        - 'button "Shark Week: Jaws in the SHallows Discovery Supervising Producer" [ref=e235]':
+          - generic [ref=e236]: +
+          - generic [ref=e238]: "Shark Week: Jaws in the SHallows"
+          - generic "Discovery" [ref=e239]
+          - generic [ref=e240]: Supervising Producer
+        - generic [ref=e241]:
+          - img [ref=e243]
+          - paragraph [ref=e244]: This 2023 Shark Week special investigates a surge of great white shark activity in New Zealand's shallow coastal waters. Shark expert Dr. Riley Elliott and Amber Jones conduct field research to determine why apex predators are increasingly frequenting popular public beaches and how to manage the resulting safety concerns.
+      - listitem [ref=e245]:
+        - button "The Interrogator Investigation Discovery Producer" [ref=e246]:
+          - generic [ref=e247]: +
+          - generic [ref=e249]: The Interrogator
+          - generic "Investigation Discovery" [ref=e250]
+          - generic [ref=e251]: Producer
+        - generic [ref=e252]:
+          - img [ref=e254]
+          - paragraph [ref=e255]: This Investigation Discovery docuseries follows Houston Homicide Detective Fil Waters as he recounts his most high-profile murder investigations. Each of the six episodes utilizes original interrogation room footage and dramatic recreations to showcase Waters' strategic psychological approach to eliciting confessions.
+      - listitem [ref=e256]:
+        - 'button "Capsized: Blood in the Water Discovery Co-Producer" [ref=e257]':
+          - generic [ref=e258]: +
+          - generic [ref=e260]: "Capsized: Blood in the Water"
+          - generic "Discovery" [ref=e261]
+          - generic [ref=e262]: Co-Producer
+        - generic [ref=e263]:
+          - img [ref=e265]
+          - paragraph [ref=e266]: Shark Week's first-ever scripted film, starring Josh Duhamel and Tyler Blackburn. Based on the terrifying true story of the 1982 sinking of the yacht Trashman off the coast of North Carolina, the film follows its crew's five-day fight for survival – stranded in an inflatable lifeboat, as tiger sharks attack.
+      - listitem [ref=e267]:
+        - 'button "Pope: The Most Powerful Man in History CNN Executive Producer / Director" [ref=e268]':
+          - generic [ref=e269]: +
+          - generic [ref=e271]: "Pope: The Most Powerful Man in History"
+          - generic "CNN" [ref=e272]
+          - generic [ref=e273]: Executive Producer / Director
+        - generic [ref=e274]:
+          - img [ref=e276]
+          - paragraph [ref=e277]: Narrated by Liam Neeson, this six-part CNN Original Series chronicles the 2,000-year evolution of the papacy from a persecuted grassroots movement to a global political powerhouse. The production utilized access to Vatican archives and features commentary from historians such as Diarmaid MacCulloch and Eamon Duffy. Dramatic recreations depict pivotal moments of the Renaissance, the Reformation, and the Church's role in the World Wars. The docuseries connects historical origins with modern-day challenges facing the Catholic Church and its 1.2 billion followers.
+      - listitem [ref=e278]:
+        - button "The American West AMC Writer / Producer" [ref=e279]:
+          - generic [ref=e280]: +
+          - generic [ref=e282]: The American West
+          - generic "AMC" [ref=e283]
+          - generic [ref=e284]: Writer / Producer
+        - generic [ref=e285]:
+          - img [ref=e287]
+          - paragraph [ref=e288]: Executive produced by Robert Redford, this eight-episode AMC limited series details the violent expansion of the United States between 1865 and 1890. It combines dramatic portrayals of figures like Jesse James and Crazy Horse with interviews featuring Western cinema icons Tom Selleck and Kiefer Sutherland.
+      - listitem [ref=e289]:
+        - 'button "NASCAR: The Rise of American Speed CMT Producer" [ref=e290]':
+          - generic [ref=e291]: +
+          - generic [ref=e293]: "NASCAR: The Rise of American Speed"
+          - generic "CMT" [ref=e294]
+          - generic [ref=e295]: Producer
+        - generic [ref=e296]:
+          - img [ref=e298]
+          - paragraph [ref=e299]: Narrated by Dale Earnhardt Jr., this three-part CMT documentary miniseries traces the history of stock car racing from its roots in Southern bootlegging to its emergence as a national multi-billion dollar sport. The series utilizes archival footage and reenactments to highlight the France family's efforts to formalize the competition and build the first superspeedways.
+      - listitem [ref=e300]:
+        - 'button "Hamilton: Building America History Writer" [ref=e301]':
+          - generic [ref=e302]: +
+          - generic [ref=e304]: "Hamilton: Building America"
+          - generic "History" [ref=e305]
+          - generic [ref=e306]: Writer
+        - generic [ref=e307]:
+          - img [ref=e309]
+          - paragraph [ref=e310]: This two-hour documentary special examines Alexander Hamilton's journey from a Caribbean immigrant to the primary architect of the American financial system. Featuring an interview with Ron Chernow, author of the definitive Hamilton biography, the program details his political rivalries with Thomas Jefferson and Aaron Burr.
+      - listitem [ref=e311]:
+        - button "Sons of Liberty History Producer" [ref=e312]:
+          - generic [ref=e313]: +
+          - generic [ref=e315]: Sons of Liberty
+          - generic "History" [ref=e316]
+          - generic [ref=e317]: Producer
+        - generic [ref=e318]:
+          - img [ref=e320]
+          - paragraph [ref=e321]: This three-part dramatic miniseries stars Ben Barnes as Sam Adams and Dean Norris as Benjamin Franklin, depicting the radicalization of colonial radicals who spark the American Revolution in Boston. The production features a score by Hans Zimmer and covers pivotal flashpoints including the Boston Tea Party and the Battles of Lexington and Concord.
+      - listitem [ref=e322]:
+        - button "The Making of the Mob AMC Producer" [ref=e323]:
+          - generic [ref=e324]: +
+          - generic [ref=e326]: The Making of the Mob
+          - generic "AMC" [ref=e327]
+          - generic [ref=e328]: Producer
+        - generic [ref=e329]:
+          - img [ref=e331]
+          - paragraph [ref=e332]: Narrated by Ray Liotta, this docuseries chronicles the rise of organized crime in America through the lives of figures like Lucky Luciano and Al Capone. The series blends cinematic reenactments with archival footage and interviews from historians and former law enforcement officers. Each season focuses on a specific criminal era, beginning with the emergence of the Five Families in New York City.
+      - listitem [ref=e333]:
+        - button "American Genius Nat Geo Producer" [ref=e334]:
+          - generic [ref=e335]: +
+          - generic [ref=e337]: American Genius
+          - generic "Nat Geo" [ref=e338]
+          - generic [ref=e339]: Producer
+        - generic [ref=e340]:
+          - img [ref=e342]
+          - paragraph [ref=e343]: This eight-part series frames the history of innovation as a series of high-stakes rivalries between inventors like Edison and Tesla or Jobs and Gates. Each episode employs dramatic recreations to demonstrate how personal competition drove the technological breakthroughs that defined the modern world.
+      - listitem [ref=e344]:
+        - button "The World Wars History Writer" [ref=e345]:
+          - generic [ref=e346]: +
+          - generic [ref=e348]: The World Wars
+          - generic "History" [ref=e349]
+          - generic [ref=e350]: Writer
+        - generic [ref=e351]:
+          - img [ref=e353]
+          - paragraph [ref=e354]: This three-part miniseries presents World War I and World War II as a single, continuous 30-year global conflict. The narrative focuses on the interconnected personal histories of leaders like Churchill, Hitler, and Roosevelt, using dual casting to show them as both young soldiers and world leaders. The production includes commentary from contemporary political figures and a filmed introduction by President Barack Obama.
+      - listitem [ref=e355]:
+        - button "Extreme Cheapskates TLC Producer" [ref=e356]:
+          - generic [ref=e357]: +
+          - generic [ref=e359]: Extreme Cheapskates
+          - generic "TLC" [ref=e360]
+          - generic [ref=e361]: Producer
+        - generic [ref=e362]:
+          - img [ref=e364]
+          - paragraph [ref=e365]: This TLC reality series documents individuals who employ extreme and often unhygienic tactics — such as dumpster diving for food and reusing dental floss — to minimize their living expenses. The program ran for three seasons and features a mix of everyday misers and "frugal millionaires" practicing radical financial austerity.
+      - listitem [ref=e366]:
+        - button "Gold Fever Discovery Producer" [ref=e367]:
+          - generic [ref=e368]: +
+          - generic [ref=e370]: Gold Fever
+          - generic "Discovery" [ref=e371]
+          - generic [ref=e372]: Producer
+        - generic [ref=e373]:
+          - img [ref=e375]
+          - paragraph [ref=e376]: This four-part Discovery Channel docudrama follows the Boston Company, a real-life group of forty men who journeyed west during the 1849 California Gold Rush. Narrated by Mike Rowe, the series utilizes historical journals to depict the lawless nature of the gold fields and the ruthless entrepreneurship of figures like Sam Brannan — the man who pioneered the idea "during a gold rush, sell shovels."
+      - listitem [ref=e377]:
+        - button "The Séance A&E Producer" [ref=e378]:
+          - generic [ref=e379]: +
+          - generic [ref=e381]: The Séance
+          - generic "A&E" [ref=e382]
+          - generic [ref=e383]: Producer
+        - generic [ref=e384]:
+          - img [ref=e386]
+          - paragraph [ref=e387]: This paranormal television pilot for A&E investigated historical cold cases and famous crimes through the medium of a séance led by psychic Jackie Barrett. The special combined psychic investigation with dramatic recreations to attempt communication with the spirits of victims and perpetrators from the past.
+      - listitem [ref=e388]:
+        - button "The Men Who Built America History Writer / Producer" [ref=e389]:
+          - generic [ref=e390]: +
+          - generic [ref=e392]: The Men Who Built America
+          - generic "History" [ref=e393]
+          - generic [ref=e394]: Writer / Producer
+        - generic [ref=e395]:
+          - img [ref=e397]
+          - paragraph [ref=e398]: This eight-part History Channel docudrama chronicles the lives of industrial titans Cornelius Vanderbilt, John D. Rockefeller, Andrew Carnegie, J.P. Morgan, and Henry Ford. The series utilizes cinematic dramatic re-enactments and commentary from modern business leaders to illustrate how these men transformed the United States into a global superpower. Narrated by Campbell Scott, the production won two Primetime Emmy Awards, including Outstanding Documentary or Nonfiction Series. The series launched the successful "That Built" franchise and utilized advanced CGI alongside historical negatives from the Library of Congress. Its narrative focuses on the intersection of innovation, ruthless competition, and the birth of the modern American economy.
+      - listitem [ref=e399]:
+        - 'button "Commander in Chief: Inside the Oval Office Discovery Writer / Producer" [ref=e400]':
+          - generic [ref=e401]: +
+          - generic [ref=e403]: "Commander in Chief: Inside the Oval Office"
+          - generic "Discovery" [ref=e404]
+          - generic [ref=e405]: Writer / Producer
+        - generic [ref=e406]:
+          - img [ref=e408]
+          - paragraph [ref=e409]: This three-part documentary miniseries examines high-stakes presidential decision-making during defining historical crises, including the Cuban Missile Crisis and the 2011 raid on Osama bin Laden. The series features exclusive interviews with advisors and officials alongside newly declassified documents and rare archival footage to provide a behind-the-scenes look at the pressure of the Oval Office.
+      - listitem [ref=e410]:
+        - button "Inside the NSA Nat Geo Writer" [ref=e411]:
+          - generic [ref=e412]: +
+          - generic [ref=e414]: Inside the NSA
+          - generic "Nat Geo" [ref=e415]
+          - generic [ref=e416]: Writer
+        - generic [ref=e417]:
+          - img [ref=e419]
+          - paragraph [ref=e420]: National Geographic secured unprecedented access to the National Security Agency's Fort Meade headquarters for this documentary special on the world's most secretive intelligence agency. The film details the agency's dual mission of signals intelligence and information assurance, specifically highlighting its critical role in the 2011 raid on Osama bin Laden's compound. It provides a rare look at the high-tech security protocols, copper-lined facilities, and specialized workforce of cryptologists and mathematicians.
+      - listitem [ref=e421]:
+        - button "Redrum Investigation Discovery Co-Executive Producer" [ref=e422]:
+          - generic [ref=e423]: +
+          - generic [ref=e425]: Redrum
+          - generic "Investigation Discovery" [ref=e426]
+          - generic [ref=e427]: Co-Executive Producer
+        - generic [ref=e428]:
+          - img [ref=e430]
+          - paragraph [ref=e431]: This Investigation Discovery true-crime series utilizes a reverse-chronological narrative structure to deconstruct homicide investigations. Each episode begins at the scene of the crime and moves backward in time to reveal the events, relationships, and hidden motives that led to the murder. The storytelling format emphasizes the investigation process, showing how detectives separate false leads from the eventual truth.
+      - listitem [ref=e432]:
+        - button "Travel Testers TLC Producer" [ref=e433]:
+          - generic [ref=e434]: +
+          - generic [ref=e436]: Travel Testers
+          - generic "TLC" [ref=e437]
+          - generic [ref=e438]: Producer
+        - generic [ref=e439]:
+          - img [ref=e441]
+          - paragraph [ref=e442]: This TLC reality special follows a team of travel experts as they rigorously evaluate vacation destinations and consumer travel products. The "testers" visit popular tourist attractions, such as major waterparks, to assess safety, value, and whether the experiences live up to their marketing claims.
+      - listitem [ref=e443]:
+        - button "Heavily Ever After TLC Producer" [ref=e444]:
+          - generic [ref=e445]: +
+          - generic [ref=e447]: Heavily Ever After
+          - generic "TLC" [ref=e448]
+          - generic [ref=e449]: Producer
+        - generic [ref=e450]:
+          - img [ref=e452]
+          - paragraph [ref=e453]: This TLC series follows Freddie and Kay Combs as they navigate the physical and emotional challenges of a massive weight-loss journey. Freddie, a minister who weighed nearly 1,000 pounds at his peak, works with his wife to regain mobility and improve their health through a mutual support system. The program documents their daily struggles with mobility and their determination to overcome extreme obesity.
+      - listitem [ref=e454]:
+        - button "Holiday Inc HGTV Producer" [ref=e455]:
+          - generic [ref=e456]: +
+          - generic [ref=e458]: Holiday Inc
+          - generic "HGTV" [ref=e459]
+          - generic [ref=e460]: Producer
+        - generic [ref=e461]:
+          - img [ref=e463]
+          - paragraph [ref=e464]: This HGTV special provides a behind-the-scenes look at the high-stakes logistical effort required to decorate New York City's most iconic landmarks for the holiday season. The show follows professional design teams as they perform overnight transformations of sites like Macy's Herald Square, Lord & Taylor, and the Waldorf Astoria. It highlights the precision and artistry needed to execute massive commercial installations in high-traffic urban environments within a single night.
+      - listitem [ref=e465]:
+        - 'button "Secret Access: The Vatican History Producer" [ref=e466]':
+          - generic [ref=e467]: +
+          - generic [ref=e469]: "Secret Access: The Vatican"
+          - generic "History" [ref=e470]
+          - generic [ref=e471]: Producer
+        - generic [ref=e472]:
+          - img [ref=e474]
+          - paragraph [ref=e475]: This two-hour special investigates restricted areas within the 110-acre city-state, including the "City of the Dead" necropolis beneath St. Peter's Basilica and the Secret Archives. It also details the historical diplomatic relationship between the United States and the Holy See, referencing documents from the Civil War through the Cold War.
+      - listitem [ref=e476]:
+        - button "Ton of Love TLC Producer" [ref=e477]:
+          - generic [ref=e478]: +
+          - generic [ref=e480]: Ton of Love
+          - generic "TLC" [ref=e481]
+          - generic [ref=e482]: Producer
+        - generic [ref=e483]:
+          - img [ref=e485]
+          - paragraph [ref=e486]: This TLC special follows minister Freddie Combs and his wife Katrina as they manage his 900-pound weight-loss journey and the resulting strain on their marriage. The program documents the daily realities of extreme obesity and the emotional toll on primary caregivers.
+      - listitem [ref=e487]:
+        - button "Jobsite History Producer" [ref=e488]:
+          - generic [ref=e489]: +
+          - generic [ref=e491]: Jobsite
+          - generic "History" [ref=e492]
+          - generic [ref=e493]: Producer
+        - generic [ref=e494]:
+          - img [ref=e496]
+          - paragraph [ref=e497]: This History Channel docuseries takes viewers behind-the-scenes of jobs where critical deadlines cannot be missed. The first special tracks the "90-minute rule" on a Manhattan skyscraper pour at Setai Fifth Avenue; the second follows a FedEx package around the world in an incredible overnight delivery of life-saving medicine.
+    - generic [ref=e500]:
+      - heading "Stay in the loop" [level=2] [ref=e501]
+      - paragraph [ref=e502]: Get occasional updates on new projects and productions.
+      - generic [ref=e504]:
+        - generic [ref=e505]: Email address
+        - textbox "Email address" [ref=e506]:
+          - /placeholder: your@email.com
+        - button "Subscribe" [ref=e507]
+      - separator [ref=e508]
+      - link "Get in Touch" [ref=e509]:
+        - /url: contact.html
+        - text: Get in Touch
+        - img [ref=e510]
+  - contentinfo:
+    - generic:
+      - generic:
+        - paragraph:
+          - text: Got a project? Let's make
+          - text: something together.
+        - navigation "Footer navigation":
+          - link "Home":
+            - /url: "#hero"
+          - link "Featured":
+            - /url: "#featured"
+          - link "Work":
+            - /url: "#work"
+          - link "Resume":
+            - /url: resume.html
+            - text: Resume
+            - img
+      - generic:
+        - generic:
+          - generic: Location
+          - paragraph: New York, NY
+        - generic:
+          - generic: Get in Touch
+          - link "Contact Form":
+            - /url: contact.html
+        - generic:
+          - generic: Socials
+          - link "LinkedIn":
+            - /url: https://www.linkedin.com/in/randycounsman/
+          - link "Vimeo":
+            - /url: https://vimeo.com/randycounsman
+      - paragraph: © Randy Counsman, 2026

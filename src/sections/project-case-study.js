@@ -228,6 +228,89 @@ function initImageRevealSections(ctx) {
   });
 }
 
+function initChatGraphic(ctx) {
+  document.querySelectorAll('.case-study__chat-graphic').forEach((section) => {
+    const frames = section.querySelectorAll('.case-study__chat-frame');
+    const sendItems = section.querySelectorAll('.case-study__send-item');
+    const strip = section.querySelector('.case-study__send-strip');
+
+    if (frames.length) {
+      gsap.set(frames, { autoAlpha: 0 });
+      gsap.set(frames[0], { autoAlpha: 1 });
+
+      let intervalId = null;
+      let current = 0;
+
+      const step = () => {
+        gsap.set(frames[current], { autoAlpha: 0 });
+        current = (current + 1) % frames.length;
+        gsap.set(frames[current], { autoAlpha: 1 });
+      };
+
+      ctx.add(() => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top 85%',
+          end: 'bottom top',
+          onEnter: () => { intervalId = setInterval(step, 350); },
+          onLeave: () => { clearInterval(intervalId); intervalId = null; },
+          onEnterBack: () => { intervalId = setInterval(step, 350); },
+          onLeaveBack: () => { clearInterval(intervalId); intervalId = null; },
+        });
+        return () => { clearInterval(intervalId); };
+      });
+    }
+
+    if (sendItems.length) {
+      ctx.add(() => {
+        gsap.fromTo(
+          sendItems,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            stagger: 0.04,
+            scrollTrigger: {
+              trigger: strip || section,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      });
+    }
+
+    if (strip) {
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      strip.addEventListener('mousedown', (e) => {
+        isDown = true;
+        strip.classList.add('is-dragging');
+        startX = e.pageX - strip.offsetLeft;
+        scrollLeft = strip.scrollLeft;
+      });
+      strip.addEventListener('mouseleave', () => {
+        isDown = false;
+        strip.classList.remove('is-dragging');
+      });
+      strip.addEventListener('mouseup', () => {
+        isDown = false;
+        strip.classList.remove('is-dragging');
+      });
+      strip.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - strip.offsetLeft;
+        strip.scrollLeft = scrollLeft - (x - startX) * 1.5;
+      });
+    }
+  });
+}
+
 function initCaseClosing(ctx) {
   const closing = document.querySelector('.case-study__closing');
   if (!closing) return;
@@ -279,6 +362,7 @@ export function initProjectCaseStudy() {
   initCaseHero(ctx);
   initCaseIntro(ctx);
   initImageRevealSections(ctx);
+  initChatGraphic(ctx);
   initCaseClosing(ctx);
 
   return () => ctx.revert();
