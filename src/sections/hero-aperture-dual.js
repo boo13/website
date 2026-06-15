@@ -433,9 +433,9 @@ export function initHeroApertureDual() {
         staggerOffset: 0.1,
       },
       retainClones: true,
+      onWordsComplete: playHeroChromeEntrance,
       onComplete: (clones) => {
         const allClones = clones.flat();
-        playHeroChromeEntrance();
         if (!allClones.length) return;
 
         const numLayers = clones.length;
