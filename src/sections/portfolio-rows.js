@@ -708,7 +708,7 @@ function renderProjectRow(p) {
               .map(
                 (src, i) => `
               <li class="portfolio-shot">
-                ${renderShotMedia(src, p, i === 0 ? p.firstShotLightboxVideo ?? null : null)}
+                ${renderShotMedia(src, p, i === 0 ? (p.firstShotLightboxVideo ?? null) : null)}
               </li>`
               )
               .join('')}

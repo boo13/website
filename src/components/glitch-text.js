@@ -95,29 +95,56 @@ export function setupGlitchText(target) {
     const drift = clamp(rawDrift, -profile.driftMax, profile.driftMax);
     const opacity =
       active || energy > 0.025
-        ? Math.min(profile.opacityMax, profile.opacityBase + energy * profile.opacityGain)
+        ? Math.min(
+            profile.opacityMax,
+            profile.opacityBase + energy * profile.opacityGain
+          )
         : 0;
     const trailOpacity =
       active || energy > 0.025
-        ? Math.min(profile.trailMax, profile.trailOpacityBase + energy * profile.trailOpacityGain)
+        ? Math.min(
+            profile.trailMax,
+            profile.trailOpacityBase + energy * profile.trailOpacityGain
+          )
         : 0;
 
     setVar('--glitch-y', pct(pointer.y + lineJitter));
     setVar('--glitch-tail-y', pct(tail.y - lineJitter * 0.7));
-    setVar('--glitch-band', `${(profile.bandBase + energy * profile.bandRange).toFixed(2)}px`);
+    setVar(
+      '--glitch-band',
+      `${(profile.bandBase + energy * profile.bandRange).toFixed(2)}px`
+    );
     setVar(
       '--glitch-tail-band',
-      `${(profile.tailBandBase + energy * profile.tailBandRange).toFixed(2)}px`,
+      `${(profile.tailBandBase + energy * profile.tailBandRange).toFixed(2)}px`
     );
     setVar('--glitch-shift', `${drift.toFixed(2)}px`);
     setVar('--glitch-counter-shift', `${(-drift * 0.56).toFixed(2)}px`);
-    setVar('--glitch-red-shadow', `${(-0.9 - energy * profile.shadow).toFixed(2)}px`);
-    setVar('--glitch-blue-shadow', `${(0.9 + energy * profile.shadow).toFixed(2)}px`);
+    setVar(
+      '--glitch-red-shadow',
+      `${(-0.9 - energy * profile.shadow).toFixed(2)}px`
+    );
+    setVar(
+      '--glitch-blue-shadow',
+      `${(0.9 + energy * profile.shadow).toFixed(2)}px`
+    );
+    // Outer spectral pair — ~1.5× the inner offset, same energy scaling
+    setVar(
+      '--glitch-cyan-shadow',
+      `${(-1.35 - energy * profile.shadow * 1.5).toFixed(2)}px`
+    );
+    setVar(
+      '--glitch-yellow-shadow',
+      `${(1.35 + energy * profile.shadow * 1.5).toFixed(2)}px`
+    );
     setVar('--glitch-grit-x', `${Math.round(now * 0.06) % 29}px`);
     setVar('--glitch-grit-y', `${Math.round(now * 0.09) % 11}px`);
     setVar('--glitch-opacity', opacity.toFixed(3));
     setVar('--trail-opacity', trailOpacity.toFixed(3));
-    setVar('--trail-clip', trailClip(pointer, tail, profile.trailBase + energy * profile.trailRange));
+    setVar(
+      '--trail-clip',
+      trailClip(pointer, tail, profile.trailBase + energy * profile.trailRange)
+    );
 
     if (active || energy > 0.012 || speed > 0.01) {
       frame = requestAnimationFrame(renderGlitch);

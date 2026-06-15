@@ -7,6 +7,8 @@
   --glitch-counter-shift: 0px;
   --glitch-red-shadow: -1px;
   --glitch-blue-shadow: 1px;
+  --glitch-cyan-shadow: -1.5px;
+  --glitch-yellow-shadow: 1.5px;
   --glitch-grit-x: 0px;
   --glitch-grit-y: 0px;
   --glitch-opacity: 0;
@@ -93,7 +95,11 @@
     calc(var(--glitch-y) - var(--glitch-band)) 0
       calc(100% - var(--glitch-y) - var(--glitch-band)) 0
   );
-  text-shadow: var(--glitch-red-shadow) 0 0 var(--color-accent-blue);
+  /* Inner blue primary; outer cyan halo at ~1.5× offset, half alpha */
+  text-shadow:
+    var(--glitch-red-shadow) 0 0 var(--color-accent-blue),
+    var(--glitch-cyan-shadow) -1px 0
+      color-mix(in oklch, var(--color-accent-cyan), transparent 50%);
   transform: translate3d(var(--glitch-shift), 0, 0);
 }
 
@@ -103,7 +109,11 @@
     calc(var(--glitch-tail-y) - var(--glitch-tail-band)) 0
       calc(100% - var(--glitch-tail-y) - var(--glitch-tail-band)) 0
   );
-  text-shadow: var(--glitch-blue-shadow) 0 0 var(--color-accent-red);
+  /* Inner red primary; outer yellow halo at ~1.5× offset, half alpha */
+  text-shadow:
+    var(--glitch-blue-shadow) 0 0 var(--color-accent-red),
+    var(--glitch-yellow-shadow) 1px 0
+      color-mix(in oklch, var(--color-accent-yellow), transparent 50%);
   transform: translate3d(var(--glitch-counter-shift), 0, 0);
 }
 
@@ -129,7 +139,8 @@
 .glitch-text__trail::before {
   content: attr(data-text);
   color: oklch(0.968 0.006 75 / 0.82);
-  background-image: repeating-linear-gradient(
+  background-image:
+    repeating-linear-gradient(
       90deg,
       oklch(0.968 0.006 75 / 0.08) 0,
       oklch(0.968 0.006 75 / 0.08) 7px,
@@ -179,9 +190,14 @@
   );
   -webkit-mask-position: var(--glitch-grit-x) var(--glitch-grit-y);
   mask-position: var(--glitch-grit-x) var(--glitch-grit-y);
+  /* Inner red/blue primaries first; outer cyan/yellow at ~1.5× offset, half alpha */
   text-shadow:
     var(--glitch-red-shadow) 0 0 var(--color-accent-red),
-    var(--glitch-blue-shadow) 0 0 var(--color-accent-blue);
+    var(--glitch-blue-shadow) 0 0 var(--color-accent-blue),
+    var(--glitch-cyan-shadow) -1px 0
+      color-mix(in oklch, var(--color-accent-cyan), transparent 50%),
+    var(--glitch-yellow-shadow) 1px 0
+      color-mix(in oklch, var(--color-accent-yellow), transparent 50%);
 }
 
 @media (prefers-reduced-motion: reduce) {
