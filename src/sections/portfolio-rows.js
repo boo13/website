@@ -563,7 +563,8 @@ function renderShotMedia(src, p, clickLightboxVideo = null) {
   if (isVideoSrc(src)) {
     const mp4 = encodeSrc(src.replace(VIDEO_EXT_RE, '.mp4'));
     const webm = encodeSrc(src.replace(VIDEO_EXT_RE, '.webm'));
-    const videoEl = `<video muted autoplay loop playsinline preload="auto" disableremoteplayback>
+    const poster = encodeSrc(src.replace(VIDEO_EXT_RE, '.poster.webp'));
+    const videoEl = `<video class="portfolio-shot__video" muted loop playsinline preload="none" poster="${poster}" disableremoteplayback>
       <source src="${webm}" type="video/webm">
       <source src="${mp4}" type="video/mp4">
     </video>`;
@@ -584,6 +585,33 @@ function renderShotMedia(src, p, clickLightboxVideo = null) {
        aria-label="View screenshot from ${escAttr(p.title)}">
       <img src="${thumbSrc(src)}" alt="" loading="lazy" draggable="false">
     </a>`;
+}
+
+// Lazy-play inline shot videos: with preload="none" they fetch nothing until
+// they near the viewport, then play; pausing off-screen frees decode cost.
+function wireLazyVideos(container) {
+  const videos = [...container.querySelectorAll('.portfolio-shot__video')];
+  if (!videos.length) return () => {};
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    },
+    { rootMargin: '200px 0px' }
+  );
+
+  videos.forEach((video) => observer.observe(video));
+  return () => {
+    observer.disconnect();
+    videos.forEach((video) => video.pause());
+  };
 }
 
 function normalizeSectionText(value) {
@@ -987,6 +1015,8 @@ export async function initPortfolioRows(data) {
     container.querySelectorAll('.portfolio-row__strip').forEach((strip) => {
       strip.style.gap = `${cfg.gap}px`;
     });
+
+    return wireLazyVideos(container);
   });
 
   if (isDebug) {

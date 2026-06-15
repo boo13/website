@@ -103,24 +103,14 @@ textarea {
   pointer-events: none;
 }
 
-.contact-background::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('/images/landing-poster.jpg') center 62% / cover;
-  opacity: 0.54;
-  filter: saturate(0.82) contrast(1.16) brightness(1.08);
-  transform: scale(1.035);
-}
-
 .contact-background__video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.26;
-  filter: saturate(0.75) contrast(1.1);
+  opacity: 0.94;
+  filter: saturate(0.82) contrast(1.12);
   transform: scale(1.04);
 }
 
@@ -133,22 +123,23 @@ textarea {
 .contact-background__shade {
   background:
     radial-gradient(
-      circle at 72% 42%,
-      oklch(0.2 0 0 / 0.12) 0%,
-      oklch(0.14 0 0 / 0.4) 34%,
-      oklch(0.06 0 0 / 0.86) 78%
+      circle at 28% 42%,
+      oklch(0.2 0 0 / 0.08) 0%,
+      oklch(0.14 0 0 / 0.32) 38%,
+      oklch(0.06 0 0 / 0.8) 80%
     ),
     linear-gradient(
       90deg,
-      oklch(0.06 0 0 / 0.94) 0%,
-      oklch(0.08 0 0 / 0.7) 42%,
-      oklch(0.08 0 0 / 0.62) 100%
+      oklch(0.08 0 0 / 0.36) 0%,
+      oklch(0.08 0 0 / 0.66) 52%,
+      oklch(0.06 0 0 / 0.95) 100%
     ),
     linear-gradient(
       180deg,
-      oklch(0 0 0 / 0.68) 0%,
-      oklch(0 0 0 / 0.28) 44%,
-      oklch(0 0 0 / 0.74) 100%
+      oklch(0 0 0 / 0.45) 0%,
+      oklch(0 0 0 / 0.12) 32%,
+      oklch(0 0 0 / 0.5) 70%,
+      oklch(0 0 0 / 0.92) 100%
     );
 }
 
@@ -262,13 +253,13 @@ textarea {
   max-width: var(--grid-max-width);
   min-height: 100vh;
   margin: 0 auto;
-  padding: clamp(8rem, 18vh, 13rem) var(--container-padding)
+  padding: clamp(6rem, 12vh, 9rem) var(--container-padding)
     clamp(5rem, 12vh, 8rem);
 }
 
 .contact-intro {
   grid-column: 1 / 4;
-  align-self: center;
+  align-self: end;
   max-width: 620px;
 }
 
@@ -355,7 +346,7 @@ textarea {
 
 .contact-panel {
   grid-column: 4 / 7;
-  align-self: center;
+  align-self: end;
   position: relative;
   padding-left: clamp(1.5rem, 3vw, 3.75rem);
 }
@@ -484,10 +475,15 @@ textarea {
 }
 
 .contact-status {
-  min-height: 1.5rem;
-  margin: 1rem 0 0;
+  min-height: 0;
+  margin: 0;
   color: oklch(0.968 0.006 75 / 0.62);
   font-size: 0.875rem;
+}
+
+.contact-status:not(:empty) {
+  margin-top: 1rem;
+  min-height: 1.5rem;
 }
 
 .contact-footer {
