@@ -57,10 +57,22 @@ body.has-custom-cursor .gallery-card {
   height: 100%;
 }
 
-.custom-cursor-corner-lt { top: 0; left: 0; }
-.custom-cursor-corner-rt { top: 0; right: 0; }
-.custom-cursor-corner-lb { bottom: 0; left: 0; }
-.custom-cursor-corner-rb { bottom: 0; right: 0; }
+.custom-cursor-corner-lt {
+  top: 0;
+  left: 0;
+}
+.custom-cursor-corner-rt {
+  top: 0;
+  right: 0;
+}
+.custom-cursor-corner-lb {
+  bottom: 0;
+  left: 0;
+}
+.custom-cursor-corner-rb {
+  bottom: 0;
+  right: 0;
+}
 
 .custom-cursor-corner-lb::before,
 .custom-cursor-corner-lb::after,
