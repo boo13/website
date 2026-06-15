@@ -364,7 +364,9 @@ body.show-grid .bg-columns {
 
 .hero-title > .hero-name-glitch.glitch-text {
   position: absolute;
-  inset: 0;
+  /* Extend 0.3em below the hero-title box to include the "y" descender —
+     line-height:1 excludes it from the layout box, clip-path would clip it. */
+  inset: 0 0 -0.3em;
   z-index: 6;
   display: block;
   font-family: var(--ff-display);
