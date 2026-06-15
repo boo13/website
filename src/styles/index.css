@@ -354,7 +354,10 @@ body.show-grid .bg-columns {
 
 /* Subtle grain in the glyph fill (print-like texture). Clipped background paints
    the glyph area opaquely, so the inherited text-shadow stays behind it. Trail
-   clones keep their inline color; the fixed name transitions color and is excluded. */
+   clones keep their inline color; the fixed name transitions color and is excluded.
+   padding-bottom extends the background painting area into the descender zone —
+   background-clip:text only paints where glyphs are, so without it the "y"
+   descender (which extends below the 1em content box) becomes transparent. */
 .hero-name:not(.hero-name-fixed) .word:not(.color-trail-word) {
   background-color: var(--color-offwhite);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='0.07' filter='url(%23noise)'/%3E%3C/svg%3E");
@@ -363,6 +366,7 @@ body.show-grid .bg-columns {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  padding-bottom: 0.3em;
 }
 
 .hero-title {
