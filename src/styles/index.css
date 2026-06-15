@@ -335,12 +335,21 @@ body.show-grid .bg-columns {
   will-change: transform, opacity;
 }
 
-/* Mask wrapper for rise effect */
+/* Mask wrapper for rise effect — SplitText creates span.word-mask (not div).
+   padding-bottom must cover the Ivypresto Display descender; with line-height:1
+   the layout box ends at the em square, cutting the "y" descender without it. */
+.hero-name .word-mask,
+.hero-name-fixed .word-mask {
+  display: inline-block;
+  padding-bottom: 0.25em;
+}
+
+/* Kept for backward-compat if SplitText ever changes wrapper element type */
 .hero-name div,
 .hero-name-fixed div {
   display: inline-block;
   overflow: hidden;
-  padding-bottom: 0.15em;
+  padding-bottom: 0.25em;
 }
 
 /* Subtle grain in the glyph fill (print-like texture). Clipped background paints
@@ -364,9 +373,7 @@ body.show-grid .bg-columns {
 
 .hero-title > .hero-name-glitch.glitch-text {
   position: absolute;
-  /* Extend 0.3em below the hero-title box to include the "y" descender —
-     line-height:1 excludes it from the layout box, clip-path would clip it. */
-  inset: 0 0 -0.3em;
+  inset: 0;
   z-index: 6;
   display: block;
   font-family: var(--ff-display);
