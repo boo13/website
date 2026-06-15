@@ -84,3 +84,37 @@
 .glightbox-clean .gslide-media {
   box-shadow: none !important;
 }
+
+/* ── Video sizing: respect the clip's own aspect ratio ─────────────────────
+   GLightbox runs videos through Plyr, which forces a 16:9 wrapper. That
+   letterboxes portrait clips (black side bars) and stretches the control bar
+   full width. Let the <video> size to its intrinsic ratio, capped by the
+   viewport, so portrait and landscape both fit and the controls track the
+   video width. */
+.glightbox-container .gslide-video,
+.glightbox-container .gslide-video .gvideo-wrapper {
+  width: auto !important;
+  max-width: 90vw;
+}
+
+.glightbox-container .gslide-video .plyr {
+  width: auto !important;
+  height: auto !important;
+  max-width: 90vw;
+}
+
+.glightbox-container .gslide-video .plyr__video-wrapper {
+  aspect-ratio: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.glightbox-container .gslide-video video {
+  position: relative !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 90vw !important;
+  max-height: 85vh !important;
+  display: block;
+  margin: 0 auto;
+}

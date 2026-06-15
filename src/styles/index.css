@@ -645,6 +645,10 @@ body.show-grid .bg-columns {
   opacity: 1;
 }
 
+body.has-custom-cursor .gallery-card-corner {
+  display: none;
+}
+
 /* When the cursor viewfinder is wrapping a card, hide the card's own corners to avoid a doubled frame */
 .gallery-card.is-cursor-snapping .gallery-card-corner {
   opacity: 0;
