@@ -505,8 +505,8 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.94;
-  filter: saturate(0.82) contrast(1.12);
+  opacity: 1;
+  filter: saturate(0.9) contrast(1.08);
   transform: scale(1.04);
 }
 
@@ -526,9 +526,9 @@ body::before {
     ),
     linear-gradient(
       90deg,
-      oklch(0.08 0 0 / 0.36) 0%,
-      oklch(0.08 0 0 / 0.66) 52%,
-      oklch(0.06 0 0 / 0.95) 100%
+      oklch(0.06 0 0 / 0.95) 0%,
+      oklch(0.08 0 0 / 0.66) 48%,
+      oklch(0.08 0 0 / 0.18) 100%
     ),
     linear-gradient(
       180deg,

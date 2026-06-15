@@ -110,8 +110,7 @@ export function initPortfolioGate({ slug, onUnlock }) {
         <div class="portfolio-gate__grain"></div>
       </div>
       <div class="portfolio-gate__panel">
-        <p class="portfolio-gate__kicker portfolio-gate__reveal portfolio-gate__reveal--1">Private Portfolio</p>
-        <h1 class="portfolio-gate__title portfolio-gate__reveal portfolio-gate__reveal--2">Enter password to view.</h1>
+        <h1 class="portfolio-gate__title portfolio-gate__reveal portfolio-gate__reveal--2">Portfolio</h1>
         <form class="portfolio-gate__form portfolio-gate__reveal portfolio-gate__reveal--3" autocomplete="off" novalidate>
           <label class="portfolio-gate__label" for="portfolio-gate-input">Password</label>
           <div class="portfolio-gate__input-row">
