@@ -343,13 +343,22 @@ body.show-grid .bg-columns {
 
 .hero-title {
   position: relative;
+  width: fit-content;
+  max-width: 100%;
 }
 
-.hero-name-glitch {
+.hero-title > .hero-name-glitch.glitch-text {
   position: absolute;
   inset: 0;
-  pointer-events: auto;
+  z-index: 6;
   display: block;
+  font-family: var(--ff-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-offwhite);
+  text-shadow: 0 4px 30px oklch(0 0 0 / 0.5);
+  pointer-events: auto;
 }
 
 .hero-subtitle {
