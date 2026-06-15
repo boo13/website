@@ -30,7 +30,7 @@
   /* Portfolio-specific */
   --shot-gap: 18px;
   --edge-pan-zone: clamp(3rem, 9vw, 10rem);
-  --row-padding: clamp(2.5rem, 6vh, 5rem);
+  --row-padding: clamp(1.25rem, 3vh, 2.5rem);
 }
 
 /* =====================================================
