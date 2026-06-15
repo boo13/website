@@ -32,28 +32,59 @@ export function initCustomCursor() {
   const BASE_W = 40;
   const BASE_H = 22;
   const SNAP_PAD = 10;
+  const DOT_IDLE_OPACITY = 1;
+  const DOT_ACTIVE_OPACITY = 0.35;
 
   let lastMouseX = 0;
   let lastMouseY = 0;
-  // When true the frame is wrapped to a target and must NOT follow the cursor.
+  let hasMousePosition = false;
+  let dotTargetOpacity = DOT_IDLE_OPACITY;
+  // When true the frame is wrapped to a target and must not follow the cursor.
   let framing = false;
 
   const dotX = gsap.quickTo(dot, 'x', { duration: 0.3, ease: 'power2.out' });
   const dotY = gsap.quickTo(dot, 'y', { duration: 0.3, ease: 'power2.out' });
-  // quickTo's internal tween gets its PropTweens killed by snapToTarget's
-  // overwrite:'auto', leaving the frame frozen after any snap. Rebuild on
-  // demand in resetFrame so the catch-up and subsequent mousemoves work.
-  let frameX = gsap.quickTo(frame, 'x', { duration: 0.7, ease: 'power2.out' });
-  let frameY = gsap.quickTo(frame, 'y', { duration: 0.7, ease: 'power2.out' });
-  function rebuildFrameQuick() {
-    frameX = gsap.quickTo(frame, 'x', { duration: 0.7, ease: 'power2.out' });
-    frameY = gsap.quickTo(frame, 'y', { duration: 0.7, ease: 'power2.out' });
+  const frameX = gsap.quickTo(frame, 'x', {
+    duration: 0.7,
+    ease: 'power2.out',
+  });
+  const frameY = gsap.quickTo(frame, 'y', {
+    duration: 0.7,
+    ease: 'power2.out',
+  });
+  const snapFrameX = gsap.quickTo(frame, 'x', {
+    duration: 0.4,
+    ease: 'power3.out',
+  });
+  const snapFrameY = gsap.quickTo(frame, 'y', {
+    duration: 0.4,
+    ease: 'power3.out',
+  });
+  const snapFrameW = gsap.quickTo(frame, 'width', {
+    duration: 0.4,
+    ease: 'power3.out',
+  });
+  const snapFrameH = gsap.quickTo(frame, 'height', {
+    duration: 0.4,
+    ease: 'power3.out',
+  });
+
+  function setDotOpacity(opacity, duration = 0.3) {
+    dotTargetOpacity = opacity;
+    gsap.to(dot, { opacity, scale: 1, duration, overwrite: 'auto' });
   }
 
   function handleMouseMove(e) {
-    gsap.to([dot, frame], { opacity: 1, duration: 0.3, overwrite: 'auto' });
+    hasMousePosition = true;
     lastMouseX = e.clientX;
     lastMouseY = e.clientY;
+    gsap.to(frame, { opacity: 1, duration: 0.3, overwrite: 'auto' });
+    gsap.to(dot, {
+      opacity: dotTargetOpacity,
+      scale: 1,
+      duration: 0.3,
+      overwrite: 'auto',
+    });
     dotX(e.clientX);
     dotY(e.clientY);
     if (!framing) {
@@ -74,26 +105,29 @@ export function initCustomCursor() {
     };
   }
 
-  function setFrameToSnapTarget(duration = 0) {
+  function setFrameToSnapTarget() {
     if (!snappedEl) return;
     const { x, y, w, h } = snapFrameToEl(snappedEl);
-    const vars = { x, y, width: w, height: h, overwrite: 'auto' };
-    if (duration > 0) {
-      gsap.to(frame, { ...vars, duration, ease: 'power2.out' });
-    } else {
-      gsap.set(frame, vars);
-    }
+    snapFrameX(x);
+    snapFrameY(y);
+    snapFrameW(w);
+    snapFrameH(h);
   }
 
   let lastScrollY = window.scrollY;
+  let lastTickScrollX = window.scrollX;
+  let lastTickScrollY = window.scrollY;
+  let scrollRetargetUntil = 0;
   let scrollReturnTimer;
   function handleScroll() {
+    const currentScrollY = window.scrollY;
+    const delta = currentScrollY - lastScrollY;
+    lastScrollY = currentScrollY;
+    scrollRetargetUntil = performance.now() + 900;
     // Snapped re-pinning is handled per-frame by onTick (gsap.ticker) so it
     // stays in sync with ScrollSmoother's transform-based scroll. Nothing to do
     // here when framing — just handle the non-snapped cursor nudge effect.
     if (framing) return;
-    const delta = window.scrollY - lastScrollY;
-    lastScrollY = window.scrollY;
     const offset = Math.min(Math.max(delta * 1.2, -5), 5);
     frameY(lastMouseY + offset);
     clearTimeout(scrollReturnTimer);
@@ -102,7 +136,7 @@ export function initCustomCursor() {
 
   function handleInteractiveEnter() {
     const d = 5;
-    gsap.to(dot, { scale: 0, duration: 0.3, overwrite: 'auto' });
+    setDotOpacity(DOT_ACTIVE_OPACITY);
     gsap.to(corners.lt, {
       x: -d,
       y: -d,
@@ -134,7 +168,7 @@ export function initCustomCursor() {
   }
 
   function handleInteractiveLeave() {
-    gsap.to(dot, { scale: 1, duration: 0.3, overwrite: 'auto' });
+    setDotOpacity(DOT_IDLE_OPACITY);
     Object.values(corners).forEach((c) =>
       gsap.to(c, {
         x: 0,
@@ -147,73 +181,28 @@ export function initCustomCursor() {
   }
 
   let snappedEl = null;
-  let snappedResizeObserver = null;
-  // True only after the snap-in tween completes; prevents per-frame gsap.set
-  // from fighting the tween while it animates.
-  let tracking = false;
 
-  function onTick() {
-    if (framing && snappedEl && tracking) setFrameToSnapTarget(0);
-  }
-
-  function stopObservingSnapTarget() {
-    snappedResizeObserver?.disconnect();
-    snappedResizeObserver = null;
-  }
-
-  function snapToTarget(e) {
-    const el = e.currentTarget;
+  function snapToTarget(el) {
     framing = true;
-    tracking = false;
-    stopObservingSnapTarget();
     snappedEl = el;
     el.classList.add('is-cursor-snapping');
-    gsap.to(dot, { scale: 0, duration: 0.2, overwrite: 'auto' });
-    // CSS centers base frame via top/left = -BASE/2; offset x/y so the resized frame stays centered on target.
-    const { x, y, w, h } = snapFrameToEl(el);
-    gsap.to(frame, {
-      x,
-      y,
-      width: w,
-      height: h,
-      duration: 0.45,
-      ease: 'power3.out',
-      overwrite: 'auto',
-      onComplete: () => {
-        tracking = true;
-      },
-    });
-    if ('ResizeObserver' in window) {
-      snappedResizeObserver = new ResizeObserver(() => {
-        if (framing && snappedEl === el) setFrameToSnapTarget(0.08);
-      });
-      snappedResizeObserver.observe(el);
-    }
+    setDotOpacity(DOT_ACTIVE_OPACITY, 0.2);
+    setFrameToSnapTarget();
   }
 
   function resetFrame() {
     framing = false;
-    tracking = false;
-    stopObservingSnapTarget();
     if (snappedEl) {
       snappedEl.classList.remove('is-cursor-snapping');
       snappedEl = null;
     }
-    // Rebuild the position quickTos — snap's gsap.to(...overwrite:'auto') strips
-    // their internal PropTweens, so they silently no-op until recreated.
-    rebuildFrameQuick();
     // Kick them toward the last cursor position so the frame catches up even
     // without a follow-up mousemove (snap target scrolling out of view, etc).
     frameX(lastMouseX);
     frameY(lastMouseY);
-    gsap.to(dot, { scale: 1, duration: 0.3, overwrite: 'auto' });
-    gsap.to(frame, {
-      width: BASE_W,
-      height: BASE_H,
-      duration: 0.4,
-      ease: 'power2.out',
-      overwrite: 'auto',
-    });
+    setDotOpacity(DOT_IDLE_OPACITY);
+    snapFrameW(BASE_W);
+    snapFrameH(BASE_H);
     Object.values(corners).forEach((c) =>
       gsap.to(c, {
         x: 0,
@@ -225,16 +214,12 @@ export function initCustomCursor() {
     );
   }
 
-  document.addEventListener('mousemove', handleMouseMove);
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  gsap.ticker.add(onTick);
-
   // Delegated hover handling so dynamically-added targets (e.g. credits titles
   // built after a fetch) are covered without re-wiring. mouseover/mouseout
   // bubble, unlike mouseenter/mouseleave.
   const SNAP_SELECTOR = '[data-cursor-snap]';
   const DEFAULT_SELECTOR = '[data-cursor-default]';
-  const EXPAND_SELECTOR = 'a, button, .gallery-card';
+  const EXPAND_SELECTOR = 'a, button';
   let activeSnapEl = null;
   let activeExpandEl = null;
 
@@ -249,50 +234,81 @@ export function initCustomCursor() {
     return { snap: null, expand };
   }
 
-  function handleMouseOver(e) {
-    const { snap, expand } = targetFor(e.target);
+  function resolveTargetAt(node) {
+    const { snap, expand } = targetFor(node);
 
-    if (snap && snap !== activeSnapEl) {
+    if (snap) {
       if (activeExpandEl) {
         handleInteractiveLeave();
         activeExpandEl = null;
       }
-      activeSnapEl = snap;
-      snapToTarget({ currentTarget: snap });
+      if (snap !== activeSnapEl) {
+        if (activeSnapEl) resetFrame();
+        activeSnapEl = snap;
+        snapToTarget(snap);
+      }
       return;
     }
 
-    if (expand && expand !== activeExpandEl) {
-      if (activeSnapEl) {
-        resetFrame();
-        activeSnapEl = null;
-      }
-      activeExpandEl = expand;
-      handleInteractiveEnter();
-    }
-  }
-
-  function handleMouseOut(e) {
-    // Only act when leaving the active target entirely (relatedTarget outside it).
-    const to = e.relatedTarget;
-    if (activeSnapEl && (!to || !activeSnapEl.contains(to))) {
+    if (activeSnapEl) {
       resetFrame();
       activeSnapEl = null;
     }
-    if (
-      activeExpandEl &&
-      (!to || !activeExpandEl.contains(to)) &&
-      !(to instanceof Element && to.closest(EXPAND_SELECTOR) === activeExpandEl)
-    ) {
+
+    if (expand) {
+      if (expand !== activeExpandEl) {
+        if (activeExpandEl) handleInteractiveLeave();
+        activeExpandEl = expand;
+        handleInteractiveEnter();
+      }
+      return;
+    }
+
+    if (activeExpandEl) {
       handleInteractiveLeave();
       activeExpandEl = null;
     }
   }
 
+  function onTick() {
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const scrollChanged =
+      scrollX !== lastTickScrollX || scrollY !== lastTickScrollY;
+
+    if (scrollChanged) {
+      lastTickScrollX = scrollX;
+      lastTickScrollY = scrollY;
+      scrollRetargetUntil = performance.now() + 900;
+    }
+
+    if (
+      hasMousePosition &&
+      (scrollChanged || performance.now() < scrollRetargetUntil)
+    ) {
+      resolveTargetAt(document.elementFromPoint(lastMouseX, lastMouseY));
+    }
+
+    if (framing && snappedEl) setFrameToSnapTarget();
+  }
+
+  function handleMouseOver(e) {
+    resolveTargetAt(e.target);
+  }
+
+  function handleMouseOut(e) {
+    resolveTargetAt(e.relatedTarget);
+  }
+
+  document.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  gsap.ticker.add(onTick);
+
   document.addEventListener('mouseover', handleMouseOver);
   document.addEventListener('mouseout', handleMouseOut);
 
   return () => {
+    if (snappedEl) snappedEl.classList.remove('is-cursor-snapping');
     document.body.classList.remove('has-custom-cursor');
     document.removeEventListener('mousemove', handleMouseMove);
     window.removeEventListener('scroll', handleScroll);

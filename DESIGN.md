@@ -124,7 +124,7 @@ The site is a cinematic portfolio — a title sequence and reel, not a SaaS land
 - *Video Hero:* Project video → Credits → Footer
 - *Case Study Editorial:* Key image → Intro → Image sections → Credits → Footer
 
-Project pages are intentionally darker and more focused than the homepage. They have no preloader, no custom cursor, and no ScrollSmoother.
+Project pages are intentionally darker and more focused than the homepage. They have no preloader and no ScrollSmoother. The custom cursor is initialized for pointer devices so project navigation/footer snap targets match the homepage interaction model.
 
 ---
 
@@ -601,15 +601,15 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 
 **Custom Cursor** (`src/components/custom-cursor.js`):
 - Viewfinder cursor: `.custom-cursor-dot` (small filled dot) + `.custom-cursor-frame` (16:9 box, base 40×22) with four `.custom-cursor-corner` L-bracket children. Both `position: fixed`, `mix-blend-mode: difference`.
-- `gsap.quickTo`: dot x/y `0.3s power2.out`, frame x/y `0.7s power2.out` (trailing effect)
-- `index.html` only (initialized in `main.js`). Skip on touch devices and `prefers-reduced-motion`.
+- `gsap.quickTo`: dot x/y `0.3s power2.out`, frame follow x/y `0.7s power2.out`, snap x/y/width/height `0.4s power3.out`
+- Initialized on the homepage (`main.js`) and project pages (`main-project.js`). Skip on touch devices and `prefers-reduced-motion`.
 - **Two hover behaviors**, selected per element:
-  - **Expand** (default for inline `a`, `button`): dot `scale→0`; corners translate outward 5px (`0.5s power2.out`). Mouseleave resets corners to 0 and dot to 1.
-  - **Snap-frame** (opt-in via `data-cursor-snap`): dot `scale→0` (0.2s); frame resizes + repositions to wrap the target's `getBoundingClientRect` + 10px pad, `0.45s power3.out`. A `framing` flag gates the `quickTo` follow so the frame stays locked to the target. Mouseleave resets frame to base 40×22 (`0.4s power2.out`).
+  - **Expand** (default for inline `a`, `button`): dot remains at the pointer and fades to `0.35` opacity; corners translate outward 5px (`0.5s power2.out`). Mouseleave resets corners to 0 and dot opacity to 1.
+  - **Snap-frame** (opt-in via `data-cursor-snap`): dot remains at the pointer and fades to `0.35` opacity; frame continuously tracks the target's live `getBoundingClientRect` + 10px pad with quickTo setters. Mouseleave resets frame to base 40×22 and dot opacity to 1.
 - **`data-cursor-snap` convention**: add the attribute to any element that should snap. Use it for well-bounded targets with a pleasing aspect ratio (buttons, gallery cards). Avoid it on tiny inline text links (use expand) and on full-width rows (a wrapped full-width row reads as a letterbox bar — snap an inner element like a title instead).
-  - Currently applied: `.cta-contact-btn`, `.newsletter-submit` (index.html), and `.gallery-card` (injected by `build/inject-gallery.js`).
-  - Gallery cards add `.is-cursor-snapping` while wrapped; CSS hides the card's own `.gallery-card-corner` to avoid a doubled frame.
-- Scroll: frame nudged `delta * 1.2` clamped ±5px, returns after 80ms (skipped while `framing`).
+  - Currently applied: `.cta-contact-btn`, `.newsletter-submit` (index.html), `.gallery-card` (injected by `build/inject-gallery.js`), project hero close links, project footer ticker links, and project back buttons.
+  - Gallery cards hide their own `.gallery-card-corner` whenever `body.has-custom-cursor` is present so the cursor frame is the only visible bracket system on pointer devices.
+- Scroll: free-follow frame nudged `delta * 1.2` clamped ±5px, returns after 80ms (skipped while `framing`). During and shortly after scroll, cursor targeting is re-evaluated with `document.elementFromPoint()` so scrubbed transform-driven gallery movement cannot leave stale hover/snap state under a stationary pointer.
 - **On-light gotcha**: the off-white frame + `mix-blend-mode: difference` reads well on dark and mid-tone backgrounds, but goes low-contrast on near-white surfaces (e.g. the inverted/expanded credits panel). Resolve per-section before snapping content over light backgrounds (see `cursor-lab.html` for on-light variant experiments).
 
 **Hero Z-Depth** (`src/sections/hero.js`):
