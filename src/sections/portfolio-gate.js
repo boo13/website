@@ -91,28 +91,48 @@ export function initPortfolioGate({ slug, onUnlock }) {
 
   mount.innerHTML = `
     <div class="portfolio-gate__overlay">
-      <form class="portfolio-gate__form" autocomplete="off" novalidate>
-        <label class="portfolio-gate__label" for="portfolio-gate-input">
-          Enter password to view
-        </label>
-        <div class="portfolio-gate__input-row">
-          <input
-            id="portfolio-gate-input"
-            class="portfolio-gate__input"
-            type="password"
-            autocomplete="current-password"
-            spellcheck="false"
-            placeholder="Password"
-            aria-describedby="portfolio-gate-error"
+      <div class="portfolio-gate__bg" aria-hidden="true">
+        <video
+          class="portfolio-gate__video"
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="/images/landing-poster.jpg"
+          crossorigin
+        >
+          <source
+            src="https://media.randycounsman.com/video/Beyond.the.Spotlight.10secReel.v01_1920x1080.webm"
+            type="video/webm"
           >
-          <button class="portfolio-gate__submit" type="submit" aria-label="Unlock">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-        <p class="portfolio-gate__error" id="portfolio-gate-error" role="alert" aria-live="polite"></p>
-      </form>
+        </video>
+        <div class="portfolio-gate__shade"></div>
+        <div class="portfolio-gate__grain"></div>
+      </div>
+      <div class="portfolio-gate__panel">
+        <p class="portfolio-gate__kicker portfolio-gate__reveal portfolio-gate__reveal--1">Private Portfolio</p>
+        <h1 class="portfolio-gate__title portfolio-gate__reveal portfolio-gate__reveal--2">Enter password to view.</h1>
+        <form class="portfolio-gate__form portfolio-gate__reveal portfolio-gate__reveal--3" autocomplete="off" novalidate>
+          <label class="portfolio-gate__label" for="portfolio-gate-input">Password</label>
+          <div class="portfolio-gate__input-row">
+            <input
+              id="portfolio-gate-input"
+              class="portfolio-gate__input"
+              type="password"
+              autocomplete="current-password"
+              spellcheck="false"
+              placeholder="Enter password"
+              aria-describedby="portfolio-gate-error"
+            >
+            <button class="portfolio-gate__submit" type="submit" aria-label="Unlock">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+          <p class="portfolio-gate__error" id="portfolio-gate-error" role="alert" aria-live="polite"></p>
+        </form>
+      </div>
     </div>`;
 
   const form = mount.querySelector('.portfolio-gate__form');

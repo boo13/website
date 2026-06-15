@@ -484,36 +484,142 @@ body::before {
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: var(--color-nearblack);
+  justify-content: flex-start;
+  padding: clamp(2rem, 8vh, 6rem) var(--grid-edge-offset);
+  background: oklch(0 0 0);
+  overflow: hidden;
+}
+
+/* Background video stack — mirrors contact.html treatment */
+.portfolio-gate__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.portfolio-gate__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.94;
+  filter: saturate(0.82) contrast(1.12);
+  transform: scale(1.04);
+}
+
+.portfolio-gate__shade,
+.portfolio-gate__grain {
+  position: absolute;
+  inset: 0;
+}
+
+.portfolio-gate__shade {
+  background:
+    radial-gradient(
+      circle at 28% 42%,
+      oklch(0.2 0 0 / 0.08) 0%,
+      oklch(0.14 0 0 / 0.32) 38%,
+      oklch(0.06 0 0 / 0.8) 80%
+    ),
+    linear-gradient(
+      90deg,
+      oklch(0.08 0 0 / 0.36) 0%,
+      oklch(0.08 0 0 / 0.66) 52%,
+      oklch(0.06 0 0 / 0.95) 100%
+    ),
+    linear-gradient(
+      180deg,
+      oklch(0 0 0 / 0.45) 0%,
+      oklch(0 0 0 / 0.12) 32%,
+      oklch(0 0 0 / 0.5) 70%,
+      oklch(0 0 0 / 0.92) 100%
+    );
+}
+
+.portfolio-gate__grain {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      oklch(1 0 0 / 0.018) 0,
+      oklch(1 0 0 / 0.018) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      oklch(0 0 0 / 0.02) 0,
+      oklch(0 0 0 / 0.02) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+  mix-blend-mode: overlay;
+  opacity: 0.38;
+}
+
+.portfolio-gate__panel {
+  position: relative;
+  z-index: 2;
+  width: min(460px, 100%);
+}
+
+.portfolio-gate__kicker {
+  margin: 0 0 clamp(1rem, 3vh, 2rem);
+  font-family: var(--ff-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: oklch(0.968 0.006 75 / 0.55);
+}
+
+.portfolio-gate__title {
+  margin: 0 0 clamp(2rem, 5vh, 3rem);
+  max-width: 12ch;
+  font-family: var(--ff-display);
+  font-size: clamp(2.25rem, 5.2vw, 4.25rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-offwhite);
+  text-wrap: balance;
+  text-shadow: 0 8px 45px oklch(0 0 0 / 0.52);
 }
 
 .portfolio-gate__form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  width: min(320px, calc(100vw - 3rem));
+  gap: 0.6rem;
+  width: min(360px, 100%);
 }
 
 .portfolio-gate__label {
   font-family: var(--ff-body);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: oklch(0.968 0.006 75 / 0.4);
+  color: oklch(0.968 0.006 75 / 0.46);
 }
 
 .portfolio-gate__input-row {
   display: flex;
   gap: 0;
-  border: 1px solid oklch(0.968 0.006 75 / 0.2);
-  border-radius: 2px;
+  background: oklch(0.968 0.006 75 / 0.04);
+  border: 1px solid oklch(0.968 0.006 75 / 0.22);
+  border-radius: 3px;
   overflow: hidden;
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.portfolio-gate__input-row:hover {
+  border-color: oklch(0.968 0.006 75 / 0.4);
 }
 
 .portfolio-gate__input-row:focus-within {
-  border-color: oklch(0.968 0.006 75 / 0.5);
+  border-color: oklch(0.968 0.006 75 / 0.78);
+  background: oklch(0.968 0.006 75 / 0.06);
 }
 
 .portfolio-gate__input {
@@ -521,9 +627,9 @@ body::before {
   background: transparent;
   border: none;
   outline: none;
-  padding: 0.6rem 0.75rem;
+  padding: 0.85rem 0.95rem;
   font-family: var(--ff-body);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: var(--color-offwhite);
   caret-color: var(--color-offwhite);
 }
@@ -535,8 +641,8 @@ body::before {
 .portfolio-gate__submit {
   background: transparent;
   border: none;
-  border-left: 1px solid oklch(0.968 0.006 75 / 0.2);
-  padding: 0 0.75rem;
+  border-left: 1px solid oklch(0.968 0.006 75 / 0.22);
+  padding: 0 0.95rem;
   color: oklch(0.968 0.006 75 / 0.5);
   cursor: pointer;
   display: flex;
@@ -582,4 +688,42 @@ body::before {
 
 .portfolio-gate__input-row.is-shaking {
   animation: portfolio-gate-shake 0.35s ease;
+}
+
+/* Staggered entrance — mirrors contact reveal */
+.portfolio-gate__reveal {
+  animation: portfolio-gate-reveal 1.05s var(--ease-out-expo) both;
+}
+
+.portfolio-gate__reveal--1 {
+  animation-delay: 120ms;
+}
+
+.portfolio-gate__reveal--2 {
+  animation-delay: 190ms;
+}
+
+.portfolio-gate__reveal--3 {
+  animation-delay: 310ms;
+}
+
+@keyframes portfolio-gate-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-gate__video {
+    display: none;
+  }
+
+  .portfolio-gate__reveal {
+    animation-duration: 1ms;
+  }
 }
