@@ -214,7 +214,7 @@ body.show-grid .bg-columns {
   font-weight: 300;
   line-height: 1;
   color: var(--color-offwhite);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   text-shadow: 0 4px 30px oklch(0 0 0 / 0.5);
   opacity: 0;
 }
@@ -396,7 +396,7 @@ body.show-grid .bg-columns {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: oklch(0.968 0.006 75 / 0.7);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-shadow: 0 2px 15px oklch(0 0 0 / 0.4);
   opacity: 0;
   transform: translateY(20px);
