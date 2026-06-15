@@ -223,13 +223,18 @@ export function initHeroApertureDual() {
 
     if (heroSocial) {
       const icons = [...heroSocial.querySelectorAll('.social-icon svg')];
-      // Reveal container first (no y movement — icons carry the rise)
-      heroChromeTl.set(heroSocial, { autoAlpha: 1 }, heroSubtitle ? 0.18 : 0);
+      // Reveal container (snap to natural position, clearing CSS translateY(20px))
+      heroChromeTl.set(
+        heroSocial,
+        { autoAlpha: 1, y: 0 },
+        heroSubtitle ? 0.18 : 0
+      );
       if (icons.length) {
         // Icons rise from below with vertical CA trails — same distance as
         // the hero title words (28px). Vertical shadows trail beneath each
         // icon during the fast opening of expo.out, contracting to zero as
-        // the icon decelerates into place. Looks like motion-blur, not copies.
+        // the icon decelerates into place. Reads as motion-blur, not copies.
+        // Stagger at 0.15s keeps each icon's rise visually distinct.
         heroChromeTl.fromTo(
           icons,
           {
@@ -251,7 +256,7 @@ export function initHeroApertureDual() {
               'drop-shadow(0 0 0 oklch(0.85 0.17 85 / 0))',
             duration: 0.85,
             ease: 'expo.out',
-            stagger: 0.1,
+            stagger: 0.15,
             clearProps: 'opacity,transform,filter',
           },
           heroSubtitle ? 0.18 : 0
