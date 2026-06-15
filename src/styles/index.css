@@ -367,6 +367,7 @@ body.show-grid .bg-columns {
   background-clip: text;
   color: transparent;
   padding-bottom: 0.3em;
+  margin-bottom: -0.3em;
 }
 
 .hero-title {
