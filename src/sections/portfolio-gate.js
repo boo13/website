@@ -168,7 +168,9 @@ export function initPortfolioGate({ slug, onUnlock }) {
       mount.remove();
       onUnlock(data);
     } catch {
-      errorEl.textContent = 'Incorrect password.';
+      const contactUrl =
+        '/contact.html?subject=Requesting%20Portfolio%20access&message=Hey%20Randy%2C%20Can%20I%20check%20out%20your%20portfolio%3F%20I%27m...';
+      errorEl.innerHTML = `wrong password — need it? just ask… <a href="${contactUrl}">CONTACT</a>`;
       shakeInput(inputRow);
       input.value = '';
       input.focus();

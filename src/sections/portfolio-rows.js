@@ -559,7 +559,7 @@ function resolveVideoUrl(src) {
   return `${CDN_BASE}/${cleanSource}`;
 }
 
-function renderShotMedia(src, p, clickLightboxVideo = null) {
+function renderShotMedia(src, p, idx, hasWatchVideo) {
   if (isVideoSrc(src)) {
     const mp4 = encodeSrc(src.replace(VIDEO_EXT_RE, '.mp4'));
     const webm = encodeSrc(src.replace(VIDEO_EXT_RE, '.webm'));
@@ -568,8 +568,8 @@ function renderShotMedia(src, p, clickLightboxVideo = null) {
       <source src="${webm}" type="video/webm">
       <source src="${mp4}" type="video/mp4">
     </video>`;
-    if (clickLightboxVideo) {
-      const lightboxUrl = resolveVideoUrl(clickLightboxVideo);
+    if (idx === 0 && !hasWatchVideo && p.firstShotLightboxVideo) {
+      const lightboxUrl = resolveVideoUrl(p.firstShotLightboxVideo);
       return `<a class="glightbox-portfolio"
            data-gallery="portfolio-${escAttr(p.id)}"
            data-type="video"
@@ -577,6 +577,30 @@ function renderShotMedia(src, p, clickLightboxVideo = null) {
            aria-label="Watch ${escAttr(p.title)}">${videoEl}</a>`;
     }
     return videoEl;
+  }
+  if (idx === 0) {
+    if (!hasWatchVideo && p.firstShotLightboxVideo) {
+      const lightboxUrl = resolveVideoUrl(p.firstShotLightboxVideo);
+      return `<a class="glightbox-portfolio"
+           data-gallery="portfolio-${escAttr(p.id)}"
+           data-type="video"
+           href="${escAttr(lightboxUrl)}"
+           aria-label="Watch ${escAttr(p.title)}">
+          <img src="${thumbSrc(src)}" alt="" loading="lazy" draggable="false">
+        </a>`;
+    }
+    if (hasWatchVideo) {
+      return `<img src="${thumbSrc(src)}" alt="" loading="lazy" draggable="false">`;
+    }
+  }
+  if (hasWatchVideo) {
+    return `<a class="glightbox-portfolio"
+         data-gallery="portfolio-${escAttr(p.id)}"
+         data-type="image"
+         href="${largeSrc(src)}"
+         aria-label="View screenshot from ${escAttr(p.title)}">
+        <img src="${thumbSrc(src)}" alt="" loading="lazy" draggable="false">
+      </a>`;
   }
   return `<a class="glightbox-portfolio-img"
        data-gallery="portfolio-img-${escAttr(p.id)}"
@@ -727,6 +751,7 @@ function renderViewPill(p) {
 
 function renderProjectRow(p) {
   const screenshots = p.screenshots ?? [];
+  const hasWatchVideo = !!(p.lightboxVideo || p.videoUrl);
   const shotsMarkup = screenshots.length
     ? `
       <div class="portfolio-row__strip-frame">
@@ -735,8 +760,8 @@ function renderProjectRow(p) {
             ${screenshots
               .map(
                 (src, i) => `
-              <li class="portfolio-shot">
-                ${renderShotMedia(src, p, i === 0 ? (p.firstShotLightboxVideo ?? null) : null)}
+              <li class="portfolio-shot"${i === 0 && hasWatchVideo ? ' data-portfolio-first-shot' : ''}>
+                ${renderShotMedia(src, p, i, hasWatchVideo)}
               </li>`
               )
               .join('')}
@@ -788,6 +813,9 @@ function initLightbox() {
       videosWidth: '90vw',
       openEffect: 'fade',
       closeEffect: 'fade',
+      slideEffect: 'slide',
+      preload: false,
+      moreLength: 0,
     });
   }
 
@@ -962,6 +990,14 @@ export async function initPortfolioRows(data) {
   renderRows(container, projects, sectionIds);
   wireScrollSpy();
   initLightbox();
+
+  container.querySelectorAll('[data-portfolio-first-shot]').forEach((firstShot) => {
+    const row = firstShot.closest('.portfolio-row');
+    const watchPill = row?.querySelector('.portfolio-view-pill.glightbox-portfolio');
+    if (!watchPill) return;
+    firstShot.style.cursor = 'pointer';
+    firstShot.addEventListener('click', () => watchPill.click());
+  });
 
   const params = new URLSearchParams(window.location.search);
   const isDebug = params.get('debug') === '1';

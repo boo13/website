@@ -667,6 +667,13 @@ body::before {
   min-height: 1em;
 }
 
+.portfolio-gate__error a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  letter-spacing: 0.08em;
+}
+
 @keyframes portfolio-gate-shake {
   0%,
   100% {

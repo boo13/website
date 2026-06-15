@@ -11,6 +11,18 @@ if (year) {
   year.textContent = new Date().getFullYear().toString();
 }
 
+const params = new URLSearchParams(window.location.search);
+const subjectParam = params.get('subject');
+const messageParam = params.get('message');
+if (subjectParam) {
+  const subjectEl = document.getElementById('project-context');
+  if (subjectEl) subjectEl.value = subjectParam;
+}
+if (messageParam) {
+  const messageEl = document.getElementById('message');
+  if (messageEl) messageEl.value = messageParam;
+}
+
 if (form && submit) {
   form.addEventListener('submit', () => {
     submit.setAttribute('disabled', true);
