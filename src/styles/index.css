@@ -343,13 +343,22 @@ body.show-grid .bg-columns {
 
 .hero-title {
   position: relative;
+  width: fit-content;
+  max-width: 100%;
 }
 
-.hero-name-glitch {
+.hero-title > .hero-name-glitch.glitch-text {
   position: absolute;
   inset: 0;
-  pointer-events: auto;
+  z-index: 6;
   display: block;
+  font-family: var(--ff-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-offwhite);
+  text-shadow: 0 4px 30px oklch(0 0 0 / 0.5);
+  pointer-events: auto;
 }
 
 .hero-subtitle {
@@ -806,8 +815,8 @@ body.show-grid .bg-columns {
 /* Double class (0-2-0) beats the shared .credit-row__platform rule (0-1-0) below. */
 .credit-row__platform .credit-row__platform-logo {
   display: block;
-  width: 7.75rem;
-  height: 1.75rem;
+  width: 8.6rem;
+  height: 1.85rem;
   object-fit: contain;
   object-position: left center;
   opacity: 0.78;
@@ -817,14 +826,14 @@ body.show-grid .bg-columns {
     opacity var(--credits-dim-duration) var(--credits-dim-ease);
 }
 
-.credit-row__platform-logo--standard {
-  width: 6.5rem;
-  height: 2.15rem;
+.credit-row__platform .credit-row__platform-logo--standard {
+  width: 6.3rem;
+  height: 1.85rem;
 }
 
-.credit-row__platform-logo--mark {
-  width: 3.35rem;
-  height: 2.35rem;
+.credit-row__platform .credit-row__platform-logo--mark {
+  width: 4.0rem;
+  height: 1.5rem;
 }
 
 .credit-row__platform .credit-row__platform-logo--preserve-contrast {
@@ -1442,6 +1451,21 @@ body.show-grid .bg-columns {
   .gallery-progress {
     display: none;
   }
+
+  .credit-row__platform .credit-row__platform-logo {
+    width: 7.7rem;
+    height: 1.65rem;
+  }
+
+  .credit-row__platform .credit-row__platform-logo--standard {
+    width: 5.6rem;
+    height: 1.65rem;
+  }
+
+  .credit-row__platform .credit-row__platform-logo--mark {
+    width: 3.6rem;
+    height: 1.35rem;
+  }
 }
 
 /* Hide hover corners on touch devices (prevents sticky :hover on tap) */
@@ -1518,19 +1542,19 @@ body.show-grid .bg-columns {
     gap: 0 1rem;
   }
 
-  .credit-row__platform-logo {
+  .credit-row__platform .credit-row__platform-logo {
     width: 6.5rem;
-    height: 1.5rem;
+    height: 1.4rem;
   }
 
-  .credit-row__platform-logo--standard {
-    width: 5.5rem;
-    height: 1.8rem;
+  .credit-row__platform .credit-row__platform-logo--standard {
+    width: 4.8rem;
+    height: 1.4rem;
   }
 
-  .credit-row__platform-logo--mark {
-    width: 2.85rem;
-    height: 2rem;
+  .credit-row__platform .credit-row__platform-logo--mark {
+    width: 3.1rem;
+    height: 1.15rem;
   }
 
   .credit-row__details-inner {

@@ -88,14 +88,10 @@ export function initCustomCursor() {
   let lastScrollY = window.scrollY;
   let scrollReturnTimer;
   function handleScroll() {
-    // While snapped, re-pin the frame to the target's new viewport position
-    // each scroll tick. Without this, position:fixed leaves the frame parked
-    // at its initial screen coords while the target moves with the page.
-    if (framing && snappedEl) {
-      setFrameToSnapTarget();
-      lastScrollY = window.scrollY;
-      return;
-    }
+    // Snapped re-pinning is handled per-frame by onTick (gsap.ticker) so it
+    // stays in sync with ScrollSmoother's transform-based scroll. Nothing to do
+    // here when framing — just handle the non-snapped cursor nudge effect.
+    if (framing) return;
     const delta = window.scrollY - lastScrollY;
     lastScrollY = window.scrollY;
     const offset = Math.min(Math.max(delta * 1.2, -5), 5);
@@ -152,6 +148,13 @@ export function initCustomCursor() {
 
   let snappedEl = null;
   let snappedResizeObserver = null;
+  // True only after the snap-in tween completes; prevents per-frame gsap.set
+  // from fighting the tween while it animates.
+  let tracking = false;
+
+  function onTick() {
+    if (framing && snappedEl && tracking) setFrameToSnapTarget(0);
+  }
 
   function stopObservingSnapTarget() {
     snappedResizeObserver?.disconnect();
@@ -161,6 +164,7 @@ export function initCustomCursor() {
   function snapToTarget(e) {
     const el = e.currentTarget;
     framing = true;
+    tracking = false;
     stopObservingSnapTarget();
     snappedEl = el;
     el.classList.add('is-cursor-snapping');
@@ -175,6 +179,9 @@ export function initCustomCursor() {
       duration: 0.45,
       ease: 'power3.out',
       overwrite: 'auto',
+      onComplete: () => {
+        tracking = true;
+      },
     });
     if ('ResizeObserver' in window) {
       snappedResizeObserver = new ResizeObserver(() => {
@@ -186,6 +193,7 @@ export function initCustomCursor() {
 
   function resetFrame() {
     framing = false;
+    tracking = false;
     stopObservingSnapTarget();
     if (snappedEl) {
       snappedEl.classList.remove('is-cursor-snapping');
@@ -219,6 +227,7 @@ export function initCustomCursor() {
 
   document.addEventListener('mousemove', handleMouseMove);
   window.addEventListener('scroll', handleScroll, { passive: true });
+  gsap.ticker.add(onTick);
 
   // Delegated hover handling so dynamically-added targets (e.g. credits titles
   // built after a fetch) are covered without re-wiring. mouseover/mouseout
@@ -289,6 +298,7 @@ export function initCustomCursor() {
     window.removeEventListener('scroll', handleScroll);
     document.removeEventListener('mouseover', handleMouseOver);
     document.removeEventListener('mouseout', handleMouseOut);
+    gsap.ticker.remove(onTick);
     clearTimeout(scrollReturnTimer);
     dot.remove();
     frame.remove();
