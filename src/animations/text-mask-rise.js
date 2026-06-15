@@ -28,6 +28,7 @@ const toArray = (targets) => gsap.utils.toArray(targets).filter(Boolean);
 //
 // colorTrail: {
 //   colors: ['#00d4ff', '#ff3366'],
+//   opacities: [0.85, 0.85],   // optional per-layer peak opacity
 //   blendMode: 'screen',
 //   staggerOffset: 0.06,
 // }
@@ -96,6 +97,7 @@ export function textMaskRiseWords(targets, overrides = {}) {
   if (hasTrail) {
     const retainClones = !!settings.retainClones;
     const onCompleteCallback = settings.onComplete ?? null;
+    const onWordsCompleteCallback = settings.onWordsComplete ?? null;
     const trailCleanups = [];
     let trailsCleaned = false;
 
@@ -135,6 +137,7 @@ export function textMaskRiseWords(targets, overrides = {}) {
       // staggerOffset controls the delay (in seconds) per layer.
       trail.layers.forEach((layer, i) => {
         const layerDelay = (i + 1) * staggerOffset;
+        const layerOpacity = trailConfig.opacities?.[i] ?? 0.85;
 
         // Hide clones until their delayed entrance
         tl.set(layer.words, { opacity: 0 }, 0);
@@ -144,7 +147,7 @@ export function textMaskRiseWords(targets, overrides = {}) {
           layer.words,
           { opacity: 0, y: settings.yOffset },
           {
-            opacity: 0.85,
+            opacity: layerOpacity,
             y: 0,
             duration: settings.duration,
             ease: settings.ease,
@@ -166,6 +169,15 @@ export function textMaskRiseWords(targets, overrides = {}) {
         );
       });
     });
+
+    // Fire onWordsComplete when the last main word finishes rising — before
+    // trail clone fade-outs complete. Lets callers start follow-on UI earlier.
+    if (onWordsCompleteCallback) {
+      const allWords = splits.flatMap((s) => s.words);
+      const wordsEndPos =
+        settings.stagger * (allWords.length - 1) + settings.duration;
+      tl.call(onWordsCompleteCallback, [], wordsEndPos);
+    }
 
     // When retainClones is true, clones stay in the DOM at opacity:0 after
     // the rise animation. The onComplete callback receives them for scroll-driven

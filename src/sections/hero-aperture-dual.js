@@ -12,6 +12,15 @@ import {
 
 gsap.registerPlugin(SplitText);
 
+// Per-layer opacity caps for the hero name color trail (blue, red, cyan, yellow) —
+// outer spectral hues stay fainter than the inner pair.
+const TRAIL_LAYER_OPACITY = [
+  TRAIL_OPACITY,
+  TRAIL_OPACITY,
+  TRAIL_OPACITY * 0.65,
+  TRAIL_OPACITY * 0.65,
+];
+
 const isMobile = window.innerWidth < 768;
 const prefersReducedMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
@@ -112,7 +121,7 @@ export function initHeroApertureDual() {
 
   // Hero content hidden until textMaskRiseWords reveals it
   if (heroSubtitle) gsap.set(heroSubtitle, { autoAlpha: 0, y: 20 });
-  if (heroSocial) gsap.set(heroSocial, { autoAlpha: 0, y: 20 });
+  if (heroSocial) gsap.set(heroSocial, { autoAlpha: 0 });
 
   // ─── Ticker state (velocity-driven chromatic trail) ───────────────────────
   let tickerFn = null;
@@ -130,9 +139,12 @@ export function initHeroApertureDual() {
       .to(svg, {
         y: -5,
         opacity: 0.96,
+        // Chained drop-shadows compound: cyan/yellow halo the blue/red fringe
         filter:
           'drop-shadow(-2px 4px 2px oklch(0.804 0.146 220 / 0.9)) ' +
-          'drop-shadow(2px 2px 2px oklch(0.656 0.235 13 / 0.9))',
+          'drop-shadow(2px 2px 2px oklch(0.656 0.235 13 / 0.9)) ' +
+          'drop-shadow(-3px 6px 3px oklch(0.86 0.15 195 / 0.5)) ' +
+          'drop-shadow(3px 3px 3px oklch(0.85 0.17 85 / 0.5))',
         duration: 0.14,
         ease: 'expo.out',
       })
@@ -140,16 +152,21 @@ export function initHeroApertureDual() {
         y: 2,
         filter:
           'drop-shadow(-1px -2px 2px oklch(0.804 0.146 220 / 0.66)) ' +
-          'drop-shadow(1px 3px 2px oklch(0.656 0.235 13 / 0.66))',
+          'drop-shadow(1px 3px 2px oklch(0.656 0.235 13 / 0.66)) ' +
+          'drop-shadow(-2px -3px 3px oklch(0.86 0.15 195 / 0.35)) ' +
+          'drop-shadow(2px 4px 3px oklch(0.85 0.17 85 / 0.35))',
         duration: 0.16,
         ease: 'power2.out',
       })
       .to(svg, {
         y: 0,
         opacity: 1,
+        // Must stay four shadows — GSAP only interpolates matching filter structures
         filter:
           'drop-shadow(0 0 0 oklch(0.804 0.146 220 / 0)) ' +
-          'drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0))',
+          'drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0)) ' +
+          'drop-shadow(0 0 0 oklch(0.86 0.15 195 / 0)) ' +
+          'drop-shadow(0 0 0 oklch(0.85 0.17 85 / 0))',
         duration: 0.48,
         ease: 'expo.out',
         clearProps: 'transform,opacity,filter',
@@ -206,38 +223,43 @@ export function initHeroApertureDual() {
 
     if (heroSocial) {
       const icons = [...heroSocial.querySelectorAll('.social-icon svg')];
-      heroChromeTl.to(
+      // Reveal container (snap to natural position, clearing CSS translateY(20px))
+      heroChromeTl.set(
         heroSocial,
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 1.2,
-          ease: 'expo.out',
-        },
+        { autoAlpha: 1, y: 0 },
         heroSubtitle ? 0.18 : 0
       );
       if (icons.length) {
+        // Icons rise from below with vertical CA trails — same distance as
+        // the hero title words (28px). Vertical shadows trail beneath each
+        // icon during the fast opening of expo.out, contracting to zero as
+        // the icon decelerates into place. Reads as motion-blur, not copies.
+        // Stagger at 0.15s keeps each icon's rise visually distinct.
         heroChromeTl.fromTo(
           icons,
           {
-            y: 10,
+            y: 28,
             opacity: 0,
             filter:
-              'drop-shadow(-4px 8px 0 oklch(0.804 0.146 220)) ' +
-              'drop-shadow(4px 4px 0 oklch(0.656 0.235 13))',
+              'drop-shadow(0 3px 1.5px oklch(0.804 0.146 220 / 0.7)) ' +
+              'drop-shadow(0 1.5px 1px oklch(0.656 0.235 13 / 0.7)) ' +
+              'drop-shadow(0 4.5px 2px oklch(0.86 0.15 195 / 0.35)) ' +
+              'drop-shadow(0 2px 1px oklch(0.85 0.17 85 / 0.35))',
           },
           {
             y: 0,
             opacity: 1,
             filter:
               'drop-shadow(0 0 0 oklch(0.804 0.146 220 / 0)) ' +
-              'drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0))',
-            duration: 0.72,
+              'drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0)) ' +
+              'drop-shadow(0 0 0 oklch(0.86 0.15 195 / 0)) ' +
+              'drop-shadow(0 0 0 oklch(0.85 0.17 85 / 0))',
+            duration: 0.85,
             ease: 'expo.out',
-            stagger: 0.08,
+            stagger: 0.15,
             clearProps: 'opacity,transform,filter',
           },
-          heroSubtitle ? 0.42 : 0.18
+          heroSubtitle ? 0.18 : 0
         );
       }
     }
@@ -400,14 +422,21 @@ export function initHeroApertureDual() {
       stagger: 0.12,
       yOffset: 30,
       colorTrail: {
-        colors: ['oklch(0.804 0.146 220)', 'oklch(0.656 0.235 13)'],
+        // Inner blue/red hug the glyphs; outer cyan/yellow trail further, fainter
+        colors: [
+          'oklch(0.804 0.146 220)',
+          'oklch(0.656 0.235 13)',
+          'oklch(0.86 0.15 195)',
+          'oklch(0.85 0.17 85)',
+        ],
+        opacities: TRAIL_LAYER_OPACITY,
         blendMode: 'screen',
-        staggerOffset: 0.15,
+        staggerOffset: 0.1,
       },
       retainClones: true,
+      onWordsComplete: playHeroChromeEntrance,
       onComplete: (clones) => {
         const allClones = clones.flat();
-        playHeroChromeEntrance();
         if (!allClones.length) return;
 
         const numLayers = clones.length;
@@ -444,9 +473,10 @@ export function initHeroApertureDual() {
             );
             clones.forEach((layerClones, i) => {
               const fraction = (i + 1) / numLayers;
+              const layerMax = TRAIL_LAYER_OPACITY[i] ?? TRAIL_OPACITY;
               gsap.set(layerClones, {
                 y: baseYOff * fraction,
-                opacity: Math.min(baseOp * fraction, TRAIL_OPACITY),
+                opacity: Math.min(baseOp * fraction, layerMax),
               });
             });
           } else if (isActive && !isSpringBack) {

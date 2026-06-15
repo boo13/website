@@ -15,6 +15,8 @@
   --color-gray: oklch(0.51 0 0);
   --color-accent-blue: oklch(0.804 0.146 220);
   --color-accent-red: oklch(0.656 0.235 13);
+  --color-accent-cyan: oklch(0.86 0.15 195);
+  --color-accent-yellow: oklch(0.85 0.17 85);
 
   /* Typography */
   --ff-display: 'ivypresto-display', Georgia, serif;
@@ -212,7 +214,7 @@ body.show-grid .bg-columns {
   font-weight: 300;
   line-height: 1;
   color: var(--color-offwhite);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   text-shadow: 0 4px 30px oklch(0 0 0 / 0.5);
   opacity: 0;
 }
@@ -333,12 +335,39 @@ body.show-grid .bg-columns {
   will-change: transform, opacity;
 }
 
-/* Mask wrapper for rise effect */
+/* Mask wrapper for rise effect — SplitText creates span.word-mask (not div).
+   padding-bottom must cover the Ivypresto Display descender; with line-height:1
+   the layout box ends at the em square, cutting the "y" descender without it. */
+.hero-name .word-mask,
+.hero-name-fixed .word-mask {
+  display: inline-block;
+  padding-bottom: 0.25em;
+}
+
+/* Kept for backward-compat if SplitText ever changes wrapper element type */
 .hero-name div,
 .hero-name-fixed div {
   display: inline-block;
   overflow: hidden;
-  padding-bottom: 0.15em;
+  padding-bottom: 0.25em;
+}
+
+/* Subtle grain in the glyph fill (print-like texture). Clipped background paints
+   the glyph area opaquely, so the inherited text-shadow stays behind it. Trail
+   clones keep their inline color; the fixed name transitions color and is excluded.
+   padding-bottom extends the background painting area into the descender zone —
+   background-clip:text only paints where glyphs are, so without it the "y"
+   descender (which extends below the 1em content box) becomes transparent. */
+.hero-name:not(.hero-name-fixed) .word:not(.color-trail-word) {
+  background-color: var(--color-offwhite);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='0.07' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 160px;
+  background-blend-mode: multiply;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 0.3em;
+  margin-bottom: -0.3em;
 }
 
 .hero-title {
@@ -367,7 +396,7 @@ body.show-grid .bg-columns {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: oklch(0.968 0.006 75 / 0.7);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-shadow: 0 2px 15px oklch(0 0 0 / 0.4);
   opacity: 0;
   transform: translateY(20px);
@@ -691,6 +720,12 @@ body.show-grid .bg-columns {
   --credits-ca-duration: 1500ms;
   --credits-ca-blue: oklch(0.804 0.146 220);
   --credits-ca-red: oklch(0.656 0.235 13);
+  /* Outer spectral layer — lighter hues at larger diagonal offset, more blur, lower alpha */
+  --credits-ca-cyan: oklch(0.86 0.15 195);
+  --credits-ca-yellow: oklch(0.85 0.17 85);
+  --credits-ca-offset-2: 3px;
+  --credits-ca-y-2: 1px;
+  --credits-ca-blur-2: 3px;
   /* Precomputed to avoid typed calc() — Firefox/older Safari don't support multiplying px vars */
   --credits-ca-neg-offset: -2px;
   --credits-ca-transparent-pct: 10%;
@@ -698,6 +733,13 @@ body.show-grid .bg-columns {
   --credits-ca-neg-half-offset: -1px;
   --credits-ca-double-blur: 4px;
   --credits-ca-transparent-bloom-pct: 46%;
+  --credits-ca-neg-offset-2: -3px;
+  --credits-ca-neg-y-2: -1px;
+  --credits-ca-transparent-pct-2: 40%;
+  --credits-ca-half-offset-2: 1.5px;
+  --credits-ca-neg-half-offset-2: -1.5px;
+  --credits-ca-double-blur-2: 6px;
+  --credits-ca-transparent-bloom-pct-2: 70%;
   position: relative;
   padding: var(--section-padding) 0;
   background: var(--credits-bg);
@@ -771,12 +813,19 @@ body.show-grid .bg-columns {
   --credit-ca-neg-offset: 0px;
   --credit-ca-blur: 0px;
   --credit-ca-transparent-pct: 100%;
+  --credit-ca-offset-2: 0px;
+  --credit-ca-neg-offset-2: 0px;
+  --credit-ca-y-2: 0px;
+  --credit-ca-neg-y-2: 0px;
+  --credit-ca-blur-2: 0px;
+  --credit-ca-transparent-pct-2: 100%;
   font-family: var(--ff-display);
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 400;
   /* Shrink-wrap so the cursor viewfinder snaps tightly to the title, not the full 1fr track. */
   justify-self: start;
   width: fit-content;
+  /* Primaries first (paint on top); outer cyan/yellow layers carry the diagonal */
   text-shadow:
     var(--credit-ca-neg-offset) 0 var(--credit-ca-blur)
       color-mix(
@@ -789,6 +838,19 @@ body.show-grid .bg-columns {
         in oklch,
         var(--credits-ca-red),
         transparent var(--credit-ca-transparent-pct)
+      ),
+    var(--credit-ca-neg-offset-2) var(--credit-ca-neg-y-2)
+      var(--credit-ca-blur-2)
+      color-mix(
+        in oklch,
+        var(--credits-ca-cyan),
+        transparent var(--credit-ca-transparent-pct-2)
+      ),
+    var(--credit-ca-offset-2) var(--credit-ca-y-2) var(--credit-ca-blur-2)
+      color-mix(
+        in oklch,
+        var(--credits-ca-yellow),
+        transparent var(--credit-ca-transparent-pct-2)
       );
 }
 
@@ -832,7 +894,7 @@ body.show-grid .bg-columns {
 }
 
 .credit-row__platform .credit-row__platform-logo--mark {
-  width: 4.0rem;
+  width: 4rem;
   height: 1.5rem;
 }
 

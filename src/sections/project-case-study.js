@@ -252,12 +252,24 @@ function initChatGraphic(ctx) {
           trigger: section,
           start: 'top 85%',
           end: 'bottom top',
-          onEnter: () => { intervalId = setInterval(step, 350); },
-          onLeave: () => { clearInterval(intervalId); intervalId = null; },
-          onEnterBack: () => { intervalId = setInterval(step, 350); },
-          onLeaveBack: () => { clearInterval(intervalId); intervalId = null; },
+          onEnter: () => {
+            intervalId = setInterval(step, 350);
+          },
+          onLeave: () => {
+            clearInterval(intervalId);
+            intervalId = null;
+          },
+          onEnterBack: () => {
+            intervalId = setInterval(step, 350);
+          },
+          onLeaveBack: () => {
+            clearInterval(intervalId);
+            intervalId = null;
+          },
         });
-        return () => { clearInterval(intervalId); };
+        return () => {
+          clearInterval(intervalId);
+        };
       });
     }
 
