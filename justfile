@@ -96,6 +96,10 @@ portfolio-encrypt-all:
 images-optimize *ARGS:
     node scripts/optimize-portfolio-images.mjs {{ ARGS }}
 
+# Deploy the portfolio-unlock Cloudflare Worker
+worker-deploy:
+    cd worker/portfolio-unlock && npx wrangler deploy
+
 # Run a full visual audit across desktop, tablet, and phone sizes
 visual-audit:
     #!/usr/bin/env bash

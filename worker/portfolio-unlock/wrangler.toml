@@ -1,0 +1,15 @@
+name = "portfolio-unlock"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+[[routes]]
+pattern = "www.randycounsman.com/api/portfolio-unlock"
+zone_name = "randycounsman.com"
+
+[[kv_namespaces]]
+binding = "UNLOCK_LOG"
+id = "4445c51869f24a2ea3749548ff52f370"
+
+# Secrets — set via: wrangler secret put <NAME>
+#   RESEND_API_KEY  — Resend API key (resend.com, free tier)
+#   NOTIFY_EMAIL    — destination address (defaults to randycounsman@gmail.com in code)

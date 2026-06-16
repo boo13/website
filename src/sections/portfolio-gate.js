@@ -10,6 +10,8 @@
  * Unlock persists for the tab session via sessionStorage (clears on tab close).
  */
 
+import { trackPortfolioUnlock } from '../utils/track-portfolio-unlock.js';
+
 const SESSION_KEY_PREFIX = 'portfolio-unlock-';
 
 function sessionKey(slug) {
@@ -165,6 +167,7 @@ export function initPortfolioGate({ slug, onUnlock }) {
       }
 
       sessionStorage.setItem(sessionKey(slug), JSON.stringify(data));
+      if (!payload.dev) trackPortfolioUnlock(slug);
       mount.remove();
       onUnlock(data);
     } catch {
