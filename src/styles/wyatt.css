@@ -3,65 +3,8 @@
  * Standalone parallax rack-focus effect
  */
 
-/* =====================================================
-   CSS VARIABLES
-====================================================== */
-:root {
-  /* Colors (OKLCH) */
-  --color-offwhite: oklch(0.968 0.006 75);
-  --color-nearblack: oklch(0.14 0 0);
-  --color-charcoal: oklch(0.2 0 0);
-
-  /* Typography */
-  --ff-display: 'ivypresto-display', Georgia, serif;
-  --ff-body:
-    'aktiv-grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-  /* Spacing */
-  --section-padding: clamp(4rem, 10vh, 8rem);
-  --container-padding: clamp(1.5rem, 5vw, 4rem);
-
-  /* Animation */
-  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
-}
-
-/* =====================================================
-   RESET & BASE
-====================================================== */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-  color: #f7f4f0;
-}
-
-body {
-  font-family: var(--ff-body);
-  background: var(--color-nearblack);
-  color: var(--color-offwhite);
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@import './tokens.css';
+@import './base.css';
 
 /* =====================================================
    PARALLAX RACK-FOCUS SECTION
@@ -220,15 +163,3 @@ a {
   }
 }
 
-/* =====================================================
-   REDUCED MOTION
-====================================================== */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}

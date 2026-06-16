@@ -145,8 +145,6 @@ button {
   border-color: oklch(0.72 0.13 34 / 0.58);
 }
 
-.media-state__inner p,
-.media-control-group p,
 .media-count,
 .media-item__topline,
 .media-item__meta {
@@ -160,6 +158,11 @@ button {
 
 .media-state__inner p,
 .media-control-group p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-transform: uppercase;
   color: var(--ml-accent);
 }
 

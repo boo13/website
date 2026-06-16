@@ -1,0 +1,48 @@
+/**
+ * Design tokens — single source of truth for shared CSS custom properties.
+ * Import this file first from any page stylesheet that needs these values.
+ */
+
+:root {
+  /* ── Colors (OKLCH) ───────────────────────────────────────────── */
+  --color-offwhite: oklch(0.968 0.006 75);
+  --color-cream: oklch(0.918 0.011 77);
+  --color-nearblack: oklch(0.14 0 0);
+  --color-charcoal: oklch(0.2 0 0);
+
+  /* Spectral accent palette — also used for chromatic-aberration effects */
+  --color-accent-blue: oklch(0.804 0.146 220);
+  --color-accent-red: oklch(0.656 0.235 13);
+  --color-accent-cyan: oklch(0.86 0.15 195);
+  --color-accent-yellow: oklch(0.85 0.17 85);
+
+  /* ── Typography ───────────────────────────────────────────────── */
+  --ff-display: 'ivypresto-display', Georgia, serif;
+  --ff-body:
+    'aktiv-grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ── Easing ───────────────────────────────────────────────────── */
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+
+  /* ── Duration ─────────────────────────────────────────────────── */
+  --dur-instant: 200ms;
+  --dur-quick: 400ms;
+  --dur-medium: 700ms;
+  --dur-slow: 1.2s;
+  --dur-very-slow: 2s;
+  --dur-credits-enter: 600ms;
+
+  /* ── Spacing ──────────────────────────────────────────────────── */
+  --section-padding: clamp(4rem, 10vh, 8rem);
+  --container-padding: clamp(1.5rem, 5vw, 4rem);
+
+  /* ── Grid ─────────────────────────────────────────────────────── */
+  --grid-columns: 6;
+  --grid-gutter: 20px;
+  --grid-max-width: 1400px;
+  --grid-edge-offset: max(
+    var(--container-padding),
+    calc((100vw - var(--grid-max-width)) / 2 + var(--container-padding))
+  );
+}

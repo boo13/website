@@ -1,44 +1,8 @@
-:root {
-  --color-offwhite: oklch(0.968 0.006 75);
-  --color-nearblack: oklch(0.14 0 0);
-  --color-charcoal: oklch(0.2 0 0);
-  --ff-display: 'ivypresto-display', Georgia, serif;
-  --ff-body:
-    'aktiv-grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --container-padding: clamp(1.5rem, 5vw, 4rem);
-  --grid-columns: 6;
-  --grid-gutter: 20px;
-  --grid-max-width: 1400px;
-  --grid-edge-offset: max(
-    var(--container-padding),
-    calc((100vw - var(--grid-max-width)) / 2 + var(--container-padding))
-  );
-  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --dur-instant: 200ms;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-  background: var(--color-nearblack);
-  color: var(--color-offwhite);
-}
+@import './tokens.css';
+@import './base.css';
 
 body {
   min-height: 100vh;
-  margin: 0;
-  font-family: var(--ff-body);
-  color: var(--color-offwhite);
-  background: var(--color-nearblack);
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body::before {
@@ -683,15 +647,6 @@ textarea {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 1ms !important;
-  }
-
   .contact-background__video {
     display: none;
   }
