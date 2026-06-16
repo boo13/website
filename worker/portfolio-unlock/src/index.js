@@ -1,25 +1,13 @@
+import { guardRequest, hashIP } from '../../shared/utils.js';
+
 const KNOWN_SLUGS = new Set(['0626', 'design']);
 const RATE_LIMIT_TTL = 60 * 30; // 30 minutes — one notification per slug+IP per window
 
 export default {
   async fetch(request, env, ctx) {
-    if (request.method !== 'POST') {
-      return new Response(null, { status: 405 });
-    }
-
-    // Sanity-check origin — not real security (client is public), just noise reduction
-    const origin = request.headers.get('Origin') ?? '';
-    const referer = request.headers.get('Referer') ?? '';
-    if (!origin.includes('randycounsman.com') && !referer.includes('randycounsman.com')) {
-      return new Response(null, { status: 204 });
-    }
-
-    let body;
-    try {
-      body = await request.json();
-    } catch {
-      return new Response(null, { status: 204 });
-    }
+    const guard = await guardRequest(request);
+    if (guard.response) return guard.response;
+    const body = guard.body;
 
     const { slug } = body;
     if (!KNOWN_SLUGS.has(slug)) {
@@ -55,8 +43,11 @@ export default {
 
 async function handleEvent(event, env) {
   try {
-    // Rate-limit: dedupe same slug+IP within the TTL window
+    // Derive one hash for both rate-limit key and persistence; never store raw IP.
     const ipHash = await hashIP(event.ip);
+    delete event.ip;
+    event.ip_hash = ipHash;
+
     const rlKey = `rl:${event.slug}:${ipHash}`;
 
     const recent = await env.UNLOCK_LOG.get(rlKey);
@@ -67,22 +58,14 @@ async function handleEvent(event, env) {
 
     await env.UNLOCK_LOG.put(rlKey, '1', { expirationTtl: RATE_LIMIT_TTL });
 
-    // Persist the event
-    const logKey = `log:${event.slug}:${event.timestamp}:${Math.random().toString(36).slice(2, 9)}`;
+    // Persist the event (ip_hash stored, raw ip already deleted)
+    const logKey = `log:${event.slug}:${event.timestamp}:${crypto.randomUUID()}`;
     await env.UNLOCK_LOG.put(logKey, JSON.stringify(event));
 
     await notify(event, env);
   } catch (err) {
     console.error('[handleEvent] uncaught error:', err);
   }
-}
-
-async function hashIP(ip) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(ip));
-  return Array.from(new Uint8Array(buf))
-    .slice(0, 8)
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
 }
 
 function summary(event) {
