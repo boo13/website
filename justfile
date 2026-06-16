@@ -100,6 +100,10 @@ images-optimize *ARGS:
 worker-deploy:
     cd worker/portfolio-unlock && npx wrangler deploy
 
+# Deploy the homepage-visit Cloudflare Worker
+worker-deploy-homepage:
+    cd worker/homepage-visit && npx wrangler deploy
+
 # Run a full visual audit across desktop, tablet, and phone sizes
 visual-audit:
     #!/usr/bin/env bash

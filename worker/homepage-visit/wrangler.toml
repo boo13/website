@@ -1,0 +1,24 @@
+name = "homepage-visit"
+main = "src/index.js"
+compatibility_date = "2026-06-15"
+
+[observability]
+enabled = false
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+
+[observability.traces]
+enabled = false
+
+[[routes]]
+pattern = "www.randycounsman.com/api/homepage-visit"
+zone_name = "randycounsman.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "homepage_visits"
+database_id = "cee4a018-8901-49e8-b603-7ceae0982cbb"   # fill in after: npx wrangler d1 create homepage_visits

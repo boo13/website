@@ -54,20 +54,27 @@ export default {
 };
 
 async function handleEvent(event, env) {
-  // Rate-limit: dedupe same slug+IP within the TTL window
-  const ipHash = await hashIP(event.ip);
-  const rlKey = `rl:${event.slug}:${ipHash}`;
+  try {
+    // Rate-limit: dedupe same slug+IP within the TTL window
+    const ipHash = await hashIP(event.ip);
+    const rlKey = `rl:${event.slug}:${ipHash}`;
 
-  const recent = await env.UNLOCK_LOG.get(rlKey);
-  if (recent) return;
+    const recent = await env.UNLOCK_LOG.get(rlKey);
+    if (recent) {
+      console.log(`[handleEvent] rate-limited: ${rlKey}`);
+      return;
+    }
 
-  await env.UNLOCK_LOG.put(rlKey, '1', { expirationTtl: RATE_LIMIT_TTL });
+    await env.UNLOCK_LOG.put(rlKey, '1', { expirationTtl: RATE_LIMIT_TTL });
 
-  // Persist the event
-  const logKey = `log:${event.slug}:${event.timestamp}:${Math.random().toString(36).slice(2, 9)}`;
-  await env.UNLOCK_LOG.put(logKey, JSON.stringify(event));
+    // Persist the event
+    const logKey = `log:${event.slug}:${event.timestamp}:${Math.random().toString(36).slice(2, 9)}`;
+    await env.UNLOCK_LOG.put(logKey, JSON.stringify(event));
 
-  await notify(event, env);
+    await notify(event, env);
+  } catch (err) {
+    console.error('[handleEvent] uncaught error:', err);
+  }
 }
 
 async function hashIP(ip) {
@@ -93,31 +100,38 @@ function summary(event) {
 
 async function notify(event, env) {
   const apiKey = env.RESEND_API_KEY;
-  if (!apiKey) return; // not configured — skip silently
+  if (!apiKey) {
+    console.error('[notify] RESEND_API_KEY not set');
+    return;
+  }
 
   const to = env.NOTIFY_EMAIL ?? 'randycounsman@gmail.com';
   const subject = `🔓 ${event.slug} portfolio unlocked — ${event.city}, ${event.country}`;
 
   // onboarding@resend.dev works without domain verification for sending to your own verified address.
   // Switch to "portfolio@randycounsman.com" once you've verified the domain in Resend.
-  await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: 'onboarding@resend.dev',
-      to: [to],
-      subject,
-      text: summary(event),
-    }),
-  });
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'portfolio@randycounsman.com',
+        to: [to],
+        subject,
+        text: summary(event),
+      }),
+    });
 
-  // Alternatively, for phone push with zero account setup:
-  // await fetch(`https://ntfy.sh/${env.NTFY_TOPIC}`, {
-  //   method: 'POST',
-  //   body: summary(event),
-  //   headers: { Title: subject, Priority: 'default' },
-  // });
+    if (!res.ok) {
+      const body = await res.text();
+      console.error(`[notify] Resend ${res.status}: ${body}`);
+    } else {
+      console.log(`[notify] sent to ${to} (${res.status})`);
+    }
+  } catch (err) {
+    console.error('[notify] fetch failed:', err);
+  }
 }

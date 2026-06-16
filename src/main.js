@@ -13,6 +13,7 @@ import { initCustomCursor } from './components/custom-cursor.js';
 import { runPreloader } from './components/preloader.js';
 import { initVideoLightbox } from './components/video-lightbox.js';
 import { initNav } from './sections/nav.js';
+import { trackHomepageVisit } from './utils/track-homepage-visit.js';
 
 let smoother;
 
@@ -28,6 +29,8 @@ function init() {
       smoothTouch: 0.1,
     });
   }
+
+  trackHomepageVisit();
 
   // Initialize sections (without hero animations yet)
   const cleanupCredits = initCredits();
