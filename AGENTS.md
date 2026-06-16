@@ -57,7 +57,7 @@ Root HTML pages and entry files:
 - aiplaylists.html       → src/main-aiplaylists.js
 - medialog.html          → src/main-medialog.js
 - cursor-lab.html / styleguide.html → inline CDN scripts (dev-only; NOT in Vite build inputs — not deployed)
-- sandbox.html → inline module (IS in Vite build inputs via discoverPages)
+- sandbox.html → inline module (IS in Vite build inputs — explicit rollupOptions.input entry)
 
 projects/                           # project detail pages (auto-discovered by Vite)
   wyatt-earp/index.html             # → /projects/wyatt-earp/
