@@ -1011,7 +1011,6 @@ export async function initPortfolioRows(data) {
       })()
     : null;
   const cfg = Object.assign({}, DEFAULT_CONFIG, savedCfg);
-  delete cfg.model;
   document.documentElement.style.setProperty('--shot-gap', `${cfg.gap}px`);
 
   const canHover = window.matchMedia(

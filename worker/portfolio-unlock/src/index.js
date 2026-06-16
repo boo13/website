@@ -108,8 +108,6 @@ async function notify(event, env) {
   const to = env.NOTIFY_EMAIL ?? 'randycounsman@gmail.com';
   const subject = `🔓 ${event.slug} portfolio unlocked — ${event.city}, ${event.country}`;
 
-  // onboarding@resend.dev works without domain verification for sending to your own verified address.
-  // Switch to "portfolio@randycounsman.com" once you've verified the domain in Resend.
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',

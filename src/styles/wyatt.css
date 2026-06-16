@@ -9,10 +9,8 @@
 :root {
   /* Colors (OKLCH) */
   --color-offwhite: oklch(0.968 0.006 75);
-  --color-cream: oklch(0.918 0.011 77);
   --color-nearblack: oklch(0.14 0 0);
   --color-charcoal: oklch(0.2 0 0);
-  --color-gray: oklch(0.51 0 0);
 
   /* Typography */
   --ff-display: 'ivypresto-display', Georgia, serif;
