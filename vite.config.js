@@ -3,56 +3,18 @@ import { readdirSync, existsSync, readFileSync } from 'node:fs';
 import { defineConfig } from 'vite';
 import injectGallery from './build/inject-gallery.js';
 
-// Auto-discover project pages: projects/*/index.html
-function discoverProjects() {
+// Auto-discover sub-directory pages: dir/*/index.html → { prefix-name: abs-path }
+function discoverPages(dir, prefix) {
   try {
     return Object.fromEntries(
-      readdirSync('projects', { withFileTypes: true })
+      readdirSync(dir, { withFileTypes: true })
         .filter(
           (d) =>
-            d.isDirectory() && existsSync(resolve('projects', d.name, 'index.html')),
+            d.isDirectory() && existsSync(resolve(dir, d.name, 'index.html')),
         )
         .map((d) => [
-          `project-${d.name}`,
-          resolve(import.meta.dirname, `projects/${d.name}/index.html`),
-        ]),
-    );
-  } catch {
-    return {};
-  }
-}
-
-// Auto-discover portfolio variant pages: portfolio/*/index.html
-function discoverPortfolio() {
-  try {
-    return Object.fromEntries(
-      readdirSync('portfolio', { withFileTypes: true })
-        .filter(
-          (d) =>
-            d.isDirectory() && existsSync(resolve('portfolio', d.name, 'index.html')),
-        )
-        .map((d) => [
-          `portfolio-${d.name}`,
-          resolve(import.meta.dirname, `portfolio/${d.name}/index.html`),
-        ]),
-    );
-  } catch {
-    return {};
-  }
-}
-
-// Auto-discover experiment pages: experiments/*/index.html
-function discoverExperiments() {
-  try {
-    return Object.fromEntries(
-      readdirSync('experiments', { withFileTypes: true })
-        .filter(
-          (d) =>
-            d.isDirectory() && existsSync(resolve('experiments', d.name, 'index.html')),
-        )
-        .map((d) => [
-          `experiment-${d.name}`,
-          resolve(import.meta.dirname, `experiments/${d.name}/index.html`),
+          `${prefix}-${d.name}`,
+          resolve(import.meta.dirname, `${dir}/${d.name}/index.html`),
         ]),
     );
   } catch {
@@ -127,9 +89,9 @@ export default defineConfig({
         sandbox: resolve(import.meta.dirname, 'sandbox.html'),
         wyatt: resolve(import.meta.dirname, 'case-study-wyatt.html'),
         experiments: resolve(import.meta.dirname, 'experiments/index.html'),
-        ...discoverPortfolio(),
-        ...discoverProjects(),
-        ...discoverExperiments(),
+        ...discoverPages('portfolio', 'portfolio'),
+        ...discoverPages('projects', 'project'),
+        ...discoverPages('experiments', 'experiment'),
       },
     },
   },

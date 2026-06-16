@@ -56,7 +56,8 @@ Root HTML pages and entry files:
 - case-study-wyatt.html  → src/main-wyatt.js
 - aiplaylists.html       → src/main-aiplaylists.js
 - medialog.html          → src/main-medialog.js
-- cursor-lab.html / sandbox.html / styleguide.html → src/main-experiments.js (dev/lab pages)
+- cursor-lab.html / styleguide.html → inline CDN scripts (dev-only; NOT in Vite build inputs — not deployed)
+- sandbox.html → inline module (IS in Vite build inputs — explicit rollupOptions.input entry)
 
 projects/                           # project detail pages (auto-discovered by Vite)
   wyatt-earp/index.html             # → /projects/wyatt-earp/
@@ -96,7 +97,7 @@ src/
   main-wyatt.js         # entry for case-study-wyatt.html (featured-work effects)
   main-aiplaylists.js   # entry for aiplaylists.html
   main-medialog.js      # entry for medialog.html
-  main-experiments.js   # entry for lab/dev pages (cursor-lab, sandbox, styleguide)
+  main-experiments.js   # entry for experiments/index.html only
 ```
 
 ## GSAP Conventions

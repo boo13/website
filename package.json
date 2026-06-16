@@ -1,7 +1,7 @@
 {
   "name": "website",
   "version": "1.0.0",
-  "description": "Static portfolio site for Randy Counsman with root pages for index2 (primary), index, contact, resume, examples_mockup, and a GSAP sandbox. Built with Vite + GSAP and modular JS/CSS under src/.",
+  "description": "Video portfolio site for Randy Counsman. Built with Vite + GSAP; entry points in src/, static assets in public/, video on Cloudflare R2.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -39,7 +39,6 @@
   "dependencies": {
     "glightbox": "^3.3.1",
     "gsap": "^3.14.2",
-    "three": "^0.183.1",
     "tweakpane": "^4.0.5"
   }
 }

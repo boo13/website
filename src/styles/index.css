@@ -3,87 +3,18 @@
  * Cinematic, scroll-driven portfolio experience
  */
 
+@import './tokens.css';
+@import './base.css';
+
 /* =====================================================
-   CSS VARIABLES & RESET
+   HOMEPAGE-SPECIFIC VARIABLES
 ====================================================== */
 :root {
-  /* Colors (OKLCH) */
-  --color-offwhite: oklch(0.968 0.006 75);
-  --color-cream: oklch(0.918 0.011 77);
-  --color-nearblack: oklch(0.14 0 0);
-  --color-charcoal: oklch(0.2 0 0);
-  --color-gray: oklch(0.51 0 0);
-  --color-accent-blue: oklch(0.804 0.146 220);
-  --color-accent-red: oklch(0.656 0.235 13);
-  --color-accent-cyan: oklch(0.86 0.15 195);
-  --color-accent-yellow: oklch(0.85 0.17 85);
-
-  /* Typography */
-  --ff-display: 'ivypresto-display', Georgia, serif;
-  --ff-body:
-    'aktiv-grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-  /* Spacing */
-  --section-padding: clamp(4rem, 10vh, 8rem);
-  --container-padding: clamp(1.5rem, 5vw, 4rem);
   --hero-social-hit-size: 44px;
   --hero-social-icon-size: 20px;
   --hero-social-grid-offset: calc(
     (var(--hero-social-icon-size) - var(--hero-social-hit-size)) / 2
   );
-
-  /* Animation */
-  --dur-instant: 200ms;
-  --dur-quick: 400ms;
-  --dur-medium: 700ms;
-  --dur-slow: 1.2s;
-  --dur-very-slow: 2s;
-  --dur-credits-enter: 600ms;
-  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
-
-  /* Grid system */
-  --grid-columns: 6;
-  --grid-gutter: 20px;
-  --grid-max-width: 1400px;
-  --grid-edge-offset: max(
-    var(--container-padding),
-    calc((100vw - var(--grid-max-width)) / 2 + var(--container-padding))
-  );
-}
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-  color: #f7f4f0;
-}
-
-body {
-  font-family: var(--ff-body);
-  background: var(--color-nearblack);
-  color: var(--color-offwhite);
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-img,
-video {
-  max-width: 100%;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 /* =====================================================
@@ -430,8 +361,8 @@ body.show-grid .bg-columns {
   overflow: visible;
   transform-origin: center;
   will-change: transform, filter;
-  filter: drop-shadow(0 0 0 oklch(0.804 0.146 220 / 0))
-    drop-shadow(0 0 0 oklch(0.656 0.235 13 / 0));
+  filter: drop-shadow(0 0 0 oklch(from var(--color-accent-blue) l c h / 0))
+    drop-shadow(0 0 0 oklch(from var(--color-accent-red) l c h / 0));
   transition:
     transform var(--dur-quick) var(--ease-out-expo),
     filter var(--dur-quick) var(--ease-out-expo),
@@ -441,8 +372,8 @@ body.show-grid .bg-columns {
 .social-icon:is(:hover, :focus-visible) svg {
   transform: translateY(-5px);
   opacity: 0.96;
-  filter: drop-shadow(-2px 4px 2px oklch(0.804 0.146 220 / 0.9))
-    drop-shadow(2px 2px 2px oklch(0.656 0.235 13 / 0.9));
+  filter: drop-shadow(-2px 4px 2px oklch(from var(--color-accent-blue) l c h / 0.9))
+    drop-shadow(2px 2px 2px oklch(from var(--color-accent-red) l c h / 0.9));
 }
 
 /* =====================================================
@@ -722,11 +653,11 @@ body.has-custom-cursor .gallery-card-corner {
   --credits-ca-offset: 2px;
   --credits-ca-blur: 2px;
   --credits-ca-duration: 1500ms;
-  --credits-ca-blue: oklch(0.804 0.146 220);
-  --credits-ca-red: oklch(0.656 0.235 13);
+  --credits-ca-blue: var(--color-accent-blue);
+  --credits-ca-red: var(--color-accent-red);
   /* Outer spectral layer — lighter hues at larger diagonal offset, more blur, lower alpha */
-  --credits-ca-cyan: oklch(0.86 0.15 195);
-  --credits-ca-yellow: oklch(0.85 0.17 85);
+  --credits-ca-cyan: var(--color-accent-cyan);
+  --credits-ca-yellow: var(--color-accent-yellow);
   --credits-ca-offset-2: 3px;
   --credits-ca-y-2: 1px;
   --credits-ca-blur-2: 3px;
@@ -1677,9 +1608,6 @@ body.has-custom-cursor .gallery-card-corner {
     --hero-social-hit-size: 40px;
   }
 
-  .hero-content {
-  }
-
   .hero-top-transition-gradient {
     height: clamp(2.5rem, 9vh, 4rem);
     background: linear-gradient(
@@ -1732,14 +1660,6 @@ body.has-custom-cursor .gallery-card-corner {
     position: static;
     overflow: visible;
     height: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 
   .hero-name,

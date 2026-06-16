@@ -7,7 +7,7 @@
 
 /* ── Backdrop ─────────────────────────────────────── */
 .glightbox-container .goverlay {
-  background: rgba(2, 2, 2, 0.96) !important;
+  background: oklch(0.14 0 0 / 0.96) !important;
 }
 
 /* ── Image sizing ─────────────────────────────────── */

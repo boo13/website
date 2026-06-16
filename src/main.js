@@ -14,15 +14,13 @@ import { runPreloader } from './components/preloader.js';
 import { initVideoLightbox } from './components/video-lightbox.js';
 import { initNav } from './sections/nav.js';
 import { trackHomepageVisit } from './utils/track-homepage-visit.js';
+import { prefersReducedMotion, onReady } from './utils/dom.js';
 
 let smoother;
 
 function init() {
   // Create ScrollSmoother (skip if user prefers reduced motion)
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion()) {
     smoother = ScrollSmoother.create({
       smooth: 1,
       effects: true,
@@ -75,7 +73,7 @@ function init() {
     if (typeof cleanupMarquee === 'function') cleanupMarquee();
     if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
     if (typeof cleanupLightbox === 'function') cleanupLightbox();
-    if (cleanupGallery) cleanupGallery.revert();
+    if (typeof cleanupGallery === 'function') cleanupGallery();
     if (typeof cleanupHero === 'function') cleanupHero();
     if (typeof cleanupNav === 'function') cleanupNav();
   });
@@ -93,8 +91,4 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+onReady(init);

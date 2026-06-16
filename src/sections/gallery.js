@@ -3,7 +3,8 @@
  * Vertical scroll triggers horizontal card movement
  */
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
-import { GALLERY_BREAKPOINT } from '../config.js';
+import { GALLERY_BREAKPOINT, SCRUB } from '../config.js';
+import { prefersReducedMotion, canHover } from '../utils/dom.js';
 
 export function initGallery() {
   const section = document.querySelector('.featured-work-section');
@@ -18,9 +19,6 @@ export function initGallery() {
 
   if (!section || !track || !cards.length) return;
 
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
   // sync with @media (max-width: 1024px) in index.css
   let isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
 
@@ -60,10 +58,8 @@ export function initGallery() {
   }
 
   function setupVideoHover() {
-    // Skip hover previews on touch devices
-    const isTouchDevice =
-      'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
+    // Skip hover previews on touch/pointer-coarse devices
+    if (!canHover()) return;
 
     cards.forEach((card) => {
       const video = card.querySelector('.card-video');
@@ -92,47 +88,17 @@ export function initGallery() {
     });
   }
 
-  function setupScrollVideoPlay(containerAnimation) {
+  function setupVideoPlay({ containerAnimation } = {}) {
+    const horizontal = !!containerAnimation;
     cards.forEach((card) => {
       const video = card.querySelector('.card-video');
       if (!video) return;
 
       ScrollTrigger.create({
         trigger: card,
-        containerAnimation,
-        start: 'left 80%',
-        end: 'right 20%',
-        onEnter: () => {
-          if (video.readyState === 0) video.load();
-          video.play().catch(() => {});
-          card.classList.add('is-playing');
-        },
-        onLeave: () => {
-          video.pause();
-          card.classList.remove('is-playing');
-        },
-        onEnterBack: () => {
-          video.play().catch(() => {});
-          card.classList.add('is-playing');
-        },
-        onLeaveBack: () => {
-          video.pause();
-          card.classList.remove('is-playing');
-        },
-      });
-    });
-  }
-
-  /** Vertical ScrollTrigger autoplay for mobile/tablet (no containerAnimation) */
-  function setupVerticalVideoPlay() {
-    cards.forEach((card) => {
-      const video = card.querySelector('.card-video');
-      if (!video) return;
-
-      ScrollTrigger.create({
-        trigger: card,
-        start: 'top 80%',
-        end: 'bottom 20%',
+        ...(containerAnimation ? { containerAnimation } : {}),
+        start: horizontal ? 'left 80%' : 'top 80%',
+        end: horizontal ? 'right 20%' : 'bottom 20%',
         onEnter: () => {
           if (video.readyState === 0) video.load();
           video.play().catch(() => {});
@@ -156,13 +122,25 @@ export function initGallery() {
 
   setupHoverCorners();
 
+  function handleResize() {
+    const wasCompact = isCompact;
+    isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
+    if (wasCompact !== isCompact) {
+      window.location.reload();
+      return;
+    }
+    if (!isCompact) {
+      ScrollTrigger.refresh();
+    }
+  }
+
   // --- Mobile / tablet / reduced-motion path ---
-  if (prefersReducedMotion || isCompact) {
+  if (prefersReducedMotion() || isCompact) {
     // CSS handles all layout (flex-direction, widths, etc.) via @media (max-width: 1024px)
     // JS only sets up video autoplay via vertical ScrollTrigger
     const ctx = gsap.context(() => {
-      if (!prefersReducedMotion) {
-        setupVerticalVideoPlay();
+      if (!prefersReducedMotion()) {
+        setupVideoPlay();
       }
     }, section);
 
@@ -183,17 +161,13 @@ export function initGallery() {
       });
     }
     document.addEventListener('gallery:lightbox-close', onLightboxClose);
-
-    function handleResize() {
-      const wasCompact = isCompact;
-      isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
-      if (wasCompact !== isCompact) {
-        window.location.reload();
-      }
-    }
     window.addEventListener('resize', handleResize);
 
-    return ctx;
+    return () => {
+      document.removeEventListener('gallery:lightbox-close', onLightboxClose);
+      window.removeEventListener('resize', handleResize);
+      ctx.revert();
+    };
   }
 
   // --- Desktop path (horizontal scroll) ---
@@ -213,7 +187,7 @@ export function initGallery() {
         start: 'top top',
         end: () => `+=${scrollDistance}`,
         pin: true,
-        scrub: 1,
+        scrub: SCRUB.default,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
@@ -231,25 +205,16 @@ export function initGallery() {
       },
     });
 
-    setupScrollVideoPlay(scrollTween);
+    setupVideoPlay({ containerAnimation: scrollTween });
     updateProgress(0);
   }, section);
 
   setupVideoHover();
 
-  function handleResize() {
-    const wasCompact = isCompact;
-    isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
-    if (wasCompact !== isCompact) {
-      window.location.reload();
-      return;
-    }
-    if (!isCompact) {
-      ScrollTrigger.refresh();
-    }
-  }
-
   window.addEventListener('resize', handleResize);
 
-  return ctx;
+  return () => {
+    window.removeEventListener('resize', handleResize);
+    ctx.revert();
+  };
 }

@@ -229,5 +229,3 @@ export function textMaskRiseWords(targets, overrides = {}) {
   };
 }
 
-// Optional export if you want to inspect or reuse the default settings elsewhere.
-export { preset as textMaskRisePreset };

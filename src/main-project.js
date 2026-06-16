@@ -6,6 +6,7 @@ import { initProjectCaseStudy } from './sections/project-case-study.js';
 import { initProjectCredits } from './sections/project-credits.js';
 import { initProjectFooter } from './sections/project-footer.js';
 import { initCustomCursor } from './components/custom-cursor.js';
+import { onReady, onPageHide } from './utils/dom.js';
 
 function init() {
   // Each returns early if its DOM section is absent
@@ -16,17 +17,7 @@ function init() {
     initProjectFooter(),
     initCustomCursor(),
   ];
-  window.addEventListener(
-    'pagehide',
-    () => {
-      cleanups.forEach((fn) => typeof fn === 'function' && fn());
-    },
-    { once: true }
-  );
+  onPageHide(cleanups);
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+onReady(init);

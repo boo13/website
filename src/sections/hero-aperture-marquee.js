@@ -3,16 +3,14 @@ import {
   ScrollTrigger,
   ScrollSmoother,
 } from '../animations/scroll-defaults.js';
+import { prefersReducedMotion } from '../utils/dom.js';
 
 export function initMarquee() {
   const scope = document.querySelector('.portal-scene--aperture-dual');
   const track = scope?.querySelector('.about-intro__marquee-track');
   if (!track) return () => {};
 
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
-  if (prefersReducedMotion) return () => {};
+  if (prefersReducedMotion()) return () => {};
 
   let removeHoverListeners = () => {};
 

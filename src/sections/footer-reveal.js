@@ -7,6 +7,7 @@
  */
 
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
+import { prefersReducedMotion } from '../utils/dom.js';
 
 export function initFooterReveal() {
   const footer = document.getElementById('site-footer');
@@ -15,7 +16,7 @@ export function initFooterReveal() {
   const spacer = smoothContent?.querySelector('.footer-spacer');
   if (!footer || !smoothContent || !smoothWrapper || !spacer) return;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (prefersReducedMotion()) return;
 
   // Keep spacer height in sync with footer height
   function sync() {

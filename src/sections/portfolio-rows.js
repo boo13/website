@@ -3,6 +3,7 @@ import GLightbox from 'glightbox';
 import 'glightbox/dist/css/glightbox.min.css';
 import { escHtml, escAttr } from '../utils/escape.js';
 import { CDN_BASE } from '../config.js';
+import { prefersReducedMotion, canHover } from '../utils/dom.js';
 
 // ─── Default Tweakpane config ──────────────────────────────────────────────
 const DEFAULT_CONFIG = {
@@ -940,17 +941,13 @@ function wireScrollSpy() {
 
   sections.forEach((section) => observer.observe(section));
 
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
-
   const titleLink = document.querySelector('.portfolio-section-index__title');
   if (titleLink) {
     titleLink.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({
         top: 0,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
       });
       history.replaceState(null, '', window.location.pathname);
     });
@@ -963,7 +960,7 @@ function wireScrollSpy() {
       if (!target) return;
       e.preventDefault();
       target.scrollIntoView({
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
         block: 'start',
       });
       history.replaceState(null, '', `#portfolio-${id}`);
@@ -1011,23 +1008,20 @@ export async function initPortfolioRows(data) {
       })()
     : null;
   const cfg = Object.assign({}, DEFAULT_CONFIG, savedCfg);
-  delete cfg.model;
   document.documentElement.style.setProperty('--shot-gap', `${cfg.gap}px`);
 
-  const canHover = window.matchMedia(
-    '(hover: hover) and (pointer: fine)'
-  ).matches;
+  const hoverCapable = canHover();
   const mm = gsap.matchMedia();
 
   container.querySelectorAll('.portfolio-row__strip-frame').forEach((frame) => {
-    wireFramePan(frame, canHover);
+    wireFramePan(frame, hoverCapable);
   });
 
   container.querySelectorAll('.portfolio-row__strip').forEach((strip) => {
     wirePortraitSizes(strip);
   });
 
-  if (canHover) {
+  if (hoverCapable) {
     container.querySelectorAll('.portfolio-row').forEach((row) => {
       row.addEventListener('mouseenter', () => {
         container.classList.add('is-row-hovered');
@@ -1045,7 +1039,7 @@ export async function initPortfolioRows(data) {
   mm.add('(prefers-reduced-motion: no-preference)', () => {
     container.querySelectorAll('.portfolio-row').forEach((row) => {
       const strip = row.querySelector('.portfolio-row__strip');
-      if (strip) wireStrip(strip, () => cfg, canHover);
+      if (strip) wireStrip(strip, () => cfg, hoverCapable);
     });
 
     container.querySelectorAll('.portfolio-row__strip').forEach((strip) => {

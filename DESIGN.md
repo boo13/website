@@ -462,7 +462,7 @@ CSS-only `@keyframes project-ticker-scroll`, 12s linear infinite horizontal scro
 - **Network logo** — rendered as `.project-credits__network img` above the title row (60px tall desktop, 44px tablet, 36px mobile). Never show network as a text grid row.
 - **Credits curation** — 3–5 entries only (his role + marquee talent + 1–2 key creatives). This is a sales tool, not a full crew list.
 - **Multi-name credits** — `names` array in JSON, rendered with `white-space: pre-line` (newline-joined). Never comma-separated.
-- **Highlight modifier** — `.project-credits__item--highlight` colors the name `#C84A24` to distinguish Randy's own credit.
+- **Highlight modifier** — `.project-credits__item--highlight` colors the name `#ffffff` to distinguish Randy's own credit.
 - **"Credits" subtitle removed** — the hero "credits" button scrolls to this section; no subtitle needed.
 
 **Project Footer** — `footer.project-footer` | `src/sections/project-footer.js` (stub)

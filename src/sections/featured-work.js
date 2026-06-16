@@ -4,6 +4,7 @@
  */
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
 import { MOBILE_BREAKPOINT } from '../config.js';
+import { prefersReducedMotion } from '../utils/dom.js';
 
 const config = {
   bgBlurStart: 6,
@@ -38,12 +39,9 @@ export function initFeaturedWork() {
 
   if (!section || !bg || !fg) return;
 
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
   const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
 
-  if (prefersReducedMotion || isMobile) {
+  if (prefersReducedMotion() || isMobile) {
     gsap.set(bg, { filter: 'blur(0px)', opacity: 1 });
     gsap.set(fg, { filter: 'blur(3px)', opacity: 0.8 });
     if (textLayer) {
@@ -183,5 +181,5 @@ export function initFeaturedWork() {
     });
   }, section);
 
-  return ctx;
+  return () => ctx.revert();
 }
