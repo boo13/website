@@ -183,5 +183,5 @@ export function initFeaturedWork() {
     });
   }, section);
 
-  return ctx;
+  return () => ctx.revert();
 }

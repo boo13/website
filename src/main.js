@@ -75,7 +75,7 @@ function init() {
     if (typeof cleanupMarquee === 'function') cleanupMarquee();
     if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
     if (typeof cleanupLightbox === 'function') cleanupLightbox();
-    if (cleanupGallery) cleanupGallery.revert();
+    if (typeof cleanupGallery === 'function') cleanupGallery();
     if (typeof cleanupHero === 'function') cleanupHero();
     if (typeof cleanupNav === 'function') cleanupNav();
   });
