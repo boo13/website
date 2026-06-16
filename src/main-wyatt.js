@@ -1,22 +1,9 @@
 import './styles/wyatt.css';
 import { initFeaturedWork } from './sections/featured-work.js';
+import { onReady, onPageHide } from './utils/dom.js';
 
 function init() {
-  // Initialize Wyatt Earp parallax effect
-  const cleanupFeaturedWork = initFeaturedWork();
-
-  // Cleanup on page unload
-  window.addEventListener(
-    'pagehide',
-    () => {
-      if (typeof cleanupFeaturedWork === 'function') cleanupFeaturedWork();
-    },
-    { once: true }
-  );
+  onPageHide([initFeaturedWork()]);
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+onReady(init);

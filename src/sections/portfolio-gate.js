@@ -11,6 +11,7 @@
  */
 
 import { trackPortfolioUnlock } from '../utils/track-portfolio-unlock.js';
+import { prefersReducedMotion } from '../utils/dom.js';
 
 const SESSION_KEY_PREFIX = 'portfolio-unlock-';
 
@@ -61,10 +62,6 @@ async function decrypt(encJson, password) {
 }
 
 // ─── DOM helpers ──────────────────────────────────────────────────────────────
-
-function prefersReducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
 
 function shakeInput(el) {
   if (prefersReducedMotion()) return;

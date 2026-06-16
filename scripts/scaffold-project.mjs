@@ -7,6 +7,7 @@
  */
 import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
+import { escHtml as esc, escAttr } from '../src/utils/escape.js';
 
 const { cdnBase: CDN_BASE } = JSON.parse(
   readFileSync('cdn-base.json', 'utf8')
@@ -200,19 +201,3 @@ function buildCreditsHtml(credits, fallbackRole) {
   }).join('\n');
 }
 
-function esc(str) {
-  if (!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
-
-function escAttr(str) {
-  if (!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}

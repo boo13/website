@@ -7,6 +7,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { escHtml, escAttr } from '../src/utils/escape.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const { cdnBase: CDN_BASE } = JSON.parse(
@@ -127,23 +128,6 @@ function renderGalleryCards(projects) {
                 </article>`;
     })
     .join('\n\n');
-}
-
-function escHtml(str) {
-  if (!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
-
-function escAttr(str) {
-  if (!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
 }
 
 function ext(path) {

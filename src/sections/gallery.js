@@ -3,7 +3,8 @@
  * Vertical scroll triggers horizontal card movement
  */
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
-import { GALLERY_BREAKPOINT } from '../config.js';
+import { GALLERY_BREAKPOINT, SCRUB } from '../config.js';
+import { prefersReducedMotion, canHover } from '../utils/dom.js';
 
 export function initGallery() {
   const section = document.querySelector('.featured-work-section');
@@ -18,9 +19,6 @@ export function initGallery() {
 
   if (!section || !track || !cards.length) return;
 
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
   // sync with @media (max-width: 1024px) in index.css
   let isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
 
@@ -60,10 +58,8 @@ export function initGallery() {
   }
 
   function setupVideoHover() {
-    // Skip hover previews on touch devices
-    const isTouchDevice =
-      'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
+    // Skip hover previews on touch/pointer-coarse devices
+    if (!canHover()) return;
 
     cards.forEach((card) => {
       const video = card.querySelector('.card-video');
@@ -139,11 +135,11 @@ export function initGallery() {
   }
 
   // --- Mobile / tablet / reduced-motion path ---
-  if (prefersReducedMotion || isCompact) {
+  if (prefersReducedMotion() || isCompact) {
     // CSS handles all layout (flex-direction, widths, etc.) via @media (max-width: 1024px)
     // JS only sets up video autoplay via vertical ScrollTrigger
     const ctx = gsap.context(() => {
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion()) {
         setupVideoPlay();
       }
     }, section);
@@ -191,7 +187,7 @@ export function initGallery() {
         start: 'top top',
         end: () => `+=${scrollDistance}`,
         pin: true,
-        scrub: 1,
+        scrub: SCRUB.default,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {

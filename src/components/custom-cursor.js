@@ -1,9 +1,9 @@
 import { gsap } from '../animations/scroll-defaults.js';
+import { prefersReducedMotion, canHover } from '../utils/dom.js';
 
 export function initCustomCursor() {
-  if ('ontouchstart' in window) return () => {};
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-    return () => {};
+  if (!canHover()) return () => {};
+  if (prefersReducedMotion()) return () => {};
 
   document.body.classList.add('has-custom-cursor');
 

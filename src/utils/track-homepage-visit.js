@@ -1,28 +1,17 @@
+import { sendBeaconJSON, browserContext } from './beacon.js';
+
 const SESSION_KEY = 'homepage-visit-sent';
 
 export function trackHomepageVisit() {
-  if (sessionStorage.getItem(SESSION_KEY)) return;
-  sessionStorage.setItem(SESSION_KEY, '1');
+  try {
+    if (sessionStorage.getItem(SESSION_KEY)) return;
+    sessionStorage.setItem(SESSION_KEY, '1');
+  } catch {
+    // sessionStorage unavailable (private mode, embedded iframe, etc.)
+  }
 
-  const payload = JSON.stringify({
-    referrer: document.referrer,
-    tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    screenWidth: screen.width,
-    screenHeight: screen.height,
-    language: navigator.language,
+  sendBeaconJSON('/api/homepage-visit', {
+    ...browserContext(),
     path: location.pathname,
   });
-
-  const blob = new Blob([payload], { type: 'application/json' });
-
-  if (navigator.sendBeacon) {
-    navigator.sendBeacon('/api/homepage-visit', blob);
-  } else {
-    fetch('/api/homepage-visit', {
-      method: 'POST',
-      body: payload,
-      headers: { 'Content-Type': 'application/json' },
-      keepalive: true,
-    }).catch(() => {});
-  }
 }

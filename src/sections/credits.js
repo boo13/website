@@ -5,10 +5,7 @@
  */
 
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
-
-const prefersReducedMotion = window.matchMedia(
-  '(prefers-reduced-motion: reduce)'
-).matches;
+import { prefersReducedMotion } from '../utils/dom.js';
 
 const PLATFORM_LOGOS = {
   cnn: {
@@ -240,7 +237,7 @@ export function initCredits() {
   function invertColors(toDark, tl, pos) {
     section.classList.toggle('is-expanded', toDark);
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion()) {
       // When row is expanded (toDark), credits bg goes dark → hero header stays dark.
       // When row is closed (!toDark), credits bg returns to light → hero header goes light.
       setHeroHeaderLight(!toDark);
@@ -309,7 +306,7 @@ export function initCredits() {
   }
 
   function playCreditChromaticFlash(headerEl) {
-    if (prefersReducedMotion || !headerEl) return;
+    if (prefersReducedMotion() || !headerEl) return;
     const titleEl = headerEl.querySelector('.credit-row__title');
     if (!titleEl) return;
 
@@ -458,7 +455,7 @@ export function initCredits() {
       details.style.overflow = 'clip';
       activeRow = null;
 
-      if (prefersReducedMotion) {
+      if (prefersReducedMotion()) {
         details.style.height = '0';
         gsap.delayedCall(0, () => ScrollTrigger.refresh());
         invertColors(false);
@@ -494,7 +491,7 @@ export function initCredits() {
         prevDetails.setAttribute('aria-hidden', 'true');
         prevDetails.style.overflow = 'clip';
 
-        if (prefersReducedMotion) {
+        if (prefersReducedMotion()) {
           prevDetails.style.height = '0';
           resetTitle(prevTitleEl);
         } else {
@@ -507,7 +504,7 @@ export function initCredits() {
         }
       } else {
         // First expansion: invert to dark
-        invertColors(true, prefersReducedMotion ? null : tl, 0);
+        invertColors(true, prefersReducedMotion() ? null : tl, 0);
       }
 
       // Expand new row
@@ -519,7 +516,7 @@ export function initCredits() {
         .setAttribute('aria-expanded', 'true');
       details.setAttribute('aria-hidden', 'false');
 
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion()) {
         titleEl.style.letterSpacing = '-0.02em';
         titleEl.style.lineHeight = '1';
         growTitle(titleEl, tl, activeRow ? 0.05 : 0);
@@ -535,7 +532,7 @@ export function initCredits() {
         delete img.dataset.src;
       }
 
-      if (prefersReducedMotion) {
+      if (prefersReducedMotion()) {
         details.style.height = 'auto';
         details.style.overflow = 'visible';
         gsap.delayedCall(0, () => ScrollTrigger.refresh());
@@ -651,7 +648,7 @@ export function initCredits() {
       });
 
       // Row entrance animation
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion()) {
         ctx.add(() => {
           gsap.from('.credit-row', {
             opacity: 0,

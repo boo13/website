@@ -7,6 +7,18 @@ export function onReady(fn) {
   }
 }
 
+/**
+ * Register one-shot pagehide cleanup for an array of cleanup functions.
+ * Each item is called only if it is a function (safe with early-return inits).
+ */
+export function onPageHide(cleanups) {
+  window.addEventListener(
+    'pagehide',
+    () => cleanups.forEach((fn) => typeof fn === 'function' && fn()),
+    { once: true }
+  );
+}
+
 /** True if the user prefers reduced motion. */
 export function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;

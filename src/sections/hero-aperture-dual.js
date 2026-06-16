@@ -8,7 +8,10 @@ import {
   TRAIL_MAX_PX,
   TRAIL_THRESH,
   TRAIL_OPACITY,
+  MOBILE_BREAKPOINT,
+  SCRUB,
 } from '../config.js';
+import { prefersReducedMotion } from '../utils/dom.js';
 
 gsap.registerPlugin(SplitText);
 
@@ -20,11 +23,6 @@ const TRAIL_LAYER_OPACITY = [
   TRAIL_OPACITY * 0.65,
   TRAIL_OPACITY * 0.65,
 ];
-
-const isMobile = window.innerWidth < 768;
-const prefersReducedMotion = window.matchMedia(
-  '(prefers-reduced-motion: reduce)'
-).matches;
 
 function pauseDecorativeVideo(video) {
   if (!video) return;
@@ -72,6 +70,7 @@ export function initHeroApertureDual() {
   const marquee = scene.querySelector('.about-intro__marquee');
   const galleryEl = document.querySelector('.featured-work-section');
 
+  const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
   const hasBackVideo = Boolean(backShell && backVideo);
   const finalHole = isMobile ? '64vmin' : '54vmin';
   const finalFeather = isMobile ? '22vmin' : '24vmin';
@@ -79,7 +78,7 @@ export function initHeroApertureDual() {
   const finalShade = hasBackVideo ? 0.38 : 0.24;
 
   // ─── Reduced motion ───────────────────────────────────────────────────────
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion()) {
     pauseDecorativeVideo(backVideo);
     pauseDecorativeVideo(video);
     if (content) gsap.set(content, { autoAlpha: 0 });
@@ -408,7 +407,7 @@ export function initHeroApertureDual() {
       start: 'top top',
       end: '+=230%',
       pin: true,
-      scrub: 1,
+      scrub: SCRUB.default,
       anticipatePin: 1,
       animation: tl,
     });

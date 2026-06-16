@@ -4,6 +4,8 @@
  */
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
 import { textMaskRiseWords } from '../animations/text-mask-rise.js';
+import { SCRUB } from '../config.js';
+import { prefersReducedMotion } from '../utils/dom.js';
 
 function initCaseHero(ctx) {
   const hero = document.querySelector('.case-study__hero');
@@ -24,7 +26,7 @@ function initCaseHero(ctx) {
             trigger: hero,
             start: 'top top',
             end: 'bottom top',
-            scrub: 1.5,
+            scrub: SCRUB.smooth,
           },
         }
       );
@@ -365,9 +367,7 @@ export function initProjectCaseStudy() {
   const root = document.querySelector('.case-study__hero');
   if (!root) return;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
+  if (prefersReducedMotion()) return;
 
   const ctx = gsap.context(() => {}, document.body);
 
