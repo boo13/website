@@ -71,6 +71,14 @@ function shakeInput(el) {
   el.classList.add('is-shaking');
 }
 
+function clearPasswordFromUrl() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has('p') && !url.searchParams.has('password')) return;
+  url.searchParams.delete('p');
+  url.searchParams.delete('password');
+  window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+}
+
 // ─── Public init ──────────────────────────────────────────────────────────────
 
 export function initPortfolioGate({ slug, onUnlock }) {
@@ -78,7 +86,9 @@ export function initPortfolioGate({ slug, onUnlock }) {
   const cached = sessionStorage.getItem(sessionKey(slug));
   if (cached) {
     try {
-      onUnlock(JSON.parse(cached));
+      const data = JSON.parse(cached);
+      clearPasswordFromUrl();
+      onUnlock(data);
       return;
     } catch {
       sessionStorage.removeItem(sessionKey(slug));
@@ -141,11 +151,14 @@ export function initPortfolioGate({ slug, onUnlock }) {
 
   input.focus();
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const password = input.value;
-    if (!password) return;
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlPassword = urlParams.get('p') || urlParams.get('password');
 
+  let inFlight = false;
+
+  async function performUnlock(password) {
+    if (inFlight) return;
+    inFlight = true;
     btn.disabled = true;
     errorEl.textContent = '';
 
@@ -165,9 +178,13 @@ export function initPortfolioGate({ slug, onUnlock }) {
 
       sessionStorage.setItem(sessionKey(slug), JSON.stringify(data));
       if (!payload.dev) trackPortfolioUnlock(slug);
+
+      clearPasswordFromUrl();
+
       mount.remove();
       onUnlock(data);
     } catch {
+      clearPasswordFromUrl();
       const contactUrl =
         '/contact.html?subject=Requesting%20Portfolio%20access&message=Hey%20Randy%2C%20Can%20I%20check%20out%20your%20portfolio%3F%20I%27m...';
       errorEl.innerHTML = `wrong password — need it? just ask… <a href="${contactUrl}">CONTACT</a>`;
@@ -175,6 +192,20 @@ export function initPortfolioGate({ slug, onUnlock }) {
       input.value = '';
       input.focus();
       btn.disabled = false;
+      inFlight = false;
     }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const password = input.value;
+    if (!password) return;
+    await performUnlock(password);
   });
+
+  // Auto-submit if password provided in URL
+  if (urlPassword) {
+    input.value = urlPassword;
+    performUnlock(urlPassword);
+  }
 }
