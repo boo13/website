@@ -46,12 +46,11 @@ typography:
     fontSize: "clamp(0.875rem, 2vw, 1.125rem)"
     fontWeight: 400
     letterSpacing: "0.15em"
-  about-intro:
+  about-stub:
     fontFamily: "ivypresto-display, Georgia, serif"
-    fontSize: "clamp(1.5rem, 3.5vw, 3rem)"
+    fontSize: "clamp(2rem, 5vw, 3.5rem)"
     fontWeight: 300
-    lineHeight: "1.4"
-    letterSpacing: "0.01em"
+    lineHeight: "1.15"
   section-title:
     fontFamily: "ivypresto-display, Georgia, serif"
     fontSize: "clamp(2rem, 4vw, 3rem)"
@@ -102,7 +101,7 @@ components:
 
 **Scope:** Homepage (`index.html`) and project detail pages (`projects/*/index.html`). Does not govern utility pages (contact, resume).
 
-**Governed files:** `src/styles/index.css`, `src/styles/about-intro.css`, `src/styles/project.css`, `src/styles/video-lightbox.css`, `src/main.js`, `src/main-project.js`, and all section/component modules they import.
+**Governed files:** `src/styles/index.css`, `src/styles/hero-aperture-dual.css`, `src/styles/project.css`, `src/styles/video-lightbox.css`, `src/main.js`, `src/main-project.js`, and all section/component modules they import.
 
 **Purpose:** Prescriptive rules for design decisions. Every rule here can be applied to new work. Where something is not specified, it is not constrained.
 
@@ -173,7 +172,7 @@ Text hierarchy on dark backgrounds is built from a single base color at varying 
 | 0.6 | Gallery progress, tertiary text |
 | 0.5 | Card year, credits muted text |
 | 0.4 | Marquee items |
-| 0.35 | Marquee items (about-intro.css), form placeholders |
+| 0.35 | Marquee items (hero-aperture-dual.css), form placeholders |
 | 0.3 | Copyright |
 | 0.2 | Borders, dividers |
 | 0.15 | Dot grid color (before layer opacity reduces further) |
@@ -256,7 +255,7 @@ All fluid via `clamp()`:
 | Hero name | `.hero-name` | display | `clamp(3rem, 8vw, 6rem)` | 300 | — | 1 | — |
 | Hero name (header) | `.hero-name-fixed` | display | `clamp(1.25rem, 3.2vw, 2.25rem)` | 300 | — | 1 | — |
 | Hero subtitle | `.hero-subtitle` | body | `clamp(0.875rem, 2vw, 1.125rem)` | 400 | — | — | 0.15em |
-| About intro text | `.about-intro__text` | display | `clamp(1.5rem, 3.5vw, 3rem)` | 300 | italic | 1.4 | 0.01em |
+| About headline | `.about-stub__headline` | display | `clamp(2rem, 5vw, 3.5rem)` | 300 | — | 1.15 | — |
 | Section heading | `.section-title` | display | `clamp(2rem, 4vw, 3rem)` | 400 | — | — | — |
 | Card title | `.card-title` | display | `clamp(1.5rem, 3vw, 2.5rem)` | 400 | — | 1.2 | — |
 | Card role | `.card-role` | body | 0.875rem | — | — | — | — |
@@ -285,7 +284,7 @@ Fixed px values with breakpoint tiers. The one exception is the case study hero 
 ### Typography Rules
 
 1. **Display font weight:** 300 or 400 only. Never 500 or higher on the display font. `.footer-tagline` at 600 is the sole exception.
-2. **Italic:** Only `.about-intro__text`. Never italic on headings or UI text.
+2. **Italic:** Not used on the homepage or project pages. Never italic on headings or UI text.
 3. **Uppercase:** Always body font with `letter-spacing` between 0.05em and 0.15em. Never uppercase on display font.
 4. **Fluid sizing:** Homepage requires `clamp()` for all type above 1rem. Fixed rem only for utility text ≤1rem.
 5. **Project pages:** Fixed px with media-query tiers at 1024px and 768px. Case study hero title is the one exception that uses `clamp()`.
@@ -422,15 +421,15 @@ CSS-only `@keyframes project-ticker-scroll`, 12s linear infinite horizontal scro
 
 ### Section Quick-Reference
 
-**Hero** — `section.hero-section` | `src/sections/hero.js`
-- Pin: 150% | Scrub: 1.5 | BG: full-bleed video + multi-stop gradient overlay
-- Key classes: `.hero-video-container`, `.hero-video`, `.hero-gradient`, `.hero-content`, `.hero-name`, `.hero-subtitle`, `.hero-social`
-- Scroll behavior: zoom (scale→1.15), blur (→8px), content exits, gradient darkens. Name Flips to fixed header over first 45%.
+**Hero (Aperture)** — `section.portal-scene--aperture` (`.portal-scene--aperture-dual`) | `src/sections/hero-aperture-dual.js` (marquee: `src/sections/hero-aperture-marquee.js`)
+- Pin: `+=230%` (ScrollTrigger id `'hero-aperture-pin'`) | Scrub: 1 (`SCRUB.default`) | BG: full-bleed `.hero-video` behind an iris/aperture mask, optional `.aperture-back-video` behind it
+- Key classes: `.aperture-video-shell`, `.aperture-back-video-shell`, `.aperture-edge-vignette`, `.hero-content`, `.hero-name`, `.hero-subtitle`, `.hero-social`, `[data-aperture-text-fill]`
+- Scroll behavior: hero content rack-focuses out (blur + fade), `.hero-video` scales to 1.24 and blurs, the aperture hole opens (`--aperture-hole`), back video blurs in, the embedded About beat scales/blurs in, then the fixed header name (`#hero-name-fixed`) blurs in late.
 
-**About Intro** — `section.about-intro-section` | `src/sections/about-intro.js`
-- Pin: 200% | Scrub: 1 | BG: `--color-nearblack` + radial dot-grid texture at ~7.5% effective opacity
-- Key classes: `.about-intro__dot-bg`, `.about-intro__content`, `.about-intro__text`, `.about-intro__marquee`, `.about-intro__marquee-track`
-- Scroll behavior: char-level opacity fill (0.15→1) across pinned section. Marquee loops via CSS.
+**About beat (embedded in hero aperture)** — `.portal-scene__about` / `.about-stub` | no separate module; driven by `src/sections/hero-aperture-dual.js` (marquee: `src/sections/hero-aperture-marquee.js`)
+- No separate pin — runs inside the hero aperture timeline, revealed behind the opening aperture
+- Key classes: `.portal-scene__about`, `.portal-scene__about-inner`, `.portal-scene__about-kicker`, `.about-stub__label`, `.about-stub__headline`, `.about-stub__body`, `.about-intro__marquee`, `.about-intro__marquee-track`
+- Scroll behavior: char-level opacity fill (0.15→1) on `[data-aperture-text-fill]`. Marquee loops via GSAP, velocity-reactive.
 
 **Featured** — `section#featured.featured-work-section` | `src/sections/gallery.js`
 - Pin: trackWidth (desktop) or none (≤1024px) | Scrub: 1 | BG: `--color-nearblack`
@@ -515,7 +514,7 @@ Shared across both page types:
 | `power3.inOut` | Wipe/clip reveals | case study triptych |
 | `power1.out` | Subtle exit | preloader element exits |
 | `power1.inOut` | Physical motion | rack-focus blur/scale transitions |
-| `'none'` | All scrub-linked | hero zoom, about-intro char fill, gallery horizontal scroll |
+| `'none'` | All scrub-linked | hero aperture rack-focus, aperture char fill, gallery horizontal scroll |
 
 **Rule:** Scrub-driven animations always use `ease: 'none'`. Easing on top of scrub creates jitter.
 
@@ -527,7 +526,7 @@ Shared across both page types:
 | Quick | 0.3–0.5s | Cursor quickTo (dot 0.3s, ring 0.7s), accordion collapse (0.4s), corner expand (0.5s), CA flash (0.5s) |
 | Medium | 0.5–0.9s | Credits inversion (0.9s), scroll-to nav (0.9s), row expand (0.5s), preloader corners (1.05s) |
 | Slow | 1.0–1.5s | Text-mask-rise (1.5s default), subtitle entrance (1.2s), case study reveals (1.0–1.4s) |
-| Very Slow | 2.0+ | Hero name rise (2.2s), client marquee (30s CSS), project footer ticker (12s CSS) |
+| Very Slow | 2.0+ | Hero name rise (2.2s), client marquee (30s GSAP loop), project footer ticker (12s CSS) |
 
 ### Scroll-Driven Patterns
 
@@ -539,11 +538,10 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 ```
 
 **Homepage pins:**
-- Hero: `150%` of viewport (`config.scrollDistance`). ScrollTrigger `start: 'top top'`, `end: '+=150%'`.
-- About-intro: `200%`. ScrollTrigger id `'about-intro-pin'`, referenced by hero trail suppression.
+- Hero aperture: `+=230%` of viewport. ScrollTrigger id `'hero-aperture-pin'`, `start: 'top top'`, `end: '+=230%'`, `scrub: SCRUB.default` (1). Referenced by hero trail suppression. The About beat shares this pin — there is no separate about pin.
 - Gallery: `trackWidth - viewportWidth + 200px`.
 
-**About-intro char fill:** SplitText chars animated from `opacity: 0.15` to `1`. Duration `3/N` per char, stagger `1/N each`, producing a ~3-char transition window at any scroll position. Linear ease throughout.
+**Hero aperture char fill:** `[data-aperture-text-fill]` SplitText chars animated from `opacity: 0.15` to `1`. Duration `3/N` per char, stagger `1/N each`, producing a ~3-char transition window at any scroll position. Linear ease throughout.
 
 **Case study parallax:** Hero image `scale: 1.15→1` scrubbed. Statement images `yPercent: -10→10`, `start: 'top bottom'` to `end: 'bottom top'`, ease none.
 
@@ -556,7 +554,7 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 - Hero override: `duration: 2.2`, `stagger: 0.12`, `delay: 0.3`
 - Case study trigger: `start: 'top 75%'`, `once: true`
 
-**Color Trail** (`src/animations/color-trail.js` + scroll-velocity in `hero.js`):
+**Color Trail** (`src/animations/color-trail.js`, invoked via `src/animations/text-mask-rise.js`; scroll-velocity ticker in `src/sections/hero-aperture-dual.js`):
 - Four screen-blended clones per word in spectral order: blue, red, cyan, yellow OKLCH — later layers lag/offset further, so the lighter outer hues trail beyond the inner pair
 - `mix-blend-mode: screen`, `filter: blur(0.4px)`, `pointer-events: none`
 - Static (entrance): each color layer delayed by `staggerOffset` (0.1s per layer), fades out at 75% of main duration via `power2.in`. Per-layer peak opacity via `colorTrail.opacities`: inner layers 0.85, outer layers 0.85 × 0.65
@@ -565,12 +563,12 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
   - Y offset: `velocity * -TRAIL_K` (0.03), clamped ±`TRAIL_MAX_PX` (5px), scaled per layer by `(i+1)/numLayers`
   - Max opacity: `TRAIL_OPACITY` (0.85) for inner layers, × 0.65 for outer layers (`TRAIL_LAYER_OPACITY`)
   - Spring-back: 0.5s `power2.out` when velocity drops below threshold
-  - Suppressed during about-intro pin and gallery `.active` state
+  - Suppressed during the hero aperture pin (`'hero-aperture-pin'`) and gallery `.active` state
 - Hero social hover adapts the same four-color spectral palette as chained SVG `drop-shadow`s (blue/red inner, cyan/yellow halo per the spectral pairing rule) during a `translateY(-5px) → 2px → 0` nudge. No background hover wash.
 
 **Hero Name Grain:**
 - Subtle print-like noise in the hero name glyph fill: feTurbulence data-URI (`baseFrequency 0.82, numOctaves 4, stitchTiles`, rect `opacity 0.07`) multiplied over `--color-offwhite`, clipped via `background-clip: text` on `.word` elements (trail clones and `.hero-name-fixed` excluded)
-- Effective intensity ~7%, matching the about-intro dot-grid precedent
+- Effective intensity ~7%
 - Reduced-motion: SplitText never runs, so no `.word` elements exist and the name renders un-grained — intentional graceful degradation
 
 **Corner Brackets:**
@@ -612,16 +610,13 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 - Scroll: free-follow frame nudged `delta * 1.2` clamped ±5px, returns after 80ms (skipped while `framing`). During and shortly after scroll, cursor targeting is re-evaluated with `document.elementFromPoint()` so scrubbed transform-driven gallery movement cannot leave stale hover/snap state under a stationary pointer.
 - **On-light gotcha**: the off-white frame + `mix-blend-mode: difference` reads well on dark and mid-tone backgrounds, but goes low-contrast on near-white surfaces (e.g. the inverted/expanded credits panel). Resolve per-section before snapping content over light backgrounds (see `cursor-lab.html` for on-light variant experiments).
 
-**Hero Z-Depth** (`src/sections/hero.js`):
-- ScrollTrigger: `start: 'top top'`, `end: '+=150%'`, `scrub: 1.5`
-- Parallel tweens (all ease `'none'`): `scale→1.15`, `filter: blur(8px)` (over 80% of progress), content `opacity 0, y -50` (`power2.in`, over 50%), gradient darkens (over 70%), top-gradient `autoAlpha→1` (over 65%)
+**Hero Aperture Rack-Focus** (`src/sections/hero-aperture-dual.js`):
+- ScrollTrigger id `'hero-aperture-pin'`: `start: 'top top'`, `end: '+=230%'`, `scrub: SCRUB.default` (1), `pin: true`, `anticipatePin: 1`
+- Parallel scrub tweens (all ease `'none'`) on a paused timeline: hero content `autoAlpha 0, y -26, blur(7px)`; `.hero-video` `scale→1.24, blur(10px) saturate(0.66)`; aperture hole opens (`--aperture-hole`/`--aperture-feather`); optional back video fades/blurs in; About beat `autoAlpha→1, scale→1, blur(0)`; edge vignette + `--portal-shade` rise; top-gradient `autoAlpha→0.85`
 
-**Hero Name Flip** (`src/sections/hero.js`):
-- GSAP `Flip.fit()` between `.hero-name` (in-flow) and `#hero-name-fixed` (fixed header)
-- ScrollTrigger: `start: 'top top'`, `end: '+=45%'`, `scrub: true`
-- `scale: true` (CSS scaleX/Y, not width/height)
-- `#hero-subtitle-fixed` and `#hero-social-fixed` track title's bottom edge via Flip progress
-- Subtitle entrance: `autoAlpha: 0→1`, `1.2s expo.out`, `delay: 2.35s` after `loadingComplete`
+**Fixed Header Name** (`src/sections/hero-aperture-dual.js`):
+- `#hero-name-fixed` (fixed header) blurs in late in the aperture timeline (~62% of progress): `autoAlpha 0→1`, `filter: blur(10px)→blur(0px)`. No Flip.
+- Subtitle + social entrance run on load (not scrub): triggered when the hero name finishes rising (`onWordsComplete`) — subtitle `autoAlpha 0→1, y→0, 1.2s expo.out`; social icons rise with CA trails, stagger 0.15s
 - Social entrance: `autoAlpha: 0→1`, `1.2s expo.out`, `delay: 2.7s` after `loadingComplete`
 
 **Footer Reveal** (`src/sections/footer-reveal.js`):
