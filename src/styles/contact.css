@@ -16,11 +16,13 @@ body::before {
   background-position: center;
   background-size:
     calc(
-        (min(100vw, var(--grid-max-width)) - (var(--container-padding) * 2)) / 6
+        (min(100vw, var(--grid-max-width)) - (var(--container-padding) * 2)) /
+          var(--grid-columns)
       )
       100%,
     calc(
-        (min(100vw, var(--grid-max-width)) - (var(--container-padding) * 2)) / 6
+        (min(100vw, var(--grid-max-width)) - (var(--container-padding) * 2)) /
+          var(--grid-columns)
       )
       100%;
   opacity: 0.45;
@@ -520,10 +522,8 @@ textarea {
 }
 
 @media (max-width: 1024px) {
-  :root {
-    --grid-columns: 4;
-  }
-
+  /* Column collapse comes from tokens.css (6 -> 4 @768 -> 2 @480).
+     Intro + panel both span 1 / -1 here, so column count is moot. */
   .contact-header {
     position: absolute;
   }
@@ -612,12 +612,7 @@ textarea {
 }
 
 @media (max-width: 480px) {
-  :root {
-    --container-padding: 1.25rem;
-    --grid-columns: 2;
-    --grid-gutter: 14px;
-  }
-
+  /* --grid-columns / --grid-gutter / --container-padding collapse in tokens.css */
   body::before {
     display: none;
   }
