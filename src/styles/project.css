@@ -2,15 +2,16 @@
    PROJECT PAGE — Shared styles for all project detail pages
    Variants: --video, --image, --parallax (via BEM modifiers)
    ============================================================ */
+@import './tokens.css';
 
-/* --- Variables --- */
+/* --- Page-scoped variables (shared tokens come from tokens.css) --- */
 :root {
-  --project-text: oklch(0.959 0.003 165);
-  --project-bg: oklch(0.08 0 0);
-  --project-bg-credits: oklch(0.134 0 0);
-  --project-font-body:
-    aktiv-grotesk, -apple-system, BlinkMacSystemFont, sans-serif;
-  --project-font-display: ivypresto-display, Georgia, serif;
+  /* Fluid horizontal inset for full-bleed video-player controls.
+     Kept separate from --container-padding so controls don't drift inboard. */
+  --hero-ui-inset: clamp(1rem, 2vw, 1.5rem);
+  /* Credits vertical rhythm (replaces 263/180/120 and 150/100/80 px tiers) */
+  --space-credits-top: clamp(7.5rem, 18.3vw, 16.4375rem);
+  --space-credits-bottom: clamp(5rem, 10.4vw, 9.375rem);
 }
 
 /* --- Reset & Base --- */
@@ -30,7 +31,7 @@ html {
 body {
   background: var(--project-bg);
   color: var(--project-text);
-  font-family: var(--project-font-body);
+  font-family: var(--ff-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -125,7 +126,7 @@ a {
 .project-hero__info-left span {
   font-size: 50px;
   font-weight: 500;
-  font-family: var(--project-font-body);
+  font-family: var(--ff-body);
   line-height: 1.1;
 }
 
@@ -249,14 +250,14 @@ a {
 }
 
 .project-credits__title {
-  font-family: var(--project-font-body);
+  font-family: var(--ff-body);
   font-size: 91px;
   font-weight: 500;
   line-height: 1.05;
 }
 
 .project-credits__year {
-  font-family: var(--project-font-body);
+  font-family: var(--ff-body);
   font-size: 60px;
   font-weight: 300;
   opacity: 0.8;

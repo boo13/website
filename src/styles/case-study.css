@@ -35,7 +35,7 @@
 }
 
 .case-study__hero-title {
-  font-family: var(--project-font-display);
+  font-family: var(--ff-display);
   font-size: clamp(40px, 6vw, 96px);
   font-weight: 300;
   line-height: 1.05;
@@ -80,7 +80,7 @@
 }
 
 .case-study__intro-text p {
-  font-family: var(--project-font-display);
+  font-family: var(--ff-display);
   font-size: clamp(24px, 3vw, 40px);
   font-weight: 300;
   line-height: 1.4;

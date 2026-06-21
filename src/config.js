@@ -4,6 +4,18 @@ import cdn from '../cdn-base.json';
 
 export const CDN_BASE = cdn.cdnBase;
 
+// Canonical breakpoints — single source of truth, mirrored by tokens.css.
+// Direction convention: "down" = max-width:N; "up" = min-width:N+1.
+// JS mirrors the small side: innerWidth <= BP.
+export const BREAKPOINTS = Object.freeze({
+  mobile: 480, // phone portrait
+  tablet: 768, // phone landscape / small tablet
+  desktop: 1024, // tablet/desktop seam — pairs with min-width: 1025px
+});
+
+// px past the track end on the pinned horizontal gallery
+export const GALLERY_SCROLL_BUFFER = 200;
+
 export const MOBILE_BREAKPOINT = 768;
 export const GALLERY_BREAKPOINT = 1024; // sync with @media (max-width: 1024px) in index.css
 
