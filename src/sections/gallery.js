@@ -3,7 +3,7 @@
  * Vertical scroll triggers horizontal card movement
  */
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
-import { GALLERY_BREAKPOINT, SCRUB } from '../config.js';
+import { BREAKPOINTS, GALLERY_SCROLL_BUFFER, SCRUB } from '../config.js';
 import { prefersReducedMotion, canHover } from '../utils/dom.js';
 
 export function initGallery() {
@@ -19,8 +19,8 @@ export function initGallery() {
 
   if (!section || !track || !cards.length) return;
 
-  // sync with @media (max-width: 1024px) in index.css
-  let isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
+  // sync with @media (max-width: 1024px) in index.css (BREAKPOINTS.desktop)
+  let isCompact = window.innerWidth <= BREAKPOINTS.desktop;
 
   let currentIndex = 0;
 
@@ -124,7 +124,7 @@ export function initGallery() {
 
   function handleResize() {
     const wasCompact = isCompact;
-    isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
+    isCompact = window.innerWidth <= BREAKPOINTS.desktop;
     if (wasCompact !== isCompact) {
       window.location.reload();
       return;
@@ -174,7 +174,7 @@ export function initGallery() {
   const ctx = gsap.context(() => {
     const trackWidth = track.scrollWidth;
     const viewportWidth = window.innerWidth;
-    let scrollDistance = trackWidth - viewportWidth + 200;
+    let scrollDistance = trackWidth - viewportWidth + GALLERY_SCROLL_BUFFER;
 
     const scrollTween = gsap.to(track, {
       x: () => -scrollDistance,

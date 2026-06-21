@@ -1418,7 +1418,7 @@ body.has-custom-cursor .gallery-card-corner {
   }
 }
 
-/* Tablet + mobile: vertical gallery stack — sync with GALLERY_BREAKPOINT in gallery.js */
+/* Tablet + mobile: vertical gallery stack — sync with BREAKPOINTS.desktop in gallery.js */
 @media (max-width: 1024px) {
   .featured-work-section {
     height: auto;

@@ -1,4 +1,7 @@
 import { gsap } from 'gsap';
+import { BREAKPOINTS } from '../config.js';
+
+const MOBILE_MQ = `(max-width: ${BREAKPOINTS.mobile}px)`;
 
 const FORCE_COMPLETE_AFTER_MS = 15000;
 const FONT_TASK_WEIGHT = 3;
@@ -14,9 +17,7 @@ function clamp(value, min, max) {
 }
 
 function getSizeConfig() {
-  return window.matchMedia('(max-width: 480px)').matches
-    ? MOBILE_SIZES
-    : DESKTOP_SIZES;
+  return window.matchMedia(MOBILE_MQ).matches ? MOBILE_SIZES : DESKTOP_SIZES;
 }
 
 function waitForVideoFrame(video, onLoaded) {
@@ -180,9 +181,7 @@ function createProgressSmoother(edgesEl, countdown) {
 }
 
 function animateExit({ overlayEl, edgesEl, timeEl, onComplete }) {
-  const travelDistance = window.matchMedia('(max-width: 480px)').matches
-    ? 28
-    : 44;
+  const travelDistance = window.matchMedia(MOBILE_MQ).matches ? 28 : 44;
   const cornerAnimations = [
     {
       selector: '.preloader-corner-lt',

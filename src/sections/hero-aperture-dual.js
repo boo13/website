@@ -8,7 +8,7 @@ import {
   TRAIL_MAX_PX,
   TRAIL_THRESH,
   TRAIL_OPACITY,
-  MOBILE_BREAKPOINT,
+  BREAKPOINTS,
   SCRUB,
 } from '../config.js';
 import { prefersReducedMotion } from '../utils/dom.js';
@@ -70,7 +70,7 @@ export function initHeroApertureDual() {
   const marquee = scene.querySelector('.about-intro__marquee');
   const galleryEl = document.querySelector('.featured-work-section');
 
-  const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+  const isMobile = window.innerWidth <= BREAKPOINTS.tablet;
   const hasBackVideo = Boolean(backShell && backVideo);
   const finalHole = isMobile ? '64vmin' : '54vmin';
   const finalFeather = isMobile ? '22vmin' : '24vmin';

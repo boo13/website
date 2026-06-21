@@ -16,9 +16,6 @@ export const BREAKPOINTS = Object.freeze({
 // px past the track end on the pinned horizontal gallery
 export const GALLERY_SCROLL_BUFFER = 200;
 
-export const MOBILE_BREAKPOINT = 768;
-export const GALLERY_BREAKPOINT = 1024; // sync with @media (max-width: 1024px) in index.css
-
 export const SCRUB = {
   default: 1,
   smooth: 1.5,
