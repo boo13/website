@@ -141,7 +141,7 @@ body.show-grid .bg-columns {
 
 .hero-name {
   font-family: var(--ff-display);
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: var(--text-hero);
   font-weight: 300;
   line-height: 1;
   color: var(--color-offwhite);
@@ -151,7 +151,7 @@ body.show-grid .bg-columns {
 }
 
 .hero-name.hero-name-fixed {
-  font-size: clamp(1.25rem, 3.2vw, 2.25rem);
+  font-size: var(--text-hero-fixed);
   margin-bottom: 0;
   white-space: nowrap;
   opacity: 0;
@@ -313,7 +313,7 @@ body.show-grid .bg-columns {
   z-index: 6;
   display: block;
   font-family: var(--ff-display);
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: var(--text-hero);
   font-weight: 300;
   line-height: 1;
   color: var(--color-offwhite);
@@ -322,7 +322,7 @@ body.show-grid .bg-columns {
 }
 
 .hero-subtitle {
-  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  font-size: var(--text-subtitle);
   font-weight: 400;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -592,7 +592,7 @@ body.has-custom-cursor .gallery-card-corner {
 
 .card-title {
   font-family: var(--ff-display);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: var(--text-card-title);
   font-weight: 400;
   line-height: 1.2;
   margin-bottom: 0.5rem;
@@ -688,7 +688,7 @@ body.has-custom-cursor .gallery-card-corner {
 
 .credits-section .section-title {
   font-family: var(--ff-display);
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--text-section-title);
   font-weight: 400;
   margin-bottom: 3rem;
   color: var(--credits-text);
@@ -960,7 +960,7 @@ body.has-custom-cursor .gallery-card-corner {
 
 .cta-heading {
   font-family: var(--ff-display);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: var(--text-cta);
   font-weight: 400;
   margin-bottom: 0.75rem;
 }
@@ -1266,7 +1266,7 @@ body.has-custom-cursor .gallery-card-corner {
 .footer-tagline {
   grid-column: 1 / 5;
   font-family: var(--ff-body);
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: var(--text-tagline);
   font-weight: 600;
   line-height: 1.4;
   max-width: 440px;
@@ -1474,10 +1474,6 @@ body.has-custom-cursor .gallery-card-corner {
 
 /* Mobile landscape and smaller tablets */
 @media (max-width: 768px) {
-  .bg-columns {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
   .hero-content {
     left: 1.5rem;
     right: 1.5rem;
@@ -1599,12 +1595,8 @@ body.has-custom-cursor .gallery-card-corner {
 
 /* Mobile portrait */
 @media (max-width: 480px) {
-  .bg-columns {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   :root {
-    --container-padding: 1.25rem;
+    /* --container-padding / --grid-gutter collapse live in tokens.css */
     --hero-social-hit-size: 40px;
   }
 
