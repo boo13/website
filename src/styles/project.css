@@ -452,6 +452,12 @@ a {
     height: 36px;
   }
 
+  /* Restore vertical breathing room between the stacked text + poster rows
+     (the desktop grid is a single row, so this only applies once stacked). */
+  .project-credits__wrapper {
+    row-gap: 40px;
+  }
+
   /* Single-column stack: both blocks span the full grid */
   .project-credits__text,
   .project-credits__image {

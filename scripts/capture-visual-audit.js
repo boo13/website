@@ -34,9 +34,15 @@ async page => {
       ['.case-study__closing', 'closing', 800],
       ['.project-credits', 'credits', 1000],
     ],
+    contact: [
+      ['.contact-shell', 'shell', 1000],
+      ['.contact-intro', 'intro', 600],
+      ['.contact-panel', 'form', 600],
+    ],
   };
 
   function routeKind(routePath) {
+    if (routePath.includes('contact')) return 'contact';
     if (routePath.includes('upnext-news')) return 'caseStudy';
     if (routePath.startsWith('/projects/')) return 'project';
     return 'home';
