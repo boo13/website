@@ -1,7 +1,7 @@
 ---
 title: "feat: Gemini-generated cover art for AI playlists"
 type: feat
-status: active
+status: completed
 date: 2026-03-15
 ---
 
