@@ -2,15 +2,16 @@
    PROJECT PAGE — Shared styles for all project detail pages
    Variants: --video, --image, --parallax (via BEM modifiers)
    ============================================================ */
+@import './tokens.css';
 
-/* --- Variables --- */
+/* --- Page-scoped variables (shared tokens come from tokens.css) --- */
 :root {
-  --project-text: oklch(0.959 0.003 165);
-  --project-bg: oklch(0.08 0 0);
-  --project-bg-credits: oklch(0.134 0 0);
-  --project-font-body:
-    aktiv-grotesk, -apple-system, BlinkMacSystemFont, sans-serif;
-  --project-font-display: ivypresto-display, Georgia, serif;
+  /* Fluid horizontal inset for full-bleed video-player controls.
+     Kept separate from --container-padding so controls don't drift inboard. */
+  --hero-ui-inset: clamp(1rem, 2vw, 1.5rem);
+  /* Credits vertical rhythm (replaces 263/180/120 and 150/100/80 px tiers) */
+  --space-credits-top: clamp(7.5rem, 18.3vw, 16.4375rem);
+  --space-credits-bottom: clamp(5rem, 10.4vw, 9.375rem);
 }
 
 /* --- Reset & Base --- */
@@ -24,13 +25,13 @@
 
 html {
   scroll-behavior: smooth;
-  color: #f0f2f1;
+  color: var(--project-text);
 }
 
 body {
   background: var(--project-bg);
   color: var(--project-text);
-  font-family: var(--project-font-body);
+  font-family: var(--ff-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -84,9 +85,9 @@ a {
 .project-hero__close {
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: var(--hero-ui-inset);
   z-index: 10;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -102,8 +103,8 @@ a {
 .project-hero__bottom {
   position: absolute;
   bottom: 0;
-  left: 21px;
-  right: 21px;
+  left: var(--hero-ui-inset);
+  right: var(--hero-ui-inset);
   padding-bottom: 46px;
   z-index: 5;
 }
@@ -123,9 +124,9 @@ a {
 }
 
 .project-hero__info-left span {
-  font-size: 50px;
+  font-size: var(--text-project-hero-title);
   font-weight: 500;
-  font-family: var(--project-font-body);
+  font-family: var(--ff-body);
   line-height: 1.1;
 }
 
@@ -141,7 +142,7 @@ a {
 }
 
 .project-hero__credits-btn {
-  font-size: 14px;
+  font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.8;
@@ -182,7 +183,7 @@ a {
 .project-hero__time {
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 1rem;
   font-variant-numeric: tabular-nums;
   opacity: 0.7;
 }
@@ -191,9 +192,9 @@ a {
 .project-hero__sound-btn {
   position: absolute;
   bottom: 80px;
-  right: 21px;
+  right: var(--hero-ui-inset);
   z-index: 10;
-  font-size: 14px;
+  font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.8;
@@ -225,18 +226,20 @@ a {
   z-index: 2;
 }
 
-/* --- Credits wrapper --- */
+/* --- Credits wrapper (shared 6-col grid) --- */
 .project-credits__wrapper {
-  display: flex;
-  gap: 60px;
-  padding: 263px 20px 150px;
-  max-width: 1600px;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: 0 var(--grid-gutter);
+  max-width: var(--grid-max-width);
   margin: 0 auto;
+  padding: var(--space-credits-top) var(--container-padding)
+    var(--space-credits-bottom);
 }
 
 /* --- Text block (left side) --- */
 .project-credits__text {
-  flex: 1;
+  grid-column: 1 / 5;
   min-width: 0;
 }
 
@@ -249,15 +252,15 @@ a {
 }
 
 .project-credits__title {
-  font-family: var(--project-font-body);
-  font-size: 91px;
+  font-family: var(--ff-body);
+  font-size: var(--text-project-credits-title);
   font-weight: 500;
   line-height: 1.05;
 }
 
 .project-credits__year {
-  font-family: var(--project-font-body);
-  font-size: 60px;
+  font-family: var(--ff-body);
+  font-size: var(--text-project-credits-year);
   font-weight: 300;
   opacity: 0.8;
 }
@@ -272,7 +275,7 @@ a {
 
 /* About section */
 .project-credits__subtitle {
-  font-size: 14px;
+  font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 24px;
@@ -280,8 +283,8 @@ a {
 }
 
 .project-credits__about {
-  font-size: 40px;
-  line-height: 48px;
+  font-size: var(--text-project-about);
+  line-height: 1.2;
   font-weight: 300;
 }
 
@@ -312,32 +315,31 @@ a {
 }
 
 .project-credits__item-title {
-  font-size: 16px;
+  font-size: 1rem;
   opacity: 0.6;
   margin-bottom: 4px;
   width: fit-content;
 }
 
 .project-credits__item-text {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
   white-space: pre-line;
   color: oklch(0.959 0.003 165 / 0.8);
 }
 
 .project-credits__item--highlight .project-credits__item-text {
-  color: #ffffff;
+  color: var(--project-text-highlight);
 }
 
 /* --- Poster image (right side) --- */
 .project-credits__image {
-  flex-shrink: 0;
-  width: 460px;
+  grid-column: 5 / 7;
 }
 
 .project-credits__image img {
   width: 100%;
-  height: 615px;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
   display: block;
 }
@@ -349,15 +351,15 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 40px 21px;
+  padding: 40px var(--container-padding);
   border-top: 1px solid oklch(0.959 0.003 165 / 0.15);
-  max-width: 1600px;
+  max-width: var(--grid-max-width);
   margin: 0 auto;
 }
 
 /* Ticker / marquee */
 .project-footer__ticker {
-  font-size: 16px;
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   opacity: 0.7;
@@ -391,7 +393,7 @@ a {
 
 /* Back to video button */
 .project-footer__back-btn {
-  font-size: 14px;
+  font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: 10px 24px;
@@ -410,7 +412,7 @@ a {
   display: flex;
   align-items: center;
   gap: 16px;
-  font-size: 14px;
+  font-size: 0.875rem;
   opacity: 0.6;
 }
 
@@ -424,41 +426,12 @@ a {
 
 /* ============================================================
    RESPONSIVE — Tablet
+   (type, poster size, and wrapper padding are now fluid tokens / grid)
    ============================================================ */
 @media (max-width: 1024px) {
-  .project-hero__info-left span {
-    font-size: 36px;
-  }
-
-  .project-credits__title {
-    font-size: 64px;
-  }
-
-  .project-credits__year {
-    font-size: 42px;
-  }
-
-  .project-credits__about {
-    font-size: 30px;
-    line-height: 38px;
-  }
-
   .project-credits__network {
     width: min(12rem, 55vw);
     height: 44px;
-  }
-
-  .project-credits__image {
-    width: 340px;
-  }
-
-  .project-credits__image img {
-    height: 460px;
-  }
-
-  .project-credits__wrapper {
-    padding: 180px 20px 100px;
-    gap: 40px;
   }
 }
 
@@ -466,23 +439,11 @@ a {
    RESPONSIVE — Mobile
    ============================================================ */
 @media (max-width: 768px) {
-  .project-hero__info-left span {
-    font-size: 24px;
-  }
-
   .project-hero__bottom {
-    left: 16px;
-    right: 16px;
     padding-bottom: 32px;
   }
 
-  .project-hero__close {
-    top: 16px;
-    right: 16px;
-  }
-
   .project-hero__sound-btn {
-    right: 16px;
     bottom: 56px;
   }
 
@@ -491,36 +452,25 @@ a {
     height: 36px;
   }
 
+  /* Restore vertical breathing room between the stacked text + poster rows
+     (the desktop grid is a single row, so this only applies once stacked). */
   .project-credits__wrapper {
-    flex-direction: column;
-    padding: 120px 16px 80px;
-    gap: 40px;
+    row-gap: 40px;
   }
 
-  .project-credits__title {
-    font-size: 40px;
+  /* Single-column stack: both blocks span the full grid */
+  .project-credits__text,
+  .project-credits__image {
+    grid-column: 1 / -1;
   }
 
-  .project-credits__year {
-    font-size: 28px;
-  }
-
+  /* Loosen __about line-height a touch at phone sizes (1.2 reads tight) */
   .project-credits__about {
-    font-size: 22px;
-    line-height: 30px;
+    line-height: 1.35;
   }
 
   .project-credits__line {
     margin: 32px 0 30px;
-  }
-
-  .project-credits__image {
-    width: 100%;
-  }
-
-  .project-credits__image img {
-    height: auto;
-    aspect-ratio: 3 / 4;
   }
 
   .project-credits__list {
@@ -531,7 +481,7 @@ a {
   .project-footer {
     flex-direction: column;
     gap: 24px;
-    padding: 32px 16px;
+    padding: 32px var(--container-padding);
   }
 
   .project-footer__ticker {

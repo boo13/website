@@ -3,7 +3,7 @@
  * Creates cinematic depth-of-field shift with layered images
  */
 import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
-import { MOBILE_BREAKPOINT } from '../config.js';
+import { BREAKPOINTS } from '../config.js';
 import { prefersReducedMotion } from '../utils/dom.js';
 
 const config = {
@@ -39,7 +39,7 @@ export function initFeaturedWork() {
 
   if (!section || !bg || !fg) return;
 
-  const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+  const isMobile = window.innerWidth <= BREAKPOINTS.tablet;
 
   if (prefersReducedMotion() || isMobile) {
     gsap.set(bg, { filter: 'blur(0px)', opacity: 1 });

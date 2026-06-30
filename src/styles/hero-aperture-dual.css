@@ -315,7 +315,7 @@ body.has-custom-cursor .portal-scene {
 
 .portal-scene--aperture-dual .about-intro__marquee-item {
   font-family: var(--ff-body, 'Inter', sans-serif);
-  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  font-size: var(--text-marquee);
   font-weight: 400;
   color: oklch(0.968 0.006 75 / 0.5);
   text-transform: uppercase;
