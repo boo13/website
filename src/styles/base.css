@@ -46,3 +46,11 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+/* Tweakpane debug panel mount — only populated when ?debug=1 */
+#tweakpane-mount {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 9999;
+}

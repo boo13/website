@@ -1,3 +1,5 @@
+import { isDebugMode, mountPane } from '../utils/debug-pane.js';
+
 const PROFILES = {
   default: {
     tail: 0.06,
@@ -206,6 +208,20 @@ export function setupGlitchText(target) {
   };
 }
 
+function mountGlitchTextPane() {
+  let pane = null;
+  mountPane('Glitch Text').then((p) => {
+    pane = p;
+    Object.entries(PROFILES).forEach(([name, profile]) => {
+      const folder = pane.addFolder({ title: name });
+      Object.keys(profile).forEach((key) => {
+        folder.addBinding(profile, key);
+      });
+    });
+  });
+  return () => pane?.dispose();
+}
+
 export function initGlitchText(root = document) {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(pointer: fine)');
@@ -214,8 +230,10 @@ export function initGlitchText(root = document) {
 
   const targets = [...root.querySelectorAll('[data-glitch-text]')];
   const cleanups = targets.map(setupGlitchText);
+  const cleanupPane = isDebugMode() ? mountGlitchTextPane() : () => {};
 
   return function cleanup() {
     cleanups.forEach((fn) => fn());
+    cleanupPane();
   };
 }

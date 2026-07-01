@@ -4,6 +4,7 @@ import 'glightbox/dist/css/glightbox.min.css';
 import { escHtml, escAttr } from '../utils/escape.js';
 import { CDN_BASE } from '../config.js';
 import { prefersReducedMotion, canHover } from '../utils/dom.js';
+import { isDebugMode, mountPane } from '../utils/debug-pane.js';
 
 // ─── Default Tweakpane config ──────────────────────────────────────────────
 const DEFAULT_CONFIG = {
@@ -840,11 +841,7 @@ function initLightbox() {
 // ─── Tweakpane integration ─────────────────────────────────────────────────
 
 async function mountTweakpane(cfg, onUpdate) {
-  const { Pane } = await import('tweakpane');
-  const pane = new Pane({
-    title: 'Hover Physics',
-    container: document.getElementById('tweakpane-mount'),
-  });
+  const pane = await mountPane('Hover Physics');
 
   pane.addBinding(cfg, 'hoverScale', {
     label: 'Hover scale',
@@ -996,8 +993,7 @@ export async function initPortfolioRows(data) {
     firstShot.addEventListener('click', () => watchPill.click());
   });
 
-  const params = new URLSearchParams(window.location.search);
-  const isDebug = params.get('debug') === '1';
+  const isDebug = isDebugMode();
   const savedCfg = isDebug
     ? (() => {
         try {
