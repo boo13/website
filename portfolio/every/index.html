@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Every Portfolio — Randy Counsman</title>
+    <meta
+      name="description"
+      content="Selected design, digital, deck, web, and long-form work by Randy Counsman."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Critical inline styles to prevent flash -->
+    <style>
+      html,
+      body {
+        background: #020202;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <!-- Typekit Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css" />
+  </head>
+  <body data-portfolio-slug="every">
+    <!-- Fixed wordmark header -->
+    <div class="portfolio-header">
+      <a href="/" class="portfolio-wordmark">Randy Counsman</a>
+    </div>
+
+    <!-- Section index -->
+    <nav class="portfolio-section-index" aria-label="Portfolio sections">
+      <a class="portfolio-section-index__title" href="#">Every</a>
+      <a
+        class="portfolio-section-index__link"
+        href="#portfolio-pitch-decks"
+        data-section-link="pitch-decks"
+        >decks</a
+      >
+      <a
+        class="portfolio-section-index__link"
+        href="#portfolio-short-form"
+        data-section-link="short-form"
+        >short-form</a
+      >
+      <a
+        class="portfolio-section-index__link"
+        href="#portfolio-long-form"
+        data-section-link="long-form"
+        >long-form</a
+      >
+      <a
+        class="portfolio-section-index__link"
+        href="#portfolio-social"
+        data-section-link="social"
+        >social</a
+      >
+      <a
+        class="portfolio-section-index__link"
+        href="#portfolio-websites"
+        data-section-link="websites"
+        >web</a
+      >
+    </nav>
+
+    <!-- Gate overlay — rendered by JS, removed on unlock -->
+    <div id="portfolio-gate"></div>
+
+    <!-- Project rows — populated by JS after unlock -->
+    <main class="portfolio-rows" id="portfolio-rows"></main>
+
+    <!-- Footer -->
+    <footer class="portfolio-footer">
+      <span>© Randy Counsman, <span id="footer-year"></span></span>
+    </footer>
+
+    <!-- Tweakpane mount — only rendered on ?debug=1 -->
+    <div id="tweakpane-mount"></div>
+
+    <script type="module" src="/src/main-portfolio.js"></script>
+  </body>
+</html>
