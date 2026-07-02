@@ -47,5 +47,22 @@
   font-size: 0.95rem;
 }
 
+/* Cap media height so the player never overflows short / landscape viewports.
+   On narrow screens width then follows height to preserve the 16:9 frame. */
+.glight-container .gslide-video {
+  max-height: 85svh;
+}
+
+.glight-container .gslide-video video {
+  max-height: 85svh;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .glight-container .gslide-video {
+    width: min(90vw, calc(85svh * 16 / 9)) !important;
+  }
+}
+
 /* Z-index override (default is 100001/100002) */
 /* Already higher than cursor-preview (1000) and gallery-progress (100) */

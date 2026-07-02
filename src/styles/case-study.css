@@ -29,14 +29,14 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 60px 40px;
+  padding: 60px var(--container-padding);
   background: linear-gradient(to top, oklch(0 0 0 / 0.7) 0%, transparent 100%);
   z-index: 2;
 }
 
 .case-study__hero-title {
-  font-family: var(--project-font-display);
-  font-size: clamp(40px, 6vw, 96px);
+  font-family: var(--ff-display);
+  font-size: clamp(2.5rem, 6vw, 6rem);
   font-weight: 300;
   line-height: 1.05;
   margin-bottom: 12px;
@@ -70,7 +70,7 @@
 
 /* --- Intro (centered text block) --- */
 .case-study__intro {
-  padding: 120px 40px;
+  padding: 120px var(--container-padding);
 }
 
 .case-study__intro-text {
@@ -80,8 +80,8 @@
 }
 
 .case-study__intro-text p {
-  font-family: var(--project-font-display);
-  font-size: clamp(24px, 3vw, 40px);
+  font-family: var(--ff-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 300;
   line-height: 1.4;
   opacity: 0;
@@ -89,7 +89,7 @@
 
 /* --- Side-by-Side Pair (2-col grid) --- */
 .case-study__pair {
-  padding: 0 40px;
+  padding: 0 var(--container-padding);
   margin-bottom: 8px;
 }
 
@@ -97,7 +97,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  max-width: 1600px;
+  max-width: var(--grid-max-width);
   margin: 0 auto;
 }
 
@@ -136,7 +136,7 @@
 
 /* --- Triptych Row (3-col grid, portrait images) --- */
 .case-study__triptych {
-  padding: 0 40px;
+  padding: 0 var(--container-padding);
   margin-bottom: 8px;
 }
 
@@ -144,7 +144,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  max-width: 1600px;
+  max-width: var(--grid-max-width);
   margin: 0 auto;
 }
 
@@ -162,7 +162,7 @@
 
 /* --- Asymmetric Pair (2fr:1fr) --- */
 .case-study__asymmetric {
-  padding: 0 40px;
+  padding: 0 var(--container-padding);
   margin-bottom: 8px;
 }
 
@@ -170,7 +170,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 8px;
-  max-width: 1600px;
+  max-width: var(--grid-max-width);
   margin: 0 auto;
 }
 
@@ -222,7 +222,7 @@
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  padding: 0 40px;
+  padding: 0 var(--container-padding);
   cursor: grab;
 }
 
@@ -270,38 +270,12 @@
 }
 
 /* ============================================================
-   RESPONSIVE — Tablet
-   ============================================================ */
-@media (max-width: 1024px) {
-  .case-study__hero-overlay {
-    padding: 48px 24px;
-  }
-
-  .case-study__intro {
-    padding: 80px 24px;
-  }
-
-  .case-study__pair,
-  .case-study__triptych,
-  .case-study__asymmetric {
-    padding: 0 24px;
-  }
-
-  .case-study__send-strip {
-    padding: 0 24px;
-  }
-}
-
-/* ============================================================
    RESPONSIVE — Mobile
+   (side padding now flows from --container-padding at every width)
    ============================================================ */
 @media (max-width: 768px) {
   .case-study__hero {
     height: 80vh;
-  }
-
-  .case-study__hero-overlay {
-    padding: 40px 16px;
   }
 
   .case-study__close {
@@ -309,22 +283,8 @@
     right: 16px;
   }
 
-  .case-study__intro {
-    padding: 60px 16px;
-  }
-
-  .case-study__pair,
-  .case-study__triptych,
-  .case-study__asymmetric {
-    padding: 0 16px;
-  }
-
   .case-study__chat-frames {
     max-width: calc(100vw - 32px);
-  }
-
-  .case-study__send-strip {
-    padding: 0 16px;
   }
 
   .case-study__send-item {

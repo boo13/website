@@ -99,9 +99,9 @@ components:
 
 # Design Rulebook
 
-**Scope:** Homepage (`index.html`) and project detail pages (`projects/*/index.html`). Does not govern utility pages (contact, resume).
+**Scope:** Homepage (`index.html`) and project detail pages (`projects/*/index.html`). Does not govern utility pages (contact, resume). Note: `contact.css` consumes the shared token layer (`tokens.css`) but is not otherwise design-governed.
 
-**Governed files:** `src/styles/index.css`, `src/styles/hero-aperture-dual.css`, `src/styles/project.css`, `src/styles/video-lightbox.css`, `src/main.js`, `src/main-project.js`, and all section/component modules they import.
+**Governed files:** `src/styles/tokens.css`, `src/styles/base.css`, `src/styles/index.css`, `src/styles/hero-aperture-dual.css`, `src/styles/project.css`, `src/styles/case-study.css`, `src/styles/video-lightbox.css`, `src/main.js`, `src/main-project.js`, and all section/component modules they import.
 
 **Purpose:** Prescriptive rules for design decisions. Every rule here can be applied to new work. Where something is not specified, it is not constrained.
 
@@ -268,26 +268,25 @@ All fluid via `clamp()`:
 
 ### Project Page Type Scale
 
-Fixed px values with breakpoint tiers. The one exception is the case study hero title.
+Fluid `clamp()` tokens (defined in `tokens.css`), anchored so rendered size at 1440px ≈ the former desktop px and at 390px ≈ the former mobile px. No media-query tiers.
 
-| Element | Class | Desktop | Tablet (≤1024px) | Mobile (≤768px) |
-|---------|-------|---------|-----------------|-----------------|
-| Credits title | `.project-credits__title` | 91px, weight 400 | 64px | 40px |
-| Credits year | `.project-credits__year` | 60px, weight 300 | 42px | 28px |
-| Credits about | `.project-credits__about` | 40px / lh 48px | 30px / lh 38px | 22px / lh 30px |
-| Role items | `.project-credits__role-item` | 16px | — | — |
-| Hero label | `.project-hero__label` | 14px, uppercase, 0.05em | — | — |
-| Hero subtitle | `.project-hero__subtitle` | 14px, uppercase, 0.08em | — | — |
-| Case study hero | `.case-study__title` | `clamp(40px, 6vw, 96px)` | — | — |
-| Case study intro | `.case-study__intro-text` | `clamp(24px, 3vw, 40px)`, display serif | — | — |
+| Element | Class | Token | Value |
+|---------|-------|-------|-------|
+| Credits title | `.project-credits__title` | `--text-project-credits-title` | `clamp(2.5rem, 6.32vw, 5.6875rem)` (40→91px) |
+| Credits year | `.project-credits__year` | `--text-project-credits-year` | `clamp(1.75rem, 4.17vw, 3.75rem)` (28→60px) |
+| Credits about | `.project-credits__about` | `--text-project-about` | `clamp(1.375rem, 2.78vw, 2.5rem)`, lh 1.2 (1.35 ≤768) |
+| Hero title | `.project-hero__info-left span` | `--text-project-hero-title` | `clamp(1.5rem, 3.47vw, 3.125rem)` (24→50px) |
+| Utility text | hero/credits/footer labels | — | `0.875rem` / `1rem` |
+| Case study hero | `.case-study__hero-title` | — | `clamp(2.5rem, 6vw, 6rem)` |
+| Case study intro | `.case-study__intro-text` | — | `clamp(1.5rem, 3vw, 2.5rem)`, display serif |
 
 ### Typography Rules
 
 1. **Display font weight:** 300 or 400 only. Never 500 or higher on the display font. `.footer-tagline` at 600 is the sole exception.
 2. **Italic:** Not used on the homepage or project pages. Never italic on headings or UI text.
 3. **Uppercase:** Always body font with `letter-spacing` between 0.05em and 0.15em. Never uppercase on display font.
-4. **Fluid sizing:** Homepage requires `clamp()` for all type above 1rem. Fixed rem only for utility text ≤1rem.
-5. **Project pages:** Fixed px with media-query tiers at 1024px and 768px. Case study hero title is the one exception that uses `clamp()`.
+4. **Fluid sizing:** Both page types require `clamp()` for all type above 1rem. Fixed rem only for utility text ≤1rem. Homepage clamps are named `--text-*` tokens in `tokens.css`.
+5. **Project pages:** Type is fluid `clamp()` via `--text-project-*` tokens — no fixed-px media-query tiers. The one hand-tuned override is `__about` line-height (1.2 desktop → 1.35 at ≤768).
 6. **Credits font swap:** Credits accordion row titles swap body→display font on expand. Driven by JS (`src/sections/credits.js`): inline `font-family` + GSAP `fontSize` tween to `2.25rem` at `expo.out`.
 
 ---
@@ -312,22 +311,21 @@ Debug grid overlay: `.bg-columns` (6 column divs), toggled via `Ctrl/Cmd+G` (add
 
 ### Project Pages
 
-No CSS grid system. Flex-based layouts throughout. Max-width 1600px.
+On the shared 6-col grid (`--grid-max-width: 1400px`), with `--container-padding` side gutters and `--grid-gutter` between columns. Credits: text `1 / 5`, poster `5/ 7` (3:4 aspect); both span `1 / -1` at ≤768. Credits vertical rhythm uses fluid page-scoped tokens (`--space-credits-top` / `--space-credits-bottom`). Full-bleed video-player controls use `--hero-ui-inset` (a tighter fluid inset) so they don't drift inboard with the content gutter.
 
-Spacing is hardcoded px:
-- Credits padding: 263px top / 20px sides / 150px bottom (desktop), reduces through breakpoints
-- Image grids: 8px gaps (tight, magazine-style)
-- Case study side padding: 40px (desktop) → 24px (≤1024px) → 16px (≤768px)
+**Sanctioned exception:** the case-study internal image grids (`__pair-grid` 2-col, `__triptych-grid` 3-col, `__asymmetric-grid` 2fr:1fr, 8px gaps) stay magazine-style. They align to the visual grid at their outer edges (shared `--grid-max-width` + `--container-padding`) but their internal columns are editorial composition, not the 6-col system.
 
 ### Spacing Note
 
-Neither page type uses a strict mathematical spacing scale. Use `--section-padding` and `--container-padding` as anchors on the homepage. On project pages, match the existing px rhythm.
+Neither page type uses a strict mathematical spacing scale. Use `--section-padding` and `--container-padding` as anchors. Project credits rhythm flows from `--space-credits-*` tokens; image-grid gaps stay 8px (magazine-style).
 
 ### Responsive Breakpoints
 
-`GALLERY_BREAKPOINT = 1024` and `MOBILE_BREAKPOINT = 768` in `src/config.js`. Gallery JS does a full page reload when the user crosses 1024px.
+Canonical breakpoints live in one place: `BREAKPOINTS` in `src/config.js` (`mobile: 480`, `tablet: 768`, `desktop: 1024`), mirrored by `tokens.css`. **Direction convention:** "down" = `max-width: N`; "up" = `min-width: N+1` (so `max-width: 1024px` pairs with `min-width: 1025px`). JS mirrors the small side: `innerWidth <= BP`. No governed stylesheet may introduce other media widths — the only exception is the inline critical preloader CSS in `index.html`, which keeps a hand-synced `(max-width: 480px)`.
 
-`--container-padding` overridden to `1.25rem` at ≤480px.
+Gallery JS does a full page reload when the user crosses 1024px (`BREAKPOINTS.desktop`).
+
+**Uniform column collapse** (in `tokens.css`, shared by every page): 6-col → **4-col @768** → **2-col @480** (`--grid-gutter` 20→14px, `--container-padding` → 1.25rem at ≤480).
 
 **Homepage:**
 
@@ -343,9 +341,11 @@ Neither page type uses a strict mathematical spacing scale. Use `--section-paddi
 
 | Breakpoint | Credits | Case Study | Video Hero | Footer |
 |-----------|---------|------------|------------|--------|
-| >1024px | 2-col (text left, 460px/460px poster right) | 40px side padding, full image grids | 100vh | Row layout |
-| 768–1024px | Poster 340px wide, 460px tall | 24px side padding | 100vh | — |
-| <768px | 1-col stack, poster full-width 3:4 aspect | 16px side padding, grids collapse to 1-col | 80vh | Centered stack |
+| ≥1025px | Grid: text `1/5`, poster `5/7` (3:4 aspect) | `--container-padding` sides, full image grids | 100vh | Row layout, `--grid-max-width` |
+| 768–1024px | Same grid; poster narrows fluidly with columns | `--container-padding` sides | 100vh | — |
+| ≤768px | Text + poster both `1 / -1` (1-col stack), poster full-width 3:4 | grids collapse to 1-col | 80vh | Column stack |
+
+**Deferred pages:** portfolio, resume, aiplaylists, medialog, the Wyatt case-study page, and legacy variants are not yet on the shared system. They keep their local breakpoints — including the non-canonical 520/600/860/980 widths still live in their stylesheets — until individually migrated.
 
 ---
 
@@ -402,6 +402,12 @@ Desktop only (`hover: hover` media query):
 - Dark overlay: `oklch(0.14 0 0 / 0.95)`
 - On open: all `.card-video` pause and reset to frame 0
 - On close: dispatches `'gallery:lightbox-close'`
+- Media capped at `max-height: 85svh`; at ≤768 width follows height (`min(90vw, calc(85svh * 16 / 9))`) so short/landscape viewports never clip the player
+
+### Touch / Coarse Pointer
+
+- Gallery hover-previews are skipped on touch (`canHover()` guard). Video instead plays scroll-driven via ScrollTrigger (`top 80%` / `bottom 20%`).
+- Corner brackets are hidden under `@media (hover: none)` to avoid sticky `:hover` on tap.
 
 ### Scroll-to Navigation
 

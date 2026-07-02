@@ -76,6 +76,8 @@ src/
   experiments/          # hero variant explorations and lab harness (tweak.js, shared.js)
   utils/                # small shared helpers
   styles/               # CSS per page, imported from JS entry points
+    tokens.css          # shared design tokens (colors, type scale, grid, breakpoint collapse) — imported first
+    base.css            # reset + universal element defaults
     index.css           # main portfolio page styles (used by index.html)
     project.css         # shared styles for all project pages (BEM: .project-hero--video, .project-credits, .project-footer)
     portfolio.css       # gated portfolio pages
