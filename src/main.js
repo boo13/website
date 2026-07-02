@@ -33,7 +33,7 @@ function init() {
   // Initialize sections (without hero animations yet)
   const cleanupCredits = initCredits();
   const cleanupCursor = initCustomCursor();
-  const cleanupGallery = initGallery();
+  const gallery = initGallery();
   const cleanupNav = initNav();
   const cleanupFooterReveal = initFooterReveal();
   const cleanupLightbox = initVideoLightbox();
@@ -55,12 +55,39 @@ function init() {
     { once: true }
   );
 
-  runPreloader({ criticalRootSelector: '#hero' })
-    .catch(() => {})
-    .finally(() => {
-      // Start hero animations after preloader exits (or fails open)
-      document.dispatchEvent(new CustomEvent('loadingComplete'));
+  const de = document.documentElement;
+  if (de.classList.contains('rc-return')) {
+    // Returning from a project page (flagged before paint by the inline script
+    // in index.html): skip the preloader and restore the gallery to the opened
+    // card, deterministically — no dependence on bfcache.
+    document.querySelector('.loading-overlay')?.remove();
+    document.dispatchEvent(new CustomEvent('loadingComplete'));
+
+    const href = de.dataset.returnTo;
+    // Restore after the hero pin registers + layout settles, then once more on
+    // full load to correct drift from late-loading assets.
+    document.fonts.ready.then(() => {
+      ScrollTrigger.refresh();
+      requestAnimationFrame(() => {
+        if (href) gallery.scrollToCard(href);
+      });
     });
+    window.addEventListener(
+      'load',
+      () => {
+        ScrollTrigger.refresh();
+        if (href) gallery.scrollToCard(href);
+      },
+      { once: true }
+    );
+  } else {
+    runPreloader({ criticalRootSelector: '#hero' })
+      .catch(() => {})
+      .finally(() => {
+        // Start hero animations after preloader exits (or fails open)
+        document.dispatchEvent(new CustomEvent('loadingComplete'));
+      });
+  }
 
   // Cleanup on page unload — but skip when the page is being put into the
   // back/forward cache, so back navigation restores ScrollSmoother state and
@@ -73,7 +100,7 @@ function init() {
     if (typeof cleanupMarquee === 'function') cleanupMarquee();
     if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
     if (typeof cleanupLightbox === 'function') cleanupLightbox();
-    if (typeof cleanupGallery === 'function') cleanupGallery();
+    gallery.destroy();
     if (typeof cleanupHero === 'function') cleanupHero();
     if (typeof cleanupNav === 'function') cleanupNav();
   });

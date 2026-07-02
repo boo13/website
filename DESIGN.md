@@ -597,6 +597,11 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
 - Exit sequence: time fades (0.55s `power1.out`), corners expand+fade (1.05s `power1.out`), edges scale 1.04× (`power1.out`), overlay fades (1.25s `power2.inOut`)
 - After exit: `.loading-overlay` removed from DOM, `'loadingComplete'` event dispatched → hero init begins
 
+**Return-from-project navigation** (no preloader replay):
+- On a same-site return to the homepage (browser Back, or the project Close button), the preloader is **suppressed** and the gallery **restores to the card that was opened** — it does not replay the loading sequence or land at the top.
+- Deterministic, not dependent on bfcache. A project page writes a one-use `sessionStorage['rc:returnTo'] = location.pathname` (`src/main-project.js`); an inline `<head>` script in `index.html` consumes it before first paint when the navigation is a genuine return (`back_forward` nav or a `/projects/…` referrer), adds `html.rc-return` (CSS hides `.loading-overlay`), and stashes the slug on `document.documentElement.dataset.returnTo`. `src/main.js` then skips `runPreloader`, dispatches `loadingComplete` immediately, and calls `gallery.scrollToCard()` after `fonts.ready` + a `ScrollTrigger.refresh()` (and again on `load`).
+- On desktop the gallery is a horizontally-pinned scrubbed track, so the restore maps the card to a vertical scroll offset within the pin and snaps the scrub tween to its final state (no slide-in). First/external visits (no marker) play the preloader normally. When the browser grants bfcache, the frozen page is restored as-is and none of this runs.
+
 **Custom Cursor** (`src/components/custom-cursor.js`):
 - Viewfinder cursor: `.custom-cursor-dot` (small filled dot) + `.custom-cursor-frame` (16:9 box, base 40×22) with four `.custom-cursor-corner` L-bracket children. Both `position: fixed`, `mix-blend-mode: difference`.
 - `gsap.quickTo`: dot x/y `0.3s power2.out`, frame follow x/y `0.7s power2.out`, snap x/y/width/height `0.4s power3.out`

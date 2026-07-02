@@ -2,7 +2,11 @@
  * Horizontal Scroll Gallery
  * Vertical scroll triggers horizontal card movement
  */
-import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
+import {
+  gsap,
+  ScrollTrigger,
+  ScrollSmoother,
+} from '../animations/scroll-defaults.js';
 import { GALLERY_BREAKPOINT, SCRUB } from '../config.js';
 import { prefersReducedMotion, canHover } from '../utils/dom.js';
 
@@ -17,12 +21,50 @@ export function initGallery() {
     '.gallery-progress .progress-total'
   );
 
-  if (!section || !track || !cards.length) return;
+  const noop = { destroy: () => {}, scrollToCard: () => {} };
+  if (!section || !track || !cards.length) return noop;
 
   // sync with @media (max-width: 1024px) in index.css
   let isCompact = window.innerWidth <= GALLERY_BREAKPOINT;
 
   let currentIndex = 0;
+
+  // Assigned in the desktop path; stays null on compact/reduced-motion.
+  let scrollTween = null;
+
+  // Restore the gallery to a specific card after a same-site return (see main.js).
+  function scrollToCard(href) {
+    const card = track
+      .querySelector(`a.card-link[href="${href}"]`)
+      ?.closest('.gallery-card');
+    if (!card) return;
+    const smoother = ScrollSmoother.get();
+
+    // Compact / reduced-motion: gallery is a vertical flex column.
+    if (isCompact || prefersReducedMotion() || !scrollTween) {
+      if (smoother) smoother.scrollTo(card, false, 'center center');
+      else card.scrollIntoView();
+      return;
+    }
+
+    // Desktop: card position is driven by vertical scroll within the pin.
+    const st = scrollTween.scrollTrigger;
+    const dist = st.end - st.start;
+    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+    const targetX = Math.min(
+      Math.max(cardCenter - window.innerWidth / 2, 0),
+      dist
+    );
+    const targetScroll = st.start + targetX;
+
+    if (smoother) smoother.scrollTo(targetScroll, false);
+    else window.scrollTo(0, targetScroll);
+
+    // The pin tween uses scrub (SCRUB.default = 1); snap scroll + tween to the
+    // final state so the track doesn't visibly slide into place over ~1s.
+    st.scroll(targetScroll);
+    scrollTween.progress(dist ? targetX / dist : 0);
+  }
 
   function setupHoverCorners() {
     cards.forEach((card) => {
@@ -163,11 +205,12 @@ export function initGallery() {
     document.addEventListener('gallery:lightbox-close', onLightboxClose);
     window.addEventListener('resize', handleResize);
 
-    return () => {
+    const destroy = () => {
       document.removeEventListener('gallery:lightbox-close', onLightboxClose);
       window.removeEventListener('resize', handleResize);
       ctx.revert();
     };
+    return { destroy, scrollToCard };
   }
 
   // --- Desktop path (horizontal scroll) ---
@@ -176,7 +219,7 @@ export function initGallery() {
     const viewportWidth = window.innerWidth;
     let scrollDistance = trackWidth - viewportWidth + 200;
 
-    const scrollTween = gsap.to(track, {
+    scrollTween = gsap.to(track, {
       x: () => -scrollDistance,
       ease: 'none',
       modifiers: {
@@ -213,8 +256,9 @@ export function initGallery() {
 
   window.addEventListener('resize', handleResize);
 
-  return () => {
+  const destroy = () => {
     window.removeEventListener('resize', handleResize);
     ctx.revert();
   };
+  return { destroy, scrollToCard };
 }

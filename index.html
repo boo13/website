@@ -38,6 +38,11 @@
         pointer-events: none;
       }
 
+      /* Returning from a project page: suppress the preloader before first paint */
+      html.rc-return .loading-overlay {
+        display: none !important;
+      }
+
       .preloader-wrapper {
         position: relative;
         width: 100%;
@@ -127,6 +132,35 @@
         }
       }
     </style>
+
+    <!-- Detect same-site return from a project page before first paint, so the
+         preloader is suppressed and the gallery can restore to the opened card.
+         Runs synchronously during parse; see src/main.js for the restore. -->
+    <script>
+      (function () {
+        try {
+          var payload = sessionStorage.getItem('rc:returnTo');
+          if (!payload) return;
+          var nav = performance.getEntriesByType('navigation')[0];
+          var bf = nav && nav.type === 'back_forward';
+          var ref = document.referrer;
+          var fromProject =
+            ref &&
+            ref.indexOf(location.origin) === 0 &&
+            /\/projects\//.test(ref);
+          if (!(bf || fromProject)) return;
+          sessionStorage.removeItem('rc:returnTo');
+          var de = document.documentElement;
+          de.classList.add('rc-return');
+          de.dataset.returnTo = payload;
+          // Suppress the browser's native scroll restoration so it can't flash
+          // the old position before scrollToCard() runs. Per-document, so it
+          // does not leak to other pages.
+          if ('scrollRestoration' in history)
+            history.scrollRestoration = 'manual';
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Typekit Fonts -->
     <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css" />
