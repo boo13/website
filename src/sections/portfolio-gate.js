@@ -14,9 +14,14 @@ import { trackPortfolioUnlock } from '../utils/track-portfolio-unlock.js';
 import { prefersReducedMotion } from '../utils/dom.js';
 
 const SESSION_KEY_PREFIX = 'portfolio-unlock-';
+const LOCAL_DEV_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]']);
 
 function sessionKey(slug) {
   return SESSION_KEY_PREFIX + slug;
+}
+
+function shouldUseSessionCache() {
+  return !LOCAL_DEV_HOSTS.has(window.location.hostname);
 }
 
 // ─── WebCrypto helpers ────────────────────────────────────────────────────────
@@ -83,7 +88,9 @@ function clearPasswordFromUrl() {
 
 export function initPortfolioGate({ slug, onUnlock }) {
   // Resume from sessionStorage on refresh
-  const cached = sessionStorage.getItem(sessionKey(slug));
+  const cached = shouldUseSessionCache()
+    ? sessionStorage.getItem(sessionKey(slug))
+    : null;
   if (cached) {
     try {
       const data = JSON.parse(cached);
