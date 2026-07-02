@@ -566,6 +566,19 @@ function resolveVideoUrl(src) {
   return `${CDN_BASE}/${cleanSource}`;
 }
 
+function isYouTubeUrl(src) {
+  try {
+    const { hostname } = new URL(String(src || ''));
+    return (
+      hostname === 'youtu.be' ||
+      hostname === 'youtube.com' ||
+      hostname.endsWith('.youtube.com')
+    );
+  } catch {
+    return false;
+  }
+}
+
 function renderShotMedia(src, p, idx, hasWatchVideo) {
   if (isVideoSrc(src)) {
     const mp4 = encodeSrc(src.replace(VIDEO_EXT_RE, '.mp4'));
@@ -730,17 +743,42 @@ function groupProjectsBySection(projects, sectionIds) {
 
 function renderViewPill(p) {
   const videoSource = p.lightboxVideo || p.videoUrl;
+  const fullVideoUrl = p.fullVideoUrl;
   const pills = [];
 
   if (videoSource) {
     const videoUrl = resolveVideoUrl(videoSource);
-    pills.push(`<a
+    const label = p.videoLabel || (p.liveUrl ? 'Motion' : 'Watch');
+    const labelText = escHtml(label);
+    if (isYouTubeUrl(videoUrl)) {
+      pills.push(`<a
+      class="portfolio-view-pill"
+      data-portfolio-watch
+      href="${escAttr(videoUrl)}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Watch ${escAttr(p.title)} on YouTube"
+    >${labelText} ↗</a>`);
+    } else {
+      pills.push(`<a
       class="portfolio-view-pill glightbox-portfolio"
+      data-portfolio-watch
       data-gallery="portfolio-${escAttr(p.id)}"
       data-type="video"
       href="${escAttr(videoUrl)}"
       aria-label="Watch ${escAttr(p.title)}"
-    >${p.liveUrl ? 'Motion' : 'Watch'}</a>`);
+    >${labelText}</a>`);
+    }
+  }
+
+  if (fullVideoUrl) {
+    pills.push(`<a
+      class="portfolio-view-pill"
+      href="${escAttr(fullVideoUrl)}"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="${escAttr(p.fullVideoAriaLabel || `Watch full ${p.title}`)}"
+    >${escHtml(p.fullVideoLabel || 'Watch full')} ↗</a>`);
   }
 
   if (p.liveUrl) {
@@ -750,7 +788,7 @@ function renderViewPill(p) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Visit ${escAttr(p.title)}"
-    >${videoSource ? 'Site ↗' : 'View ↗'}</a>`);
+    >${videoSource || fullVideoUrl ? 'Site ↗' : 'View ↗'}</a>`);
   }
 
   return pills.join('');
@@ -1031,7 +1069,7 @@ export async function initPortfolioRows(data) {
 
   container.querySelectorAll('[data-portfolio-first-shot]').forEach((firstShot) => {
     const row = firstShot.closest('.portfolio-row');
-    const watchPill = row?.querySelector('.portfolio-view-pill.glightbox-portfolio');
+    const watchPill = row?.querySelector('[data-portfolio-watch]');
     if (!watchPill) return;
     firstShot.style.cursor = 'pointer';
     firstShot.addEventListener('click', () => watchPill.click());
