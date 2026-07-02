@@ -291,6 +291,51 @@ body::before {
   user-select: none;
 }
 
+/* =====================================================
+   GRID MEDIA ROW
+====================================================== */
+.portfolio-row--grid {
+  padding-block: clamp(1.5rem, 4vh, 3.25rem);
+}
+
+.portfolio-row--grid .portfolio-row__head {
+  margin-bottom: clamp(0.9rem, 2vh, 1.4rem);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, clamp(16rem, 25vw, 24rem)), 1fr)
+  );
+  gap: clamp(0.55rem, 1vw, 1rem);
+  align-items: start;
+  list-style: none;
+}
+
+.portfolio-grid .portfolio-shot {
+  width: 100%;
+  height: auto;
+  background: oklch(0.968 0.006 75 / 0.035);
+}
+
+.portfolio-grid .portfolio-shot > a {
+  height: auto;
+}
+
+.portfolio-grid .portfolio-shot img,
+.portfolio-grid .portfolio-shot video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: top left;
+}
+
+.portfolio-grid .portfolio-shot:hover img,
+.portfolio-grid .portfolio-shot:hover video {
+  filter: brightness(1);
+}
+
 .portfolio-row__edge {
   position: absolute;
   top: 0;

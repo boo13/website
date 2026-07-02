@@ -756,31 +756,66 @@ function renderViewPill(p) {
   return pills.join('');
 }
 
-function renderProjectRow(p) {
-  const screenshots = p.screenshots ?? [];
-  const hasWatchVideo = !!(p.lightboxVideo || p.videoUrl);
-  const shotsMarkup = screenshots.length
-    ? `
+function usesGridMediaLayout(project) {
+  return String(project.mediaLayout || '').toLowerCase() === 'grid';
+}
+
+function renderShotItem(src, p, idx, hasWatchVideo) {
+  const firstShotAttr =
+    idx === 0 && hasWatchVideo ? ' data-portfolio-first-shot' : '';
+
+  return `
+              <li class="portfolio-shot"${firstShotAttr}>
+                ${renderShotMedia(src, p, idx, hasWatchVideo)}
+              </li>`;
+}
+
+function renderFilmstripMedia(p, screenshots, hasWatchVideo) {
+  return `
       <div class="portfolio-row__strip-frame">
         <div class="portfolio-row__strip-viewport">
           <ul class="portfolio-row__strip">
             ${screenshots
-              .map(
-                (src, i) => `
-              <li class="portfolio-shot"${i === 0 && hasWatchVideo ? ' data-portfolio-first-shot' : ''}>
-                ${renderShotMedia(src, p, i, hasWatchVideo)}
-              </li>`
-              )
+              .map((src, i) => renderShotItem(src, p, i, hasWatchVideo))
               .join('')}
           </ul>
         </div>
         <span class="portfolio-row__edge portfolio-row__edge--left" aria-hidden="true"></span>
         <span class="portfolio-row__edge portfolio-row__edge--right" aria-hidden="true"></span>
-      </div>`
-    : '';
+      </div>`;
+}
+
+function renderGridMedia(p, screenshots, hasWatchVideo) {
+  return `
+      <ul class="portfolio-grid">
+        ${screenshots
+          .map((src, i) => renderShotItem(src, p, i, hasWatchVideo))
+          .join('')}
+      </ul>`;
+}
+
+function renderProjectRow(p) {
+  const screenshots = p.screenshots ?? [];
+  const hasWatchVideo = !!(p.lightboxVideo || p.videoUrl);
+  const isGrid = screenshots.length > 0 && usesGridMediaLayout(p);
+  let shotsMarkup = '';
+
+  if (screenshots.length) {
+    shotsMarkup = isGrid
+      ? renderGridMedia(p, screenshots, hasWatchVideo)
+      : renderFilmstripMedia(p, screenshots, hasWatchVideo);
+  }
+
+  const rowClasses = [
+    'portfolio-row',
+    screenshots.length ? '' : 'portfolio-row--no-shots',
+    isGrid ? 'portfolio-row--grid' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return `
-    <section class="portfolio-row${screenshots.length ? '' : ' portfolio-row--no-shots'}" data-project="${escAttr(p.id)}">
+    <section class="${rowClasses}" data-project="${escAttr(p.id)}">
       <header class="portfolio-row__head">
         <div class="portfolio-row__head-left">
           <h3 class="portfolio-row__title">${escHtml(p.title)}</h3>
