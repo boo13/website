@@ -19,6 +19,11 @@ const EDGE_PAN_SPEED = 360;
 const HOVER_PAN_INSET = 24;
 const PORTFOLIO_SECTIONS = [
   {
+    id: 'interviews',
+    label: 'interviews',
+    aliases: ['interview', 'interviews', 'interview stills', 'sit-down'],
+  },
+  {
     id: 'short-form',
     label: 'short-form',
     aliases: [
@@ -120,6 +125,7 @@ const SECTION_FIELDS = [
   'format',
 ];
 const SECTION_MATCH_PRIORITY = [
+  'interviews',
   'pitch-decks',
   'websites',
   'social',
