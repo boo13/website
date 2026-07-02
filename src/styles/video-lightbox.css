@@ -4,63 +4,81 @@
  */
 
 /* Dark backdrop */
-.glight-container .goverlay {
+.glightbox-container .goverlay {
   background: oklch(0.14 0 0 / 0.95) !important;
   -webkit-backdrop-filter: blur(12px) saturate(0.8);
   backdrop-filter: blur(12px) saturate(0.8);
 }
 
 /* Close button styling */
-.glight-container .gclose,
-.glight-container .gnext,
-.glight-container .gprev {
+.glightbox-container .gclose,
+.glightbox-container .gnext,
+.glightbox-container .gprev {
   color: var(--color-offwhite, oklch(0.968 0.006 75)) !important;
   opacity: 0.8;
   transition: opacity 0.3s ease;
 }
 
-.glight-container .gclose:hover,
-.glight-container .gnext:hover,
-.glight-container .gprev:hover {
+.glightbox-container .gclose:hover,
+.glightbox-container .gnext:hover,
+.glightbox-container .gprev:hover {
   opacity: 1;
 }
 
 /* Video container - remove default borders/shadows */
-.glight-container .ginner-container {
+.glightbox-container .ginner-container {
   border: none;
   box-shadow: none;
 }
 
 /* Title and description text */
-.glight-container .gdesc-inner {
+.glightbox-container .gdesc-inner {
   color: var(--color-offwhite, oklch(0.968 0.006 75));
 }
 
-.glight-container .gslide-title {
+.glightbox-container .gslide-title {
   color: var(--color-offwhite, oklch(0.968 0.006 75));
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-.glight-container .gslide-description {
+.glightbox-container .gslide-description {
   color: oklch(0.968 0.006 75 / 0.8);
   font-size: 0.95rem;
 }
 
 /* Cap media height so the player never overflows short / landscape viewports.
    On narrow screens width then follows height to preserve the 16:9 frame. */
-.glight-container .gslide-video {
+.glightbox-container .gslide-video {
   max-height: 85svh;
 }
 
-.glight-container .gslide-video video {
+.glightbox-container .gslide-video video {
   max-height: 85svh;
   object-fit: contain;
 }
 
 @media (max-width: 768px) {
-  .glight-container .gslide-video {
+  .glightbox-container .gslide-video {
     width: min(90vw, calc(85svh * 16 / 9)) !important;
+  }
+
+  /* Default close button (35px, faint) is unreliable against a playing
+     video on mobile. Make it a large, opaque, thumb-reachable target. */
+  .glightbox-container .gclose {
+    width: 48px !important;
+    height: 48px !important;
+    top: max(env(safe-area-inset-top), 12px) !important;
+    right: max(env(safe-area-inset-right), 12px) !important;
+    background: oklch(0.14 0 0 / 0.7) !important;
+    border-radius: 50%;
+    opacity: 1 !important;
+    z-index: 100000;
+  }
+
+  .glightbox-container .gclose svg {
+    width: 22px !important;
+    height: 22px !important;
   }
 }
 

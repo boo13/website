@@ -118,3 +118,28 @@
   display: block;
   margin: 0 auto;
 }
+
+/* ── Mobile close button: the default transparent/faint (35px, 0.35 opacity)
+   close button is unreadable over a playing video and easy to miss on a
+   phone. Make it a large, opaque, thumb-reachable target. ─────────────── */
+@media (max-width: 768px) {
+  .glightbox-container .gclose {
+    width: 48px !important;
+    height: 48px !important;
+    top: max(env(safe-area-inset-top), 12px) !important;
+    right: max(env(safe-area-inset-right), 12px) !important;
+    background: oklch(0.14 0 0 / 0.7) !important;
+    border-radius: 50%;
+    opacity: 1 !important;
+    z-index: 100000;
+  }
+
+  .glightbox-container .gclose path {
+    fill: oklch(0.968 0.006 75) !important;
+  }
+
+  .glightbox-container .gclose svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+}
