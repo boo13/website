@@ -48,7 +48,7 @@ export function initProjectVideo() {
   // --- Play / Pause ---
   function togglePlay() {
     if (video.paused) {
-      video.play();
+      video.play().catch(() => {});
     } else {
       video.pause();
     }
@@ -73,8 +73,6 @@ export function initProjectVideo() {
       video.muted = !video.muted;
       updateSoundBtn();
     });
-    // Default to sound on; muted attr is kept in HTML only for autoplay permission
-    video.muted = false;
     updateSoundBtn();
   }
 
@@ -93,6 +91,7 @@ export function initProjectVideo() {
   // --- Timeline seek on click ---
   if (timelineRail) {
     timelineRail.addEventListener('click', (e) => {
+      if (!video.duration) return;
       const rect = timelineRail.getBoundingClientRect();
       const pct = (e.clientX - rect.left) / rect.width;
       video.currentTime = pct * video.duration;
