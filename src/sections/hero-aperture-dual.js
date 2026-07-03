@@ -61,9 +61,10 @@ export function initHeroApertureDual() {
   const aboutInner = scene?.querySelector('.portal-scene__about-inner');
   const vignette = scene?.querySelector('.aperture-edge-vignette');
   const topGradient = document.querySelector('.hero-top-transition-gradient');
-  const textFillEls = [...scene.querySelectorAll('[data-aperture-text-fill]')];
 
   if (!scene || !videoShell || !about) return () => {};
+
+  const textFillEls = [...scene.querySelectorAll('[data-aperture-text-fill]')];
 
   const fixedName = document.getElementById('hero-name-fixed');
   const fixedOverlays = [fixedName].filter(Boolean);
