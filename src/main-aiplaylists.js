@@ -11,6 +11,7 @@ const FOCUSABLE_SELECTOR =
 
 const SOURCE_LABELS = {
   nlm: 'NotebookLM',
+  notebooklm: 'NotebookLM',
   codex_fallback: 'Codex',
   codex: 'Codex',
   sonnet: 'Sonnet',
@@ -20,6 +21,7 @@ const SOURCE_LABELS = {
 
 const KIND_LABELS = {
   daily_nlm: 'Daily roulette',
+  daily_notebooklm: 'Daily roulette',
   ai_curated: 'One-off curation',
 };
 
