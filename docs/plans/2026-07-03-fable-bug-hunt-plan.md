@@ -107,19 +107,24 @@ _Updated as work progresses — read this section first to see what's done vs. s
 
 1. `0b41d04` — P1-1 (project hero unmute-at-init bug) + P3-2 (NaN seek guard) + P4 (`play().catch()`), all in `src/sections/project-video.js`.
 2. `e751525` — P1-2 (`'every'` added to `KNOWN_SLUGS`, plus unknown-slug logging) in `worker/portfolio-unlock/src/index.js`, + P4 (exact-hostname origin/referer check) in `worker/shared/utils.js`.
-3. `315783f` — P2-1 (preloader video-error stall) in `src/components/preloader.js`.
+3. `315783f` — P2-1 (preloader video-error stall) in `src/components/preloader.js`. **Superseded by `bec48eb` below** — the first version was incomplete.
 4. `37daae7` — P2-2 (notebooklm/daily_notebooklm label mapping) in `src/main-aiplaylists.js`.
 
-`npx eslint src/` and `npm run build` both pass clean as of the last commit above. None of these four fixes were manually verified in a browser (playwright-cli) — that's still open, see Verification section above for the specific checks per fix.
+**Review round (Codex):** flagged that the P2-1 fix in commit 3 only listened for `error` on `<video>`, but the homepage's hero videos use nested `<source>` children whose `error` events don't bubble — verified with playwright-cli (blocked `media.randycounsman.com`), overlay still took ~17.4s. Filed as `todos/001-pending-p2-preloader-source-errors.md`.
+
+5. `bec48eb` — fixes P2-1 properly. First attempt just added `<source>`-level error listeners (matching the reviewer's Option 1), but re-testing with the same repro showed **zero** error/loadeddata events reached any listener at all — a fast/local 404 flips `video.networkState` to `NETWORK_NO_SOURCE` before `waitForVideoFrame` even attaches, so the event has already come and gone. Event listeners alone can't be made reliable against that race. Final fix checks `readyState`/`networkState`/`error` synchronously at attach time, then polls via `requestAnimationFrame` as the source of truth (listeners kept only as a fast-path). Verified with the same playwright-cli repro: blocked case now resolves in ~2.3s (was ~17.4s); unblocked case still loads/plays normally (`loadeddata` at ~410-508ms, videos confirmed `paused: false` with `currentTime` advancing). `todos/001-...md` marked `status: resolved` with the full investigation in its Work Log.
+
+`npx eslint src/` and `npm run build` both pass clean as of the last commit above. Commits 1, 2, and 4 (project-video.js, worker files, aiplaylists.js) still have **not** been manually verified in a browser — only P2-1 got the playwright-cli treatment, because that's what the review round surfaced. See Verification section above for the specific checks still owed on 1, 2, and 4.
 
 **Still open — for the next LLM to pick up:**
 
-5. P3-1 — `src/sections/portfolio-gate.js`: narrow the try/catch so storage/`onUnlock` failures aren't reported as "wrong password." Not started.
-6. P3-3 — `justfile`: `just deploy` can strand the repo on `gh-pages` on merge/push failure. Not started.
-7. P4 remainder — `src/sections/hero-aperture-dual.js:64`: move the `scene` dereference below the null guard. Not started. (The other two P4 items — `project-video.js` play() catch and `worker/shared/utils.js` origin check — were already folded into commits 1 and 2 above, per the original plan.)
+6. P3-1 — `src/sections/portfolio-gate.js`: narrow the try/catch so storage/`onUnlock` failures aren't reported as "wrong password." Not started.
+7. P3-3 — `justfile`: `just deploy` can strand the repo on `gh-pages` on merge/push failure. Not started.
+8. P4 remainder — `src/sections/hero-aperture-dual.js:64`: move the `scene` dereference below the null guard. Not started. (The other two P4 items — `project-video.js` play() catch and `worker/shared/utils.js` origin check — were already folded into commits 1 and 2, per the original plan.)
 
-**Also still open (not part of the 7 commits, called out explicitly above):**
+**Also still open:**
 - Deploy note for commit 2: the worker code change is committed, but `just worker-deploy` (wrangler auth) has not been run — production is still on the old allowlist/origin check until that happens.
-- Browser verification (playwright-cli) for commits 1-4 has not been performed in this session — do this before/alongside picking up remaining work, or at minimum before considering the branch ready to merge.
+- Browser verification (playwright-cli) for commits 1, 2, and 4 has not been performed — do this before/alongside picking up remaining work, or at minimum before considering the branch ready to merge.
+- If another review pass runs, treat P2-1 as re-tested/high-confidence (it already survived one real repro-based review round) but the other three commits as unverified — weight review attention accordingly.
 
 **Not touched:** the "noted, no action recommended" item (`portfolio-rows.js` listener teardown) and all four refuted findings — leave as-is per the plan above.
