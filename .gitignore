@@ -183,9 +183,8 @@ public/video/
 # Playwright MCP folder (contains screenshots and logs)
 .playwright-mcp/
 
-# Playwright CLI snapshot yamls 
-.playwright-cli/*.yml
-.playwright-cli/*.png
+# Playwright CLI generated snapshots, logs, and helper scripts
+.playwright-cli/
 
 # Screenshots folder used for visual testing
 screenshots/
