@@ -1,5 +1,15 @@
 const HOST = 'randycounsman.com';
 
+function hostMatches(value) {
+  if (!value) return false;
+  try {
+    const { hostname } = new URL(value);
+    return hostname === HOST || hostname.endsWith(`.${HOST}`);
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Guards a Worker fetch handler: checks method, validates origin/referer,
  * and parses the JSON body. Returns { response } on rejection or { body } on success.
@@ -11,7 +21,7 @@ export async function guardRequest(request) {
 
   const origin = request.headers.get('Origin') ?? '';
   const referer = request.headers.get('Referer') ?? '';
-  if (!origin.includes(HOST) && !referer.includes(HOST)) {
+  if (!hostMatches(origin) && !hostMatches(referer)) {
     return { response: new Response(null, { status: 204 }) };
   }
 

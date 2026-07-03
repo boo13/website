@@ -1,6 +1,7 @@
 import { guardRequest, hashIP } from '../../shared/utils.js';
 
-const KNOWN_SLUGS = new Set(['0626', 'design']);
+// Must include every slug under portfolio/ — update when scaffolding a new gated portfolio.
+const KNOWN_SLUGS = new Set(['0626', 'design', 'every']);
 const RATE_LIMIT_TTL = 60 * 30; // 30 minutes — one notification per slug+IP per window
 
 export default {
@@ -11,6 +12,7 @@ export default {
 
     const { slug } = body;
     if (!KNOWN_SLUGS.has(slug)) {
+      console.log(`[fetch] unknown slug: ${slug}`);
       return new Response(null, { status: 204 });
     }
 
