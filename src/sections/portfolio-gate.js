@@ -169,27 +169,21 @@ export function initPortfolioGate({ slug, onUnlock }) {
     btn.disabled = true;
     errorEl.textContent = '';
 
+    let data;
+    let isDev;
     try {
       const res = await fetch(`/data/portfolios/${slug}.enc.json`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const payload = await res.json();
 
-      let data;
-      if (payload.dev === true) {
+      isDev = payload.dev === true;
+      if (isDev) {
         // Dev middleware fast-path: any non-empty password unlocks
         data = { ...payload, projects: payload.projects ?? [] };
         delete data.dev;
       } else {
         data = await decrypt(payload, password);
       }
-
-      sessionStorage.setItem(sessionKey(slug), JSON.stringify(data));
-      if (!payload.dev) trackPortfolioUnlock(slug);
-
-      clearPasswordFromUrl();
-
-      mount.remove();
-      onUnlock(data);
     } catch {
       clearPasswordFromUrl();
       const contactUrl =
@@ -200,7 +194,18 @@ export function initPortfolioGate({ slug, onUnlock }) {
       input.focus();
       btn.disabled = false;
       inFlight = false;
+      return;
     }
+
+    try {
+      sessionStorage.setItem(sessionKey(slug), JSON.stringify(data));
+    } catch {
+      // Storage unavailable (quota, private browsing) — cache is an optimization, not required.
+    }
+    if (!isDev) trackPortfolioUnlock(slug);
+    clearPasswordFromUrl();
+    mount.remove();
+    onUnlock(data);
   }
 
   form.addEventListener('submit', async (e) => {
