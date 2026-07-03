@@ -1,6 +1,24 @@
 # Merge dev into gh-pages and push to deploy
 deploy:
-    git checkout gh-pages && git merge dev && git push && git checkout dev
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    git checkout gh-pages
+
+    if ! git merge dev; then
+        echo "Merge failed — aborting and returning to dev." >&2
+        git merge --abort
+        git checkout dev
+        exit 1
+    fi
+
+    if ! git push; then
+        echo "Push failed — returning to dev. gh-pages has the merge locally; resolve and push manually." >&2
+        git checkout dev
+        exit 1
+    fi
+
+    git checkout dev
 
 # Merge a feature-branch worktree into gh-pages, push, then remove the worktree and branch.
 # Run from any worktree of this repo. Branch must already have its changes committed.
