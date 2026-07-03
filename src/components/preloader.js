@@ -26,13 +26,18 @@ function waitForVideoFrame(video, onLoaded) {
     return () => {};
   }
 
-  const onFrameLoaded = () => {
-    video.removeEventListener('loadeddata', onFrameLoaded);
+  const onDone = () => {
+    video.removeEventListener('loadeddata', onDone);
+    video.removeEventListener('error', onDone);
     onLoaded();
   };
 
-  video.addEventListener('loadeddata', onFrameLoaded);
-  return () => video.removeEventListener('loadeddata', onFrameLoaded);
+  video.addEventListener('loadeddata', onDone);
+  video.addEventListener('error', onDone);
+  return () => {
+    video.removeEventListener('loadeddata', onDone);
+    video.removeEventListener('error', onDone);
+  };
 }
 
 function waitForImageLoad(image, onLoaded) {
