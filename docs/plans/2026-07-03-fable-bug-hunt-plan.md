@@ -103,4 +103,23 @@ Push with `git push -u origin claude/bug-search-severity-ranking-7vqxue`.
 
 _Updated as work progresses — read this section first to see what's done vs. still open._
 
-**Not started yet.** This section will be updated once implementation begins in this session.
+**Done (commits 1-4 of the 7 planned, all on `claude/bug-search-severity-ranking-7vqxue`):**
+
+1. `0b41d04` — P1-1 (project hero unmute-at-init bug) + P3-2 (NaN seek guard) + P4 (`play().catch()`), all in `src/sections/project-video.js`.
+2. `e751525` — P1-2 (`'every'` added to `KNOWN_SLUGS`, plus unknown-slug logging) in `worker/portfolio-unlock/src/index.js`, + P4 (exact-hostname origin/referer check) in `worker/shared/utils.js`.
+3. `315783f` — P2-1 (preloader video-error stall) in `src/components/preloader.js`.
+4. `37daae7` — P2-2 (notebooklm/daily_notebooklm label mapping) in `src/main-aiplaylists.js`.
+
+`npx eslint src/` and `npm run build` both pass clean as of the last commit above. None of these four fixes were manually verified in a browser (playwright-cli) — that's still open, see Verification section above for the specific checks per fix.
+
+**Still open — for the next LLM to pick up:**
+
+5. P3-1 — `src/sections/portfolio-gate.js`: narrow the try/catch so storage/`onUnlock` failures aren't reported as "wrong password." Not started.
+6. P3-3 — `justfile`: `just deploy` can strand the repo on `gh-pages` on merge/push failure. Not started.
+7. P4 remainder — `src/sections/hero-aperture-dual.js:64`: move the `scene` dereference below the null guard. Not started. (The other two P4 items — `project-video.js` play() catch and `worker/shared/utils.js` origin check — were already folded into commits 1 and 2 above, per the original plan.)
+
+**Also still open (not part of the 7 commits, called out explicitly above):**
+- Deploy note for commit 2: the worker code change is committed, but `just worker-deploy` (wrangler auth) has not been run — production is still on the old allowlist/origin check until that happens.
+- Browser verification (playwright-cli) for commits 1-4 has not been performed in this session — do this before/alongside picking up remaining work, or at minimum before considering the branch ready to merge.
+
+**Not touched:** the "noted, no action recommended" item (`portfolio-rows.js` listener teardown) and all four refuted findings — leave as-is per the plan above.
