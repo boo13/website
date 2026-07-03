@@ -20,23 +20,54 @@ function getSizeConfig() {
   return window.matchMedia(MOBILE_MQ).matches ? MOBILE_SIZES : DESKTOP_SIZES;
 }
 
+function isVideoSettled(video) {
+  return (
+    video.readyState >= 2 ||
+    video.networkState === video.NETWORK_NO_SOURCE ||
+    !!video.error
+  );
+}
+
 function waitForVideoFrame(video, onLoaded) {
-  if (video.readyState >= 2) {
+  if (isVideoSettled(video)) {
     onLoaded();
     return () => {};
   }
 
+  // A fast-failing <source> (e.g. an instant 404 on a fresh connection) can
+  // flip the video to networkState NETWORK_NO_SOURCE before any listener
+  // attached here has a chance to run, and 'error' on <source> nodes doesn't
+  // bubble to the video anyway — so events alone are not reliable. Poll the
+  // element's real state as the source of truth; the listeners just give an
+  // instant response on the common case where the event fires after attach.
+  let settled = false;
+  let rafId = null;
+
   const onDone = () => {
+    if (settled) return;
+    settled = true;
     video.removeEventListener('loadeddata', onDone);
     video.removeEventListener('error', onDone);
+    if (rafId !== null) cancelAnimationFrame(rafId);
     onLoaded();
+  };
+
+  const poll = () => {
+    if (isVideoSettled(video)) {
+      onDone();
+      return;
+    }
+    rafId = requestAnimationFrame(poll);
   };
 
   video.addEventListener('loadeddata', onDone);
   video.addEventListener('error', onDone);
+  rafId = requestAnimationFrame(poll);
+
   return () => {
     video.removeEventListener('loadeddata', onDone);
     video.removeEventListener('error', onDone);
+    if (rafId !== null) cancelAnimationFrame(rafId);
   };
 }
 
