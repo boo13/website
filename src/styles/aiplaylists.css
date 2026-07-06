@@ -286,6 +286,14 @@ code {
   background: oklch(0.1 0.014 252 / 0.9);
 }
 
+.coverflow__nav:focus-visible,
+.coverflow-card__button:focus-visible,
+.playlist-modal__close:focus-visible,
+.playlist-modal__action:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
 .coverflow__nav:disabled {
   opacity: 0.28;
   cursor: default;

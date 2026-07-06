@@ -10,6 +10,8 @@
  * Unlock persists for the tab session via sessionStorage (clears on tab close).
  */
 
+import { gsap } from 'gsap';
+import { EASE } from '../config.js';
 import { trackPortfolioUnlock } from '../utils/track-portfolio-unlock.js';
 import { prefersReducedMotion } from '../utils/dom.js';
 
@@ -163,6 +165,39 @@ export function initPortfolioGate({ slug, onUnlock }) {
 
   let inFlight = false;
 
+  function finishUnlock(data) {
+    mount.remove();
+    onUnlock(data);
+  }
+
+  function exitGate(data) {
+    const panel = mount.querySelector('.portfolio-gate__panel');
+    const overlay = mount.querySelector('.portfolio-gate__overlay');
+    if (prefersReducedMotion() || !panel || !overlay) {
+      finishUnlock(data);
+      return;
+    }
+
+    gsap
+      .timeline({ onComplete: () => finishUnlock(data) })
+      .to(panel, {
+        autoAlpha: 0,
+        y: -12,
+        filter: 'blur(6px)',
+        duration: 0.35,
+        ease: EASE.exit,
+      })
+      .to(
+        overlay,
+        {
+          autoAlpha: 0,
+          duration: 0.45,
+          ease: EASE.color,
+        },
+        '-=0.15'
+      );
+  }
+
   async function performUnlock(password) {
     if (inFlight) return;
     inFlight = true;
@@ -189,6 +224,19 @@ export function initPortfolioGate({ slug, onUnlock }) {
       const contactUrl =
         '/contact.html?subject=Requesting%20Portfolio%20access&message=Hey%20Randy%2C%20Can%20I%20check%20out%20your%20portfolio%3F%20I%27m...';
       errorEl.innerHTML = `wrong password — need it? just ask… <a href="${contactUrl}">CONTACT</a>`;
+      if (!prefersReducedMotion()) {
+        gsap.fromTo(
+          errorEl,
+          { autoAlpha: 0, y: -4 },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.3,
+            ease: EASE.enter,
+            clearProps: 'opacity,visibility,transform',
+          }
+        );
+      }
       shakeInput(inputRow);
       input.value = '';
       input.focus();
@@ -204,8 +252,7 @@ export function initPortfolioGate({ slug, onUnlock }) {
     }
     if (!isDev) trackPortfolioUnlock(slug);
     clearPasswordFromUrl();
-    mount.remove();
-    onUnlock(data);
+    exitGate(data);
   }
 
   form.addEventListener('submit', async (e) => {

@@ -55,9 +55,17 @@ export function initProjectVideo() {
   }
 
   function updatePlayBtn() {
-    if (playBtn) playBtn.textContent = video.paused ? '\u25B6' : '\u275A\u275A';
+    if (!playBtn) return;
+    playBtn.classList.toggle('is-playing', !video.paused);
+    playBtn.setAttribute('aria-label', video.paused ? 'Play' : 'Pause');
   }
 
+  if (playBtn) {
+    playBtn.innerHTML =
+      '<span class="project-hero__play-icon project-hero__play-icon--play" aria-hidden="true">\u25B6</span>' +
+      '<span class="project-hero__play-icon project-hero__play-icon--pause" aria-hidden="true">\u275A\u275A</span>';
+    updatePlayBtn();
+  }
   video.addEventListener('play', updatePlayBtn);
   video.addEventListener('pause', updatePlayBtn);
   if (playBtn) playBtn.addEventListener('click', togglePlay);

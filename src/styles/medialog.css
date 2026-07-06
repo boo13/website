@@ -1,3 +1,6 @@
+@import './tokens.css';
+@import './reduced-motion.css';
+
 :root {
   --ml-bg: oklch(0.105 0 0);
   --ml-bg-2: oklch(0.14 0 0);
@@ -222,9 +225,9 @@ button {
   background: oklch(0.12 0 0 / 0.72);
   cursor: pointer;
   transition:
-    border-color 160ms ease,
-    color 160ms ease,
-    background-color 160ms ease;
+    border-color var(--dur-instant) var(--ease-out-expo),
+    color var(--dur-instant) var(--ease-out-expo),
+    background-color var(--dur-instant) var(--ease-out-expo);
 }
 
 .media-filter:hover,
@@ -475,19 +478,5 @@ button {
 
   .media-item__review {
     font-size: 0.94rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
   }
 }

@@ -13,6 +13,7 @@ import { initCustomCursor } from './components/custom-cursor.js';
 import { runPreloader } from './components/preloader.js';
 import { initVideoLightbox } from './components/video-lightbox.js';
 import { initNav } from './sections/nav.js';
+import { initNewsletter } from './sections/newsletter.js';
 import { trackHomepageVisit } from './utils/track-homepage-visit.js';
 import { prefersReducedMotion, onReady } from './utils/dom.js';
 
@@ -38,6 +39,7 @@ function init() {
   const cleanupFooterReveal = initFooterReveal();
   const cleanupLightbox = initVideoLightbox();
   const cleanupMarquee = initMarquee();
+  const cleanupNewsletter = initNewsletter();
 
   // Refresh once after all sections register their triggers.
   ScrollTrigger.refresh();
@@ -100,6 +102,7 @@ function init() {
     if (typeof cleanupMarquee === 'function') cleanupMarquee();
     if (typeof cleanupFooterReveal === 'function') cleanupFooterReveal();
     if (typeof cleanupLightbox === 'function') cleanupLightbox();
+    if (typeof cleanupNewsletter === 'function') cleanupNewsletter();
     gallery.destroy();
     if (typeof cleanupHero === 'function') cleanupHero();
     if (typeof cleanupNav === 'function') cleanupNav();

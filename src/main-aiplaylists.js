@@ -1,6 +1,7 @@
 import './styles/aiplaylists.css';
 import { gsap } from 'gsap';
 import { CDN_BASE } from './config.js';
+import { swapHidden } from './utils/motion.js';
 
 const FEED_URL = '/data/ai-playlists.json';
 const REDUCED_MOTION = window.matchMedia(
@@ -255,6 +256,7 @@ function createModalController() {
   const body = root.querySelector('.playlist-modal__body');
   const closeButton = root.querySelector('.playlist-modal__close');
   let lastFocusedElement = null;
+  let isClosing = false;
 
   function resetAudio() {
     for (const audio of root.querySelectorAll('audio')) {
@@ -291,18 +293,55 @@ function createModalController() {
     }
   }
 
-  function close() {
-    if (root.hidden) return;
-
-    resetAudio();
+  function finishClose() {
+    const backdrop = root.querySelector('.playlist-modal__backdrop');
+    const closeTargets = [dialog, backdrop].filter(Boolean);
     document.body.classList.remove('playlist-modal-open');
     root.classList.remove('is-open');
     root.hidden = true;
     body.innerHTML = '';
-    window.removeEventListener('keydown', onKeydown);
+    gsap.set(closeTargets, {
+      clearProps: 'opacity,visibility,transform',
+    });
+    isClosing = false;
 
     if (lastFocusedElement instanceof HTMLElement) {
       lastFocusedElement.focus({ preventScroll: true });
+    }
+  }
+
+  function close({ immediate = false } = {}) {
+    if (root.hidden || isClosing) return;
+
+    isClosing = true;
+    resetAudio();
+    window.removeEventListener('keydown', onKeydown);
+
+    if (REDUCED_MOTION || immediate) {
+      finishClose();
+      return;
+    }
+
+    const backdrop = root.querySelector('.playlist-modal__backdrop');
+    const closeTargets = [dialog, backdrop].filter(Boolean);
+    gsap.killTweensOf(closeTargets);
+    const tl = gsap.timeline({ onComplete: finishClose }).to(dialog, {
+      autoAlpha: 0,
+      y: 24,
+      scale: 0.97,
+      duration: 0.28,
+      ease: 'power2.in',
+    });
+    if (backdrop) {
+      tl.to(
+        backdrop,
+        {
+          autoAlpha: 0,
+          duration: 0.26,
+          ease: 'power2.in',
+        },
+        0
+      );
     }
   }
 
@@ -317,6 +356,7 @@ function createModalController() {
   }
 
   function open(item, trigger) {
+    if (isClosing) return;
     lastFocusedElement =
       trigger instanceof HTMLElement ? trigger : document.activeElement;
 
@@ -433,6 +473,9 @@ function createModalController() {
     document.body.classList.add('playlist-modal-open');
     root.classList.add('is-open');
     window.addEventListener('keydown', onKeydown);
+    gsap.killTweensOf(
+      [dialog, root.querySelector('.playlist-modal__backdrop')].filter(Boolean)
+    );
 
     if (closeButton instanceof HTMLElement) {
       closeButton.focus({ preventScroll: true });
@@ -499,7 +542,7 @@ function createModalController() {
     open,
     close,
     destroy() {
-      close();
+      close({ immediate: true });
       root.remove();
     },
   };
@@ -594,12 +637,26 @@ function mountShowcase(items) {
     return items[activeIndex];
   }
 
-  function updateCaption() {
+  function updateCaption({ animate = false } = {}) {
     const item = currentItem();
     title.textContent = stripSourcePrefix(item.title);
     counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
     prevButton.disabled = activeIndex === 0;
     nextButton.disabled = activeIndex === items.length - 1;
+
+    if (REDUCED_MOTION || !animate) return;
+    gsap.fromTo(
+      [title, counter],
+      { autoAlpha: 0, y: -8 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.2,
+        ease: 'expo.out',
+        overwrite: true,
+        clearProps: 'opacity,visibility,transform',
+      }
+    );
   }
 
   function layoutCard(card, offset) {
@@ -707,18 +764,18 @@ function mountShowcase(items) {
     });
   }
 
-  function syncLayout() {
+  function syncLayout({ animateCaption = false } = {}) {
     cards.forEach((card, index) => {
       layoutCard(card, index - activeIndex);
     });
-    updateCaption();
+    updateCaption({ animate: animateCaption });
   }
 
   function setActive(nextIndex) {
     const bounded = Math.max(0, Math.min(items.length - 1, nextIndex));
     if (bounded === activeIndex) return;
     activeIndex = bounded;
-    syncLayout();
+    syncLayout({ animateCaption: true });
   }
 
   function openActive(trigger) {
@@ -849,18 +906,23 @@ function mountShowcase(items) {
       );
     });
 
-    gsap.from(
-      playlistList.querySelectorAll('.coverflow__caption > *, .coverflow__nav'),
-      {
-        y: 18,
-        autoAlpha: 0,
-        duration: 0.7,
-        stagger: 0.08,
-        delay: 0.4,
-        ease: 'power2.out',
-        clearProps: 'opacity,transform',
-      }
+    const chromeTargets = playlistList.querySelectorAll(
+      '.coverflow__caption > *, .coverflow__nav'
     );
+    gsap.from(chromeTargets, {
+      y: 18,
+      autoAlpha: 0,
+      duration: 0.7,
+      stagger: 0.08,
+      delay: 0.4,
+      ease: 'power2.out',
+      clearProps: 'opacity,visibility,transform',
+      onComplete: () => {
+        gsap.set(chromeTargets, {
+          clearProps: 'opacity,visibility,transform',
+        });
+      },
+    });
   }
 
   teardownShowcase = () => {
@@ -958,8 +1020,6 @@ function initHeroEntrance() {
 
 function renderState({ eyebrow, title, description, error = false }) {
   teardownShowcase();
-  feedState.hidden = false;
-  playlistList.hidden = true;
   feedState.innerHTML = `
     <div class="feed-state__card ${error ? 'feed-state__card--error' : ''}">
       <p class="feed-state__eyebrow">${eyebrow}</p>
@@ -967,6 +1027,7 @@ function renderState({ eyebrow, title, description, error = false }) {
       <p>${description}</p>
     </div>
   `;
+  swapHidden(playlistList, feedState);
 }
 
 async function loadFeed() {
@@ -996,9 +1057,9 @@ async function loadFeed() {
       return;
     }
 
-    feedState.hidden = true;
     playlistList.hidden = false;
     renderShowcase(items);
+    swapHidden(feedState, playlistList);
   } catch {
     renderState({
       eyebrow: 'Feed error',

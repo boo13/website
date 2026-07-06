@@ -192,7 +192,7 @@ body::before {
   overflow: visible;
   white-space: nowrap;
   cursor: default;
-  transition: opacity 1000ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1000ms var(--ease-out-quint);
 }
 
 .portfolio-row__tag {
@@ -402,7 +402,7 @@ body::before {
 
 .portfolio-rows.is-row-hovered .portfolio-row.is-hovered .portfolio-row__title {
   opacity: 1;
-  animation: portfolio-ca-fade 1500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: portfolio-ca-fade 1500ms var(--ease-out-quint) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -653,7 +653,9 @@ body::before {
   cursor: pointer;
   display: flex;
   align-items: center;
-  transition: color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .portfolio-gate__submit:hover {

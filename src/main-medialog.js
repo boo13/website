@@ -1,5 +1,7 @@
 import './styles/medialog.css';
 import { gsap } from 'gsap';
+import { DUR, EASE } from './config.js';
+import { swapHidden } from './utils/motion.js';
 
 const FEED_URL = '/data/media-log.json';
 const REDUCED_MOTION = window.matchMedia(
@@ -27,6 +29,8 @@ const mediaList = document.getElementById('media-list');
 const mediaCount = document.getElementById('media-count');
 const yearFilters = document.getElementById('year-filters');
 const typeFilters = document.getElementById('type-filters');
+
+let renderGeneration = 0;
 
 function escHtml(value) {
   return String(value ?? '')
@@ -87,8 +91,6 @@ function initials(title) {
 }
 
 function renderState({ eyebrow, title, description = '', error = false }) {
-  mediaExperience.hidden = true;
-  mediaState.hidden = false;
   mediaState.innerHTML = `
     <div class="media-state__inner ${error ? 'media-state__inner--error' : ''}">
       <p>${escHtml(eyebrow)}</p>
@@ -96,6 +98,7 @@ function renderState({ eyebrow, title, description = '', error = false }) {
       ${description ? `<span>${escHtml(description)}</span>` : ''}
     </div>
   `;
+  swapHidden(mediaExperience, mediaState);
 }
 
 function buttonMarkup({ label, value, active, group }) {
@@ -112,7 +115,7 @@ function buttonMarkup({ label, value, active, group }) {
   `;
 }
 
-function renderFilters(items) {
+function buildFilters(items) {
   const years = uniqueYears(items);
   const types = uniqueTypes(items);
 
@@ -149,6 +152,18 @@ function renderFilters(items) {
       })
     ),
   ].join('');
+}
+
+function updateFilterButtons() {
+  for (const button of mediaExperience.querySelectorAll('.media-filter')) {
+    const group = button.dataset.filterGroup;
+    const value = button.dataset.filterValue || 'all';
+    const active =
+      (group === 'year' && state.year === value) ||
+      (group === 'type' && state.type === value);
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+  }
 }
 
 function filteredItems() {
@@ -207,8 +222,10 @@ function createItemMarkup(item, index) {
 
 function animateItems() {
   if (REDUCED_MOTION) return;
+  const targets = mediaList.querySelectorAll('.media-item, .media-empty');
+  if (!targets.length) return;
   gsap.fromTo(
-    mediaList.querySelectorAll('.media-item'),
+    targets,
     { autoAlpha: 0, y: 24 },
     {
       autoAlpha: 1,
@@ -221,25 +238,7 @@ function animateItems() {
   );
 }
 
-function renderItems() {
-  renderFilters(state.items);
-  const items = filteredItems();
-  const noun = items.length === 1 ? 'entry' : 'entries';
-  mediaCount.textContent = `${items.length} ${noun}`;
-
-  if (!items.length) {
-    mediaList.innerHTML = `
-      <div class="media-empty">
-        <p>No public entries match those filters.</p>
-      </div>
-    `;
-    return;
-  }
-
-  mediaList.innerHTML = items
-    .map((item, index) => createItemMarkup(item, index))
-    .join('');
-
+function bindPosterFallbacks() {
   for (const image of mediaList.querySelectorAll('img')) {
     image.addEventListener(
       'error',
@@ -252,8 +251,43 @@ function renderItems() {
       { once: true }
     );
   }
+}
 
-  animateItems();
+function renderItems({ animateExit = false } = {}) {
+  updateFilterButtons();
+  const items = filteredItems();
+  const noun = items.length === 1 ? 'entry' : 'entries';
+  mediaCount.textContent = `${items.length} ${noun}`;
+  const generation = ++renderGeneration;
+
+  const swap = () => {
+    if (generation !== renderGeneration) return;
+    mediaList.innerHTML = items.length
+      ? items.map((item, index) => createItemMarkup(item, index)).join('')
+      : `
+        <div class="media-empty">
+          <p>No public entries match those filters.</p>
+        </div>
+      `;
+    bindPosterFallbacks();
+    animateItems();
+  };
+
+  const children = Array.from(mediaList.children);
+  if (REDUCED_MOTION || !animateExit || !children.length) {
+    swap();
+    return;
+  }
+
+  gsap.killTweensOf(children);
+  gsap.to(children, {
+    autoAlpha: 0,
+    y: -10,
+    duration: DUR.instant,
+    stagger: 0.015,
+    ease: EASE.exit,
+    onComplete: swap,
+  });
 }
 
 function bindFilters() {
@@ -269,13 +303,12 @@ function bindFilters() {
     if (group !== 'year' && group !== 'type') return;
 
     state[group] = value;
-    renderItems();
+    renderItems({ animateExit: true });
   });
 }
 
 function revealExperience() {
-  mediaState.hidden = true;
-  mediaExperience.hidden = false;
+  swapHidden(mediaState, mediaExperience, { y: 18, duration: 0.5 });
 
   if (REDUCED_MOTION) return;
   gsap.fromTo(
@@ -336,6 +369,7 @@ async function loadFeed() {
       return;
     }
 
+    buildFilters(items);
     revealExperience();
     renderItems();
   } catch {
