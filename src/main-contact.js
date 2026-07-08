@@ -5,6 +5,7 @@ import { initGlitchText } from './components/glitch-text.js';
 const form = document.getElementById('fs-frm');
 const submit = document.getElementById('fs-frm-submit');
 const submitLabel = submit?.querySelector('[data-submit-label]');
+const status = document.getElementById('fs-frm-status');
 const year = document.getElementById('contact-year');
 
 if (year) {
@@ -29,6 +30,10 @@ if (form && submit) {
     submit.setAttribute('aria-busy', 'true');
     if (submitLabel) {
       submitLabel.textContent = 'Sending...';
+    }
+    if (status) {
+      status.textContent = 'Sending your message…';
+      status.classList.add('is-visible');
     }
   });
 }

@@ -34,6 +34,9 @@ export function initCustomCursor() {
   const SNAP_PAD = 10;
   const DOT_IDLE_OPACITY = 1;
   const DOT_ACTIVE_OPACITY = 0.35;
+  // Leave settles slightly faster so corners never lag behind the pointer.
+  const CORNER_ENTER = 0.5;
+  const CORNER_LEAVE = 0.45;
 
   let lastMouseX = 0;
   let lastMouseY = 0;
@@ -140,28 +143,28 @@ export function initCustomCursor() {
     gsap.to(corners.lt, {
       x: -d,
       y: -d,
-      duration: 0.5,
+      duration: CORNER_ENTER,
       ease: 'power2.out',
       overwrite: 'auto',
     });
     gsap.to(corners.rt, {
       x: d,
       y: -d,
-      duration: 0.5,
+      duration: CORNER_ENTER,
       ease: 'power2.out',
       overwrite: 'auto',
     });
     gsap.to(corners.lb, {
       x: -d,
       y: d,
-      duration: 0.5,
+      duration: CORNER_ENTER,
       ease: 'power2.out',
       overwrite: 'auto',
     });
     gsap.to(corners.rb, {
       x: d,
       y: d,
-      duration: 0.5,
+      duration: CORNER_ENTER,
       ease: 'power2.out',
       overwrite: 'auto',
     });
@@ -173,7 +176,7 @@ export function initCustomCursor() {
       gsap.to(c, {
         x: 0,
         y: 0,
-        duration: 0.45,
+        duration: CORNER_LEAVE,
         ease: 'power2.out',
         overwrite: 'auto',
       })
@@ -207,7 +210,7 @@ export function initCustomCursor() {
       gsap.to(c, {
         x: 0,
         y: 0,
-        duration: 0.45,
+        duration: CORNER_LEAVE,
         ease: 'power2.out',
         overwrite: 'auto',
       })

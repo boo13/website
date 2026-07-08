@@ -61,7 +61,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.8;
-  transition: opacity 0.3s;
+  transition: opacity var(--dur-instant) var(--ease-out-expo);
 }
 
 .case-study__close:hover {

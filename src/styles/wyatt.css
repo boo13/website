@@ -7,6 +7,44 @@
 @import './base.css';
 
 /* =====================================================
+   BACK NAVIGATION
+====================================================== */
+.wyatt-back-nav {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  z-index: 100;
+}
+
+.wyatt-back-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: oklch(0.968 0.006 75 / 0.7);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color var(--dur-instant) var(--ease-out-expo);
+}
+
+.wyatt-back-link svg {
+  transform: translate(0, 0) rotate(180deg);
+  transition: transform var(--dur-instant) var(--ease-out-expo);
+}
+
+.wyatt-back-link:hover {
+  color: var(--color-offwhite);
+}
+
+.wyatt-back-link:hover svg {
+  transform: translate(-2px, 2px) rotate(180deg);
+}
+
+.wyatt-back-link:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* =====================================================
    PARALLAX RACK-FOCUS SECTION
 ====================================================== */
 .parallax-section {
@@ -162,4 +200,3 @@
     --container-padding: 1.25rem;
   }
 }
-
