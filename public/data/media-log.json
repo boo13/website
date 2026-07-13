@@ -1,5 +1,133 @@
 {
-  "generated_at": "2026-06-01T00:00:00+00:00",
-  "count": 0,
-  "items": []
+  "generated_at": "2026-07-13T19:38:07+00:00",
+  "count": 9,
+  "items": [
+    {
+      "slug": "2026-election",
+      "type": "movie",
+      "title": "Election",
+      "release_year": null,
+      "finished_at": "2026-07-10",
+      "year": 2026,
+      "review": "Was surprised to kinda love it.",
+      "creators": [],
+      "image_url": null,
+      "canonical_url": null,
+      "external_ids": {}
+    },
+    {
+      "slug": "2026-the-trouble-with-mr-doodle",
+      "type": "movie",
+      "title": "The Trouble with Mr. Doodle",
+      "release_year": null,
+      "finished_at": "2026-07-08",
+      "year": 2026,
+      "review": "Supremely well-crafted doc",
+      "creators": [],
+      "image_url": null,
+      "canonical_url": null,
+      "external_ids": {}
+    },
+    {
+      "slug": "2026-the-long-walk",
+      "type": "movie",
+      "title": "The Long Walk",
+      "release_year": null,
+      "finished_at": "2026-07-07",
+      "year": 2026,
+      "review": "Hardcore. A timely take on... the Vietnam War.",
+      "creators": [],
+      "image_url": null,
+      "canonical_url": null,
+      "external_ids": {}
+    },
+    {
+      "slug": "2026-springsteen-deliver-me-from-nowhere",
+      "type": "movie",
+      "title": "Springsteen: Deliver Me from Nowhere",
+      "release_year": null,
+      "finished_at": "2026-06-07",
+      "year": 2026,
+      "review": "Well-made movie about a man who decides to go to therapy.",
+      "creators": [],
+      "image_url": null,
+      "canonical_url": null,
+      "external_ids": {}
+    },
+    {
+      "slug": "2026-the-mercy-of-gods",
+      "type": "book",
+      "title": "The Mercy of Gods",
+      "release_year": 2024,
+      "finished_at": "2026-06-02",
+      "year": 2026,
+      "review": "Really good story about weird aliens, scary shrimp overlords, and POW dynamics.",
+      "creators": [
+        "James S. A. Corey"
+      ],
+      "image_url": "https://covers.openlibrary.org/b/id/14649358-L.jpg",
+      "canonical_url": "https://openlibrary.org/works/OL37579227W",
+      "external_ids": {
+        "openlibrary_work": "works/OL37579227W"
+      }
+    },
+    {
+      "slug": "2026-the-boys",
+      "type": "tv",
+      "title": "The Boys",
+      "release_year": null,
+      "finished_at": "2026-05-20",
+      "year": 2026,
+      "review": "",
+      "creators": [],
+      "image_url": null,
+      "canonical_url": null,
+      "external_ids": {}
+    },
+    {
+      "slug": "2026-this-could-be-our-future-a-manifesto-for-a-more-generous-world",
+      "type": "book",
+      "title": "This Could Be Our Future: A Manifesto for a More Generous World",
+      "release_year": null,
+      "finished_at": "2026-05-13",
+      "year": 2026,
+      "review": "Inspiring.",
+      "creators": [
+        "Yancey Strickler"
+      ],
+      "image_url": null,
+      "canonical_url": null,
+      "external_ids": {}
+    },
+    {
+      "slug": "2026-say-nothing-a-true-story-of-murder-and-memory-in-northern-ireland",
+      "type": "book",
+      "title": "Say Nothing: A True Story of Murder and Memory in Northern Ireland",
+      "release_year": null,
+      "finished_at": "2026-05-09",
+      "year": 2026,
+      "review": "Liked London Falling so much I had to read this.",
+      "creators": [
+        "Patrick Radden Keefe"
+      ],
+      "image_url": null,
+      "canonical_url": null,
+      "external_ids": {}
+    },
+    {
+      "slug": "2026-london-falling-a-mysterious-death-in-a-gilded-city-and-a-family-s-search-for-truth",
+      "type": "book",
+      "title": "London Falling: A Mysterious Death in a Gilded City and a Family's Search for Truth",
+      "release_year": null,
+      "finished_at": "2026-05-02",
+      "year": 2026,
+      "review": "Liked it.",
+      "creators": [
+        "Patrick Radden Keefe"
+      ],
+      "image_url": null,
+      "canonical_url": null,
+      "external_ids": {}
+    }
+  ]
 }

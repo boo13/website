@@ -16,6 +16,14 @@ export const BREAKPOINTS = Object.freeze({
 // px past the track end on the pinned horizontal gallery
 export const GALLERY_SCROLL_BUFFER = 200;
 
+export const DUR = Object.freeze({ instant: 0.2, quick: 0.4, medium: 0.7 }); // mirrors tokens.css
+export const EASE = Object.freeze({
+  enter: 'expo.out',
+  exit: 'power2.in',
+  soft: 'power2.out',
+  color: 'power2.inOut',
+});
+
 export const SCRUB = {
   default: 1,
   smooth: 1.5,

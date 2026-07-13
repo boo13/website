@@ -3,6 +3,7 @@
    Variants: --video, --image, --parallax (via BEM modifiers)
    ============================================================ */
 @import './tokens.css';
+@import './reduced-motion.css';
 
 /* --- Page-scoped variables (shared tokens come from tokens.css) --- */
 :root {
@@ -50,6 +51,16 @@ a {
   text-decoration: none;
 }
 
+.project-hero__close:focus-visible,
+.project-hero__play-btn:focus-visible,
+.project-hero__credits-btn:focus-visible,
+.project-hero__sound-btn:focus-visible,
+.project-footer__back-btn:focus-visible,
+.project-footer__links a:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
 /* ============================================================
    HERO — Video variant (.project-hero--video)
    ============================================================ */
@@ -92,7 +103,10 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.8;
-  transition: opacity 0.3s;
+  transform-origin: center;
+  transition:
+    opacity var(--dur-instant) var(--ease-out-expo),
+    transform var(--dur-instant) var(--ease-out-expo);
 }
 
 .project-hero__close:hover {
@@ -131,10 +145,39 @@ a {
 }
 
 .project-hero__play-btn {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.75rem;
+  min-height: 1.75rem;
   font-size: 18px;
   opacity: 0.9;
-  transition: opacity 0.2s;
+  transform-origin: center;
+  transition:
+    opacity var(--dur-instant) var(--ease-out-expo),
+    transform var(--dur-instant) var(--ease-out-expo);
   padding: 4px;
+}
+
+.project-hero__play-icon {
+  grid-area: 1 / 1;
+  transition:
+    opacity var(--dur-instant) var(--ease-out-expo),
+    transform var(--dur-instant) var(--ease-out-expo);
+}
+
+.project-hero__play-icon--pause {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.project-hero__play-btn.is-playing .project-hero__play-icon--play {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.project-hero__play-btn.is-playing .project-hero__play-icon--pause {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .project-hero__play-btn:hover {
@@ -146,7 +189,10 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.8;
-  transition: opacity 0.3s;
+  transform-origin: center;
+  transition:
+    opacity var(--dur-instant) var(--ease-out-expo),
+    transform var(--dur-instant) var(--ease-out-expo);
 }
 
 .project-hero__credits-btn:hover {
@@ -198,7 +244,10 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.8;
-  transition: opacity 0.3s;
+  transform-origin: center;
+  transition:
+    opacity var(--dur-instant) var(--ease-out-expo),
+    transform var(--dur-instant) var(--ease-out-expo);
 }
 
 .project-hero__sound-btn:hover {
@@ -363,7 +412,7 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   opacity: 0.7;
-  transition: opacity 0.3s;
+  transition: opacity var(--dur-instant) var(--ease-out-expo);
   overflow: hidden;
   white-space: nowrap;
   max-width: 300px;
@@ -398,13 +447,23 @@ a {
   letter-spacing: 0.06em;
   padding: 10px 24px;
   border: 1px solid oklch(0.959 0.003 165 / 0.4);
+  transform-origin: center;
   transition:
-    border-color 0.3s,
-    opacity 0.3s;
+    border-color var(--dur-instant) var(--ease-out-expo),
+    opacity var(--dur-instant) var(--ease-out-expo),
+    transform var(--dur-instant) var(--ease-out-expo);
 }
 
 .project-footer__back-btn:hover {
   border-color: var(--project-text);
+}
+
+.project-hero__close:active,
+.project-hero__play-btn:active,
+.project-hero__credits-btn:active,
+.project-hero__sound-btn:active,
+.project-footer__back-btn:active {
+  transform: scale(0.97);
 }
 
 /* Footer links */
@@ -413,15 +472,38 @@ a {
   align-items: center;
   gap: 16px;
   font-size: 0.875rem;
-  opacity: 0.6;
 }
 
 .project-footer__links a {
-  transition: opacity 0.3s;
+  position: relative;
+  display: inline-flex;
+  color: oklch(0.959 0.003 165 / 0.6);
+  transition: color var(--dur-instant) var(--ease-out-expo);
+}
+
+.project-footer__links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.45rem;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(0.4);
+  transform-origin: left;
+  transition:
+    opacity var(--dur-instant) var(--ease-out-expo),
+    transform var(--dur-instant) var(--ease-out-expo);
 }
 
 .project-footer__links a:hover {
-  opacity: 1;
+  color: var(--project-text);
+}
+
+.project-footer__links a:hover::after {
+  opacity: 0.8;
+  transform: scaleX(1);
 }
 
 /* ============================================================

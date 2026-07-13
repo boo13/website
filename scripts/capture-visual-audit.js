@@ -4,11 +4,9 @@ async page => {
 
   // Route-aware: set AUDIT_PATH (e.g. "/contact.html", "/projects/wyatt-earp/")
   // and optionally AUDIT_BASE. Defaults to the homepage on the Vite dev server.
-  const BASE = (process.env.AUDIT_BASE || 'http://localhost:5173').replace(
-    /\/$/,
-    ''
-  );
-  const ROUTE = process.env.AUDIT_PATH || '/';
+  const env = typeof process === 'undefined' ? {} : process.env;
+  const BASE = (env.AUDIT_BASE || 'http://localhost:5173').replace(/\/$/, '');
+  const ROUTE = env.AUDIT_PATH || '/';
   const url = `${BASE}${ROUTE.startsWith('/') ? ROUTE : `/${ROUTE}`}`;
 
   // Per-route scroll targets. Each entry scrolls the section into view, waits,

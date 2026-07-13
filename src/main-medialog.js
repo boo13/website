@@ -1,5 +1,7 @@
 import './styles/medialog.css';
 import { gsap } from 'gsap';
+import { DUR, EASE } from './config.js';
+import { swapHidden } from './utils/motion.js';
 
 const FEED_URL = '/data/media-log.json';
 const REDUCED_MOTION = window.matchMedia(
@@ -10,6 +12,13 @@ const TYPE_LABELS = {
   movie: 'Movies',
   tv: 'TV',
   book: 'Books',
+  other: 'Other',
+};
+
+const ITEM_TYPE_LABELS = {
+  movie: 'Movie',
+  tv: 'Television',
+  book: 'Book',
   other: 'Other',
 };
 
@@ -27,6 +36,8 @@ const mediaList = document.getElementById('media-list');
 const mediaCount = document.getElementById('media-count');
 const yearFilters = document.getElementById('year-filters');
 const typeFilters = document.getElementById('type-filters');
+
+let renderGeneration = 0;
 
 function escHtml(value) {
   return String(value ?? '')
@@ -52,6 +63,10 @@ function itemTypeLabel(type) {
   return TYPE_LABELS[type] || 'Other';
 }
 
+function itemTypeName(type) {
+  return ITEM_TYPE_LABELS[type] || 'Other';
+}
+
 function uniqueYears(items) {
   return [
     ...new Set(items.map((item) => Number(item.year)).filter(Boolean)),
@@ -75,20 +90,7 @@ function yearText(item) {
   return 'Release year unknown';
 }
 
-function initials(title) {
-  const letters = String(title ?? '')
-    .split(/\s+/)
-    .map((word) => word[0])
-    .join('')
-    .replace(/[^a-z0-9]/gi, '')
-    .slice(0, 3)
-    .toUpperCase();
-  return letters || 'ML';
-}
-
 function renderState({ eyebrow, title, description = '', error = false }) {
-  mediaExperience.hidden = true;
-  mediaState.hidden = false;
   mediaState.innerHTML = `
     <div class="media-state__inner ${error ? 'media-state__inner--error' : ''}">
       <p>${escHtml(eyebrow)}</p>
@@ -96,6 +98,7 @@ function renderState({ eyebrow, title, description = '', error = false }) {
       ${description ? `<span>${escHtml(description)}</span>` : ''}
     </div>
   `;
+  swapHidden(mediaExperience, mediaState);
 }
 
 function buttonMarkup({ label, value, active, group }) {
@@ -112,7 +115,7 @@ function buttonMarkup({ label, value, active, group }) {
   `;
 }
 
-function renderFilters(items) {
+function buildFilters(items) {
   const years = uniqueYears(items);
   const types = uniqueTypes(items);
 
@@ -151,6 +154,18 @@ function renderFilters(items) {
   ].join('');
 }
 
+function updateFilterButtons() {
+  for (const button of mediaExperience.querySelectorAll('.media-filter')) {
+    const group = button.dataset.filterGroup;
+    const value = button.dataset.filterValue || 'all';
+    const active =
+      (group === 'year' && state.year === value) ||
+      (group === 'type' && state.type === value);
+    button.classList.toggle('is-active', active);
+    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+  }
+}
+
 function filteredItems() {
   return state.items.filter((item) => {
     const yearMatches =
@@ -160,46 +175,30 @@ function filteredItems() {
   });
 }
 
-function createPoster(item) {
-  if (item.image_url) {
-    return `
-      <figure class="media-item__poster">
-        <img src="${escHtml(item.image_url)}" alt="" loading="lazy" decoding="async" />
-      </figure>
-    `;
-  }
-
-  return `
-    <figure class="media-item__poster media-item__poster--fallback" aria-hidden="true">
-      <span>${escHtml(initials(item.title))}</span>
-    </figure>
-  `;
-}
-
 function createItemMarkup(item, index) {
   const creators = creatorText(item);
   const review = String(item.review || '').trim();
-  const meta = [itemTypeLabel(item.type), yearText(item), creators]
-    .filter(Boolean)
-    .join(' / ');
-  const link = item.canonical_url
-    ? `<a class="media-item__link" href="${escHtml(item.canonical_url)}" target="_blank" rel="noopener">Reference</a>`
-    : '';
+  const meta = [creators, yearText(item)].filter(Boolean).join(' / ');
+  const title = escHtml(item.title);
+  const titleMarkup = item.canonical_url
+    ? `<a class="media-item__link" href="${escHtml(item.canonical_url)}" target="_blank" rel="noopener">${title}<span aria-hidden="true">↗</span></a>`
+    : title;
 
   return `
     <article class="media-item" style="--item-index:${index}">
-      ${createPoster(item)}
-      <div class="media-item__body">
-        <div class="media-item__topline">
-          <span>${escHtml(formatDate(item.finished_at))}</span>
-          <span>${escHtml(itemTypeLabel(item.type))}</span>
-        </div>
-        <div class="media-item__title-row">
-          <h2>${escHtml(item.title)}</h2>
-          ${link}
-        </div>
+      <div class="media-item__title-cell">
+        <span class="media-item__cell-label">Title</span>
+        <h2>${titleMarkup}</h2>
         <p class="media-item__meta">${escHtml(meta)}</p>
         ${review ? `<p class="media-item__review">${escHtml(review)}</p>` : ''}
+      </div>
+      <div class="media-item__type">
+        <span class="media-item__cell-label">Type</span>
+        <p>${escHtml(itemTypeName(item.type))}</p>
+      </div>
+      <div class="media-item__date">
+        <span class="media-item__cell-label">Finished</span>
+        <time datetime="${escHtml(item.finished_at || '')}">${escHtml(formatDate(item.finished_at))}</time>
       </div>
     </article>
   `;
@@ -207,8 +206,10 @@ function createItemMarkup(item, index) {
 
 function animateItems() {
   if (REDUCED_MOTION) return;
+  const targets = mediaList.querySelectorAll('.media-item, .media-empty');
+  if (!targets.length) return;
   gsap.fromTo(
-    mediaList.querySelectorAll('.media-item'),
+    targets,
     { autoAlpha: 0, y: 24 },
     {
       autoAlpha: 1,
@@ -221,39 +222,40 @@ function animateItems() {
   );
 }
 
-function renderItems() {
-  renderFilters(state.items);
+function renderItems({ animateExit = false } = {}) {
+  updateFilterButtons();
   const items = filteredItems();
   const noun = items.length === 1 ? 'entry' : 'entries';
   mediaCount.textContent = `${items.length} ${noun}`;
+  const generation = ++renderGeneration;
 
-  if (!items.length) {
-    mediaList.innerHTML = `
-      <div class="media-empty">
-        <p>No public entries match those filters.</p>
-      </div>
-    `;
+  const swap = () => {
+    if (generation !== renderGeneration) return;
+    mediaList.innerHTML = items.length
+      ? items.map((item, index) => createItemMarkup(item, index)).join('')
+      : `
+        <div class="media-empty">
+          <p>No public entries match those filters.</p>
+        </div>
+      `;
+    animateItems();
+  };
+
+  const children = Array.from(mediaList.children);
+  if (REDUCED_MOTION || !animateExit || !children.length) {
+    swap();
     return;
   }
 
-  mediaList.innerHTML = items
-    .map((item, index) => createItemMarkup(item, index))
-    .join('');
-
-  for (const image of mediaList.querySelectorAll('img')) {
-    image.addEventListener(
-      'error',
-      () => {
-        const poster = image.closest('.media-item__poster');
-        if (!poster) return;
-        poster.classList.add('media-item__poster--fallback');
-        poster.innerHTML = `<span>${escHtml(initials(poster.closest('.media-item')?.querySelector('h2')?.textContent))}</span>`;
-      },
-      { once: true }
-    );
-  }
-
-  animateItems();
+  gsap.killTweensOf(children);
+  gsap.to(children, {
+    autoAlpha: 0,
+    y: -10,
+    duration: DUR.instant,
+    stagger: 0.015,
+    ease: EASE.exit,
+    onComplete: swap,
+  });
 }
 
 function bindFilters() {
@@ -269,13 +271,12 @@ function bindFilters() {
     if (group !== 'year' && group !== 'type') return;
 
     state[group] = value;
-    renderItems();
+    renderItems({ animateExit: true });
   });
 }
 
 function revealExperience() {
-  mediaState.hidden = true;
-  mediaExperience.hidden = false;
+  swapHidden(mediaState, mediaExperience, { y: 18, duration: 0.5 });
 
   if (REDUCED_MOTION) return;
   gsap.fromTo(
@@ -336,6 +337,7 @@ async function loadFeed() {
       return;
     }
 
+    buildFilters(items);
     revealExperience();
     renderItems();
   } catch {

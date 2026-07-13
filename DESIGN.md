@@ -524,6 +524,14 @@ Shared across both page types:
 
 **Rule:** Scrub-driven animations always use `ease: 'none'`. Easing on top of scrub creates jitter.
 
+CSS-side easing tokens mirror this palette where hover and state transitions do not need GSAP:
+
+| CSS Token | Value | Role |
+|-----------|-------|------|
+| `--ease-out-expo` | `cubic-bezier(0.19, 1, 0.22, 1)` | Default hover/state ease |
+| `--ease-out-quint` | `cubic-bezier(0.22, 1, 0.36, 1)` | Longer opacity/color settles |
+| `--ease-in-out-circ` | `cubic-bezier(0.85, 0, 0.15, 1)` | Symmetric CSS transitions |
+
 ### Timing Vocabulary
 
 | Band | Duration | Examples |
@@ -541,6 +549,13 @@ Scrub constants from `src/config.js`:
 ```js
 SCRUB.default = 1     // standard responsiveness
 SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
+DUR.instant   = 0.2   // JS mirror of --dur-instant
+DUR.quick     = 0.4   // JS mirror of --dur-quick
+DUR.medium    = 0.7   // JS mirror of --dur-medium
+EASE.enter    = 'expo.out'
+EASE.exit     = 'power2.in'
+EASE.soft     = 'power2.out'
+EASE.color    = 'power2.inOut'
 ```
 
 **Homepage pins:**
@@ -571,6 +586,12 @@ SCRUB.smooth  = 1.5   // cinematic, used by hero zoom and case study parallax
   - Spring-back: 0.5s `power2.out` when velocity drops below threshold
   - Suppressed during the hero aperture pin (`'hero-aperture-pin'`) and gallery `.active` state
 - Hero social hover adapts the same four-color spectral palette as chained SVG `drop-shadow`s (blue/red inner, cyan/yellow halo per the spectral pairing rule) during a `translateY(-5px) → 2px → 0` nudge. No background hover wash.
+- Reduced-motion social hover is CSS-only: no transform nudge, just opacity plus the same four-shadow chromatic response. The GSAP hover timeline remains the primary path.
+
+**Exit Choreography:**
+- Dismissals should be subtler and faster than their matching entrances, roughly 60–65% of the entrance duration.
+- Gate and modal exits fade/translate the outer panel/backdrop only. Do not tween nested reveal elements that already use CSS animations with `fill: both`.
+- `clearProps` must land on the CSS rest state; CSS transitions should not target a property GSAP is animating on the same element.
 
 **Hero Name Grain:**
 - Subtle print-like noise in the hero name glyph fill: feTurbulence data-URI (`baseFrequency 0.82, numOctaves 4, stitchTiles`, rect `opacity 0.07`) multiplied over `--color-offwhite`, clipped via `background-clip: text` on `.word` elements (trail clones and `.hero-name-fixed` excluded)
