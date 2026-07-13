@@ -15,6 +15,13 @@ const TYPE_LABELS = {
   other: 'Other',
 };
 
+const ITEM_TYPE_LABELS = {
+  movie: 'Movie',
+  tv: 'Television',
+  book: 'Book',
+  other: 'Other',
+};
+
 const TYPE_ORDER = ['movie', 'tv', 'book', 'other'];
 
 const state = {
@@ -56,6 +63,10 @@ function itemTypeLabel(type) {
   return TYPE_LABELS[type] || 'Other';
 }
 
+function itemTypeName(type) {
+  return ITEM_TYPE_LABELS[type] || 'Other';
+}
+
 function uniqueYears(items) {
   return [
     ...new Set(items.map((item) => Number(item.year)).filter(Boolean)),
@@ -77,17 +88,6 @@ function creatorText(item) {
 function yearText(item) {
   if (item.release_year) return `${item.release_year}`;
   return 'Release year unknown';
-}
-
-function initials(title) {
-  const letters = String(title ?? '')
-    .split(/\s+/)
-    .map((word) => word[0])
-    .join('')
-    .replace(/[^a-z0-9]/gi, '')
-    .slice(0, 3)
-    .toUpperCase();
-  return letters || 'ML';
 }
 
 function renderState({ eyebrow, title, description = '', error = false }) {
@@ -175,46 +175,30 @@ function filteredItems() {
   });
 }
 
-function createPoster(item) {
-  if (item.image_url) {
-    return `
-      <figure class="media-item__poster">
-        <img src="${escHtml(item.image_url)}" alt="" loading="lazy" decoding="async" />
-      </figure>
-    `;
-  }
-
-  return `
-    <figure class="media-item__poster media-item__poster--fallback" aria-hidden="true">
-      <span>${escHtml(initials(item.title))}</span>
-    </figure>
-  `;
-}
-
 function createItemMarkup(item, index) {
   const creators = creatorText(item);
   const review = String(item.review || '').trim();
-  const meta = [itemTypeLabel(item.type), yearText(item), creators]
-    .filter(Boolean)
-    .join(' / ');
-  const link = item.canonical_url
-    ? `<a class="media-item__link" href="${escHtml(item.canonical_url)}" target="_blank" rel="noopener">Reference</a>`
-    : '';
+  const meta = [creators, yearText(item)].filter(Boolean).join(' / ');
+  const title = escHtml(item.title);
+  const titleMarkup = item.canonical_url
+    ? `<a class="media-item__link" href="${escHtml(item.canonical_url)}" target="_blank" rel="noopener">${title}<span aria-hidden="true">↗</span></a>`
+    : title;
 
   return `
     <article class="media-item" style="--item-index:${index}">
-      ${createPoster(item)}
-      <div class="media-item__body">
-        <div class="media-item__topline">
-          <span>${escHtml(formatDate(item.finished_at))}</span>
-          <span>${escHtml(itemTypeLabel(item.type))}</span>
-        </div>
-        <div class="media-item__title-row">
-          <h2>${escHtml(item.title)}</h2>
-          ${link}
-        </div>
+      <div class="media-item__title-cell">
+        <span class="media-item__cell-label">Title</span>
+        <h2>${titleMarkup}</h2>
         <p class="media-item__meta">${escHtml(meta)}</p>
         ${review ? `<p class="media-item__review">${escHtml(review)}</p>` : ''}
+      </div>
+      <div class="media-item__type">
+        <span class="media-item__cell-label">Type</span>
+        <p>${escHtml(itemTypeName(item.type))}</p>
+      </div>
+      <div class="media-item__date">
+        <span class="media-item__cell-label">Finished</span>
+        <time datetime="${escHtml(item.finished_at || '')}">${escHtml(formatDate(item.finished_at))}</time>
       </div>
     </article>
   `;
@@ -238,21 +222,6 @@ function animateItems() {
   );
 }
 
-function bindPosterFallbacks() {
-  for (const image of mediaList.querySelectorAll('img')) {
-    image.addEventListener(
-      'error',
-      () => {
-        const poster = image.closest('.media-item__poster');
-        if (!poster) return;
-        poster.classList.add('media-item__poster--fallback');
-        poster.innerHTML = `<span>${escHtml(initials(poster.closest('.media-item')?.querySelector('h2')?.textContent))}</span>`;
-      },
-      { once: true }
-    );
-  }
-}
-
 function renderItems({ animateExit = false } = {}) {
   updateFilterButtons();
   const items = filteredItems();
@@ -269,7 +238,6 @@ function renderItems({ animateExit = false } = {}) {
           <p>No public entries match those filters.</p>
         </div>
       `;
-    bindPosterFallbacks();
     animateItems();
   };
 
