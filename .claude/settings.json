@@ -54,13 +54,25 @@
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_snapshot",
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__click",
       "mcp__plugin_linear_linear__list_teams",
-      "mcp__plugin_linear_linear__save_issue"
+      "mcp__plugin_linear_linear__save_issue",
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git show *)",
+      "Bash(git branch)",
+      "Bash(rg *)",
+      "Bash(jq *)",
+      "Bash(du *)",
+      "Bash(ps *)",
+      "Bash(lsof *)",
+      "Bash(sort *)",
+      "Bash(uniq *)",
+      "Bash(awk *)"
     ]
   },
   "plansDirectory": "docs/plans",
   "enabledPlugins": {
     "chrome-devtools-mcp@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true
-  },
-  "plansDirectory": "docs/plans"
+  }
 }
