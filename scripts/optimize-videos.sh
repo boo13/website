@@ -239,7 +239,7 @@ SCALE_FILTER=""
 VIDEO_FILTER_ARGS=()
 if [[ "${MAX_WIDTH_SET}" == "true" || "${MAX_HEIGHT_SET}" == "true" ]]; then
   USE_SCALING=true
-  SCALE_FILTER="scale=w=trunc(min(iw\\,${MAX_WIDTH})/2)*2:h=trunc(min(ih\\,${MAX_HEIGHT})/2)*2:force_original_aspect_ratio=decrease"
+  SCALE_FILTER="scale=w=min(iw\\,${MAX_WIDTH}):h=min(ih\\,${MAX_HEIGHT}):force_original_aspect_ratio=decrease:force_divisible_by=2"
   VIDEO_FILTER_ARGS=(-vf "${SCALE_FILTER}")
 fi
 
