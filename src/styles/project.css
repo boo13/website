@@ -55,6 +55,7 @@ a {
 .project-hero__play-btn:focus-visible,
 .project-hero__credits-btn:focus-visible,
 .project-hero__sound-btn:focus-visible,
+.project-hero__timeline:focus-visible,
 .project-footer__back-btn:focus-visible,
 .project-footer__links a:focus-visible {
   outline: 1px solid currentColor;
@@ -126,6 +127,8 @@ a {
 /* Title + credits row */
 .project-hero__info {
   display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16px;
@@ -133,11 +136,13 @@ a {
 
 .project-hero__info-left {
   display: flex;
+  flex: 1 1 20rem;
+  min-width: 0;
   align-items: center;
   gap: 14px;
 }
 
-.project-hero__info-left span {
+.project-hero__info-left > span {
   font-size: var(--text-project-hero-title);
   font-weight: 500;
   font-family: var(--ff-body);
@@ -146,6 +151,7 @@ a {
 
 .project-hero__play-btn {
   display: inline-grid;
+  flex-shrink: 0;
   place-items: center;
   min-width: 1.75rem;
   min-height: 1.75rem;
@@ -185,6 +191,7 @@ a {
 }
 
 .project-hero__credits-btn {
+  min-height: 24px;
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -199,30 +206,77 @@ a {
   opacity: 1;
 }
 
+.project-hero__info-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 /* --- Timeline --- */
 .project-hero__timeline {
-  position: relative;
+  --video-progress: 0%;
+  display: block;
   width: 100%;
-  height: 2px;
-  background: oklch(0.959 0.003 165 / 0.25);
-  margin-bottom: 12px;
+  height: 24px;
+  margin: 0 0 2px;
+  border: 0;
+  border-radius: 0;
+  color: var(--project-text);
+  background: linear-gradient(
+      to right,
+      var(--project-text) var(--video-progress),
+      oklch(0.959 0.003 165 / 0.25) var(--video-progress)
+    )
+    center / 100% 2px no-repeat;
+  -webkit-appearance: none;
+  appearance: none;
   cursor: pointer;
 }
 
-.project-hero__timeline::before {
-  content: '';
-  position: absolute;
-  inset: -10px 0;
+.project-hero__timeline:disabled {
+  cursor: default;
 }
 
-.project-hero__timeline-progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0%;
+.project-hero__timeline::-webkit-slider-runnable-track {
+  height: 2px;
+  background: transparent;
+}
+
+.project-hero__timeline::-moz-range-track {
+  height: 2px;
+  background: transparent;
+}
+
+.project-hero__timeline::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  margin-top: -5px;
+  border: 0;
+  border-radius: 50%;
   background: var(--project-text);
-  transition: width 0.1s linear;
+  opacity: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.project-hero__timeline::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--project-text);
+  opacity: 0;
+}
+
+.project-hero__timeline:is(
+    :hover,
+    :focus-visible
+  ):enabled::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.project-hero__timeline:is(:hover, :focus-visible):enabled::-moz-range-thumb {
+  opacity: 1;
 }
 
 /* --- Time display --- */
@@ -234,12 +288,9 @@ a {
   opacity: 0.7;
 }
 
-/* --- Sound button (bottom right) --- */
+/* --- Sound button --- */
 .project-hero__sound-btn {
-  position: absolute;
-  bottom: 80px;
-  right: var(--hero-ui-inset);
-  z-index: 10;
+  min-height: 24px;
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -525,8 +576,8 @@ a {
     padding-bottom: 32px;
   }
 
-  .project-hero__sound-btn {
-    bottom: 56px;
+  .project-hero__info-left {
+    flex-basis: 100%;
   }
 
   .project-credits__network {
