@@ -1,0 +1,83 @@
+{
+  "httpStatus": 200,
+  "initial": {
+    "url": "https://www.randycounsman.com/",
+    "js": [
+      "/assets/main-BzevZL5n.js",
+      "/assets/modulepreload-polyfill-B5Qt9EMX.js",
+      "/assets/index-DDlvirwQ.js",
+      "/assets/SplitText-C-ojTpxI.js",
+      "/assets/text-mask-rise-Bgs7z0ee.js",
+      "/assets/scroll-defaults-Bo-1Pf1Y.js",
+      "/assets/config-CcZ_i5p8.js",
+      "/assets/dom-BcGtiACw.js",
+      "/assets/preload-helper-BXl3LOEh.js",
+      "/assets/nav-Duh3GbGb.js",
+      "/assets/glitch-text-CMICE1av.js",
+      "/assets/custom-cursor-CWp68Z1n.js",
+      "/assets/beacon-B_-uEmRd.js",
+      "/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925"
+    ],
+    "kits": [
+      "https://use.typekit.net/gya6int.css"
+    ],
+    "responsive": 4,
+    "glightboxRequests": []
+  },
+  "expectedJs": [
+    "/assets/main-BzevZL5n.js",
+    "/assets/modulepreload-polyfill-B5Qt9EMX.js",
+    "/assets/index-DDlvirwQ.js",
+    "/assets/SplitText-C-ojTpxI.js",
+    "/assets/text-mask-rise-Bgs7z0ee.js",
+    "/assets/scroll-defaults-Bo-1Pf1Y.js",
+    "/assets/config-CcZ_i5p8.js",
+    "/assets/dom-BcGtiACw.js",
+    "/assets/preload-helper-BXl3LOEh.js",
+    "/assets/nav-Duh3GbGb.js",
+    "/assets/glitch-text-CMICE1av.js",
+    "/assets/custom-cursor-CWp68Z1n.js",
+    "/assets/beacon-B_-uEmRd.js"
+  ],
+  "a": {
+    "videos": [
+      {
+        "paused": true,
+        "frames": 51,
+        "time": 1.900165
+      },
+      {
+        "paused": true,
+        "frames": 187,
+        "time": 7.456521
+      }
+    ],
+    "marquee": "translate3d(-344.513px, 0px, 0px)"
+  },
+  "b": {
+    "videos": [
+      {
+        "paused": true,
+        "frames": 51,
+        "time": 1.900165
+      },
+      {
+        "paused": true,
+        "frames": 187,
+        "time": 7.456521
+      }
+    ],
+    "marquee": "translate3d(-344.513px, 0px, 0px)"
+  },
+  "errors": [],
+  "additionalProductionScripts": [
+    "/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925"
+  ],
+  "matchesExpectedBuildJs": true,
+  "deployment": {
+    "commit": "f7df2e1a88c5fcee1adb9d3b3a95f5ffe3f31d26",
+    "run": "https://github.com/boo13/website/actions/runs/33355382497",
+    "conclusion": "success",
+    "verifiedAt": "2026-08-31T03:57:16.952Z"
+  }
+}

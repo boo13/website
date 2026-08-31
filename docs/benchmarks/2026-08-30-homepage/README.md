@@ -28,3 +28,5 @@ Baseline and after JSON are the evidence source for the results report and prese
 `visual-qa.json` records stable entrance styles before the final desktop/phone captures. The initial benchmark pass used a shorter entrance delay; those presentation images were replaced with settled captures, and the reusable script now waits 5.1 seconds. Raw timing samples are retained as exploratory data only.
 
 PNG screenshots and the PowerPoint are retained locally and excluded from git. JSON evidence, the comparison report, and the reusable scripts are tracked. Run `node scripts/compare-homepage-benchmarks.mjs` to regenerate comparison.json and RESULTS.md.
+
+`production-qa.json` verifies the live root's application bundle paths and offscreen behavior after deployment. `production-images.json` verifies all seven new image variants against local SHA-256 hashes. The final deployment and remaining limitations are summarized in RESULTS.md.

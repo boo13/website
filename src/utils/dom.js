@@ -7,16 +7,15 @@ export function onReady(fn) {
   }
 }
 
-/**
- * Register one-shot pagehide cleanup for an array of cleanup functions.
- * Each item is called only if it is a function (safe with early-return inits).
- */
+// Cached pages resume their initialized state without running setup again.
 export function onPageHide(cleanups) {
-  window.addEventListener(
-    'pagehide',
-    () => cleanups.forEach((fn) => typeof fn === 'function' && fn()),
-    { once: true }
-  );
+  function cleanupPage(event) {
+    if (event.persisted) return;
+    window.removeEventListener('pagehide', cleanupPage);
+    cleanups.forEach((fn) => typeof fn === 'function' && fn());
+  }
+
+  window.addEventListener('pagehide', cleanupPage);
 }
 
 /** True if the user prefers reduced motion. */

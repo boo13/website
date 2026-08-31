@@ -27,3 +27,42 @@ The review's event-based comparison reproduced the regression: before the change
 Suggested fix: preserve the project page's initialized sections during persisted pagehide, matching the homepage's existing policy, or reinitialize the affected listeners on restoration. Verify real Back/Forward restoration and ordinary non-cached navigation before deploying the fix.
 
 Disposition: recorded for follow-up. The installation task did not authorize applying review findings, and no website runtime files were changed.
+
+## Resolution — 2026-08-31
+
+Randy subsequently authorized fixing this finding. Work started from clean `dev`
+at `43fff331c5ce3a1adbf61287d1e277624bcbec0e`, preserving the deployed performance changes.
+
+Actual Chrome navigation reproduced the defect through `playwright-cli` against
+the production build: the same document returned with `pageshow.persisted === true`.
+The slider moved from 0.1 to 0.2 seconds without seeking; playback advanced to
+1.64 seconds while the elapsed label stayed at `00:00`.
+
+`onPageHide` now preserves initialized sections on persisted pagehide and removes
+its handler only when performing final cleanup. No player, design, font, or
+performance-loading code changed. A lifecycle regression test failed before the
+fix; both cached-return and ordinary-disposal tests pass after it, including
+repeated caching and exactly-once cleanup. Run `node --test tests/dom.test.js`.
+`npm run lint`, `npm run build`, and `git diff --check` also passed.
+
+Browser verification used Chrome through `playwright-cli` at 1440×1000 and
+390×844. The CLI launch configuration ignored `--disable-back-forward-cache` so
+actual cached navigation could be exercised; no synthetic pagehide events were
+used for browser acceptance. Screenshots were inspected after fonts, scrolling,
+and animation settled, then removed as required by repository instructions.
+
+| Route | Result |
+| --- | --- |
+| `/projects/wyatt-earp/` | Pass: repeated cached Back/Forward, Close/Forward, refresh, keyboard and pointer seek, playback progress, Credits/back-to-video; cached Close/Forward also passed at phone width. |
+| `/projects/sitting-bull/` | Pass: direct entry, Close, cached Back, keyboard seek and playback progress. |
+| `/projects/men-who-built-america/`, `/projects/pope/` | Pass: direct entry, Close, Back, seek and progress through normal reload fallback. Chrome reported `outstanding-network-request`; cached restoration was not confirmed on these routes. |
+| `/` | Pass: return to each opened gallery card without the preloader; offscreen hero videos stayed paused. |
+| `/projects/upnext-news/`, `/case-study-wyatt.html` | Pass: genuine cached Back retained initialized transforms and working scroll animations. |
+
+The local preview reported existing 404s for `/api/homepage-visit` and
+`/favicon.ico`; no navigation-related JavaScript failure was observed. Verification
+covered Chrome, not other browser engines. The small helper change was reviewed
+directly with its tests; no broader cleanup or review pipeline was needed.
+
+Deployment status at this handoff: verified locally, not deployed. Production
+deployment requires a separately authorized `dev` → `gh-pages` release.
