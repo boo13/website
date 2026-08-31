@@ -3,40 +3,279 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Playlists | Randy Counsman</title>
+    <title>AI Playlists — Good music. Strange connections.</title>
     <meta
       name="description"
-      content="A public archive of AI-generated playlists created through AIHome and published to YouTube Music."
+      content="Follow your curiosity. An evolving collection of AI-curated playlists, unexpected genres, and musical rabbit holes. A listening experiment by Randy Counsman."
+    />
+    <meta name="theme-color" content="#161614" />
+    <link rel="icon" href="/favicon/favicon-32x32.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
     />
     <link rel="stylesheet" href="https://use.typekit.net/bnp0hyp.css" />
     <link rel="stylesheet" href="https://use.typekit.net/gya6int.css" />
   </head>
   <body>
-    <div class="feed-shell">
-      <div class="feed-glow feed-glow--top" aria-hidden="true"></div>
-      <div class="feed-glow feed-glow--bottom" aria-hidden="true"></div>
+    <a class="skip-link" href="#collection">Skip to the collection</a>
+    <header class="masthead page-width" id="top">
+      <a class="wordmark" href="#top" aria-label="AI Playlists home">
+        <span class="record-mark" aria-hidden="true"></span>
+        <span>AI PLAYLISTS<span class="wordmark__period">.</span></span>
+      </a>
+      <nav class="masthead__nav" aria-label="Main navigation">
+        <a href="#collection"
+          >The collection <span data-playlist-count></span
+        ></a>
+        <a href="#about">The experiment <span aria-hidden="true">↗</span></a>
+      </nav>
+      <span class="masthead__note mono"
+        >Independent ears.<br />Unexpected directions.</span
+      >
+    </header>
 
-      <header class="hero">
-        <div class="hero__copy">
-          <h1>AI playlists</h1>
-          <p class="hero__lede">
-            A public archive of machine-assisted music curation from an AI setup designed by Randy.
-          </p>
+    <main>
+      <section class="intro page-width" aria-labelledby="intro-title">
+        <div class="intro__eyebrow mono">
+          <span class="signal-dot"></span>A listening experiment by Randy
+          Counsman
         </div>
-      </header>
-
-      <main class="playlist-experience">
-        <section id="feed-state" class="feed-state" aria-live="polite">
-          <div class="feed-state__card">
-            <p class="feed-state__eyebrow">Loading</p>
-            <h2>Pulling the latest public feed.</h2>
-            <p>Reading <code>/data/ai-playlists.json</code> and assembling the archive.</p>
+        <div class="intro__layout">
+          <div class="intro__copy">
+            <h1 id="intro-title">
+              <span>GOOD MUSIC.</span><em>strange</em><span>CONNECTIONS.</span>
+            </h1>
+            <div class="intro__bottom">
+              <p>
+                Human curiosity. Machine selection.<br />A growing collection of
+                sounds you might<br class="desktop-break" />
+                never have gone looking for.
+              </p>
+              <a class="text-link" href="#collection"
+                >Find your next rabbit hole <span aria-hidden="true">↓</span></a
+              >
+            </div>
           </div>
-        </section>
+          <div
+            class="feature"
+            id="featured-playlist"
+            aria-label="Featured playlist"
+            aria-busy="true"
+          >
+            <div class="feature__loading mono">
+              Selecting a record<span aria-hidden="true">...</span>
+            </div>
+          </div>
+        </div>
+        <div class="intro__footer mono">
+          <span>Deep cuts. Wide open ears.</span>
+          <span id="archive-stats">An archive for the musically curious</span>
+          <a href="#collection" aria-label="Browse the collection"
+            >Dig in <span aria-hidden="true">↓</span></a
+          >
+        </div>
+      </section>
 
-        <section id="playlist-list" class="playlist-showcase" aria-live="polite" hidden></section>
-      </main>
-    </div>
+      <div class="genre-strip" aria-hidden="true">
+        <div class="genre-strip__inner page-width">
+          <span>ACID JAZZ</span><i>✳</i><span>POST-PUNK</span><i>✳</i
+          ><span>DETROIT TECHNO</span><i>✳</i><span>BALEARIC BEAT</span><i>✳</i
+          ><span>THE UNEXPECTED</span><i>✳</i>
+        </div>
+      </div>
+
+      <section
+        class="collection page-width"
+        id="collection"
+        aria-labelledby="collection-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / The collection</p>
+            <h2 id="collection-title">DIG A LITTLE <em>deeper.</em></h2>
+          </div>
+          <button
+            class="shuffle-button"
+            id="shuffle-playlist"
+            type="button"
+            disabled
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path
+                d="M3 6h3c4 0 8 12 12 12h3M17 14l4 4-4 4M3 18h3c1.5 0 3-1.6 4.5-4M13.5 10c1.5-2.4 3-4 4.5-4h3M17 2l4 4-4 4"
+              /></svg
+            >Pick something for me
+          </button>
+        </div>
+
+        <div class="collection__tools" id="collection-tools" hidden>
+          <div class="filter-list" role="group" aria-label="Filter playlists">
+            <button
+              class="filter-button is-active"
+              type="button"
+              data-filter="all"
+              aria-pressed="true"
+            >
+              All records <span data-playlist-count></span>
+            </button>
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="electronic"
+              aria-pressed="false"
+            >
+              Electronic
+            </button>
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="jazz"
+              aria-pressed="false"
+            >
+              Jazz & soul
+            </button>
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="guitars"
+              aria-pressed="false"
+            >
+              Guitars
+            </button>
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="leftfield"
+              aria-pressed="false"
+            >
+              Left field
+            </button>
+          </div>
+          <label class="search-field"
+            ><svg
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <circle cx="8.5" cy="8.5" r="5.5" />
+              <path d="m13 13 4 4" /></svg
+            ><span class="sr-only">Search playlists, genres, and artists</span
+            ><input
+              id="playlist-search"
+              type="search"
+              placeholder="A sound, a genre, an artist…"
+              autocomplete="off"
+          /></label>
+        </div>
+
+        <div class="collection__meta mono" id="collection-meta" hidden>
+          <p id="results-count" role="status" aria-live="polite"></p>
+          <label>
+            <span class="sr-only">Sort by</span>
+            <select id="playlist-sort" aria-label="Sort playlists">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="title">A—Z</option>
+            </select></label
+          >
+        </div>
+
+        <div
+          id="feed-state"
+          class="feed-state"
+          role="status"
+          aria-live="polite"
+        >
+          <span class="eyebrow">One moment</span>
+          <h3>Getting the records out.</h3>
+          <p>The next rabbit hole is on its way.</p>
+        </div>
+        <div id="playlist-list" class="record-grid" hidden></div>
+        <div id="empty-results" class="feed-state" hidden>
+          <span class="eyebrow">Keep digging</span>
+          <h3>No records in this corner.</h3>
+          <p>Try another artist, genre, or a wider selection.</p>
+          <button class="text-link" id="reset-filters" type="button">
+            See all records <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <noscript
+          ><p class="feed-state">
+            Enable JavaScript to explore the playlist collection.
+          </p></noscript
+        >
+        <div class="collection__end mono" id="collection-end" hidden>
+          <span>End of the crate. For now.</span
+          ><a href="#top">Back to the top ↑</a>
+        </div>
+      </section>
+
+      <section class="about" id="about" aria-labelledby="about-title">
+        <div class="about__inner page-width">
+          <div class="about__label">
+            <p class="eyebrow">02 / The experiment</p>
+            <span class="asterisk" aria-hidden="true">✳</span>
+          </div>
+          <div class="about__copy">
+            <h2 id="about-title">
+              A machine with<br /><em>a wandering ear.</em>
+            </h2>
+            <p>
+              A genre I’ve never heard of. A painting. A very specific mood. I
+              give an AI a starting point and see where the music goes.
+            </p>
+            <p>
+              This is the ongoing collection: playlists assembled with
+              NotebookLM, Claude, Codex, and Gemini, with artwork and the
+              occasional narrated introduction. Every selection is a different
+              way into the music.
+            </p>
+            <span class="about__signoff mono"
+              >An ongoing side project by Randy Counsman ↗</span
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer page-width">
+      <a class="wordmark" href="#top"
+        ><span class="record-mark" aria-hidden="true"></span>AI PLAYLISTS.</a
+      >
+      <p class="mono">Made of curiosity.<br />Best enjoyed with headphones.</p>
+      <a class="text-link" href="#collection"
+        >Keep listening <span aria-hidden="true">↗</span></a
+      >
+    </footer>
+
+    <dialog
+      class="playlist-dialog"
+      id="playlist-dialog"
+      aria-labelledby="dialog-title"
+    >
+      <div class="playlist-dialog__bar">
+        <span class="mono">AI PLAYLISTS / LINER NOTES</span
+        ><button
+          class="dialog-close"
+          type="button"
+          aria-label="Close playlist details"
+        >
+          <span class="mono">Close</span><span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div id="dialog-content"></div>
+    </dialog>
 
     <script type="module" src="/src/main-aiplaylists.js"></script>
   </body>
