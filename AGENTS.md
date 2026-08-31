@@ -34,6 +34,16 @@ This project is a video portfolio website using GSAP.
 - The live response still exposes GitHub Pages / Fastly headers (`x-github-request-id`, `x-served-by`, `x-fastly-request-id`, `via: 1.1 varnish`), which indicates the origin has not been fully moved off GitHub Pages.
 - Do not describe the site as "on Cloudflare Pages" unless the origin and deploy workflow have actually been migrated.
 
+## Compound Engineering
+
+- Use the native `compound-engineering` plugin and this repository's `.compound-engineering/config.yaml`. Setup, update, and rollback details are in `.compound-engineering/README.md`. Prefer current `ce-*` skills over legacy `workflows-*` copies.
+- Adopt planning, report-only review, and learning capture selectively. Clear, small fixes can proceed directly. Do not start `lfg`, cross-model delegation, PR creation, or production deployment unless the user requests that action.
+- Project rules override plugin defaults: npm, `dev`, `DESIGN.md`, and `playwright-cli` remain authoritative. Keep browser verification in `playwright-cli`, including when a plugin suggests a native browser or `agent-browser`. Respect the animation timing checks below.
+- Keep implementation on the current host/model unless the user explicitly selects another route. Native subagents may be used only when the invoked workflow and active host/user instructions permit them; do not use the retired Claude-to-Codex tool map for native plugin skills.
+- Review actual defects, regressions, and unmet requirements. Do not turn stylistic preferences into mandatory fixes. Review mode is report-only unless applying its findings is explicitly requested.
+- Keep dated plans and useful lessons in the existing `docs/plans/` and `docs/solutions/` directories. Preserve prior artifacts; do not manufacture a lesson for every trivial edit.
+- Reviews need an explicit appropriate base when no PR supplies one; never assume `main` or `master`. After shipping, use the pre-change commit because `gh-pages` already contains the changes. Existing git and deployment authorization rules still apply.
+
 ## Design System
 - **`DESIGN.md`** is the source of truth for all visual and motion design decisions on `index.html` and project pages (`projects/*/index.html`).
 - Consult DESIGN.md before making any design decision: colors, typography, spacing, animation timing, easing, layout, breakpoints, z-index.

@@ -131,6 +131,49 @@ export function initHeroApertureDual() {
   let cleanupGlitch = () => {};
   const cleanupSocialHover = [];
   let cleanupMaskRise = () => {};
+  const motionPreference = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  );
+  const decorativeVideos = [video, backVideo].filter(Boolean);
+  let sceneVisible = false;
+  let backVideoRevealed = false;
+  let visibilityTrigger;
+
+  function syncVideoPlayback() {
+    const canPlay =
+      sceneVisible && !document.hidden && !motionPreference.matches;
+    decorativeVideos.forEach((element) => {
+      const eligible = canPlay && (element !== backVideo || backVideoRevealed);
+      if (eligible) {
+        if (element.paused) element.play().catch(() => undefined);
+      } else {
+        element.pause();
+      }
+    });
+  }
+
+  function updateSceneVisibility(trigger) {
+    sceneVisible = trigger.isActive;
+    syncVideoPlayback();
+  }
+
+  function suspendVideos() {
+    decorativeVideos.forEach((element) => element.pause());
+  }
+
+  function restoreVideoPlayback() {
+    visibilityTrigger.refresh();
+    updateSceneVisibility(visibilityTrigger);
+  }
+
+  decorativeVideos.forEach((element) => {
+    element.removeAttribute('autoplay');
+    element.addEventListener('play', syncVideoPlayback);
+  });
+  document.addEventListener('visibilitychange', syncVideoPlayback);
+  motionPreference.addEventListener('change', syncVideoPlayback);
+  window.addEventListener('pagehide', suspendVideos);
+  window.addEventListener('pageshow', restoreVideoPlayback);
 
   function animateSocialIcon(svg) {
     gsap.killTweensOf(svg);
@@ -318,7 +361,12 @@ export function initHeroApertureDual() {
           duration: 0.62,
           ease: 'none',
           onStart() {
-            backVideo.play().catch(() => undefined);
+            backVideoRevealed = true;
+            syncVideoPlayback();
+          },
+          onReverseComplete() {
+            backVideoRevealed = false;
+            syncVideoPlayback();
           },
         },
         0.16
@@ -402,7 +450,7 @@ export function initHeroApertureDual() {
       tl.to(marquee, { autoAlpha: 1, duration: 0.25, ease: 'none' }, 0.68);
     }
 
-    ScrollTrigger.create({
+    const pin = ScrollTrigger.create({
       id: 'hero-aperture-pin',
       trigger: scene,
       start: 'top top',
@@ -412,6 +460,17 @@ export function initHeroApertureDual() {
       anticipatePin: 1,
       animation: tl,
     });
+
+    visibilityTrigger = ScrollTrigger.create({
+      id: 'hero-aperture-visibility',
+      trigger: scene,
+      start: () => pin.start - window.innerHeight,
+      // The scene remains visible for its own height after the pin releases.
+      end: () => pin.end + scene.offsetHeight,
+      onToggle: updateSceneVisibility,
+      onRefresh: updateSceneVisibility,
+    });
+    updateSceneVisibility(visibilityTrigger);
   }, scene);
 
   // ─── Phase A: entrance animations (load-driven) ───────────────────────────
@@ -503,6 +562,14 @@ export function initHeroApertureDual() {
   if (!heroName) playHeroChromeEntrance();
 
   return function cleanup() {
+    document.removeEventListener('visibilitychange', syncVideoPlayback);
+    motionPreference.removeEventListener('change', syncVideoPlayback);
+    window.removeEventListener('pagehide', suspendVideos);
+    window.removeEventListener('pageshow', restoreVideoPlayback);
+    decorativeVideos.forEach((element) => {
+      element.removeEventListener('play', syncVideoPlayback);
+    });
+    suspendVideos();
     if (tickerFn !== null) {
       gsap.ticker.remove(tickerFn);
       tickerFn = null;

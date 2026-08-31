@@ -1,45 +1,69 @@
-import GLightbox from 'glightbox';
-import 'glightbox/dist/css/glightbox.min.css';
-
 export function initVideoLightbox() {
-  // Skip on touch devices if no video cards exist
   const videoCards = document.querySelectorAll('.glightbox-video');
   if (!videoCards.length) return () => {};
 
-  // Initialize GLightbox with gallery-style navigation
-  const lightbox = GLightbox({
-    selector: '.glightbox-video',
-    touchNavigation: true,
-    loop: false,
-    autoplayVideos: true,
-    closeButton: true,
-    closeOnOutsideClick: true,
-    keyboardNavigation: true,
-    videosWidth: '90vw',
-    openEffect: 'fade',
-    closeEffect: 'fade',
-  });
+  let lightbox;
+  let disposed = false;
+  let pendingCard;
 
-  // Pause any playing hover preview videos when lightbox opens
-  lightbox.on('open', () => {
-    const hoverVideos = document.querySelectorAll('.card-video');
-    hoverVideos.forEach((video) => {
-      if (!video.paused) {
-        video.pause();
-        video.currentTime = 0;
-      }
+  function queueActivation(event) {
+    const card = event.target.closest?.('.glightbox-video');
+    if (!card) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    pendingCard = card;
+  }
+
+  document.addEventListener('click', queueActivation, true);
+
+  Promise.all([
+    import('glightbox'),
+    import('glightbox/dist/css/glightbox.min.css'),
+  ])
+    .then(([{ default: GLightbox }]) => {
+      if (disposed) return;
+      lightbox = GLightbox({
+        selector: '.glightbox-video',
+        touchNavigation: true,
+        loop: false,
+        autoplayVideos: true,
+        closeButton: true,
+        closeOnOutsideClick: true,
+        keyboardNavigation: true,
+        videosWidth: '90vw',
+        openEffect: 'fade',
+        closeEffect: 'fade',
+      });
+
+      lightbox.on('open', () => {
+        document.querySelectorAll('.card-video').forEach((video) => {
+          if (!video.paused) {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+      });
+
+      lightbox.on('close', () => {
+        if (!disposed) {
+          document.dispatchEvent(new CustomEvent('gallery:lightbox-close'));
+        }
+      });
+
+      document.removeEventListener('click', queueActivation, true);
+      if (pendingCard?.isConnected) lightbox.open(pendingCard);
+      pendingCard = null;
+    })
+    .catch((error) => {
+      document.removeEventListener('click', queueActivation, true);
+      pendingCard = null;
+      if (!disposed) console.error('Unable to load video lightbox.', error);
     });
-  });
 
-  // Notify gallery to resume visible card autoplay after lightbox closes
-  lightbox.on('close', () => {
-    document.dispatchEvent(new CustomEvent('gallery:lightbox-close'));
-  });
-
-  // Return cleanup function
   return () => {
-    if (lightbox) {
-      lightbox.destroy();
-    }
+    disposed = true;
+    pendingCard = null;
+    document.removeEventListener('click', queueActivation, true);
+    lightbox?.destroy();
   };
 }

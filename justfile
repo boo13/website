@@ -122,6 +122,10 @@ worker-deploy:
 worker-deploy-homepage:
     cd worker/homepage-visit && npx wrangler deploy
 
+# Benchmark a frozen production build using the perf-benchmark Playwright CLI session
+homepage-benchmark build label:
+    node scripts/benchmark-homepage.mjs {{ build }} {{ label }}
+
 # Run a full visual audit across desktop, tablet, and phone sizes
 visual-audit:
     #!/usr/bin/env bash
