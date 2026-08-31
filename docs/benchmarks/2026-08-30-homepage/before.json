@@ -1,0 +1,2035 @@
+{
+  "label": "before",
+  "capturedAt": "2026-08-31T03:41:18.121Z",
+  "revision": "b4645fd33936ff593a57f2afbd2012fdf4439b1c",
+  "buildDir": "tmp/performance-before",
+  "method": "Chromium via playwright-cli; fresh browser contexts; same-origin assets fulfilled from frozen production build; live Adobe/R2; no CPU/network throttling; timings are descriptive lab samples, not production CWV",
+  "assets": [
+    {
+      "path": "/assets/main-aU7GKE2D.js",
+      "bytes": 10103,
+      "gzipBytes": 3743
+    },
+    {
+      "path": "/assets/modulepreload-polyfill-B5Qt9EMX.js",
+      "bytes": 711,
+      "gzipBytes": 399
+    },
+    {
+      "path": "/assets/index-DDlvirwQ.js",
+      "bytes": 69893,
+      "gzipBytes": 27480
+    },
+    {
+      "path": "/assets/SplitText-C-ojTpxI.js",
+      "bytes": 7173,
+      "gzipBytes": 3367
+    },
+    {
+      "path": "/assets/text-mask-rise-Bgs7z0ee.js",
+      "bytes": 2930,
+      "gzipBytes": 1358
+    },
+    {
+      "path": "/assets/scroll-defaults-Bo-1Pf1Y.js",
+      "bytes": 59688,
+      "gzipBytes": 24159
+    },
+    {
+      "path": "/assets/config-CcZ_i5p8.js",
+      "bytes": 381,
+      "gzipBytes": 275
+    },
+    {
+      "path": "/assets/dom-BcGtiACw.js",
+      "bytes": 400,
+      "gzipBytes": 255
+    },
+    {
+      "path": "/assets/glightbox.min-B2vVOLh0.js",
+      "bytes": 56429,
+      "gzipBytes": 15580
+    },
+    {
+      "path": "/assets/nav-DDJ6Ei89.js",
+      "bytes": 22437,
+      "gzipBytes": 7012
+    },
+    {
+      "path": "/assets/glitch-text-CMICE1av.js",
+      "bytes": 3342,
+      "gzipBytes": 1412
+    },
+    {
+      "path": "/assets/custom-cursor-CWp68Z1n.js",
+      "bytes": 4022,
+      "gzipBytes": 1415
+    },
+    {
+      "path": "/assets/beacon-B_-uEmRd.js",
+      "bytes": 437,
+      "gzipBytes": 306
+    },
+    {
+      "path": "/assets/text-mask-rise-Dukh2llw.css",
+      "bytes": 1262,
+      "gzipBytes": 402
+    },
+    {
+      "path": "/assets/glightbox-Dt4O2PdW.css",
+      "bytes": 13571,
+      "gzipBytes": 2553
+    },
+    {
+      "path": "/assets/nav-fBo07i8e.css",
+      "bytes": 30194,
+      "gzipBytes": 6607
+    },
+    {
+      "path": "/assets/glitch-text-B7YihFuz.css",
+      "bytes": 4299,
+      "gzipBytes": 1003
+    },
+    {
+      "path": "/assets/main-DkaZD05I.css",
+      "bytes": 5245,
+      "gzipBytes": 1516
+    }
+  ],
+  "totals": {
+    "initialJsGzip": 86761,
+    "initialCssGzip": 12081
+  },
+  "results": [
+    {
+      "config": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "dpr": 1
+      },
+      "initial": {
+        "timing": {
+          "lcp": 5220,
+          "cls": 0.0005894670567558298,
+          "longTasks": [
+            62
+          ],
+          "preloaderExit": 2567.2000000476837,
+          "fcp": 340
+        },
+        "resources": [
+          {
+            "url": "https://use.typekit.net/bnp0hyp.css",
+            "initiator": "link",
+            "transferBytes": 1310,
+            "duration": 70
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/modulepreload-polyfill-B5Qt9EMX.js",
+            "initiator": "other",
+            "transferBytes": 1011,
+            "duration": 18.599999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-aU7GKE2D.js",
+            "initiator": "script",
+            "transferBytes": 10403,
+            "duration": 18.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/index-DDlvirwQ.js",
+            "initiator": "other",
+            "transferBytes": 70193,
+            "duration": 22
+          },
+          {
+            "url": "https://use.typekit.net/gya6int.css",
+            "initiator": "link",
+            "transferBytes": 1044,
+            "duration": 69.89999997615814
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/SplitText-C-ojTpxI.js",
+            "initiator": "other",
+            "transferBytes": 7473,
+            "duration": 18.700000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Bgs7z0ee.js",
+            "initiator": "other",
+            "transferBytes": 3230,
+            "duration": 22.100000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/scroll-defaults-Bo-1Pf1Y.js",
+            "initiator": "other",
+            "transferBytes": 59988,
+            "duration": 23.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/config-CcZ_i5p8.js",
+            "initiator": "other",
+            "transferBytes": 681,
+            "duration": 22.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/dom-BcGtiACw.js",
+            "initiator": "other",
+            "transferBytes": 700,
+            "duration": 23.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox.min-B2vVOLh0.js",
+            "initiator": "other",
+            "transferBytes": 56729,
+            "duration": 23.80000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-DDJ6Ei89.js",
+            "initiator": "other",
+            "transferBytes": 22737,
+            "duration": 24.100000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-CMICE1av.js",
+            "initiator": "other",
+            "transferBytes": 3642,
+            "duration": 24.100000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/custom-cursor-CWp68Z1n.js",
+            "initiator": "other",
+            "transferBytes": 4322,
+            "duration": 24
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Dukh2llw.css",
+            "initiator": "link",
+            "transferBytes": 1562,
+            "duration": 24.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox-Dt4O2PdW.css",
+            "initiator": "link",
+            "transferBytes": 13871,
+            "duration": 24.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/beacon-B_-uEmRd.js",
+            "initiator": "other",
+            "transferBytes": 737,
+            "duration": 24
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-fBo07i8e.css",
+            "initiator": "link",
+            "transferBytes": 30494,
+            "duration": 24.899999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-B7YihFuz.css",
+            "initiator": "link",
+            "transferBytes": 4599,
+            "duration": 25.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-DkaZD05I.css",
+            "initiator": "link",
+            "transferBytes": 5545,
+            "duration": 26.200000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/Netflix_white2.png",
+            "initiator": "img",
+            "transferBytes": 13783,
+            "duration": 26.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/History.png",
+            "initiator": "img",
+            "transferBytes": 1848,
+            "duration": 26.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/CNN_logo_red.svg",
+            "initiator": "img",
+            "transferBytes": 5637,
+            "duration": 26.5
+          },
+          {
+            "url": "https://media.randycounsman.com/video/Cowboy.War.10secReel.v01_1920x1004.webm",
+            "initiator": "video",
+            "transferBytes": 0,
+            "duration": 134.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/api/homepage-visit",
+            "initiator": "beacon",
+            "transferBytes": 309,
+            "duration": 40.5
+          },
+          {
+            "url": "https://www.randycounsman.com/data/Projects.json",
+            "initiator": "fetch",
+            "transferBytes": 35096,
+            "duration": 40.59999996423721
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 398126,
+            "duration": 51.60000002384186
+          },
+          {
+            "url": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+            "initiator": "img",
+            "transferBytes": 99494,
+            "duration": 53.60000002384186
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 119910,
+            "duration": 54.5
+          },
+          {
+            "url": "https://www.randycounsman.com/favicon/favicon.ico",
+            "initiator": "other",
+            "transferBytes": 0,
+            "duration": 1.5
+          }
+        ],
+        "fonts": [
+          {
+            "family": "ivypresto-display",
+            "weight": "300"
+          }
+        ],
+        "lightboxCards": 0,
+        "bodyFont": "aktiv-grotesk, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+      },
+      "images": [
+        {
+          "project": "wyatt-earp",
+          "src": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+          "naturalWidth": 1080,
+          "naturalHeight": 1350,
+          "displayWidth": 864,
+          "displayHeight": 630,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 397826
+        },
+        {
+          "project": "sitting-bull",
+          "src": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+          "naturalWidth": 1280,
+          "naturalHeight": 720,
+          "displayWidth": 864,
+          "displayHeight": 630,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 99194
+        },
+        {
+          "project": "men-who-built-america",
+          "src": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+          "naturalWidth": 1600,
+          "naturalHeight": 900,
+          "displayWidth": 864,
+          "displayHeight": 630,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 119610
+        },
+        {
+          "project": "pope",
+          "src": "https://www.randycounsman.com/images/portfolio/pope/poster.large.webp",
+          "naturalWidth": 1276,
+          "naturalHeight": 720,
+          "displayWidth": 864,
+          "displayHeight": 630,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 64024
+        }
+      ],
+      "offscreen": {
+        "a": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 1.608222,
+              "frames": 353,
+              "top": -8050.0390625
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.259488,
+              "frames": 179,
+              "top": -8148.3193359375
+            }
+          ],
+          "marquee": "translate3d(-338.34px, 0px, 0px)"
+        },
+        "b": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 3.610565,
+              "frames": 401,
+              "top": -8050.0390625
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.259488,
+              "frames": 179,
+              "top": -8148.3193359375
+            }
+          ],
+          "marquee": "translate3d(-679.444px, 0px, 0px)"
+        },
+        "sampleSeconds": 2,
+        "mainThreadSeconds": {
+          "TaskDuration": 0.4672810000000003,
+          "ScriptDuration": 0.015631000000000006,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0.010320999999999997
+        }
+      },
+      "returned": {
+        "videos": [
+          {
+            "class": "aperture-back-video",
+            "paused": false,
+            "time": 5.61458,
+            "frames": 443,
+            "top": -102.95902252197266
+          },
+          {
+            "class": "hero-video",
+            "paused": false,
+            "time": 8.824999,
+            "frames": 216,
+            "top": -9.35898494720459
+          }
+        ],
+        "marquee": "translate3d(-912.856px, 0px, 0px)"
+      },
+      "errors": []
+    },
+    {
+      "config": {
+        "name": "phone",
+        "width": 375,
+        "height": 812,
+        "dpr": 2
+      },
+      "initial": {
+        "timing": {
+          "lcp": 5204,
+          "cls": 0.0006092924684737153,
+          "longTasks": [],
+          "preloaderExit": 2548.699999988079,
+          "fcp": 320
+        },
+        "resources": [
+          {
+            "url": "https://use.typekit.net/gya6int.css",
+            "initiator": "link",
+            "transferBytes": 1044,
+            "duration": 79.5
+          },
+          {
+            "url": "https://use.typekit.net/bnp0hyp.css",
+            "initiator": "link",
+            "transferBytes": 1310,
+            "duration": 81.59999996423721
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/modulepreload-polyfill-B5Qt9EMX.js",
+            "initiator": "other",
+            "transferBytes": 1011,
+            "duration": 17.599999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-aU7GKE2D.js",
+            "initiator": "script",
+            "transferBytes": 10403,
+            "duration": 17.80000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/SplitText-C-ojTpxI.js",
+            "initiator": "other",
+            "transferBytes": 7473,
+            "duration": 17.80000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/config-CcZ_i5p8.js",
+            "initiator": "other",
+            "transferBytes": 681,
+            "duration": 22.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/index-DDlvirwQ.js",
+            "initiator": "other",
+            "transferBytes": 70193,
+            "duration": 22.099999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/scroll-defaults-Bo-1Pf1Y.js",
+            "initiator": "other",
+            "transferBytes": 59988,
+            "duration": 22.80000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Bgs7z0ee.js",
+            "initiator": "other",
+            "transferBytes": 3230,
+            "duration": 26.399999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/dom-BcGtiACw.js",
+            "initiator": "other",
+            "transferBytes": 700,
+            "duration": 22.200000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-DDJ6Ei89.js",
+            "initiator": "other",
+            "transferBytes": 22737,
+            "duration": 25.700000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox.min-B2vVOLh0.js",
+            "initiator": "other",
+            "transferBytes": 56729,
+            "duration": 27.900000035762787
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-CMICE1av.js",
+            "initiator": "other",
+            "transferBytes": 3642,
+            "duration": 22.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/custom-cursor-CWp68Z1n.js",
+            "initiator": "other",
+            "transferBytes": 4322,
+            "duration": 22.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Dukh2llw.css",
+            "initiator": "link",
+            "transferBytes": 1562,
+            "duration": 25.899999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox-Dt4O2PdW.css",
+            "initiator": "link",
+            "transferBytes": 13871,
+            "duration": 26.100000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/beacon-B_-uEmRd.js",
+            "initiator": "other",
+            "transferBytes": 737,
+            "duration": 27
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-B7YihFuz.css",
+            "initiator": "link",
+            "transferBytes": 4599,
+            "duration": 27.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-fBo07i8e.css",
+            "initiator": "link",
+            "transferBytes": 30494,
+            "duration": 29.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/Netflix_white2.png",
+            "initiator": "img",
+            "transferBytes": 13783,
+            "duration": 29.299999952316284
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-DkaZD05I.css",
+            "initiator": "link",
+            "transferBytes": 5545,
+            "duration": 30
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/CNN_logo_red.svg",
+            "initiator": "img",
+            "transferBytes": 5637,
+            "duration": 30.399999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/History.png",
+            "initiator": "img",
+            "transferBytes": 1848,
+            "duration": 30.599999964237213
+          },
+          {
+            "url": "https://media.randycounsman.com/video/Cowboy.War.10secReel.v01_1920x1004.webm",
+            "initiator": "video",
+            "transferBytes": 0,
+            "duration": 148.39999997615814
+          },
+          {
+            "url": "https://www.randycounsman.com/api/homepage-visit",
+            "initiator": "beacon",
+            "transferBytes": 309,
+            "duration": 19.5
+          },
+          {
+            "url": "https://www.randycounsman.com/data/Projects.json",
+            "initiator": "fetch",
+            "transferBytes": 35096,
+            "duration": 18.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 398126,
+            "duration": 10.300000011920929
+          },
+          {
+            "url": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+            "initiator": "img",
+            "transferBytes": 99494,
+            "duration": 11.199999988079071
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 119910,
+            "duration": 12
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/pope/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 64324,
+            "duration": 12.700000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/favicon/favicon.ico",
+            "initiator": "other",
+            "transferBytes": 0,
+            "duration": 2.399999976158142
+          }
+        ],
+        "fonts": [
+          {
+            "family": "ivypresto-display",
+            "weight": "300"
+          }
+        ],
+        "lightboxCards": 0,
+        "bodyFont": "aktiv-grotesk, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+      },
+      "images": [
+        {
+          "project": "wyatt-earp",
+          "src": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+          "naturalWidth": 1080,
+          "naturalHeight": 1350,
+          "displayWidth": 335,
+          "displayHeight": 280,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 397826
+        },
+        {
+          "project": "sitting-bull",
+          "src": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+          "naturalWidth": 1280,
+          "naturalHeight": 720,
+          "displayWidth": 335,
+          "displayHeight": 280,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 99194
+        },
+        {
+          "project": "men-who-built-america",
+          "src": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+          "naturalWidth": 1600,
+          "naturalHeight": 900,
+          "displayWidth": 335,
+          "displayHeight": 280,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 119610
+        },
+        {
+          "project": "pope",
+          "src": "https://www.randycounsman.com/images/portfolio/pope/poster.large.webp",
+          "naturalWidth": 1276,
+          "naturalHeight": 720,
+          "displayWidth": 335,
+          "displayHeight": 280,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 64024
+        }
+      ],
+      "offscreen": {
+        "a": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 1.501215,
+              "frames": 350,
+              "top": -6236.666015625
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.485682,
+              "frames": 184,
+              "top": -6325.3369140625
+            }
+          ],
+          "marquee": "translate3d(-395.98px, 0px, 0px)"
+        },
+        "b": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 3.503393,
+              "frames": 398,
+              "top": -6236.666015625
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.485682,
+              "frames": 184,
+              "top": -6325.3369140625
+            }
+          ],
+          "marquee": "translate3d(-450.346px, 0px, 0px)"
+        },
+        "sampleSeconds": 2,
+        "mainThreadSeconds": {
+          "TaskDuration": 0.286467,
+          "ScriptDuration": 0.015461000000000003,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0.010320999999999997
+        }
+      },
+      "returned": {
+        "videos": [
+          {
+            "class": "aperture-back-video",
+            "paused": false,
+            "time": 5.509156,
+            "frames": 445,
+            "top": -92.8918228149414
+          },
+          {
+            "class": "hero-video",
+            "paused": false,
+            "time": 9.320932,
+            "frames": 229,
+            "top": -8.443793296813965
+          }
+        ],
+        "marquee": "translate3d(-504.93px, 0px, 0px)"
+      },
+      "errors": []
+    },
+    {
+      "config": {
+        "name": "phone-1x",
+        "width": 375,
+        "height": 812,
+        "dpr": 1
+      },
+      "initial": {
+        "timing": {
+          "lcp": 5164,
+          "cls": 0.0008045451236380403,
+          "longTasks": [],
+          "preloaderExit": 2507.699999988079,
+          "fcp": 272
+        },
+        "resources": [
+          {
+            "url": "https://use.typekit.net/bnp0hyp.css",
+            "initiator": "link",
+            "transferBytes": 1310,
+            "duration": 65.90000003576279
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-aU7GKE2D.js",
+            "initiator": "script",
+            "transferBytes": 10403,
+            "duration": 11.599999964237213
+          },
+          {
+            "url": "https://use.typekit.net/gya6int.css",
+            "initiator": "link",
+            "transferBytes": 1044,
+            "duration": 63.59999996423721
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/modulepreload-polyfill-B5Qt9EMX.js",
+            "initiator": "other",
+            "transferBytes": 1011,
+            "duration": 11.400000035762787
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/SplitText-C-ojTpxI.js",
+            "initiator": "other",
+            "transferBytes": 7473,
+            "duration": 11.699999988079071
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Bgs7z0ee.js",
+            "initiator": "other",
+            "transferBytes": 3230,
+            "duration": 12.399999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/scroll-defaults-Bo-1Pf1Y.js",
+            "initiator": "other",
+            "transferBytes": 59988,
+            "duration": 14.300000011920929
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/dom-BcGtiACw.js",
+            "initiator": "other",
+            "transferBytes": 700,
+            "duration": 15.399999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/config-CcZ_i5p8.js",
+            "initiator": "other",
+            "transferBytes": 681,
+            "duration": 15.300000011920929
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/index-DDlvirwQ.js",
+            "initiator": "other",
+            "transferBytes": 70193,
+            "duration": 15.100000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-CMICE1av.js",
+            "initiator": "other",
+            "transferBytes": 3642,
+            "duration": 15.299999952316284
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-DDJ6Ei89.js",
+            "initiator": "other",
+            "transferBytes": 22737,
+            "duration": 15.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox.min-B2vVOLh0.js",
+            "initiator": "other",
+            "transferBytes": 56729,
+            "duration": 15.899999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox-Dt4O2PdW.css",
+            "initiator": "link",
+            "transferBytes": 13871,
+            "duration": 15.900000035762787
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Dukh2llw.css",
+            "initiator": "link",
+            "transferBytes": 1562,
+            "duration": 16
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-fBo07i8e.css",
+            "initiator": "link",
+            "transferBytes": 30494,
+            "duration": 16.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-DkaZD05I.css",
+            "initiator": "link",
+            "transferBytes": 5545,
+            "duration": 16.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-B7YihFuz.css",
+            "initiator": "link",
+            "transferBytes": 4599,
+            "duration": 16.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/Netflix_white2.png",
+            "initiator": "img",
+            "transferBytes": 13783,
+            "duration": 16.900000035762787
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/custom-cursor-CWp68Z1n.js",
+            "initiator": "other",
+            "transferBytes": 4322,
+            "duration": 15.300000011920929
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/beacon-B_-uEmRd.js",
+            "initiator": "other",
+            "transferBytes": 737,
+            "duration": 15.5
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/CNN_logo_red.svg",
+            "initiator": "img",
+            "transferBytes": 5637,
+            "duration": 17.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/History.png",
+            "initiator": "img",
+            "transferBytes": 1848,
+            "duration": 17.5
+          },
+          {
+            "url": "https://media.randycounsman.com/video/Cowboy.War.10secReel.v01_1920x1004.webm",
+            "initiator": "video",
+            "transferBytes": 0,
+            "duration": 128.79999995231628
+          },
+          {
+            "url": "https://www.randycounsman.com/api/homepage-visit",
+            "initiator": "beacon",
+            "transferBytes": 309,
+            "duration": 19.5
+          },
+          {
+            "url": "https://www.randycounsman.com/data/Projects.json",
+            "initiator": "fetch",
+            "transferBytes": 35096,
+            "duration": 19.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 398126,
+            "duration": 16.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+            "initiator": "img",
+            "transferBytes": 99494,
+            "duration": 19.100000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 119910,
+            "duration": 19.80000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/pope/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 64324,
+            "duration": 20.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/favicon/favicon.ico",
+            "initiator": "other",
+            "transferBytes": 0,
+            "duration": 0.800000011920929
+          }
+        ],
+        "fonts": [
+          {
+            "family": "ivypresto-display",
+            "weight": "300"
+          }
+        ],
+        "lightboxCards": 0,
+        "bodyFont": "aktiv-grotesk, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+      },
+      "images": [
+        {
+          "project": "wyatt-earp",
+          "src": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+          "naturalWidth": 1080,
+          "naturalHeight": 1350,
+          "displayWidth": 335,
+          "displayHeight": 280,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 397826
+        },
+        {
+          "project": "sitting-bull",
+          "src": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+          "naturalWidth": 1280,
+          "naturalHeight": 720,
+          "displayWidth": 335,
+          "displayHeight": 280,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 99194
+        },
+        {
+          "project": "men-who-built-america",
+          "src": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+          "naturalWidth": 1600,
+          "naturalHeight": 900,
+          "displayWidth": 335,
+          "displayHeight": 280,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 119610
+        },
+        {
+          "project": "pope",
+          "src": "https://www.randycounsman.com/images/portfolio/pope/poster.large.webp",
+          "naturalWidth": 1276,
+          "naturalHeight": 720,
+          "displayWidth": 335,
+          "displayHeight": 280,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 64024
+        }
+      ],
+      "offscreen": {
+        "a": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 1.263704,
+              "frames": 344,
+              "top": -6236.666015625
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.249899,
+              "frames": 179,
+              "top": -6325.3369140625
+            }
+          ],
+          "marquee": "translate3d(-389.564px, 0px, 0px)"
+        },
+        "b": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 3.265922,
+              "frames": 393,
+              "top": -6236.666015625
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.249899,
+              "frames": 179,
+              "top": -6325.3369140625
+            }
+          ],
+          "marquee": "translate3d(-444.121px, 0px, 0px)"
+        },
+        "sampleSeconds": 2,
+        "mainThreadSeconds": {
+          "TaskDuration": 0.32655299999999987,
+          "ScriptDuration": 0.014916000000000013,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0.00951200000000002
+        }
+      },
+      "returned": {
+        "videos": [
+          {
+            "class": "aperture-back-video",
+            "paused": false,
+            "time": 5.273671,
+            "frames": 439,
+            "top": -92.8918228149414
+          },
+          {
+            "class": "hero-video",
+            "paused": false,
+            "time": 9.08748,
+            "frames": 223,
+            "top": -8.443793296813965
+          }
+        ],
+        "marquee": "translate3d(-498.515px, 0px, 0px)"
+      },
+      "errors": []
+    },
+    {
+      "config": {
+        "name": "tablet",
+        "width": 768,
+        "height": 1024,
+        "dpr": 2
+      },
+      "initial": {
+        "timing": {
+          "lcp": 5144,
+          "cls": 0.0006038285791873933,
+          "longTasks": [],
+          "preloaderExit": 2489.599999964237,
+          "fcp": 276
+        },
+        "resources": [
+          {
+            "url": "https://use.typekit.net/bnp0hyp.css",
+            "initiator": "link",
+            "transferBytes": 1310,
+            "duration": 69.39999997615814
+          },
+          {
+            "url": "https://use.typekit.net/gya6int.css",
+            "initiator": "link",
+            "transferBytes": 1044,
+            "duration": 66.20000004768372
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-aU7GKE2D.js",
+            "initiator": "script",
+            "transferBytes": 10403,
+            "duration": 14.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/modulepreload-polyfill-B5Qt9EMX.js",
+            "initiator": "other",
+            "transferBytes": 1011,
+            "duration": 16.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Bgs7z0ee.js",
+            "initiator": "other",
+            "transferBytes": 3230,
+            "duration": 19.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/index-DDlvirwQ.js",
+            "initiator": "other",
+            "transferBytes": 70193,
+            "duration": 20.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/SplitText-C-ojTpxI.js",
+            "initiator": "other",
+            "transferBytes": 7473,
+            "duration": 24.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/dom-BcGtiACw.js",
+            "initiator": "other",
+            "transferBytes": 700,
+            "duration": 24.899999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/config-CcZ_i5p8.js",
+            "initiator": "other",
+            "transferBytes": 681,
+            "duration": 24.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/scroll-defaults-Bo-1Pf1Y.js",
+            "initiator": "other",
+            "transferBytes": 59988,
+            "duration": 25.299999952316284
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox.min-B2vVOLh0.js",
+            "initiator": "other",
+            "transferBytes": 56729,
+            "duration": 29.599999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/custom-cursor-CWp68Z1n.js",
+            "initiator": "other",
+            "transferBytes": 4322,
+            "duration": 25.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Dukh2llw.css",
+            "initiator": "link",
+            "transferBytes": 1562,
+            "duration": 32.40000003576279
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-DDJ6Ei89.js",
+            "initiator": "other",
+            "transferBytes": 22737,
+            "duration": 32.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-CMICE1av.js",
+            "initiator": "other",
+            "transferBytes": 3642,
+            "duration": 32.60000002384186
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/beacon-B_-uEmRd.js",
+            "initiator": "other",
+            "transferBytes": 737,
+            "duration": 33.90000003576279
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-fBo07i8e.css",
+            "initiator": "link",
+            "transferBytes": 30494,
+            "duration": 33.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox-Dt4O2PdW.css",
+            "initiator": "link",
+            "transferBytes": 13871,
+            "duration": 33.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-B7YihFuz.css",
+            "initiator": "link",
+            "transferBytes": 4599,
+            "duration": 33
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-DkaZD05I.css",
+            "initiator": "link",
+            "transferBytes": 5545,
+            "duration": 33.90000003576279
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/Netflix_white2.png",
+            "initiator": "img",
+            "transferBytes": 13783,
+            "duration": 34.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/History.png",
+            "initiator": "img",
+            "transferBytes": 1848,
+            "duration": 34.10000002384186
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/CNN_logo_red.svg",
+            "initiator": "img",
+            "transferBytes": 5637,
+            "duration": 34.19999998807907
+          },
+          {
+            "url": "https://media.randycounsman.com/video/Cowboy.War.10secReel.v01_1920x1004.webm",
+            "initiator": "video",
+            "transferBytes": 0,
+            "duration": 153.60000002384186
+          },
+          {
+            "url": "https://www.randycounsman.com/api/homepage-visit",
+            "initiator": "beacon",
+            "transferBytes": 309,
+            "duration": 11.300000011920929
+          },
+          {
+            "url": "https://www.randycounsman.com/data/Projects.json",
+            "initiator": "fetch",
+            "transferBytes": 35096,
+            "duration": 10.700000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 398126,
+            "duration": 19.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+            "initiator": "img",
+            "transferBytes": 99494,
+            "duration": 20.599999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 119910,
+            "duration": 21.700000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/favicon/favicon.ico",
+            "initiator": "other",
+            "transferBytes": 0,
+            "duration": 2
+          }
+        ],
+        "fonts": [
+          {
+            "family": "ivypresto-display",
+            "weight": "300"
+          }
+        ],
+        "lightboxCards": 0,
+        "bodyFont": "aktiv-grotesk, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+      },
+      "images": [
+        {
+          "project": "wyatt-earp",
+          "src": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+          "naturalWidth": 1080,
+          "naturalHeight": 1350,
+          "displayWidth": 691,
+          "displayHeight": 518,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 397826
+        },
+        {
+          "project": "sitting-bull",
+          "src": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+          "naturalWidth": 1280,
+          "naturalHeight": 720,
+          "displayWidth": 691,
+          "displayHeight": 518,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 99194
+        },
+        {
+          "project": "men-who-built-america",
+          "src": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+          "naturalWidth": 1600,
+          "naturalHeight": 900,
+          "displayWidth": 691,
+          "displayHeight": 518,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 119610
+        },
+        {
+          "project": "pope",
+          "src": "https://www.randycounsman.com/images/portfolio/pope/poster.large.webp",
+          "naturalWidth": 1276,
+          "naturalHeight": 720,
+          "displayWidth": 691,
+          "displayHeight": 518,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 64024
+        }
+      ],
+      "offscreen": {
+        "a": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 2.256122,
+              "frames": 368,
+              "top": -7123.9736328125
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.052915,
+              "frames": 175,
+              "top": -7235.7939453125
+            }
+          ],
+          "marquee": "translate3d(-482.678px, 0px, 0px)"
+        },
+        "b": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 4.261487,
+              "frames": 416,
+              "top": -7123.9736328125
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.052915,
+              "frames": 175,
+              "top": -7235.7939453125
+            }
+          ],
+          "marquee": "translate3d(-545.963px, 0px, 0px)"
+        },
+        "sampleSeconds": 2,
+        "mainThreadSeconds": {
+          "TaskDuration": 0.284867,
+          "ScriptDuration": 0.015963000000000005,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0.010321999999999998
+        }
+      },
+      "returned": {
+        "videos": [
+          {
+            "class": "aperture-back-video",
+            "paused": false,
+            "time": 6.297761,
+            "frames": 462,
+            "top": -117.1446304321289
+          },
+          {
+            "class": "hero-video",
+            "paused": false,
+            "time": 8.930793,
+            "frames": 220,
+            "top": -10.64859676361084
+          }
+        ],
+        "marquee": "translate3d(-610.1px, 0px, 0px)"
+      },
+      "errors": []
+    },
+    {
+      "config": {
+        "name": "compact",
+        "width": 1024,
+        "height": 768,
+        "dpr": 1
+      },
+      "initial": {
+        "timing": {
+          "lcp": 5188,
+          "cls": 0.0007892735302448273,
+          "longTasks": [],
+          "preloaderExit": 2535.300000011921,
+          "fcp": 308
+        },
+        "resources": [
+          {
+            "url": "https://use.typekit.net/bnp0hyp.css",
+            "initiator": "link",
+            "transferBytes": 1310,
+            "duration": 73.59999996423721
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-aU7GKE2D.js",
+            "initiator": "script",
+            "transferBytes": 10403,
+            "duration": 17.700000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/modulepreload-polyfill-B5Qt9EMX.js",
+            "initiator": "other",
+            "transferBytes": 1011,
+            "duration": 17.80000001192093
+          },
+          {
+            "url": "https://use.typekit.net/gya6int.css",
+            "initiator": "link",
+            "transferBytes": 1044,
+            "duration": 73.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/index-DDlvirwQ.js",
+            "initiator": "other",
+            "transferBytes": 70193,
+            "duration": 25
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/SplitText-C-ojTpxI.js",
+            "initiator": "other",
+            "transferBytes": 7473,
+            "duration": 42.10000002384186
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Bgs7z0ee.js",
+            "initiator": "other",
+            "transferBytes": 3230,
+            "duration": 25.099999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/config-CcZ_i5p8.js",
+            "initiator": "other",
+            "transferBytes": 681,
+            "duration": 25.099999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/dom-BcGtiACw.js",
+            "initiator": "other",
+            "transferBytes": 700,
+            "duration": 31.099999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/scroll-defaults-Bo-1Pf1Y.js",
+            "initiator": "other",
+            "transferBytes": 59988,
+            "duration": 30.899999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox.min-B2vVOLh0.js",
+            "initiator": "other",
+            "transferBytes": 56729,
+            "duration": 43.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-CMICE1av.js",
+            "initiator": "other",
+            "transferBytes": 3642,
+            "duration": 31.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-DDJ6Ei89.js",
+            "initiator": "other",
+            "transferBytes": 22737,
+            "duration": 34.10000002384186
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/custom-cursor-CWp68Z1n.js",
+            "initiator": "other",
+            "transferBytes": 4322,
+            "duration": 39.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/beacon-B_-uEmRd.js",
+            "initiator": "other",
+            "transferBytes": 737,
+            "duration": 39.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Dukh2llw.css",
+            "initiator": "link",
+            "transferBytes": 1562,
+            "duration": 43.10000002384186
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox-Dt4O2PdW.css",
+            "initiator": "link",
+            "transferBytes": 13871,
+            "duration": 39.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-B7YihFuz.css",
+            "initiator": "link",
+            "transferBytes": 4599,
+            "duration": 41.89999997615814
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-DkaZD05I.css",
+            "initiator": "link",
+            "transferBytes": 5545,
+            "duration": 43
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-fBo07i8e.css",
+            "initiator": "link",
+            "transferBytes": 30494,
+            "duration": 42.89999997615814
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/Netflix_white2.png",
+            "initiator": "img",
+            "transferBytes": 13783,
+            "duration": 44.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/History.png",
+            "initiator": "img",
+            "transferBytes": 1848,
+            "duration": 43
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/CNN_logo_red.svg",
+            "initiator": "img",
+            "transferBytes": 5637,
+            "duration": 45
+          },
+          {
+            "url": "https://media.randycounsman.com/video/Cowboy.War.10secReel.v01_1920x1004.webm",
+            "initiator": "video",
+            "transferBytes": 0,
+            "duration": 135.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/api/homepage-visit",
+            "initiator": "beacon",
+            "transferBytes": 309,
+            "duration": 23.700000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/data/Projects.json",
+            "initiator": "fetch",
+            "transferBytes": 35096,
+            "duration": 23.400000035762787
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 398126,
+            "duration": 39.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+            "initiator": "img",
+            "transferBytes": 99494,
+            "duration": 34.60000002384186
+          },
+          {
+            "url": "https://www.randycounsman.com/favicon/favicon.ico",
+            "initiator": "other",
+            "transferBytes": 0,
+            "duration": 2.599999964237213
+          }
+        ],
+        "fonts": [
+          {
+            "family": "ivypresto-display",
+            "weight": "300"
+          }
+        ],
+        "lightboxCards": 0,
+        "bodyFont": "aktiv-grotesk, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+      },
+      "images": [
+        {
+          "project": "wyatt-earp",
+          "src": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+          "naturalWidth": 1080,
+          "naturalHeight": 1350,
+          "displayWidth": 922,
+          "displayHeight": 691,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 397826
+        },
+        {
+          "project": "sitting-bull",
+          "src": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+          "naturalWidth": 1280,
+          "naturalHeight": 720,
+          "displayWidth": 922,
+          "displayHeight": 691,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 99194
+        },
+        {
+          "project": "men-who-built-america",
+          "src": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+          "naturalWidth": 1600,
+          "naturalHeight": 900,
+          "displayWidth": 922,
+          "displayHeight": 691,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 119610
+        },
+        {
+          "project": "pope",
+          "src": "https://www.randycounsman.com/images/portfolio/pope/poster.large.webp",
+          "naturalWidth": 1276,
+          "naturalHeight": 720,
+          "displayWidth": 922,
+          "displayHeight": 691,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 64024
+        }
+      ],
+      "offscreen": {
+        "a": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 1.450344,
+              "frames": 349,
+              "top": -7385.9794921875
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.439527,
+              "frames": 183,
+              "top": -7469.845703125
+            }
+          ],
+          "marquee": "translate3d(-570.968px, 0px, 0px)"
+        },
+        "b": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 3.452922,
+              "frames": 397,
+              "top": -7385.9794921875
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.439527,
+              "frames": 183,
+              "top": -7469.845703125
+            }
+          ],
+          "marquee": "translate3d(-650.023px, 0px, 0px)"
+        },
+        "sampleSeconds": 2,
+        "mainThreadSeconds": {
+          "TaskDuration": 0.39088600000000007,
+          "ScriptDuration": 0.016013,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0.011174000000000017
+        }
+      },
+      "returned": {
+        "videos": [
+          {
+            "class": "aperture-back-video",
+            "paused": false,
+            "time": 5.456173,
+            "frames": 438,
+            "top": -87.85822296142578
+          },
+          {
+            "class": "hero-video",
+            "paused": false,
+            "time": 9.249671,
+            "frames": 227,
+            "top": -7.986182689666748
+          }
+        ],
+        "marquee": "translate3d(-728.723px, 0px, 0px)"
+      },
+      "errors": []
+    },
+    {
+      "config": {
+        "name": "desktop-2x",
+        "width": 1440,
+        "height": 900,
+        "dpr": 2
+      },
+      "initial": {
+        "timing": {
+          "lcp": 5240,
+          "cls": 0.0004042320387517147,
+          "longTasks": [
+            57
+          ],
+          "preloaderExit": 2585.199999988079,
+          "fcp": 364
+        },
+        "resources": [
+          {
+            "url": "https://use.typekit.net/bnp0hyp.css",
+            "initiator": "link",
+            "transferBytes": 1310,
+            "duration": 94.39999997615814
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-aU7GKE2D.js",
+            "initiator": "script",
+            "transferBytes": 10403,
+            "duration": 12.800000011920929
+          },
+          {
+            "url": "https://use.typekit.net/gya6int.css",
+            "initiator": "link",
+            "transferBytes": 1044,
+            "duration": 94.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Bgs7z0ee.js",
+            "initiator": "other",
+            "transferBytes": 3230,
+            "duration": 12.800000011920929
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/modulepreload-polyfill-B5Qt9EMX.js",
+            "initiator": "other",
+            "transferBytes": 1011,
+            "duration": 13
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/SplitText-C-ojTpxI.js",
+            "initiator": "other",
+            "transferBytes": 7473,
+            "duration": 13
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/index-DDlvirwQ.js",
+            "initiator": "other",
+            "transferBytes": 70193,
+            "duration": 17.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/scroll-defaults-Bo-1Pf1Y.js",
+            "initiator": "other",
+            "transferBytes": 59988,
+            "duration": 20.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/config-CcZ_i5p8.js",
+            "initiator": "other",
+            "transferBytes": 681,
+            "duration": 20.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/dom-BcGtiACw.js",
+            "initiator": "other",
+            "transferBytes": 700,
+            "duration": 20.700000047683716
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox.min-B2vVOLh0.js",
+            "initiator": "other",
+            "transferBytes": 56729,
+            "duration": 20.899999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-DDJ6Ei89.js",
+            "initiator": "other",
+            "transferBytes": 22737,
+            "duration": 21.100000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-CMICE1av.js",
+            "initiator": "other",
+            "transferBytes": 3642,
+            "duration": 21.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/custom-cursor-CWp68Z1n.js",
+            "initiator": "other",
+            "transferBytes": 4322,
+            "duration": 21.399999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/text-mask-rise-Dukh2llw.css",
+            "initiator": "link",
+            "transferBytes": 1562,
+            "duration": 21.69999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/nav-fBo07i8e.css",
+            "initiator": "link",
+            "transferBytes": 30494,
+            "duration": 21.899999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glitch-text-B7YihFuz.css",
+            "initiator": "link",
+            "transferBytes": 4599,
+            "duration": 22.099999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/Netflix_white2.png",
+            "initiator": "img",
+            "transferBytes": 13783,
+            "duration": 23.5
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/main-DkaZD05I.css",
+            "initiator": "link",
+            "transferBytes": 5545,
+            "duration": 22.19999998807907
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/beacon-B_-uEmRd.js",
+            "initiator": "other",
+            "transferBytes": 737,
+            "duration": 21.399999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/assets/glightbox-Dt4O2PdW.css",
+            "initiator": "link",
+            "transferBytes": 13871,
+            "duration": 22.799999952316284
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/History.png",
+            "initiator": "img",
+            "transferBytes": 1848,
+            "duration": 23.600000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/images/logos/CNN_logo_red.svg",
+            "initiator": "img",
+            "transferBytes": 5637,
+            "duration": 24.19999998807907
+          },
+          {
+            "url": "https://media.randycounsman.com/video/Cowboy.War.10secReel.v01_1920x1004.webm",
+            "initiator": "video",
+            "transferBytes": 0,
+            "duration": 128.30000001192093
+          },
+          {
+            "url": "https://www.randycounsman.com/api/homepage-visit",
+            "initiator": "beacon",
+            "transferBytes": 309,
+            "duration": 29.399999976158142
+          },
+          {
+            "url": "https://www.randycounsman.com/data/Projects.json",
+            "initiator": "fetch",
+            "transferBytes": 35096,
+            "duration": 29.099999964237213
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 398126,
+            "duration": 16.100000023841858
+          },
+          {
+            "url": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+            "initiator": "img",
+            "transferBytes": 99494,
+            "duration": 16.799999952316284
+          },
+          {
+            "url": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+            "initiator": "img",
+            "transferBytes": 119910,
+            "duration": 17.5
+          },
+          {
+            "url": "https://www.randycounsman.com/favicon/favicon.ico",
+            "initiator": "other",
+            "transferBytes": 0,
+            "duration": 3.399999976158142
+          }
+        ],
+        "fonts": [
+          {
+            "family": "ivypresto-display",
+            "weight": "300"
+          }
+        ],
+        "lightboxCards": 0,
+        "bodyFont": "aktiv-grotesk, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif"
+      },
+      "images": [
+        {
+          "project": "wyatt-earp",
+          "src": "https://www.randycounsman.com/images/portfolio/wyatt-earp/poster.large.webp",
+          "naturalWidth": 1080,
+          "naturalHeight": 1350,
+          "displayWidth": 864,
+          "displayHeight": 630,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 397826
+        },
+        {
+          "project": "sitting-bull",
+          "src": "https://www.randycounsman.com/images/shows/SittingBull_TitleCard.webp",
+          "naturalWidth": 1280,
+          "naturalHeight": 720,
+          "displayWidth": 864,
+          "displayHeight": 630,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 99194
+        },
+        {
+          "project": "men-who-built-america",
+          "src": "https://www.randycounsman.com/images/portfolio/men-who-built-america/poster.large.webp",
+          "naturalWidth": 1600,
+          "naturalHeight": 900,
+          "displayWidth": 864,
+          "displayHeight": 630,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 119610
+        },
+        {
+          "project": "pope",
+          "src": "https://www.randycounsman.com/images/portfolio/pope/poster.large.webp",
+          "naturalWidth": 1276,
+          "naturalHeight": 720,
+          "displayWidth": 864,
+          "displayHeight": 630,
+          "sizes": "",
+          "srcset": "",
+          "assetBytes": 64024
+        }
+      ],
+      "offscreen": {
+        "a": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 2.989015,
+              "frames": 386,
+              "top": -8050.0390625
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.823561,
+              "frames": 193,
+              "top": -8148.3193359375
+            }
+          ],
+          "marquee": "translate3d(-647.688px, 0px, 0px)"
+        },
+        "b": {
+          "videos": [
+            {
+              "class": "aperture-back-video",
+              "paused": false,
+              "time": 4.992176,
+              "frames": 434,
+              "top": -8050.0390625
+            },
+            {
+              "class": "hero-video",
+              "paused": true,
+              "time": 7.823561,
+              "frames": 193,
+              "top": -8148.3193359375
+            }
+          ],
+          "marquee": "translate3d(-732.921px, 0px, 0px)"
+        },
+        "sampleSeconds": 2,
+        "mainThreadSeconds": {
+          "TaskDuration": 0.4669190000000003,
+          "ScriptDuration": 0.016672999999999993,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0.010562999999999989
+        }
+      },
+      "returned": {
+        "videos": [
+          {
+            "class": "aperture-back-video",
+            "paused": false,
+            "time": 6.998252,
+            "frames": 475,
+            "top": -102.95902252197266
+          },
+          {
+            "class": "hero-video",
+            "paused": false,
+            "time": 9.648928,
+            "frames": 236,
+            "top": -9.35898494720459
+          }
+        ],
+        "marquee": "translate3d(-818.496px, 0px, 0px)"
+      },
+      "errors": []
+    }
+  ]
+}

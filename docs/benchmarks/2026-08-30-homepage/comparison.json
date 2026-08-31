@@ -1,0 +1,80 @@
+{
+  "before": {
+    "initialJsGzip": 86761,
+    "initialCssGzip": 12081
+  },
+  "after": {
+    "initialJsGzip": 72638,
+    "initialCssGzip": 9528
+  },
+  "frames": [
+    {
+      "viewport": "desktop",
+      "beforeFrames": 48,
+      "afterFrames": 0,
+      "marqueeStopped": true
+    },
+    {
+      "viewport": "phone",
+      "beforeFrames": 48,
+      "afterFrames": 0,
+      "marqueeStopped": true
+    },
+    {
+      "viewport": "phone-1x",
+      "beforeFrames": 49,
+      "afterFrames": 0,
+      "marqueeStopped": true
+    },
+    {
+      "viewport": "tablet",
+      "beforeFrames": 48,
+      "afterFrames": 0,
+      "marqueeStopped": true
+    },
+    {
+      "viewport": "compact",
+      "beforeFrames": 48,
+      "afterFrames": 0,
+      "marqueeStopped": true
+    },
+    {
+      "viewport": "desktop-2x",
+      "beforeFrames": 48,
+      "afterFrames": 0,
+      "marqueeStopped": true
+    }
+  ],
+  "gallery": [
+    {
+      "viewport": "desktop",
+      "beforeBytes": 680654,
+      "afterBytes": 485626
+    },
+    {
+      "viewport": "phone",
+      "beforeBytes": 680654,
+      "afterBytes": 392690
+    },
+    {
+      "viewport": "phone-1x",
+      "beforeBytes": 680654,
+      "afterBytes": 115512
+    },
+    {
+      "viewport": "tablet",
+      "beforeBytes": 680654,
+      "afterBytes": 680654
+    },
+    {
+      "viewport": "compact",
+      "beforeBytes": 680654,
+      "afterBytes": 648902
+    },
+    {
+      "viewport": "desktop-2x",
+      "beforeBytes": 680654,
+      "afterBytes": 680654
+    }
+  ]
+}
