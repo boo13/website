@@ -244,7 +244,7 @@ Two fonts. Shared across all page types.
 | Display serif | `ivypresto-display, Georgia, serif` | `--ff-display` | `--project-font-display` |
 | Body sans | `aktiv-grotesk, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif` | `--ff-body` | `--project-font-body` |
 
-Both loaded via Typekit (`bnp0hyp.css`). There is no third font.
+The homepage loads Typekit `gya6int.css`, which currently supplies IvyPresto Display 300 only. Aktiv Grotesk and additional IvyPresto weights remain intended typography; until a verified kit supplies them, the browser uses the declared fallback or available weight. The unused `bnp0hyp.css` kit was removed from the homepage; other pages may still need it. There is no third intended font.
 
 ### Homepage Type Scale
 
@@ -651,6 +651,7 @@ EASE.color    = 'power2.inOut'
 - **On-light gotcha**: the off-white frame + `mix-blend-mode: difference` reads well on dark and mid-tone backgrounds, but goes low-contrast on near-white surfaces (e.g. the inverted/expanded credits panel). Resolve per-section before snapping content over light backgrounds (see `cursor-lab.html` for on-light variant experiments).
 
 **Hero Aperture Rack-Focus** (`src/sections/hero-aperture-dual.js`):
+- Decorative hero videos and the client marquee suspend while the entire scene is outside the viewport or the document is hidden. Visibility includes the scene's full height after pin release. Return resumes retained playback positions without replaying entrances; background playback begins with its existing reveal. Marquee hover pause and reduced-motion preferences take precedence over resume.
 - ScrollTrigger id `'hero-aperture-pin'`: `start: 'top top'`, `end: '+=230%'`, `scrub: SCRUB.default` (1), `pin: true`, `anticipatePin: 1`
 - Parallel scrub tweens (all ease `'none'`) on a paused timeline: hero content `autoAlpha 0, y -26, blur(7px)`; `.hero-video` `scale→1.24, blur(10px) saturate(0.66)`; aperture hole opens (`--aperture-hole`/`--aperture-feather`); optional back video fades/blurs in; About beat `autoAlpha→1, scale→1, blur(0)`; edge vignette + `--portal-shade` rise; top-gradient `autoAlpha→0.85`
 
