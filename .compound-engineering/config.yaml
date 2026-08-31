@@ -1,0 +1,10 @@
+docs_root: docs
+plan_output: md
+brainstorm_output: md
+ideate_output: md
+plan_skip_scoping_confirm: true
+work_engine_mode: 'off'
+cross_model_review_mode: 'off'
+auto_babysit: false
+pr_teaching_section: false
+pr_teaching_archive: false

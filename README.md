@@ -29,6 +29,10 @@ src/
 
 Static assets (images, data, favicon) live in `public/` and get copied as-is to the build output. Video files are hosted on [Cloudflare R2](https://developers.cloudflare.com/r2/) and referenced via CDN URLs — they are not stored in the git repository.
 
+## Agent workflows
+
+Compound Engineering is configured for optional planning, report-only review, and reusable lessons. See [.compound-engineering/README.md](.compound-engineering/README.md) for installation, project defaults, and rollback. `AGENTS.md` remains the authority for this site's design, browser verification, and deployment workflow.
+
 ## Deployment
 
 The live site at `www.randycounsman.com` currently sits behind Cloudflare, but it does not appear to be fully hosted on Cloudflare Pages yet.
