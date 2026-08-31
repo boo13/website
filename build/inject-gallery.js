@@ -98,6 +98,7 @@ function renderGalleryCards(projects) {
       }
 
       const previewSrc = publicAssetPath(p.preview || p.poster || '');
+      const imageAttrs = galleryImageAttrs(p, previewSrc);
 
       const networkLogoHtml = hasNetworkLogo
         ? `
@@ -117,7 +118,7 @@ function renderGalleryCards(projects) {
                     <div class="card-media">
                         <img
                             class="card-thumbnail"
-                            src="${previewSrc}"
+                            src="${escAttr(previewSrc)}"${imageAttrs}
                             alt="${escAttr(p.title)}"
                             loading="lazy"
                         >${videoHtml}
@@ -128,6 +129,30 @@ function renderGalleryCards(projects) {
                 </article>`;
     })
     .join('\n\n');
+}
+
+function galleryImageAttrs(project, previewSrc) {
+  const image = project.galleryImage;
+  if (!image?.width || !image?.height) return '';
+
+  const dimensions = ` width="${escAttr(image.width)}" height="${escAttr(image.height)}"`;
+  if (!image.sources?.length) return dimensions;
+
+  const candidates = [...image.sources, { src: previewSrc, width: image.width }]
+    .sort((a, b) => a.width - b.width)
+    .map(({ src, width }) => `${publicAssetPath(src)} ${width}w`)
+    .join(', ');
+  const ratio = image.width / image.height;
+  const compactScale = Math.max(1, (3 / 4) * ratio);
+  const rounded = (value) => Number(value.toFixed(6));
+  // Cover can scale landscape sources by card height, beyond their visible width.
+  const sizes = [
+    `(max-width: 480px) max(calc(${rounded(100 * compactScale)}vw - ${rounded(2.5 * compactScale)}rem), ${rounded(280 * ratio)}px)`,
+    `(max-width: 1024px) calc(${rounded(100 * compactScale)}vw - clamp(${rounded(3 * compactScale)}rem, ${rounded(10 * compactScale)}vw, ${rounded(8 * compactScale)}rem))`,
+    `max(min(60vw, 900px), min(${rounded(70 * ratio)}vh, ${rounded(700 * ratio)}px))`,
+  ].join(', ');
+
+  return `${dimensions} srcset="${escAttr(candidates)}" sizes="${escAttr(sizes)}"`;
 }
 
 function ext(path) {
