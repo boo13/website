@@ -1,0 +1,44 @@
+[
+  {
+    "path": "images/shows/SittingBull_TitleCard.gallery-640.webp",
+    "status": 200,
+    "bytes": 20974,
+    "matchesBuild": true
+  },
+  {
+    "path": "images/shows/SittingBull_TitleCard.gallery-960.webp",
+    "status": 200,
+    "bytes": 38616,
+    "matchesBuild": true
+  },
+  {
+    "path": "images/portfolio/wyatt-earp/poster.gallery-720.webp",
+    "status": 200,
+    "bytes": 141614,
+    "matchesBuild": true
+  },
+  {
+    "path": "images/portfolio/wyatt-earp/poster.gallery-900.webp",
+    "status": 200,
+    "bytes": 234550,
+    "matchesBuild": true
+  },
+  {
+    "path": "images/portfolio/pope/poster.gallery-640.webp",
+    "status": 200,
+    "bytes": 26094,
+    "matchesBuild": true
+  },
+  {
+    "path": "images/portfolio/men-who-built-america/poster.gallery-640.webp",
+    "status": 200,
+    "bytes": 37192,
+    "matchesBuild": true
+  },
+  {
+    "path": "images/portfolio/men-who-built-america/poster.gallery-1280.webp",
+    "status": 200,
+    "bytes": 87858,
+    "matchesBuild": true
+  }
+]

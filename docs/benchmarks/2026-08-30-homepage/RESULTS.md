@@ -38,3 +38,13 @@ Baseline revision: b4645fd33936ff593a57f2afbd2012fdf4439b1c. Before/after artifa
 Exact build gzip sizes, selected image sizes, and offscreen frame counters support the claims above. Raw timing and main-thread samples remain in the JSON for inspection, but are single lab samples affected by live media and other machine work. They do not establish production Core Web Vitals, battery savings, or a general loading-speed percentage.
 
 Screenshots used in the presentation were recaptured after the entire entrance settled. Poster comparisons temporarily hide preview videos to compare the responsive image crop; normal page behavior was restored afterward.
+
+## Deployment and verification
+
+Deployed through `dev` → `gh-pages`, merge `f7df2e1a88c5fcee1adb9d3b3a95f5ffe3f31d26`. [GitHub Pages deployment succeeded](https://github.com/boo13/website/actions/runs/33355382497).
+
+The live root returned HTTP 200 and the exact tested application bundle paths. It had four responsive gallery images, one Adobe stylesheet, zero GLightbox requests, stopped hero video frame counters and marquee movement at the footer, and no uncaught page errors. Production includes an additional injected analytics script; the build-byte comparison excludes that script.
+
+Local verification also passed delayed first-click lightbox loading, media readiness, Escape close, pending disposal, dependency failure, gallery preview pause/resume, dynamic reduced motion, project-return restoration, and font/media-failure handling on a coarse-pointer touch viewport. Lint, build, syntax checks, and whitespace checks passed. Independent code review found no actionable defects. Native hidden-tab behavior and physical Safari/iPhone execution were not verified.
+
+Full Adobe font restoration remains pending the kit described above. The deployed cleanup preserves the current fallback rendering.
