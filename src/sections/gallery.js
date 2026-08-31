@@ -162,7 +162,24 @@ export function initGallery() {
     });
   }
 
+  function onLightboxClose() {
+    ScrollTrigger.getAll().forEach((st) => {
+      if (
+        st.isActive &&
+        st.trigger?.classList.contains('gallery-card') &&
+        section.contains(st.trigger)
+      ) {
+        const video = st.trigger.querySelector('.card-video');
+        if (video) {
+          video.play().catch(() => {});
+          st.trigger.classList.add('is-playing');
+        }
+      }
+    });
+  }
+
   setupHoverCorners();
+  document.addEventListener('gallery:lightbox-close', onLightboxClose);
 
   function handleResize() {
     const wasCompact = isCompact;
@@ -188,21 +205,6 @@ export function initGallery() {
 
     setupVideoHover();
 
-    // Resume autoplay after lightbox closes
-    function onLightboxClose() {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger && st.trigger.classList.contains('gallery-card')) {
-          if (st.isActive) {
-            const video = st.trigger.querySelector('.card-video');
-            if (video) {
-              video.play().catch(() => {});
-              st.trigger.classList.add('is-playing');
-            }
-          }
-        }
-      });
-    }
-    document.addEventListener('gallery:lightbox-close', onLightboxClose);
     window.addEventListener('resize', handleResize);
 
     const destroy = () => {
@@ -257,6 +259,7 @@ export function initGallery() {
   window.addEventListener('resize', handleResize);
 
   const destroy = () => {
+    document.removeEventListener('gallery:lightbox-close', onLightboxClose);
     window.removeEventListener('resize', handleResize);
     ctx.revert();
   };
