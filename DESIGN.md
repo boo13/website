@@ -417,6 +417,14 @@ Desktop only (`hover: hover` media query):
 
 Custom UI — play/pause, sound toggle, timeline scrub, smooth scroll to credits. DOM-imperative; no GSAP tweens currently in `src/sections/project-video.js`.
 
+- Sound and Credits share a control row in normal flow, below the title at ≤768px; neither overlaps the timeline or timestamps.
+- Seeking uses a labeled native range input with a 24px interaction height, a 2px visual rail, and a visible focus outline. Its thumb appears on hover or keyboard focus. Seeking stays disabled until a finite, positive duration is available; labels initialize from already-loaded metadata.
+- Credits/back-to-video scrolling is immediate under `prefers-reduced-motion`.
+
+### Footer Keyboard Access (Homepage)
+
+Keyboard focus entering the fixed footer immediately completes its existing reveal so the focused link is visible. Under `prefers-reduced-motion`, the footer stays in normal flow and accepts pointer interaction.
+
 ### Case Study (Project Pages)
 
 All scroll-triggered, no user interaction required. Entrance fades, parallax, and clip-path wipes are automatic.

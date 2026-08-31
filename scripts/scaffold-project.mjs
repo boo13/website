@@ -102,19 +102,18 @@ const html = `<!DOCTYPE html>
                             <button class="project-hero__play-btn" aria-label="Play/Pause">&#9654;</button>
                         </div>
                         <div class="project-hero__info-right">
+                            <button class="project-hero__sound-btn" aria-label="Toggle sound">sound off</button>
                             <button class="project-hero__credits-btn">credits</button>
                         </div>
                     </div>
-                    <div class="project-hero__timeline">
-                        <div class="project-hero__timeline-progress"></div>
-                    </div>
+                    <input class="project-hero__timeline" type="range" min="0" max="0"
+                        value="0" step="0.1" aria-label="Video position" disabled>
                     <div class="project-hero__time">
                         <span class="project-hero__time-current">00:00</span>
                         <span class="project-hero__time-total">00:00</span>
                     </div>
                 </div>
 
-                <button class="project-hero__sound-btn" aria-label="Toggle sound">sound off</button>
             </div>
         </div>
     </section>
@@ -200,4 +199,3 @@ function buildCreditsHtml(credits, fallbackRole) {
                         </div>`;
   }).join('\n');
 }
-

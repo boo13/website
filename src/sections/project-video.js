@@ -3,6 +3,7 @@
  * Play/pause, timeline, sound toggle, scroll-to-credits
  */
 import gsap from 'gsap';
+import { prefersReducedMotion } from '../utils/dom.js';
 
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60);
@@ -34,9 +35,6 @@ export function initProjectVideo() {
       }
     });
   }
-  const timelineFill = section.querySelector(
-    '.project-hero__timeline-progress'
-  );
   const timelineRail = section.querySelector('.project-hero__timeline');
   const timeCurrent = section.querySelector('.project-hero__time-current');
   const timeTotal = section.querySelector('.project-hero__time-total');
@@ -44,6 +42,8 @@ export function initProjectVideo() {
   if (!video) return;
 
   const ctx = gsap.context(() => {}, section);
+  const controller = new AbortController();
+  const listenerOptions = { signal: controller.signal };
 
   // --- Play / Pause ---
   function togglePlay() {
@@ -84,42 +84,71 @@ export function initProjectVideo() {
     updateSoundBtn();
   }
 
-  // --- Timeline progress ---
-  video.addEventListener('loadedmetadata', () => {
-    if (timeTotal) timeTotal.textContent = formatTime(video.duration);
-  });
+  function updateTimeline() {
+    const duration = Number.isFinite(video.duration) ? video.duration : 0;
+    const currentTime = Math.min(Math.max(video.currentTime, 0), duration);
+    if (timeTotal) timeTotal.textContent = formatTime(duration);
+    if (timeCurrent) timeCurrent.textContent = formatTime(currentTime);
+    if (!timelineRail) return;
 
-  video.addEventListener('timeupdate', () => {
-    if (!video.duration) return;
-    const pct = (video.currentTime / video.duration) * 100;
-    if (timelineFill) timelineFill.style.width = `${pct}%`;
-    if (timeCurrent) timeCurrent.textContent = formatTime(video.currentTime);
-  });
+    timelineRail.disabled = duration <= 0;
+    timelineRail.max = String(duration);
+    timelineRail.value = String(currentTime);
+    timelineRail.style.setProperty(
+      '--video-progress',
+      `${duration > 0 ? (currentTime / duration) * 100 : 0}%`
+    );
+    timelineRail.setAttribute(
+      'aria-valuetext',
+      `${formatTime(currentTime)} of ${formatTime(duration)}`
+    );
+  }
 
-  // --- Timeline seek on click ---
+  ['loadedmetadata', 'durationchange', 'timeupdate', 'emptied'].forEach(
+    (event) => {
+      video.addEventListener(event, updateTimeline, listenerOptions);
+    }
+  );
+  updateTimeline();
+
   if (timelineRail) {
-    timelineRail.addEventListener('click', (e) => {
-      if (!video.duration) return;
-      const rect = timelineRail.getBoundingClientRect();
-      const pct = (e.clientX - rect.left) / rect.width;
-      video.currentTime = pct * video.duration;
-    });
+    timelineRail.addEventListener(
+      'input',
+      () => {
+        if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+        video.currentTime = Math.min(
+          Math.max(Number(timelineRail.value), 0),
+          video.duration
+        );
+        updateTimeline();
+      },
+      listenerOptions
+    );
   }
 
   // --- Credits scroll ---
   if (creditsBtn) {
     creditsBtn.addEventListener('click', () => {
       const credits = document.querySelector('.project-credits');
-      if (credits) credits.scrollIntoView({ behavior: 'smooth' });
+      if (credits)
+        credits.scrollIntoView({
+          behavior: prefersReducedMotion() ? 'instant' : 'smooth',
+        });
     });
   }
 
   // --- Back to video ---
   if (backBtn) {
     backBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion() ? 'instant' : 'smooth',
+      });
     });
   }
 
-  return () => ctx.revert();
+  return () => {
+    controller.abort();
+    ctx.revert();
+  };
 }

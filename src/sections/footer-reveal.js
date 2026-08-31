@@ -6,7 +6,11 @@
  * from the bottom, progressively revealing the fixed footer behind.
  */
 
-import { gsap, ScrollTrigger } from '../animations/scroll-defaults.js';
+import {
+  gsap,
+  ScrollTrigger,
+  ScrollSmoother,
+} from '../animations/scroll-defaults.js';
 import { prefersReducedMotion } from '../utils/dom.js';
 
 export function initFooterReveal() {
@@ -50,6 +54,15 @@ export function initFooterReveal() {
     },
   });
 
+  const handleFocusIn = () => {
+    if (revealTrigger.progress >= 0.99) return;
+    const smoother = ScrollSmoother.get();
+    if (smoother) smoother.scrollTo(revealTrigger.end, false);
+    else window.scrollTo({ top: revealTrigger.end, behavior: 'instant' });
+    ScrollTrigger.update();
+  };
+  footer.addEventListener('focusin', handleFocusIn);
+
   // Anchor nav links — animate with GSAP ScrollToPlugin
   const navLinks = footer.querySelectorAll('.footer-nav-link[href^="#"]');
   const navHandler = (e) => {
@@ -73,6 +86,7 @@ export function initFooterReveal() {
     spacer.style.height = '';
     smoothWrapper.style.clipPath = '';
     footer.classList.remove('site-footer--interactive');
+    footer.removeEventListener('focusin', handleFocusIn);
     navLinks.forEach((link) => link.removeEventListener('click', navHandler));
   };
 }

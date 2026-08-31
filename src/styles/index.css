@@ -1698,5 +1698,6 @@ body.has-custom-cursor .gallery-card-corner {
 
   .site-footer {
     position: static;
+    pointer-events: auto;
   }
 }
