@@ -3,16 +3,14 @@ export function sendBeaconJSON(url, data) {
   const payload = JSON.stringify(data);
   const blob = new Blob([payload], { type: 'application/json' });
 
-  if (navigator.sendBeacon) {
-    navigator.sendBeacon(url, blob);
-  } else {
-    fetch(url, {
-      method: 'POST',
-      body: payload,
-      headers: { 'Content-Type': 'application/json' },
-      keepalive: true,
-    }).catch(() => {});
-  }
+  if (navigator.sendBeacon && navigator.sendBeacon(url, blob)) return;
+
+  fetch(url, {
+    method: 'POST',
+    body: payload,
+    headers: { 'Content-Type': 'application/json' },
+    keepalive: true,
+  }).catch(() => {});
 }
 
 /** Common analytics fields collected from the browser environment. */
