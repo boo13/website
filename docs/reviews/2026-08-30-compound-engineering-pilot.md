@@ -66,3 +66,41 @@ directly with its tests; no broader cleanup or review pipeline was needed.
 
 Deployment status at this handoff: verified locally, not deployed. Production
 deployment requires a separately authorized `dev` → `gh-pages` release.
+
+## Production verification — 2026-08-31
+
+Randy authorized deployment after the preceding handoff. `just deploy` merged
+the reviewed fix into `gh-pages` as `590db7ce0eba4263a60735eb547e455f70a7ff1d`
+and returned the checkout to `dev`. The previous production revision was
+`f7df2e1a88c5fcee1adb9d3b3a95f5ffe3f31d26`. The only runtime source change between
+releases is `src/utils/dom.js`; performance, font, and release configuration
+remain unchanged. Regression tests, lint, and build passed again before release.
+
+[GitHub Pages deployment succeeded](https://github.com/boo13/website/actions/runs/33362566361)
+at 06:02 UTC. The public [Wyatt Earp page](https://www.randycounsman.com/projects/wyatt-earp/)
+returned HTTP 200 with the new build references, without a cache-busting query.
+All nine referenced JavaScript files matched the local build byte for byte,
+including `/assets/dom-BsTUfGXy.js` (SHA-256
+`cc9bac5767b636e47e65c9645950890046cd2f73cf7f625570c2907dceb18c96`).
+
+Live Chrome checks through `playwright-cli` passed:
+
+- Desktop: gallery entry, two genuine cached Back/Forward cycles, Close/Forward,
+  keyboard and pointer seeking, advancing elapsed-time/progress labels, and
+  refresh. Cached restores retained the same document ID and reported
+  `pageshow.persisted === true`; refresh created a new document with type `reload`.
+- Gallery return: the opened card remained visible without a preloader. Both
+  offscreen hero videos stayed paused with unchanged playback times.
+- Phone viewport (390×844): Close restored the gallery card and Forward restored
+  the cached video. Pointer seeking set both playback and range to 4.5 seconds;
+  playback advanced to 6.09 seconds with the visible label at `00:06`.
+- At the phone gallery return position, the hero still extends 198 pixels into
+  view. After scrolling it fully offscreen, both hero videos paused and their
+  times remained unchanged. No playback code was altered for this check.
+
+No console errors were reported during the final live checks. Desktop and phone
+screenshots were inspected after layout and motion settled, then removed.
+Live acceptance covered the homepage and Wyatt Earp in Chrome; the earlier
+local route matrix remains the coverage for other project pages. Safari,
+Firefox, and physical phones were not tested. No deployment regression was
+observed and no rollback was needed. The navigation fix is live.
