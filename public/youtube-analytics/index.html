@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>YouTube Analytics Collector — Randy Counsman</title>
+    <meta
+      name="description"
+      content="Private, read-only YouTube Analytics collector operated by Randy Counsman for personal production use."
+    />
+    <link rel="icon" href="/favicon/favicon.ico" />
+    <style>
+      :root {
+        color-scheme: light;
+        --text: #1a1a1a;
+        --muted: #555;
+        --border: #ddd;
+        --bg: #fafafa;
+        --link: #0b57d0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--bg);
+      }
+      main {
+        max-width: 40rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+      }
+      h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        line-height: 1.25;
+        margin: 0 0 0.75rem;
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin: 0 0 1.75rem;
+      }
+      p,
+      ul {
+        margin: 0 0 1rem;
+      }
+      ul {
+        padding-left: 1.25rem;
+      }
+      li {
+        margin-bottom: 0.35rem;
+      }
+      a {
+        color: var(--link);
+      }
+      hr {
+        border: 0;
+        border-top: 1px solid var(--border);
+        margin: 2rem 0;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.9em;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>YouTube Analytics Collector</h1>
+      <p class="meta">
+        Private desktop tool · operated by Randy Counsman · last updated 15
+        September 2026
+      </p>
+
+      <p>
+        This is a private, read-only desktop collector that pulls YouTube
+        Analytics for a channel Randy Counsman is authorized to read. It runs
+        on a personal Google Cloud project and feeds a personal production
+        dashboard.
+      </p>
+
+      <p>
+        It is not a public app, not an Every product, and not affiliated
+        branding for Every. Browser consent is completed by Randy as himself.
+      </p>
+
+      <p>
+        Access is read-only. The collector may request these Google API scopes:
+      </p>
+      <ul>
+        <li>
+          <code>https://www.googleapis.com/auth/youtube.readonly</code>
+        </li>
+        <li>
+          <code>https://www.googleapis.com/auth/yt-analytics.readonly</code>
+        </li>
+        <li>
+          <code
+            >https://www.googleapis.com/auth/yt-analytics-monetary.readonly</code
+          >
+          — only if revenue collection is explicitly opted into
+        </li>
+      </ul>
+
+      <p>
+        It does not upload videos, moderate comments, change ads or channel
+        settings, manage the Google account, or act as a service account.
+      </p>
+
+      <p>
+        Tokens and analytics stay in local private storage on Randy’s own
+        computers. They are not sold, not used for ads, and not shared with a
+        third party.
+      </p>
+
+      <hr />
+
+      <p>
+        <a href="/youtube-analytics/privacy.html">Privacy policy</a>
+        · Contact:
+        <a href="mailto:RandyCounsman@gmail.com">RandyCounsman@gmail.com</a>
+      </p>
+    </main>
+  </body>
+</html>
