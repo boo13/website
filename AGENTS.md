@@ -56,7 +56,7 @@ This project is a video portfolio website using GSAP.
 - Each section exports an `initSectionName()` function called from `main.js`.
 - Static assets live in `public/` (data, images, favicon, CNAME) — Vite copies them as-is to the build output. HTML files stay at the repo root.
 - **Video assets** hosted on Cloudflare R2 (not in git). Base URL: `CDN_BASE` in `src/config.js`. Local copies in `public/video/` are gitignored.
-- CLAUDE.md and GEMINI.md are sym-linked to AGENTS.md
+- Claude Code, Codex, and Gemini read AGENTS.md directly. Don't add CLAUDE.md or GEMINI.md; the pre-commit hook rejects them.
 
 ```
 Root HTML pages and entry files:

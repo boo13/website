@@ -51,7 +51,7 @@ npm run dev
 ```
 
 This starts the Vite dev server with hot module replacement. Open the URL it prints (usually `http://localhost:5173`).
-`npm install` also runs hook setup (`postinstall`), which configures `core.hooksPath=.githooks` and repairs `CLAUDE.md`/`GEMINI.md` symlinks to `AGENTS.md`.
+`npm install` also runs hook setup (`postinstall`), which configures `core.hooksPath=.githooks`. The pre-commit hook rejects `CLAUDE.md`/`GEMINI.md`, since agents read `AGENTS.md` directly.
 If you skipped install scripts, run `npm run setup-hooks` manually.
 
 Other commands:
