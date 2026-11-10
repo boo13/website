@@ -2,25 +2,17 @@
 
 set -eu
 
-EXPECTED_TARGET="AGENTS.md"
+# Agents read AGENTS.md directly; a CLAUDE.md would stop Claude Code from reading it.
 FAILED=0
 
 for FILE in CLAUDE.md GEMINI.md; do
-  if [ ! -L "$FILE" ]; then
-    echo "pre-commit: $FILE must be a symlink to $EXPECTED_TARGET (currently not a symlink)." >&2
-    FAILED=1
-    continue
-  fi
-
-  TARGET="$(readlink "$FILE")"
-  if [ "$TARGET" != "$EXPECTED_TARGET" ]; then
-    echo "pre-commit: $FILE must point to $EXPECTED_TARGET (currently points to $TARGET)." >&2
+  if [ -e "$FILE" ] || [ -L "$FILE" ]; then
+    echo "pre-commit: remove $FILE; agents read AGENTS.md directly." >&2
     FAILED=1
   fi
 done
 
 if [ "$FAILED" -ne 0 ]; then
-  echo "pre-commit: fix with:" >&2
-  echo "  rm -f CLAUDE.md GEMINI.md && ln -s AGENTS.md CLAUDE.md && ln -s AGENTS.md GEMINI.md" >&2
+  echo "pre-commit: fix with: git rm -f CLAUDE.md GEMINI.md" >&2
   exit 1
 fi

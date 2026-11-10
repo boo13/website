@@ -180,7 +180,7 @@ function createItemMarkup(item, index) {
   const review = String(item.review || '').trim();
   const meta = [creators, yearText(item)].filter(Boolean).join(' / ');
   const title = escHtml(item.title);
-  const titleMarkup = item.canonical_url
+  const titleMarkup = /^https?:\/\//i.test(item.canonical_url || '')
     ? `<a class="media-item__link" href="${escHtml(item.canonical_url)}" target="_blank" rel="noopener">${title}<span aria-hidden="true">↗</span></a>`
     : title;
 
