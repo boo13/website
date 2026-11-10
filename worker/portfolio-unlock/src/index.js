@@ -1,4 +1,4 @@
-import { guardRequest, hashIP } from '../../shared/utils.js';
+import { guardRequest, hashIP, trunc, toScreenDim } from '../../shared/utils.js';
 
 // Must include every slug under portfolio/ — update when scaffolding a new gated portfolio.
 const KNOWN_SLUGS = new Set(['0626', 'design', 'every']);
@@ -27,13 +27,13 @@ export default {
       country: cf.country ?? 'unknown',
       city: cf.city ?? 'unknown',
       region: cf.region ?? 'unknown',
-      timezone: cf.timezone ?? body.tz ?? 'unknown',
+      timezone: cf.timezone ?? trunc(body.tz, 120) ?? 'unknown',
       org: cf.asOrganization ?? 'unknown',
-      ua: request.headers.get('User-Agent') ?? 'unknown',
-      referrer: body.referrer ?? '',
-      screenWidth: body.screenWidth,
-      screenHeight: body.screenHeight,
-      language: body.language ?? '',
+      ua: trunc(request.headers.get('User-Agent'), 300) ?? 'unknown',
+      referrer: trunc(body.referrer, 500) ?? '',
+      screenWidth: toScreenDim(body.screenWidth),
+      screenHeight: toScreenDim(body.screenHeight),
+      language: trunc(body.language, 120) ?? '',
     };
 
     // Return immediately; do logging + notification after the response
