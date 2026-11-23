@@ -37,7 +37,10 @@
     "postcss": ">=8.5.10",
     "esbuild": ">=0.28.1",
     "js-yaml": "^4.3.2",
-    "ws": ">=8.21.0"
+    "ws": ">=8.21.0",
+    "@google/design.md": {
+      "zod": "^4.6.6"
+    }
   },
   "dependencies": {
     "glightbox": "^3.3.1",
