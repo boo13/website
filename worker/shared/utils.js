@@ -33,6 +33,20 @@ export async function guardRequest(request) {
   }
 }
 
+const SCREEN_MAX = 8000;
+
+export function trunc(s, max) {
+  if (s == null) return null;
+  const str = String(s);
+  return str.length > max ? str.slice(0, max) : str;
+}
+
+export function toScreenDim(v) {
+  const n = Number(v);
+  if (!Number.isFinite(n) || n <= 0 || n > SCREEN_MAX) return null;
+  return Math.round(n);
+}
+
 /** SHA-256 hash of an IP address, truncated to 8 hex bytes (16 chars). */
 export async function hashIP(ip) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(ip));

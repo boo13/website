@@ -1,9 +1,7 @@
-import { guardRequest, hashIP } from '../../shared/utils.js';
+import { guardRequest, hashIP, trunc, toScreenDim } from '../../shared/utils.js';
 
 const BOT_UA_RE =
   /bot|crawl|spider|slurp|bing|google|facebook|preview|monitor|curl|wget|headless/i;
-
-const SCREEN_MAX = 8000;
 
 export default {
   async fetch(request, env, ctx) {
@@ -87,16 +85,4 @@ async function handleEvent(event, env) {
   } catch (err) {
     console.error('[homepage-visit] error:', err);
   }
-}
-
-function trunc(s, max) {
-  if (s == null) return null;
-  const str = String(s);
-  return str.length > max ? str.slice(0, max) : str;
-}
-
-function toScreenDim(v) {
-  const n = Number(v);
-  if (!Number.isFinite(n) || n <= 0 || n > SCREEN_MAX) return null;
-  return Math.round(n);
 }

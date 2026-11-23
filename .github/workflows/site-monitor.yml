@@ -15,7 +15,7 @@ jobs:
     env:
       LIGHTHOUSE_FAILURE_THRESHOLD: ${{ vars.LIGHTHOUSE_FAILURE_THRESHOLD || 2 }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Run Lighthouse
         id: lighthouse
         continue-on-error: true
@@ -237,7 +237,7 @@ jobs:
             city: Dublin
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Check site via Globalping (${{ matrix.region.name }})
         id: globalping_check
         env:
