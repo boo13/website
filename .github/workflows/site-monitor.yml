@@ -1,4 +1,4 @@
-name: Weekly Site Monitoring
+name: Daily Site Monitoring
 
 on:
   schedule:
@@ -146,26 +146,37 @@ jobs:
 
           echo "Checking $URL"
 
-          START=$(date +%s%3N)
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --retry 3 --retry-delay 5 "$URL")
-          END=$(date +%s%3N)
-          DURATION=$((END - START))
+          STATUS=000
+          DURATION=0
+          for ATTEMPT in 1 2 3; do
+            RESULT=$(curl -s -o /dev/null -w "%{http_code} %{time_total}" --connect-timeout 10 --max-time 20 "$URL" || true)
+            STATUS=${RESULT%% *}
+            DURATION=$(awk -v t="${RESULT##* }" 'BEGIN { printf "%d", t * 1000 }')
+            echo "Attempt $ATTEMPT: status=$STATUS duration=${DURATION}ms"
+            if [ "$STATUS" != "000" ] && [ "$STATUS" -lt 400 ] && [ "$DURATION" -le 3000 ]; then
+              break
+            fi
+            if [ "$ATTEMPT" -lt 3 ]; then
+              sleep 5
+            fi
+          done
 
           echo "status=$STATUS" >> $GITHUB_OUTPUT
           echo "duration=$DURATION" >> $GITHUB_OUTPUT
 
-          if [ "$STATUS" -ge 400 ]; then
-            echo "Site returned error status $STATUS"
+          if [ "$STATUS" = "000" ] || [ "$STATUS" -ge 400 ]; then
+            echo "Site returned error status $STATUS on all 3 attempts"
             exit 1
           fi
 
           if [ "$DURATION" -gt 3000 ]; then
-            echo "Site is slow: ${DURATION}ms"
+            echo "Site is slow on all 3 attempts: ${DURATION}ms"
             exit 1
           fi
 
       - name: Check SSL certificate expiration
         id: ssl_check
+        if: always()
         run: |
           DOMAIN=$(echo "${{ secrets.SITE_URL }}" | sed -e 's|https://||' -e 's|/.*||')
 
@@ -207,6 +218,7 @@ jobs:
         if: failure()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
         run: |
           gh issue create \
             --title "🚨 Site Monitoring Alert: ${{ secrets.SITE_URL }}" \
@@ -251,6 +263,7 @@ jobs:
             {
               type: "http",
               target: $target,
+              measurementOptions: { protocol: "HTTPS", request: { method: "GET", path: "/" } },
               limit: 1,
               locations: [
                 ({ country: $country } + (if ($city | length) > 0 then {city: $city} else {} end))
