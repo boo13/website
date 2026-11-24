@@ -149,7 +149,7 @@ jobs:
           STATUS=000
           DURATION=0
           for ATTEMPT in 1 2 3; do
-            RESULT=$(curl -s -o /dev/null -w "%{http_code} %{time_total}" --connect-timeout 10 --max-time 20 "$URL" || true)
+            RESULT=$(curl -sL -o /dev/null -w "%{http_code} %{time_total}" --connect-timeout 10 --max-time 20 "$URL" || true)
             STATUS=${RESULT%% *}
             DURATION=$(awk -v t="${RESULT##* }" 'BEGIN { printf "%d", t * 1000 }')
             echo "Attempt $ATTEMPT: status=$STATUS duration=${DURATION}ms"
